@@ -1,38 +1,31 @@
-import { AppService, GameModel, PlayerModel, MageHeroModel, HandModel, BoardModel, Selector, Utils } from "hearthstone-core";
+import { GameModel, PlayerModel, MageHeroModel, HandModel, BoardModel, Selector, Utils } from "hearthstone-core";
 import { WispCardModel } from "../src/wisp/card";
+import { boot } from "./boot";
 
 describe('wisp', () => {
-    test('start', () => {
-        const root = AppService.root;
-        expect(root).toBeDefined();
-        if (!root) return
-        const game = new GameModel({
-            child: {
-                playerA: new PlayerModel({
-                    child: {
-                        hero: new MageHeroModel({}),
-                        hand: new HandModel({
-                            child: { cards: [new WispCardModel({})] }
-                        }),
-                    }
-                }),
-                playerB: new PlayerModel({
-                    child: {
-                        hero: new MageHeroModel({}),
-                        board: new BoardModel({
-                            child: { cards: [new WispCardModel({})] }
-                        })
-                    }
-                })
-            }
-        })
-        root.start(game)
+    const game = new GameModel({
+        child: {
+            playerA: new PlayerModel({
+                child: {
+                    hero: new MageHeroModel({}),
+                    hand: new HandModel({
+                        child: { cards: [new WispCardModel({})] }
+                    }),
+                }
+            }),
+            playerB: new PlayerModel({
+                child: {
+                    hero: new MageHeroModel({}),
+                    board: new BoardModel({
+                        child: { cards: [new WispCardModel({})] }
+                    })
+                }
+            })
+        }
     })
+    const root = boot(game);
 
     test('summon', async () => {
-        const root = AppService.root;
-        const game = root?.child.game;
-        if (!game) return;
         const handA = game.child.playerA.child.hand;
         const handB = game.child.playerB.child.hand;
         const boardA = game.child.playerA.child.board;
@@ -54,9 +47,6 @@ describe('wisp', () => {
     })
 
     test('attack', () => {
-        const root = AppService.root;
-        const game = root?.child.game;
-        if (!game) return;
         const boardA = game.child.playerA.child.board;
         const boardB = game.child.playerB.child.board;
         const cardA = boardA.child.cards.find(item => item instanceof WispCardModel);
@@ -90,7 +80,6 @@ describe('wisp', () => {
     test('prepare-attack', async () => {
         // Minions gain action points at the start of their turn
         // Without action points, minions cannot attack
-        const root = AppService.root;
         const game = new GameModel({
             child: {
                 playerA: new PlayerModel({
@@ -111,8 +100,7 @@ describe('wisp', () => {
                 })
             }
         })
-        root?.start(game);
-        expect(game).toBeDefined();
+        root.start(game);
         
         const playerA = game.child.playerA;
         const playerB = game.child.playerB;
@@ -124,12 +112,7 @@ describe('wisp', () => {
         const roleA = cardA.child.role;
         const roleB = cardB.child.role;
         
-        // Initial state: both minions have 0 action points
-        expect(roleA.state.action).toBe(0);
-        expect(roleB.state.action).toBe(0);
-        
         // Player A's turn starts: minion gains 1 action point
-        game.nextTurn();
         expect(roleA.state.action).toBe(1);
         expect(roleB.state.action).toBe(0);
 

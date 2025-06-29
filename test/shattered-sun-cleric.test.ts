@@ -1,47 +1,38 @@
 import { GameModel, BoardModel, HandModel, MageHeroModel, PlayerModel, Selector, Utils } from "hearthstone-core";
 import { ShatteredSunClericCardModel } from "../src/shattered-sun-cleric/card";
 import { WispCardModel } from "../src/wisp/card";
-import { AppService } from "hearthstone-core";
+import { boot } from "./boot";
 
 describe('shattered-sun-cleric', () => {
-    test('start', async () => {
-        const root = AppService.root;
-        expect(root).toBeDefined();
-        if (!root) return
-        const game = new GameModel({
-            child: {
-                playerA: new PlayerModel({
-                    child: {
-                        hero: new MageHeroModel({}),
-                        board: new BoardModel({
-                            child: { cards: [new WispCardModel({})] }
-                        }),
-                        hand: new HandModel({
-                            child: { cards: [new ShatteredSunClericCardModel({})] }
-                        })
-                    }
-                }),
-                playerB: new PlayerModel({
-                    child: {
-                        hero: new MageHeroModel({}),
-                        hand: new HandModel({
-                            child: { cards: [
-                                new ShatteredSunClericCardModel({}),
-                                new WispCardModel({})
-                            ]}
-                        })
-                    }
-                })
-            }
-        })
-        root.start(game)
-    });
+    const game = new GameModel({
+        child: {
+            playerA: new PlayerModel({
+                child: {
+                    hero: new MageHeroModel({}),
+                    board: new BoardModel({
+                        child: { cards: [new WispCardModel({})] }
+                    }),
+                    hand: new HandModel({
+                        child: { cards: [new ShatteredSunClericCardModel({})] }
+                    })
+                }
+            }),
+            playerB: new PlayerModel({
+                child: {
+                    hero: new MageHeroModel({}),
+                    hand: new HandModel({
+                        child: { cards: [
+                            new ShatteredSunClericCardModel({}),
+                            new WispCardModel({})
+                        ]}
+                    })
+                }
+            })
+        }
+    })
+    const root = boot(game);
 
     test('battlecry', async () => {
-        const root = AppService.root;
-        const game = root?.child.game;
-        expect(game).toBeDefined();
-        if (!game) return;
         const hand = game.child.playerA.child.hand;
         const board = game.child.playerA.child.board;
         const cardA = hand.child.cards.find(item => item instanceof ShatteredSunClericCardModel);
@@ -89,10 +80,6 @@ describe('shattered-sun-cleric', () => {
     })
 
     test('skip', async () => {
-        const root = AppService.root;
-        const game = root?.child.game;
-        expect(game).toBeDefined();
-        if (!game) return;
         const hand = game.child.playerB.child.hand;
         const board = game.child.playerB.child.board;
         const cardA = hand.child.cards.find(item => item instanceof ShatteredSunClericCardModel);
@@ -129,10 +116,6 @@ describe('shattered-sun-cleric', () => {
     })
 
     test('attack', async () => {
-        const root = AppService.root;
-        const game = root?.child.game;
-        expect(game).toBeDefined();
-        if (!game) return;
         const boardA = game.child.playerA.child.board;
         const boardB = game.child.playerB.child.board;
         const cardA = boardA.child.cards.find(item => item instanceof WispCardModel);

@@ -6,46 +6,35 @@
  * 2. attack: Wisp can only attack the footman due to taunt
  */
 
-import { AppService, GameModel, PlayerModel, MageHeroModel, BoardModel, Selector, Utils } from "hearthstone-core";
+import { GameModel, PlayerModel, MageHeroModel, BoardModel, Selector, Utils } from "hearthstone-core";
 import { GoldshireFootmanCardModel } from "../src/goldshire-footman/card";
 import { WispCardModel } from "../src/wisp/card";
+import { boot } from "./boot";
 
 describe('goldshire-footman', () => {
-    test('start', async () => {
-        const root = AppService.root;
-        expect(root).toBeDefined();
-        if (!root) return
-        const game = new GameModel({
-            child: {
-                playerA: new PlayerModel({
-                    child: {
-                        hero: new MageHeroModel({}),
-                        board: new BoardModel({
-                            child: { cards: [new WispCardModel({})] }
-                        }),
-                    }
-                }),
-                playerB: new PlayerModel({
-                    child: {
-                        hero: new MageHeroModel({}),
-                        board: new BoardModel({
-                            child: { cards: [new GoldshireFootmanCardModel({})] }
-                        })
-                    }
-                })
-            }
-        })
-        root.start(game)
-        
-        // Turn starts - Player A's turn
-        game.nextTurn();
+    const game = new GameModel({
+        child: {
+            playerA: new PlayerModel({
+                child: {
+                    hero: new MageHeroModel({}),
+                    board: new BoardModel({
+                        child: { cards: [new WispCardModel({})] }
+                    }),
+                }
+            }),
+            playerB: new PlayerModel({
+                child: {
+                    hero: new MageHeroModel({}),
+                    board: new BoardModel({
+                        child: { cards: [new GoldshireFootmanCardModel({})] }
+                    })
+                }
+            })
+        }
     })
+    const root = boot(game);
 
     test('attack', async () => {
-        const root = AppService.root;
-        const game = root?.child.game;
-        if (!game) return;
-        
         const boardA = game.child.playerA.child.board;
         const boardB = game.child.playerB.child.board;
         const playerB = game.child.playerB;

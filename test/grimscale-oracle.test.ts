@@ -6,50 +6,42 @@
  * 2. aura: Both raiders initially have 2 attack, after Player A plays oracle, Player A's raider gains +1 attack, no attack occurs
  */
 
-import { AppService, GameModel, PlayerModel, MageHeroModel, HandModel, BoardModel } from "hearthstone-core";
+import { GameModel, PlayerModel, MageHeroModel, HandModel, BoardModel } from "hearthstone-core";
 import { GrimscaleOracleCardModel } from "../src/grimscale-oracle/card";
 import { MurlocRaiderCardModel } from "../src/murloc-raider/card";
 import { WispCardModel } from "../src/wisp/card";
+import { boot } from "./boot";
 
 describe('grimscale-oracle', () => {
-    test('start', async () => {
-        const root = AppService.root;
-        expect(root).toBeDefined();
-        if (!root) return
-        const game = new GameModel({
-            child: {
-                playerA: new PlayerModel({
-                    child: {
-                        hero: new MageHeroModel({}),
-                        board: new BoardModel({
-                            child: { cards: [
-                                new MurlocRaiderCardModel({}),
-                                new WispCardModel({})
-                            ]}
-                        }),
-                        hand: new HandModel({
-                            child: { cards: [new GrimscaleOracleCardModel({})] }
-                        }),
-                    }
-                }),
-                playerB: new PlayerModel({
-                    child: {
-                        hero: new MageHeroModel({}),
-                        board: new BoardModel({
-                            child: { cards: [new MurlocRaiderCardModel({})] }
-                        })
-                    }
-                })
-            }
-        })
-        root.start(game)
+    const game = new GameModel({
+        child: {
+            playerA: new PlayerModel({
+                child: {
+                    hero: new MageHeroModel({}),
+                    board: new BoardModel({
+                        child: { cards: [
+                            new MurlocRaiderCardModel({}),
+                            new WispCardModel({})
+                        ]}
+                    }),
+                    hand: new HandModel({
+                        child: { cards: [new GrimscaleOracleCardModel({})] }
+                    }),
+                }
+            }),
+            playerB: new PlayerModel({
+                child: {
+                    hero: new MageHeroModel({}),
+                    board: new BoardModel({
+                        child: { cards: [new MurlocRaiderCardModel({})] }
+                    })
+                }
+            })
+        }
     })
+    const root = boot(game);
 
     test('aura', async () => {
-        const root = AppService.root;
-        const game = root?.child.game;
-        if (!game) return;
-        
         const boardA = game.child.playerA.child.board;
         const boardB = game.child.playerB.child.board;
         const handA = game.child.playerA.child.hand;

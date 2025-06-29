@@ -1,38 +1,32 @@
-import { AppService, GameModel, PlayerModel, MageHeroModel, BoardModel } from "hearthstone-core";
+import { GameModel, PlayerModel, MageHeroModel, BoardModel, RootModel } from "hearthstone-core";
+import { RouteAgent } from "set-piece";
 import { ArgentSquireCardModel } from "../src/argent-squire/card";
+import { boot } from "./boot";
 
 describe('argent-squire', () => {
-    test('start', () => {
-        const root = AppService.root;
-        expect(root).toBeDefined();
-        if (!root) return
-        const game = new GameModel({
-            child: {
-                playerA: new PlayerModel({
-                    child: {
-                        hero: new MageHeroModel({}),
-                        board: new BoardModel({
-                            child: { cards: [new ArgentSquireCardModel({})] }
-                        }),
-                    }
-                }),
-                playerB: new PlayerModel({
-                    child: {
-                        hero: new MageHeroModel({}),
-                        board: new BoardModel({
-                            child: { cards: [new ArgentSquireCardModel({})] }
-                        })
-                    }
-                })
-            }
-        })
-        root.start(game)
+    const game = new GameModel({
+        child: {
+            playerA: new PlayerModel({
+                child: {
+                    hero: new MageHeroModel({}),
+                    board: new BoardModel({
+                        child: { cards: [new ArgentSquireCardModel({})] }
+                    }),
+                }
+            }),
+            playerB: new PlayerModel({
+                child: {
+                    hero: new MageHeroModel({}),
+                    board: new BoardModel({
+                        child: { cards: [new ArgentSquireCardModel({})] }
+                    })
+                }
+            })
+        }
     })
+    const root = boot(game);
 
     test('attack', () => {
-        const root = AppService.root;
-        const game = root?.child.game;
-        if (!game) return;
         const boardA = game.child.playerA.child.board;
         const boardB = game.child.playerB.child.board;
         const cardA = boardA.child.cards.find(item => item instanceof ArgentSquireCardModel);

@@ -1,42 +1,32 @@
+import { RouteAgent } from "set-piece";
 import { AngryBirdCardModel } from "../src/angry-bird/card";
-import { AppService, GameModel, PlayerModel, MageHeroModel, BoardModel } from "hearthstone-core";
+import { GameModel, PlayerModel, MageHeroModel, BoardModel, RootModel } from "hearthstone-core";
+import { boot } from "./boot";
 
 describe('angry-chicken', () => {
-    test('start', async () => {
-        const root = AppService.root;
-        expect(root).toBeDefined();
-        if (!root) return
-        
-        // Initialize game with two Angry Birds on the board
-        const game = new GameModel({
-            child: {
-                playerA: new PlayerModel({
-                    child: {
-                        hero: new MageHeroModel({}),
-                        board: new BoardModel({
-                            child: { cards: [new AngryBirdCardModel({})] }
-                        })
-                    }
-                }),
-                playerB: new PlayerModel({
-                    child: {
-                        hero: new MageHeroModel({}),
-                        board: new BoardModel({
-                            child: { cards: [new AngryBirdCardModel({})] }
-                        })
-                    }
-                })
-            }
-        })
-        root.start(game)
-    });
+    const game = new GameModel({
+        child: {
+            playerA: new PlayerModel({
+                child: {
+                    hero: new MageHeroModel({}),
+                    board: new BoardModel({
+                        child: { cards: [new AngryBirdCardModel({})] }
+                    })
+                }
+            }),
+            playerB: new PlayerModel({
+                child: {
+                    hero: new MageHeroModel({}),
+                    board: new BoardModel({
+                        child: { cards: [new AngryBirdCardModel({})] }
+                    })
+                }
+            })
+        }
+    })
+    const root = boot(game);
 
     test('attack', async () => {
-        const root = AppService.root;
-        const game = root?.child.game;
-        expect(game).toBeDefined();
-        if (!game) return;
-        
         const boardA = game.child.playerA.child.board;
         const boardB = game.child.playerB.child.board;
         const cardA = boardA.child.cards.find(item => item instanceof AngryBirdCardModel);

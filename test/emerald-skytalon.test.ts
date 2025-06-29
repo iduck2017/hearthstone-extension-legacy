@@ -7,48 +7,40 @@
  * 3. attack: After 2 turns, the other emerald can attack the hero
  */
 
-import { AppService, GameModel, PlayerModel, MageHeroModel, HandModel, BoardModel, Selector, Utils } from "hearthstone-core";
+import { GameModel, PlayerModel, MageHeroModel, HandModel, BoardModel, Selector, Utils, RootModel } from "hearthstone-core";
 import { EmeraldSkytalonCardModel } from "../src/emerald-skytalon/card";
 import { WispCardModel } from "../src/wisp/card";
+import { RouteAgent } from "set-piece";
+import { boot } from "./boot";
 
 describe('emerald-skytalon', () => {
-    test('start', async () => {
-        const root = AppService.root;
-        expect(root).toBeDefined();
-        if (!root) return
-        const game = new GameModel({
-            child: {
-                playerA: new PlayerModel({
-                    child: {
-                        hero: new MageHeroModel({}),
-                        hand: new HandModel({
-                            child: { cards: [
-                                new EmeraldSkytalonCardModel({}),
-                            ]}
-                        }),
-                    }
-                }),
-                playerB: new PlayerModel({
-                    child: {
-                        hero: new MageHeroModel({}),
-                        board: new BoardModel({
-                            child: { cards: [
-                                new WispCardModel({}),
-                            ]}
-                        })
-                    }
-                })
-            }
-        })
-        root.start(game)
-        game.nextTurn();
+    const game = new GameModel({
+        child: {
+            playerA: new PlayerModel({
+                child: {
+                    hero: new MageHeroModel({}),
+                    hand: new HandModel({
+                        child: { cards: [
+                            new EmeraldSkytalonCardModel({}),
+                        ]}
+                    }),
+                }
+            }),
+            playerB: new PlayerModel({
+                child: {
+                    hero: new MageHeroModel({}),
+                    board: new BoardModel({
+                        child: { cards: [
+                            new WispCardModel({}),
+                        ]}
+                    })
+                }
+            })
+        }
     })
+    const root = boot(game);
 
     test('rush', async () => {
-        const root = AppService.root;
-        const game = root?.child.game;
-        if (!game) return;
-        
         const handA = game.child.playerA.child.hand;
         const boardA = game.child.playerA.child.board;
         const boardB = game.child.playerB.child.board;
@@ -90,10 +82,6 @@ describe('emerald-skytalon', () => {
     })
 
     test('attack', async () => {
-        const root = AppService.root;
-        const game = root?.child.game;
-        if (!game) return;
-        
         const playerB = game.child.playerB;
         const boardA = game.child.playerA.child.board;
         const boardB = game.child.playerB.child.board;

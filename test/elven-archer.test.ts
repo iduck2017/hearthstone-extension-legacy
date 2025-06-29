@@ -7,42 +7,35 @@
  */
 
 import { ElvenArcherCardModel } from "../src/elven-archer/card";
-import { AppService, GameModel, PlayerModel, MageHeroModel, HandModel, BoardModel, Selector } from "hearthstone-core";
+import { GameModel, PlayerModel, MageHeroModel, HandModel, BoardModel, Selector, RootModel } from "hearthstone-core";
 import { WispCardModel } from "../src/wisp/card";
+import { RouteAgent } from "set-piece";
+import { boot } from "./boot";
 
 describe('elven-archer', () => {
-    test('start', async () => {
-        const root = AppService.root;
-        expect(root).toBeDefined();
-        if (!root) return
-        const game = new GameModel({
-            child: {
-                playerA: new PlayerModel({
-                    child: {
-                        hero: new MageHeroModel({}),
-                        hand: new HandModel({
-                            child: { cards: [new ElvenArcherCardModel({})] }
-                        })
-                    }
-                }),
-                playerB: new PlayerModel({
-                    child: {
-                        hero: new MageHeroModel({}),
-                        board: new BoardModel({
-                            child: { cards: [new WispCardModel({})] }
-                        })
-                    }
-                })
-            }
-        })
-        root.start(game)
-    });
+    const game = new GameModel({
+        child: {
+            playerA: new PlayerModel({
+                child: {
+                    hero: new MageHeroModel({}),
+                    hand: new HandModel({
+                        child: { cards: [new ElvenArcherCardModel({})] }
+                    })
+                }
+            }),
+            playerB: new PlayerModel({
+                child: {
+                    hero: new MageHeroModel({}),
+                    board: new BoardModel({
+                        child: { cards: [new WispCardModel({})] }
+                    })
+                }
+            })
+        }
+    })
+    const root = boot(game);
 
     test('battlecry', async () => {
-        const root = AppService.root;
-        const game = root?.child.game;
-        expect(game).toBeDefined();
-        if (!game) return;
         const playerA = game.child.playerA;
         const playerB = game.child.playerB;
         const hand = game.child.playerA.child.hand;

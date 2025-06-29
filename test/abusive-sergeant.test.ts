@@ -1,47 +1,40 @@
+import { RouteAgent } from "set-piece";
 import { AbusiveSergeantCardModel } from "../src/abusive-sergeant/card";
 import { WispCardModel } from "../src/wisp/card";
-import { AppService, Selector, Utils } from "hearthstone-core";
+import { RootModel, Selector, Utils } from "hearthstone-core";
 import { GameModel, PlayerModel, HandModel, MageHeroModel } from "hearthstone-core";
+import { boot } from "./boot";
 
 describe('abusive-sergeant', () => {
-    test('start', async () => {
-        const root = AppService.root;
-        expect(root).toBeDefined();
-        if (!root) return
-        const game = new GameModel({
-            child: {
-                playerA: new PlayerModel({
-                    child: {
-                        hero: new MageHeroModel({}),
-                        hand: new HandModel({
-                            child: { cards: [
-                                new AbusiveSergeantCardModel({}),
-                                new WispCardModel({})
-                            ]}
-                        })
-                    }
-                }),
-                playerB: new PlayerModel({
-                    child: {
-                        hero: new MageHeroModel({}),
-                        hand: new HandModel({
-                            child: { cards: [
-                                new AbusiveSergeantCardModel({}),
-                                new WispCardModel({})
-                            ]}
-                        })
-                    }
-                })
-            }
-        })
-        root.start(game)
-    });
+    const game = new GameModel({
+        child: {
+            playerA: new PlayerModel({
+                child: {
+                    hero: new MageHeroModel({}),
+                    hand: new HandModel({
+                        child: { cards: [
+                            new AbusiveSergeantCardModel({}),
+                            new WispCardModel({})
+                        ]}
+                    })
+                }
+            }),
+            playerB: new PlayerModel({
+                child: {
+                    hero: new MageHeroModel({}),
+                    hand: new HandModel({
+                        child: { cards: [
+                            new AbusiveSergeantCardModel({}),
+                            new WispCardModel({})
+                        ]}
+                    })
+                }
+            })
+        }
+    })
+    const root = boot(game);
 
     test('skip', async () => {
-        const root = AppService.root;
-        const game = root?.child.game;
-        expect(game).toBeDefined();
-        if (!game) return;
         const hand = game.child.playerB.child.hand;
         const boardA = game.child.playerA.child.board;
         const boardB = game.child.playerB.child.board;
@@ -81,10 +74,6 @@ describe('abusive-sergeant', () => {
     })
 
     test('battlecry', async () => {
-        const root = AppService.root;
-        const game = root?.child.game;
-        expect(game).toBeDefined();
-        if (!game) return;
         const hand = game.child.playerA.child.hand;
         const cardA = hand.child.cards.find(item => item instanceof AbusiveSergeantCardModel);
         const cardB = hand.child.cards.find(item => item instanceof WispCardModel);
@@ -128,10 +117,6 @@ describe('abusive-sergeant', () => {
     })
 
     test('attack', async () => {
-        const root = AppService.root;
-        const game = root?.child.game;
-        expect(game).toBeDefined();
-        if (!game) return;
         const boardA = game.child.playerA.child.board;
         const boardB = game.child.playerB.child.board;
         const cardA = boardA.child.cards.find(item => item instanceof WispCardModel);
@@ -188,10 +173,6 @@ describe('abusive-sergeant', () => {
     })
 
     test('end-of-turn', async () => {
-        const root = AppService.root;
-        const game = root?.child.game;
-        expect(game).toBeDefined();
-        if (!game) return;
         const board = game.child.playerA.child.board;
         const card = board.child.cards.find(item => item instanceof WispCardModel);
         const role = card?.child.role;
