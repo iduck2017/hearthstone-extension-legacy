@@ -6,9 +6,9 @@
  * 2. battlecry: Player A uses Elven Archer to attack the wisp
  */
 
-import { ElvenArcherCardModel } from "../src/elven-archer/card";
+import { ElvenArcherCardModel } from "../src/elven-archer";
 import { GameModel, PlayerModel, MageHeroModel, HandModel, BoardModel, Selector, RootModel } from "hearthstone-core";
-import { WispCardModel } from "../src/wisp/card";
+import { WispCardModel } from "../src/wisp";
 import { RouteAgent } from "set-piece";
 import { boot } from "./boot";
 

@@ -1,5 +1,5 @@
 import { ExtensionModel } from "hearthstone-core";
-import { WispCardModel } from "./wisp/card";
+import { WispCardModel } from "./wisp";
 
 export namespace LegacyExtensionModel {
     export type Event = Partial<ExtensionModel.Event>;

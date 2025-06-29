@@ -1,5 +1,5 @@
 import { RouteAgent } from "set-piece";
-import { AngryBirdCardModel } from "../src/angry-bird/card";
+import { AngryBirdCardModel } from "../src/angry-bird";
 import { GameModel, PlayerModel, MageHeroModel, BoardModel, RootModel } from "hearthstone-core";
 import { boot } from "./boot";
 

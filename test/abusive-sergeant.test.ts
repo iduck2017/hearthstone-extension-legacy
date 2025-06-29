@@ -1,6 +1,6 @@
 import { RouteAgent } from "set-piece";
-import { AbusiveSergeantCardModel } from "../src/abusive-sergeant/card";
-import { WispCardModel } from "../src/wisp/card";
+import { AbusiveSergeantCardModel } from "../src/abusive-sergeant";
+import { WispCardModel } from "../src/wisp";
 import { RootModel, Selector, Utils } from "hearthstone-core";
 import { GameModel, PlayerModel, HandModel, MageHeroModel } from "hearthstone-core";
 import { boot } from "./boot";

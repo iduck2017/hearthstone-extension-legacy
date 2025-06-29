@@ -1,5 +1,5 @@
 import { GameModel, PlayerModel, MageHeroModel, HandModel, BoardModel, Selector, Utils } from "hearthstone-core";
-import { WispCardModel } from "../src/wisp/card";
+import { WispCardModel } from "../src/wisp";
 import { boot } from "./boot";
 
 describe('wisp', () => {

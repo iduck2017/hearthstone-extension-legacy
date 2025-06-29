@@ -7,8 +7,8 @@
  */
 
 import { GameModel, PlayerModel, MageHeroModel, BoardModel, Selector, Utils } from "hearthstone-core";
-import { GoldshireFootmanCardModel } from "../src/goldshire-footman/card";
-import { WispCardModel } from "../src/wisp/card";
+import { GoldshireFootmanCardModel } from "../src/goldshire-footman";
+import { WispCardModel } from "../src/wisp";
 import { boot } from "./boot";
 
 describe('goldshire-footman', () => {
