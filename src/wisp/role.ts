@@ -1,7 +1,7 @@
 import { MinionRoleModel, MinionRaceType } from "hearthstone-core";
-import { StoreService } from "set-piece";
+import { StoreUtil } from "set-piece";
 
-@StoreService.is('wisp-role')
+@StoreUtil.is('wisp-role')
 export class WispRoleModel extends MinionRoleModel {
     constructor(props: WispRoleModel['props']) {
         super({

@@ -1,10 +1,10 @@
 import { GameModel, RootModel } from "hearthstone-core";
-import { DebugService, LogLevel, RouteAgent } from "set-piece";
+import { DebugUtil, LogLevel, RouteUtil } from "set-piece";
 
 export function boot(game: GameModel) {
-    DebugService.level = LogLevel.ERROR;
+    DebugUtil.level = LogLevel.ERROR;
     const root = new RootModel({});
-    RouteAgent.boot(root);
+    RouteUtil.boot(root);
     root.start(game);
     return root;
 }

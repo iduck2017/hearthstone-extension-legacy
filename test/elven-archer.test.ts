@@ -9,7 +9,7 @@
 import { ElvenArcherCardModel } from "../src/elven-archer";
 import { GameModel, PlayerModel, MageHeroModel, HandModel, BoardModel, Selector, RootModel } from "hearthstone-core";
 import { WispCardModel } from "../src/wisp";
-import { RouteAgent } from "set-piece";
+import { RouteUtil } from "set-piece";
 import { boot } from "./boot";
 
 describe('elven-archer', () => {

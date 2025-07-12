@@ -1,5 +1,5 @@
 import { GameModel, PlayerModel, MageHeroModel, BoardModel, RootModel } from "hearthstone-core";
-import { RouteAgent } from "set-piece";
+import { RouteUtil } from "set-piece";
 import { ArgentSquireCardModel } from "../src/argent-squire";
 import { boot } from "./boot";
 

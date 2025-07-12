@@ -1,18 +1,18 @@
 import { MinionCardModel } from "hearthstone-core";
-import { AngryBirdRoleModel } from "./role";
+import { AngryChickenRoleModel } from "./role";
 
-export class AngryBirdCardModel extends MinionCardModel {
-    constructor(props: AngryBirdCardModel['props']) {
+export class AngryChickenCardModel extends MinionCardModel {
+    constructor(props: AngryChickenCardModel['props']) {
         super({
             uuid: props.uuid,
             state: {
-                name: 'Angry Bird',
+                name: 'Angry Chicken',
                 desc: 'Has +5 Attack while damaged.',
                 mana: 1,
                 ...props.state,
             },
             child: {
-                role: new AngryBirdRoleModel({}),
+                role: new AngryChickenRoleModel({}),
                 ...props.child,
             },
             refer: { ...props.refer },

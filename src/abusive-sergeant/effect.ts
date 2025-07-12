@@ -1,5 +1,5 @@
 import { EffectModel, GameModel } from "hearthstone-core";
-import { DebugService, EventAgent, LogLevel, TranxService } from "set-piece";
+import { DebugUtil, EventUtil, LogLevel, TranxUtil } from "set-piece";
 
 export class AbusiveSergeantEffectModel extends EffectModel {
     constructor(props: AbusiveSergeantEffectModel['props']) {
@@ -18,9 +18,9 @@ export class AbusiveSergeantEffectModel extends EffectModel {
         });
     }
 
-    @EventAgent.use(self => self.route.game?.proxy.event.onTurnEnd)
-    @DebugService.log(LogLevel.WARN)
-    @TranxService.use()
+    @EventUtil.use(self => self.route.game?.proxy.event.onTurnEnd)
+    @DebugUtil.log(LogLevel.WARN)
+    @TranxUtil.use()
     private handleTurnEnd(that: GameModel) {
         this.draft.state.isActive = false;
         this.reload();

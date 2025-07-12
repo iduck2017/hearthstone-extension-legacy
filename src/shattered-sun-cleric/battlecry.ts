@@ -1,6 +1,6 @@
 import { BattlecryModel, MinionRoleModel, TargetType, Selector } from "hearthstone-core";
 import { ShatteredSunClericEffectModel } from "./buff";
-import { DebugService } from "set-piece";
+import { DebugUtil } from "set-piece";
 
 export class ShatteredSunClericBattlecryModel extends BattlecryModel<
     [MinionRoleModel]
@@ -27,7 +27,7 @@ export class ShatteredSunClericBattlecryModel extends BattlecryModel<
         return [new Selector(candidates, 'Choose a friendly minion')]
     }
 
-    @DebugService.log()
+    @DebugUtil.log()
     public async run(target: MinionRoleModel) {
         target.affect(new ShatteredSunClericEffectModel({}))
     }

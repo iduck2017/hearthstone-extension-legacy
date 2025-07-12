@@ -1,5 +1,5 @@
 import { EffectModel, RoleModel, MinionRoleModel, MinionRaceType } from "hearthstone-core";
-import { CheckService, DebugService, LogLevel, StateAgent, TranxService } from "set-piece";
+import { CheckUtil, DebugUtil, LogLevel, StateUtil, TranxUtil } from "set-piece";
 import { DeepReadonly } from "utility-types";
 
 export namespace GrimscaleOracleEffectModel {
@@ -28,8 +28,8 @@ export class GrimscaleOracleEffectModel extends EffectModel<
         });
     }
 
-    @StateAgent.use(self => self.route.owner?.proxy.child.board.child.cards.child.role.decor)
-    @DebugService.log(LogLevel.WARN)
+    @StateUtil.use(self => self.route.owner?.proxy.child.board.child.cards.child.role.decor)
+    @DebugUtil.log(LogLevel.WARN)
     private decorateRoleAttack(
         that: MinionRoleModel, 
         state: DeepReadonly<MinionRoleModel.State & RoleModel.State>

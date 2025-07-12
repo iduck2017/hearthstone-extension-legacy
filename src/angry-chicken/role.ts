@@ -1,8 +1,8 @@
 import { MinionRoleModel, FeatureModel, MinionRaceType } from "hearthstone-core";
-import { AngryBirdEffectModel } from "./effect";
+import { AngryChickenEffectModel } from "./effect";
 
-export class AngryBirdRoleModel extends MinionRoleModel {
-    constructor(props: AngryBirdRoleModel['props']) {
+export class AngryChickenRoleModel extends MinionRoleModel {
+    constructor(props: AngryChickenRoleModel['props']) {
         super({
             uuid: props.uuid,
             state: {
@@ -15,7 +15,7 @@ export class AngryBirdRoleModel extends MinionRoleModel {
                 ...props.child,
                 effect: FeatureModel.assign(
                     props.child?.effect,
-                    new AngryBirdEffectModel({})
+                    new AngryChickenEffectModel({})
                 ),
             },
             refer: { ...props.refer },

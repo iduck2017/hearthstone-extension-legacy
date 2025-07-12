@@ -1,5 +1,5 @@
-import { RouteAgent } from "set-piece";
-import { AngryBirdCardModel } from "../src/angry-bird";
+import { RouteUtil } from "set-piece";
+import { AngryChickenCardModel } from "../src/angry-chicken";
 import { GameModel, PlayerModel, MageHeroModel, BoardModel, RootModel } from "hearthstone-core";
 import { boot } from "./boot";
 
@@ -10,7 +10,7 @@ describe('angry-chicken', () => {
                 child: {
                     hero: new MageHeroModel({}),
                     board: new BoardModel({
-                        child: { cards: [new AngryBirdCardModel({})] }
+                        child: { cards: [new AngryChickenCardModel({})] }
                     })
                 }
             }),
@@ -18,7 +18,7 @@ describe('angry-chicken', () => {
                 child: {
                     hero: new MageHeroModel({}),
                     board: new BoardModel({
-                        child: { cards: [new AngryBirdCardModel({})] }
+                        child: { cards: [new AngryChickenCardModel({})] }
                     })
                 }
             })
@@ -29,8 +29,8 @@ describe('angry-chicken', () => {
     test('attack', async () => {
         const boardA = game.child.playerA.child.board;
         const boardB = game.child.playerB.child.board;
-        const cardA = boardA.child.cards.find(item => item instanceof AngryBirdCardModel);
-        const cardB = boardB.child.cards.find(item => item instanceof AngryBirdCardModel);
+        const cardA = boardA.child.cards.find(item => item instanceof AngryChickenCardModel);
+        const cardB = boardB.child.cards.find(item => item instanceof AngryChickenCardModel);
         expect(cardA).toBeDefined();
         expect(cardB).toBeDefined();
         if (!cardA || !cardB) return;
@@ -38,7 +38,7 @@ describe('angry-chicken', () => {
         const roleA = cardA.child.role;
         const roleB = cardB.child.role;
         
-        // Initial state: both Angry Birds are at full health (1/1)
+        // Initial state: both Angry Chickens are at full health (1/1)
         // When at full health, they don't have the +5 attack buff
         let state = {
             attack: 1,

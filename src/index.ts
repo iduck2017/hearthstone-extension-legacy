@@ -2,7 +2,7 @@ export { LegacyExtensionModel } from "./extension";
 
 export { WispCardModel } from "./wisp";
 export { AbusiveSergeantCardModel } from "./abusive-sergeant";
-export { AngryBirdCardModel } from "./angry-bird";
+export { AngryChickenCardModel as AngryChickenCardModel } from "./angry-chicken";
 export { ArgentSquireCardModel } from "./argent-squire";
 export { ElvenArcherCardModel } from "./elven-archer";
 export { EmeraldSkytalonCardModel } from "./emerald-skytalon";

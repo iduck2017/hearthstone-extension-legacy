@@ -1,8 +1,8 @@
 import { MinionCardModel } from "hearthstone-core";
 import { WispRoleModel } from "./role";
-import { StoreService } from "set-piece";
+import { StoreUtil } from "set-piece";
 
-@StoreService.is('wisp-card')
+@StoreUtil.is('wisp-card')
 export class WispCardModel extends MinionCardModel {
     constructor(props: WispCardModel['props']) {
         super({

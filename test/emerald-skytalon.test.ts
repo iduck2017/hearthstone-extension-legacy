@@ -10,7 +10,7 @@
 import { GameModel, PlayerModel, MageHeroModel, HandModel, BoardModel, Selector, Utils, RootModel } from "hearthstone-core";
 import { EmeraldSkytalonCardModel } from "../src/emerald-skytalon";
 import { WispCardModel } from "../src/wisp";
-import { RouteAgent } from "set-piece";
+import { RouteUtil } from "set-piece";
 import { boot } from "./boot";
 
 describe('emerald-skytalon', () => {

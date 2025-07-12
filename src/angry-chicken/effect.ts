@@ -1,24 +1,24 @@
 import { FeatureModel, EffectModel, MinionRoleModel, RoleModel } from "hearthstone-core";
-import { Event, EventAgent, StateAgent, TranxService } from "set-piece";
+import { Event, EventUtil, StateUtil, TranxUtil } from "set-piece";
 import { DeepReadonly } from "utility-types";
 
-export namespace AngryBirdEffectModel {
+export namespace AngryChickenEffectModel {
     export type State = Partial<FeatureModel.State> & {
         readonly isEnable: false;
     }
     export type Event = {}
 }
 
-export class AngryBirdEffectModel extends EffectModel<
+export class AngryChickenEffectModel extends EffectModel<
     MinionRoleModel,
-    AngryBirdEffectModel.Event,
-    AngryBirdEffectModel.State
+    AngryChickenEffectModel.Event,
+    AngryChickenEffectModel.State
 > {
-    constructor(props: AngryBirdEffectModel['props']) {
+    constructor(props: AngryChickenEffectModel['props']) {
         super({
             uuid: props.uuid,
             state: {
-                name: 'Angry Bird\'s Buff',
+                name: 'Angry Chicken\'s Buff',
                 desc: 'Has +5 Attack while damaged.',
                 modAttack: 5,
                 modHealth: 0,
@@ -30,8 +30,8 @@ export class AngryBirdEffectModel extends EffectModel<
         });
     }
 
-    @EventAgent.use(self => self.route.parent?.proxy.event.onStateChange)
-    @TranxService.use()
+    @EventUtil.on(self => self.route.parent?.proxy.event.onStateChange)
+    @TranxUtil.span()
     private handleHealthChange(that: MinionRoleModel, event: Event.OnStateChange<RoleModel>) {
         const { next } = event;
         const isActive = next.curHealth < next.maxHealth;
@@ -40,7 +40,7 @@ export class AngryBirdEffectModel extends EffectModel<
         this.reload();
     }
 
-    @StateAgent.use(self => self.route.parent?.proxy.decor)
+    @StateUtil.use(self => self.route.parent?.proxy.decor)
     private decorateRoleAttack(
         that: MinionRoleModel, 
         state: DeepReadonly<MinionRoleModel.State & RoleModel.State>
