@@ -2,7 +2,7 @@ import { AttackModel, FeatureModel, RaceType, RoleModel } from "hearthstone-core
 import { DebugUtil, LogLevel, StateUtil, TranxUtil } from "set-piece";
 import { DeepReadonly } from "utility-types";
 
-export namespace GrimscaleOracleBuffModel {
+export namespace GrimscaleOracleFeatureModel {
     export type Event = {}
     export type State = {
         offset: number;
@@ -10,11 +10,11 @@ export namespace GrimscaleOracleBuffModel {
     }
 }
 
-export class GrimscaleOracleBuffModel extends FeatureModel<
-    GrimscaleOracleBuffModel.Event,
-    GrimscaleOracleBuffModel.State
+export class GrimscaleOracleFeatureModel extends FeatureModel<
+    GrimscaleOracleFeatureModel.Event,
+    GrimscaleOracleFeatureModel.State
 > {
-    constructor(props: GrimscaleOracleBuffModel['props']) {
+    constructor(props: GrimscaleOracleFeatureModel['props']) {
         super({
             uuid: props.uuid,
             state: {

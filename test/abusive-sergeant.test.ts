@@ -1,7 +1,7 @@
 import { GameModel, HandModel, MageModel, PlayerModel, SelectUtil, TimeUtil } from "hearthstone-core";
 import { boot } from "./boot";
-import { AbusiveSergeantCardModel } from "../src/abusive-sergeant";
-import { WispCardModel } from "../src/wisp";
+import { AbusiveSergeantCardModel } from "../src/abusive-sergeant/card";
+import { WispCardModel } from "../src/wisp/card";
 import { DebugUtil, LogLevel } from "set-piece";
 
 DebugUtil.level = LogLevel.ERROR

@@ -1,21 +1,6 @@
 import { MinionCardModel, BattlecryModel, RoleModel, SelectForm, DamageForm, DamageType, DamageModel } from "hearthstone-core";
 
-export namespace ElvenArcherBattlecryModel {
-    export type Event = {};
-    export type State = {};
-    export type Child = {
-        damage: DamageModel;
-    }
-    export type Refer = {};
-}
-
-export class ElvenArcherBattlecryModel extends BattlecryModel<
-    [RoleModel],
-    ElvenArcherBattlecryModel.Event,
-    ElvenArcherBattlecryModel.State,
-    ElvenArcherBattlecryModel.Child,
-    ElvenArcherBattlecryModel.Refer
-> {
+export class ElvenArcherBattlecryModel extends BattlecryModel<[RoleModel]> {
     constructor(props: ElvenArcherBattlecryModel['props']) {
         super({
             uuid: props.uuid,
@@ -41,8 +26,10 @@ export class ElvenArcherBattlecryModel extends BattlecryModel<
     }
 
     public async doRun(target: RoleModel) {
+        const card = this.route.card;
+        if (!card) return;
         DamageModel.deal([{
-            source: this.child.damage,
+            source: card.child.damage,
             target,
             damage: 1,
             result: 1,

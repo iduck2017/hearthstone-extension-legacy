@@ -1,6 +1,6 @@
 import { GameModel, PlayerModel, MageModel, BoardModel, SelectUtil } from "hearthstone-core";
 import { RouteUtil } from "set-piece";
-import { ArgentSquireCardModel } from "../src/argent-squire";
+import { ArgentSquireCardModel } from "../src/argent-squire/card";
 import { boot } from "./boot";
 
 describe('argent-squire', () => {

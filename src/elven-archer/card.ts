@@ -15,11 +15,11 @@ export class ElvenArcherCardModel extends MinionCardModel {
             },
             child: {
                 role: new ElvenArcherRoleModel({}),
-                ...props.child,
-                battlecryHooks: [
-                    ...props.child?.battlecryHooks ?? [], 
+                battlecry: [
+                    ...props.child?.battlecry ?? [], 
                     new ElvenArcherBattlecryModel({})
-                ]
+                ],
+                ...props.child,
             },
             refer: { ...props.refer },
         });

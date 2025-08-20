@@ -7,9 +7,9 @@
  */
 
 import { GameModel, PlayerModel, HandModel, BoardModel, MageModel, TimeUtil, SelectUtil } from "hearthstone-core";
-import { GrimscaleOracleCardModel } from "../src/grimscale-oracle";
-import { MurlocRaiderCardModel } from "../src/murloc-raider";
-import { WispCardModel } from "../src/wisp";
+import { GrimscaleOracleCardModel } from "../src/grimscale-oracle/card";
+import { MurlocRaiderCardModel } from "../src/murloc-raider/card";
+import { WispCardModel } from "../src/wisp/card";
 import { boot } from "./boot";
 
 describe('grimscale-oracle', () => {

@@ -1,8 +1,7 @@
 import { BuffModel, FilterType } from "hearthstone-core";
 
-
-export class ShatteredSunClericEffectModel extends BuffModel {
-    constructor(props: ShatteredSunClericEffectModel['props']) {
+export class ShatteredSunClericBuffModel extends BuffModel {
+    constructor(props: ShatteredSunClericBuffModel['props']) {
         super({
             uuid: props.uuid,
             state: {

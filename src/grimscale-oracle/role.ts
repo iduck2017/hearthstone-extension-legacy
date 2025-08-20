@@ -1,5 +1,5 @@
 import { AttackModel, HealthModel, RoleModel } from "hearthstone-core";
-import { GrimscaleOracleBuffModel } from "./buff";
+import { GrimscaleOracleFeatureModel } from "./feature";
 
 export class GrimscaleOracleRoleModel extends RoleModel {
     constructor(props: GrimscaleOracleRoleModel['props']) {
@@ -12,7 +12,7 @@ export class GrimscaleOracleRoleModel extends RoleModel {
                 ...props.child,
                 features: [
                     ...props.child?.features ?? [],
-                    new GrimscaleOracleBuffModel({})
+                    new GrimscaleOracleFeatureModel({})
                 ]
             },
             refer: { ...props.refer }

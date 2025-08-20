@@ -3,7 +3,7 @@ import { Event, EventUtil, StateUtil, TranxUtil } from "set-piece";
 import { DeepReadonly } from "utility-types";
 
 
-export namespace AngryChickenBuffModel {
+export namespace AngryChickenFeatureModel {
     export type Event = {};
     export type State = {
         isActive: boolean;
@@ -13,13 +13,13 @@ export namespace AngryChickenBuffModel {
     export type Refer = {}
 }
 
-export class AngryChickenBuffModel extends FeatureModel<
-    AngryChickenBuffModel.Event,
-    AngryChickenBuffModel.State,
-    AngryChickenBuffModel.Child,
-    AngryChickenBuffModel.Refer
+export class AngryChickenFeatureModel extends FeatureModel<
+    AngryChickenFeatureModel.Event,
+    AngryChickenFeatureModel.State,
+    AngryChickenFeatureModel.Child,
+    AngryChickenFeatureModel.Refer
 > {
-    constructor(props: AngryChickenBuffModel['props']) {
+    constructor(props: AngryChickenFeatureModel['props']) {
         super({
             uuid: props.uuid,
             state: {

@@ -5,9 +5,9 @@
  * 1. start: Player B has a wisp on board by default, Player A has an elven archer in hand
  * 2. battlecry: Player A uses Elven Archer to attack the wisp
  */
-import { ElvenArcherCardModel } from "../src/elven-archer";
+import { ElvenArcherCardModel } from "../src/elven-archer/card";
 import { GameModel, PlayerModel, MageModel, HandModel, BoardModel, SelectUtil, TimeUtil } from "hearthstone-core";
-import { WispCardModel } from "../src/wisp";
+import { WispCardModel } from "../src/wisp/card";
 import { boot } from "./boot";
 import { DebugUtil, LogLevel } from "set-piece";
 

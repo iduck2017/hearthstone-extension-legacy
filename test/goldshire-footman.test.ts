@@ -6,8 +6,8 @@
  * 2. attack: Wisp can only attack the footman due to taunt
  */
 import { GameModel, PlayerModel, MageModel, BoardModel, TimeUtil, SelectUtil } from "hearthstone-core";
-import { GoldshireFootmanCardModel } from "../src/goldshire-footman";
-import { WispCardModel } from "../src/wisp";
+import { GoldshireFootmanCardModel } from "../src/goldshire-footman/card";
+import { WispCardModel } from "../src/wisp/card";
 import { boot } from "./boot";
 
 describe('goldshire-footman', () => {

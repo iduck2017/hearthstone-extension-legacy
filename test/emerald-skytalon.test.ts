@@ -7,8 +7,8 @@
  * 3. attack: After 2 turns, the other emerald can attack the hero
  */
 import { GameModel, PlayerModel, MageModel, HandModel, BoardModel, SelectUtil, TimeUtil, RushStatus, ActionModel } from "hearthstone-core";
-import { EmeraldSkytalonCardModel } from "../src/emerald-skytalon";
-import { WispCardModel } from "../src/wisp";
+import { EmeraldSkytalonCardModel } from "../src/emerald-skytalon/card";
+import { WispCardModel } from "../src/wisp/card";
 import { boot } from "./boot";
 
 describe('emerald-skytalon', () => {

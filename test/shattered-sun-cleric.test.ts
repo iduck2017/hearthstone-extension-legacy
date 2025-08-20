@@ -1,6 +1,6 @@
 import { GameModel, BoardModel, HandModel, MageModel, PlayerModel, TimeUtil, SelectUtil } from "hearthstone-core";
-import { ShatteredSunClericCardModel } from "../src/shattered-sun-cleric";
-import { WispCardModel } from "../src/wisp";
+import { ShatteredSunClericCardModel } from "../src/shattered-sun-cleric/card";
+import { WispCardModel } from "../src/wisp/card";
 import { boot } from "./boot";
 
 describe('shattered-sun-cleric', () => {

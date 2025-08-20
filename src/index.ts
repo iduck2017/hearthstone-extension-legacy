@@ -1,12 +1,12 @@
-// export { LegacyExtensionModel } from "./extension";
-
-// export { WispCardModel } from "./wisp";
-// export { AbusiveSergeantCardModel } from "./abusive-sergeant";
-// export { AngryChickenCardModel as AngryChickenCardModel } from "./angry-chicken";
-// export { ArgentSquireCardModel } from "./argent-squire";
-// export { ElvenArcherCardModel } from "./elven-archer";
-// export { EmeraldSkytalonCardModel } from "./emerald-skytalon";
-// export { GoldshireFootmanCardModel } from "./goldshire-footman";
-// export { GrimscaleOracleCardModel } from "./grimscale-oracle";
-// export { MurlocRaiderCardModel } from "./murloc-raider";
-// export { ShatteredSunClericCardModel } from "./shattered-sun-cleric";
+export { LegacyExtensionModel } from "./extension";
+export { WispCardModel } from "./wisp/card";
+export { AbusiveSergeantCardModel } from "./abusive-sergeant/card";
+export { AngryChickenCardModel } from "./angry-chicken/card";
+export { ArgentSquireCardModel } from "./argent-squire/card";
+export { ElvenArcherCardModel } from "./elven-archer/card";
+export { EmeraldSkytalonCardModel } from "./emerald-skytalon/card";
+export { GoldshireFootmanCardModel } from "./goldshire-footman/card";
+export { GrimscaleOracleCardModel } from "./grimscale-oracle/card";
+export { MurlocRaiderCardModel } from "./murloc-raider/card";
+export { ShatteredSunClericCardModel } from "./shattered-sun-cleric/card";
+export { ShieldbearerCardModel } from "./shieldbearer/card";

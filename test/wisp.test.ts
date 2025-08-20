@@ -1,5 +1,5 @@
 import { GameModel, PlayerModel, HandModel, BoardModel, MageModel, TimeUtil, SelectUtil } from "hearthstone-core";
-import { WispCardModel } from "../src/wisp";   
+import { WispCardModel } from "../src/wisp/card";   
 import { boot } from "./boot";
 import { DebugUtil, LogLevel } from "set-piece";
 

@@ -15,8 +15,11 @@ export class ShatteredSunClericCardModel extends MinionCardModel {
             },
             child: {
                 role: new ShatteredSunClericRoleModel({}),
+                battlecry: [
+                    ...props.child?.battlecry ?? [], 
+                    new ShatteredSunClericBattlecryModel({})
+                ],
                 ...props.child,
-                battlecryHooks: [...props.child?.battlecryHooks ?? [], new ShatteredSunClericBattlecryModel({})]
             },
             refer: { ...props.refer },
         });

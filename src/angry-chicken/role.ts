@@ -1,5 +1,5 @@
 import { AttackModel, HealthModel, RoleModel } from "hearthstone-core";
-import { AngryChickenBuffModel } from "./buff";
+import { AngryChickenFeatureModel } from "./feature";
 
 export class AngryChickenRoleModel extends RoleModel {
     constructor(props: AngryChickenRoleModel['props']) {
@@ -12,7 +12,7 @@ export class AngryChickenRoleModel extends RoleModel {
                 ...props.child,
                 features: [
                     ...props.child?.features ?? [],
-                    new AngryChickenBuffModel({})
+                    new AngryChickenFeatureModel({})
                 ]
             },
             refer: { ...props.refer },

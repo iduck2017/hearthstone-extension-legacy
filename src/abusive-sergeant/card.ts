@@ -15,8 +15,11 @@ export class AbusiveSergeantCardModel extends MinionCardModel {
             },
             child: {
                 role: new AbusiveSergeantRoleModel({}),
+                battlecry: [
+                    ...props.child?.battlecry ?? [], 
+                    new AbusiveSergeantBattlecryModel({})
+                ],
                 ...props.child,
-                battlecryHooks: [...props.child?.battlecryHooks ?? [], new AbusiveSergeantBattlecryModel({})]
             },
             refer: { ...props.refer },
         });

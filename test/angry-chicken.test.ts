@@ -1,5 +1,5 @@
 import { DebugUtil, LogLevel, RouteUtil } from "set-piece";
-import { AngryChickenCardModel } from "../src/angry-chicken";
+import { AngryChickenCardModel } from "../src/angry-chicken/card";
 import { GameModel, PlayerModel, MageModel, BoardModel, SelectUtil } from "hearthstone-core";
 import { boot } from "./boot";
 

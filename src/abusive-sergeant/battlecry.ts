@@ -1,6 +1,6 @@
 import { BattlecryModel, FilterType, MinionCardModel, RoleModel } from "hearthstone-core";
 import { SelectForm } from "hearthstone-core/dist/type/utils/select";
-import { AbusiveSergeantBuffModel } from "./buff";
+import { AbusiveSergeantBuffModel } from "./feature";
 import { DebugUtil, LogLevel } from "set-piece";
 
 export class AbusiveSergeantBattlecryModel extends BattlecryModel<
@@ -12,7 +12,7 @@ export class AbusiveSergeantBattlecryModel extends BattlecryModel<
             uuid: props.uuid,
             state: {
                 name: 'Abusive Sergeant\'s Battlecry',
-                desc: 'Give a minion +2 Attack this turn.',
+                desc: '+2 Attack this turn.',
                 ...props.state,
             },
             child: {},

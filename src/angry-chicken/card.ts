@@ -7,7 +7,7 @@ export class AngryChickenCardModel extends MinionCardModel {
             uuid: props.uuid,
             state: {
                 name: 'Angry Chicken',
-                desc: 'Has +5 Attack while damaged.',
+                desc: '+5 Attack while damaged.',
                 mana: 1,
                 races: [RaceType.BEAST],
                 ...props.state,

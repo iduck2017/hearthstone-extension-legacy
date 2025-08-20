@@ -1,5 +1,5 @@
 import { BattlecryModel, FilterType, RoleModel, SelectForm } from "hearthstone-core";
-import { ShatteredSunClericEffectModel } from "./buff";
+import { ShatteredSunClericBuffModel } from "./buff";
 import { DebugUtil } from "set-piece";
 
 export class ShatteredSunClericBattlecryModel extends BattlecryModel<
@@ -31,6 +31,6 @@ export class ShatteredSunClericBattlecryModel extends BattlecryModel<
 
     @DebugUtil.log()
     public async doRun(target: RoleModel) {
-        target.affect(new ShatteredSunClericEffectModel({}))
+        target.affect(new ShatteredSunClericBuffModel({}))
     }
 }
