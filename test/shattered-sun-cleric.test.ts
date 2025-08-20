@@ -1,14 +1,14 @@
-import { GameModel, BoardModel, HandModel, MageHeroModel, PlayerModel, Selector, Utils } from "hearthstone-core";
+import { GameModel, BoardModel, HandModel, MageModel, PlayerModel, TimeUtil, SelectUtil } from "hearthstone-core";
 import { ShatteredSunClericCardModel } from "../src/shattered-sun-cleric";
 import { WispCardModel } from "../src/wisp";
 import { boot } from "./boot";
 
 describe('shattered-sun-cleric', () => {
-    const game = new GameModel({
+    const game = boot(new GameModel({
         child: {
             playerA: new PlayerModel({
                 child: {
-                    hero: new MageHeroModel({}),
+                    hero: new MageModel({}),
                     board: new BoardModel({
                         child: { cards: [new WispCardModel({})] }
                     }),
@@ -19,7 +19,7 @@ describe('shattered-sun-cleric', () => {
             }),
             playerB: new PlayerModel({
                 child: {
-                    hero: new MageHeroModel({}),
+                    hero: new MageModel({}),
                     hand: new HandModel({
                         child: { cards: [
                             new ShatteredSunClericCardModel({}),
@@ -29,128 +29,111 @@ describe('shattered-sun-cleric', () => {
                 }
             })
         }
-    })
-    const root = boot(game);
+    }));
 
     test('battlecry', async () => {
-        const hand = game.child.playerA.child.hand;
-        const board = game.child.playerA.child.board;
-        const cardA = hand.child.cards.find(item => item instanceof ShatteredSunClericCardModel);
-        const cardB = board.child.cards.find(item => item instanceof WispCardModel);
+        const handA = game.child.playerA.child.hand;
+        const boardA = game.child.playerA.child.board;
+        const cardA = handA.child.cards.find(item => item instanceof ShatteredSunClericCardModel);
+        const cardB = boardA.child.cards.find(item => item instanceof WispCardModel);
         expect(cardA).toBeDefined();
         expect(cardB).toBeDefined();
-        if (!cardA || !cardB) return;
-        
-        // Initial state of the wisp
-        let state = {
-            attack: 1,
-            health: 1,
-            modAttack: 0,
-            modHealth: 0,
-            refHealth: 1,
-            damage: 0,
-            maxHealth: 1,
-            curHealth: 1,
-            curAttack: 1,
-        }
-        const role = cardB.child.role;
-        expect(role.state).toMatchObject(state);
-        
-        // Use Shattered Sun Cleric to buff the wisp
-        process.nextTick(() => {
-            const selector = Selector.current;
-            expect(selector).toBeDefined();
-            if (!selector) return;
-            expect(selector.candidates.length).toBe(1);
-            expect(selector.candidates).toContain(role);
-            selector.set(role);
-        })
-        await cardA.preparePlay();
-        
-        // State after buff: +1/+1 (attack and health)
-        expect(role.state).toMatchObject({
-            ...state,
-            modAttack: 1,      // +1 attack
-            modHealth: 1,      // +1 health
-            refHealth: 2,      // reference health increased
-            curHealth: 2,      // current health increased
-            maxHealth: 2,      // max health increased
-            curAttack: 2,      // current attack increased
-        });
+        if (!cardA) return;
+        if (!cardB) return;
+        const roleA = cardA.child.role;
+        const roleB = cardB.child.role;
+        let promise = cardA.play();
+        await TimeUtil.sleep();
+        expect(SelectUtil.current?.options).toContain(0);
+        SelectUtil.set(0);
+        await TimeUtil.sleep();
+        expect(SelectUtil.current?.options).toContain(roleB);
+        expect(SelectUtil.current?.options.length).toBe(1);
+        SelectUtil.set(roleB);
+        await promise;
+        expect(boardA.child.cards.length).toBe(2);
+        expect(roleB.state.attack).toBe(2);
+        expect(roleB.child.attack.state.origin).toBe(1);
+        expect(roleB.child.attack.state.offset).toBe(1);
+        expect(roleB.child.attack.state.current).toBe(2);
+        expect(roleB.state.health).toBe(2);
+        expect(roleB.child.health.state.limit).toBe(2);
+        expect(roleB.child.health.state.origin).toBe(1);
+        expect(roleB.child.health.state.offset).toBe(1);
+        expect(roleB.child.health.state.damage).toBe(0);
+        expect(roleB.child.health.state.memory).toBe(2);
+        expect(roleB.child.health.state.current).toBe(2);
     })
 
-    test('skip', async () => {
-        const hand = game.child.playerB.child.hand;
-        const board = game.child.playerB.child.board;
-        const cardA = hand.child.cards.find(item => item instanceof ShatteredSunClericCardModel);
-        const cardB = hand.child.cards.find(item => item instanceof WispCardModel);
+    test('cancel', async () => {
+        const turn = game.child.turn;
+        turn.next();
+        const handB = game.child.playerB.child.hand;
+        const boardB = game.child.playerB.child.board;
+        const cardA = handB.child.cards.find(item => item instanceof ShatteredSunClericCardModel);
+        const cardB = handB.child.cards.find(item => item instanceof WispCardModel);
         expect(cardA).toBeDefined();
         expect(cardB).toBeDefined();
-        if (!cardA || !cardB) return;
-        
+        if (!cardA) return;
+        if (!cardB) return;
+        const roleA = cardA.child.role;
+        const roleB = cardB.child.role;
         // Player B has no minions on board, so battlecry cannot trigger
-        const role = cardB.child.role;
-        const state = {
-            attack: 1,
-            health: 1,
-            modAttack: 0,
-            modHealth: 0,
-            refHealth: 1,
-            maxHealth: 1,
-            curHealth: 1,
-            curAttack: 1,
-            damage: 0,
-        }
-        expect(role.state).toMatchObject(state);
-        expect(board.child.cards.length).toBe(0);
-        
-        // Play both cards, but no battlecry effect
-        process.nextTick(() => {
-            const selector = Selector.current;
-            expect(selector).toBeUndefined();
-        })
-        await cardA.preparePlay();
-        await Utils.sleep()
-        await cardB.preparePlay();
-        expect(role.state).toMatchObject(state);
+        expect(boardB.child.cards.length).toBe(0);
+        let promise = cardA.play();
+        await TimeUtil.sleep();
+        expect(SelectUtil.current?.options).toContain(0);
+        SelectUtil.set(0);
+        await TimeUtil.sleep();
+        expect(SelectUtil.current).toBeUndefined();
+        await promise;
+        expect(boardB.child.cards.length).toBe(1);
+        promise = cardB.play();
+        await TimeUtil.sleep();
+        expect(SelectUtil.current?.options).toContain(0);
+        SelectUtil.set(0);
+        await promise;
+        expect(boardB.child.cards.length).toBe(2);
+        expect(roleB.state.action).toBe(1);
+        expect(roleB.state.health).toBe(1);
     })
 
     test('attack', async () => {
+        const turn = game.child.turn;
+        turn.next();
         const boardA = game.child.playerA.child.board;
         const boardB = game.child.playerB.child.board;
         const cardA = boardA.child.cards.find(item => item instanceof WispCardModel);
         const cardB = boardB.child.cards.find(item => item instanceof WispCardModel);
         expect(cardA).toBeDefined();
         expect(cardB).toBeDefined();
-        if (!cardA || !cardB) return;
-        
+        if (!cardA) return;
+        if (!cardB) return;
         const roleA = cardA.child.role;
         const roleB = cardB.child.role;
-        
-        // Attack each other
-        roleA.attack(roleB);
-        
-        // State after attack
-        expect(roleA.state).toMatchObject({
-            attack: 1,
-            health: 1,
-            modAttack: 1,      // +1 attack from cleric
-            modHealth: 1,      // +1 health from cleric
-            refHealth: 2,      // reference health
-            maxHealth: 2,      // max health
-            curHealth: 1,      // current health after taking 1 damage
-            damage: 1,         // damage taken
-        })
-        expect(roleB.state).toMatchObject({
-            attack: 1,
-            health: 1,
-            modAttack: 0,      // no buffs
-            modHealth: 0,      // no buffs
-            refHealth: 1,      // reference health
-            maxHealth: 1,      // max health
-            curHealth: -1,      // current health after taking 2 damage
-            damage: 2,         // damage taken
-        })
+        const heroB = game.child.playerB.child.hero.child.role;
+        expect(turn.refer.current).toBe(game.child.playerA);
+        let promise = roleA.child.attack.run();
+        await TimeUtil.sleep();
+        expect(SelectUtil.current?.options).toContain(roleB);
+        expect(SelectUtil.current?.options).toContain(heroB);
+        expect(SelectUtil.current?.options.length).toBe(3);
+        SelectUtil.set(roleB);
+        await promise;
+        expect(roleA.state.attack).toBe(2);
+        expect(roleA.state.health).toBe(1);
+        expect(roleA.state.action).toBe(0);
+        expect(roleA.child.health.state.damage).toBe(1);
+        expect(roleA.child.health.state.offset).toBe(1);
+        expect(roleA.child.death.state.isDying).toBe(false);
+        expect(roleB.state.attack).toBe(1);
+        expect(roleB.state.health).toBe(-1);
+        expect(roleB.state.action).toBe(1);
+        expect(roleB.child.health.state.damage).toBe(2);
+        expect(roleB.child.health.state.offset).toBe(0);
+        expect(roleB.child.death.state.isDying).toBe(true);
+        expect(boardB.child.cards.length).toBe(1);
+        expect(boardA.child.cards.length).toBe(2);
     })
 })
 

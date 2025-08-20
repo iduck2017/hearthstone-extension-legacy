@@ -1,18 +1,15 @@
-import { MinionRoleModel, MinionRaceType } from "hearthstone-core";
-import { StoreUtil } from "set-piece";
+import { AttackModel, HealthModel, RoleModel } from "hearthstone-core";
 
-@StoreUtil.is('wisp-role')
-export class WispRoleModel extends MinionRoleModel {
+export class WispRoleModel extends RoleModel {
     constructor(props: WispRoleModel['props']) {
         super({
             uuid: props.uuid,
-            state: {
-                attack: 1,
-                health: 1,
-                races: [MinionRaceType.UNDEAD],
-                ...props.state,
+            state: { ...props.state },
+            child: { 
+                attack: new AttackModel({ state: { origin: 1 }}),
+                health: new HealthModel({ state: { origin: 1 }}),   
+                ...props.child 
             },
-            child: { ...props.child },
             refer: { ...props.refer },
         });
     }

@@ -1,4 +1,4 @@
-import { GameModel, PlayerModel, MageHeroModel, BoardModel, RootModel } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, SelectUtil } from "hearthstone-core";
 import { RouteUtil } from "set-piece";
 import { ArgentSquireCardModel } from "../src/argent-squire";
 import { boot } from "./boot";
@@ -8,7 +8,7 @@ describe('argent-squire', () => {
         child: {
             playerA: new PlayerModel({
                 child: {
-                    hero: new MageHeroModel({}),
+                    hero: new MageModel({}),
                     board: new BoardModel({
                         child: { cards: [new ArgentSquireCardModel({})] }
                     }),
@@ -16,7 +16,7 @@ describe('argent-squire', () => {
             }),
             playerB: new PlayerModel({
                 child: {
-                    hero: new MageHeroModel({}),
+                    hero: new MageModel({}),
                     board: new BoardModel({
                         child: { cards: [new ArgentSquireCardModel({})] }
                     })
@@ -24,57 +24,34 @@ describe('argent-squire', () => {
             })
         }
     })
-    const root = boot(game);
+    boot(game);
 
-    test('attack', () => {
+    test('attack', async () => {
         const boardA = game.child.playerA.child.board;
         const boardB = game.child.playerB.child.board;
         const cardA = boardA.child.cards.find(item => item instanceof ArgentSquireCardModel);
         const cardB = boardB.child.cards.find(item => item instanceof ArgentSquireCardModel);
-        const roleA = cardA?.child.role;
-        const roleB = cardB?.child.role;
-        if (!roleA || !roleB) return;
-        
-        // Initial state: both Argent Squires have Divine Shield
-        let state = {
-            attack: 1,
-            health: 1,
-            modAttack: 0,
-            modHealth: 0,
-            damage: 0,
-            maxHealth: 1,
-            curHealth: 1,
-            curAttack: 1,
-            isShield: true,     // Divine Shield active
-        }
-        expect(roleA.state).toMatchObject(state);
-        expect(roleB.state).toMatchObject(state);
-        
+        expect(cardA).toBeDefined();
+        expect(cardB).toBeDefined();
+        if (!cardA) return;
+        if (!cardB) return;
+        const roleA = cardA.child.role;
+        const roleB = cardB.child.role;
         // First attack: both squires attack each other
         // Divine Shield blocks the damage, so no health is lost
-        roleA.attack(roleB);
-        
-        // After first attack: Divine Shield is consumed, but no damage taken
-        state = {
-            ...state,
-            isShield: false,    // Divine Shield consumed
-            damage: 0,          // No damage taken due to Divine Shield
-            curHealth: 1,       // Health remains full
-        }
-        expect(roleA.state).toMatchObject(state);
-        expect(roleB.state).toMatchObject(state);
-        
-        // Second attack: both squires attack each other again
-        // Now without Divine Shield, they take damage
-        roleA.attack(roleB);
-        
-        // After second attack: both squires are damaged
-        state = {
-            ...state,
-            damage: 1,          // Damage taken
-            curHealth: 0,       // Health reduced to 0
-        }
-        expect(roleA.state).toMatchObject(state);
-        expect(roleB.state).toMatchObject(state);
+        expect(roleA.state.health).toBe(1);
+        expect(roleB.state.health).toBe(1);
+        expect(roleA.child.devineShield.state.isActive).toBe(true);
+        expect(roleB.child.devineShield.state.isActive).toBe(true);
+        const promise = roleA.child.attack.run();
+        expect(SelectUtil.current?.options).toContain(roleB);
+        SelectUtil.set(roleB);
+        await promise;
+        expect(roleA.state.health).toBe(1);
+        expect(roleB.state.health).toBe(1);
+        expect(roleA.child.devineShield.state.isActive).toBe(false);
+        expect(roleB.child.devineShield.state.isActive).toBe(false);
+        expect(roleA.child.death.state.isDying).toBe(false);
+        expect(roleB.child.death.state.isDying).toBe(false);
     })
 })

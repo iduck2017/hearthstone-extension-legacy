@@ -1,17 +1,16 @@
-import { RoleModel, MinionRoleModel } from "hearthstone-core";
+import { AttackModel, DevineSheildModel, HealthModel, RoleModel } from "hearthstone-core";
 
-export class ArgentSquireRoleModel extends MinionRoleModel {
+export class ArgentSquireRoleModel extends RoleModel {
     public constructor(props: RoleModel['props']) {
         super({
             uuid: props.uuid,
-            state: {
-                attack: 1,
-                health: 1,
-                isShield: true,
-                races: [],
-                ...props.state,
+            state: { ...props.state },
+            child: { 
+                attack: new AttackModel({ state: { origin: 1 }}),
+                health: new HealthModel({ state: { origin: 1 }}),   
+                devineShield: new DevineSheildModel({ state: { isActive: true } }),
+                ...props.child,
             },
-            child: { ...props.child },
             refer: { ...props.refer },
         });
     }

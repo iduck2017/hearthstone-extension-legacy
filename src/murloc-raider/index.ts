@@ -1,4 +1,4 @@
-import { MinionCardModel } from "hearthstone-core";
+import { MinionCardModel, RaceType } from "hearthstone-core";
 import { MurlocRaiderRoleModel } from "./role";
 
 export class MurlocRaiderCardModel extends MinionCardModel {
@@ -9,6 +9,7 @@ export class MurlocRaiderCardModel extends MinionCardModel {
                 name: 'Murloc Raider',
                 desc: '',
                 mana: 1,
+                races: [RaceType.MURLOC],
                 ...props.state
             },
             child: {

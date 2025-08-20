@@ -1,6 +1,6 @@
-import { MinionCardModel } from "hearthstone-core";
-import { WispRoleModel } from "./role";
+import { MinionCardModel, RaceType } from "hearthstone-core";
 import { StoreUtil } from "set-piece";
+import { WispRoleModel } from "./role";
 
 @StoreUtil.is('wisp-card')
 export class WispCardModel extends MinionCardModel {
@@ -11,6 +11,7 @@ export class WispCardModel extends MinionCardModel {
                 name: 'Wisp',
                 desc: '',
                 mana: 0,
+                races: [RaceType.UNDEAD],
                 ...props.state,
             },
             child: { 
@@ -20,5 +21,4 @@ export class WispCardModel extends MinionCardModel {
             refer: { ...props.refer },
         });
     }
-
 }

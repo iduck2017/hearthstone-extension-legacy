@@ -1,9 +1,10 @@
-import { MinionCardModel, BattlecryModel, TargetType, Selector } from "hearthstone-core";
-import { AbusiveSergeantEffectModel } from "./effect";
-import { MinionRoleModel } from "hearthstone-core";
+import { BattlecryModel, FilterType, MinionCardModel, RoleModel } from "hearthstone-core";
+import { SelectForm } from "hearthstone-core/dist/type/utils/select";
+import { AbusiveSergeantBuffModel } from "./buff";
+import { DebugUtil, LogLevel } from "set-piece";
 
 export class AbusiveSergeantBattlecryModel extends BattlecryModel<
-    [MinionRoleModel],
+    [RoleModel],
     MinionCardModel
 > {
     constructor(props: AbusiveSergeantBattlecryModel['props']) {
@@ -19,14 +20,17 @@ export class AbusiveSergeantBattlecryModel extends BattlecryModel<
         });
     }
 
-    public preparePlay(): [Selector<MinionRoleModel>] | undefined {
+    @DebugUtil.log()
+    public toRun(): [SelectForm<RoleModel>] | undefined {
         if (!this.route.game) return;
-        const candidates = this.route.game.query(TargetType.MinionRole, {})
-        if (!candidates.length) return;
-        return [new Selector(candidates, 'Choose a minion')];
+        const options = this.route.game.query({
+            isMinion: FilterType.INCLUDE,
+        })
+        if (!options.length) return;
+        return [{ options, hint: 'Choose a minion' }];
     }
 
-    public async run(target: MinionRoleModel) {
-        target.affect(new AbusiveSergeantEffectModel({}))
+    public async doRun(target: RoleModel) {
+        target.affect(new AbusiveSergeantBuffModel({}))
     }
 }

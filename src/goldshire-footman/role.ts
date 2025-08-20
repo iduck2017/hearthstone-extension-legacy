@@ -1,17 +1,16 @@
-import { MinionRoleModel } from "hearthstone-core";
+import { AttackModel, HealthModel, RoleModel, TauntModel } from "hearthstone-core";
 
-export class GoldshireFootmanRoleModel extends MinionRoleModel {
+export class GoldshireFootmanRoleModel extends RoleModel {
     constructor(props: GoldshireFootmanRoleModel['props']) {
         super({
             uuid: props.uuid,
-            state: {
-                attack: 1,
-                health: 2,
-                races: [],
-                isTaunt: true,
-                ...props.state
+            state: { ...props.state },
+            child: { 
+                attack: new AttackModel({ state: { origin: 1 }}),
+                health: new HealthModel({ state: { origin: 2 }}),   
+                taunt: new TauntModel({ state: { isActive: true }}),
+                ...props.child 
             },
-            child: { ...props.child },
             refer: { ...props.refer }
         });
     }

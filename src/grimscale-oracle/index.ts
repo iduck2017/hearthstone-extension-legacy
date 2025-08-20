@@ -1,4 +1,4 @@
-import { MinionCardModel } from "hearthstone-core";
+import { MinionCardModel, RaceType } from "hearthstone-core";
 import { GrimscaleOracleRoleModel } from "./role";
 
 export class GrimscaleOracleCardModel extends MinionCardModel {
@@ -9,6 +9,7 @@ export class GrimscaleOracleCardModel extends MinionCardModel {
                 name: 'Grimscale Oracle',
                 desc: 'Your other Murlocs have +1 Attack.',
                 mana: 1,
+                races: [RaceType.MURLOC],
                 ...props.state
             },
             child: {

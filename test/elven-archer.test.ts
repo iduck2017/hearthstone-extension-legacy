@@ -5,19 +5,19 @@
  * 1. start: Player B has a wisp on board by default, Player A has an elven archer in hand
  * 2. battlecry: Player A uses Elven Archer to attack the wisp
  */
-
 import { ElvenArcherCardModel } from "../src/elven-archer";
-import { GameModel, PlayerModel, MageHeroModel, HandModel, BoardModel, Selector, RootModel } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, HandModel, BoardModel, SelectUtil, TimeUtil } from "hearthstone-core";
 import { WispCardModel } from "../src/wisp";
-import { RouteUtil } from "set-piece";
 import { boot } from "./boot";
+import { DebugUtil, LogLevel } from "set-piece";
 
+DebugUtil.level = LogLevel.ERROR;
 describe('elven-archer', () => {
     const game = new GameModel({
         child: {
             playerA: new PlayerModel({
                 child: {
-                    hero: new MageHeroModel({}),
+                    hero: new MageModel({}),
                     hand: new HandModel({
                         child: { cards: [new ElvenArcherCardModel({})] }
                     })
@@ -25,7 +25,7 @@ describe('elven-archer', () => {
             }),
             playerB: new PlayerModel({
                 child: {
-                    hero: new MageHeroModel({}),
+                    hero: new MageModel({}),
                     board: new BoardModel({
                         child: { cards: [new WispCardModel({})] }
                     })
@@ -44,38 +44,27 @@ describe('elven-archer', () => {
         const cardB = board.child.cards.find(item => item instanceof WispCardModel);
         expect(cardA).toBeDefined();
         expect(cardB).toBeDefined();
-        if (!cardA || !cardB) return;
-        
-        // Initial state of the wisp
-        let state = {
-            attack: 1,
-            health: 1,
-            modAttack: 0,
-            modHealth: 0,
-            damage: 0,
-            maxHealth: 1,
-            curHealth: 1,
-            curAttack: 1,
-        }
-        const role = cardB.child.role;
-        expect(role.state).toMatchObject(state);
-        
-        // Use Elven Archer to deal 1 damage to the wisp
-        process.nextTick(() => {
-            const selector = Selector.current;
-            expect(selector?.candidates.length).toBe(3);
-            expect(selector?.candidates).toContain(playerA.child.role);
-            expect(selector?.candidates).toContain(playerB.child.role);
-            expect(selector?.candidates).toContain(role);
-            selector?.set(role);
-        })
-        await cardA.preparePlay();
-        
-        // State after battlecry: wisp takes 1 damage
-        expect(role.state).toMatchObject({
-            ...state,
-            damage: 1,          // 1 damage taken from battlecry
-            curHealth: 0,       // current health reduced to 0
-        });
+        if (!cardA) return;
+        if (!cardB) return;
+        const roleA = cardA.child.role;
+        const roleB = cardB.child.role;
+        expect(roleB.state.health).toBe(1);
+        const promise = cardA.play();
+        expect(SelectUtil.current?.options).toContain(0);
+        SelectUtil.set(0);
+        await TimeUtil.sleep()
+        expect(SelectUtil.current?.options).toContain(roleB);
+        expect(SelectUtil.current?.options).toContain(playerA.child.hero.child.role);
+        expect(SelectUtil.current?.options).toContain(playerB.child.hero.child.role);
+        SelectUtil.set(roleB);
+        await promise;
+        expect(roleB.state.health).toBe(0);
+        expect(roleB.child.health.state.damage).toBe(1);
+        expect(roleB.child.health.state.limit).toBe(1);
+        expect(roleB.child.health.state.current).toBe(0);
+        expect(roleB.child.health.state.origin).toBe(1);
+        expect(roleB.child.death.state.isDying).toBe(true);
+        const reason = roleB.child.death.refer.reason;
+        expect(reason?.route.card).toBe(cardA);
     })
 })

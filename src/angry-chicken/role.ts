@@ -1,22 +1,19 @@
-import { MinionRoleModel, FeatureModel, MinionRaceType } from "hearthstone-core";
-import { AngryChickenEffectModel } from "./effect";
+import { AttackModel, HealthModel, RoleModel } from "hearthstone-core";
+import { AngryChickenBuffModel } from "./buff";
 
-export class AngryChickenRoleModel extends MinionRoleModel {
+export class AngryChickenRoleModel extends RoleModel {
     constructor(props: AngryChickenRoleModel['props']) {
         super({
             uuid: props.uuid,
-            state: {
-                attack: 1,
-                health: 1,
-                races: [MinionRaceType.BEAST],
-                ...props.state,
-            },
-            child: {
+            state: { ...props.state },
+            child: { 
+                attack: new AttackModel({ state: { origin: 1 }}),
+                health: new HealthModel({ state: { origin: 1 }}),   
                 ...props.child,
-                effect: FeatureModel.assign(
-                    props.child?.effect,
-                    new AngryChickenEffectModel({})
-                ),
+                features: [
+                    ...props.child?.features ?? [],
+                    new AngryChickenBuffModel({})
+                ]
             },
             refer: { ...props.refer },
         });

@@ -1,16 +1,15 @@
-import { MinionRoleModel } from "hearthstone-core";
+import { AttackModel, HealthModel, RoleModel } from "hearthstone-core";
 
-export class ElvenArcherRoleModel extends MinionRoleModel {
+export class ElvenArcherRoleModel extends RoleModel {
     constructor(props: ElvenArcherRoleModel['props']) {
         super({
             uuid: props.uuid,
-            state: {
-                attack: 1,
-                health: 1,
-                races: [],
-                ...props.state,
+            state: { ...props.state },
+            child: { 
+                attack: new AttackModel({ state: { origin: 1 }}),
+                health: new HealthModel({ state: { origin: 1 }}),  
+                ...props.child, 
             },
-            child: { ...props.child },
             refer: { ...props.refer },
         });
     }

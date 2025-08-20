@@ -1,13 +1,15 @@
-import { GameModel, PlayerModel, MageHeroModel, HandModel, BoardModel, Selector, Utils } from "hearthstone-core";
-import { WispCardModel } from "../src/wisp";
+import { GameModel, PlayerModel, HandModel, BoardModel, MageModel, TimeUtil, SelectUtil } from "hearthstone-core";
+import { WispCardModel } from "../src/wisp";   
 import { boot } from "./boot";
+import { DebugUtil, LogLevel } from "set-piece";
 
+DebugUtil.level = LogLevel.ERROR;
 describe('wisp', () => {
     const game = new GameModel({
         child: {
             playerA: new PlayerModel({
                 child: {
-                    hero: new MageHeroModel({}),
+                    hero: new MageModel({}),
                     hand: new HandModel({
                         child: { cards: [new WispCardModel({})] }
                     }),
@@ -15,7 +17,7 @@ describe('wisp', () => {
             }),
             playerB: new PlayerModel({
                 child: {
-                    hero: new MageHeroModel({}),
+                    hero: new MageModel({}),
                     board: new BoardModel({
                         child: { cards: [new WispCardModel({})] }
                     })
@@ -23,138 +25,56 @@ describe('wisp', () => {
             })
         }
     })
-    const root = boot(game);
+    boot(game);
 
     test('summon', async () => {
         const handA = game.child.playerA.child.hand;
         const handB = game.child.playerB.child.hand;
         const boardA = game.child.playerA.child.board;
         const boardB = game.child.playerB.child.board;
-        expect([
-            handA.child.cards.length,
-            handB.child.cards.length,
-            boardA.child.cards.length,
-            boardB.child.cards.length,
-        ]).toMatchObject([1, 0, 0, 1]);
+        expect(handA.child.cards.length).toBe(1);
+        expect(handB.child.cards.length).toBe(0);
+        expect(boardA.child.cards.length).toBe(0);
+        expect(boardB.child.cards.length).toBe(1);
         const card = handA.child.cards.find(item => item instanceof WispCardModel);
-        await card?.preparePlay();
-        expect([
-            handA.child.cards.length,
-            handB.child.cards.length,
-            boardA.child.cards.length,
-            boardB.child.cards.length,
-        ]).toMatchObject([0, 0, 1, 1]);
+        const promise = card?.play();
+        await TimeUtil.sleep();
+        expect(SelectUtil.current).toBeDefined();
+        expect(SelectUtil.current?.options.length).toBe(1);
+        expect(SelectUtil.current?.options).toContain(0);
+        SelectUtil.set(0);
+        await promise;
+        expect(boardA.child.cards.length).toBe(1);
+        expect(boardB.child.cards.length).toBe(1);
+        expect(handA.child.cards.length).toBe(0);
+        expect(handB.child.cards.length).toBe(0);
     })
 
-    test('attack', () => {
+
+    test('attack', async () => {
         const boardA = game.child.playerA.child.board;
         const boardB = game.child.playerB.child.board;
         const cardA = boardA.child.cards.find(item => item instanceof WispCardModel);
         const cardB = boardB.child.cards.find(item => item instanceof WispCardModel);
         const roleA = cardA?.child.role;
         const roleB = cardB?.child.role;
+        expect(roleA).toBeDefined();
+        expect(roleB).toBeDefined();
         if (!roleA || !roleB) return;
-        let state = {
-            attack: 1,
-            health: 1,
-            modAttack: 0,
-            modHealth: 0,
-            damage: 0,
-            maxHealth: 1,
-            curHealth: 1,
-            curAttack: 1,
-        }
-        expect(roleA.state).toMatchObject(state);
-        expect(roleB.state).toMatchObject(state);
-        roleA.attack(roleB);
-        state = {
-            ...state,
-            damage: 1,
-            curHealth: 0,
-            maxHealth: 1,
-        }
-        expect(roleA.state).toMatchObject(state);
-        expect(roleB.state).toMatchObject(state);
-    })
-
-    test('prepare-attack', async () => {
-        // Minions gain action points at the start of their turn
-        // Without action points, minions cannot attack
-        const game = new GameModel({
-            child: {
-                playerA: new PlayerModel({
-                    child: {
-                        hero: new MageHeroModel({}),
-                        board: new BoardModel({
-                            child: { cards: [new WispCardModel({})] }
-                        }),
-                    }
-                }),
-                playerB: new PlayerModel({
-                    child: {
-                        hero: new MageHeroModel({}),
-                        board: new BoardModel({
-                            child: { cards: [new WispCardModel({})] }
-                        })
-                    }
-                })
-            }
-        })
-        root.start(game);
-        
-        const playerA = game.child.playerA;
-        const playerB = game.child.playerB;
-        const boardA = playerA.child.board;
-        const boardB = playerB.child.board;
-        const cardA = boardA.child.cards.find(item => item instanceof WispCardModel);
-        const cardB = boardB.child.cards.find(item => item instanceof WispCardModel);
-        if (!cardA || !cardB) return;
-        const roleA = cardA.child.role;
-        const roleB = cardB.child.role;
-        
-        // Player A's turn starts: minion gains 1 action point
-        expect(roleA.state.action).toBe(1);
-        expect(roleB.state.action).toBe(0);
-
-        // No selector should be available when minion has no action points
-        process.nextTick(() => {
-            const selector = Selector.current;
-            expect(selector).toBeUndefined();
-        })
-        await roleB.prepareAttack();
-        await Utils.sleep();
-
-        // Selector should be available when minion has action points
-        process.nextTick(() => {
-            const selector = Selector.current;
-            expect(selector).toBeDefined();
-            if (!selector) return;
-            expect(selector.candidates.length).toBe(2);
-            expect(selector.candidates).toContain(roleB);
-            expect(selector.candidates).toContain(playerB.child.role);
-            selector.set(roleB);
-        })
-        await roleA.prepareAttack();
-        await Utils.sleep();
-        
-        // After attack: action points are consumed and minions are damaged
-        expect(roleA.state).toMatchObject({
-            action: 0,
-            curHealth: 0,
-            damage: 1,
-        });
-        expect(roleB.state).toMatchObject({
-            action: 0,
-            curHealth: 0,
-            damage: 1,
-        });
-
-        // No selector should be available after action points are consumed
-        process.nextTick(() => {
-            const selector = Selector.current;
-            expect(selector).toBeUndefined();
-        })
-        await roleA.prepareAttack();
-        await Utils.sleep();
+        game.child.turn.next();
+        expect(roleB.state.action).toBe(1);
+        const promise = roleB.child.attack.run();
+        await TimeUtil.sleep();
+        expect(SelectUtil.current).toBeDefined();
+        expect(SelectUtil.current?.options).toContain(roleA);
+        expect(SelectUtil.current?.options.length).toBe(2);
+        SelectUtil.set(roleA);
+        await promise;
+        expect(roleB.state.action).toBe(0)
+        expect(roleA.state.health).toBe(0);
+        expect(roleA.child.death.state.isDying).toBe(true);
+        expect(roleB.child.death.state.isDying).toBe(true);
+        expect(boardA.child.cards.length).toBe(0);
+        expect(boardB.child.cards.length).toBe(0);
     })
 })

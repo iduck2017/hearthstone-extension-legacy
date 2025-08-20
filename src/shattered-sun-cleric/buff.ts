@@ -1,15 +1,15 @@
-import { EffectModel } from "hearthstone-core";
+import { BuffModel, FilterType } from "hearthstone-core";
 
-export class ShatteredSunClericEffectModel extends EffectModel {
+
+export class ShatteredSunClericEffectModel extends BuffModel {
     constructor(props: ShatteredSunClericEffectModel['props']) {
         super({
             uuid: props.uuid,
             state: {
                 name: 'Shattered Sun Cleric\'s Buff',
                 desc: '+1/+1',
-                modAttack: 1,
-                modHealth: 1,
-                isEnable: true,
+                offset: [1, 1],
+                isActive: true,
                 ...props.state,
             },
             child: { ...props.child },

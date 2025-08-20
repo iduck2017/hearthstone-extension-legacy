@@ -1,22 +1,19 @@
-import { MinionRoleModel, MinionRaceType, FeatureModel } from "hearthstone-core";
-import { GrimscaleOracleEffectModel } from "./effect";
+import { AttackModel, HealthModel, RoleModel } from "hearthstone-core";
+import { GrimscaleOracleBuffModel } from "./buff";
 
-export class GrimscaleOracleRoleModel extends MinionRoleModel {
+export class GrimscaleOracleRoleModel extends RoleModel {
     constructor(props: GrimscaleOracleRoleModel['props']) {
         super({
             uuid: props.uuid,
-            state: {
-                attack: 1,
-                health: 1,
-                races: [MinionRaceType.MURLOC],
-                ...props.state,
-            },
+            state: { ...props.state },
             child: { 
+                attack: new AttackModel({ state: { origin: 1 }}),
+                health: new HealthModel({ state: { origin: 1 }}),   
                 ...props.child,
-                effect: FeatureModel.assign(
-                    props.child?.effect,
-                    new GrimscaleOracleEffectModel({})
-                ),
+                features: [
+                    ...props.child?.features ?? [],
+                    new GrimscaleOracleBuffModel({})
+                ]
             },
             refer: { ...props.refer }
         });

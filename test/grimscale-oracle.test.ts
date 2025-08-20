@@ -6,7 +6,7 @@
  * 2. aura: Both raiders initially have 2 attack, after Player A plays oracle, Player A's raider gains +1 attack, no attack occurs
  */
 
-import { GameModel, PlayerModel, MageHeroModel, HandModel, BoardModel } from "hearthstone-core";
+import { GameModel, PlayerModel, HandModel, BoardModel, MageModel, TimeUtil, SelectUtil } from "hearthstone-core";
 import { GrimscaleOracleCardModel } from "../src/grimscale-oracle";
 import { MurlocRaiderCardModel } from "../src/murloc-raider";
 import { WispCardModel } from "../src/wisp";
@@ -17,7 +17,7 @@ describe('grimscale-oracle', () => {
         child: {
             playerA: new PlayerModel({
                 child: {
-                    hero: new MageHeroModel({}),
+                    hero: new MageModel({}),
                     board: new BoardModel({
                         child: { cards: [
                             new MurlocRaiderCardModel({}),
@@ -31,7 +31,7 @@ describe('grimscale-oracle', () => {
             }),
             playerB: new PlayerModel({
                 child: {
-                    hero: new MageHeroModel({}),
+                    hero: new MageModel({}),
                     board: new BoardModel({
                         child: { cards: [new MurlocRaiderCardModel({})] }
                     })
@@ -41,71 +41,98 @@ describe('grimscale-oracle', () => {
     })
     const root = boot(game);
 
-    test('aura', async () => {
+    test('start', async () => {
         const boardA = game.child.playerA.child.board;
         const boardB = game.child.playerB.child.board;
         const handA = game.child.playerA.child.hand;
-        
+        const cardD = boardA.child.cards.find(item => item instanceof WispCardModel);
+        const cardA = boardA.child.cards.find(item => item instanceof MurlocRaiderCardModel);
+        const cardB = boardB.child.cards.find(item => item instanceof MurlocRaiderCardModel);
+        expect(cardA).toBeDefined();
+        expect(cardB).toBeDefined();
+        expect(cardD).toBeDefined();
+        if (!cardA || !cardB || !cardD) return;
+        const roleA = cardA.child.role;
+        const roleB = cardB.child.role;
+        const roleD = cardD.child.role;
+        expect(roleA.state.attack).toBe(2);
+        expect(roleB.state.attack).toBe(2);
+        expect(roleD.state.attack).toBe(1);
+    })
+
+    test("buff", async () => {
+        const boardA = game.child.playerA.child.board;
+        const boardB = game.child.playerB.child.board;
+        const handA = game.child.playerA.child.hand;
         const cardA = boardA.child.cards.find(item => item instanceof MurlocRaiderCardModel);
         const cardB = boardB.child.cards.find(item => item instanceof MurlocRaiderCardModel);
         const cardC = handA.child.cards.find(item => item instanceof GrimscaleOracleCardModel);
         const cardD = boardA.child.cards.find(item => item instanceof WispCardModel);
-        
         expect(cardA).toBeDefined();
         expect(cardB).toBeDefined();
         expect(cardC).toBeDefined();
         expect(cardD).toBeDefined();
         if (!cardA || !cardB || !cardC || !cardD) return;
-        
+        const promise = cardC.play();
+        await TimeUtil.sleep();
+        expect(SelectUtil.current).toBeDefined();
+        expect(SelectUtil.current?.options.length).toBe(3);
+        SelectUtil.set(0);
+        await promise;
+        expect(boardA.child.cards.length).toBe(3);
+        expect(boardB.child.cards.length).toBe(1);
         const roleA = cardA.child.role;
-        const roleB = cardB.child.role;
+        const roleZ = cardB.child.role;
+        const roleC = cardC.child.role;
         const roleD = cardD.child.role;
-        
-        // Initial state: both raiders have 2 attack, wisp has 1 attack
-        expect(roleA.state).toMatchObject({
-            health: 1,
-            attack: 2,
-            modAttack: 0,
-            curAttack: 2,
-        });
-        expect(roleB.state).toMatchObject({
-            health: 1,
-            attack: 2,
-            modAttack: 0,
-            curAttack: 2,
-        });
-        expect(roleD.state).toMatchObject({
-            health: 1,
-            attack: 1,
-            modAttack: 0,
-            curAttack: 1,
-        });
-        
-        // Play Grimscale Oracle
-        await cardC.preparePlay();
-        
-        // After playing oracle: Player A's raider should gain +1 attack
-        expect(roleA.state).toMatchObject({
-            health: 1,
-            attack: 2,
-            modAttack: 1,      // +1 attack from oracle aura
-            curAttack: 3,      // 2 + 1 = 3
-        });
-        
-        // Player B's raider should remain unchanged (not affected by Player A's oracle)
-        expect(roleB.state).toMatchObject({
-            health: 1,
-            attack: 2,
-            modAttack: 0,      // No aura effect
-            curAttack: 2,      // Still 2 attack
-        });
-        
-        // Player A's wisp should remain unchanged (not a murloc, so no aura effect)
-        expect(roleD.state).toMatchObject({
-            health: 1,
-            attack: 1,
-            modAttack: 0,      // No aura effect (not a murloc)
-            curAttack: 1,      // Still 1 attack
-        });
+        expect(roleA.state.attack).toBe(3);
+        expect(roleA.child.attack.state.offset).toBe(1);
+        expect(roleA.child.attack.state.origin).toBe(2);
+        expect(roleZ.state.attack).toBe(2);
+        expect(roleD.state.attack).toBe(1);
+        expect(roleC.state.attack).toBe(1);
     })
+
+    
+    test('attack', async () => {
+        const boardA = game.child.playerA.child.board;
+        const boardB = game.child.playerB.child.board;
+        const handA = game.child.playerA.child.hand;
+        const cardA = boardA.child.cards.find(item => item instanceof MurlocRaiderCardModel);
+        const cardB = boardB.child.cards.find(item => item instanceof MurlocRaiderCardModel);
+        const cardC = boardA.child.cards.find(item => item instanceof GrimscaleOracleCardModel);
+        const cardD = boardA.child.cards.find(item => item instanceof WispCardModel);
+        expect(cardA).toBeDefined();
+        expect(cardB).toBeDefined();
+        expect(cardC).toBeDefined();
+        expect(cardD).toBeDefined();
+        if (!cardA || !cardB || !cardC || !cardD) return;
+        const roleA = cardA.child.role;
+        const roleZ = cardB.child.role;
+        const roleC = cardC.child.role;
+        const roleD = cardD.child.role;
+        game.child.turn.next();
+        expect(game.child.turn.refer.current).toBe(game.child.playerB);
+        expect(roleZ.state.action).toBe(1);
+        const promise = roleZ.child.attack.run();
+        await TimeUtil.sleep();
+        expect(SelectUtil.current).toBeDefined();
+        expect(SelectUtil.current?.options.length).toBe(4);
+        expect(SelectUtil.current?.options).toContain(roleA);
+        expect(SelectUtil.current?.options).toContain(roleC);
+        expect(SelectUtil.current?.options).toContain(roleD);
+        expect(SelectUtil.current?.options).toContain(game.child.playerA.child.hero.child.role); 
+        SelectUtil.set(roleC);
+        await promise;
+        expect(roleZ.state.action).toBe(0)
+        expect(roleZ.state.health).toBe(0);
+        expect(roleZ.child.death.state.isDying).toBe(true);
+        expect(roleC.state.health).toBe(-1);
+        expect(roleC.child.death.state.isDying).toBe(true);
+        expect(boardB.child.cards.length).toBe(0);
+        expect(boardA.child.cards.length).toBe(2);
+        expect(roleA.state.attack).toBe(2);
+        expect(roleD.state.attack).toBe(1);
+    })
+
 }) 

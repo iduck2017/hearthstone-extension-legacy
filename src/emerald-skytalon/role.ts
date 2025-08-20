@@ -1,18 +1,16 @@
-import { MinionRoleModel, MinionRaceType } from "hearthstone-core";
+import { AttackModel, HealthModel, RaceType, RoleModel, RushModel, RushStatus } from "hearthstone-core";
 
-export class EmeraldSkytalonRoleModel extends MinionRoleModel {
+export class EmeraldSkytalonRoleModel extends RoleModel {
     constructor(props: EmeraldSkytalonRoleModel['props']) {
         super({
             uuid: props.uuid,
-            state: {
-                attack: 2,
-                health: 1,
-                races: [MinionRaceType.BEAST, MinionRaceType.ELEMENTAL],
-                isRush: true,
-                action: 1,
-                ...props.state,
+            state: { ...props.state },
+            child: { 
+                attack: new AttackModel({ state: { origin: 2 }}),
+                health: new HealthModel({ state: { origin: 1 }}),   
+                rush: new RushModel({ state: { isActive: RushStatus.ACTIVE }}),
+                ...props.child,
             },
-            child: { ...props.child },
             refer: { ...props.refer },
         })
     }

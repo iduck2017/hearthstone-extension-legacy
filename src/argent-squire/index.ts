@@ -9,6 +9,7 @@ export class ArgentSquireCardModel extends MinionCardModel {
                 name: 'Argent Squire',
                 desc: 'Divine Shield',
                 mana: 1,
+                races: [],
                 ...props.state,
             },
             child: {

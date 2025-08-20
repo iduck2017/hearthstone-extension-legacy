@@ -1,4 +1,4 @@
-import { MinionCardModel } from "hearthstone-core";
+import { MinionCardModel, RaceType } from "hearthstone-core";
 import { EmeraldSkytalonRoleModel } from "./role";
 
 export class EmeraldSkytalonCardModel extends MinionCardModel {
@@ -9,6 +9,7 @@ export class EmeraldSkytalonCardModel extends MinionCardModel {
                 name: 'Emerald Skytalon',
                 desc: 'Rush',
                 mana: 1,
+                races: [RaceType.BEAST, RaceType.ELEMENTAL],
                 ...props.state,
             },
             child: {

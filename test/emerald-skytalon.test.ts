@@ -6,11 +6,9 @@
  * 2. rush: Player A plays 2 emerald skytalons, they can attack immediately but only target wisps (not Player B hero), one emerald attacks one wisp, the other doesn't move
  * 3. attack: After 2 turns, the other emerald can attack the hero
  */
-
-import { GameModel, PlayerModel, MageHeroModel, HandModel, BoardModel, Selector, Utils, RootModel } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, HandModel, BoardModel, SelectUtil, TimeUtil, RushStatus, ActionModel } from "hearthstone-core";
 import { EmeraldSkytalonCardModel } from "../src/emerald-skytalon";
 import { WispCardModel } from "../src/wisp";
-import { RouteUtil } from "set-piece";
 import { boot } from "./boot";
 
 describe('emerald-skytalon', () => {
@@ -18,106 +16,134 @@ describe('emerald-skytalon', () => {
         child: {
             playerA: new PlayerModel({
                 child: {
-                    hero: new MageHeroModel({}),
+                    hero: new MageModel({}),
                     hand: new HandModel({
                         child: { cards: [
                             new EmeraldSkytalonCardModel({}),
+                            new WispCardModel({})
                         ]}
                     }),
                 }
             }),
             playerB: new PlayerModel({
                 child: {
-                    hero: new MageHeroModel({}),
+                    hero: new MageModel({}),
                     board: new BoardModel({
-                        child: { cards: [
-                            new WispCardModel({}),
-                        ]}
+                        child: { cards: [new WispCardModel({})]}
                     })
                 }
             })
         }
     })
-    const root = boot(game);
+    boot(game);
 
     test('rush', async () => {
         const handA = game.child.playerA.child.hand;
         const boardA = game.child.playerA.child.board;
         const boardB = game.child.playerB.child.board;
-        
-        // Play first emerald skytalon
         const cardA = handA.child.cards.find(item => item instanceof EmeraldSkytalonCardModel);
+        const cardB = boardB.child.cards.find(item => item instanceof WispCardModel);
         expect(cardA).toBeDefined();
         if (!cardA) return;
-        const roleA = cardA.child.role;
-        await cardA.preparePlay();
-        expect(roleA.state.isRush).toBe(true);
-        expect(roleA.state.action).toBe(1); // Rush minions have action points
-        
-        // First emerald attacks a wisp
-        const cardB = boardB.child.cards.find(item => item instanceof WispCardModel);
-        const roleB = cardB?.child.role;
-        if (!roleB) return;
-        
-        // Use prepareAttack to select target
-        process.nextTick(() => {
-            const selector = Selector.current;
-            expect(selector).toBeDefined();
-            if (!selector) return;
-            // Rush minions can only target enemy minions, not heroes
-            expect(selector.candidates.length).toBe(1); // 2 wisps
-            expect(selector.candidates).toContain(roleB);
-            selector.set(roleB);
-        });
-        await roleA.prepareAttack();
-        await Utils.sleep();
-        
-        // Verify wisp is damaged and emerald's action is consumed
-        expect(roleA.state.action).toBe(0);
-        expect(roleB.state).toMatchObject({
-            damage: 2,
-            maxHealth: 1,
-            curHealth: -1,
-        })
-    })
-
-    test('attack', async () => {
-        const playerB = game.child.playerB;
-        const boardA = game.child.playerA.child.board;
-        const boardB = game.child.playerB.child.board;
-        
-        // After 2 turns, the second emerald can attack the hero
-        game.nextTurn(); // Player B's turn
-        game.nextTurn(); // Player A's turn again
-        
-        const cardA = boardA.child.cards.find(item => item instanceof EmeraldSkytalonCardModel);
-        const cardB = boardB.child.cards.find(item => item instanceof WispCardModel);
-        expect(cardA).toBeDefined();
-        expect(cardB).toBeDefined();
-        if (!cardA || !cardB) return;
+        if (!cardB) return;
         const roleA = cardA.child.role;
         const roleB = cardB.child.role;
-        
-        // Attack the hero
-        process.nextTick(() => {
-            const selector = Selector.current;
-            expect(selector).toBeDefined();
-            if (selector) {
-                // Now can target hero since it's not rush anymore (or rush expired)
-                expect(selector.candidates.length).toBe(2);
-                expect(selector.candidates).toContain(playerB.child.role);
-                expect(selector.candidates).toContain(roleB);
-                selector.set(playerB.child.role);
-            }
-        });
+        const turn = game.child.turn;
+        const playerA = game.child.playerA;
+        const playerB = game.child.playerB
+        let promise = cardA.play()
+        await TimeUtil.sleep();
+        expect(SelectUtil.current?.options).toContain(0);
+        SelectUtil.set(0);
+        await promise;
+        expect(boardA.child.cards.length).toBe(1);
+        expect(turn.refer.current).toBe(playerA);
+        expect(roleA.state.attack).toBe(2);
+        expect(roleA.state.health).toBe(1);
         expect(roleA.state.action).toBe(1);
-        await roleA.prepareAttack();
-        await Utils.sleep();
-
-        expect(playerB.child.role.state).toMatchObject({
-            damage: 2,
-            maxHealth: 30,
-            curHealth: 28,
-        })
+        expect(roleA.child.sleep.state.isActive).toBe(false);
+        expect(roleA.child.rush.state.isActive).toBe(RushStatus.ACTIVE);
+        promise = roleA.child.attack.run()
+        await TimeUtil.sleep();
+        expect(SelectUtil.current?.options).toContain(roleB);
+        expect(SelectUtil.current?.options).not.toContain(playerB);
+        SelectUtil.set(undefined);
+        await promise;
+        expect(roleA.state.action).toBe(1);        
     })
+
+
+    test("sleep", async () => {
+        const handA = game.child.playerA.child.hand;
+        const boardA = game.child.playerA.child.board;
+        const boardB = game.child.playerB.child.board;
+        const cardA = handA.child.cards.find(item => item instanceof WispCardModel);
+        const cardB = boardB.child.cards.find(item => item instanceof WispCardModel);
+        expect(cardA).toBeDefined();
+        if (!cardA) return;
+        if (!cardB) return;
+        const roleA = cardA.child.role;
+        let promise = cardA.play();
+        await TimeUtil.sleep();
+        expect(SelectUtil.current?.options).toContain(1);
+        SelectUtil.set(1);
+        await promise;
+        expect(boardA.child.cards.length).toBe(2);
+        expect(roleA.state.action).toBe(1);
+        expect(roleA.child.sleep.state.isActive).toBe(true);
+        expect(roleA.child.rush.state.isActive).toBe(RushStatus.INACTIVE);
+        promise = roleA.child.attack.run();
+        await TimeUtil.sleep();
+        expect(SelectUtil.current).toBeUndefined();
+    })
+
+
+    test('attack', async () => {
+        const turn = game.child.turn;
+        const playerA = game.child.playerA;
+        const playerB = game.child.playerB;
+        expect(turn.refer.current).toBe(playerA);
+        await turn.next();
+        expect(turn.refer.current).toBe(playerB);
+        await turn.next();
+        expect(turn.refer.current).toBe(playerA);
+        const boardA = game.child.playerA.child.board;
+        const boardB = game.child.playerB.child.board;
+        const cardA = boardA.child.cards.find(item => item instanceof EmeraldSkytalonCardModel);
+        const cardB = boardA.child.cards.find(item => item instanceof WispCardModel);
+        const cardC = boardB.child.cards.find(item => item instanceof WispCardModel);
+        expect(cardA).toBeDefined();
+        expect(cardB).toBeDefined();
+        expect(cardC).toBeDefined();
+        if (!cardA) return;
+        if (!cardB) return;
+        if (!cardC) return;
+        const roleA = cardA.child.role;
+        const roleB = cardB.child.role;
+        const roleC = cardC.child.role;
+        expect(roleA.child.sleep.state.isActive).toBe(false);
+        expect(roleA.state.action).toBe(1);
+        expect(roleA.child.rush.state.isActive).toBe(RushStatus.FINISH);
+        expect(roleB.child.sleep.state.isActive).toBe(false);
+        expect(roleB.state.action).toBe(1);
+        expect(roleB.child.rush.state.isActive).toBe(RushStatus.INACTIVE);
+        let promise = roleA.child.attack.run();
+        await TimeUtil.sleep();
+        const heroB = playerB.child.hero.child.role;
+        expect(SelectUtil.current?.options).toContain(roleC);
+        expect(SelectUtil.current?.options).toContain(heroB);
+        SelectUtil.set(heroB);
+        await promise;
+        expect(heroB.state.health).toBe(28);
+        expect(roleA.state.action).toBe(0);
+        promise = roleB.child.attack.run();
+        await TimeUtil.sleep();
+        expect(SelectUtil.current?.options).toContain(roleC);
+        expect(SelectUtil.current?.options).toContain(heroB);
+        SelectUtil.set(heroB);
+        await promise;
+        expect(heroB.state.health).toBe(27);
+        expect(roleA.state.action).toBe(0);
+    });
+
 })

@@ -1,9 +1,9 @@
-import { BattlecryModel, MinionRoleModel, TargetType, Selector } from "hearthstone-core";
+import { BattlecryModel, FilterType, RoleModel, SelectForm } from "hearthstone-core";
 import { ShatteredSunClericEffectModel } from "./buff";
 import { DebugUtil } from "set-piece";
 
 export class ShatteredSunClericBattlecryModel extends BattlecryModel<
-    [MinionRoleModel]
+    [RoleModel]
 > {
     constructor(props: ShatteredSunClericBattlecryModel['props']) {
         super({
@@ -18,17 +18,19 @@ export class ShatteredSunClericBattlecryModel extends BattlecryModel<
         });
     }
 
-    public preparePlay(): [Selector<MinionRoleModel>] | undefined {
-        if (!this.route.game) return;
-        const candidates = this.route.game.query(TargetType.MinionRole, { 
-            side: this.route.owner 
+    public toRun(): [SelectForm<RoleModel>] | undefined {
+        const game = this.route.game;
+        if (!game) return;
+        const options = game.query({ 
+            side: this.route.player,
+            isMinion: FilterType.INCLUDE,
         })
-        if (candidates.length === 0) return;
-        return [new Selector(candidates, 'Choose a friendly minion')]
+        if (options.length === 0) return;
+        return [{ options, hint: 'Choose a friendly minion' }]
     }
 
     @DebugUtil.log()
-    public async run(target: MinionRoleModel) {
+    public async doRun(target: RoleModel) {
         target.affect(new ShatteredSunClericEffectModel({}))
     }
 }

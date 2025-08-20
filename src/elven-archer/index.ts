@@ -10,15 +10,16 @@ export class ElvenArcherCardModel extends MinionCardModel {
                 name: 'Elven Archer',
                 desc: 'Battlecry: Deal 1 damage.',
                 mana: 1,
+                races: [],
                 ...props.state,
             },
             child: {
                 role: new ElvenArcherRoleModel({}),
                 ...props.child,
-                battlecries: FeatureModel.assign(
-                    props.child?.battlecries,
+                battlecryHooks: [
+                    ...props.child?.battlecryHooks ?? [], 
                     new ElvenArcherBattlecryModel({})
-                ),
+                ]
             },
             refer: { ...props.refer },
         });

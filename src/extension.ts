@@ -1,5 +1,4 @@
 import { ExtensionModel } from "hearthstone-core";
-import { WispCardModel } from "./wisp";
 
 export namespace LegacyExtensionModel {
     export type Event = Partial<ExtensionModel.Event>;
@@ -17,7 +16,7 @@ export class LegacyExtensionModel extends ExtensionModel {
             },
             child: {
                 cards: [
-                    new WispCardModel({}),
+                    // new WispCardModel({}),
                 ],
                 ...props.child,
             },

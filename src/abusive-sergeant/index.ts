@@ -10,15 +10,13 @@ export class AbusiveSergeantCardModel extends MinionCardModel {
                 name: 'Abusive Sergeant',
                 desc: 'Battlecry: Give a minion +2 Attack this turn.',
                 mana: 1,
+                races: [],
                 ...props.state,
             },
             child: {
                 role: new AbusiveSergeantRoleModel({}),
                 ...props.child,
-                battlecries: FeatureModel.assign(
-                    props.child?.battlecries, 
-                    new AbusiveSergeantBattlecryModel({})
-                ),
+                battlecryHooks: [...props.child?.battlecryHooks ?? [], new AbusiveSergeantBattlecryModel({})]
             },
             refer: { ...props.refer },
         });

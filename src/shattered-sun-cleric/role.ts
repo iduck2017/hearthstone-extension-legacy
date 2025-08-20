@@ -1,16 +1,15 @@
-import { MinionRoleModel } from "hearthstone-core";
+import { AttackModel, HealthModel, RoleModel } from "hearthstone-core";
 
-export class ShatteredSunClericRoleModel extends MinionRoleModel {
+export class ShatteredSunClericRoleModel extends RoleModel {
     constructor(props: ShatteredSunClericRoleModel['props']) {
         super({
             uuid: props.uuid,
-            state: {
-                attack: 3,
-                health: 2,
-                races: [],
-                ...props.state,
+            state: { ...props.state },
+            child: { 
+                attack: new AttackModel({ state: { origin: 3 }}),
+                health: new HealthModel({ state: { origin: 2 }}),   
+                ...props.child 
             },
-            child: { ...props.child },
             refer: { ...props.refer },
         });
     }
