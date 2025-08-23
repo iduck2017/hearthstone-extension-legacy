@@ -1,10 +1,10 @@
-import { BattlecryModel, MinionCardModel, RoleModel, SelectEvent } from "hearthstone-core";
+import { BattlecryModel, MinionModel, RoleModel, SelectEvent } from "hearthstone-core";
 import { AbusiveSergeantBuffModel } from "./buff";
 import { DebugUtil, LogLevel } from "set-piece";
 
 export class AbusiveSergeantBattlecryModel extends BattlecryModel<
     [RoleModel],
-    MinionCardModel
+    MinionModel
 > {
     constructor(props: AbusiveSergeantBattlecryModel['props']) {
         super({

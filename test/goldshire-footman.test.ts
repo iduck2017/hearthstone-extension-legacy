@@ -15,17 +15,15 @@ DebugUtil.level = LogLevel.ERROR;
 describe('goldshire-footman', () => {
     const game = new GameModel({
         child: {
-            playerA: new PlayerModel({
+            playerA: new MageModel({
                 child: {
-                    hero: new MageModel({}),
                     board: new BoardModel({
                         child: { cards: [new WispModel({})] }
                     }),
                 }
             }),
-            playerB: new PlayerModel({
+            playerB: new MageModel({
                 child: {
-                    hero: new MageModel({}),
                     board: new BoardModel({
                         child: { cards: [new GoldshireFootmanModel({})] }
                     })
@@ -46,7 +44,7 @@ describe('goldshire-footman', () => {
         if (!cardA || !cardB) return;
         const roleA = cardA.child.role;
         const roleB = cardB.child.role;
-        const heroB = game.child.playerB.child.hero.child.role;
+        const heroB = game.child.playerB.child.role;
         // Initial state verification
         expect(roleA.state.action).toBe(1); // Wisp has action point
         expect(roleB.child.entries.child.taunt.state.status).toBe(1);

@@ -1,6 +1,6 @@
-import { AttackModel, HealthModel, MinionCardModel, RoleEntriesModel, RoleModel, TauntModel } from "hearthstone-core";
+import { AttackModel, ClassType, HealthModel, MinionModel, RarityType, RoleEntriesModel, RoleModel, TauntModel } from "hearthstone-core";
 
-export class GoldshireFootmanModel extends MinionCardModel {
+export class GoldshireFootmanModel extends MinionModel {
     constructor(props: GoldshireFootmanModel['props']) {
         super({
             uuid: props.uuid,
@@ -9,6 +9,9 @@ export class GoldshireFootmanModel extends MinionCardModel {
                 desc: 'Taunt',
                 mana: 1,
                 races: [],
+                flavorDesc: '',
+                rarity: RarityType.COMMON,
+                class: ClassType.NEUTRAL,
                 ...props.state
             },
             child: {

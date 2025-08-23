@@ -1,6 +1,6 @@
-import { HealthModel, AttackModel, MinionCardModel, RaceType, RoleModel } from "hearthstone-core";
+import { HealthModel, AttackModel, MinionModel, RaceType, RoleModel, RarityType, ClassType } from "hearthstone-core";
 
-export class MurlocRaiderCard extends MinionCardModel {
+export class MurlocRaiderCard extends MinionModel {
     constructor(props: MurlocRaiderCard['props']) {
         super({
             uuid: props.uuid,
@@ -9,6 +9,9 @@ export class MurlocRaiderCard extends MinionCardModel {
                 desc: '',
                 mana: 1,
                 races: [RaceType.MURLOC],
+                flavorDesc: '',
+                rarity: RarityType.COMMON,
+                class: ClassType.NEUTRAL,
                 ...props.state
             },
             child: {

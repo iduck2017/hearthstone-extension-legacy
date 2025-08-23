@@ -12,9 +12,8 @@ DebugUtil.level = LogLevel.ERROR;
 describe('young-dragonhawk', () => {
     const game = boot(new GameModel({
         child: {
-            playerA: new PlayerModel({
+            playerA: new MageModel({
                 child: {
-                    hero: new MageModel({}),
                     board: new BoardModel({
                         child: { cards: [new YoungDragonhawkModel({})] }
                     }),
@@ -23,9 +22,8 @@ describe('young-dragonhawk', () => {
                     })
                 }
             }),
-            playerB: new PlayerModel({
+            playerB: new MageModel({
                 child: {
-                    hero: new MageModel({}),
                     board: new BoardModel({
                         child: { cards: [new ShieldbearerModel({})] }
                     }),

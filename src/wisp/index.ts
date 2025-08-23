@@ -1,8 +1,8 @@
-import { AttackModel, HealthModel, MinionCardModel, RaceType, RoleModel } from "hearthstone-core";
+import { AttackModel, ClassType, HealthModel, MinionModel, RaceType, RarityType, RoleModel } from "hearthstone-core";
 import { StoreUtil } from "set-piece";
 
 @StoreUtil.is('wisp-card')
-export class WispModel extends MinionCardModel {
+export class WispModel extends MinionModel {
     constructor(props: WispModel['props']) {
         super({
             uuid: props.uuid,
@@ -11,6 +11,9 @@ export class WispModel extends MinionCardModel {
                 desc: '',
                 mana: 0,
                 races: [RaceType.UNDEAD],
+                flavorDesc: '',
+                rarity: RarityType.COMMON,
+                class: ClassType.NEUTRAL,
                 ...props.state,
             },
             child: { 

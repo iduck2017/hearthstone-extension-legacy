@@ -17,9 +17,8 @@ DebugUtil.level = LogLevel.ERROR;
 describe('grimscale-oracle', () => {
     const game = new GameModel({
         child: {
-            playerA: new PlayerModel({
+            playerA: new MageModel({
                 child: {
-                    hero: new MageModel({}),
                     board: new BoardModel({
                         child: { cards: [
                             new MurlocRaiderCard({}),
@@ -31,9 +30,8 @@ describe('grimscale-oracle', () => {
                     }),
                 }
             }),
-            playerB: new PlayerModel({
+            playerB: new MageModel({
                 child: {
-                    hero: new MageModel({}),
                     board: new BoardModel({
                         child: { cards: [new MurlocRaiderCard({})] }
                     })
@@ -123,7 +121,7 @@ describe('grimscale-oracle', () => {
         expect(SelectUtil.current?.options).toContain(roleA);
         expect(SelectUtil.current?.options).toContain(roleC);
         expect(SelectUtil.current?.options).toContain(roleD);
-        expect(SelectUtil.current?.options).toContain(game.child.playerA.child.hero.child.role); 
+        expect(SelectUtil.current?.options).toContain(game.child.playerA.child.role); 
         SelectUtil.set(roleC);
         await promise;
         expect(roleZ.state.action).toBe(0)

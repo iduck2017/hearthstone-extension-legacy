@@ -1,10 +1,10 @@
 // Murloc Tidehunter - Battlecry: Summon a 1/1 Murloc Scout
 // Type: Minion, Minion Type: Murloc, Rarity: Free, Set: Legacy, Class: Neutral
 
-import { AttackModel, CardHooksModel, HealthModel, MinionCardModel, RaceType, RoleModel } from "hearthstone-core";
+import { AttackModel, CardHooksModel, ClassType, HealthModel, MinionModel, RaceType, RarityType, RoleModel } from "hearthstone-core";
 import { MurlocTidehunterBattlecryModel } from "./battlecry";
 
-export class MurlocTidehunterModel extends MinionCardModel {
+export class MurlocTidehunterModel extends MinionModel {
     constructor(props: MurlocTidehunterModel['props']) {
         super({
             uuid: props.uuid,
@@ -13,6 +13,9 @@ export class MurlocTidehunterModel extends MinionCardModel {
                 desc: 'Battlecry: Summon a 1/1 Murloc Scout.',
                 mana: 2,
                 races: [RaceType.MURLOC],
+                flavorDesc: '',
+                rarity: RarityType.COMMON,
+                class: ClassType.NEUTRAL,
                 ...props.state
             },
             child: {

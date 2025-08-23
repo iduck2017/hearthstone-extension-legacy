@@ -16,9 +16,8 @@ DebugUtil.level = LogLevel.ERROR;
 describe('emerald-skytalon', () => {
     const game = new GameModel({
         child: {
-            playerA: new PlayerModel({
+            playerA: new MageModel({
                 child: {
-                    hero: new MageModel({}),
                     hand: new HandModel({
                         child: { cards: [
                             new EmeraldSkytalonModel({}),
@@ -27,9 +26,8 @@ describe('emerald-skytalon', () => {
                     }),
                 }
             }),
-            playerB: new PlayerModel({
+            playerB: new MageModel({
                 child: {
-                    hero: new MageModel({}),
                     board: new BoardModel({
                         child: { cards: [new WispModel({})]}
                     })
@@ -131,7 +129,7 @@ describe('emerald-skytalon', () => {
         expect(roleB.child.entries.child.rush.state.status).toBe(RushStatus.INACTIVE);
         let promise = roleA.child.action.run();
         await TimeUtil.sleep();
-        const heroB = playerB.child.hero.child.role;
+        const heroB = playerB.child.role;
         expect(SelectUtil.current?.options).toContain(roleC);
         expect(SelectUtil.current?.options).toContain(heroB);
         SelectUtil.set(heroB);

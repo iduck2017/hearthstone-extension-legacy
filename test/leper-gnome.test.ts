@@ -12,17 +12,15 @@ DebugUtil.level = LogLevel.ERROR;
 describe('leper-gnome', () => {
     const game = boot(new GameModel({
         child: {
-            playerA: new PlayerModel({
+            playerA: new MageModel({
                 child: {
-                    hero: new MageModel({}),
                     board: new BoardModel({
                         child: { cards: [new LeperGnomeModel({})] }
                     }),
                 }
             }),
-            playerB: new PlayerModel({
+            playerB: new MageModel({
                 child: {
-                    hero: new MageModel({}),
                     board: new BoardModel({
                         child: { cards: [new WispModel({})] }
                     }),
@@ -42,7 +40,7 @@ describe('leper-gnome', () => {
         if (!cardB) return;
         const roleA = cardA.child.role;
         const roleB = cardB.child.role;
-        const heroB = game.child.playerB.child.hero.child.role;
+        const heroB = game.child.playerB.child.role;
         expect(boardA.child.cards.length).toBe(1);
         expect(boardB.child.cards.length).toBe(1);
         expect(roleA.state.attack).toBe(2);

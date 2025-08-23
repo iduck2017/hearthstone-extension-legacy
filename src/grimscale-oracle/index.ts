@@ -1,7 +1,7 @@
-import { HealthModel, AttackModel, RoleModel, RaceType, MinionCardModel, FeaturesModel } from "hearthstone-core";
+import { HealthModel, AttackModel, RoleModel, RaceType, MinionModel, FeaturesModel, RarityType, ClassType } from "hearthstone-core";
 import { GrimscaleOracleFeatureModel } from "./feature";
 
-export class GrimscaleOracleModel extends MinionCardModel {
+export class GrimscaleOracleModel extends MinionModel {
     constructor(props: GrimscaleOracleModel['props']) {
         super({
             uuid: props.uuid,
@@ -10,6 +10,9 @@ export class GrimscaleOracleModel extends MinionCardModel {
                 desc: 'Your other Murlocs have +1 Attack.',
                 mana: 1,
                 races: [RaceType.MURLOC],
+                flavorDesc: '',
+                rarity: RarityType.COMMON,
+                class: ClassType.NEUTRAL,
                 ...props.state
             },
             child: {

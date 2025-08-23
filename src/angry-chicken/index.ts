@@ -1,7 +1,7 @@
-import { AttackModel, FeaturesModel, HealthModel, MinionCardModel, RaceType, RoleModel } from "hearthstone-core";
+import { AttackModel, ClassType, FeaturesModel, HealthModel, MinionModel, RaceType, RarityType, RoleModel } from "hearthstone-core";
 import { AngryChickenFeatureModel } from "./feature";
 
-export class AngryChickenModel extends MinionCardModel {
+export class AngryChickenModel extends MinionModel {
     constructor(props: AngryChickenModel['props']) {
         super({
             uuid: props.uuid,
@@ -10,6 +10,9 @@ export class AngryChickenModel extends MinionCardModel {
                 desc: '+5 Attack while damaged.',
                 mana: 1,
                 races: [RaceType.BEAST],
+                flavorDesc: '',
+                rarity: RarityType.RARE,
+                class: ClassType.NEUTRAL,
                 ...props.state,
             },
             child: {

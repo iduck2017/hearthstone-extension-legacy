@@ -1,9 +1,9 @@
 // Murloc Scout - 1/1 Murloc summoned by Murloc Tidehunter
 // Type: Minion, Minion Type: Murloc
 
-import { AttackModel, HealthModel, MinionCardModel, RaceType, RoleModel } from "hearthstone-core";
+import { AttackModel, ClassType, HealthModel, MinionModel, RaceType, RarityType, RoleModel } from "hearthstone-core";
 
-export class MurlocScoutModel extends MinionCardModel {
+export class MurlocScoutModel extends MinionModel {
     constructor(props: MurlocScoutModel['props']) {
         super({
             uuid: props.uuid,
@@ -12,6 +12,9 @@ export class MurlocScoutModel extends MinionCardModel {
                 desc: '',
                 mana: 1,
                 races: [RaceType.MURLOC],
+                flavorDesc: '',
+                rarity: RarityType.COMMON,
+                class: ClassType.NEUTRAL,
                 ...props.state
             },
             child: {

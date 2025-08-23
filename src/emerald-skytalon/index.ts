@@ -1,6 +1,6 @@
-import { AttackModel, HealthModel, MinionCardModel, RaceType, RoleEntriesModel, RoleModel, RushModel, RushStatus } from "hearthstone-core";
+import { AttackModel, ClassType, HealthModel, MinionModel,RarityType,  RaceType, RoleEntriesModel, RoleModel, RushModel, RushStatus } from "hearthstone-core";
 
-export class EmeraldSkytalonModel extends MinionCardModel {
+export class EmeraldSkytalonModel extends MinionModel {
     constructor(props: EmeraldSkytalonModel['props']) {
         super({
             uuid: props.uuid,
@@ -9,6 +9,9 @@ export class EmeraldSkytalonModel extends MinionCardModel {
                 desc: 'Rush',
                 mana: 1,
                 races: [RaceType.BEAST, RaceType.ELEMENTAL],
+                flavorDesc: '',
+                rarity: RarityType.COMMON,
+                class: ClassType.NEUTRAL,
                 ...props.state,
             },
             child: {

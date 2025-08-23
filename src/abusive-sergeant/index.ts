@@ -1,7 +1,7 @@
-import { MinionCardModel, FeatureModel, RoleModel, AttackModel, HealthModel, CardHooksModel } from "hearthstone-core";
+import { MinionModel, FeatureModel, RoleModel, AttackModel, HealthModel, CardHooksModel, RarityType, ClassType } from "hearthstone-core";
 import { AbusiveSergeantBattlecryModel } from "./battlecry";
 
-export class AbusiveSergeantModel extends MinionCardModel {
+export class AbusiveSergeantModel extends MinionModel {
     constructor(props: AbusiveSergeantModel['props']) {
         super({
             uuid: props.uuid,
@@ -10,6 +10,9 @@ export class AbusiveSergeantModel extends MinionCardModel {
                 desc: 'Battlecry: Give a minion +2 Attack this turn.',
                 mana: 1,
                 races: [],
+                flavorDesc: '',
+                rarity: RarityType.COMMON,
+                class: ClassType.NEUTRAL,
                 ...props.state,
             },
             child: {

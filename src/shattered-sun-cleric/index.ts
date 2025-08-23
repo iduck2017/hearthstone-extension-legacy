@@ -1,7 +1,7 @@
-import { AttackModel, CardHooksModel, HealthModel, MinionCardModel, RoleModel } from "hearthstone-core";
+import { AttackModel, CardHooksModel, ClassType, HealthModel, MinionModel, RarityType, RoleModel } from "hearthstone-core";
 import { ShatteredSunClericBattlecryModel } from "./battlecry";
 
-export class ShatteredSunClericModel extends MinionCardModel {
+export class ShatteredSunClericModel extends MinionModel {
     constructor(props: ShatteredSunClericModel['props']) {
         super({
             uuid: props.uuid,
@@ -10,6 +10,9 @@ export class ShatteredSunClericModel extends MinionCardModel {
                 desc: 'Battlecry: Give a friendly minion +1/+1.',
                 mana: 2,
                 races: [],
+                flavorDesc: '',
+                rarity: RarityType.COMMON,
+                class: ClassType.NEUTRAL,
                 ...props.state,
             },
             child: {

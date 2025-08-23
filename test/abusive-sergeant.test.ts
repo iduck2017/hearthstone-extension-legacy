@@ -8,9 +8,8 @@ DebugUtil.level = LogLevel.ERROR
 describe('abusive-sergeant', () => {
     const game = boot(new GameModel({
         child: {
-            playerA: new PlayerModel({
+            playerA: new MageModel({
                 child: {
-                    hero: new MageModel({}),
                     hand: new HandModel({
                         child: { cards: [
                             new AbusiveSergeantModel({}),
@@ -19,9 +18,8 @@ describe('abusive-sergeant', () => {
                     })
                 }
             }),
-            playerB: new PlayerModel({
+            playerB: new MageModel({
                 child: {
-                    hero: new MageModel({}),
                     hand: new HandModel({
                         child: { cards: [
                             new AbusiveSergeantModel({}),

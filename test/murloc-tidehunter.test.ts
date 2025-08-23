@@ -13,9 +13,8 @@ DebugUtil.level = LogLevel.ERROR;
 describe('murloc-tidehunter', () => {
     const game = boot(new GameModel({
         child: {
-            playerA: new PlayerModel({
+            playerA: new MageModel({
                 child: {
-                    hero: new MageModel({}),
                     board: new BoardModel({
                         child: { cards: [new WispModel({})] }
                     }),
@@ -24,9 +23,8 @@ describe('murloc-tidehunter', () => {
                     })
                 }
             }),
-            playerB: new PlayerModel({
+            playerB: new MageModel({
                 child: {
-                    hero: new MageModel({}),
                     board: new BoardModel({
                         child: { cards: [] }
                     }),

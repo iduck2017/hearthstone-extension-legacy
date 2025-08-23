@@ -15,17 +15,15 @@ DebugUtil.level = LogLevel.ERROR;
 describe('elven-archer', () => {
     const game = new GameModel({
         child: {
-            playerA: new PlayerModel({
+            playerA: new MageModel({
                 child: {
-                    hero: new MageModel({}),
                     hand: new HandModel({
                         child: { cards: [new ElvenArcherModel({})] }
                     })
                 }
             }),
-            playerB: new PlayerModel({
+            playerB: new MageModel({
                 child: {
-                    hero: new MageModel({}),
                     board: new BoardModel({
                         child: { cards: [new WispModel({})] }
                     })
@@ -54,8 +52,8 @@ describe('elven-archer', () => {
         SelectUtil.set(0);
         await TimeUtil.sleep()
         expect(SelectUtil.current?.options).toContain(roleB);
-        expect(SelectUtil.current?.options).toContain(playerA.child.hero.child.role);
-        expect(SelectUtil.current?.options).toContain(playerB.child.hero.child.role);
+        expect(SelectUtil.current?.options).toContain(playerA.child.role);
+        expect(SelectUtil.current?.options).toContain(playerB.child.role);
         SelectUtil.set(roleB);
         await promise;
         expect(roleB.state.health).toBe(0);

@@ -8,9 +8,8 @@ DebugUtil.level = LogLevel.ERROR;
 describe('shattered-sun-cleric', () => {
     const game = boot(new GameModel({
         child: {
-            playerA: new PlayerModel({
+            playerA: new MageModel({
                 child: {
-                    hero: new MageModel({}),
                     board: new BoardModel({
                         child: { cards: [new WispModel({})] }
                     }),
@@ -19,9 +18,8 @@ describe('shattered-sun-cleric', () => {
                     })
                 }
             }),
-            playerB: new PlayerModel({
+            playerB: new MageModel({
                 child: {
-                    hero: new MageModel({}),
                     hand: new HandModel({
                         child: { cards: [
                             new ShatteredSunClericModel({}),
@@ -113,7 +111,7 @@ describe('shattered-sun-cleric', () => {
         if (!cardB) return;
         const roleA = cardA.child.role;
         const roleB = cardB.child.role;
-        const heroB = game.child.playerB.child.hero.child.role;
+        const heroB = game.child.playerB.child.role;
         expect(turn.refer.current).toBe(game.child.playerA);
         let promise = roleA.child.action.run();
         await TimeUtil.sleep();

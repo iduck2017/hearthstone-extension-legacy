@@ -14,9 +14,8 @@ DebugUtil.level = LogLevel.ERROR;
 describe('voodoo-doctor', () => {
     const game = boot(new GameModel({
         child: {
-            playerA: new PlayerModel({
+            playerA: new MageModel({
                 child: {
-                    hero: new MageModel({}),
                     board: new BoardModel({
                         child: { cards: [new WispModel({})] }
                     }),
@@ -25,9 +24,8 @@ describe('voodoo-doctor', () => {
                     })
                 }
             }),
-            playerB: new PlayerModel({
+            playerB: new MageModel({
                 child: {
-                    hero: new MageModel({}),
                     board: new BoardModel({
                         child: { cards: [new ShieldbearerModel({})] }
                     }),
@@ -49,7 +47,7 @@ describe('voodoo-doctor', () => {
         if (!cardA || !cardB) return;
         const roleA = cardA.child.role;
         const roleB = cardB.child.role;
-        const heroB = game.child.playerB.child.hero.child.role;
+        const heroB = game.child.playerB.child.role;
         
         expect(boardA.child.cards.length).toBe(1);
         expect(boardB.child.cards.length).toBe(1);
@@ -82,8 +80,8 @@ describe('voodoo-doctor', () => {
         const roleA = cardA.child.role;
         const roleB = cardB.child.role;
         const roleC = cardC.child.role;
-        const heroA = game.child.playerA.child.hero.child.role;
-        const heroB = game.child.playerB.child.hero.child.role;
+        const heroA = game.child.playerA.child.role;
+        const heroB = game.child.playerB.child.role;
         
         // Play Voodoo Doctor
         let promise = cardC.play();

@@ -14,9 +14,8 @@ DebugUtil.level = LogLevel.ERROR;
 describe('worgen-infiltrator', () => {
     const game = boot(new GameModel({
         child: {
-            playerA: new PlayerModel({
+            playerA: new MageModel({
                 child: {
-                    hero: new MageModel({}),
                     board: new BoardModel({
                         child: { cards: [new WispModel({})] }
                     }),
@@ -25,9 +24,8 @@ describe('worgen-infiltrator', () => {
                     })
                 }
             }),
-            playerB: new PlayerModel({
+            playerB: new MageModel({
                 child: {
-                    hero: new MageModel({}),
                     board: new BoardModel({
                         child: { cards: [new WorgenInfiltratorModel({})] }
                     }),
@@ -49,7 +47,7 @@ describe('worgen-infiltrator', () => {
         if (!cardA || !cardB) return;
         const roleA = cardA.child.role;
         const roleB = cardB.child.role;
-        const heroB = game.child.playerB.child.hero.child.role;
+        const heroB = game.child.playerB.child.role;
 
         
         expect(boardA.child.cards.length).toBe(1);
@@ -80,7 +78,7 @@ describe('worgen-infiltrator', () => {
         if (!cardA || !cardB) return;
         const roleA = cardA.child.role;
         const roleB = cardB.child.role;
-        const heroA = game.child.playerA.child.hero.child.role;
+        const heroA = game.child.playerA.child.role;
         
         expect(roleB.child.entries.child.stealth.state.status).toBe(1);
         
@@ -109,7 +107,7 @@ describe('worgen-infiltrator', () => {
         if (!cardA || !cardB) return;
         const roleA = cardA.child.role;
         const roleB = cardB.child.role;
-        const heroB = game.child.playerB.child.hero.child.role;
+        const heroB = game.child.playerB.child.role;
         
         expect(roleB.child.entries.child.stealth.state.status).toBe(0);
         

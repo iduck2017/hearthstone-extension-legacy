@@ -12,9 +12,8 @@ DebugUtil.level = LogLevel.ERROR;
 describe('stonetusk-boar', () => {
     const game = boot(new GameModel({
         child: {
-            playerA: new PlayerModel({
+            playerA: new MageModel({
                 child: {
-                    hero: new MageModel({}),
                     board: new BoardModel({
                         child: { cards: [] }
                     }),
@@ -23,9 +22,8 @@ describe('stonetusk-boar', () => {
                     })
                 }
             }),
-            playerB: new PlayerModel({
+            playerB: new MageModel({
                 child: {
-                    hero: new MageModel({}),
                     board: new BoardModel({
                         child: { cards: [new WispModel({})] }
                     }),
@@ -45,7 +43,7 @@ describe('stonetusk-boar', () => {
         expect(cardA).toBeDefined();
         if (!cardA) return;
         const roleA = cardA.child.role;
-        const heroB = game.child.playerB.child.hero.child.role;
+        const heroB = game.child.playerB.child.role;
         
         expect(boardA.child.cards.length).toBe(0);
         expect(boardB.child.cards.length).toBe(1);

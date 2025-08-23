@@ -15,9 +15,8 @@ DebugUtil.level = LogLevel.ERROR;
 describe('hungry-crab', () => {
     const game = boot(new GameModel({
         child: {
-            playerA: new PlayerModel({
+            playerA: new MageModel({
                 child: {
-                    hero: new MageModel({}),
                     board: new BoardModel({
                         child: { cards: [new WispModel({})] }
                     }),
@@ -26,9 +25,8 @@ describe('hungry-crab', () => {
                     })
                 }
             }),
-            playerB: new PlayerModel({
+            playerB: new MageModel({
                 child: {
-                    hero: new MageModel({}),
                     hand: new HandModel({
                         child: { cards: [
                             new HungryCrabModel({}),

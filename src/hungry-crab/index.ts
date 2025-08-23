@@ -1,7 +1,7 @@
-import { HealthModel, AttackModel, MinionCardModel, RaceType, RoleModel, CardHooksModel } from "hearthstone-core";
+import { HealthModel, AttackModel, MinionModel, RaceType, RoleModel, CardHooksModel, ClassType, RarityType } from "hearthstone-core";
 import { HungryCrabBattlecryModel } from "./battlecry";
 
-export class HungryCrabModel extends MinionCardModel {
+export class HungryCrabModel extends MinionModel {
     constructor(props: HungryCrabModel['props']) {
         super({
             uuid: props.uuid,
@@ -10,6 +10,9 @@ export class HungryCrabModel extends MinionCardModel {
                 desc: 'Battlecry: Destroy a Murloc and gain +2/+2.',
                 mana: 1,
                 races: [RaceType.BEAST],
+                flavorDesc: '',
+                rarity: RarityType.EPIC,
+                class: ClassType.NEUTRAL,
                 ...props.state
             },
             child: {

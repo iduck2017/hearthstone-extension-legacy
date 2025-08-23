@@ -7,17 +7,15 @@ DebugUtil.level = LogLevel.ERROR;
 describe('argent-squire', () => {
     const game = new GameModel({
         child: {
-            playerA: new PlayerModel({
+            playerA: new MageModel({
                 child: {
-                    hero: new MageModel({}),
                     board: new BoardModel({
                         child: { cards: [new ArgentSquireModel({})] }
                     }),
                 }
             }),
-            playerB: new PlayerModel({
+            playerB: new MageModel({
                 child: {
-                    hero: new MageModel({}),
                     board: new BoardModel({
                         child: { cards: [new ArgentSquireModel({})] }
                     })
