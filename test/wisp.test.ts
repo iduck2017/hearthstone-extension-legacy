@@ -1,4 +1,4 @@
-import { GameModel, PlayerModel, HandModel, BoardModel, MageModel, TimeUtil, SelectUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, HandModel, BoardModel, MageModel, TimeUtil, SelectUtil, DeathStatus } from "hearthstone-core";
 import { WispCardModel } from "../src/wisp";   
 import { boot } from "./boot";
 import { DebugUtil, LogLevel } from "set-piece";
@@ -72,8 +72,8 @@ describe('wisp', () => {
         await promise;
         expect(roleB.state.action).toBe(0)
         expect(roleA.state.health).toBe(0);
-        expect(roleA.child.death.state.isActive).toBe(true);
-        expect(roleB.child.death.state.isActive).toBe(true);
+        expect(roleA.child.death.state.status).toBe(DeathStatus.ACTIVE);
+        expect(roleB.child.death.state.status).toBe(DeathStatus.ACTIVE);
         expect(boardA.child.cards.length).toBe(0);
         expect(boardB.child.cards.length).toBe(0);
     })

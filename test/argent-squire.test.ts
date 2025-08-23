@@ -1,4 +1,4 @@
-import { GameModel, PlayerModel, MageModel, BoardModel, SelectUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, SelectUtil, DeathStatus } from "hearthstone-core";
 import { ArgentSquireModel } from "../src/argent-squire";
 import { boot } from "./boot";
 import { DebugUtil, LogLevel } from "set-piece";
@@ -52,7 +52,7 @@ describe('argent-squire', () => {
         expect(roleB.state.health).toBe(1);
         expect(roleA.child.entries.child.divineShield.state.isActive).toBe(false);
         expect(roleB.child.entries.child.divineShield.state.isActive).toBe(false);
-        expect(roleA.child.death.state.isActive).toBe(false);
-        expect(roleB.child.death.state.isActive).toBe(false);
+        expect(roleA.child.death.state.status).toBe(DeathStatus.INACTIVE);
+        expect(roleB.child.death.state.status).toBe(DeathStatus.INACTIVE);
     })
 })

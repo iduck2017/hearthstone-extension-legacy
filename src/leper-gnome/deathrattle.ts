@@ -17,6 +17,7 @@ export class LeperGnomeDeathrattleModel extends DeathrattleModel {
     public async doRun() {
         const player = this.route.player;
         const card = this.route.card;
+        console.log('deathrattle', card?.name);
         if (!card) return;
         if (!player) return;
         const opponent = player.refer.opponent;

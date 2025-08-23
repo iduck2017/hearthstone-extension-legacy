@@ -1,6 +1,6 @@
 import { DebugUtil, LogLevel, RouteUtil } from "set-piece";
 import { AngryChickenModel } from "../src/angry-chicken";
-import { GameModel, PlayerModel, MageModel, BoardModel, SelectUtil, TimeUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, SelectUtil, TimeUtil, DeathStatus } from "hearthstone-core";
 import { boot } from "./boot";
 
 DebugUtil.level = LogLevel.ERROR;
@@ -65,7 +65,7 @@ describe('angry-chicken', () => {
         expect(roleA.state.health).toBe(0);
         expect(roleA.state.attack).toBe(6);
         expect(roleB.state.health).toBe(0);
-        expect(roleA.child.death.state.isActive).toBe(true);
-        expect(roleB.child.death.state.isActive).toBe(true);
+        expect(roleA.child.death.state.status).toBe(DeathStatus.ACTIVE);
+        expect(roleB.child.death.state.status).toBe(DeathStatus.ACTIVE);
     })
 })

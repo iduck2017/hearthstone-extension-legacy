@@ -19,7 +19,7 @@ export class EmeraldSkytalonModel extends MinionCardModel {
                         entries: new RoleEntriesModel({
                             child: {
                                 rush: new RushModel({ 
-                                    state: { isActive: RushStatus.ACTIVE }
+                                    state: { status: RushStatus.ACTIVE }
                                 })
                             }
                         })  

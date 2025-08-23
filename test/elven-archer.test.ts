@@ -6,7 +6,7 @@
  * 2. battlecry: Player A uses Elven Archer to attack the wisp
  */
 import { ElvenArcherModel } from "../src/elven-archer";
-import { GameModel, PlayerModel, MageModel, HandModel, BoardModel, SelectUtil, TimeUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, HandModel, BoardModel, SelectUtil, TimeUtil, DeathStatus } from "hearthstone-core";
 import { WispCardModel } from "../src/wisp";
 import { boot } from "./boot";
 import { DebugUtil, LogLevel } from "set-piece";
@@ -63,7 +63,7 @@ describe('elven-archer', () => {
         expect(roleB.child.health.state.limit).toBe(1);
         expect(roleB.child.health.state.current).toBe(0);
         expect(roleB.child.health.state.origin).toBe(1);
-        expect(roleB.child.death.state.isActive).toBe(true);
+        expect(roleB.child.death.state.status).toBe(DeathStatus.ACTIVE);
         const reason = roleB.child.death.refer.reason;
         expect(reason?.route.card).toBe(cardA);
     })

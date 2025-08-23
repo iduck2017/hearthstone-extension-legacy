@@ -62,4 +62,22 @@ describe('shieldbearer', () => {
         expect(roleC.child.health.state.limit).toBe(4);
         expect(roleC.child.health.state.damage).toBe(1);
     })
+
+    test('no-action', async () => {
+        const turn = game.child.turn;
+        turn.next();
+        const boardA = game.child.playerA.child.board;
+        const boardB = game.child.playerB.child.board;
+        const card = boardB.child.cards.find(item => item instanceof ShieldbearerCardModel);
+        expect(card).toBeDefined();
+        if (!card) return;
+        const role = card.child.role;
+        const promise = role.child.action.run();
+        expect(role.state.attack).toBe(0);
+        expect(role.state.action).toBe(1);
+        expect(role.child.sleep.state.isActive).toBe(false);
+        await TimeUtil.sleep();
+        expect(SelectUtil.current).toBeUndefined();
+        await promise;
+    })
 })

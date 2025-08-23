@@ -6,7 +6,7 @@
  * 2. aura: Both raiders initially have 2 attack, after Player A plays oracle, Player A's raider gains +1 attack, no attack occurs
  */
 
-import { GameModel, PlayerModel, HandModel, BoardModel, MageModel, TimeUtil, SelectUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, HandModel, BoardModel, MageModel, TimeUtil, SelectUtil, DeathStatus } from "hearthstone-core";
 import { GrimscaleOracleModel } from "../src/grimscale-oracle";
 import { MurlocRaiderCardModel } from "../src/murloc-raider";
 import { WispCardModel } from "../src/wisp";
@@ -128,9 +128,9 @@ describe('grimscale-oracle', () => {
         await promise;
         expect(roleZ.state.action).toBe(0)
         expect(roleZ.state.health).toBe(0);
-        expect(roleZ.child.death.state.isActive).toBe(true);
+        expect(roleZ.child.death.state.status).toBe(DeathStatus.ACTIVE);
         expect(roleC.state.health).toBe(-1);
-        expect(roleC.child.death.state.isActive).toBe(true);
+        expect(roleC.child.death.state.status).toBe(DeathStatus.ACTIVE);
         expect(boardB.child.cards.length).toBe(0);
         expect(boardA.child.cards.length).toBe(2);
         expect(roleA.state.attack).toBe(2);

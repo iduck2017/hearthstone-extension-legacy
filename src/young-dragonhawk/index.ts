@@ -17,7 +17,7 @@ export class YoungDragonhawkCardModel extends MinionCardModel {
                         attack: new AttackModel({ state: { origin: 1 }}),
                         health: new HealthModel({ state: { origin: 1 }}),
                         entries: new RoleEntriesModel({
-                            child: { windfury: new WindfuryModel({ state: { isActive: WindfuryStatus.ACTIVE }}) }
+                            child: { windfury: new WindfuryModel({ state: { status: WindfuryStatus.ACTIVE }}) }
                         })
                     }
                 }),

@@ -1,4 +1,4 @@
-import { GameModel, BoardModel, HandModel, MageModel, PlayerModel, TimeUtil, SelectUtil } from "hearthstone-core";
+import { GameModel, BoardModel, HandModel, MageModel, PlayerModel, TimeUtil, SelectUtil, DeathStatus } from "hearthstone-core";
 import { ShatteredSunClericCardModel } from "../src/shattered-sun-cleric";
 import { WispCardModel } from "../src/wisp";
 import { boot } from "./boot";
@@ -67,7 +67,7 @@ describe('shattered-sun-cleric', () => {
         expect(roleB.child.health.state.current).toBe(2);
     })
 
-    test('cancel', async () => {
+    test('no-battlecry', async () => {
         const turn = game.child.turn;
         turn.next();
         const handB = game.child.playerB.child.hand;
@@ -127,13 +127,13 @@ describe('shattered-sun-cleric', () => {
         expect(roleA.state.action).toBe(0);
         expect(roleA.child.health.state.damage).toBe(1);
         expect(roleA.child.health.state.offset).toBe(1);
-        expect(roleA.child.death.state.isActive).toBe(false);
+        expect(roleA.child.death.state.status).toBe(DeathStatus.INACTIVE);
         expect(roleB.state.attack).toBe(1);
         expect(roleB.state.health).toBe(-1);
         expect(roleB.state.action).toBe(1);
         expect(roleB.child.health.state.damage).toBe(2);
         expect(roleB.child.health.state.offset).toBe(0);
-        expect(roleB.child.death.state.isActive).toBe(true);
+        expect(roleB.child.death.state.status).toBe(DeathStatus.ACTIVE);
         expect(boardB.child.cards.length).toBe(1);
         expect(boardA.child.cards.length).toBe(2);
     })

@@ -29,10 +29,10 @@ export class HungryCrabBattlecryModel extends BattlecryModel<[RoleModel]> {
 
     public async doRun(target: RoleModel) {
         const card = this.route.card;
-        const role = this.route.role;
-        if (!card) return;
+        const role = card?.child.role;
         if (!role) return;
-        role.child.death.destroy(new AnchorEvent({ source: this.child.anchor  }));
+        if (!card) return;
+        target.child.death.destroy(new AnchorEvent({ source: this.child.anchor }));
         role.child.features.add(new HungryCrabBuffModel({}))
     }
 }
