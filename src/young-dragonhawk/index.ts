@@ -1,7 +1,7 @@
 import { HealthModel, AttackModel, WindfuryModel, RoleEntriesModel, MinionCardModel, RaceType, RoleModel, WindfuryStatus } from "hearthstone-core";
 
-export class YoungDragonhawkCardModel extends MinionCardModel {
-    constructor(props: YoungDragonhawkCardModel['props']) {
+export class YoungDragonhawkModel extends MinionCardModel {
+    constructor(props: YoungDragonhawkModel['props']) {
         super({
             uuid: props.uuid,
             state: {

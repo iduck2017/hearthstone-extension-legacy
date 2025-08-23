@@ -7,7 +7,7 @@
  */
 import { ElvenArcherModel } from "../src/elven-archer";
 import { GameModel, PlayerModel, MageModel, HandModel, BoardModel, SelectUtil, TimeUtil, DeathStatus } from "hearthstone-core";
-import { WispCardModel } from "../src/wisp";
+import { WispModel } from "../src/wisp";
 import { boot } from "./boot";
 import { DebugUtil, LogLevel } from "set-piece";
 
@@ -27,7 +27,7 @@ describe('elven-archer', () => {
                 child: {
                     hero: new MageModel({}),
                     board: new BoardModel({
-                        child: { cards: [new WispCardModel({})] }
+                        child: { cards: [new WispModel({})] }
                     })
                 }
             })
@@ -41,7 +41,7 @@ describe('elven-archer', () => {
         const hand = game.child.playerA.child.hand;
         const board = game.child.playerB.child.board;
         const cardA = hand.child.cards.find(item => item instanceof ElvenArcherModel);
-        const cardB = board.child.cards.find(item => item instanceof WispCardModel);
+        const cardB = board.child.cards.find(item => item instanceof WispModel);
         expect(cardA).toBeDefined();
         expect(cardB).toBeDefined();
         if (!cardA) return;

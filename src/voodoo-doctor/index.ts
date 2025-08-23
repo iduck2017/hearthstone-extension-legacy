@@ -1,8 +1,8 @@
 import { AttackModel, CardHooksModel, HealthModel, MinionCardModel, RaceType, RoleModel } from "hearthstone-core";
 import { VoodooDoctorBattlecryModel } from "./battlecry";
 
-export class VoodooDoctorCardModel extends MinionCardModel {
-    constructor(props: VoodooDoctorCardModel['props']) {
+export class VoodooDoctorModel extends MinionCardModel {
+    constructor(props: VoodooDoctorModel['props']) {
         super({
             uuid: props.uuid,
             state: {

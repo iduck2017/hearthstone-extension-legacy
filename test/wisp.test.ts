@@ -1,5 +1,5 @@
 import { GameModel, PlayerModel, HandModel, BoardModel, MageModel, TimeUtil, SelectUtil, DeathStatus } from "hearthstone-core";
-import { WispCardModel } from "../src/wisp";   
+import { WispModel } from "../src/wisp";   
 import { boot } from "./boot";
 import { DebugUtil, LogLevel } from "set-piece";
 
@@ -11,7 +11,7 @@ describe('wisp', () => {
                 child: {
                     hero: new MageModel({}),
                     hand: new HandModel({
-                        child: { cards: [new WispCardModel({})] }
+                        child: { cards: [new WispModel({})] }
                     }),
                 }
             }),
@@ -19,7 +19,7 @@ describe('wisp', () => {
                 child: {
                     hero: new MageModel({}),
                     board: new BoardModel({
-                        child: { cards: [new WispCardModel({})] }
+                        child: { cards: [new WispModel({})] }
                     })
                 }
             })
@@ -36,7 +36,7 @@ describe('wisp', () => {
         expect(handB.child.cards.length).toBe(0);
         expect(boardA.child.cards.length).toBe(0);
         expect(boardB.child.cards.length).toBe(1);
-        const card = handA.child.cards.find(item => item instanceof WispCardModel);
+        const card = handA.child.cards.find(item => item instanceof WispModel);
         const promise = card?.play();
         await TimeUtil.sleep();
         expect(SelectUtil.current).toBeDefined();
@@ -54,8 +54,8 @@ describe('wisp', () => {
     test('attack', async () => {
         const boardA = game.child.playerA.child.board;
         const boardB = game.child.playerB.child.board;
-        const cardA = boardA.child.cards.find(item => item instanceof WispCardModel);
-        const cardB = boardB.child.cards.find(item => item instanceof WispCardModel);
+        const cardA = boardA.child.cards.find(item => item instanceof WispModel);
+        const cardB = boardB.child.cards.find(item => item instanceof WispModel);
         const roleA = cardA?.child.role;
         const roleB = cardB?.child.role;
         expect(roleA).toBeDefined();

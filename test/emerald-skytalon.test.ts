@@ -8,7 +8,7 @@
  */
 import { GameModel, PlayerModel, MageModel, HandModel, BoardModel, SelectUtil, TimeUtil, RushStatus, ActionModel } from "hearthstone-core";
 import { EmeraldSkytalonModel } from "../src/emerald-skytalon";
-import { WispCardModel } from "../src/wisp";
+import { WispModel } from "../src/wisp";
 import { boot } from "./boot";
 import { DebugUtil, LogLevel } from "set-piece";
 
@@ -22,7 +22,7 @@ describe('emerald-skytalon', () => {
                     hand: new HandModel({
                         child: { cards: [
                             new EmeraldSkytalonModel({}),
-                            new WispCardModel({})
+                            new WispModel({})
                         ]}
                     }),
                 }
@@ -31,7 +31,7 @@ describe('emerald-skytalon', () => {
                 child: {
                     hero: new MageModel({}),
                     board: new BoardModel({
-                        child: { cards: [new WispCardModel({})]}
+                        child: { cards: [new WispModel({})]}
                     })
                 }
             })
@@ -44,7 +44,7 @@ describe('emerald-skytalon', () => {
         const boardA = game.child.playerA.child.board;
         const boardB = game.child.playerB.child.board;
         const cardA = handA.child.cards.find(item => item instanceof EmeraldSkytalonModel);
-        const cardB = boardB.child.cards.find(item => item instanceof WispCardModel);
+        const cardB = boardB.child.cards.find(item => item instanceof WispModel);
         expect(cardA).toBeDefined();
         if (!cardA) return;
         if (!cardB) return;
@@ -79,8 +79,8 @@ describe('emerald-skytalon', () => {
         const handA = game.child.playerA.child.hand;
         const boardA = game.child.playerA.child.board;
         const boardB = game.child.playerB.child.board;
-        const cardA = handA.child.cards.find(item => item instanceof WispCardModel);
-        const cardB = boardB.child.cards.find(item => item instanceof WispCardModel);
+        const cardA = handA.child.cards.find(item => item instanceof WispModel);
+        const cardB = boardB.child.cards.find(item => item instanceof WispModel);
         expect(cardA).toBeDefined();
         if (!cardA) return;
         if (!cardB) return;
@@ -112,8 +112,8 @@ describe('emerald-skytalon', () => {
         const boardA = game.child.playerA.child.board;
         const boardB = game.child.playerB.child.board;
         const cardA = boardA.child.cards.find(item => item instanceof EmeraldSkytalonModel);
-        const cardB = boardA.child.cards.find(item => item instanceof WispCardModel);
-        const cardC = boardB.child.cards.find(item => item instanceof WispCardModel);
+        const cardB = boardA.child.cards.find(item => item instanceof WispModel);
+        const cardC = boardB.child.cards.find(item => item instanceof WispModel);
         expect(cardA).toBeDefined();
         expect(cardB).toBeDefined();
         expect(cardC).toBeDefined();

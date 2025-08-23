@@ -3,8 +3,8 @@
 // Test case: Player A plays Stonetusk Boar, boar directly attacks Player B's hero
 
 import { GameModel, BoardModel, HandModel, MageModel, PlayerModel, TimeUtil, SelectUtil } from "hearthstone-core";
-import { StonetuskBoarCardModel } from "../src/stonetusk-boar";
-import { WispCardModel } from "../src/wisp";
+import { StonetuskBoarModel } from "../src/stonetusk-boar";
+import { WispModel } from "../src/wisp";
 import { boot } from "./boot";
 import { DebugUtil, LogLevel } from "set-piece";
 
@@ -19,7 +19,7 @@ describe('stonetusk-boar', () => {
                         child: { cards: [] }
                     }),
                     hand: new HandModel({
-                        child: { cards: [new StonetuskBoarCardModel({})] }
+                        child: { cards: [new StonetuskBoarModel({})] }
                     })
                 }
             }),
@@ -27,7 +27,7 @@ describe('stonetusk-boar', () => {
                 child: {
                     hero: new MageModel({}),
                     board: new BoardModel({
-                        child: { cards: [new WispCardModel({})] }
+                        child: { cards: [new WispModel({})] }
                     }),
                     hand: new HandModel({
                         child: { cards: [] }
@@ -41,7 +41,7 @@ describe('stonetusk-boar', () => {
         const handA = game.child.playerA.child.hand;
         const boardA = game.child.playerA.child.board;
         const boardB = game.child.playerB.child.board;
-        const cardA = handA.child.cards.find(item => item instanceof StonetuskBoarCardModel);
+        const cardA = handA.child.cards.find(item => item instanceof StonetuskBoarModel);
         expect(cardA).toBeDefined();
         if (!cardA) return;
         const roleA = cardA.child.role;

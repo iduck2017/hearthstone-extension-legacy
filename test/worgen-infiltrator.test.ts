@@ -5,8 +5,8 @@
 // Test case 3: Turn switches, Player A's Wisp attacks again, can attack Worgen, attacks Worgen
 
 import { GameModel, BoardModel, HandModel, MageModel, PlayerModel, TimeUtil, SelectUtil, DeathStatus } from "hearthstone-core";
-import { WorgenInfiltratorCardModel } from "../src/worgen-infiltrator";
-import { WispCardModel } from "../src/wisp";
+import { WorgenInfiltratorModel } from "../src/worgen-infiltrator";
+import { WispModel } from "../src/wisp";
 import { boot } from "./boot";
 import { DebugUtil, LogLevel } from "set-piece";
 
@@ -18,7 +18,7 @@ describe('worgen-infiltrator', () => {
                 child: {
                     hero: new MageModel({}),
                     board: new BoardModel({
-                        child: { cards: [new WispCardModel({})] }
+                        child: { cards: [new WispModel({})] }
                     }),
                     hand: new HandModel({
                         child: { cards: [] }
@@ -29,7 +29,7 @@ describe('worgen-infiltrator', () => {
                 child: {
                     hero: new MageModel({}),
                     board: new BoardModel({
-                        child: { cards: [new WorgenInfiltratorCardModel({})] }
+                        child: { cards: [new WorgenInfiltratorModel({})] }
                     }),
                     hand: new HandModel({
                         child: { cards: [] }
@@ -42,8 +42,8 @@ describe('worgen-infiltrator', () => {
     test('stealth', async () => {
         const boardA = game.child.playerA.child.board;
         const boardB = game.child.playerB.child.board;
-        const cardA = boardA.child.cards.find(item => item instanceof WispCardModel);
-        const cardB = boardB.child.cards.find(item => item instanceof WorgenInfiltratorCardModel);
+        const cardA = boardA.child.cards.find(item => item instanceof WispModel);
+        const cardB = boardB.child.cards.find(item => item instanceof WorgenInfiltratorModel);
         expect(cardA).toBeDefined();
         expect(cardB).toBeDefined();
         if (!cardA || !cardB) return;
@@ -73,8 +73,8 @@ describe('worgen-infiltrator', () => {
         turn.next();
         const boardA = game.child.playerA.child.board;
         const boardB = game.child.playerB.child.board;
-        const cardA = boardA.child.cards.find(item => item instanceof WispCardModel);
-        const cardB = boardB.child.cards.find(item => item instanceof WorgenInfiltratorCardModel);
+        const cardA = boardA.child.cards.find(item => item instanceof WispModel);
+        const cardB = boardB.child.cards.find(item => item instanceof WorgenInfiltratorModel);
         expect(cardA).toBeDefined();
         expect(cardB).toBeDefined();
         if (!cardA || !cardB) return;
@@ -102,8 +102,8 @@ describe('worgen-infiltrator', () => {
         turn.next();
         const boardA = game.child.playerA.child.board;
         const boardB = game.child.playerB.child.board;
-        const cardA = boardA.child.cards.find(item => item instanceof WispCardModel);
-        const cardB = boardB.child.cards.find(item => item instanceof WorgenInfiltratorCardModel);
+        const cardA = boardA.child.cards.find(item => item instanceof WispModel);
+        const cardB = boardB.child.cards.find(item => item instanceof WorgenInfiltratorModel);
         expect(cardA).toBeDefined();
         expect(cardB).toBeDefined();
         if (!cardA || !cardB) return;

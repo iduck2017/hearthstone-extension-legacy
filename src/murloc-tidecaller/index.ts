@@ -1,8 +1,8 @@
 import { AttackModel, FeaturesModel, HealthModel, MinionCardModel, RaceType, RoleModel } from "hearthstone-core";
 import { MurlocTidecallerFeatureModel } from "./feature";
 
-export class MurlocTidecallerCardModel extends MinionCardModel {
-    constructor(props: MurlocTidecallerCardModel['props']) {
+export class MurlocTidecallerModel extends MinionCardModel {
+    constructor(props: MurlocTidecallerModel['props']) {
         super({
             uuid: props.uuid,
             state: {

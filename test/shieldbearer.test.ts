@@ -1,8 +1,8 @@
 import { GameModel, PlayerModel, HandModel, BoardModel, MageModel, TimeUtil, SelectUtil } from "hearthstone-core";
-import { WispCardModel } from "../src/wisp";   
+import { WispModel } from "../src/wisp";   
 import { boot } from "./boot";
 import { DebugUtil, LogLevel } from "set-piece";
-import { ShieldbearerCardModel } from "../src";
+import { ShieldbearerModel } from "../src/shieldbearer";
 
 DebugUtil.level = LogLevel.ERROR;
 describe('shieldbearer', () => {
@@ -12,7 +12,7 @@ describe('shieldbearer', () => {
                 child: {
                     hero: new MageModel({}),
                     board: new BoardModel({
-                        child: { cards: [new WispCardModel({})] }
+                        child: { cards: [new WispModel({})] }
                     }),
                 }
             }),
@@ -21,8 +21,8 @@ describe('shieldbearer', () => {
                     hero: new MageModel({}),
                     board: new BoardModel({
                         child: { cards: [
-                            new WispCardModel({}),
-                            new ShieldbearerCardModel({})
+                            new WispModel({}),
+                            new ShieldbearerModel({})
                         ]}
                     })
                 }
@@ -35,9 +35,9 @@ describe('shieldbearer', () => {
     test('attack', async () => {
         const boardA = game.child.playerA.child.board;
         const boardB = game.child.playerB.child.board;
-        const cardA = boardA.child.cards.find(item => item instanceof WispCardModel);
-        const cardB = boardB.child.cards.find(item => item instanceof WispCardModel);
-        const cardC = boardB.child.cards.find(item => item instanceof ShieldbearerCardModel);
+        const cardA = boardA.child.cards.find(item => item instanceof WispModel);
+        const cardB = boardB.child.cards.find(item => item instanceof WispModel);
+        const cardC = boardB.child.cards.find(item => item instanceof ShieldbearerModel);
         const roleA = cardA?.child.role;
         const roleB = cardB?.child.role;
         const roleC = cardC?.child.role;
@@ -68,7 +68,7 @@ describe('shieldbearer', () => {
         turn.next();
         const boardA = game.child.playerA.child.board;
         const boardB = game.child.playerB.child.board;
-        const card = boardB.child.cards.find(item => item instanceof ShieldbearerCardModel);
+        const card = boardB.child.cards.find(item => item instanceof ShieldbearerModel);
         expect(card).toBeDefined();
         if (!card) return;
         const role = card.child.role;

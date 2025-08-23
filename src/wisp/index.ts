@@ -2,8 +2,8 @@ import { AttackModel, HealthModel, MinionCardModel, RaceType, RoleModel } from "
 import { StoreUtil } from "set-piece";
 
 @StoreUtil.is('wisp-card')
-export class WispCardModel extends MinionCardModel {
-    constructor(props: WispCardModel['props']) {
+export class WispModel extends MinionCardModel {
+    constructor(props: WispModel['props']) {
         super({
             uuid: props.uuid,
             state: {

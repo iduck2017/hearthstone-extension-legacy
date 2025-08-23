@@ -1,7 +1,7 @@
 import { GameModel, HandModel, MageModel, PlayerModel, SelectUtil, TimeUtil } from "hearthstone-core";
 import { boot } from "./boot";
 import { AbusiveSergeantModel } from "../src/abusive-sergeant";
-import { WispCardModel } from "../src/wisp";
+import { WispModel } from "../src/wisp";
 import { DebugUtil, LogLevel } from "set-piece";
 
 DebugUtil.level = LogLevel.ERROR
@@ -14,7 +14,7 @@ describe('abusive-sergeant', () => {
                     hand: new HandModel({
                         child: { cards: [
                             new AbusiveSergeantModel({}),
-                            new WispCardModel({})
+                            new WispModel({})
                         ]}
                     })
                 }
@@ -25,7 +25,7 @@ describe('abusive-sergeant', () => {
                     hand: new HandModel({
                         child: { cards: [
                             new AbusiveSergeantModel({}),
-                            new WispCardModel({})
+                            new WispModel({})
                         ]}
                     })
                 }
@@ -38,7 +38,7 @@ describe('abusive-sergeant', () => {
         const boardA = game.child.playerA.child.board;
         const boardB = game.child.playerB.child.board;
         const cardA = handA.child.cards.find(item => item instanceof AbusiveSergeantModel);
-        const cardB = handA.child.cards.find(item => item instanceof WispCardModel);
+        const cardB = handA.child.cards.find(item => item instanceof WispModel);
         expect(cardA).toBeDefined();
         expect(cardB).toBeDefined();
         if (!cardA || !cardB) return;
@@ -77,8 +77,8 @@ describe('abusive-sergeant', () => {
         const boardA = game.child.playerA.child.board;
         const boardB = game.child.playerB.child.board;
         const cardA = handB.child.cards.find(item => item instanceof AbusiveSergeantModel);
-        const cardB = handB.child.cards.find(item => item instanceof WispCardModel);
-        const cardC = boardA.child.cards.find(item => item instanceof WispCardModel);
+        const cardB = handB.child.cards.find(item => item instanceof WispModel);
+        const cardC = boardA.child.cards.find(item => item instanceof WispModel);
         const cardD = boardA.child.cards.find(item => item instanceof AbusiveSergeantModel);
         expect(cardA).toBeDefined();
         expect(cardB).toBeDefined();
@@ -122,7 +122,7 @@ describe('abusive-sergeant', () => {
 
     test('turn-end', async () => {
         const boardB = game.child.playerB.child.board;
-        const cardB = boardB.child.cards.find(item => item instanceof WispCardModel);
+        const cardB = boardB.child.cards.find(item => item instanceof WispModel);
         const roleB = cardB?.child.role;
         expect(roleB).toBeDefined();
         if (!roleB) return;

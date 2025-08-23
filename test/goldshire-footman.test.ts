@@ -7,7 +7,7 @@
  */
 import { GameModel, PlayerModel, MageModel, BoardModel, TimeUtil, SelectUtil } from "hearthstone-core";
 import { GoldshireFootmanModel } from "../src/goldshire-footman";
-import { WispCardModel } from "../src/wisp";
+import { WispModel } from "../src/wisp";
 import { boot } from "./boot";
 import { DebugUtil, LogLevel } from "set-piece";
 
@@ -19,7 +19,7 @@ describe('goldshire-footman', () => {
                 child: {
                     hero: new MageModel({}),
                     board: new BoardModel({
-                        child: { cards: [new WispCardModel({})] }
+                        child: { cards: [new WispModel({})] }
                     }),
                 }
             }),
@@ -39,7 +39,7 @@ describe('goldshire-footman', () => {
         const boardA = game.child.playerA.child.board;
         const boardB = game.child.playerB.child.board;
         const playerB = game.child.playerB;
-        const cardA = boardA.child.cards.find(item => item instanceof WispCardModel);
+        const cardA = boardA.child.cards.find(item => item instanceof WispModel);
         const cardB = boardB.child.cards.find(item => item instanceof GoldshireFootmanModel);
         expect(cardA).toBeDefined();
         expect(cardB).toBeDefined();

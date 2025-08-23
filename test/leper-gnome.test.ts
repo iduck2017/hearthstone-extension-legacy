@@ -3,8 +3,8 @@
 // Test case: Player A's Leper Gnome attacks Player B's Wisp, both die, Player B loses 2 health
 
 import { GameModel, BoardModel, HandModel, MageModel, PlayerModel, TimeUtil, SelectUtil, DeathStatus } from "hearthstone-core";
-import { LeperGnomeCardModel } from "../src/leper-gnome";
-import { WispCardModel } from "../src/wisp";
+import { LeperGnomeModel } from "../src/leper-gnome";
+import { WispModel } from "../src/wisp";
 import { boot } from "./boot";
 import { DebugUtil, LogLevel } from "set-piece";
 
@@ -16,7 +16,7 @@ describe('leper-gnome', () => {
                 child: {
                     hero: new MageModel({}),
                     board: new BoardModel({
-                        child: { cards: [new LeperGnomeCardModel({})] }
+                        child: { cards: [new LeperGnomeModel({})] }
                     }),
                 }
             }),
@@ -24,7 +24,7 @@ describe('leper-gnome', () => {
                 child: {
                     hero: new MageModel({}),
                     board: new BoardModel({
-                        child: { cards: [new WispCardModel({})] }
+                        child: { cards: [new WispModel({})] }
                     }),
                 }
             })
@@ -34,8 +34,8 @@ describe('leper-gnome', () => {
     test('deathrattle', async () => {
         const boardA = game.child.playerA.child.board;
         const boardB = game.child.playerB.child.board;
-        const cardA = boardA.child.cards.find(item => item instanceof LeperGnomeCardModel);
-        const cardB = boardB.child.cards.find(item => item instanceof WispCardModel);
+        const cardA = boardA.child.cards.find(item => item instanceof LeperGnomeModel);
+        const cardB = boardB.child.cards.find(item => item instanceof WispModel);
         expect(cardA).toBeDefined();
         expect(cardB).toBeDefined();
         if (!cardA) return;

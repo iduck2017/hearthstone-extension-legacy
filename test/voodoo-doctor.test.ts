@@ -4,9 +4,9 @@
 // Test case 2: Player A plays Voodoo Doctor, target selection should include all roles, choose Shieldbearer, it restores 1 health
 
 import { GameModel, BoardModel, HandModel, MageModel, PlayerModel, TimeUtil, SelectUtil } from "hearthstone-core";
-import { VoodooDoctorCardModel } from "../src/voodoo-doctor";
-import { WispCardModel } from "../src/wisp";
-import { ShieldbearerCardModel } from "../src/shieldbearer";
+import { VoodooDoctorModel } from "../src/voodoo-doctor";
+import { WispModel } from "../src/wisp";
+import { ShieldbearerModel } from "../src/shieldbearer";
 import { boot } from "./boot";
 import { DebugUtil, LogLevel } from "set-piece";
 
@@ -18,10 +18,10 @@ describe('voodoo-doctor', () => {
                 child: {
                     hero: new MageModel({}),
                     board: new BoardModel({
-                        child: { cards: [new WispCardModel({})] }
+                        child: { cards: [new WispModel({})] }
                     }),
                     hand: new HandModel({
-                        child: { cards: [new VoodooDoctorCardModel({})] }
+                        child: { cards: [new VoodooDoctorModel({})] }
                     })
                 }
             }),
@@ -29,7 +29,7 @@ describe('voodoo-doctor', () => {
                 child: {
                     hero: new MageModel({}),
                     board: new BoardModel({
-                        child: { cards: [new ShieldbearerCardModel({})] }
+                        child: { cards: [new ShieldbearerModel({})] }
                     }),
                     hand: new HandModel({
                         child: { cards: [] }
@@ -42,8 +42,8 @@ describe('voodoo-doctor', () => {
     test('attack', async () => {
         const boardA = game.child.playerA.child.board;
         const boardB = game.child.playerB.child.board;
-        const cardA = boardA.child.cards.find(item => item instanceof WispCardModel);
-        const cardB = boardB.child.cards.find(item => item instanceof ShieldbearerCardModel);
+        const cardA = boardA.child.cards.find(item => item instanceof WispModel);
+        const cardB = boardB.child.cards.find(item => item instanceof ShieldbearerModel);
         expect(cardA).toBeDefined();
         expect(cardB).toBeDefined();
         if (!cardA || !cardB) return;
@@ -72,9 +72,9 @@ describe('voodoo-doctor', () => {
         const boardA = game.child.playerA.child.board;
         const boardB = game.child.playerB.child.board;
         const handA = game.child.playerA.child.hand;
-        const cardA = boardA.child.cards.find(item => item instanceof WispCardModel);
-        const cardB = boardB.child.cards.find(item => item instanceof ShieldbearerCardModel);
-        const cardC = handA.child.cards.find(item => item instanceof VoodooDoctorCardModel);
+        const cardA = boardA.child.cards.find(item => item instanceof WispModel);
+        const cardB = boardB.child.cards.find(item => item instanceof ShieldbearerModel);
+        const cardC = handA.child.cards.find(item => item instanceof VoodooDoctorModel);
         expect(cardA).toBeDefined();
         expect(cardB).toBeDefined();
         expect(cardC).toBeDefined();

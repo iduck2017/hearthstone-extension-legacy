@@ -1,7 +1,7 @@
 import { ChargeModel, HealthModel, AttackModel, MinionCardModel, RaceType, RoleModel, RoleEntriesModel } from "hearthstone-core";
 
-export class StonetuskBoarCardModel extends MinionCardModel {
-    constructor(props: StonetuskBoarCardModel['props']) {
+export class StonetuskBoarModel extends MinionCardModel {
+    constructor(props: StonetuskBoarModel['props']) {
         super({
             uuid: props.uuid,
             state: {

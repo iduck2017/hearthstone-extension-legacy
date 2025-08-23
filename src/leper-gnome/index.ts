@@ -1,8 +1,8 @@
 import { AttackModel, CardHooksModel, HealthModel, MinionCardModel, RoleModel } from "hearthstone-core";
 import { LeperGnomeDeathrattleModel } from "./deathrattle";
 
-export class LeperGnomeCardModel extends MinionCardModel {
-    constructor(props: LeperGnomeCardModel['props']) {
+export class LeperGnomeModel extends MinionCardModel {
+    constructor(props: LeperGnomeModel['props']) {
         super({
             uuid: props.uuid,
             state: {

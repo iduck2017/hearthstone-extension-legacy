@@ -3,8 +3,8 @@
 // Test case: Player A uses Dragonhawk to attack Shieldbearer, can attack twice then cannot attack
 
 import { GameModel, BoardModel, HandModel, MageModel, PlayerModel, TimeUtil, SelectUtil } from "hearthstone-core";
-import { YoungDragonhawkCardModel } from "../src/young-dragonhawk";
-import { ShieldbearerCardModel } from "../src/shieldbearer";
+import { YoungDragonhawkModel } from "../src/young-dragonhawk";
+import { ShieldbearerModel } from "../src/shieldbearer";
 import { boot } from "./boot";
 import { DebugUtil, LogLevel } from "set-piece";
 
@@ -16,7 +16,7 @@ describe('young-dragonhawk', () => {
                 child: {
                     hero: new MageModel({}),
                     board: new BoardModel({
-                        child: { cards: [new YoungDragonhawkCardModel({})] }
+                        child: { cards: [new YoungDragonhawkModel({})] }
                     }),
                     hand: new HandModel({
                         child: { cards: [] }
@@ -27,7 +27,7 @@ describe('young-dragonhawk', () => {
                 child: {
                     hero: new MageModel({}),
                     board: new BoardModel({
-                        child: { cards: [new ShieldbearerCardModel({})] }
+                        child: { cards: [new ShieldbearerModel({})] }
                     }),
                     hand: new HandModel({
                         child: { cards: [] }
@@ -40,8 +40,8 @@ describe('young-dragonhawk', () => {
     test('windfury', async () => {
         const boardA = game.child.playerA.child.board;
         const boardB = game.child.playerB.child.board;
-        const cardA = boardA.child.cards.find(item => item instanceof YoungDragonhawkCardModel);
-        const cardB = boardB.child.cards.find(item => item instanceof ShieldbearerCardModel);
+        const cardA = boardA.child.cards.find(item => item instanceof YoungDragonhawkModel);
+        const cardB = boardB.child.cards.find(item => item instanceof ShieldbearerModel);
         expect(cardA).toBeDefined();
         expect(cardB).toBeDefined();
         if (!cardA || !cardB) return;

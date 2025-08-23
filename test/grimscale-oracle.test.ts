@@ -8,8 +8,8 @@
 
 import { GameModel, PlayerModel, HandModel, BoardModel, MageModel, TimeUtil, SelectUtil, DeathStatus } from "hearthstone-core";
 import { GrimscaleOracleModel } from "../src/grimscale-oracle";
-import { MurlocRaiderCardModel } from "../src/murloc-raider";
-import { WispCardModel } from "../src/wisp";
+import { MurlocRaiderCard } from "../src/murloc-raider";
+import { WispModel } from "../src/wisp";
 import { boot } from "./boot";
 import { DebugUtil, LogLevel } from "set-piece";
 
@@ -22,8 +22,8 @@ describe('grimscale-oracle', () => {
                     hero: new MageModel({}),
                     board: new BoardModel({
                         child: { cards: [
-                            new MurlocRaiderCardModel({}),
-                            new WispCardModel({})
+                            new MurlocRaiderCard({}),
+                            new WispModel({})
                         ]}
                     }),
                     hand: new HandModel({
@@ -35,7 +35,7 @@ describe('grimscale-oracle', () => {
                 child: {
                     hero: new MageModel({}),
                     board: new BoardModel({
-                        child: { cards: [new MurlocRaiderCardModel({})] }
+                        child: { cards: [new MurlocRaiderCard({})] }
                     })
                 }
             })
@@ -47,9 +47,9 @@ describe('grimscale-oracle', () => {
         const boardA = game.child.playerA.child.board;
         const boardB = game.child.playerB.child.board;
         const handA = game.child.playerA.child.hand;
-        const cardD = boardA.child.cards.find(item => item instanceof WispCardModel);
-        const cardA = boardA.child.cards.find(item => item instanceof MurlocRaiderCardModel);
-        const cardB = boardB.child.cards.find(item => item instanceof MurlocRaiderCardModel);
+        const cardD = boardA.child.cards.find(item => item instanceof WispModel);
+        const cardA = boardA.child.cards.find(item => item instanceof MurlocRaiderCard);
+        const cardB = boardB.child.cards.find(item => item instanceof MurlocRaiderCard);
         expect(cardA).toBeDefined();
         expect(cardB).toBeDefined();
         expect(cardD).toBeDefined();
@@ -66,10 +66,10 @@ describe('grimscale-oracle', () => {
         const boardA = game.child.playerA.child.board;
         const boardB = game.child.playerB.child.board;
         const handA = game.child.playerA.child.hand;
-        const cardA = boardA.child.cards.find(item => item instanceof MurlocRaiderCardModel);
-        const cardB = boardB.child.cards.find(item => item instanceof MurlocRaiderCardModel);
+        const cardA = boardA.child.cards.find(item => item instanceof MurlocRaiderCard);
+        const cardB = boardB.child.cards.find(item => item instanceof MurlocRaiderCard);
         const cardC = handA.child.cards.find(item => item instanceof GrimscaleOracleModel);
-        const cardD = boardA.child.cards.find(item => item instanceof WispCardModel);
+        const cardD = boardA.child.cards.find(item => item instanceof WispModel);
         expect(cardA).toBeDefined();
         expect(cardB).toBeDefined();
         expect(cardC).toBeDefined();
@@ -100,10 +100,10 @@ describe('grimscale-oracle', () => {
         const boardA = game.child.playerA.child.board;
         const boardB = game.child.playerB.child.board;
         const handA = game.child.playerA.child.hand;
-        const cardA = boardA.child.cards.find(item => item instanceof MurlocRaiderCardModel);
-        const cardB = boardB.child.cards.find(item => item instanceof MurlocRaiderCardModel);
+        const cardA = boardA.child.cards.find(item => item instanceof MurlocRaiderCard);
+        const cardB = boardB.child.cards.find(item => item instanceof MurlocRaiderCard);
         const cardC = boardA.child.cards.find(item => item instanceof GrimscaleOracleModel);
-        const cardD = boardA.child.cards.find(item => item instanceof WispCardModel);
+        const cardD = boardA.child.cards.find(item => item instanceof WispModel);
         expect(cardA).toBeDefined();
         expect(cardB).toBeDefined();
         expect(cardC).toBeDefined();

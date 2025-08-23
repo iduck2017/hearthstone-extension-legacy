@@ -1,6 +1,6 @@
 import { GameModel, BoardModel, HandModel, MageModel, PlayerModel, TimeUtil, SelectUtil, DeathStatus } from "hearthstone-core";
-import { ShatteredSunClericCardModel } from "../src/shattered-sun-cleric";
-import { WispCardModel } from "../src/wisp";
+import { ShatteredSunClericModel } from "../src/shattered-sun-cleric";
+import { WispModel } from "../src/wisp";
 import { boot } from "./boot";
 import { DebugUtil, LogLevel } from "set-piece";
 
@@ -12,10 +12,10 @@ describe('shattered-sun-cleric', () => {
                 child: {
                     hero: new MageModel({}),
                     board: new BoardModel({
-                        child: { cards: [new WispCardModel({})] }
+                        child: { cards: [new WispModel({})] }
                     }),
                     hand: new HandModel({
-                        child: { cards: [new ShatteredSunClericCardModel({})] }
+                        child: { cards: [new ShatteredSunClericModel({})] }
                     })
                 }
             }),
@@ -24,8 +24,8 @@ describe('shattered-sun-cleric', () => {
                     hero: new MageModel({}),
                     hand: new HandModel({
                         child: { cards: [
-                            new ShatteredSunClericCardModel({}),
-                            new WispCardModel({})
+                            new ShatteredSunClericModel({}),
+                            new WispModel({})
                         ]}
                     })
                 }
@@ -36,8 +36,8 @@ describe('shattered-sun-cleric', () => {
     test('battlecry', async () => {
         const handA = game.child.playerA.child.hand;
         const boardA = game.child.playerA.child.board;
-        const cardA = handA.child.cards.find(item => item instanceof ShatteredSunClericCardModel);
-        const cardB = boardA.child.cards.find(item => item instanceof WispCardModel);
+        const cardA = handA.child.cards.find(item => item instanceof ShatteredSunClericModel);
+        const cardB = boardA.child.cards.find(item => item instanceof WispModel);
         expect(cardA).toBeDefined();
         expect(cardB).toBeDefined();
         if (!cardA) return;
@@ -72,8 +72,8 @@ describe('shattered-sun-cleric', () => {
         turn.next();
         const handB = game.child.playerB.child.hand;
         const boardB = game.child.playerB.child.board;
-        const cardA = handB.child.cards.find(item => item instanceof ShatteredSunClericCardModel);
-        const cardB = handB.child.cards.find(item => item instanceof WispCardModel);
+        const cardA = handB.child.cards.find(item => item instanceof ShatteredSunClericModel);
+        const cardB = handB.child.cards.find(item => item instanceof WispModel);
         expect(cardA).toBeDefined();
         expect(cardB).toBeDefined();
         if (!cardA) return;
@@ -105,8 +105,8 @@ describe('shattered-sun-cleric', () => {
         turn.next();
         const boardA = game.child.playerA.child.board;
         const boardB = game.child.playerB.child.board;
-        const cardA = boardA.child.cards.find(item => item instanceof WispCardModel);
-        const cardB = boardB.child.cards.find(item => item instanceof WispCardModel);
+        const cardA = boardA.child.cards.find(item => item instanceof WispModel);
+        const cardB = boardB.child.cards.find(item => item instanceof WispModel);
         expect(cardA).toBeDefined();
         expect(cardB).toBeDefined();
         if (!cardA) return;

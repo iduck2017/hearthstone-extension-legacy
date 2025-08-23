@@ -1,8 +1,8 @@
 import { AttackModel, CardHooksModel, HealthModel, MinionCardModel, RoleModel } from "hearthstone-core";
 import { ShatteredSunClericBattlecryModel } from "./battlecry";
 
-export class ShatteredSunClericCardModel extends MinionCardModel {
-    constructor(props: ShatteredSunClericCardModel['props']) {
+export class ShatteredSunClericModel extends MinionCardModel {
+    constructor(props: ShatteredSunClericModel['props']) {
         super({
             uuid: props.uuid,
             state: {

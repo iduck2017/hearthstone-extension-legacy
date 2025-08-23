@@ -6,8 +6,8 @@
 
 import { GameModel, BoardModel, HandModel, MageModel, PlayerModel, TimeUtil, SelectUtil } from "hearthstone-core";
 import { HungryCrabModel } from "../src/hungry-crab";
-import { WispCardModel } from "../src/wisp";
-import { MurlocRaiderCardModel } from "../src/murloc-raider";
+import { WispModel } from "../src/wisp";
+import { MurlocRaiderCard } from "../src/murloc-raider";
 import { boot } from "./boot";
 import { DebugUtil, LogLevel } from "set-piece";
 
@@ -19,7 +19,7 @@ describe('hungry-crab', () => {
                 child: {
                     hero: new MageModel({}),
                     board: new BoardModel({
-                        child: { cards: [new WispCardModel({})] }
+                        child: { cards: [new WispModel({})] }
                     }),
                     hand: new HandModel({
                         child: { cards: [new HungryCrabModel({})] }
@@ -32,7 +32,7 @@ describe('hungry-crab', () => {
                     hand: new HandModel({
                         child: { cards: [
                             new HungryCrabModel({}),
-                            new MurlocRaiderCardModel({})
+                            new MurlocRaiderCard({})
                         ]}
                     })
                 }
@@ -74,7 +74,7 @@ describe('hungry-crab', () => {
         const handB = game.child.playerB.child.hand;
         const boardB = game.child.playerB.child.board;
         const cardA = handB.child.cards.find(item => item instanceof HungryCrabModel);
-        const cardB = handB.child.cards.find(item => item instanceof MurlocRaiderCardModel);
+        const cardB = handB.child.cards.find(item => item instanceof MurlocRaiderCard);
         expect(cardA).toBeDefined();
         expect(cardB).toBeDefined();
         if (!cardA) return;

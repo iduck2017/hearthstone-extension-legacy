@@ -1,8 +1,8 @@
 import { HealthModel, AttackModel, RaceType, FeaturesModel, RoleModel, MinionCardModel } from "hearthstone-core";
 import { LightwardenFeatureModel } from "./feature";
 
-export class LightwardenCardModel extends MinionCardModel {
-    constructor(props: LightwardenCardModel['props']) {
+export class LightwardenModel extends MinionCardModel {
+    constructor(props: LightwardenModel['props']) {
         super({
             uuid: props.uuid,
             state: {
