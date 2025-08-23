@@ -24,7 +24,7 @@ export class AngryChickenFeatureModel extends FeatureModel<
                 name: 'Angry Chicken\'s Buff',
                 desc: 'Has +5 Attack while damaged.',
                 attack: 5,
-                isActive: true,
+                status: 1,
                 ...props.state,
             },
             child: { ...props.child },
@@ -48,15 +48,11 @@ export class AngryChickenFeatureModel extends FeatureModel<
         const health = role.child.health;
         const isEnrage = health.state.current < health.state.limit;
         if (!isEnrage) return state;
-        if (!this.state.isActive) return state;
+        if (!this.state.status) return state;
         return {
             ...state,
             origin: state.origin + this.state.attack,
         }
     }
 
-    @TranxUtil.span()
-    protected doDisable(): void {
-        this.reload();
-    }
 }

@@ -54,7 +54,7 @@ describe('worgen-infiltrator', () => {
         
         expect(boardA.child.cards.length).toBe(1);
         expect(boardB.child.cards.length).toBe(1);
-        expect(roleB.child.entries.child.stealth.state.isActive).toBe(true);
+        expect(roleB.child.entries.child.stealth.state.status).toBe(1);
         
         // Wisp attacks, can only attack hero due to stealth
         let promise = roleA.child.action.run();
@@ -82,7 +82,7 @@ describe('worgen-infiltrator', () => {
         const roleB = cardB.child.role;
         const heroA = game.child.playerA.child.hero.child.role;
         
-        expect(roleB.child.entries.child.stealth.state.isActive).toBe(true);
+        expect(roleB.child.entries.child.stealth.state.status).toBe(1);
         
         // Worgen attacks hero, stealth disappears
         let promise = roleB.child.action.run();
@@ -93,7 +93,7 @@ describe('worgen-infiltrator', () => {
         SelectUtil.set(heroA);
         await promise;
         
-        expect(roleB.child.entries.child.stealth.state.isActive).toBe(false);
+        expect(roleB.child.entries.child.stealth.state.status).toBe(0);
         expect(heroA.state.health).toBe(28);
     })
 
@@ -111,7 +111,7 @@ describe('worgen-infiltrator', () => {
         const roleB = cardB.child.role;
         const heroB = game.child.playerB.child.hero.child.role;
         
-        expect(roleB.child.entries.child.stealth.state.isActive).toBe(false);
+        expect(roleB.child.entries.child.stealth.state.status).toBe(0);
         
         // Wisp can now attack Worgen
         let promise = roleA.child.action.run();

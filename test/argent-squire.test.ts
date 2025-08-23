@@ -42,16 +42,16 @@ describe('argent-squire', () => {
         // Divine Shield blocks the damage, so no health is lost
         expect(roleA.state.health).toBe(1);
         expect(roleB.state.health).toBe(1);
-        expect(roleA.child.entries.child.divineShield.state.isActive).toBe(true);
-        expect(roleB.child.entries.child.divineShield.state.isActive).toBe(true);
+        expect(roleA.child.entries.child.divineShield.state.status).toBe(1);
+        expect(roleB.child.entries.child.divineShield.state.status).toBe(1);
         const promise = roleA.child.action.run();
         expect(SelectUtil.current?.options).toContain(roleB);
         SelectUtil.set(roleB);
         await promise;
         expect(roleA.state.health).toBe(1);
         expect(roleB.state.health).toBe(1);
-        expect(roleA.child.entries.child.divineShield.state.isActive).toBe(false);
-        expect(roleB.child.entries.child.divineShield.state.isActive).toBe(false);
+        expect(roleA.child.entries.child.divineShield.state.status).toBe(0);
+        expect(roleB.child.entries.child.divineShield.state.status).toBe(0);
         expect(roleA.child.death.state.status).toBe(DeathStatus.INACTIVE);
         expect(roleB.child.death.state.status).toBe(DeathStatus.INACTIVE);
     })

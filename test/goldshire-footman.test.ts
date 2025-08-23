@@ -49,7 +49,7 @@ describe('goldshire-footman', () => {
         const heroB = game.child.playerB.child.hero.child.role;
         // Initial state verification
         expect(roleA.state.action).toBe(1); // Wisp has action point
-        expect(roleB.child.entries.child.taunt.state.isActive).toBe(true);
+        expect(roleB.child.entries.child.taunt.state.status).toBe(1);
         const promise = roleA.child.action.run();
         await TimeUtil.sleep();
         expect(SelectUtil.current?.options).toContain(roleB);

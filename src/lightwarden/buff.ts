@@ -9,7 +9,6 @@ export class LightwardenBuffModel extends BuffModel {
                 desc: '+2 Attack',
                 attack: 2,
                 health: 0,
-                isActive: true,
                 ...props.state,
             },
             child: { ...props.child },

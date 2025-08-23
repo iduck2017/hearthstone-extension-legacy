@@ -18,7 +18,7 @@ export class ShieldbearerCardModel extends MinionCardModel {
                         health: new HealthModel({ state: { origin: 4 }}),  
                         entries: new RoleEntriesModel({
                             child: {
-                                taunt: new TauntModel({ state: { isActive: true }})
+                                taunt: new TauntModel({})
                             }
                         })
                     },

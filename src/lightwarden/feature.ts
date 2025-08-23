@@ -2,9 +2,7 @@ import { FeatureModel } from "hearthstone-core";
 
 export namespace LightwardenFeatureModel {
     export type Event = {};
-    export type State = {
-        isActive: boolean;
-    };
+    export type State = {};
     export type Child = {};
     export type Refer = {};
 }
@@ -21,7 +19,7 @@ export class LightwardenFeatureModel extends FeatureModel<
             state: {
                 name: 'Lightwarden\'s Feature',
                 desc: 'At the end of your turn, give a random friendly minion +1/+1.',
-                isActive: true,
+                status: 1,
                 ...props.state,
             },
             child: { ...props.child },
@@ -29,5 +27,4 @@ export class LightwardenFeatureModel extends FeatureModel<
         });
     }
 
-    public doDisable(): void {}
 }

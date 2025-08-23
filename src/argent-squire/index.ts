@@ -18,9 +18,7 @@ export class ArgentSquireModel extends MinionCardModel {
                         health: new HealthModel({ state: { origin: 1 }}),   
                         entries: new RoleEntriesModel({ 
                             child: { 
-                                divineShield: new DivineSheildModel({
-                                    state: { isActive: true }
-                                })
+                                divineShield: new DivineSheildModel({})
                             }
                         })
                     }

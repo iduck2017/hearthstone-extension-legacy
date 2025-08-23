@@ -8,7 +8,7 @@ export class MurlocTidecallerFeatureModel extends FeatureModel {
             state: {
                 name: 'Murloc Tidecaller',
                 desc: 'Whenever your summon a murloc, gain +1 Attack.',
-                isActive: true,
+                status: 1,
             },
             child: {},
             refer: {}
@@ -18,9 +18,5 @@ export class MurlocTidecallerFeatureModel extends FeatureModel {
     @EventUtil.on(self => self.route.player?.proxy.child.board.child.cards.event.onSummon)
     private onSummon(that: MinionCardModel, event: {}) {
         if (!this.route.board) return;
-    }
-
-    protected doDisable(): void {
-        this.reload();
     }
 }

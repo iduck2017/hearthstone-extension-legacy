@@ -20,7 +20,7 @@ export class GrimscaleOracleFeatureModel extends FeatureModel<
                 name: 'Grimscale Oracle\'s Aura',
                 desc: 'Your other Murlocs have +1 Attack.',
                 offset: 1,
-                isActive: true,
+                status: 1,
                 ...props.state
             },
             child: { ...props.child },
@@ -36,7 +36,7 @@ export class GrimscaleOracleFeatureModel extends FeatureModel<
         state: DeepReadonly<AttackModel.State>
     ) {
         if (!this.route.board) return state;
-        if (!this.state.isActive) return state;
+        if (!this.state.status) return state;
         const card = that.route.card;
         const role = that.route.role;
         if (this.route.role === role) return state;
@@ -47,8 +47,4 @@ export class GrimscaleOracleFeatureModel extends FeatureModel<
         }
     }
 
-    @TranxUtil.span()
-    protected doDisable(): void {
-        this.reload();
-    }
 }

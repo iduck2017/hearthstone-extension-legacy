@@ -91,7 +91,6 @@ describe('voodoo-doctor', () => {
         expect(SelectUtil.current?.options).toContain(0);
         SelectUtil.set(0);
         await TimeUtil.sleep();
-        console.log(SelectUtil.current);
         expect(SelectUtil.current?.options).toContain(roleA);
         expect(SelectUtil.current?.options).toContain(roleB);
         expect(SelectUtil.current?.options).toContain(heroA);

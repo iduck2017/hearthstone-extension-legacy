@@ -18,7 +18,7 @@ export class GoldshireFootmanModel extends MinionCardModel {
                         health: new HealthModel({ state: { origin: 2 }}),   
                         entries: new RoleEntriesModel({
                             child: {
-                                taunt: new TauntModel({ state: { isActive: true }})
+                                taunt: new TauntModel({})
                             }
                         })  
                     }

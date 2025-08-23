@@ -9,7 +9,6 @@ export class ShatteredSunClericBuffModel extends BuffModel {
                 desc: '+1/+1',
                 attack: 1,
                 health: 1,
-                isActive: true,
                 ...props.state,
             },
             child: { ...props.child },

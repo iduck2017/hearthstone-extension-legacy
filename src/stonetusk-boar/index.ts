@@ -18,7 +18,7 @@ export class StonetuskBoarCardModel extends MinionCardModel {
                         health: new HealthModel({ state: { origin: 1 }}),
                         entries: new RoleEntriesModel({
                             child: {
-                                charge: new ChargeModel({ state: { isActive: true }})
+                                charge: new ChargeModel({})
                             }
                         })
                     },
