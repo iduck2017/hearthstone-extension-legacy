@@ -9,7 +9,9 @@ import { GameModel, PlayerModel, MageModel, BoardModel, TimeUtil, SelectUtil } f
 import { GoldshireFootmanModel } from "../src/goldshire-footman";
 import { WispCardModel } from "../src/wisp";
 import { boot } from "./boot";
+import { DebugUtil, LogLevel } from "set-piece";
 
+DebugUtil.level = LogLevel.ERROR;
 describe('goldshire-footman', () => {
     const game = new GameModel({
         child: {
@@ -48,7 +50,7 @@ describe('goldshire-footman', () => {
         // Initial state verification
         expect(roleA.state.action).toBe(1); // Wisp has action point
         expect(roleB.child.entries.child.taunt.state.isActive).toBe(true);
-        const promise = roleA.child.attack.run();
+        const promise = roleA.child.action.run();
         await TimeUtil.sleep();
         expect(SelectUtil.current?.options).toContain(roleB);
         expect(SelectUtil.current?.options).not.toContain(heroB);

@@ -63,7 +63,7 @@ describe('wisp', () => {
         if (!roleA || !roleB) return;
         game.child.turn.next();
         expect(roleB.state.action).toBe(1);
-        const promise = roleB.child.attack.run();
+        const promise = roleB.child.action.run();
         await TimeUtil.sleep();
         expect(SelectUtil.current).toBeDefined();
         expect(SelectUtil.current?.options).toContain(roleA);

@@ -1,6 +1,6 @@
 import { DebugUtil, LogLevel, RouteUtil } from "set-piece";
 import { AngryChickenModel } from "../src/angry-chicken";
-import { GameModel, PlayerModel, MageModel, BoardModel, SelectUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, SelectUtil, TimeUtil } from "hearthstone-core";
 import { boot } from "./boot";
 
 DebugUtil.level = LogLevel.ERROR;
@@ -55,7 +55,8 @@ describe('angry-chicken', () => {
         if (!cardB) return;
         const roleA = cardA.child.role;
         const roleB = cardB.child.role;
-        const promise = roleA.child.attack.run();
+        const promise = roleA.child.action.run();
+        await TimeUtil.sleep();
         expect(SelectUtil.current).toBeDefined();
         expect(SelectUtil.current?.options).toContain(roleB);
         SelectUtil.set(roleB);

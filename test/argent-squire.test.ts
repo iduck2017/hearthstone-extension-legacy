@@ -1,7 +1,9 @@
 import { GameModel, PlayerModel, MageModel, BoardModel, SelectUtil } from "hearthstone-core";
 import { ArgentSquireModel } from "../src/argent-squire";
 import { boot } from "./boot";
+import { DebugUtil, LogLevel } from "set-piece";
 
+DebugUtil.level = LogLevel.ERROR;
 describe('argent-squire', () => {
     const game = new GameModel({
         child: {
@@ -42,7 +44,7 @@ describe('argent-squire', () => {
         expect(roleB.state.health).toBe(1);
         expect(roleA.child.entries.child.divineShield.state.isActive).toBe(true);
         expect(roleB.child.entries.child.divineShield.state.isActive).toBe(true);
-        const promise = roleA.child.attack.run();
+        const promise = roleA.child.action.run();
         expect(SelectUtil.current?.options).toContain(roleB);
         SelectUtil.set(roleB);
         await promise;

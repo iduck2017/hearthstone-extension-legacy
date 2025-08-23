@@ -2,7 +2,9 @@ import { GameModel, BoardModel, HandModel, MageModel, PlayerModel, TimeUtil, Sel
 import { ShatteredSunClericCardModel } from "../src/shattered-sun-cleric";
 import { WispCardModel } from "../src/wisp";
 import { boot } from "./boot";
+import { DebugUtil, LogLevel } from "set-piece";
 
+DebugUtil.level = LogLevel.ERROR;
 describe('shattered-sun-cleric', () => {
     const game = boot(new GameModel({
         child: {
@@ -113,7 +115,7 @@ describe('shattered-sun-cleric', () => {
         const roleB = cardB.child.role;
         const heroB = game.child.playerB.child.hero.child.role;
         expect(turn.refer.current).toBe(game.child.playerA);
-        let promise = roleA.child.attack.run();
+        let promise = roleA.child.action.run();
         await TimeUtil.sleep();
         expect(SelectUtil.current?.options).toContain(roleB);
         expect(SelectUtil.current?.options).toContain(heroB);

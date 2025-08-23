@@ -10,7 +10,9 @@ import { GameModel, PlayerModel, MageModel, HandModel, BoardModel, SelectUtil, T
 import { EmeraldSkytalonModel } from "../src/emerald-skytalon";
 import { WispCardModel } from "../src/wisp";
 import { boot } from "./boot";
+import { DebugUtil, LogLevel } from "set-piece";
 
+DebugUtil.level = LogLevel.ERROR;
 describe('emerald-skytalon', () => {
     const game = new GameModel({
         child: {
@@ -63,7 +65,7 @@ describe('emerald-skytalon', () => {
         expect(roleA.state.action).toBe(1);
         expect(roleA.child.sleep.state.isActive).toBe(false);
         expect(roleA.child.entries.child.rush.state.isActive).toBe(RushStatus.ACTIVE);
-        promise = roleA.child.attack.run()
+        promise = roleA.child.action.run()
         await TimeUtil.sleep();
         expect(SelectUtil.current?.options).toContain(roleB);
         expect(SelectUtil.current?.options).not.toContain(playerB);
@@ -92,7 +94,7 @@ describe('emerald-skytalon', () => {
         expect(roleA.state.action).toBe(1);
         expect(roleA.child.sleep.state.isActive).toBe(true);
         expect(roleA.child.entries.child.rush.state.isActive).toBe(RushStatus.INACTIVE);
-        promise = roleA.child.attack.run();
+        promise = roleA.child.action.run();
         await TimeUtil.sleep();
         expect(SelectUtil.current).toBeUndefined();
     })
@@ -127,7 +129,7 @@ describe('emerald-skytalon', () => {
         expect(roleB.child.sleep.state.isActive).toBe(false);
         expect(roleB.state.action).toBe(1);
         expect(roleB.child.entries.child.rush.state.isActive).toBe(RushStatus.INACTIVE);
-        let promise = roleA.child.attack.run();
+        let promise = roleA.child.action.run();
         await TimeUtil.sleep();
         const heroB = playerB.child.hero.child.role;
         expect(SelectUtil.current?.options).toContain(roleC);
@@ -136,7 +138,7 @@ describe('emerald-skytalon', () => {
         await promise;
         expect(heroB.state.health).toBe(28);
         expect(roleA.state.action).toBe(0);
-        promise = roleB.child.attack.run();
+        promise = roleB.child.action.run();
         await TimeUtil.sleep();
         expect(SelectUtil.current?.options).toContain(roleC);
         expect(SelectUtil.current?.options).toContain(heroB);

@@ -11,7 +11,9 @@ import { GrimscaleOracleModel } from "../src/grimscale-oracle";
 import { MurlocRaiderCardModel } from "../src/murloc-raider";
 import { WispCardModel } from "../src/wisp";
 import { boot } from "./boot";
+import { DebugUtil, LogLevel } from "set-piece";
 
+DebugUtil.level = LogLevel.ERROR;
 describe('grimscale-oracle', () => {
     const game = new GameModel({
         child: {
@@ -114,7 +116,7 @@ describe('grimscale-oracle', () => {
         game.child.turn.next();
         expect(game.child.turn.refer.current).toBe(game.child.playerB);
         expect(roleZ.state.action).toBe(1);
-        const promise = roleZ.child.attack.run();
+        const promise = roleZ.child.action.run();
         await TimeUtil.sleep();
         expect(SelectUtil.current).toBeDefined();
         expect(SelectUtil.current?.options.length).toBe(4);
