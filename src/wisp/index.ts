@@ -1,4 +1,4 @@
-import { AttackModel, ClassType, HealthModel, MinionModel, RaceType, RarityType, RoleModel } from "hearthstone-core";
+import { AttackModel, ClassType, CostModel, HealthModel, MinionModel, RaceType, RarityType, RoleModel } from "hearthstone-core";
 import { StoreUtil } from "set-piece";
 
 @StoreUtil.is('wisp-card')
@@ -9,7 +9,6 @@ export class WispModel extends MinionModel {
             state: {
                 name: 'Wisp',
                 desc: '',
-                mana: 0,
                 races: [RaceType.UNDEAD],
                 flavorDesc: '',
                 rarity: RarityType.COMMON,
@@ -17,6 +16,7 @@ export class WispModel extends MinionModel {
                 ...props.state,
             },
             child: { 
+                cost: new CostModel({ state: { origin: 0 }}),
                 role: new RoleModel({
                     child: {
                         attack: new AttackModel({ state: { origin: 1 }}),

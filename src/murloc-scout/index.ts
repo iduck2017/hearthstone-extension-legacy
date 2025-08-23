@@ -2,6 +2,7 @@
 // Type: Minion, Minion Type: Murloc
 
 import { AttackModel, ClassType, HealthModel, MinionModel, RaceType, RarityType, RoleModel } from "hearthstone-core";
+import { CostModel } from "hearthstone-core";
 
 export class MurlocScoutModel extends MinionModel {
     constructor(props: MurlocScoutModel['props']) {
@@ -10,7 +11,6 @@ export class MurlocScoutModel extends MinionModel {
             state: {
                 name: 'Murloc Scout',
                 desc: '',
-                mana: 1,
                 races: [RaceType.MURLOC],
                 flavorDesc: '',
                 rarity: RarityType.COMMON,
@@ -18,6 +18,7 @@ export class MurlocScoutModel extends MinionModel {
                 ...props.state
             },
             child: {
+                cost: new CostModel({ state: { origin: 1 }}),
                 role: new RoleModel({
                     child: {
                         attack: new AttackModel({ state: { origin: 1 }}),

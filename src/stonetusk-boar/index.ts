@@ -1,4 +1,5 @@
 import { ChargeModel, HealthModel, AttackModel, MinionModel, RaceType, RoleModel, RoleEntriesModel, ClassType, RarityType } from "hearthstone-core";
+import { CostModel } from "hearthstone-core";
 
 export class StonetuskBoarModel extends MinionModel {
     constructor(props: StonetuskBoarModel['props']) {
@@ -7,7 +8,6 @@ export class StonetuskBoarModel extends MinionModel {
             state: {
                 name: 'Stonetusk Boar',
                 desc: 'Charge',
-                mana: 1,
                 races: [RaceType.BEAST],
                 flavorDesc: '',
                 rarity: RarityType.COMMON,
@@ -15,6 +15,7 @@ export class StonetuskBoarModel extends MinionModel {
                 ...props.state,
             },
             child: {
+                cost: new CostModel({ state: { origin: 1 }}),
                 role: new RoleModel({
                     child: {
                         attack: new AttackModel({ state: { origin: 1 }}),

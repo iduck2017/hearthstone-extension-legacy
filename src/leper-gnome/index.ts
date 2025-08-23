@@ -1,5 +1,6 @@
 import { AttackModel, CardHooksModel, ClassType, HealthModel, MinionModel, RarityType, RoleModel } from "hearthstone-core";
 import { LeperGnomeDeathrattleModel } from "./deathrattle";
+import { CostModel } from "hearthstone-core";
 
 export class LeperGnomeModel extends MinionModel {
     constructor(props: LeperGnomeModel['props']) {
@@ -8,7 +9,6 @@ export class LeperGnomeModel extends MinionModel {
             state: {
                 name: 'Leper Gnome',
                 desc: 'Deathrattle: Deal 2 damage to the enemy hero.',
-                mana: 1,
                 races: [],
                 flavorDesc: '',
                 rarity: RarityType.COMMON,
@@ -16,6 +16,7 @@ export class LeperGnomeModel extends MinionModel {
                 ...props.state
             },
             child: {
+                cost: new CostModel({ state: { origin: 1 }}),
                 role: new RoleModel({
                     child: {
                         health: new HealthModel({ state: { origin: 1 }}),

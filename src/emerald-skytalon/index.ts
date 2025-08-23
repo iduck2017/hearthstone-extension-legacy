@@ -1,4 +1,5 @@
 import { AttackModel, ClassType, HealthModel, MinionModel,RarityType,  RaceType, RoleEntriesModel, RoleModel, RushModel, RushStatus } from "hearthstone-core";
+import { CostModel } from "hearthstone-core";
 
 export class EmeraldSkytalonModel extends MinionModel {
     constructor(props: EmeraldSkytalonModel['props']) {
@@ -7,7 +8,6 @@ export class EmeraldSkytalonModel extends MinionModel {
             state: {
                 name: 'Emerald Skytalon',
                 desc: 'Rush',
-                mana: 1,
                 races: [RaceType.BEAST, RaceType.ELEMENTAL],
                 flavorDesc: '',
                 rarity: RarityType.COMMON,
@@ -15,6 +15,7 @@ export class EmeraldSkytalonModel extends MinionModel {
                 ...props.state,
             },
             child: {
+                cost: new CostModel({ state: { origin: 1 }}),
                 role: new RoleModel({
                     child: {
                         attack: new AttackModel({ state: { origin: 2 }}),

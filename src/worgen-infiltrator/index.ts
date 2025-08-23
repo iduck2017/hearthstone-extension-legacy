@@ -1,4 +1,4 @@
-import { AttackModel, ClassType, HealthModel, MinionModel, RarityType, RoleEntriesModel, RoleModel, StealthModel } from "hearthstone-core";
+import { AttackModel, ClassType, CostModel, HealthModel, MinionModel, RarityType, RoleEntriesModel, RoleModel, StealthModel } from "hearthstone-core";
 
 export class WorgenInfiltratorModel extends MinionModel {
     constructor(props: WorgenInfiltratorModel['props']) {
@@ -7,7 +7,6 @@ export class WorgenInfiltratorModel extends MinionModel {
             state: {
                 name: 'Worgen Infiltrator',
                 desc: 'Stealth',
-                mana: 1,
                 races: [],
                 flavorDesc: '',
                 rarity: RarityType.COMMON,
@@ -15,6 +14,7 @@ export class WorgenInfiltratorModel extends MinionModel {
                 ...props.state,
             },
             child: {
+                cost: new CostModel({ state: { origin: 1 }}),
                 role: new RoleModel({
                     child: {
                         attack: new AttackModel({ state: { origin: 2 }}),

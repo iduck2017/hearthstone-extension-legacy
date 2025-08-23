@@ -1,5 +1,6 @@
 import { AttackModel, ClassType, FeaturesModel, HealthModel, MinionModel, RaceType, RarityType, RoleModel } from "hearthstone-core";
 import { MurlocTidecallerFeatureModel } from "./feature";
+import { CostModel } from "hearthstone-core";
 
 export class MurlocTidecallerModel extends MinionModel {
     constructor(props: MurlocTidecallerModel['props']) {
@@ -8,7 +9,6 @@ export class MurlocTidecallerModel extends MinionModel {
             state: {
                 name: 'Murloc Tidecaller',
                 desc: 'Whenever your summon a Murloc, gain +1 Attack.',
-                mana: 1,
                 races: [RaceType.MURLOC],
                 flavorDesc: '',
                 rarity: RarityType.RARE,
@@ -16,6 +16,7 @@ export class MurlocTidecallerModel extends MinionModel {
                 ...props.state,
             },
             child: {
+                cost: new CostModel({ state: { origin: 1 }}),
                 role: new RoleModel({
                     child: {
                         attack: new AttackModel({ state: { origin: 1 }}),

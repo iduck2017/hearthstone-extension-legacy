@@ -1,4 +1,5 @@
 import { AttackModel, ClassType, HealthModel, MinionModel, RarityType, RoleEntriesModel, RoleModel, TauntModel } from "hearthstone-core";
+import { CostModel } from "hearthstone-core";
 
 export class GoldshireFootmanModel extends MinionModel {
     constructor(props: GoldshireFootmanModel['props']) {
@@ -7,7 +8,6 @@ export class GoldshireFootmanModel extends MinionModel {
             state: {
                 name: 'Goldshire Footman',
                 desc: 'Taunt',
-                mana: 1,
                 races: [],
                 flavorDesc: '',
                 rarity: RarityType.COMMON,
@@ -15,6 +15,7 @@ export class GoldshireFootmanModel extends MinionModel {
                 ...props.state
             },
             child: {
+                cost: new CostModel({ state: { origin: 1 }}),
                 role: new RoleModel({
                     child: {
                         attack: new AttackModel({ state: { origin: 1 }}),

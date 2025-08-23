@@ -1,5 +1,6 @@
 import { MinionModel, FeatureModel, HealthModel, AttackModel, RoleModel, CardHooksModel, ClassType, RarityType } from "hearthstone-core";
 import { ElvenArcherBattlecryModel } from "./battlecry";
+import { CostModel } from "hearthstone-core";
 
 export class ElvenArcherModel extends MinionModel {
     constructor(props: ElvenArcherModel['props']) {
@@ -8,7 +9,6 @@ export class ElvenArcherModel extends MinionModel {
             state: {
                 name: 'Elven Archer',
                 desc: 'Battlecry: Deal 1 damage.',
-                mana: 1,
                 races: [],
                 flavorDesc: '',
                 rarity: RarityType.COMMON,
@@ -16,6 +16,7 @@ export class ElvenArcherModel extends MinionModel {
                 ...props.state,
             },
             child: {
+                cost: new CostModel({ state: { origin: 1 }}),
                 role: new RoleModel({
                     child: {
                         attack: new AttackModel({ state: { origin: 1 }}),

@@ -1,4 +1,4 @@
-import { HealthModel, AttackModel, WindfuryModel, RoleEntriesModel, MinionModel, RaceType, RoleModel, WindfuryStatus, ClassType, RarityType } from "hearthstone-core";
+import { HealthModel, AttackModel, WindfuryModel, RoleEntriesModel, MinionModel, RaceType, RoleModel, WindfuryStatus, ClassType, RarityType, CostModel } from "hearthstone-core";
 
 export class YoungDragonhawkModel extends MinionModel {
     constructor(props: YoungDragonhawkModel['props']) {
@@ -7,7 +7,6 @@ export class YoungDragonhawkModel extends MinionModel {
             state: {
                 name: 'Young Dragonhawk',
                 desc: 'Windfury',
-                mana: 1,
                 races: [RaceType.BEAST],
                 flavorDesc: '',
                 rarity: RarityType.COMMON,
@@ -15,6 +14,7 @@ export class YoungDragonhawkModel extends MinionModel {
                 ...props.state,
             },
             child: {
+                cost: new CostModel({ state: { origin: 1 }}),
                 role: new RoleModel({
                     child: {
                         attack: new AttackModel({ state: { origin: 1 }}),

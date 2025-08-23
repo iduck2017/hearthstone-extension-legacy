@@ -1,5 +1,6 @@
 import { AttackModel, CardHooksModel, ClassType, HealthModel, MinionModel, RarityType, RoleModel } from "hearthstone-core";
 import { ShatteredSunClericBattlecryModel } from "./battlecry";
+import { CostModel } from "hearthstone-core";
 
 export class ShatteredSunClericModel extends MinionModel {
     constructor(props: ShatteredSunClericModel['props']) {
@@ -8,7 +9,6 @@ export class ShatteredSunClericModel extends MinionModel {
             state: {
                 name: 'Shattered Sun Cleric',
                 desc: 'Battlecry: Give a friendly minion +1/+1.',
-                mana: 2,
                 races: [],
                 flavorDesc: '',
                 rarity: RarityType.COMMON,
@@ -16,6 +16,7 @@ export class ShatteredSunClericModel extends MinionModel {
                 ...props.state,
             },
             child: {
+                cost: new CostModel({ state: { origin: 2 }}),
                 role: new RoleModel({
                     child: {
                         attack: new AttackModel({ state: { origin: 3 }}),

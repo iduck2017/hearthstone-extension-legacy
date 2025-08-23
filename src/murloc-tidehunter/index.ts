@@ -3,6 +3,7 @@
 
 import { AttackModel, CardHooksModel, ClassType, HealthModel, MinionModel, RaceType, RarityType, RoleModel } from "hearthstone-core";
 import { MurlocTidehunterBattlecryModel } from "./battlecry";
+import { CostModel } from "hearthstone-core";
 
 export class MurlocTidehunterModel extends MinionModel {
     constructor(props: MurlocTidehunterModel['props']) {
@@ -11,7 +12,6 @@ export class MurlocTidehunterModel extends MinionModel {
             state: {
                 name: 'Murloc Tidehunter',
                 desc: 'Battlecry: Summon a 1/1 Murloc Scout.',
-                mana: 2,
                 races: [RaceType.MURLOC],
                 flavorDesc: '',
                 rarity: RarityType.COMMON,
@@ -19,6 +19,7 @@ export class MurlocTidehunterModel extends MinionModel {
                 ...props.state
             },
             child: {
+                cost: new CostModel({ state: { origin: 2 }}),
                 role: new RoleModel({
                     child: {
                         attack: new AttackModel({ state: { origin: 2 }}),
