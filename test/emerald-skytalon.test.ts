@@ -61,7 +61,7 @@ describe('emerald-skytalon', () => {
         expect(roleA.state.attack).toBe(2);
         expect(roleA.state.health).toBe(1);
         expect(roleA.state.action).toBe(1);
-        expect(roleA.child.sleep.state.isActive).toBe(false);
+        expect(roleA.child.sleep.state.status).toBe(false);
         expect(roleA.child.entries.child.rush.state.status).toBe(RushStatus.ACTIVE);
         promise = roleA.child.action.run()
         await TimeUtil.sleep();
@@ -90,7 +90,7 @@ describe('emerald-skytalon', () => {
         await promise;
         expect(boardA.child.cards.length).toBe(2);
         expect(roleA.state.action).toBe(1);
-        expect(roleA.child.sleep.state.isActive).toBe(true);
+        expect(roleA.child.sleep.state.status).toBe(true);
         expect(roleA.child.entries.child.rush.state.status).toBe(RushStatus.INACTIVE);
         promise = roleA.child.action.run();
         await TimeUtil.sleep();
@@ -121,10 +121,10 @@ describe('emerald-skytalon', () => {
         const roleA = cardA.child.role;
         const roleB = cardB.child.role;
         const roleC = cardC.child.role;
-        expect(roleA.child.sleep.state.isActive).toBe(false);
+        expect(roleA.child.sleep.state.status).toBe(false);
         expect(roleA.state.action).toBe(1);
         expect(roleA.child.entries.child.rush.state.status).toBe(RushStatus.ACTIVE_ONCE);
-        expect(roleB.child.sleep.state.isActive).toBe(false);
+        expect(roleB.child.sleep.state.status).toBe(false);
         expect(roleB.state.action).toBe(1);
         expect(roleB.child.entries.child.rush.state.status).toBe(RushStatus.INACTIVE);
         let promise = roleA.child.action.run();

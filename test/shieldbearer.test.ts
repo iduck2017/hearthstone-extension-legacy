@@ -73,7 +73,7 @@ describe('shieldbearer', () => {
         const promise = role.child.action.run();
         expect(role.state.attack).toBe(0);
         expect(role.state.action).toBe(1);
-        expect(role.child.sleep.state.isActive).toBe(false);
+        expect(role.child.sleep.state.status).toBe(false);
         await TimeUtil.sleep();
         expect(SelectUtil.current).toBeUndefined();
         await promise;

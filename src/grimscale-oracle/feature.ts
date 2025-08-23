@@ -41,10 +41,9 @@ export class GrimscaleOracleFeatureModel extends FeatureModel<
         const role = that.route.role;
         if (this.route.role === role) return state;
         if (!card?.state.races.includes(RaceType.MURLOC)) return state;
-        return {
-            ...state,
-            offset: state.offset + this.state.offset,
-        }
+        const result = { ...state };
+        result.offset = state.offset + this.state.offset;
+        return result;
     }
 
 }

@@ -51,9 +51,8 @@ export class AmaniBerserkerFeatureModel extends FeatureModel<
         const isEnrage = health.state.current < health.state.limit;
         if (!isEnrage) return state;
         if (!this.state.status) return state;
-        return {
-            ...state,
-            offset: state.offset + this.state.attack,
-        }
+        const result = { ...state };
+        result.offset = state.offset + this.state.attack;
+        return result;
     }
 } 
