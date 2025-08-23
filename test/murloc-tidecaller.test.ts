@@ -42,7 +42,7 @@ describe('murloc-tidecaller', () => {
         }
     }));
 
-    test('summon', async () => {
+    test('murloc-raider-summon-no-buff', async () => {
         const handA = game.child.playerA.child.hand;
         const cardA = handA.child.cards.find(item => item instanceof MurlocRaiderCard);
         const cardB = handA.child.cards.find(item => item instanceof MurlocTidecallerModel);
@@ -69,7 +69,7 @@ describe('murloc-tidecaller', () => {
         expect(roleB.child.attack.state.offset).toBe(0);
     })
 
-    test('trigger', async () => {
+    test('murloc-tidehunter-summon-buffs-tidecaller', async () => {
         const handA = game.child.playerA.child.hand;
         const boardA = game.child.playerA.child.board;
         const cardA = handA.child.cards.find(item => item instanceof MurlocTidecallerModel);
@@ -109,7 +109,7 @@ describe('murloc-tidecaller', () => {
         expect(roleA.child.features.child.items.length).toBe(3);
     })
 
-    test('opponent-summon', async () => {
+    test('opponent-murloc-summon-no-buff', async () => {
         const turn = game.child.turn;
         turn.next();
         const boardA = game.child.playerA.child.board;

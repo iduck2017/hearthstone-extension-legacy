@@ -25,7 +25,7 @@ describe('angry-chicken', () => {
     })
     boot(game);
 
-    test('init', async () => {
+    test('angry-chicken-initial-stats', async () => {
         const boardA = game.child.playerA.child.board;
         const boardB = game.child.playerB.child.board;
         const cardA = boardA.child.cards.find(item => item instanceof AngryChickenModel);
@@ -42,7 +42,7 @@ describe('angry-chicken', () => {
         expect(roleB.state.health).toBe(1);
     })
 
-    test('buff', async () => {
+    test('angry-chicken-attacks-and-gains-buff', async () => {
         const boardA = game.child.playerA.child.board;
         const boardB = game.child.playerB.child.board;
         const cardA = boardA.child.cards.find(item => item instanceof AngryChickenModel);

@@ -36,7 +36,7 @@ describe('murloc-tidehunter', () => {
         }
     }));
 
-    test('battlecry', async () => {
+    test('murloc-tidehunter-battlecry-summons-scout', async () => {
         const boardA = game.child.playerA.child.board;
         const handA = game.child.playerA.child.hand;
         const cardA = handA.child.cards.find(item => item instanceof MurlocTidehunterModel);

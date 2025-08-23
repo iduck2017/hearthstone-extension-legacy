@@ -31,7 +31,7 @@ describe('abusive-sergeant', () => {
         }
     }));
 
-    test('skip', async () => {
+    test('abusive-sergeant-play-without-target', async () => {
         const handA = game.child.playerA.child.hand;
         const boardA = game.child.playerA.child.board;
         const boardB = game.child.playerB.child.board;
@@ -70,7 +70,7 @@ describe('abusive-sergeant', () => {
         expect(roleB.child.attack.state.origin).toBe(1);
     })
 
-    test('buff', async () => {
+    test('abusive-sergeant-buffs-wisp', async () => {
         const handB = game.child.playerB.child.hand;
         const boardA = game.child.playerA.child.board;
         const boardB = game.child.playerB.child.board;
@@ -118,7 +118,7 @@ describe('abusive-sergeant', () => {
         expect(roleD?.state.attack).toBe(2);
     })
 
-    test('turn-end', async () => {
+    test('buff-expires-at-turn-end', async () => {
         const boardB = game.child.playerB.child.board;
         const cardB = boardB.child.cards.find(item => item instanceof WispModel);
         const roleB = cardB?.child.role;

@@ -38,7 +38,7 @@ describe('hungry-crab', () => {
         }
     }));
 
-    test('no-battlecry', async () => {
+    test('hungry-crab-play-without-murloc', async () => {
         const handA = game.child.playerA.child.hand;
         const boardA = game.child.playerA.child.board;
         const cardA = handA.child.cards.find(item => item instanceof HungryCrabModel);
@@ -66,7 +66,7 @@ describe('hungry-crab', () => {
         expect(roleA.child.health.state.current).toBe(2);
     })
 
-    test('battlecry', async () => {
+    test('hungry-crab-battlecry-destroys-murloc', async () => {
         const turn = game.child.turn;
         turn.next();
         const handB = game.child.playerB.child.hand;

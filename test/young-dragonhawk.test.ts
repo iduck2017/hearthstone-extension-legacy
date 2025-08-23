@@ -35,7 +35,7 @@ describe('young-dragonhawk', () => {
         }
     }));
 
-    test('windfury', async () => {
+    test('young-dragonhawk-windfury-attacks-twice', async () => {
         const boardA = game.child.playerA.child.board;
         const boardB = game.child.playerB.child.board;
         const cardA = boardA.child.cards.find(item => item instanceof YoungDragonhawkModel);

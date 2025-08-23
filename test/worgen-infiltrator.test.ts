@@ -37,7 +37,7 @@ describe('worgen-infiltrator', () => {
         }
     }));
 
-    test('stealth', async () => {
+    test('wisp-cannot-attack-stealthed-worgen', async () => {
         const boardA = game.child.playerA.child.board;
         const boardB = game.child.playerB.child.board;
         const cardA = boardA.child.cards.find(item => item instanceof WispModel);
@@ -66,7 +66,7 @@ describe('worgen-infiltrator', () => {
         expect(heroB.state.health).toBe(29);
     })
 
-    test('deactive', async () => {
+    test('worgen-attacks', async () => {
         const turn = game.child.turn;
         turn.next();
         const boardA = game.child.playerA.child.board;
@@ -95,7 +95,7 @@ describe('worgen-infiltrator', () => {
         expect(heroA.state.health).toBe(28);
     })
 
-    test('no-stealth', async () => {
+    test('wisp-can-attack-worgen', async () => {
         const turn = game.child.turn;
         turn.next();
         const boardA = game.child.playerA.child.board;

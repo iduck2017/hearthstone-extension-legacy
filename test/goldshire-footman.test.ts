@@ -33,7 +33,7 @@ describe('goldshire-footman', () => {
     })
     boot(game);
 
-    test('attack', async () => {
+    test('wisp-attacks-footman-due-to-taunt', async () => {
         const boardA = game.child.playerA.child.board;
         const boardB = game.child.playerB.child.board;
         const playerB = game.child.playerB;

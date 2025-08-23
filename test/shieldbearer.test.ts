@@ -30,7 +30,7 @@ describe('shieldbearer', () => {
     boot(game);
 
 
-    test('attack', async () => {
+    test('wisp-attacks-shieldbearer', async () => {
         const boardA = game.child.playerA.child.board;
         const boardB = game.child.playerB.child.board;
         const cardA = boardA.child.cards.find(item => item instanceof WispModel);
@@ -61,7 +61,7 @@ describe('shieldbearer', () => {
         expect(roleC.child.health.state.damage).toBe(1);
     })
 
-    test('no-action', async () => {
+    test('shieldbearer-cannot-attack', async () => {
         const turn = game.child.turn;
         turn.next();
         const boardA = game.child.playerA.child.board;

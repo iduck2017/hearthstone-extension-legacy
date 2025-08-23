@@ -38,7 +38,7 @@ describe('amani-berserker', () => {
         }
     }));
 
-    test('enrage', async () => {
+    test('berserker-attacks-wisp', async () => {
         const boardA = game.child.playerA.child.board;
         const boardB = game.child.playerB.child.board;
         const cardA = boardA.child.cards.find(item => item instanceof AmaniBerserkerModel);
@@ -70,7 +70,7 @@ describe('amani-berserker', () => {
         expect(roleA.child.health.state.damage).toBe(1);
     });
 
-    test('wisp attacks berserker and berserker maintains attack power', async () => {
+    test('wisp-attacks-berserker', async () => {
         const turn = game.child.turn;
         turn.next(); // End turn to give control to Player B
         
@@ -103,7 +103,7 @@ describe('amani-berserker', () => {
         expect(roleA.child.health.state.damage).toBe(2);
     });
 
-    test('healing berserker removes attack power gain', async () => {
+    test('voodoo-doctor-heals-berserker', async () => {
         const turn = game.child.turn;
         turn.next(); // End turn to give control back to Player A
         

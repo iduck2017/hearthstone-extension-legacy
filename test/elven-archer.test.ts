@@ -33,7 +33,7 @@ describe('elven-archer', () => {
     })
     const root = boot(game);
 
-    test('battlecry', async () => {
+    test('elven-archer-battlecry-attack-wisp', async () => {
         const playerA = game.child.playerA;
         const playerB = game.child.playerB;
         const hand = game.child.playerA.child.hand;

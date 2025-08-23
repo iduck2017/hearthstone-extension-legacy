@@ -48,7 +48,7 @@ describe('young-priestess', () => {
         expect(roleA.child.health.state.offset).toBe(0);
     })
 
-    test('second-turn', async () => {
+    test('young-priestess-play-and-buff', async () => {
         // End turn
         const turn = game.child.turn;
         turn.next();

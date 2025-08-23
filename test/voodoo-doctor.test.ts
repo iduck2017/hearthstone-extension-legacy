@@ -37,7 +37,7 @@ describe('voodoo-doctor', () => {
         }
     }));
 
-    test('attack', async () => {
+    test('wisp-attacks-shieldbearer', async () => {
         const boardA = game.child.playerA.child.board;
         const boardB = game.child.playerB.child.board;
         const cardA = boardA.child.cards.find(item => item instanceof WispModel);
@@ -66,7 +66,7 @@ describe('voodoo-doctor', () => {
         expect(roleB.child.health.state.damage).toBe(1);
     })
 
-    test('battlecry', async () => {
+    test('voodoo-doctor-battlecry-heals-shieldbearer', async () => {
         const boardA = game.child.playerA.child.board;
         const boardB = game.child.playerB.child.board;
         const handA = game.child.playerA.child.hand;

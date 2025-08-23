@@ -29,7 +29,7 @@ describe('leper-gnome', () => {
         }
     }));
 
-    test('deathrattle', async () => {
+    test('leper-gnome-deathrattle-damages-hero', async () => {
         const boardA = game.child.playerA.child.board;
         const boardB = game.child.playerB.child.board;
         const cardA = boardA.child.cards.find(item => item instanceof LeperGnomeModel);

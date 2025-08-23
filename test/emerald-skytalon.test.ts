@@ -37,7 +37,7 @@ describe('emerald-skytalon', () => {
     })
     boot(game);
 
-    test('rush', async () => {
+    test('emerald-skytalon-rush-attack', async () => {
         const handA = game.child.playerA.child.hand;
         const boardA = game.child.playerA.child.board;
         const boardB = game.child.playerB.child.board;
@@ -73,7 +73,7 @@ describe('emerald-skytalon', () => {
     })
 
 
-    test("sleep", async () => {
+    test('wisp-play-and-sleep', async () => {
         const handA = game.child.playerA.child.hand;
         const boardA = game.child.playerA.child.board;
         const boardB = game.child.playerB.child.board;
@@ -98,7 +98,7 @@ describe('emerald-skytalon', () => {
     })
 
 
-    test('attack', async () => {
+    test('emerald-skytalon-attacks-wisp', async () => {
         const turn = game.child.turn;
         const playerA = game.child.playerA;
         const playerB = game.child.playerB;

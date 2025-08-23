@@ -35,7 +35,7 @@ describe('stonetusk-boar', () => {
         }
     }));
 
-    test('charge', async () => {
+    test('stonetusk-boar-charge-attacks-hero', async () => {
         const handA = game.child.playerA.child.hand;
         const boardA = game.child.playerA.child.board;
         const boardB = game.child.playerB.child.board;

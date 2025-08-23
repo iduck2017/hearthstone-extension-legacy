@@ -41,7 +41,7 @@ describe('grimscale-oracle', () => {
     })
     const root = boot(game);
 
-    test('start', async () => {
+    test('initial-murloc-attack-values', async () => {
         const boardA = game.child.playerA.child.board;
         const boardB = game.child.playerB.child.board;
         const handA = game.child.playerA.child.hand;
@@ -60,7 +60,7 @@ describe('grimscale-oracle', () => {
         expect(roleD.state.attack).toBe(1);
     })
 
-    test("buff", async () => {
+    test('grimscale-oracle-buffs-murlocs', async () => {
         const boardA = game.child.playerA.child.board;
         const boardB = game.child.playerB.child.board;
         const handA = game.child.playerA.child.hand;
@@ -94,7 +94,7 @@ describe('grimscale-oracle', () => {
     })
 
     
-    test('attack', async () => {
+    test('buffed-murloc-attacks-oracle', async () => {
         const boardA = game.child.playerA.child.board;
         const boardB = game.child.playerB.child.board;
         const handA = game.child.playerA.child.hand;
