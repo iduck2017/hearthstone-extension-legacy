@@ -18,11 +18,13 @@ export class MurlocTidecallerFeatureModel extends FeatureModel {
 
     @EventUtil.on(self => self.route.player?.proxy.child.board.child.cards.event.onSummon)
     private onSummon(that: MinionModel, event: {}) {
+        const role = this.route.role;
+        const card = this.route.card;
+        if (!role) return;
         if (!this.route.board) return;
         if (!that.state.races.includes(RaceType.MURLOC)) return;
+        if (that === card) return;
         console.log("summon", that.name);
-        const role = this.route.role;
-        if (!role) return;
         role.child.features.add(new MurlocTidecallerBuffModel({}));
     }
 }
