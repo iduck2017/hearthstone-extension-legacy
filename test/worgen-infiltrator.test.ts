@@ -50,6 +50,7 @@ describe('worgen-infiltrator', () => {
         const roleA = cardA.child.role;
         const roleB = cardB.child.role;
         const heroB = game.child.playerB.child.hero.child.role;
+
         
         expect(boardA.child.cards.length).toBe(1);
         expect(boardB.child.cards.length).toBe(1);

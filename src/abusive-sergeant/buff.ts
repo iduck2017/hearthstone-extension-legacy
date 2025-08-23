@@ -8,7 +8,8 @@ export class AbusiveSergeantBuffModel extends BuffModel {
             state: {
                 name: 'Abusive Sergeant\'s Buff',
                 desc: '+2 Attack this turn.',
-                offset: [2, 1],
+                attack: 2,
+                health: 1,
                 ...props.state,
             },
             child: { ...props.child },

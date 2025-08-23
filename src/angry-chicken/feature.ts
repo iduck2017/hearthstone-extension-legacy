@@ -5,7 +5,6 @@ import { DeepReadonly } from "utility-types";
 export namespace AngryChickenFeatureModel {
     export type Event = {};
     export type State = {
-        isActive: boolean;
         attack: number,
     };
     export type Child = {};
@@ -57,8 +56,7 @@ export class AngryChickenFeatureModel extends FeatureModel<
     }
 
     @TranxUtil.span()
-    protected disable(): void {
-        this.draft.state.isActive = false;
+    protected doDisable(): void {
         this.reload();
     }
 }

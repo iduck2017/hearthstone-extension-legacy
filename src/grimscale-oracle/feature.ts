@@ -6,7 +6,6 @@ export namespace GrimscaleOracleFeatureModel {
     export type Event = {}
     export type State = {
         offset: number;
-        isActive: boolean;
     }
 }
 
@@ -49,8 +48,7 @@ export class GrimscaleOracleFeatureModel extends FeatureModel<
     }
 
     @TranxUtil.span()
-    protected disable(): void {
-        this.draft.state.isActive = false;
+    protected doDisable(): void {
         this.reload();
     }
 }

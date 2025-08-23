@@ -7,7 +7,8 @@ export class LightwardenBuffModel extends BuffModel {
             state: {
                 name: 'Lightwarden\'s Buff',
                 desc: '+2 Attack',
-                offset: [2, 0],
+                attack: 2,
+                health: 0,
                 isActive: true,
                 ...props.state,
             },

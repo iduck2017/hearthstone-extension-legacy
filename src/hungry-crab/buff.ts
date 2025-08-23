@@ -7,7 +7,8 @@ export class HungryCrabBuffModel extends BuffModel {
             state: {
                 name: 'Hungry Crab\'s Buff',
                 desc: '+2/+2',
-                offset: [2, 2],
+                attack: 2,
+                health: 2,
                 isActive: true,
                 ...props.state,
             },

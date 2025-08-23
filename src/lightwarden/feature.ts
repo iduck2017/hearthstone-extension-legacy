@@ -29,7 +29,5 @@ export class LightwardenFeatureModel extends FeatureModel<
         });
     }
 
-    public disable(): void {
-        this.draft.state.isActive = false;
-    }
+    public doDisable(): void {}
 }

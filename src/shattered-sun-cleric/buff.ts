@@ -7,7 +7,8 @@ export class ShatteredSunClericBuffModel extends BuffModel {
             state: {
                 name: 'Shattered Sun Cleric\'s Buff',
                 desc: '+1/+1',
-                offset: [1, 1],
+                attack: 1,
+                health: 1,
                 isActive: true,
                 ...props.state,
             },

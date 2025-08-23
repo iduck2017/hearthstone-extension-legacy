@@ -125,7 +125,7 @@ describe('emerald-skytalon', () => {
         const roleC = cardC.child.role;
         expect(roleA.child.sleep.state.isActive).toBe(false);
         expect(roleA.state.action).toBe(1);
-        expect(roleA.child.entries.child.rush.state.status).toBe(RushStatus.ACTIVE_DONE);
+        expect(roleA.child.entries.child.rush.state.status).toBe(RushStatus.ACTIVE_ONCE);
         expect(roleB.child.sleep.state.isActive).toBe(false);
         expect(roleB.state.action).toBe(1);
         expect(roleB.child.entries.child.rush.state.status).toBe(RushStatus.INACTIVE);
