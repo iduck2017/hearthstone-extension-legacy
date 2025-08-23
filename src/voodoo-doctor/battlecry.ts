@@ -1,4 +1,4 @@
-import { BattlecryModel, RoleModel, SelectEvent } from "hearthstone-core";
+import { BattlecryModel, RestoreEvent, RestoreUtil, RoleModel, SelectEvent } from "hearthstone-core";
 
 export class VoodooDoctorBattlecryModel extends BattlecryModel<[RoleModel]> {
     constructor(props: VoodooDoctorBattlecryModel['props']) {
@@ -15,15 +15,21 @@ export class VoodooDoctorBattlecryModel extends BattlecryModel<[RoleModel]> {
     }
 
     public toRun(): [SelectEvent<RoleModel>] | undefined {
-        const player = this.route.player;
-        if (!player) return;
-        const options = player.refer.roles;
+        const game = this.route.game;
+        if (!game) return;
+        const card = this.route.card;
+        if (!card) return;
+        const role = card.child.role;
+        const options = game.refer.roles.filter(item => item !== role);
         if (!options.length) return;
         return [new SelectEvent(options, { hint: 'Choose a target' })];
     }
 
     public async doRun(target: RoleModel) {
-        const game = this.route.game;
-        if (!game) return;
+        RestoreUtil.run([new RestoreEvent({
+            source: this.child.anchor,
+            target: target,
+            origin: 2,
+        })]);
     }
 }

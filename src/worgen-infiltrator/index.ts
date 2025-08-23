@@ -14,7 +14,7 @@ export class WorgenInfiltratorCardModel extends MinionCardModel {
             child: {
                 role: new RoleModel({
                     child: {
-                        attack: new AttackModel({ state: { origin: 1 }}),
+                        attack: new AttackModel({ state: { origin: 2 }}),
                         health: new HealthModel({ state: { origin: 1 }}),
                         entries: new RoleEntriesModel({
                             child: { stealth: new StealthModel({ state: { isActive: true }}) }
