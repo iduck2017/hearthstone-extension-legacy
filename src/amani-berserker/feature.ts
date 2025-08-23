@@ -2,7 +2,7 @@ import { AttackModel, BuffModel, FeatureModel, HealthModel, RoleModel } from "he
 import { Event, EventUtil, StateUtil, TranxUtil } from "set-piece";
 import { DeepReadonly } from "utility-types";
 
-export namespace AngryChickenFeatureModel {
+export namespace AmaniBerserkerFeatureModel {
     export type Event = {};
     export type State = {
         attack: number,
@@ -11,19 +11,19 @@ export namespace AngryChickenFeatureModel {
     export type Refer = {}
 }
 
-export class AngryChickenFeatureModel extends FeatureModel<
-    AngryChickenFeatureModel.Event,
-    AngryChickenFeatureModel.State,
-    AngryChickenFeatureModel.Child,
-    AngryChickenFeatureModel.Refer
+export class AmaniBerserkerFeatureModel extends FeatureModel<
+    AmaniBerserkerFeatureModel.Event,
+    AmaniBerserkerFeatureModel.State,
+    AmaniBerserkerFeatureModel.Child,
+    AmaniBerserkerFeatureModel.Refer
 > {
-    constructor(props: AngryChickenFeatureModel['props']) {
+    constructor(props: AmaniBerserkerFeatureModel['props']) {
         super({
             uuid: props.uuid,
             state: {
-                name: 'Angry Chicken\'s Buff',
-                desc: 'Has +5 Attack while damaged.',
-                attack: 5,
+                name: 'Amani Berserker\'s Buff',
+                desc: 'Has +3 Attack while damaged.',
+                attack: 3,
                 status: 1,
                 ...props.state,
             },
@@ -32,12 +32,14 @@ export class AngryChickenFeatureModel extends FeatureModel<
         });
     }
 
+    // Listen to health state changes to trigger enrage effect
     @EventUtil.on(self => self.route.role?.proxy.child.health.event.onStateChange)
     @TranxUtil.span()
     private onHealthChange(that: HealthModel, event: Event.OnStateChange<HealthModel>) {
         this.reload();
     }
 
+    // Apply attack buff when damaged
     @StateUtil.on(self => self.route.role?.proxy.child.attack.decor)
     private onCheck(
         that: AttackModel, 
@@ -54,5 +56,4 @@ export class AngryChickenFeatureModel extends FeatureModel<
             offset: state.offset + this.state.attack,
         }
     }
-
-}
+} 
