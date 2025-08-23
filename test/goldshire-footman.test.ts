@@ -6,8 +6,8 @@
  * 2. attack: Wisp can only attack the footman due to taunt
  */
 import { GameModel, PlayerModel, MageModel, BoardModel, TimeUtil, SelectUtil } from "hearthstone-core";
-import { GoldshireFootmanCardModel } from "../src/goldshire-footman/card";
-import { WispCardModel } from "../src/wisp/card";
+import { GoldshireFootmanModel } from "../src/goldshire-footman";
+import { WispCardModel } from "../src/wisp";
 import { boot } from "./boot";
 
 describe('goldshire-footman', () => {
@@ -25,7 +25,7 @@ describe('goldshire-footman', () => {
                 child: {
                     hero: new MageModel({}),
                     board: new BoardModel({
-                        child: { cards: [new GoldshireFootmanCardModel({})] }
+                        child: { cards: [new GoldshireFootmanModel({})] }
                     })
                 }
             })
@@ -38,7 +38,7 @@ describe('goldshire-footman', () => {
         const boardB = game.child.playerB.child.board;
         const playerB = game.child.playerB;
         const cardA = boardA.child.cards.find(item => item instanceof WispCardModel);
-        const cardB = boardB.child.cards.find(item => item instanceof GoldshireFootmanCardModel);
+        const cardB = boardB.child.cards.find(item => item instanceof GoldshireFootmanModel);
         expect(cardA).toBeDefined();
         expect(cardB).toBeDefined();
         if (!cardA || !cardB) return;
@@ -47,7 +47,7 @@ describe('goldshire-footman', () => {
         const heroB = game.child.playerB.child.hero.child.role;
         // Initial state verification
         expect(roleA.state.action).toBe(1); // Wisp has action point
-        expect(roleB.child.taunt.state.isActive).toBe(true);
+        expect(roleB.child.entries.child.taunt.state.isActive).toBe(true);
         const promise = roleA.child.attack.run();
         await TimeUtil.sleep();
         expect(SelectUtil.current?.options).toContain(roleB);

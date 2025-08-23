@@ -2,7 +2,6 @@ import { AttackModel, BuffModel, FeatureModel, HealthModel, RoleModel } from "he
 import { Event, EventUtil, StateUtil, TranxUtil } from "set-piece";
 import { DeepReadonly } from "utility-types";
 
-
 export namespace AngryChickenFeatureModel {
     export type Event = {};
     export type State = {

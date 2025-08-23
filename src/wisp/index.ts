@@ -1,6 +1,5 @@
-import { MinionCardModel, RaceType } from "hearthstone-core";
+import { AttackModel, HealthModel, MinionCardModel, RaceType, RoleModel } from "hearthstone-core";
 import { StoreUtil } from "set-piece";
-import { WispRoleModel } from "./role";
 
 @StoreUtil.is('wisp-card')
 export class WispCardModel extends MinionCardModel {
@@ -15,7 +14,12 @@ export class WispCardModel extends MinionCardModel {
                 ...props.state,
             },
             child: { 
-                role: new WispRoleModel({}),
+                role: new RoleModel({
+                    child: {
+                        attack: new AttackModel({ state: { origin: 1 }}),
+                        health: new HealthModel({ state: { origin: 1 }}),
+                    },
+                }),
                 ...props.child
             },
             refer: { ...props.refer },

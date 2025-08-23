@@ -1,4 +1,4 @@
-import { BattlecryModel, DamageModel, DamageType, FilterType, RaceType, RoleModel, SelectForm } from "hearthstone-core";
+import { AnchorEvent, BattlecryModel, DamageType, RaceType, RoleModel, SelectEvent } from "hearthstone-core";
 import { HungryCrabBuffModel } from "./buff";
 
 export class HungryCrabBattlecryModel extends BattlecryModel<[RoleModel]> {
@@ -15,15 +15,16 @@ export class HungryCrabBattlecryModel extends BattlecryModel<[RoleModel]> {
         });
     }
 
-    public toRun(): [SelectForm<RoleModel>] | undefined {
+    public toRun(): [SelectEvent<RoleModel>] | undefined {
         const game = this.route.game;
         if (!game) return;
-        const options = game.query({ 
-            race: RaceType.MURLOC,
-            isMinion: FilterType.INCLUDE,
+        const options = game.refer.minions.filter(item => {
+            const card = item.route.card;
+            if (!card) return false;
+            return card.state.races.includes(RaceType.MURLOC);
         });
         if (options.length === 0) return;
-        return [{ options, hint: 'Select a Murloc' }];
+        return [new SelectEvent(options, { hint: 'Select a Murloc' })];
     }
 
     public async doRun(target: RoleModel) {
@@ -31,13 +32,7 @@ export class HungryCrabBattlecryModel extends BattlecryModel<[RoleModel]> {
         const role = this.route.role;
         if (!card) return;
         if (!role) return;
-        // DamageModel.deal([{
-        //     source: card.child.damage,
-        //     target,
-        //     damage: 0,
-        //     result: 0,
-        //     type: DamageType.DEFAULT,
-        // }]);
-        role.affect(new HungryCrabBuffModel({}))
+        role.child.death.destroy(new AnchorEvent({ source: this.child.anchor  }));
+        role.child.features.add(new HungryCrabBuffModel({}))
     }
 }

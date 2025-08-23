@@ -1,5 +1,5 @@
 import { DebugUtil, LogLevel, RouteUtil } from "set-piece";
-import { AngryChickenCardModel } from "../src/angry-chicken/card";
+import { AngryChickenModel } from "../src/angry-chicken";
 import { GameModel, PlayerModel, MageModel, BoardModel, SelectUtil } from "hearthstone-core";
 import { boot } from "./boot";
 
@@ -11,7 +11,7 @@ describe('angry-chicken', () => {
                 child: {
                     hero: new MageModel({}),
                     board: new BoardModel({
-                        child: { cards: [new AngryChickenCardModel({})] }
+                        child: { cards: [new AngryChickenModel({})] }
                     })
                 }
             }),
@@ -19,7 +19,7 @@ describe('angry-chicken', () => {
                 child: {
                     hero: new MageModel({}),
                     board: new BoardModel({
-                        child: { cards: [new AngryChickenCardModel({})] }
+                        child: { cards: [new AngryChickenModel({})] }
                     })
                 }
             })
@@ -30,8 +30,8 @@ describe('angry-chicken', () => {
     test('init', async () => {
         const boardA = game.child.playerA.child.board;
         const boardB = game.child.playerB.child.board;
-        const cardA = boardA.child.cards.find(item => item instanceof AngryChickenCardModel);
-        const cardB = boardB.child.cards.find(item => item instanceof AngryChickenCardModel);
+        const cardA = boardA.child.cards.find(item => item instanceof AngryChickenModel);
+        const cardB = boardB.child.cards.find(item => item instanceof AngryChickenModel);
         expect(cardA).toBeDefined();
         expect(cardB).toBeDefined();
         if (!cardA) return;
@@ -47,8 +47,8 @@ describe('angry-chicken', () => {
     test('buff', async () => {
         const boardA = game.child.playerA.child.board;
         const boardB = game.child.playerB.child.board;
-        const cardA = boardA.child.cards.find(item => item instanceof AngryChickenCardModel);
-        const cardB = boardB.child.cards.find(item => item instanceof AngryChickenCardModel);
+        const cardA = boardA.child.cards.find(item => item instanceof AngryChickenModel);
+        const cardB = boardB.child.cards.find(item => item instanceof AngryChickenModel);
         expect(cardA).toBeDefined();
         expect(cardB).toBeDefined();
         if (!cardA) return;
@@ -64,7 +64,7 @@ describe('angry-chicken', () => {
         expect(roleA.state.health).toBe(0);
         expect(roleA.state.attack).toBe(6);
         expect(roleB.state.health).toBe(0);
-        expect(roleA.child.death.state.isDying).toBe(true);
-        expect(roleB.child.death.state.isDying).toBe(true);
+        expect(roleA.child.death.state.isActive).toBe(true);
+        expect(roleB.child.death.state.isActive).toBe(true);
     })
 })

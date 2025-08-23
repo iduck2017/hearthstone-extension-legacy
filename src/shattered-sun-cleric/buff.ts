@@ -1,4 +1,4 @@
-import { BuffModel, FilterType } from "hearthstone-core";
+import { BuffModel } from "hearthstone-core";
 
 export class ShatteredSunClericBuffModel extends BuffModel {
     constructor(props: ShatteredSunClericBuffModel['props']) {

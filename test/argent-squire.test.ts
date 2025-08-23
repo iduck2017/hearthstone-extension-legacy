@@ -1,6 +1,5 @@
 import { GameModel, PlayerModel, MageModel, BoardModel, SelectUtil } from "hearthstone-core";
-import { RouteUtil } from "set-piece";
-import { ArgentSquireCardModel } from "../src/argent-squire/card";
+import { ArgentSquireModel } from "../src/argent-squire";
 import { boot } from "./boot";
 
 describe('argent-squire', () => {
@@ -10,7 +9,7 @@ describe('argent-squire', () => {
                 child: {
                     hero: new MageModel({}),
                     board: new BoardModel({
-                        child: { cards: [new ArgentSquireCardModel({})] }
+                        child: { cards: [new ArgentSquireModel({})] }
                     }),
                 }
             }),
@@ -18,7 +17,7 @@ describe('argent-squire', () => {
                 child: {
                     hero: new MageModel({}),
                     board: new BoardModel({
-                        child: { cards: [new ArgentSquireCardModel({})] }
+                        child: { cards: [new ArgentSquireModel({})] }
                     })
                 }
             })
@@ -29,8 +28,8 @@ describe('argent-squire', () => {
     test('attack', async () => {
         const boardA = game.child.playerA.child.board;
         const boardB = game.child.playerB.child.board;
-        const cardA = boardA.child.cards.find(item => item instanceof ArgentSquireCardModel);
-        const cardB = boardB.child.cards.find(item => item instanceof ArgentSquireCardModel);
+        const cardA = boardA.child.cards.find(item => item instanceof ArgentSquireModel);
+        const cardB = boardB.child.cards.find(item => item instanceof ArgentSquireModel);
         expect(cardA).toBeDefined();
         expect(cardB).toBeDefined();
         if (!cardA) return;
@@ -41,17 +40,17 @@ describe('argent-squire', () => {
         // Divine Shield blocks the damage, so no health is lost
         expect(roleA.state.health).toBe(1);
         expect(roleB.state.health).toBe(1);
-        expect(roleA.child.devineShield.state.isActive).toBe(true);
-        expect(roleB.child.devineShield.state.isActive).toBe(true);
+        expect(roleA.child.entries.child.divineShield.state.isActive).toBe(true);
+        expect(roleB.child.entries.child.divineShield.state.isActive).toBe(true);
         const promise = roleA.child.attack.run();
         expect(SelectUtil.current?.options).toContain(roleB);
         SelectUtil.set(roleB);
         await promise;
         expect(roleA.state.health).toBe(1);
         expect(roleB.state.health).toBe(1);
-        expect(roleA.child.devineShield.state.isActive).toBe(false);
-        expect(roleB.child.devineShield.state.isActive).toBe(false);
-        expect(roleA.child.death.state.isDying).toBe(false);
-        expect(roleB.child.death.state.isDying).toBe(false);
+        expect(roleA.child.entries.child.divineShield.state.isActive).toBe(false);
+        expect(roleB.child.entries.child.divineShield.state.isActive).toBe(false);
+        expect(roleA.child.death.state.isActive).toBe(false);
+        expect(roleB.child.death.state.isActive).toBe(false);
     })
 })

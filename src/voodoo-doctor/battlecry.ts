@@ -1,4 +1,4 @@
-import { BattlecryModel, RoleModel, SelectForm } from "hearthstone-core";
+import { BattlecryModel, RoleModel, SelectEvent } from "hearthstone-core";
 
 export class VoodooDoctorBattlecryModel extends BattlecryModel<[RoleModel]> {
     constructor(props: VoodooDoctorBattlecryModel['props']) {
@@ -14,12 +14,12 @@ export class VoodooDoctorBattlecryModel extends BattlecryModel<[RoleModel]> {
         });
     }
 
-    public toRun(): [SelectForm<RoleModel>] | undefined {
-        const game = this.route.game;
-        if (!game) return;
-        const options = game.query({});
+    public toRun(): [SelectEvent<RoleModel>] | undefined {
+        const player = this.route.player;
+        if (!player) return;
+        const options = player.refer.roles;
         if (!options.length) return;
-        return [{ options, hint: 'Choose a target' }];
+        return [new SelectEvent(options, { hint: 'Choose a target' })];
     }
 
     public async doRun(target: RoleModel) {

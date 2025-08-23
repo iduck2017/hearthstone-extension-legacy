@@ -1,4 +1,4 @@
-import { DamageModel, DamageType, DeathrattleModel } from "hearthstone-core";
+import { DamageEvent, DamageType, DamageUtil, DeathrattleModel } from "hearthstone-core";
 
 export class LeperGnomeDeathrattleModel extends DeathrattleModel {
     constructor(props: LeperGnomeDeathrattleModel['props']) {
@@ -21,12 +21,12 @@ export class LeperGnomeDeathrattleModel extends DeathrattleModel {
         if (!player) return;
         const opponent = player.refer.opponent;
         if (!opponent) return;
-        DamageModel.deal([{
-            source: card.child.damage,
-            target: opponent.child.hero.child.role,
-            damage: 2,
-            result: 2,
+        const target = opponent.child.hero.child.role;
+        DamageUtil.run([new DamageEvent({
+            source: this.child.anchor,
+            target,
+            origin: 2,
             type: DamageType.DEFAULT,
-        }]);
+        })]);
     }
 }

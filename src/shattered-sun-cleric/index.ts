@@ -1,5 +1,4 @@
-import { MinionCardModel } from "hearthstone-core";
-import { ShatteredSunClericRoleModel } from "./role";
+import { AttackModel, CardHooksModel, HealthModel, MinionCardModel, RoleModel } from "hearthstone-core";
 import { ShatteredSunClericBattlecryModel } from "./battlecry";
 
 export class ShatteredSunClericCardModel extends MinionCardModel {
@@ -14,11 +13,17 @@ export class ShatteredSunClericCardModel extends MinionCardModel {
                 ...props.state,
             },
             child: {
-                role: new ShatteredSunClericRoleModel({}),
-                battlecry: [
-                    ...props.child?.battlecry ?? [], 
-                    new ShatteredSunClericBattlecryModel({})
-                ],
+                role: new RoleModel({
+                    child: {
+                        attack: new AttackModel({ state: { origin: 3 }}),
+                        health: new HealthModel({ state: { origin: 2 }}),
+                    },
+                }),
+                hooks: new CardHooksModel({
+                    child: {
+                        battlecry: [new ShatteredSunClericBattlecryModel({})]
+                    }
+                }),
                 ...props.child,
             },
             refer: { ...props.refer },

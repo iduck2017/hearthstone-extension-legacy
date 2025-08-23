@@ -1,6 +1,5 @@
-import { BattlecryModel, FilterType, MinionCardModel, RoleModel } from "hearthstone-core";
-import { SelectForm } from "hearthstone-core/dist/type/utils/select";
-import { AbusiveSergeantBuffModel } from "./feature";
+import { BattlecryModel, MinionCardModel, RoleModel, SelectEvent } from "hearthstone-core";
+import { AbusiveSergeantBuffModel } from "./buff";
 import { DebugUtil, LogLevel } from "set-piece";
 
 export class AbusiveSergeantBattlecryModel extends BattlecryModel<
@@ -21,16 +20,15 @@ export class AbusiveSergeantBattlecryModel extends BattlecryModel<
     }
 
     @DebugUtil.log()
-    public toRun(): [SelectForm<RoleModel>] | undefined {
-        if (!this.route.game) return;
-        const options = this.route.game.query({
-            isMinion: FilterType.INCLUDE,
-        })
+    public toRun(): [SelectEvent<RoleModel>] | undefined {
+        const game = this.route.game;
+        if (!game) return;
+        const options = game.refer.minions;
         if (!options.length) return;
-        return [{ options, hint: 'Choose a minion' }];
+        return [new SelectEvent(options, { hint: 'Choose a minion' })];
     }
 
     public async doRun(target: RoleModel) {
-        target.affect(new AbusiveSergeantBuffModel({}))
+        target.child.features.add(new AbusiveSergeantBuffModel({}))
     }
 }

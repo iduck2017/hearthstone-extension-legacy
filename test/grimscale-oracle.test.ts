@@ -7,9 +7,9 @@
  */
 
 import { GameModel, PlayerModel, HandModel, BoardModel, MageModel, TimeUtil, SelectUtil } from "hearthstone-core";
-import { GrimscaleOracleCardModel } from "../src/grimscale-oracle/card";
-import { MurlocRaiderCardModel } from "../src/murloc-raider/card";
-import { WispCardModel } from "../src/wisp/card";
+import { GrimscaleOracleModel } from "../src/grimscale-oracle";
+import { MurlocRaiderCardModel } from "../src/murloc-raider";
+import { WispCardModel } from "../src/wisp";
 import { boot } from "./boot";
 
 describe('grimscale-oracle', () => {
@@ -25,7 +25,7 @@ describe('grimscale-oracle', () => {
                         ]}
                     }),
                     hand: new HandModel({
-                        child: { cards: [new GrimscaleOracleCardModel({})] }
+                        child: { cards: [new GrimscaleOracleModel({})] }
                     }),
                 }
             }),
@@ -66,7 +66,7 @@ describe('grimscale-oracle', () => {
         const handA = game.child.playerA.child.hand;
         const cardA = boardA.child.cards.find(item => item instanceof MurlocRaiderCardModel);
         const cardB = boardB.child.cards.find(item => item instanceof MurlocRaiderCardModel);
-        const cardC = handA.child.cards.find(item => item instanceof GrimscaleOracleCardModel);
+        const cardC = handA.child.cards.find(item => item instanceof GrimscaleOracleModel);
         const cardD = boardA.child.cards.find(item => item instanceof WispCardModel);
         expect(cardA).toBeDefined();
         expect(cardB).toBeDefined();
@@ -100,7 +100,7 @@ describe('grimscale-oracle', () => {
         const handA = game.child.playerA.child.hand;
         const cardA = boardA.child.cards.find(item => item instanceof MurlocRaiderCardModel);
         const cardB = boardB.child.cards.find(item => item instanceof MurlocRaiderCardModel);
-        const cardC = boardA.child.cards.find(item => item instanceof GrimscaleOracleCardModel);
+        const cardC = boardA.child.cards.find(item => item instanceof GrimscaleOracleModel);
         const cardD = boardA.child.cards.find(item => item instanceof WispCardModel);
         expect(cardA).toBeDefined();
         expect(cardB).toBeDefined();
@@ -126,9 +126,9 @@ describe('grimscale-oracle', () => {
         await promise;
         expect(roleZ.state.action).toBe(0)
         expect(roleZ.state.health).toBe(0);
-        expect(roleZ.child.death.state.isDying).toBe(true);
+        expect(roleZ.child.death.state.isActive).toBe(true);
         expect(roleC.state.health).toBe(-1);
-        expect(roleC.child.death.state.isDying).toBe(true);
+        expect(roleC.child.death.state.isActive).toBe(true);
         expect(boardB.child.cards.length).toBe(0);
         expect(boardA.child.cards.length).toBe(2);
         expect(roleA.state.attack).toBe(2);

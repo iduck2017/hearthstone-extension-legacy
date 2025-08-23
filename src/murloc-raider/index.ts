@@ -1,5 +1,4 @@
-import { MinionCardModel, RaceType } from "hearthstone-core";
-import { MurlocRaiderRoleModel } from "./role";
+import { HealthModel, AttackModel, MinionCardModel, RaceType, RoleModel } from "hearthstone-core";
 
 export class MurlocRaiderCardModel extends MinionCardModel {
     constructor(props: MurlocRaiderCardModel['props']) {
@@ -13,7 +12,12 @@ export class MurlocRaiderCardModel extends MinionCardModel {
                 ...props.state
             },
             child: {
-                role: new MurlocRaiderRoleModel({}),
+                role: new RoleModel({
+                    child: {
+                        attack: new AttackModel({ state: { origin: 2 }}),
+                        health: new HealthModel({ state: { origin: 1 }}),
+                    },
+                }),
                 ...props.child
             },
             refer: { ...props.refer }

@@ -7,8 +7,8 @@
  * 3. attack: After 2 turns, the other emerald can attack the hero
  */
 import { GameModel, PlayerModel, MageModel, HandModel, BoardModel, SelectUtil, TimeUtil, RushStatus, ActionModel } from "hearthstone-core";
-import { EmeraldSkytalonCardModel } from "../src/emerald-skytalon/card";
-import { WispCardModel } from "../src/wisp/card";
+import { EmeraldSkytalonModel } from "../src/emerald-skytalon";
+import { WispCardModel } from "../src/wisp";
 import { boot } from "./boot";
 
 describe('emerald-skytalon', () => {
@@ -19,7 +19,7 @@ describe('emerald-skytalon', () => {
                     hero: new MageModel({}),
                     hand: new HandModel({
                         child: { cards: [
-                            new EmeraldSkytalonCardModel({}),
+                            new EmeraldSkytalonModel({}),
                             new WispCardModel({})
                         ]}
                     }),
@@ -41,7 +41,7 @@ describe('emerald-skytalon', () => {
         const handA = game.child.playerA.child.hand;
         const boardA = game.child.playerA.child.board;
         const boardB = game.child.playerB.child.board;
-        const cardA = handA.child.cards.find(item => item instanceof EmeraldSkytalonCardModel);
+        const cardA = handA.child.cards.find(item => item instanceof EmeraldSkytalonModel);
         const cardB = boardB.child.cards.find(item => item instanceof WispCardModel);
         expect(cardA).toBeDefined();
         if (!cardA) return;
@@ -62,7 +62,7 @@ describe('emerald-skytalon', () => {
         expect(roleA.state.health).toBe(1);
         expect(roleA.state.action).toBe(1);
         expect(roleA.child.sleep.state.isActive).toBe(false);
-        expect(roleA.child.rush.state.isActive).toBe(RushStatus.ACTIVE);
+        expect(roleA.child.entries.child.rush.state.isActive).toBe(RushStatus.ACTIVE);
         promise = roleA.child.attack.run()
         await TimeUtil.sleep();
         expect(SelectUtil.current?.options).toContain(roleB);
@@ -91,7 +91,7 @@ describe('emerald-skytalon', () => {
         expect(boardA.child.cards.length).toBe(2);
         expect(roleA.state.action).toBe(1);
         expect(roleA.child.sleep.state.isActive).toBe(true);
-        expect(roleA.child.rush.state.isActive).toBe(RushStatus.INACTIVE);
+        expect(roleA.child.entries.child.rush.state.isActive).toBe(RushStatus.INACTIVE);
         promise = roleA.child.attack.run();
         await TimeUtil.sleep();
         expect(SelectUtil.current).toBeUndefined();
@@ -109,7 +109,7 @@ describe('emerald-skytalon', () => {
         expect(turn.refer.current).toBe(playerA);
         const boardA = game.child.playerA.child.board;
         const boardB = game.child.playerB.child.board;
-        const cardA = boardA.child.cards.find(item => item instanceof EmeraldSkytalonCardModel);
+        const cardA = boardA.child.cards.find(item => item instanceof EmeraldSkytalonModel);
         const cardB = boardA.child.cards.find(item => item instanceof WispCardModel);
         const cardC = boardB.child.cards.find(item => item instanceof WispCardModel);
         expect(cardA).toBeDefined();
@@ -123,10 +123,10 @@ describe('emerald-skytalon', () => {
         const roleC = cardC.child.role;
         expect(roleA.child.sleep.state.isActive).toBe(false);
         expect(roleA.state.action).toBe(1);
-        expect(roleA.child.rush.state.isActive).toBe(RushStatus.FINISH);
+        expect(roleA.child.entries.child.rush.state.isActive).toBe(RushStatus.FINISH);
         expect(roleB.child.sleep.state.isActive).toBe(false);
         expect(roleB.state.action).toBe(1);
-        expect(roleB.child.rush.state.isActive).toBe(RushStatus.INACTIVE);
+        expect(roleB.child.entries.child.rush.state.isActive).toBe(RushStatus.INACTIVE);
         let promise = roleA.child.attack.run();
         await TimeUtil.sleep();
         const heroB = playerB.child.hero.child.role;

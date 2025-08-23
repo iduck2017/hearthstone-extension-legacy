@@ -1,5 +1,4 @@
-import { MinionCardModel, RaceType } from "hearthstone-core";
-import { LeperGnomeRoleModel } from "./role";
+import { AttackModel, CardHooksModel, HealthModel, MinionCardModel, RoleModel } from "hearthstone-core";
 import { LeperGnomeDeathrattleModel } from "./deathrattle";
 
 export class LeperGnomeCardModel extends MinionCardModel {
@@ -14,11 +13,15 @@ export class LeperGnomeCardModel extends MinionCardModel {
                 ...props.state
             },
             child: {
-                role: new LeperGnomeRoleModel({}),
-                deathrattle: [
-                    ...props.child?.deathrattle ?? [],
-                    new LeperGnomeDeathrattleModel({})
-                ],
+                role: new RoleModel({
+                    child: {
+                        health: new HealthModel({ state: { origin: 1 }}),
+                        attack: new AttackModel({ state: { origin: 2 }}),
+                    },
+                }),
+                hooks: new CardHooksModel({
+                    child: { deathrattle: [new LeperGnomeDeathrattleModel({})] }
+                }),
                 ...props.child
             },
             refer: { ...props.refer }

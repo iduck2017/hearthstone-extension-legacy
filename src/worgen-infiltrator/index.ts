@@ -1,0 +1,29 @@
+import { AttackModel, HealthModel, MinionCardModel, RoleEntriesModel, RoleModel, StealthModel } from "hearthstone-core";
+
+export class WorgenInfiltratorCardModel extends MinionCardModel {
+    constructor(props: WorgenInfiltratorCardModel['props']) {
+        super({
+            uuid: props.uuid,
+            state: {
+                name: 'Worgen Infiltrator',
+                desc: 'Stealth',
+                mana: 1,
+                races: [],
+                ...props.state,
+            },
+            child: {
+                role: new RoleModel({
+                    child: {
+                        attack: new AttackModel({ state: { origin: 1 }}),
+                        health: new HealthModel({ state: { origin: 1 }}),
+                        entries: new RoleEntriesModel({
+                            child: { stealth: new StealthModel({ state: { isActive: true }}) }
+                        })
+                    }
+                }),
+                ...props.child
+            },
+            refer: { ...props.refer }
+        });
+    }
+}
