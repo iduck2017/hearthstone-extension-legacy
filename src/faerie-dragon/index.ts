@@ -15,7 +15,9 @@
 
 import { AttackModel, ClassType, HealthModel, MinionModel, RaceType, RarityType, RoleModel, RoleEntriesModel, ElusiveModel, CardModel } from "hearthstone-core";
 import { CostModel } from "hearthstone-core";
+import { LibraryUtil } from "hearthstone-core";
 
+@LibraryUtil.is('faerie-dragon')
 export class FaerieDragonModel extends CardModel {
     constructor(props: FaerieDragonModel['props']) {
         super({

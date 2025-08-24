@@ -94,7 +94,7 @@ describe('worgen-infiltrator', () => {
         expect(roleA).toBeDefined();
         expect(roleB).toBeDefined();
         if (!roleA || !roleB) return;
-        const heroB = game.child.playerB.child.role;
+        const roleC = game.child.playerB.child.role;
         
         expect(roleB.child.entries.child.stealth.state.status).toBe(0);
         
@@ -102,7 +102,7 @@ describe('worgen-infiltrator', () => {
         let promise = roleA.child.action.run();
         await TimeUtil.sleep();
         expect(SelectUtil.current?.options).toContain(roleB);
-        expect(SelectUtil.current?.options).toContain(heroB);
+        expect(SelectUtil.current?.options).toContain(roleC);
         expect(SelectUtil.current?.options.length).toBe(2);
         SelectUtil.set(roleB);
         await promise;
