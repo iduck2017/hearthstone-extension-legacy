@@ -30,22 +30,18 @@ describe('shieldbearer', () => {
     boot(game);
     const boardA = game.child.playerA.child.board;
     const boardB = game.child.playerB.child.board;
+    const turn = game.child.turn;
+    const cardA = boardA.child.cards.find(item => item instanceof WispModel);
+    const cardB = boardB.child.cards.find(item => item instanceof WispModel);
+    const cardC = boardB.child.cards.find(item => item instanceof ShieldbearerModel);
+    const roleA = cardA?.child.minion;
+    const roleB = cardB?.child.minion;
+    const roleC = cardC?.child.minion;
+    if (!roleA || !roleB || !roleC) throw new Error();
 
     test('wisp-attacks-shieldbearer', async () => {
-        const cardA = boardA.child.cards.find(item => item instanceof WispModel);
-        const cardB = boardB.child.cards.find(item => item instanceof WispModel);
-        const cardC = boardB.child.cards.find(item => item instanceof ShieldbearerModel);
-        const roleA = cardA?.child.minion;
-        const roleB = cardB?.child.minion;
-        const roleC = cardC?.child.minion;
-        expect(roleA).toBeDefined();
-        expect(roleB).toBeDefined();
-        expect(roleC).toBeDefined();
-        if (!roleA) return;
-        if (!roleB) return;
-        if (!roleC) return;
-        const turn = game.child.turn;
         expect(turn.refer.current).toBe(game.child.playerA);
+
         let promise = roleA.child.action.run();
         await TimeUtil.sleep();
         expect(SelectUtil.current).toBeDefined();
@@ -54,6 +50,7 @@ describe('shieldbearer', () => {
         expect(SelectUtil.current?.options.length).toBe(1);
         SelectUtil.set(roleC);
         await promise;
+
         expect(roleA.state.health).toBe(1);
         expect(roleC.state.health).toBe(3);
         expect(roleC.child.health.state.limit).toBe(4);
@@ -61,19 +58,12 @@ describe('shieldbearer', () => {
     })
 
     test('shieldbearer-cannot-attack', async () => {
-        const turn = game.child.turn;
         turn.next();
-        const boardA = game.child.playerA.child.board;
-        const boardB = game.child.playerB.child.board;
-        const card = boardB.child.cards.find(item => item instanceof ShieldbearerModel);
-        const role = card?.child.minion;
-        expect(role).toBeDefined();
-        if (!role) return;
 
-        const promise = role.child.action.run();
-        expect(role.state.attack).toBe(0);
-        expect(role.state.action).toBe(1);
-        expect(role.child.sleep.state.status).toBe(false);
+        const promise = roleC.child.action.run();
+        expect(roleC.state.attack).toBe(0);
+        expect(roleC.state.action).toBe(1);
+        expect(roleC.child.sleep.state.status).toBe(false);
         await TimeUtil.sleep();
         expect(SelectUtil.current).toBeUndefined();
         await promise;

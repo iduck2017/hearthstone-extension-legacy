@@ -37,14 +37,22 @@ describe('hungry-crab', () => {
             })
         }
     }));
+    const handA = game.child.playerA.child.hand;
+    const boardA = game.child.playerA.child.board;
+    const handB = game.child.playerB.child.hand;
+    const boardB = game.child.playerB.child.board;
+    const cardA = handA.child.cards.find(item => item instanceof HungryCrabModel);
+    const cardB = handB.child.cards.find(item => item instanceof MurlocRaiderCard);
+    const cardC = handB.child.cards.find(item => item instanceof HungryCrabModel);
+    const cardD = handB.child.cards.find(item => item instanceof MurlocRaiderCard);
+    const roleA = cardA?.child.minion;
+    const roleB = cardB?.child.minion;
+    const roleC = cardC?.child.minion;
+    const roleD = cardD?.child.minion;
+    if (!roleA || !roleB || !roleC || !roleD) throw new Error();
+    const turn = game.child.turn;
 
-    test('hungry-crab-play-without-murloc', async () => {
-        const handA = game.child.playerA.child.hand;
-        const boardA = game.child.playerA.child.board;
-        const cardA = handA.child.cards.find(item => item instanceof HungryCrabModel);
-        const roleA = cardA?.child.minion;
-        expect(roleA).toBeDefined();
-        if (!roleA) return;
+    test('hungry-crab-play', async () => {
         let promise = cardA.play();
         await TimeUtil.sleep();
         expect(SelectUtil.current?.options).toContain(0);
@@ -52,12 +60,14 @@ describe('hungry-crab', () => {
         await TimeUtil.sleep();
         expect(SelectUtil.current).toBeUndefined();
         await promise;
+
         expect(boardA.child.cards.length).toBe(2);
         expect(roleA.state.attack).toBe(1);
         expect(roleA.child.attack.state.origin).toBe(1);
         expect(roleA.child.attack.state.offset).toBe(0);
         expect(roleA.child.attack.state.current).toBe(1);
         expect(roleA.state.health).toBe(2);
+
         expect(roleA.child.health.state.limit).toBe(2);
         expect(roleA.child.health.state.origin).toBe(2);
         expect(roleA.child.health.state.offset).toBe(0);
@@ -66,47 +76,43 @@ describe('hungry-crab', () => {
         expect(roleA.child.health.state.current).toBe(2);
     })
 
-    test('hungry-crab-battlecry-destroys-murloc', async () => {
-        const turn = game.child.turn;
-        turn.next();
-        const handB = game.child.playerB.child.hand;
-        const boardB = game.child.playerB.child.board;
-        const cardA = handB.child.cards.find(item => item instanceof HungryCrabModel);
-        const cardB = handB.child.cards.find(item => item instanceof MurlocRaiderCard);
-        const roleA = cardA?.child.minion;
-        const roleB = cardB?.child.minion;
-        expect(roleA).toBeDefined();
-        expect(roleB).toBeDefined();
-        if (!roleA || !roleB) return;
+    test('hungry-crab-battlecry', async () => {
         expect(boardB.child.cards.length).toBe(0);
+        turn.next();
+        
         // Play Murloc Raider first
-        let promise = cardB.play();
+        let promise = cardD.play();
         await TimeUtil.sleep();
         expect(SelectUtil.current?.options).toContain(0);
         SelectUtil.set(0);
         await promise;
         expect(boardB.child.cards.length).toBe(1);
+
         // Play Hungry Crab and trigger battlecry
-        promise = cardA.play();
+        promise = cardC.play();
         await TimeUtil.sleep();
         expect(SelectUtil.current?.options).toContain(0);
         SelectUtil.set(0);
         await TimeUtil.sleep();
-        expect(SelectUtil.current?.options).toContain(roleB);
+        expect(SelectUtil.current?.options).toContain(roleD);
         expect(SelectUtil.current?.options.length).toBe(1);
-        SelectUtil.set(roleB);
+        SelectUtil.set(roleD);
         await promise;
+
+
         expect(boardB.child.cards.length).toBe(1);
-        expect(roleA.state.attack).toBe(3);
-        expect(roleA.child.attack.state.origin).toBe(1);
-        expect(roleA.child.attack.state.offset).toBe(2);
-        expect(roleA.child.attack.state.current).toBe(3);
-        expect(roleA.state.health).toBe(4);
-        expect(roleA.child.health.state.limit).toBe(4);
-        expect(roleA.child.health.state.origin).toBe(2);
-        expect(roleA.child.health.state.offset).toBe(2);
-        expect(roleA.child.health.state.damage).toBe(0);
-        expect(roleA.child.health.state.memory).toBe(4);
-        expect(roleA.child.health.state.current).toBe(4);
+        expect(roleC.state.attack).toBe(3);
+        expect(roleC.child.attack.state.origin).toBe(1);
+        expect(roleC.child.attack.state.offset).toBe(2);
+        expect(roleC.child.attack.state.current).toBe(3);
+        expect(roleC.state.health).toBe(4);
+
+
+        expect(roleC.child.health.state.limit).toBe(4);
+        expect(roleC.child.health.state.origin).toBe(2);
+        expect(roleC.child.health.state.offset).toBe(2);
+        expect(roleC.child.health.state.damage).toBe(0);
+        expect(roleC.child.health.state.memory).toBe(4);
+        expect(roleC.child.health.state.current).toBe(4);
     })
 })

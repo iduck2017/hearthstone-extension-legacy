@@ -32,29 +32,29 @@ describe('elven-archer', () => {
         }
     })
     const root = boot(game);
+    const playerA = game.child.playerA;
+    const playerB = game.child.playerB;
+    const hand = game.child.playerA.child.hand;
+    const board = game.child.playerB.child.board;
+    const cardA = hand.child.cards.find(item => item instanceof ElvenArcherModel);
+    const cardB = board.child.cards.find(item => item instanceof WispModel);
+    const roleA = cardA?.child.minion;
+    const roleB = cardB?.child.minion;
+    if (!roleA || !roleB) throw new Error();
 
-    test('elven-archer-battlecry-attack-wisp', async () => {
-        const playerA = game.child.playerA;
-        const playerB = game.child.playerB;
-        const hand = game.child.playerA.child.hand;
-        const board = game.child.playerB.child.board;
-        const cardA = hand.child.cards.find(item => item instanceof ElvenArcherModel);
-        const cardB = board.child.cards.find(item => item instanceof WispModel);
-        const roleA = cardA?.child.minion;
-        const roleB = cardB?.child.minion;
-        expect(roleA).toBeDefined();
-        expect(roleB).toBeDefined();
-        if (!roleA || !roleB) return;
+    test('elven-archer-battlecry', async () => {
         expect(roleB.state.health).toBe(1);
         const promise = cardA.play();
         expect(SelectUtil.current?.options).toContain(0);
         SelectUtil.set(0);
+        
         await TimeUtil.sleep()
         expect(SelectUtil.current?.options).toContain(roleB);
         expect(SelectUtil.current?.options).toContain(playerA.child.role);
         expect(SelectUtil.current?.options).toContain(playerB.child.role);
         SelectUtil.set(roleB);
         await promise;
+
         expect(roleB.state.health).toBe(0);
         expect(roleB.child.health.state.damage).toBe(1);
         expect(roleB.child.health.state.limit).toBe(1);

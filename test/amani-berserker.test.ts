@@ -10,6 +10,7 @@ import { WispModel } from "../src/wisp";
 import { VoodooDoctorModel } from "../src/voodoo-doctor";
 import { boot } from "./boot";
 import { DebugUtil, LogLevel } from "set-piece";
+import { StonetuskBoarModel } from "../src";
 
 DebugUtil.level = LogLevel.ERROR;
 describe('amani-berserker', () => {
@@ -30,7 +31,7 @@ describe('amani-berserker', () => {
                     board: new BoardModel({
                         child: { cards: [
                             new WispModel({}),
-                            new WispModel({})
+                            new StonetuskBoarModel({})
                         ]}
                     })
                 }
@@ -41,16 +42,18 @@ describe('amani-berserker', () => {
     const boardB = game.child.playerB.child.board;
     const handA = game.child.playerA.child.hand;
     const handB = game.child.playerB.child.hand;
+    const turn = game.child.turn;
+    const cardA = boardA.child.cards.find(item => item instanceof AmaniBerserkerModel);
+    const cardB = boardB.child.cards.find(item => item instanceof WispModel);
+    const cardD = boardB.child.cards.find(item => item instanceof StonetuskBoarModel);
+    const cardC = handA.child.cards.find(item => item instanceof VoodooDoctorModel);
+    const roleA = cardA?.child.minion;
+    const roleB = cardB?.child.minion;
+    const roleC = cardC?.child.minion;
+    const roleD = cardD?.child.minion;
+    if (!roleA || !roleB || !roleC || !roleD) throw new Error();
 
-    test('berserker-attacks-wisp', async () => {
-        const cardA = boardA.child.cards.find(item => item instanceof AmaniBerserkerModel);
-        const cardB = boardB.child.cards.find(item => item instanceof WispModel);
-        const roleA = cardA?.child.minion;
-        const roleB = cardB?.child.minion;
-        expect(roleA).toBeDefined();
-        expect(roleB).toBeDefined();
-        if (!roleA || !roleB) return;
-        
+    test('amani-berserker-attack-wisp', async () => {
         // Player A uses Berserker to attack wisp
         let promise = roleA.child.action.run();
         await TimeUtil.sleep();
@@ -71,27 +74,19 @@ describe('amani-berserker', () => {
         expect(roleA.child.health.state.damage).toBe(1);
     });
 
-    test('wisp-attacks-berserker', async () => {
-        const turn = game.child.turn;
-        turn.next(); // End turn to give control to Player B
-        const cardA = boardA.child.cards.find(item => item instanceof AmaniBerserkerModel);
-        const cardB = boardB.child.cards.find(item => item instanceof WispModel);
-        const roleA = cardA?.child.minion;
-        const roleB = cardB?.child.minion;
-        expect(roleA).toBeDefined();
-        expect(roleB).toBeDefined();
-        if (!roleA || !roleB) return;
-        
+    test('stonetusk-boar-attack-amani-berserker', async () => {
+        turn.next();
+
         // Player B uses second wisp to attack Berserker
-        let promise = roleB.child.action.run();
+        let promise = roleD.child.action.run();
         await TimeUtil.sleep();
         expect(SelectUtil.current?.options).toContain(roleA);
-        SelectUtil.set(roleA);
+        SelectUtil.set(roleA); 
         await promise;
         
         // Verify wisp dies with health -4
-        expect(roleB.state.health).toBe(-4);
-        expect(roleB.child.death.state.status).toBe(DeathStatus.ACTIVE);
+        expect(roleD.state.health).toBe(-4);
+        expect(roleD.child.death.state.status).toBe(DeathStatus.ACTIVE);
         expect(boardB.child.cards.length).toBe(0);
         
         // Verify Berserker has health 1 and maintains attack power
@@ -100,32 +95,24 @@ describe('amani-berserker', () => {
         expect(roleA.child.health.state.damage).toBe(2);
     });
 
-    test('voodoo-doctor-heals-berserker', async () => {
-        const turn = game.child.turn;
+    test('voodoo-doctor-heal-amani-berserker', async () => {
         turn.next(); 
         
-        const cardA = handA.child.cards.find(item => item instanceof VoodooDoctorModel);
-        const cardB = boardA.child.cards.find(item => item instanceof AmaniBerserkerModel);
-        const roleB = cardB?.child.minion;
-        expect(roleB).toBeDefined();
-        expect(cardA).toBeDefined();
-        if (!roleB || !cardA) return;
-        
         // Player A plays woodoo to heal Berserker
-        let promise = cardA.play();
+        let promise = cardC.play();
         await TimeUtil.sleep();
         expect(SelectUtil.current?.options).toContain(0);
         SelectUtil.set(0);
         await TimeUtil.sleep();
-        expect(SelectUtil.current?.options).toContain(roleB);
-        SelectUtil.set(roleB);
+        expect(SelectUtil.current?.options).toContain(roleA);
+        SelectUtil.set(roleA);
         await promise;
         
         // Verify Berserker is healed and loses attack power gain
-        expect(roleB.state.attack).toBe(2); // Back to base attack
-        expect(roleB.child.attack.state.offset).toBe(0);
-        expect(roleB.child.attack.state.origin).toBe(2);
-        expect(roleB.state.health).toBe(3); // Fully healed
-        expect(roleB.child.health.state.damage).toBe(0);
+        expect(roleA.state.attack).toBe(2); // Back to base attack
+        expect(roleA.child.attack.state.offset).toBe(0);
+        expect(roleA.child.attack.state.origin).toBe(2);
+        expect(roleA.state.health).toBe(3); // Fully healed
+        expect(roleA.child.health.state.damage).toBe(0);
     });
 }); 

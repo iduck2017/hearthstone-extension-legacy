@@ -32,17 +32,14 @@ describe('leper-gnome', () => {
     const boardB = game.child.playerB.child.board;
     const handA = game.child.playerA.child.hand;
     const handB = game.child.playerB.child.hand;
+    const cardA = boardA.child.cards.find(item => item instanceof LeperGnomeModel);
+    const cardB = boardB.child.cards.find(item => item instanceof WispModel);
+    const roleA = cardA?.child.minion;
+    const roleB = cardB?.child.minion;
+    const roleC = game.child.playerB.child.role;
+    if (!roleA || !roleB) throw new Error();
 
-    test('leper-gnome-deathrattle-damages-hero', async () => {
-        const cardA = boardA.child.cards.find(item => item instanceof LeperGnomeModel);
-        const cardB = boardB.child.cards.find(item => item instanceof WispModel);
-        const roleA = cardA?.child.minion;
-        const roleB = cardB?.child.minion;
-        const roleC = game.child.playerB.child.role;
-        expect(roleA).toBeDefined();
-        expect(roleB).toBeDefined();
-        if (!roleA || !roleB) return;
-        
+    test('leper-gnome-deathrattle', async () => {
         expect(boardA.child.cards.length).toBe(1);
         expect(boardB.child.cards.length).toBe(1);
         expect(roleA.state.attack).toBe(2);

@@ -27,18 +27,16 @@ describe('young-priestess', () => {
             playerB: new MageModel({})
         }
     }));
+    const turn = game.child.turn;
+    const boardA = game.child.playerA.child.board;
+    const handA = game.child.playerA.child.hand;
+    const cardA = boardA.child.cards.find(item => item instanceof WispModel);
+    const cardB = handA.child.cards.find(item => item instanceof YoungPriestessModel);
+    const roleA = cardA?.child.minion;
+    const roleB = cardB?.child.minion;
+    if (!roleA || !roleB) throw new Error();
 
-    test('first-turn', async () => {
-        const boardA = game.child.playerA.child.board;
-        const cardA = boardA.child.cards.find(item => item instanceof WispModel);
-        expect(cardA).toBeDefined();
-        if (!cardA) return;
-        const roleA = cardA.child.minion;
-        const roleB = game.child.playerA.child.role;
-        expect(roleA).toBeDefined();
-        expect(roleB).toBeDefined();
-        if (!roleA || !roleB) return;
-        
+    test('wisp-initial-state', async () => {
         expect(roleA.state.health).toBe(1);
         expect(roleA.child.health.state.origin).toBe(1);
         expect(roleA.child.health.state.offset).toBe(0);
@@ -52,20 +50,9 @@ describe('young-priestess', () => {
         expect(roleA.child.health.state.offset).toBe(0);
     })
 
-    test('young-priestess-play-and-buff', async () => {
+    test('young-priestess-buff', async () => {
         // End turn
-        const turn = game.child.turn;
         turn.next();
-
-        const boardA = game.child.playerA.child.board;
-        const handA = game.child.playerA.child.hand;
-        const cardA = boardA.child.cards.find(item => item instanceof WispModel);
-        const cardB = handA.child.cards.find(item => item instanceof YoungPriestessModel);
-        const roleA = cardA?.child.minion;
-        const roleB = cardB?.child.minion;
-        expect(roleA).toBeDefined();
-        expect(roleB).toBeDefined();
-        if (!roleA || !roleB) return;
         
         expect(roleA.state.health).toBe(1);
         expect(roleA.child.health.state.origin).toBe(1);
@@ -89,16 +76,9 @@ describe('young-priestess', () => {
         expect(roleA.child.health.state.offset).toBe(1);
     })
 
-    test('third-turn', async () => {
+    test('young-priestess-buff-2', async () => {
         // End turn
-        const turn = game.child.turn;
         turn.next();
-
-        const boardA = game.child.playerA.child.board;
-        const cardA = boardA.child.cards.find(item => item instanceof WispModel);
-        const roleA = cardA?.child.minion;
-        expect(roleA).toBeDefined();
-        if (!roleA) return;
         
         expect(roleA.state.health).toBe(2);
         expect(roleA.child.health.state.origin).toBe(1);
@@ -106,7 +86,6 @@ describe('young-priestess', () => {
         
         // End fifth turn
         turn.next();
-        
         expect(roleA.state.health).toBe(3);
         expect(roleA.child.health.state.origin).toBe(1);
         expect(roleA.child.health.state.offset).toBe(2);

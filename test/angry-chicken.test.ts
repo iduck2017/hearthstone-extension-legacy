@@ -24,33 +24,22 @@ describe('angry-chicken', () => {
         }
     })
     boot(game);
+    const boardA = game.child.playerA.child.board;
+    const boardB = game.child.playerB.child.board;
+    const cardA = boardA.child.cards.find(item => item instanceof AngryChickenModel);
+    const cardB = boardB.child.cards.find(item => item instanceof AngryChickenModel);
+    const roleA = cardA?.child.minion;
+    const roleB = cardB?.child.minion;
+    if (!roleA || !roleB) throw new Error();
 
-    test('angry-chicken-initial-stats', async () => {
-        const boardA = game.child.playerA.child.board;
-        const boardB = game.child.playerB.child.board;
-        const cardA = boardA.child.cards.find(item => item instanceof AngryChickenModel);
-        const cardB = boardB.child.cards.find(item => item instanceof AngryChickenModel);
-        const roleA = cardA?.child.minion;
-        const roleB = cardB?.child.minion;
-        expect(roleA).toBeDefined();
-        expect(roleB).toBeDefined();
-        if (!roleA || !roleB) return;
+    test('angry-chicken-initial-state', async () => {
         expect(roleA.state.attack).toBe(1);
         expect(roleA.state.health).toBe(1);
         expect(roleB.state.attack).toBe(1);
         expect(roleB.state.health).toBe(1);
     })
 
-    test('angry-chicken-attacks-and-gains-buff', async () => {
-        const boardA = game.child.playerA.child.board;
-        const boardB = game.child.playerB.child.board;
-        const cardA = boardA.child.cards.find(item => item instanceof AngryChickenModel);
-        const cardB = boardB.child.cards.find(item => item instanceof AngryChickenModel);
-        const roleA = cardA?.child.minion;
-        const roleB = cardB?.child.minion;
-        expect(roleA).toBeDefined();
-        expect(roleB).toBeDefined();
-        if (!roleA || !roleB) return;
+    test('angry-chicken-attack', async () => {
         const promise = roleA.child.action.run();
         await TimeUtil.sleep();
         expect(SelectUtil.current).toBeDefined();

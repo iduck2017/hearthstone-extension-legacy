@@ -52,9 +52,8 @@ export class DireWolfAlphaFeatureModel extends FeatureModel<
         that: AttackModel, 
         state: DeepReadonly<AttackModel.State>
     ) {
-        const player = this.route.player;
-        if (!player) return state;
-        const board = player.child.board;
+        const board = this.route.board;
+        if (!board) return state;
         if (!this.state.status) return state;
         const cardA = this.route.card;
         const cardB = that.route.card;

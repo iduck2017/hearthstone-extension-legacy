@@ -46,10 +46,10 @@ export class GrimscaleOracleFeatureModel extends FeatureModel<
         if (!this.route.board) return state;
         if (!this.state.status) return state;
         const card = that.route.card;
-        const role = that.route.role;
-        if (this.route.role === role) return state;
-        if (!(card instanceof MinionModel)) return state;
-        if (!card.state.races.includes(RaceType.MURLOC)) return state;
+        const minion = that.route.minion;
+        if (!minion) return state;
+        if (this.route.role === minion) return state;
+        if (!minion.state.races.includes(RaceType.MURLOC)) return state;
         const result = { ...state };
         result.offset = state.offset + this.state.offset;
         return result;

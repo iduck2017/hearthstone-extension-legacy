@@ -45,14 +45,18 @@ describe('murloc-tidecaller', () => {
     const boardB = game.child.playerB.child.board;
     const handA = game.child.playerA.child.hand;
     const handB = game.child.playerB.child.hand;
+    const cardA = handA.child.cards.find(item => item instanceof MurlocRaiderCard);
+    const cardB = handA.child.cards.find(item => item instanceof MurlocTidecallerModel);
+    const cardC = handA.child.cards.find(item => item instanceof MurlocTidehunterModel);
+    const cardD = handB.child.cards.find(item => item instanceof MurlocTidehunterModel);
+    const roleA = cardA?.child.minion;
+    const roleB = cardB?.child.minion;
+    const roleC = cardC?.child.minion;
+    const roleD = cardD?.child.minion;
+    if (!roleA || !roleB || !roleC || !roleD) throw new Error();
+    const turn = game.child.turn;
 
-    test('murloc-raider-summon-no-buff', async () => {
-        const cardA = handA.child.cards.find(item => item instanceof MurlocRaiderCard);
-        const cardB = handA.child.cards.find(item => item instanceof MurlocTidecallerModel);
-        const roleB = cardB?.child.minion;
-        expect(roleB).toBeDefined();
-        expect(cardA).toBeDefined();
-        if (!cardA || !roleB) return;
+    test('murloc-raider-summon', async () => {
         
         expect(roleB.state.attack).toBe(1);
         expect(roleB.child.attack.state.origin).toBe(1);
@@ -71,73 +75,54 @@ describe('murloc-tidecaller', () => {
         expect(roleB.child.attack.state.offset).toBe(0);
     })
 
-    test('murloc-tidehunter-summon-buffs-tidecaller', async () => {
-        const cardA = handA.child.cards.find(item => item instanceof MurlocTidecallerModel);
-        const cardB = handA.child.cards.find(item => item instanceof MurlocTidehunterModel);
-        const roleA = cardA?.child.minion;
-        const roleB = cardB?.child.minion;
-        expect(roleA).toBeDefined();
-        expect(roleB).toBeDefined();
-        if (!roleA || !roleB) return;
-        
-        expect(roleA.state.attack).toBe(1);
-        expect(roleA.child.attack.state.origin).toBe(1);
-        expect(roleA.child.attack.state.offset).toBe(0);
+    test('murloc-tidehunter-summon', async () => {
+        expect(roleB.state.attack).toBe(1);
+        expect(roleB.child.attack.state.origin).toBe(1);
+        expect(roleB.child.attack.state.offset).toBe(0);
         
         // Play Tidecaller
-        let promise = cardA.play();
-        await TimeUtil.sleep();
-        expect(SelectUtil.current?.options).toContain(0);
-        SelectUtil.set(0);
-        await promise;
-        
-        expect(boardA.child.cards.length).toBe(2);
-        expect(roleA.state.attack).toBe(1);
-        expect(roleA.child.attack.state.origin).toBe(1);
-        expect(roleA.child.attack.state.offset).toBe(0);
-        
-        // Play Tidehunter
-        promise = cardB.play();
-        await TimeUtil.sleep();
-        expect(SelectUtil.current?.options).toContain(0);
-        SelectUtil.set(0);
-        await promise;
-        
-        expect(boardA.child.cards.length).toBe(4);
-        expect(roleA.state.attack).toBe(3);
-        expect(roleA.child.attack.state.origin).toBe(1);
-        expect(roleA.child.attack.state.offset).toBe(2);
-        expect(roleA.child.features.child.items.length).toBe(3);
-    })
-
-    test('opponent-murloc-summon-no-buff', async () => {
-        const turn = game.child.turn;
-        turn.next();
-        const boardA = game.child.playerA.child.board;
-        const boardB = game.child.playerB.child.board;
-        const handB = game.child.playerB.child.hand;
-        const cardA = boardA.child.cards.find(item => item instanceof MurlocTidecallerModel);
-        const cardB = handB.child.cards.find(item => item instanceof MurlocTidehunterModel);
-        const roleA = cardA?.child.minion;
-        const roleB = cardB?.child.minion;
-        expect(roleA).toBeDefined();
-        expect(roleB).toBeDefined();
-        if (!roleA || !roleB) return;
-        
-        expect(roleA.state.attack).toBe(3);
-        expect(roleA.child.attack.state.origin).toBe(1);
-        expect(roleA.child.attack.state.offset).toBe(2);
-        
-        // Player B plays Tidehunter
         let promise = cardB.play();
         await TimeUtil.sleep();
         expect(SelectUtil.current?.options).toContain(0);
         SelectUtil.set(0);
         await promise;
         
+        expect(boardA.child.cards.length).toBe(2);
+        expect(roleB.state.attack).toBe(1);
+        expect(roleB.child.attack.state.origin).toBe(1);
+        expect(roleB.child.attack.state.offset).toBe(0);
+        
+        // Play Tidehunter
+        promise = cardC.play();
+        await TimeUtil.sleep();
+        expect(SelectUtil.current?.options).toContain(0);
+        SelectUtil.set(0);
+        await promise;
+        
+        expect(boardA.child.cards.length).toBe(4);
+        expect(roleB.state.attack).toBe(3);
+        expect(roleB.child.attack.state.origin).toBe(1);
+        expect(roleB.child.attack.state.offset).toBe(2);
+        expect(roleB.child.features.child.items.length).toBe(3);
+    })
+
+    test('opponent-murloc-tidehunter-summon', async () => {
+        turn.next();
+        
+        expect(roleB.state.attack).toBe(3);
+        expect(roleB.child.attack.state.origin).toBe(1);
+        expect(roleB.child.attack.state.offset).toBe(2);
+        
+        // Player B plays Tidehunter
+        let promise = cardD.play();
+        await TimeUtil.sleep();
+        expect(SelectUtil.current?.options).toContain(0);
+        SelectUtil.set(0);
+        await promise;
+        
         expect(boardB.child.cards.length).toBe(2);
-        expect(roleA.state.attack).toBe(3);
-        expect(roleA.child.attack.state.origin).toBe(1);
-        expect(roleA.child.attack.state.offset).toBe(2);
+        expect(roleB.state.attack).toBe(3);
+        expect(roleB.child.attack.state.origin).toBe(1);
+        expect(roleB.child.attack.state.offset).toBe(2);
     })
 }) 

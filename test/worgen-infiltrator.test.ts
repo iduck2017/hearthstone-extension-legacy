@@ -36,20 +36,18 @@ describe('worgen-infiltrator', () => {
             })
         }
     }));
+    const turn = game.child.turn;
+    const boardA = game.child.playerA.child.board;
+    const boardB = game.child.playerB.child.board;
+    const cardA = boardA.child.cards.find(item => item instanceof WispModel);
+    const cardB = boardB.child.cards.find(item => item instanceof WorgenInfiltratorModel);
+    const roleA = cardA?.child.minion;
+    const roleB = cardB?.child.minion;
+    const roleC = game.child.playerA.child.role;
+    const roleD = game.child.playerB.child.role;
+    if (!roleA || !roleB) throw new Error();
 
-    test('wisp-cannot-attack-stealthed-worgen', async () => {
-        const boardA = game.child.playerA.child.board;
-        const boardB = game.child.playerB.child.board;
-        const cardA = boardA.child.cards.find(item => item instanceof WispModel);
-        const cardB = boardB.child.cards.find(item => item instanceof WorgenInfiltratorModel);
-        const roleA = cardA?.child.minion;
-        const roleB = cardB?.child.minion;
-        const heroB = game.child.playerB.child.role;
-        expect(roleA).toBeDefined();
-        expect(roleB).toBeDefined();
-        expect(heroB).toBeDefined();
-        if (!roleA || !roleB || !heroB) return;
-        
+    test('worgen-infiltrator-stealth', async () => {
         expect(boardA.child.cards.length).toBe(1);
         expect(boardB.child.cards.length).toBe(1);
         expect(roleB.child.entries.child.stealth.state.status).toBe(1);
@@ -57,43 +55,31 @@ describe('worgen-infiltrator', () => {
         // Wisp attacks, can only attack hero due to stealth
         let promise = roleA.child.action.run();
         await TimeUtil.sleep();
-        expect(SelectUtil.current?.options).toContain(heroB);
+        expect(SelectUtil.current?.options).toContain(roleD);
         expect(SelectUtil.current?.options).not.toContain(roleB);
         expect(SelectUtil.current?.options.length).toBe(1);
-        SelectUtil.set(heroB);
+        SelectUtil.set(roleD);
         await promise;
         
-        expect(heroB.state.health).toBe(29);
+        expect(roleD.state.health).toBe(29);
     })
 
     test('worgen-attacks', async () => {
-        const turn = game.child.turn;
         turn.next();
-        const boardA = game.child.playerA.child.board;
-        const boardB = game.child.playerB.child.board;
-        const cardA = boardA.child.cards.find(item => item instanceof WispModel);
-        const cardB = boardB.child.cards.find(item => item instanceof WorgenInfiltratorModel);
-        const roleA = cardA?.child.minion;
-        const roleB = cardB?.child.minion;
-        const heroA = game.child.playerA.child.role;
-        expect(roleA).toBeDefined();
-        expect(roleB).toBeDefined();
-        expect(heroA).toBeDefined();
-        if (!roleA || !roleB || !heroA) return;
         
         expect(roleB.child.entries.child.stealth.state.status).toBe(1);
         
         // Worgen attacks hero, stealth disappears
         let promise = roleB.child.action.run();
         await TimeUtil.sleep();
-        expect(SelectUtil.current?.options).toContain(heroA);
+        expect(SelectUtil.current?.options).toContain(roleC);
         expect(SelectUtil.current?.options).toContain(roleA);
         expect(SelectUtil.current?.options.length).toBe(2);
-        SelectUtil.set(heroA);
+        SelectUtil.set(roleC);
         await promise;
         
         expect(roleB.child.entries.child.stealth.state.status).toBe(0);
-        expect(heroA.state.health).toBe(28);
+        expect(roleC.state.health).toBe(28);
     })
 
     test('wisp-can-attack-worgen', async () => {

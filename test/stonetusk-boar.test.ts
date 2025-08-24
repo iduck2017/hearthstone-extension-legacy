@@ -34,18 +34,18 @@ describe('stonetusk-boar', () => {
             })
         }
     }));
+    const turn = game.child.turn;   
+    const boardA = game.child.playerA.child.board;
+    const boardB = game.child.playerB.child.board;
+    const handA = game.child.playerA.child.hand;
+    const cardA = handA.child.cards.find(item => item instanceof StonetuskBoarModel);
+    const cardB = boardB.child.cards.find(item => item instanceof WispModel);
+    const roleA = cardA?.child.minion;
+    const roleB = cardB?.child.minion;
+    const roleC = game.child.playerB.child.role;
+    if (!roleA || !roleB) throw new Error();
 
-    test('stonetusk-boar-charge-attacks-hero', async () => {
-        const handA = game.child.playerA.child.hand;
-        const boardA = game.child.playerA.child.board;
-        const boardB = game.child.playerB.child.board;
-        const cardA = handA.child.cards.find(item => item instanceof StonetuskBoarModel);
-        const roleA = cardA?.child.minion;
-        const roleC = game.child.playerB.child.role;
-        expect(roleA).toBeDefined();
-        expect(roleC).toBeDefined();
-        if (!roleA || !roleC) return;
-        
+    test('stonetusk-boar-charge', async () => {
         expect(boardA.child.cards.length).toBe(0);
         expect(boardB.child.cards.length).toBe(1);
         expect(roleC.state.health).toBe(30);

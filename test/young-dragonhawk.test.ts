@@ -34,17 +34,16 @@ describe('young-dragonhawk', () => {
             })
         }
     }));
+    const turn = game.child.turn;
+    const boardA = game.child.playerA.child.board;
+    const boardB = game.child.playerB.child.board;
+    const cardA = boardA.child.cards.find(item => item instanceof YoungDragonhawkModel);
+    const cardB = boardB.child.cards.find(item => item instanceof ShieldbearerModel);
+    const roleA = cardA?.child.minion;
+    const roleB = cardB?.child.minion;
+    if (!roleA || !roleB) throw new Error();
 
-    test('young-dragonhawk-windfury-attacks-twice', async () => {
-        const boardA = game.child.playerA.child.board;
-        const boardB = game.child.playerB.child.board;
-        const cardA = boardA.child.cards.find(item => item instanceof YoungDragonhawkModel);
-        const cardB = boardB.child.cards.find(item => item instanceof ShieldbearerModel);
-        const roleA = cardA?.child.minion;
-        const roleB = cardB?.child.minion;
-        expect(roleA).toBeDefined();
-        expect(roleB).toBeDefined();
-        if (!roleA || !roleB) return;
+    test('young-dragonhawk-windfury', async () => {
         
         expect(boardA.child.cards.length).toBe(1);
         expect(boardB.child.cards.length).toBe(1);

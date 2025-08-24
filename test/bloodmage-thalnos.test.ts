@@ -31,20 +31,17 @@ describe('bloodmage-thalnos', () => {
             })
         }
     }));
+    const boardA = game.child.playerA.child.board;
+    const boardB = game.child.playerB.child.board;
+    const deckA = game.child.playerA.child.deck;
+    const handA = game.child.playerA.child.hand;
+    const cardA = boardA.child.cards.find(item => item instanceof BloodmageThalnosModel);
+    const cardB = boardB.child.cards.find(item => item instanceof WispModel);
+    const roleA = cardA?.child.minion;
+    const roleB = cardB?.child.minion;
+    if (!roleA || !roleB) throw new Error();
 
-    test('bloodmage-thalnos-attacks-wisp', async () => {
-        const boardA = game.child.playerA.child.board;
-        const boardB = game.child.playerB.child.board;
-        const deckA = game.child.playerA.child.deck;
-        const handA = game.child.playerA.child.hand;
-        const cardA = boardA.child.cards.find(item => item instanceof BloodmageThalnosModel);
-        const cardB = boardB.child.cards.find(item => item instanceof WispModel);
-        const roleA = cardA?.child.minion;
-        const roleB = cardB?.child.minion;
-        expect(roleA).toBeDefined();
-        expect(roleB).toBeDefined();
-        if (!roleA || !roleB) return;
-        
+    test('bloodmage-thalnos-attack', async () => {
         // Verify initial state
         expect(boardA.child.cards.length).toBe(1);
         expect(boardB.child.cards.length).toBe(1);

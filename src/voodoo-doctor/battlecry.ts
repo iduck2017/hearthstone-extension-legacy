@@ -22,7 +22,7 @@ export class VoodooDoctorBattlecryModel extends BattlecryModel<[RoleModel]> {
         const card = this.route.card;
         if (!card) return;
         const minion = card.child.minion;
-        const options = game.refer.minions.filter(item => item !== minion);
+        const options = game.refer.roles.filter(item => item !== minion);
         if (!options.length) return;
         return [new SelectEvent(options, { hint: 'Choose a target' })];
     }

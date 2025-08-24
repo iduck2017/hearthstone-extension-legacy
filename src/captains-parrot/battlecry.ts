@@ -26,8 +26,9 @@ export class CaptainsParrotBattlecryModel extends BattlecryModel<[]> {
         
         // Find pirates in the deck
         const cards = deck.child.cards.filter(item => {
-            if (!(item instanceof MinionModel)) return false;
-            return item.state.races.includes(RaceType.PIRATE);
+            const minion = item.child.minion;
+            if (!minion) return false;
+            return minion.state.races.includes(RaceType.PIRATE);
         });
         if (cards.length === 0) return;
         

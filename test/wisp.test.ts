@@ -34,7 +34,7 @@ describe('wisp', () => {
     const roleB = cardB?.child.minion;
     if (!roleA || !roleB) throw new Error();
 
-    test('role-summon', async () => {
+    test('wisp-summon', async () => {
         expect(handA.child.cards.length).toBe(1);
         expect(handB.child.cards.length).toBe(0);
         expect(boardA.child.cards.length).toBe(0);
@@ -52,7 +52,7 @@ describe('wisp', () => {
         expect(handB.child.cards.length).toBe(0);
     })
 
-    test('role-attack', async () => {
+    test('wisp-attack', async () => {
         game.child.turn.next();
         expect(roleB.state.action).toBe(1);
         const promise = roleB.child.action.run();

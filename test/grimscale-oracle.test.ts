@@ -40,55 +40,37 @@ describe('grimscale-oracle', () => {
         }
     })
     const root = boot(game);
+    const boardA = game.child.playerA.child.board;
+    const boardB = game.child.playerB.child.board;
+    const handA = game.child.playerA.child.hand;
+    const cardA = boardA.child.cards.find(item => item instanceof MurlocRaiderCard);
+    const cardB = boardB.child.cards.find(item => item instanceof MurlocRaiderCard);
+    const cardC = handA.child.cards.find(item => item instanceof GrimscaleOracleModel);
+    const cardD = boardA.child.cards.find(item => item instanceof WispModel);
+    const roleA = cardA?.child.minion;
+    const roleB = cardB?.child.minion;
+    const roleC = cardC?.child.minion;
+    const roleD = cardD?.child.minion;
+    if (!roleA || !roleB || !roleC || !roleD) throw new Error();
+    const turn = game.child.turn;
 
-    test('initial-murloc-attack-values', async () => {
-        const boardA = game.child.playerA.child.board;
-        const boardB = game.child.playerB.child.board;
-        const handA = game.child.playerA.child.hand;
-        const cardD = boardA.child.cards.find(item => item instanceof WispModel);
-        const cardA = boardA.child.cards.find(item => item instanceof MurlocRaiderCard);
-        const cardB = boardB.child.cards.find(item => item instanceof MurlocRaiderCard);
-        expect(cardA).toBeDefined();
-        expect(cardB).toBeDefined();
-        expect(cardD).toBeDefined();
-        if (!cardA || !cardB || !cardD) return;
-        const roleA = cardA?.child.minion;
-        const roleB = cardB?.child.minion;
-        const roleD = cardD?.child.minion;
-        expect(roleA).toBeDefined();
-        expect(roleB).toBeDefined();
-        expect(roleD).toBeDefined();
-        if (!roleA || !roleB || !roleD) return;
+    test('minions-initial-state', async () => {
         expect(roleA.state.attack).toBe(2);
         expect(roleB.state.attack).toBe(2);
         expect(roleD.state.attack).toBe(1);
     })
 
-    test('grimscale-oracle-buffs-murlocs', async () => {
-        const boardA = game.child.playerA.child.board;
-        const boardB = game.child.playerB.child.board;
-        const handA = game.child.playerA.child.hand;
-        const cardA = boardA.child.cards.find(item => item instanceof MurlocRaiderCard);
-        const cardB = boardB.child.cards.find(item => item instanceof MurlocRaiderCard);
-        const cardC = handA.child.cards.find(item => item instanceof GrimscaleOracleModel);
-        const cardD = boardA.child.cards.find(item => item instanceof WispModel);
-        expect(cardA).toBeDefined();
-        expect(cardB).toBeDefined();
-        expect(cardC).toBeDefined();
-        expect(cardD).toBeDefined();
-        const roleA = cardA?.child.minion;
-        const roleB = cardB?.child.minion;
-        const roleC = cardC?.child.minion;
-        const roleD = cardD?.child.minion;
-        if (!roleA || !roleB || !roleC || !roleD) return;
+    test('grimscale-oracle-buff', async () => {
         const promise = cardC.play();
         await TimeUtil.sleep();
         expect(SelectUtil.current).toBeDefined();
         expect(SelectUtil.current?.options.length).toBe(3);
         SelectUtil.set(0);
         await promise;
+
         expect(boardA.child.cards.length).toBe(3);
         expect(boardB.child.cards.length).toBe(1);
+
         expect(roleA.state.attack).toBe(3);
         expect(roleA.child.attack.state.offset).toBe(1);
         expect(roleA.child.attack.state.origin).toBe(2);
@@ -98,25 +80,9 @@ describe('grimscale-oracle', () => {
     })
 
     
-    test('buffed-murloc-attacks-oracle', async () => {
-        const boardA = game.child.playerA.child.board;
-        const boardB = game.child.playerB.child.board;
-        const handA = game.child.playerA.child.hand;
-        const cardA = boardA.child.cards.find(item => item instanceof MurlocRaiderCard);
-        const cardB = boardB.child.cards.find(item => item instanceof MurlocRaiderCard);
-        const cardC = boardA.child.cards.find(item => item instanceof GrimscaleOracleModel);
-        const cardD = boardA.child.cards.find(item => item instanceof WispModel);
-        const roleA = cardA?.child.minion;
-        const roleB = cardB?.child.minion;
-        const roleC = cardC?.child.minion;
-        const roleD = cardD?.child.minion;
-        expect(cardA).toBeDefined();
-        expect(cardB).toBeDefined();
-        expect(cardC).toBeDefined();
-        expect(cardD).toBeDefined();
-        if (!roleA || !roleB || !roleC || !roleD) return;
+    test('murloc-raider-attack-grimscale-oracle', async () => {
         
-        game.child.turn.next();
+        turn.next();
         expect(game.child.turn.refer.current).toBe(game.child.playerB);
         expect(roleB.state.action).toBe(1);
         const promise = roleB.child.action.run();
@@ -129,6 +95,7 @@ describe('grimscale-oracle', () => {
         expect(SelectUtil.current?.options).toContain(game.child.playerA.child.role); 
         SelectUtil.set(roleC);
         await promise;
+
         expect(roleB.state.action).toBe(0)
         expect(roleB.state.health).toBe(0);
         expect(roleB.child.death.state.status).toBe(DeathStatus.ACTIVE);

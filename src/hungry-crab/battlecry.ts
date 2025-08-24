@@ -21,10 +21,7 @@ export class HungryCrabBattlecryModel extends BattlecryModel<[RoleModel]> {
         const game = this.route.game;
         if (!game) return;
         const options = game.refer.minions.filter(item => {
-            const card = item.route.card;
-            const minion = card?.child.minion;
-            if (!minion) return false;
-            return minion.state.races.includes(RaceType.MURLOC);
+            return item.state.races.includes(RaceType.MURLOC);
         });
         if (options.length === 0) return;
         return [new SelectEvent(options, { hint: 'Select a Murloc' })];

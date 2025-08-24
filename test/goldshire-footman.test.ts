@@ -32,20 +32,17 @@ describe('goldshire-footman', () => {
         }
     })
     boot(game);
+    const boardA = game.child.playerA.child.board;
+    const boardB = game.child.playerB.child.board;
+    const playerB = game.child.playerB;
+    const cardA = boardA.child.cards.find(item => item instanceof WispModel);
+    const cardB = boardB.child.cards.find(item => item instanceof GoldshireFootmanModel);
+    const roleA = cardA?.child.minion;
+    const roleB = cardB?.child.minion;
+    const roleC = playerB.child.role;
+    if (!roleA || !roleB || !roleC) throw new Error();
 
-    test('wisp-attacks-footman-due-to-taunt', async () => {
-        const boardA = game.child.playerA.child.board;
-        const boardB = game.child.playerB.child.board;
-        const playerB = game.child.playerB;
-        const cardA = boardA.child.cards.find(item => item instanceof WispModel);
-        const cardB = boardB.child.cards.find(item => item instanceof GoldshireFootmanModel);
-        const roleA = cardA?.child.minion;
-        const roleB = cardB?.child.minion;
-        const roleC = game.child.playerB.child.role;
-        expect(roleA).toBeDefined();
-        expect(roleB).toBeDefined();
-        if (!roleA || !roleB) return;
-
+    test('wisp-attack-goldshire-footman', async () => {
         // Initial state verification
         expect(roleA.state.action).toBe(1); // Wisp has action point
         expect(roleB.child.entries.child.taunt.state.status).toBe(1);

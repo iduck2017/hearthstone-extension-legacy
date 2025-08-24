@@ -39,11 +39,11 @@ describe('murloc-tidehunter', () => {
     const boardB = game.child.playerB.child.board;
     const handA = game.child.playerA.child.hand;
     const handB = game.child.playerB.child.hand;
+    const cardA = handA.child.cards.find(item => item instanceof MurlocTidehunterModel);
+    const roleA = cardA?.child.minion;
+    if (!roleA) throw new Error();
 
-    test('murloc-tidehunter-battlecry-summons-scout', async () => {
-        const cardA = handA.child.cards.find(item => item instanceof MurlocTidehunterModel);
-        expect(cardA).toBeDefined();
-        if (!cardA) return;
+    test('murloc-tidehunter-battlecry', async () => {
         
         expect(boardA.child.cards.length).toBe(1);
         expect(boardA.child.cards[0] instanceof WispModel).toBe(true);
@@ -56,7 +56,6 @@ describe('murloc-tidehunter', () => {
         await promise;
 
         expect(boardA.child.cards.length).toBe(3);
-        console.log(boardA.child.cards.map(item => item.name))
         expect(boardA.child.cards[0] instanceof MurlocTidehunterModel).toBe(true);
         expect(boardA.child.cards[1] instanceof MurlocScoutModel).toBe(true);
         expect(boardA.child.cards[2] instanceof WispModel).toBe(true);

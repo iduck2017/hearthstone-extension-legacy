@@ -36,18 +36,21 @@ describe('voodoo-doctor', () => {
             })
         }
     }));
+    const turn = game.child.turn;
+    const boardA = game.child.playerA.child.board;
+    const boardB = game.child.playerB.child.board;
+    const handA = game.child.playerA.child.hand;
+    const cardA = boardA.child.cards.find(item => item instanceof WispModel);
+    const cardB = boardB.child.cards.find(item => item instanceof ShieldbearerModel);
+    const cardC = handA.child.cards.find(item => item instanceof VoodooDoctorModel);
+    const roleA = cardA?.child.minion;
+    const roleB = cardB?.child.minion;
+    const roleC = cardC?.child.minion;
+    const roleD = game.child.playerA.child.role;
+    const roleE = game.child.playerB.child.role;
+    if (!roleA || !roleB || !roleC || !roleD || !roleE) throw new Error();
 
-    test('wisp-attacks-shieldbearer', async () => {
-        const boardA = game.child.playerA.child.board;
-        const boardB = game.child.playerB.child.board;
-        const cardA = boardA.child.cards.find(item => item instanceof WispModel);
-        const cardB = boardB.child.cards.find(item => item instanceof ShieldbearerModel);
-        const roleA = cardA?.child.minion;
-        const roleB = cardB?.child.minion;
-        expect(roleA).toBeDefined();
-        expect(roleB).toBeDefined();
-        if (!roleA || !roleB) return;
-        
+    test('wisp-attack-shieldbearer', async () => {
         expect(boardA.child.cards.length).toBe(1);
         expect(boardB.child.cards.length).toBe(1);
         expect(roleB.state.health).toBe(4);
@@ -65,25 +68,7 @@ describe('voodoo-doctor', () => {
         expect(roleB.child.health.state.damage).toBe(1);
     })
 
-    test('voodoo-doctor-battlecry-heals-shieldbearer', async () => {
-        const boardA = game.child.playerA.child.board;
-        const boardB = game.child.playerB.child.board;
-        const handA = game.child.playerA.child.hand;
-        const cardA = boardA.child.cards.find(item => item instanceof WispModel);
-        const cardB = boardB.child.cards.find(item => item instanceof ShieldbearerModel);
-        const cardC = handA.child.cards.find(item => item instanceof VoodooDoctorModel);
-        const roleA = cardA?.child.minion;
-        const roleB = cardB?.child.minion;
-        const roleC = cardC?.child.minion;
-        const roleD = game.child.playerA.child.role;
-        const roleE = game.child.playerB.child.role;
-        expect(roleA).toBeDefined();
-        expect(roleB).toBeDefined();
-        expect(roleC).toBeDefined();
-        expect(roleD).toBeDefined();
-        expect(roleE).toBeDefined();
-        if (!roleA || !roleB || !roleC || !roleD || !roleE) return;
-        
+    test('voodoo-doctor-battlecry', async () => {
         // Play Voodoo Doctor
         let promise = cardC.play();
         await TimeUtil.sleep();

@@ -46,7 +46,7 @@ describe('abusive-sergeant', () => {
     if (!roleA || !roleB || !roleC || !roleD) throw new Error();
 
 
-    test('card-play', async () => {
+    test('abusive-sergeant-play', async () => {
         expect(boardB.child.cards.length).toBe(0);
         expect(boardA.child.cards.length).toBe(0);
 
@@ -77,7 +77,7 @@ describe('abusive-sergeant', () => {
         expect(roleB.child.attack.state.origin).toBe(1);
     })
 
-    test('card-battlecry', async () => {
+    test('abusive-sergeant-battlecry', async () => {
         let promise = cardC.play();
         await TimeUtil.sleep();
         expect(SelectUtil.current).toBeDefined();
@@ -113,7 +113,7 @@ describe('abusive-sergeant', () => {
         expect(roleD.state.attack).toBe(2);
     })
 
-    test('buff-expire', async () => {
+    test('abusive-sergeant-buff-expire', async () => {
         expect(roleB.state.attack).toBe(3);
         
         turn.next();
