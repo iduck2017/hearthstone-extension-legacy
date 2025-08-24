@@ -44,7 +44,7 @@ describe('loot-hoarder', () => {
     const roleB = cardB?.child.minion;
     if (!roleA || !roleB) throw new Error();
 
-    test('loot-hoarder-attack-draw', async () => {
+    test('loot-hoarder-deathrattle', async () => {
         // Check initial state
         expect(boardA.child.cards.length).toBe(1);
         expect(boardB.child.cards.length).toBe(1);
