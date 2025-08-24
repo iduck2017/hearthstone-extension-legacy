@@ -2,25 +2,25 @@ import { AttackModel, FeatureModel, MinionModel, RaceType, RoleModel } from "hea
 import { DebugUtil, LogLevel, StateUtil, StoreUtil, TranxUtil } from "set-piece";
 import { DeepReadonly } from "utility-types";
 
-export namespace GrimscaleOracleFeatureModel {
+export namespace MurlocWarleaderFeatureModel {
     export type Event = {}
     export type State = {
         offset: number;
     }
 }
 
-@StoreUtil.is('grimscale-oracle-feature')
-export class GrimscaleOracleFeatureModel extends FeatureModel<
-    GrimscaleOracleFeatureModel.Event,
-    GrimscaleOracleFeatureModel.State
+@StoreUtil.is('murloc-warleader-feature')
+export class MurlocWarleaderFeatureModel extends FeatureModel<
+    MurlocWarleaderFeatureModel.Event,
+    MurlocWarleaderFeatureModel.State
 > {
-    constructor(props: GrimscaleOracleFeatureModel['props']) {
+    constructor(props: MurlocWarleaderFeatureModel['props']) {
         super({
             uuid: props.uuid,
             state: {
-                name: 'Grimscale Oracle\'s Aura',
-                desc: 'Your other Murlocs have +1 Attack.',
-                offset: 1,
+                name: 'Murloc Warleader\'s Aura',
+                desc: 'Your other Murlocs have +2 Attack.',
+                offset: 2,
                 status: 1,
                 ...props.state
             },
@@ -28,7 +28,6 @@ export class GrimscaleOracleFeatureModel extends FeatureModel<
             refer: { ...props.refer }
         });
     }
-
 
     @StateUtil.on(self => {
         const proxy = self.route.player?.proxy;
@@ -53,5 +52,4 @@ export class GrimscaleOracleFeatureModel extends FeatureModel<
         result.offset = state.offset + this.state.offset;
         return result;
     }
-
-}
+} 
