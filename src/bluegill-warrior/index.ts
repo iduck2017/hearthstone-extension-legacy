@@ -23,6 +23,7 @@ export class BluegillWarriorModel extends CardModel {
             state: {
                 name: 'Bluegill Warrior',
                 desc: 'Charge',
+                isCollectible: true,
                 flavorDesc: 'He just wants a hug. A sloppy... slimy... hug.',
                 rarity: RarityType.COMMON,
                 class: ClassType.NEUTRAL,

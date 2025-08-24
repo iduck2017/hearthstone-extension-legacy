@@ -13,6 +13,7 @@ export class MurlocScoutModel extends CardModel {
             state: {
                 name: 'Murloc Scout',
                 desc: '',
+                isCollectible: false,
                 flavorDesc: '',
                 rarity: RarityType.COMMON,
                 class: ClassType.NEUTRAL,

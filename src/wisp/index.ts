@@ -9,6 +9,7 @@ export class WispModel extends CardModel {
             state: {
                 name: 'Wisp',
                 desc: '',
+                isCollectible: true,
                 flavorDesc: 'If you hit an Eredar Lord with enough Wisps, it will explode. But why?',
                 rarity: RarityType.COMMON,
                 class: ClassType.NEUTRAL,

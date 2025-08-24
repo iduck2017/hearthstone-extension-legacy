@@ -10,6 +10,7 @@ export class ShieldbearerModel extends CardModel {
             state: {
                 name: 'Shieldbearer',
                 desc: 'Taunt',
+                isCollectible: true,
                 flavorDesc: 'Have you seen the size of the shields in this game?? This is no easy job.',
                 rarity: RarityType.COMMON,
                 class: ClassType.NEUTRAL,

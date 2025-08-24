@@ -27,6 +27,7 @@ export class BloodmageThalnosModel extends CardModel {
             state: {
                 name: 'Bloodmage Thalnos',
                 desc: 'Spell Damage +1 Deathrattle: Draw a card.',
+                isCollectible: true,
                 flavorDesc: 'He\'s in charge of the Annual Scarlet Monastery Blood Drive!',
                 rarity: RarityType.LEGENDARY,
                 class: ClassType.NEUTRAL,

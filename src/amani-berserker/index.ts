@@ -22,6 +22,7 @@ export class AmaniBerserkerModel extends CardModel {
             state: {
                 name: 'Amani Berserker',
                 desc: 'Has +3 Attack while damaged.',
+                isCollectible: true,
                 flavorDesc: 'If an Amani berserker asks "Joo lookin\' at me?!", the correct response is "Nah, mon".',
                 rarity: RarityType.COMMON,
                 class: ClassType.NEUTRAL,

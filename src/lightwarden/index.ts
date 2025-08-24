@@ -11,6 +11,7 @@ export class LightwardenModel extends CardModel {
             state: {
                 name: 'Lightwarden',
                 desc: 'Whenever a character is healed, gain +2 Attack.',
+                isCollectible: true,
                 flavorDesc: 'She’s smaller than her sisters Mediumwarden and Heavywarden.',
                 rarity: RarityType.COMMON,
                 class: ClassType.NEUTRAL,

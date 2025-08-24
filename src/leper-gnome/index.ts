@@ -11,6 +11,7 @@ export class LeperGnomeModel extends CardModel {
             state: {
                 name: 'Leper Gnome',
                 desc: 'Deathrattle: Deal 2 damage to the enemy hero.',
+                isCollectible: true,
                 flavorDesc: 'He really just wants to be your friend, but the constant rejection is starting to really get to him.',
                 rarity: RarityType.COMMON,
                 class: ClassType.NEUTRAL,

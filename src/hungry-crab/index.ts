@@ -11,6 +11,7 @@ export class HungryCrabModel extends CardModel {
             state: {
                 name: 'Hungry Crab',
                 desc: 'Battlecry: Destroy a Murloc and gain +2/+2.',
+                isCollectible: true,
                 flavorDesc: 'Murloc. It\'s what\'s for dinner.',
                 rarity: RarityType.EPIC,
                 class: ClassType.NEUTRAL,

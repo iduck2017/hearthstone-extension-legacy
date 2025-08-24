@@ -11,6 +11,7 @@ export class AngryChickenModel extends CardModel {
             state: {
                 name: 'Angry Chicken',
                 desc: '+5 Attack while damaged.',
+                isCollectible: true,
                 flavorDesc: 'There is no beast more frightening (or ridiculous) than a fully enraged chicken.',
                 rarity: RarityType.RARE,
                 class: ClassType.NEUTRAL,

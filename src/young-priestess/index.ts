@@ -14,6 +14,7 @@ export class YoungPriestessModel extends CardModel {
             state: {
                 name: 'Young Priestess',
                 desc: 'At the end of your turn, give another random friendly minion +1 Health.',
+                isCollectible: true,
                 flavorDesc: 'She can\'t wait to learn Power Word: Fortitude Rank 2.',
                 rarity: RarityType.RARE,
                 class: ClassType.NEUTRAL,

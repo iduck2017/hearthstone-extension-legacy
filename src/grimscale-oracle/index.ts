@@ -11,6 +11,7 @@ export class GrimscaleOracleModel extends CardModel {
             state: {
                 name: 'Grimscale Oracle',
                 desc: 'Your other Murlocs have +1 Attack.',
+                isCollectible: true,
                 flavorDesc: 'These are the brainy murlocs. It turns out that doesn’t mean much.',
                 rarity: RarityType.COMMON,
                 class: ClassType.NEUTRAL,

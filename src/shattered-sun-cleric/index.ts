@@ -11,6 +11,7 @@ export class ShatteredSunClericModel extends CardModel {
             state: {
                 name: 'Shattered Sun Cleric',
                 desc: 'Battlecry: Give a friendly minion +1/+1.',
+                isCollectible: true,
                 flavorDesc: 'They always have a spare flask of Sunwell Energy Drink™!',
                 rarity: RarityType.COMMON,
                 class: ClassType.NEUTRAL,

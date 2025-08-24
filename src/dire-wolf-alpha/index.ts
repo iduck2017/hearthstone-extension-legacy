@@ -24,6 +24,7 @@ export class DireWolfAlphaModel extends CardModel {
             state: {
                 name: 'Dire Wolf Alpha',
                 desc: 'Adjacent minions have +1 Attack.',
+                isCollectible: true,
                 flavorDesc: 'We are pretty excited about the upcoming release of Dire Wolf Beta, just repost this sign for a chance at a key.',
                 rarity: RarityType.COMMON,
                 class: ClassType.NEUTRAL,

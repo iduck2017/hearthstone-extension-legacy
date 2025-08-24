@@ -10,6 +10,7 @@ export class AbusiveSergeantModel extends CardModel {
             state: {
                 name: 'Abusive Sergeant',
                 desc: 'Battlecry: Give a minion +2 Attack this turn.',
+                isCollectible: true,
                 flavorDesc: 'ADD ME TO YOUR DECK, MAGGOT!',
                 rarity: RarityType.COMMON,
                 class: ClassType.NEUTRAL,

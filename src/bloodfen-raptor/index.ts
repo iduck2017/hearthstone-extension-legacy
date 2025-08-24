@@ -20,6 +20,7 @@ export class BloodfenRaptorModel extends CardModel {
             state: {
                 name: 'Bloodfen Raptor',
                 desc: '',
+                isCollectible: true,
                 flavorDesc: '"Kill 30 raptors." - Hemet Nesingwary',
                 rarity: RarityType.COMMON,
                 class: ClassType.NEUTRAL,

@@ -11,6 +11,7 @@ export class VoodooDoctorModel extends CardModel {
             state: {
                 name: 'Voodoo Doctor',
                 desc: 'Battlecry: Restore 2 Health.',
+                isCollectible: true,
                 flavorDesc: 'Voodoo is an oft-misunderstood art. But it is art.',
                 rarity: RarityType.COMMON,
                 class: ClassType.NEUTRAL,

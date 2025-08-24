@@ -24,6 +24,7 @@ export class CaptainsParrotModel extends CardModel {
             state: {
                 name: 'Captain\'s Parrot',
                 desc: 'Battlecry: Draw a Pirate from your deck.',
+                isCollectible: true,
                 flavorDesc: 'Pirates and Parrots go together like Virmen and Carrots.',
                 rarity: RarityType.EPIC,
                 class: ClassType.NEUTRAL,

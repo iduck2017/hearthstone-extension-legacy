@@ -23,6 +23,7 @@ export class AncientWatcherModel extends CardModel {
             state: {
                 name: 'Ancient Watcher',
                 desc: 'Can\'t attack.',
+                isCollectible: true,
                 flavorDesc: 'Why do its eyes seem to follow you as you walk by?',
                 rarity: RarityType.RARE,
                 class: ClassType.NEUTRAL,
