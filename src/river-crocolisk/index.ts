@@ -25,7 +25,7 @@ export class RiverCrocoliskModel extends CardModel {
                 desc: '',
                 isCollectible: true,
                 flavorDesc: 'Edward "Lefty" Smith tried to make luggage out of a river crocolisk once.',
-                rarity: RarityType.FREE,
+                rarity: RarityType.COMMON,
                 class: ClassType.NEUTRAL,
                 ...props.state,
             },
