@@ -39,19 +39,20 @@ describe('goldshire-footman', () => {
         const playerB = game.child.playerB;
         const cardA = boardA.child.cards.find(item => item instanceof WispModel);
         const cardB = boardB.child.cards.find(item => item instanceof GoldshireFootmanModel);
-        expect(cardA).toBeDefined();
-        expect(cardB).toBeDefined();
-        if (!cardA || !cardB) return;
-        const roleA = cardA.child.role;
-        const roleB = cardB.child.role;
-        const heroB = game.child.playerB.child.role;
+        const roleA = cardA?.child.minion;
+        const roleB = cardB?.child.minion;
+        const roleC = game.child.playerB.child.role;
+        expect(roleA).toBeDefined();
+        expect(roleB).toBeDefined();
+        if (!roleA || !roleB) return;
+
         // Initial state verification
         expect(roleA.state.action).toBe(1); // Wisp has action point
         expect(roleB.child.entries.child.taunt.state.status).toBe(1);
         const promise = roleA.child.action.run();
         await TimeUtil.sleep();
         expect(SelectUtil.current?.options).toContain(roleB);
-        expect(SelectUtil.current?.options).not.toContain(heroB);
+        expect(SelectUtil.current?.options).not.toContain(roleC);
         SelectUtil.set(roleB);
         await promise;
         expect(roleB.state.health).toBe(1);

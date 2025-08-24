@@ -30,12 +30,11 @@ describe('argent-squire', () => {
         const boardB = game.child.playerB.child.board;
         const cardA = boardA.child.cards.find(item => item instanceof ArgentSquireModel);
         const cardB = boardB.child.cards.find(item => item instanceof ArgentSquireModel);
-        expect(cardA).toBeDefined();
-        expect(cardB).toBeDefined();
-        if (!cardA) return;
-        if (!cardB) return;
-        const roleA = cardA.child.role;
-        const roleB = cardB.child.role;
+        const roleA = cardA?.child.minion;
+        const roleB = cardB?.child.minion;
+        expect(roleA).toBeDefined();
+        expect(roleB).toBeDefined();
+        if (!roleA || !roleB) return;
         // First attack: both squires attack each other
         // Divine Shield blocks the damage, so no health is lost
         expect(roleA.state.health).toBe(1);

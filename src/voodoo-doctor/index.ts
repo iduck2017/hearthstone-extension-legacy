@@ -1,15 +1,14 @@
-import { AttackModel, CardHooksModel, ClassType, HealthModel, MinionModel,RarityType,  RaceType, RoleModel } from "hearthstone-core";
+import { AttackModel, CardHooksModel, ClassType, HealthModel, MinionModel,RarityType,  RaceType, RoleModel, CardModel } from "hearthstone-core";
 import { VoodooDoctorBattlecryModel } from "./battlecry";
 import { CostModel } from "hearthstone-core";
 
-export class VoodooDoctorModel extends MinionModel {
+export class VoodooDoctorModel extends CardModel {
     constructor(props: VoodooDoctorModel['props']) {
         super({
             uuid: props.uuid,
             state: {
                 name: 'Voodoo Doctor',
                 desc: 'Battlecry: Restore 2 Health.',
-                races: [],
                 flavorDesc: '',
                 rarity: RarityType.COMMON,
                 class: ClassType.NEUTRAL,
@@ -17,7 +16,8 @@ export class VoodooDoctorModel extends MinionModel {
             },
             child: {
                 cost: new CostModel({ state: { origin: 1 }}),
-                role: new RoleModel({
+                minion: new MinionModel({
+                    state: { races: [] },
                     child: {
                         attack: new AttackModel({ state: { origin: 2 }}),
                         health: new HealthModel({ state: { origin: 1 }}),

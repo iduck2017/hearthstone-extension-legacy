@@ -11,17 +11,16 @@
 // Learn More:
 // Charge
 
-import { ChargeModel, HealthModel, AttackModel, MinionModel, RaceType, RoleModel, RoleEntriesModel, ClassType, RarityType } from "hearthstone-core";
+import { ChargeModel, HealthModel, AttackModel, MinionModel, RaceType, RoleModel, RoleEntriesModel, ClassType, RarityType, CardModel } from "hearthstone-core";
 import { CostModel } from "hearthstone-core";
 
-export class BluegillWarriorModel extends MinionModel {
+export class BluegillWarriorModel extends CardModel {
     constructor(props: BluegillWarriorModel['props']) {
         super({
             uuid: props.uuid,
             state: {
                 name: 'Bluegill Warrior',
                 desc: 'Charge',
-                races: [RaceType.MURLOC],
                 flavorDesc: 'He just wants a hug. A sloppy... slimy... hug.',
                 rarity: RarityType.COMMON,
                 class: ClassType.NEUTRAL,
@@ -29,7 +28,8 @@ export class BluegillWarriorModel extends MinionModel {
             },
             child: {
                 cost: new CostModel({ state: { origin: 2 }}),
-                role: new RoleModel({
+                minion: new MinionModel({
+                    state: { races: [RaceType.MURLOC] },
                     child: {
                         attack: new AttackModel({ state: { origin: 2 }}),
                         health: new HealthModel({ state: { origin: 1 }}),

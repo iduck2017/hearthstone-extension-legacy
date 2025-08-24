@@ -33,7 +33,11 @@ describe('young-priestess', () => {
         const cardA = boardA.child.cards.find(item => item instanceof WispModel);
         expect(cardA).toBeDefined();
         if (!cardA) return;
-        const roleA = cardA.child.role;
+        const roleA = cardA.child.minion;
+        const roleB = game.child.playerA.child.role;
+        expect(roleA).toBeDefined();
+        expect(roleB).toBeDefined();
+        if (!roleA || !roleB) return;
         
         expect(roleA.state.health).toBe(1);
         expect(roleA.child.health.state.origin).toBe(1);
@@ -57,10 +61,11 @@ describe('young-priestess', () => {
         const handA = game.child.playerA.child.hand;
         const cardA = boardA.child.cards.find(item => item instanceof WispModel);
         const cardB = handA.child.cards.find(item => item instanceof YoungPriestessModel);
-        expect(cardA).toBeDefined();
-        expect(cardB).toBeDefined();
-        if (!cardA || !cardB) return;
-        const roleA = cardA.child.role;
+        const roleA = cardA?.child.minion;
+        const roleB = cardB?.child.minion;
+        expect(roleA).toBeDefined();
+        expect(roleB).toBeDefined();
+        if (!roleA || !roleB) return;
         
         expect(roleA.state.health).toBe(1);
         expect(roleA.child.health.state.origin).toBe(1);
@@ -91,9 +96,9 @@ describe('young-priestess', () => {
 
         const boardA = game.child.playerA.child.board;
         const cardA = boardA.child.cards.find(item => item instanceof WispModel);
-        expect(cardA).toBeDefined();
-        if (!cardA) return;
-        const roleA = cardA.child.role;
+        const roleA = cardA?.child.minion;
+        expect(roleA).toBeDefined();
+        if (!roleA) return;
         
         expect(roleA.state.health).toBe(2);
         expect(roleA.child.health.state.origin).toBe(1);

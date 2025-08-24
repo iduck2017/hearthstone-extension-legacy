@@ -15,6 +15,6 @@ export { LeperGnomeModel } from "./leper-gnome";
 export { LightwardenModel } from "./lightwarden";
 export { MurlocScoutModel } from "./murloc-scout";
 export { MurlocTidecallerModel } from "./murloc-tidecaller";
-
+export { BloodfenRaptorModel } from "./bloodfen-raptor";
 
 

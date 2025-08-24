@@ -24,9 +24,12 @@ export class MurlocTidehunterBattlecryModel extends BattlecryModel<[]> {
         if (!player) return;
         const card = this.route.card;
         const board = player.child.board;
-        const minion = new MurlocScoutModel({});
         const roles = board.child.cards;
         const position = roles.findIndex(item => item === card);
+        
+        const target = new MurlocScoutModel({});
+        const minion = target.child.minion;
+        if (!minion) return;
         minion.summon(board, position + 1);
     }
 }

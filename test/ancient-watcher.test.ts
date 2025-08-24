@@ -36,12 +36,11 @@ describe('ancient-watcher', () => {
         const boardB = game.child.playerB.child.board;
         const cardA = handA.child.cards.find(item => item instanceof AncientWatcherModel);
         const cardB = boardB.child.cards.find(item => item instanceof WispModel);
-        expect(cardA).toBeDefined();
-        expect(cardB).toBeDefined();
-        if (!cardA) return;
-        if (!cardB) return;
-        const roleA = cardA.child.role;
-        const roleB = cardB.child.role;
+        const roleA = cardA?.child.minion;
+        const roleB = cardB?.child.minion;
+        expect(roleA).toBeDefined();
+        expect(roleB).toBeDefined();
+        if (!roleA || !roleB) return;
         
         // Player A plays Watcher
         let promise = cardA.play();
@@ -69,9 +68,9 @@ describe('ancient-watcher', () => {
     test('ancient-watcher-still-cannot-attack-2', async () => {
         const boardA = game.child.playerA.child.board;
         const cardA = boardA.child.cards.find(item => item instanceof AncientWatcherModel);
-        expect(cardA).toBeDefined();
-        if (!cardA) return;
-        const roleA = cardA.child.role;
+        const roleA = cardA?.child.minion;
+        expect(roleA).toBeDefined();
+        if (!roleA) return;
         
         // End first turn
         const turn = game.child.turn;

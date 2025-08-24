@@ -41,16 +41,18 @@ describe('murloc-tidecaller', () => {
             })
         }
     }));
+    const boardA = game.child.playerA.child.board;
+    const boardB = game.child.playerB.child.board;
+    const handA = game.child.playerA.child.hand;
+    const handB = game.child.playerB.child.hand;
 
     test('murloc-raider-summon-no-buff', async () => {
-        const handA = game.child.playerA.child.hand;
         const cardA = handA.child.cards.find(item => item instanceof MurlocRaiderCard);
         const cardB = handA.child.cards.find(item => item instanceof MurlocTidecallerModel);
-        const boardA = game.child.playerA.child.board;
+        const roleB = cardB?.child.minion;
+        expect(roleB).toBeDefined();
         expect(cardA).toBeDefined();
-        expect(cardB).toBeDefined();
-        if (!cardA || !cardB) return;
-        const roleB = cardB.child.role;
+        if (!cardA || !roleB) return;
         
         expect(roleB.state.attack).toBe(1);
         expect(roleB.child.attack.state.origin).toBe(1);
@@ -70,14 +72,13 @@ describe('murloc-tidecaller', () => {
     })
 
     test('murloc-tidehunter-summon-buffs-tidecaller', async () => {
-        const handA = game.child.playerA.child.hand;
-        const boardA = game.child.playerA.child.board;
         const cardA = handA.child.cards.find(item => item instanceof MurlocTidecallerModel);
         const cardB = handA.child.cards.find(item => item instanceof MurlocTidehunterModel);
-        expect(cardA).toBeDefined();
-        expect(cardB).toBeDefined();
-        if (!cardA || !cardB) return;
-        const roleA = cardA.child.role;
+        const roleA = cardA?.child.minion;
+        const roleB = cardB?.child.minion;
+        expect(roleA).toBeDefined();
+        expect(roleB).toBeDefined();
+        if (!roleA || !roleB) return;
         
         expect(roleA.state.attack).toBe(1);
         expect(roleA.child.attack.state.origin).toBe(1);
@@ -117,10 +118,11 @@ describe('murloc-tidecaller', () => {
         const handB = game.child.playerB.child.hand;
         const cardA = boardA.child.cards.find(item => item instanceof MurlocTidecallerModel);
         const cardB = handB.child.cards.find(item => item instanceof MurlocTidehunterModel);
-        expect(cardA).toBeDefined();
-        expect(cardB).toBeDefined();
-        if (!cardA || !cardB) return;
-        const roleA = cardA.child.role;
+        const roleA = cardA?.child.minion;
+        const roleB = cardB?.child.minion;
+        expect(roleA).toBeDefined();
+        expect(roleB).toBeDefined();
+        if (!roleA || !roleB) return;
         
         expect(roleA.state.attack).toBe(3);
         expect(roleA.child.attack.state.origin).toBe(1);

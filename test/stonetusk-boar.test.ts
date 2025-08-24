@@ -40,14 +40,15 @@ describe('stonetusk-boar', () => {
         const boardA = game.child.playerA.child.board;
         const boardB = game.child.playerB.child.board;
         const cardA = handA.child.cards.find(item => item instanceof StonetuskBoarModel);
-        expect(cardA).toBeDefined();
-        if (!cardA) return;
-        const roleA = cardA.child.role;
-        const heroB = game.child.playerB.child.role;
+        const roleA = cardA?.child.minion;
+        const roleC = game.child.playerB.child.role;
+        expect(roleA).toBeDefined();
+        expect(roleC).toBeDefined();
+        if (!roleA || !roleC) return;
         
         expect(boardA.child.cards.length).toBe(0);
         expect(boardB.child.cards.length).toBe(1);
-        expect(heroB.state.health).toBe(30);
+        expect(roleC.state.health).toBe(30);
         
         // Play Stonetusk Boar
         let promise = cardA.play();
@@ -64,13 +65,13 @@ describe('stonetusk-boar', () => {
         // Boar directly attacks enemy hero
         promise = roleA.child.action.run();
         await TimeUtil.sleep();
-        expect(SelectUtil.current?.options).toContain(heroB);
+        expect(SelectUtil.current?.options).toContain(roleC);
         expect(SelectUtil.current?.options.length).toBe(2);
-        SelectUtil.set(heroB);
+        SelectUtil.set(roleC);
         await promise;
         
         expect(roleA.state.action).toBe(0);
-        expect(heroB.state.health).toBe(29);
-        expect(heroB.child.health.state.damage).toBe(1);
+        expect(roleC.state.health).toBe(29);
+        expect(roleC.child.health.state.damage).toBe(1);
     })
 }) 

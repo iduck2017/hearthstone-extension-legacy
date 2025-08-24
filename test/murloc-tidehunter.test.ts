@@ -35,10 +35,12 @@ describe('murloc-tidehunter', () => {
             })
         }
     }));
+    const boardA = game.child.playerA.child.board;
+    const boardB = game.child.playerB.child.board;
+    const handA = game.child.playerA.child.hand;
+    const handB = game.child.playerB.child.hand;
 
     test('murloc-tidehunter-battlecry-summons-scout', async () => {
-        const boardA = game.child.playerA.child.board;
-        const handA = game.child.playerA.child.hand;
         const cardA = handA.child.cards.find(item => item instanceof MurlocTidehunterModel);
         expect(cardA).toBeDefined();
         if (!cardA) return;

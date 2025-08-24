@@ -40,12 +40,11 @@ describe('elven-archer', () => {
         const board = game.child.playerB.child.board;
         const cardA = hand.child.cards.find(item => item instanceof ElvenArcherModel);
         const cardB = board.child.cards.find(item => item instanceof WispModel);
-        expect(cardA).toBeDefined();
-        expect(cardB).toBeDefined();
-        if (!cardA) return;
-        if (!cardB) return;
-        const roleA = cardA.child.role;
-        const roleB = cardB.child.role;
+        const roleA = cardA?.child.minion;
+        const roleB = cardB?.child.minion;
+        expect(roleA).toBeDefined();
+        expect(roleB).toBeDefined();
+        if (!roleA || !roleB) return;
         expect(roleB.state.health).toBe(1);
         const promise = cardA.play();
         expect(SelectUtil.current?.options).toContain(0);

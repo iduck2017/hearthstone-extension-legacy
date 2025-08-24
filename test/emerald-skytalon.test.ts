@@ -43,11 +43,12 @@ describe('emerald-skytalon', () => {
         const boardB = game.child.playerB.child.board;
         const cardA = handA.child.cards.find(item => item instanceof EmeraldSkytalonModel);
         const cardB = boardB.child.cards.find(item => item instanceof WispModel);
-        expect(cardA).toBeDefined();
-        if (!cardA) return;
-        if (!cardB) return;
-        const roleA = cardA.child.role;
-        const roleB = cardB.child.role;
+        const roleA = cardA?.child.minion;
+        const roleB = cardB?.child.minion;
+        expect(roleA).toBeDefined();
+        expect(roleB).toBeDefined();
+        if (!roleA || !roleB) return;
+
         const turn = game.child.turn;
         const playerA = game.child.playerA;
         const playerB = game.child.playerB
@@ -79,10 +80,9 @@ describe('emerald-skytalon', () => {
         const boardB = game.child.playerB.child.board;
         const cardA = handA.child.cards.find(item => item instanceof WispModel);
         const cardB = boardB.child.cards.find(item => item instanceof WispModel);
-        expect(cardA).toBeDefined();
-        if (!cardA) return;
-        if (!cardB) return;
-        const roleA = cardA.child.role;
+        const roleA = cardA?.child.minion;
+        expect(roleA).toBeDefined();
+        if (!roleA) return;
         let promise = cardA.play();
         await TimeUtil.sleep();
         expect(SelectUtil.current?.options).toContain(1);
@@ -112,15 +112,14 @@ describe('emerald-skytalon', () => {
         const cardA = boardA.child.cards.find(item => item instanceof EmeraldSkytalonModel);
         const cardB = boardA.child.cards.find(item => item instanceof WispModel);
         const cardC = boardB.child.cards.find(item => item instanceof WispModel);
-        expect(cardA).toBeDefined();
-        expect(cardB).toBeDefined();
-        expect(cardC).toBeDefined();
-        if (!cardA) return;
-        if (!cardB) return;
-        if (!cardC) return;
-        const roleA = cardA.child.role;
-        const roleB = cardB.child.role;
-        const roleC = cardC.child.role;
+        const roleA = cardA?.child.minion;
+        const roleB = cardB?.child.minion;
+        const roleC = cardC?.child.minion;
+        expect(roleA).toBeDefined();
+        expect(roleB).toBeDefined();
+        expect(roleC).toBeDefined();
+        if (!roleA || !roleB || !roleC) return;
+
         expect(roleA.child.sleep.state.status).toBe(false);
         expect(roleA.state.action).toBe(1);
         expect(roleA.child.entries.child.rush.state.status).toBe(RushStatus.ACTIVE_ONCE);

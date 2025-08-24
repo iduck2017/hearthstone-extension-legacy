@@ -28,17 +28,16 @@ describe('shieldbearer', () => {
         }
     })
     boot(game);
-
+    const boardA = game.child.playerA.child.board;
+    const boardB = game.child.playerB.child.board;
 
     test('wisp-attacks-shieldbearer', async () => {
-        const boardA = game.child.playerA.child.board;
-        const boardB = game.child.playerB.child.board;
         const cardA = boardA.child.cards.find(item => item instanceof WispModel);
         const cardB = boardB.child.cards.find(item => item instanceof WispModel);
         const cardC = boardB.child.cards.find(item => item instanceof ShieldbearerModel);
-        const roleA = cardA?.child.role;
-        const roleB = cardB?.child.role;
-        const roleC = cardC?.child.role;
+        const roleA = cardA?.child.minion;
+        const roleB = cardB?.child.minion;
+        const roleC = cardC?.child.minion;
         expect(roleA).toBeDefined();
         expect(roleB).toBeDefined();
         expect(roleC).toBeDefined();
@@ -67,9 +66,10 @@ describe('shieldbearer', () => {
         const boardA = game.child.playerA.child.board;
         const boardB = game.child.playerB.child.board;
         const card = boardB.child.cards.find(item => item instanceof ShieldbearerModel);
-        expect(card).toBeDefined();
-        if (!card) return;
-        const role = card.child.role;
+        const role = card?.child.minion;
+        expect(role).toBeDefined();
+        if (!role) return;
+
         const promise = role.child.action.run();
         expect(role.state.attack).toBe(0);
         expect(role.state.action).toBe(1);

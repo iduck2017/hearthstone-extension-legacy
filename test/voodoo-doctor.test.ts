@@ -42,12 +42,11 @@ describe('voodoo-doctor', () => {
         const boardB = game.child.playerB.child.board;
         const cardA = boardA.child.cards.find(item => item instanceof WispModel);
         const cardB = boardB.child.cards.find(item => item instanceof ShieldbearerModel);
-        expect(cardA).toBeDefined();
-        expect(cardB).toBeDefined();
-        if (!cardA || !cardB) return;
-        const roleA = cardA.child.role;
-        const roleB = cardB.child.role;
-        const heroB = game.child.playerB.child.role;
+        const roleA = cardA?.child.minion;
+        const roleB = cardB?.child.minion;
+        expect(roleA).toBeDefined();
+        expect(roleB).toBeDefined();
+        if (!roleA || !roleB) return;
         
         expect(boardA.child.cards.length).toBe(1);
         expect(boardB.child.cards.length).toBe(1);
@@ -73,15 +72,17 @@ describe('voodoo-doctor', () => {
         const cardA = boardA.child.cards.find(item => item instanceof WispModel);
         const cardB = boardB.child.cards.find(item => item instanceof ShieldbearerModel);
         const cardC = handA.child.cards.find(item => item instanceof VoodooDoctorModel);
-        expect(cardA).toBeDefined();
-        expect(cardB).toBeDefined();
-        expect(cardC).toBeDefined();
-        if (!cardA || !cardB || !cardC) return;
-        const roleA = cardA.child.role;
-        const roleB = cardB.child.role;
-        const roleC = cardC.child.role;
-        const heroA = game.child.playerA.child.role;
-        const heroB = game.child.playerB.child.role;
+        const roleA = cardA?.child.minion;
+        const roleB = cardB?.child.minion;
+        const roleC = cardC?.child.minion;
+        const roleD = game.child.playerA.child.role;
+        const roleE = game.child.playerB.child.role;
+        expect(roleA).toBeDefined();
+        expect(roleB).toBeDefined();
+        expect(roleC).toBeDefined();
+        expect(roleD).toBeDefined();
+        expect(roleE).toBeDefined();
+        if (!roleA || !roleB || !roleC || !roleD || !roleE) return;
         
         // Play Voodoo Doctor
         let promise = cardC.play();
@@ -91,8 +92,8 @@ describe('voodoo-doctor', () => {
         await TimeUtil.sleep();
         expect(SelectUtil.current?.options).toContain(roleA);
         expect(SelectUtil.current?.options).toContain(roleB);
-        expect(SelectUtil.current?.options).toContain(heroA);
-        expect(SelectUtil.current?.options).toContain(heroB);
+        expect(SelectUtil.current?.options).toContain(roleD);
+        expect(SelectUtil.current?.options).toContain(roleE);
         expect(SelectUtil.current?.options).not.toContain(roleC);
         expect(SelectUtil.current?.options.length).toBe(4);
         SelectUtil.set(roleB);

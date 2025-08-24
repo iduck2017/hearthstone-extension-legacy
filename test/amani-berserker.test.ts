@@ -37,18 +37,19 @@ describe('amani-berserker', () => {
             })
         }
     }));
+    const boardA = game.child.playerA.child.board;
+    const boardB = game.child.playerB.child.board;
+    const handA = game.child.playerA.child.hand;
+    const handB = game.child.playerB.child.hand;
 
     test('berserker-attacks-wisp', async () => {
-        const boardA = game.child.playerA.child.board;
-        const boardB = game.child.playerB.child.board;
         const cardA = boardA.child.cards.find(item => item instanceof AmaniBerserkerModel);
         const cardB = boardB.child.cards.find(item => item instanceof WispModel);
-        expect(cardA).toBeDefined();
-        expect(cardB).toBeDefined();
-        if (!cardA) return;
-        if (!cardB) return;
-        const roleA = cardA.child.role;
-        const roleB = cardB.child.role;
+        const roleA = cardA?.child.minion;
+        const roleB = cardB?.child.minion;
+        expect(roleA).toBeDefined();
+        expect(roleB).toBeDefined();
+        if (!roleA || !roleB) return;
         
         // Player A uses Berserker to attack wisp
         let promise = roleA.child.action.run();
@@ -73,17 +74,13 @@ describe('amani-berserker', () => {
     test('wisp-attacks-berserker', async () => {
         const turn = game.child.turn;
         turn.next(); // End turn to give control to Player B
-        
-        const boardA = game.child.playerA.child.board;
-        const boardB = game.child.playerB.child.board;
         const cardA = boardA.child.cards.find(item => item instanceof AmaniBerserkerModel);
         const cardB = boardB.child.cards.find(item => item instanceof WispModel);
-        expect(cardA).toBeDefined();
-        expect(cardB).toBeDefined();
-        if (!cardA) return;
-        if (!cardB) return;
-        const roleA = cardA.child.role;
-        const roleB = cardB.child.role;
+        const roleA = cardA?.child.minion;
+        const roleB = cardB?.child.minion;
+        expect(roleA).toBeDefined();
+        expect(roleB).toBeDefined();
+        if (!roleA || !roleB) return;
         
         // Player B uses second wisp to attack Berserker
         let promise = roleB.child.action.run();
@@ -105,17 +102,14 @@ describe('amani-berserker', () => {
 
     test('voodoo-doctor-heals-berserker', async () => {
         const turn = game.child.turn;
-        turn.next(); // End turn to give control back to Player A
+        turn.next(); 
         
-        const handA = game.child.playerA.child.hand;
-        const boardA = game.child.playerA.child.board;
         const cardA = handA.child.cards.find(item => item instanceof VoodooDoctorModel);
         const cardB = boardA.child.cards.find(item => item instanceof AmaniBerserkerModel);
+        const roleB = cardB?.child.minion;
+        expect(roleB).toBeDefined();
         expect(cardA).toBeDefined();
-        expect(cardB).toBeDefined();
-        if (!cardA) return;
-        if (!cardB) return;
-        const roleB = cardB.child.role;
+        if (!roleB || !cardA) return;
         
         // Player A plays woodoo to heal Berserker
         let promise = cardA.play();

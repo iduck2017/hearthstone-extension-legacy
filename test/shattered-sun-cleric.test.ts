@@ -30,27 +30,31 @@ describe('shattered-sun-cleric', () => {
             })
         }
     }));
+    const boardA = game.child.playerA.child.board;
+    const boardB = game.child.playerB.child.board;
+    const handA = game.child.playerA.child.hand;
+    const handB = game.child.playerB.child.hand;
 
     test('battlecry', async () => {
-        const handA = game.child.playerA.child.hand;
-        const boardA = game.child.playerA.child.board;
         const cardA = handA.child.cards.find(item => item instanceof ShatteredSunClericModel);
         const cardB = boardA.child.cards.find(item => item instanceof WispModel);
-        expect(cardA).toBeDefined();
-        expect(cardB).toBeDefined();
-        if (!cardA) return;
-        if (!cardB) return;
-        const roleA = cardA.child.role;
-        const roleB = cardB.child.role;
+        const roleA = cardA?.child.minion;
+        const roleB = cardB?.child.minion;
+        expect(roleA).toBeDefined();
+        expect(roleB).toBeDefined();
+        if (!roleA || !roleB) return;
+
         let promise = cardA.play();
         await TimeUtil.sleep();
         expect(SelectUtil.current?.options).toContain(0);
         SelectUtil.set(0);
         await TimeUtil.sleep();
+        
         expect(SelectUtil.current?.options).toContain(roleB);
         expect(SelectUtil.current?.options.length).toBe(1);
         SelectUtil.set(roleB);
         await promise;
+        
         expect(boardA.child.cards.length).toBe(2);
         expect(roleB.state.attack).toBe(2);
         expect(roleB.child.attack.state.origin).toBe(1);
@@ -72,12 +76,13 @@ describe('shattered-sun-cleric', () => {
         const boardB = game.child.playerB.child.board;
         const cardA = handB.child.cards.find(item => item instanceof ShatteredSunClericModel);
         const cardB = handB.child.cards.find(item => item instanceof WispModel);
-        expect(cardA).toBeDefined();
-        expect(cardB).toBeDefined();
-        if (!cardA) return;
-        if (!cardB) return;
-        const roleA = cardA.child.role;
-        const roleB = cardB.child.role;
+        const roleA = cardA?.child.minion;
+        const roleB = cardB?.child.minion;
+        expect(roleA).toBeDefined();
+        expect(roleB).toBeDefined();
+        if (!roleA || !roleB) return;
+
+        
         // Player B has no minions on board, so battlecry cannot trigger
         expect(boardB.child.cards.length).toBe(0);
         let promise = cardA.play();
@@ -87,12 +92,14 @@ describe('shattered-sun-cleric', () => {
         await TimeUtil.sleep();
         expect(SelectUtil.current).toBeUndefined();
         await promise;
+        
         expect(boardB.child.cards.length).toBe(1);
         promise = cardB.play();
         await TimeUtil.sleep();
         expect(SelectUtil.current?.options).toContain(0);
         SelectUtil.set(0);
         await promise;
+
         expect(boardB.child.cards.length).toBe(2);
         expect(roleB.state.action).toBe(1);
         expect(roleB.state.health).toBe(1);
@@ -105,13 +112,14 @@ describe('shattered-sun-cleric', () => {
         const boardB = game.child.playerB.child.board;
         const cardA = boardA.child.cards.find(item => item instanceof WispModel);
         const cardB = boardB.child.cards.find(item => item instanceof WispModel);
-        expect(cardA).toBeDefined();
-        expect(cardB).toBeDefined();
-        if (!cardA) return;
-        if (!cardB) return;
-        const roleA = cardA.child.role;
-        const roleB = cardB.child.role;
+        const roleA = cardA?.child.minion;
+        const roleB = cardB?.child.minion;
         const heroB = game.child.playerB.child.role;
+        expect(roleA).toBeDefined();
+        expect(roleB).toBeDefined();
+        if (!roleA || !roleB) return;
+
+
         expect(turn.refer.current).toBe(game.child.playerA);
         let promise = roleA.child.action.run();
         await TimeUtil.sleep();
@@ -120,6 +128,7 @@ describe('shattered-sun-cleric', () => {
         expect(SelectUtil.current?.options.length).toBe(3);
         SelectUtil.set(roleB);
         await promise;
+        
         expect(roleA.state.attack).toBe(2);
         expect(roleA.state.health).toBe(1);
         expect(roleA.state.action).toBe(0);

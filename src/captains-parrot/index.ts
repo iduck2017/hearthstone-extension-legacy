@@ -11,18 +11,17 @@
 // Artist: Daren Bader
 // Collectible
 
-import { AttackModel, ClassType, HealthModel, MinionModel, RaceType, RarityType, RoleModel, CardHooksModel } from "hearthstone-core";
+import { AttackModel, ClassType, HealthModel, MinionModel, RaceType, RarityType, RoleModel, CardHooksModel, CardModel } from "hearthstone-core";
 import { CaptainsParrotBattlecryModel } from "./battlecry";
 import { CostModel } from "hearthstone-core";
 
-export class CaptainsParrotModel extends MinionModel {
+export class CaptainsParrotModel extends CardModel {
     constructor(props: CaptainsParrotModel['props']) {
         super({
             uuid: props.uuid,
             state: {
                 name: 'Captain\'s Parrot',
                 desc: 'Battlecry: Draw a Pirate from your deck.',
-                races: [RaceType.BEAST],
                 flavorDesc: 'Pirates and Parrots go together like Virmen and Carrots.',
                 rarity: RarityType.EPIC,
                 class: ClassType.NEUTRAL,
@@ -30,7 +29,8 @@ export class CaptainsParrotModel extends MinionModel {
             },
             child: {
                 cost: new CostModel({ state: { origin: 2 }}),
-                role: new RoleModel({
+                minion: new MinionModel({
+                    state: { races: [RaceType.BEAST] },
                     child: {
                         attack: new AttackModel({ state: { origin: 1 }}),
                         health: new HealthModel({ state: { origin: 1 }}), 

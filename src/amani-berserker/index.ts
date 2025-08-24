@@ -10,18 +10,17 @@
 // Artist: Chippy
 // Collectible
 
-import { AttackModel, ClassType, FeaturesModel, HealthModel, MinionModel, RaceType, RarityType, RoleModel } from "hearthstone-core";
+import { AttackModel, CardModel, ClassType, FeaturesModel, HealthModel, MinionModel, RaceType, RarityType, RoleModel } from "hearthstone-core";
 import { AmaniBerserkerFeatureModel } from "./feature";
 import { CostModel } from "hearthstone-core";
 
-export class AmaniBerserkerModel extends MinionModel {
+export class AmaniBerserkerModel extends CardModel {
     constructor(props: AmaniBerserkerModel['props']) {
         super({
             uuid: props.uuid,
             state: {
                 name: 'Amani Berserker',
                 desc: 'Has +3 Attack while damaged.',
-                races: [],
                 flavorDesc: 'If an Amani berserker asks "Joo lookin\' at me?!", the correct response is "Nah, mon".',
                 rarity: RarityType.COMMON,
                 class: ClassType.NEUTRAL,
@@ -29,7 +28,8 @@ export class AmaniBerserkerModel extends MinionModel {
             },
             child: {
                 cost: new CostModel({ state: { origin: 2 }}),
-                role: new RoleModel({
+                minion: new MinionModel({
+                    state: { races: [] },
                     child: {
                         attack: new AttackModel({ state: { origin: 2 }}),
                         health: new HealthModel({ state: { origin: 3 }}), 

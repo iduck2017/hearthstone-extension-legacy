@@ -1,6 +1,7 @@
 import { BuffModel, GameModel, TurnModel } from "hearthstone-core";
-import { DebugUtil, EventUtil, LogLevel, TranxUtil } from "set-piece";
+import { DebugUtil, EventUtil, LogLevel, StoreUtil, TranxUtil } from "set-piece";
 
+@StoreUtil.is('abusive-sergeant-buff')
 export class AbusiveSergeantBuffModel extends BuffModel {
     constructor(props: AbusiveSergeantBuffModel['props']) {
         super({

@@ -1,18 +1,17 @@
 // Murloc Tidehunter - Battlecry: Summon a 1/1 Murloc Scout
 // Type: Minion, Minion Type: Murloc, Rarity: Free, Set: Legacy, Class: Neutral
 
-import { AttackModel, CardHooksModel, ClassType, HealthModel, MinionModel, RaceType, RarityType, RoleModel } from "hearthstone-core";
+import { AttackModel, CardHooksModel, CardModel, ClassType, HealthModel, MinionModel, RaceType, RarityType, RoleModel } from "hearthstone-core";
 import { MurlocTidehunterBattlecryModel } from "./battlecry";
 import { CostModel } from "hearthstone-core";
 
-export class MurlocTidehunterModel extends MinionModel {
+export class MurlocTidehunterModel extends CardModel {
     constructor(props: MurlocTidehunterModel['props']) {
         super({
             uuid: props.uuid,
             state: {
                 name: 'Murloc Tidehunter',
                 desc: 'Battlecry: Summon a 1/1 Murloc Scout.',
-                races: [RaceType.MURLOC],
                 flavorDesc: '',
                 rarity: RarityType.COMMON,
                 class: ClassType.NEUTRAL,
@@ -20,7 +19,8 @@ export class MurlocTidehunterModel extends MinionModel {
             },
             child: {
                 cost: new CostModel({ state: { origin: 2 }}),
-                role: new RoleModel({
+                minion: new MinionModel({
+                    state: { races: [RaceType.MURLOC] },
                     child: {
                         attack: new AttackModel({ state: { origin: 2 }}),
                         health: new HealthModel({ state: { origin: 1 }}),

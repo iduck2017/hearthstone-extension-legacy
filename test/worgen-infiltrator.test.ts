@@ -42,13 +42,13 @@ describe('worgen-infiltrator', () => {
         const boardB = game.child.playerB.child.board;
         const cardA = boardA.child.cards.find(item => item instanceof WispModel);
         const cardB = boardB.child.cards.find(item => item instanceof WorgenInfiltratorModel);
-        expect(cardA).toBeDefined();
-        expect(cardB).toBeDefined();
-        if (!cardA || !cardB) return;
-        const roleA = cardA.child.role;
-        const roleB = cardB.child.role;
+        const roleA = cardA?.child.minion;
+        const roleB = cardB?.child.minion;
         const heroB = game.child.playerB.child.role;
-
+        expect(roleA).toBeDefined();
+        expect(roleB).toBeDefined();
+        expect(heroB).toBeDefined();
+        if (!roleA || !roleB || !heroB) return;
         
         expect(boardA.child.cards.length).toBe(1);
         expect(boardB.child.cards.length).toBe(1);
@@ -73,12 +73,13 @@ describe('worgen-infiltrator', () => {
         const boardB = game.child.playerB.child.board;
         const cardA = boardA.child.cards.find(item => item instanceof WispModel);
         const cardB = boardB.child.cards.find(item => item instanceof WorgenInfiltratorModel);
-        expect(cardA).toBeDefined();
-        expect(cardB).toBeDefined();
-        if (!cardA || !cardB) return;
-        const roleA = cardA.child.role;
-        const roleB = cardB.child.role;
+        const roleA = cardA?.child.minion;
+        const roleB = cardB?.child.minion;
         const heroA = game.child.playerA.child.role;
+        expect(roleA).toBeDefined();
+        expect(roleB).toBeDefined();
+        expect(heroA).toBeDefined();
+        if (!roleA || !roleB || !heroA) return;
         
         expect(roleB.child.entries.child.stealth.state.status).toBe(1);
         
@@ -102,11 +103,11 @@ describe('worgen-infiltrator', () => {
         const boardB = game.child.playerB.child.board;
         const cardA = boardA.child.cards.find(item => item instanceof WispModel);
         const cardB = boardB.child.cards.find(item => item instanceof WorgenInfiltratorModel);
-        expect(cardA).toBeDefined();
-        expect(cardB).toBeDefined();
-        if (!cardA || !cardB) return;
-        const roleA = cardA.child.role;
-        const roleB = cardB.child.role;
+        const roleA = cardA?.child.minion;
+        const roleB = cardB?.child.minion;
+        expect(roleA).toBeDefined();
+        expect(roleB).toBeDefined();
+        if (!roleA || !roleB) return;
         const heroB = game.child.playerB.child.role;
         
         expect(roleB.child.entries.child.stealth.state.status).toBe(0);

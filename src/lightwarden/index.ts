@@ -1,15 +1,14 @@
-import { HealthModel, AttackModel, RaceType, FeaturesModel, RoleModel, MinionModel, ClassType, RarityType } from "hearthstone-core";
+import { HealthModel, AttackModel, RaceType, FeaturesModel, RoleModel, MinionModel, ClassType, RarityType, CardModel } from "hearthstone-core";
 import { LightwardenFeatureModel } from "./feature";
 import { CostModel } from "hearthstone-core";
 
-export class LightwardenModel extends MinionModel {
+export class LightwardenModel extends CardModel {
     constructor(props: LightwardenModel['props']) {
         super({
             uuid: props.uuid,
             state: {
                 name: 'Lightwarden',
                 desc: 'Whenever a character is healed, gain +2 Attack.',
-                races: [RaceType.BEAST],
                 flavorDesc: '',
                 rarity: RarityType.COMMON,
                 class: ClassType.NEUTRAL,
@@ -17,7 +16,8 @@ export class LightwardenModel extends MinionModel {
             },
             child: {
                 cost: new CostModel({ state: { origin: 1 }}),
-                role: new RoleModel({
+                minion: new MinionModel({
+                    state: { races: [RaceType.BEAST] },
                     child: {
                         attack: new AttackModel({ state: { origin: 1 }}),
                         health: new HealthModel({ state: { origin: 2 }}),

@@ -1,14 +1,13 @@
-import { AttackModel, ClassType, FeaturesModel, HealthModel, MinionModel, RaceType, RarityType, RoleEntriesModel, RoleModel, TauntModel } from "hearthstone-core";
+import { AttackModel, CardModel, ClassType, FeaturesModel, HealthModel, MinionModel, RaceType, RarityType, RoleEntriesModel, RoleModel, TauntModel } from "hearthstone-core";
 import { CostModel } from "hearthstone-core";
 
-export class ShieldbearerModel extends MinionModel {
+export class ShieldbearerModel extends CardModel {
     constructor(props: ShieldbearerModel['props']) {
         super({
             uuid: props.uuid,
             state: {
                 name: 'Shieldbearer',
                 desc: 'Taunt',
-                races: [RaceType.DRAENEI],
                 flavorDesc: '',
                 rarity: RarityType.COMMON,
                 class: ClassType.NEUTRAL,
@@ -16,7 +15,8 @@ export class ShieldbearerModel extends MinionModel {
             },
             child: {
                 cost: new CostModel({ state: { origin: 1 }}),
-                role: new RoleModel({
+                minion: new MinionModel({
+                    state: { races: [RaceType.DRAENEI] },
                     child: {
                         attack: new AttackModel({ state: { origin: 0 }}),
                         health: new HealthModel({ state: { origin: 4 }}),  

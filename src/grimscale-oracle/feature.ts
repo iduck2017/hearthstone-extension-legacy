@@ -1,4 +1,4 @@
-import { AttackModel, FeatureModel, RaceType, RoleModel } from "hearthstone-core";
+import { AttackModel, FeatureModel, MinionModel, RaceType, RoleModel } from "hearthstone-core";
 import { DebugUtil, LogLevel, StateUtil, TranxUtil } from "set-piece";
 import { DeepReadonly } from "utility-types";
 
@@ -29,7 +29,14 @@ export class GrimscaleOracleFeatureModel extends FeatureModel<
     }
 
 
-    @StateUtil.on(self => self.route.player?.proxy.child.board.child.cards.child.role.child.attack.decor)
+    @StateUtil.on(self => {
+        const proxy = self.route.player?.proxy;
+        if (!proxy) return;
+        const board = proxy.child.board;
+        const minions = board.child.cards.child.minion;
+        if (!minions) return;
+        return minions.child.attack.decor;
+    })
     @DebugUtil.log(LogLevel.WARN)
     private onCheck(
         that: AttackModel, 
@@ -40,7 +47,8 @@ export class GrimscaleOracleFeatureModel extends FeatureModel<
         const card = that.route.card;
         const role = that.route.role;
         if (this.route.role === role) return state;
-        if (!card?.state.races.includes(RaceType.MURLOC)) return state;
+        if (!(card instanceof MinionModel)) return state;
+        if (!card.state.races.includes(RaceType.MURLOC)) return state;
         const result = { ...state };
         result.offset = state.offset + this.state.offset;
         return result;

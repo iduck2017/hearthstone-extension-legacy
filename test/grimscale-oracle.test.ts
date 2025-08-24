@@ -52,9 +52,13 @@ describe('grimscale-oracle', () => {
         expect(cardB).toBeDefined();
         expect(cardD).toBeDefined();
         if (!cardA || !cardB || !cardD) return;
-        const roleA = cardA.child.role;
-        const roleB = cardB.child.role;
-        const roleD = cardD.child.role;
+        const roleA = cardA?.child.minion;
+        const roleB = cardB?.child.minion;
+        const roleD = cardD?.child.minion;
+        expect(roleA).toBeDefined();
+        expect(roleB).toBeDefined();
+        expect(roleD).toBeDefined();
+        if (!roleA || !roleB || !roleD) return;
         expect(roleA.state.attack).toBe(2);
         expect(roleB.state.attack).toBe(2);
         expect(roleD.state.attack).toBe(1);
@@ -72,7 +76,11 @@ describe('grimscale-oracle', () => {
         expect(cardB).toBeDefined();
         expect(cardC).toBeDefined();
         expect(cardD).toBeDefined();
-        if (!cardA || !cardB || !cardC || !cardD) return;
+        const roleA = cardA?.child.minion;
+        const roleB = cardB?.child.minion;
+        const roleC = cardC?.child.minion;
+        const roleD = cardD?.child.minion;
+        if (!roleA || !roleB || !roleC || !roleD) return;
         const promise = cardC.play();
         await TimeUtil.sleep();
         expect(SelectUtil.current).toBeDefined();
@@ -81,14 +89,10 @@ describe('grimscale-oracle', () => {
         await promise;
         expect(boardA.child.cards.length).toBe(3);
         expect(boardB.child.cards.length).toBe(1);
-        const roleA = cardA.child.role;
-        const roleZ = cardB.child.role;
-        const roleC = cardC.child.role;
-        const roleD = cardD.child.role;
         expect(roleA.state.attack).toBe(3);
         expect(roleA.child.attack.state.offset).toBe(1);
         expect(roleA.child.attack.state.origin).toBe(2);
-        expect(roleZ.state.attack).toBe(2);
+        expect(roleB.state.attack).toBe(2);
         expect(roleD.state.attack).toBe(1);
         expect(roleC.state.attack).toBe(1);
     })
@@ -102,19 +106,20 @@ describe('grimscale-oracle', () => {
         const cardB = boardB.child.cards.find(item => item instanceof MurlocRaiderCard);
         const cardC = boardA.child.cards.find(item => item instanceof GrimscaleOracleModel);
         const cardD = boardA.child.cards.find(item => item instanceof WispModel);
+        const roleA = cardA?.child.minion;
+        const roleB = cardB?.child.minion;
+        const roleC = cardC?.child.minion;
+        const roleD = cardD?.child.minion;
         expect(cardA).toBeDefined();
         expect(cardB).toBeDefined();
         expect(cardC).toBeDefined();
         expect(cardD).toBeDefined();
-        if (!cardA || !cardB || !cardC || !cardD) return;
-        const roleA = cardA.child.role;
-        const roleZ = cardB.child.role;
-        const roleC = cardC.child.role;
-        const roleD = cardD.child.role;
+        if (!roleA || !roleB || !roleC || !roleD) return;
+        
         game.child.turn.next();
         expect(game.child.turn.refer.current).toBe(game.child.playerB);
-        expect(roleZ.state.action).toBe(1);
-        const promise = roleZ.child.action.run();
+        expect(roleB.state.action).toBe(1);
+        const promise = roleB.child.action.run();
         await TimeUtil.sleep();
         expect(SelectUtil.current).toBeDefined();
         expect(SelectUtil.current?.options.length).toBe(4);
@@ -124,9 +129,9 @@ describe('grimscale-oracle', () => {
         expect(SelectUtil.current?.options).toContain(game.child.playerA.child.role); 
         SelectUtil.set(roleC);
         await promise;
-        expect(roleZ.state.action).toBe(0)
-        expect(roleZ.state.health).toBe(0);
-        expect(roleZ.child.death.state.status).toBe(DeathStatus.ACTIVE);
+        expect(roleB.state.action).toBe(0)
+        expect(roleB.state.health).toBe(0);
+        expect(roleB.child.death.state.status).toBe(DeathStatus.ACTIVE);
         expect(roleC.state.health).toBe(-1);
         expect(roleC.child.death.state.status).toBe(DeathStatus.ACTIVE);
         expect(boardB.child.cards.length).toBe(0);

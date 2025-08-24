@@ -42,9 +42,9 @@ describe('hungry-crab', () => {
         const handA = game.child.playerA.child.hand;
         const boardA = game.child.playerA.child.board;
         const cardA = handA.child.cards.find(item => item instanceof HungryCrabModel);
-        expect(cardA).toBeDefined();
-        if (!cardA) return;
-        const roleA = cardA.child.role;
+        const roleA = cardA?.child.minion;
+        expect(roleA).toBeDefined();
+        if (!roleA) return;
         let promise = cardA.play();
         await TimeUtil.sleep();
         expect(SelectUtil.current?.options).toContain(0);
@@ -73,12 +73,11 @@ describe('hungry-crab', () => {
         const boardB = game.child.playerB.child.board;
         const cardA = handB.child.cards.find(item => item instanceof HungryCrabModel);
         const cardB = handB.child.cards.find(item => item instanceof MurlocRaiderCard);
-        expect(cardA).toBeDefined();
-        expect(cardB).toBeDefined();
-        if (!cardA) return;
-        if (!cardB) return;
-        const roleA = cardA.child.role;
-        const roleB = cardB.child.role;
+        const roleA = cardA?.child.minion;
+        const roleB = cardB?.child.minion;
+        expect(roleA).toBeDefined();
+        expect(roleB).toBeDefined();
+        if (!roleA || !roleB) return;
         expect(boardB.child.cards.length).toBe(0);
         // Play Murloc Raider first
         let promise = cardB.play();

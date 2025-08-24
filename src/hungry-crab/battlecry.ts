@@ -20,8 +20,9 @@ export class HungryCrabBattlecryModel extends BattlecryModel<[RoleModel]> {
         if (!game) return;
         const options = game.refer.minions.filter(item => {
             const card = item.route.card;
-            if (!card) return false;
-            return card.state.races.includes(RaceType.MURLOC);
+            const minion = card?.child.minion;
+            if (!minion) return false;
+            return minion.state.races.includes(RaceType.MURLOC);
         });
         if (options.length === 0) return;
         return [new SelectEvent(options, { hint: 'Select a Murloc' })];
@@ -29,10 +30,10 @@ export class HungryCrabBattlecryModel extends BattlecryModel<[RoleModel]> {
 
     public async doRun(target: RoleModel) {
         const card = this.route.card;
-        const role = card?.child.role;
-        if (!role) return;
+        const minion = card?.child.minion;
+        if (!minion) return;
         if (!card) return;
         target.child.death.destroy(new AnchorEvent({ source: this.child.anchor }));
-        role.child.features.add(new HungryCrabBuffModel({}))
+        minion.child.features.add(new HungryCrabBuffModel({}))
     }
 }

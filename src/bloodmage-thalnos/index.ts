@@ -14,18 +14,17 @@
 // Deathrattle
 // Spell Damage
 
-import { AttackModel, ClassType, HealthModel, MinionModel, RaceType, RarityType, RoleModel, SpellDamageModel, RoleEntriesModel, CardHooksModel } from "hearthstone-core";
+import { AttackModel, ClassType, HealthModel, MinionModel, RaceType, RarityType, RoleModel, SpellDamageModel, RoleEntriesModel, CardHooksModel, CardModel } from "hearthstone-core";
 import { BloodmageThalnosDeathrattleModel } from "./deathrattle";
 import { CostModel } from "hearthstone-core";
 
-export class BloodmageThalnosModel extends MinionModel {
+export class BloodmageThalnosModel extends CardModel {
     constructor(props: BloodmageThalnosModel['props']) {
         super({
             uuid: props.uuid,
             state: {
                 name: 'Bloodmage Thalnos',
                 desc: 'Spell Damage +1 Deathrattle: Draw a card.',
-                races: [RaceType.UNDEAD],
                 flavorDesc: 'He\'s in charge of the Annual Scarlet Monastery Blood Drive!',
                 rarity: RarityType.LEGENDARY,
                 class: ClassType.NEUTRAL,
@@ -33,7 +32,8 @@ export class BloodmageThalnosModel extends MinionModel {
             },
             child: {
                 cost: new CostModel({ state: { origin: 2 }}),
-                role: new RoleModel({
+                minion: new MinionModel({
+                    state: { races: [RaceType.UNDEAD] },
                     child: {
                         attack: new AttackModel({ state: { origin: 1 }}),
                         health: new HealthModel({ state: { origin: 1 }}), 

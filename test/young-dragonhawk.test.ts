@@ -40,11 +40,11 @@ describe('young-dragonhawk', () => {
         const boardB = game.child.playerB.child.board;
         const cardA = boardA.child.cards.find(item => item instanceof YoungDragonhawkModel);
         const cardB = boardB.child.cards.find(item => item instanceof ShieldbearerModel);
-        expect(cardA).toBeDefined();
-        expect(cardB).toBeDefined();
-        if (!cardA || !cardB) return;
-        const roleA = cardA.child.role;
-        const roleB = cardB.child.role;
+        const roleA = cardA?.child.minion;
+        const roleB = cardB?.child.minion;
+        expect(roleA).toBeDefined();
+        expect(roleB).toBeDefined();
+        if (!roleA || !roleB) return;
         
         expect(boardA.child.cards.length).toBe(1);
         expect(boardB.child.cards.length).toBe(1);

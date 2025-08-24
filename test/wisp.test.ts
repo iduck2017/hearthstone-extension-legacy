@@ -24,18 +24,22 @@ describe('wisp', () => {
         }
     })
     boot(game);
+    const boardA = game.child.playerA.child.board;
+    const boardB = game.child.playerB.child.board;
+    const handA = game.child.playerA.child.hand;
+    const handB = game.child.playerB.child.hand;
+    const cardA = handA.child.cards.find(item => item instanceof WispModel);
+    const cardB = boardB.child.cards.find(item => item instanceof WispModel);
+    const roleA = cardA?.child.minion;
+    const roleB = cardB?.child.minion;
+    if (!roleA || !roleB) throw new Error();
 
-    test('summon', async () => {
-        const handA = game.child.playerA.child.hand;
-        const handB = game.child.playerB.child.hand;
-        const boardA = game.child.playerA.child.board;
-        const boardB = game.child.playerB.child.board;
+    test('role-summon', async () => {
         expect(handA.child.cards.length).toBe(1);
         expect(handB.child.cards.length).toBe(0);
         expect(boardA.child.cards.length).toBe(0);
         expect(boardB.child.cards.length).toBe(1);
-        const card = handA.child.cards.find(item => item instanceof WispModel);
-        const promise = card?.play();
+        const promise = cardA.play();
         await TimeUtil.sleep();
         expect(SelectUtil.current).toBeDefined();
         expect(SelectUtil.current?.options.length).toBe(1);
@@ -48,17 +52,7 @@ describe('wisp', () => {
         expect(handB.child.cards.length).toBe(0);
     })
 
-
-    test('attack', async () => {
-        const boardA = game.child.playerA.child.board;
-        const boardB = game.child.playerB.child.board;
-        const cardA = boardA.child.cards.find(item => item instanceof WispModel);
-        const cardB = boardB.child.cards.find(item => item instanceof WispModel);
-        const roleA = cardA?.child.role;
-        const roleB = cardB?.child.role;
-        expect(roleA).toBeDefined();
-        expect(roleB).toBeDefined();
-        if (!roleA || !roleB) return;
+    test('role-attack', async () => {
         game.child.turn.next();
         expect(roleB.state.action).toBe(1);
         const promise = roleB.child.action.run();

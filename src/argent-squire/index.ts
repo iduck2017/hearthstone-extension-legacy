@@ -1,14 +1,13 @@
 import { AttackModel, CardModel, ClassType, DivineSheildModel, HealthModel, MinionModel, RarityType, RoleEntriesModel, RoleModel } from "hearthstone-core";
 import { CostModel } from "hearthstone-core";
 
-export class ArgentSquireModel extends MinionModel {
+export class ArgentSquireModel extends CardModel {
     public constructor(props: CardModel['props']) {
         super({
             uuid: props.uuid,
             state: {
                 name: 'Argent Squire',
                 desc: 'Divine Shield',
-                races: [],
                 flavorDesc: '',
                 rarity: RarityType.COMMON,
                 class: ClassType.NEUTRAL,
@@ -16,7 +15,8 @@ export class ArgentSquireModel extends MinionModel {
             },
             child: {
                 cost: new CostModel({ state: { origin: 1 }}),
-                role: new RoleModel({
+                minion: new MinionModel({
+                    state: { races: [] },
                     child: {
                         attack: new AttackModel({ state: { origin: 1 }}),
                         health: new HealthModel({ state: { origin: 1 }}),   

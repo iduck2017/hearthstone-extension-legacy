@@ -16,14 +16,18 @@ export class MurlocTidecallerFeatureModel extends FeatureModel {
         });
     }
 
-    @EventUtil.on(self => self.route.player?.proxy.child.board.child.cards.event.onSummon)
+    @EventUtil.on(self => {
+        const proxy = self.route.player?.proxy;
+        if (!proxy) return;
+        const card = proxy.child.board.child.cards;
+        return card.child.minion?.event.onSummon;
+    })
     private onSummon(that: MinionModel, event: {}) {
         const role = this.route.role;
-        const card = this.route.card;
         if (!role) return;
         if (!this.route.board) return;
         if (!that.state.races.includes(RaceType.MURLOC)) return;
-        if (that === card) return;
+        if (that === role) return;
         console.log("summon", that.name);
         role.child.features.add(new MurlocTidecallerBuffModel({}));
     }

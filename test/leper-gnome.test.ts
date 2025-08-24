@@ -28,26 +28,28 @@ describe('leper-gnome', () => {
             })
         }
     }));
+    const boardA = game.child.playerA.child.board;
+    const boardB = game.child.playerB.child.board;
+    const handA = game.child.playerA.child.hand;
+    const handB = game.child.playerB.child.hand;
 
     test('leper-gnome-deathrattle-damages-hero', async () => {
-        const boardA = game.child.playerA.child.board;
-        const boardB = game.child.playerB.child.board;
         const cardA = boardA.child.cards.find(item => item instanceof LeperGnomeModel);
         const cardB = boardB.child.cards.find(item => item instanceof WispModel);
-        expect(cardA).toBeDefined();
-        expect(cardB).toBeDefined();
-        if (!cardA) return;
-        if (!cardB) return;
-        const roleA = cardA.child.role;
-        const roleB = cardB.child.role;
-        const heroB = game.child.playerB.child.role;
+        const roleA = cardA?.child.minion;
+        const roleB = cardB?.child.minion;
+        const roleC = game.child.playerB.child.role;
+        expect(roleA).toBeDefined();
+        expect(roleB).toBeDefined();
+        if (!roleA || !roleB) return;
+        
         expect(boardA.child.cards.length).toBe(1);
         expect(boardB.child.cards.length).toBe(1);
         expect(roleA.state.attack).toBe(2);
         expect(roleA.state.health).toBe(1);
         expect(roleB.state.attack).toBe(1);
         expect(roleB.state.health).toBe(1);
-        expect(heroB.state.health).toBe(30);
+        expect(roleC.state.health).toBe(30);
 
         let promise = roleA.child.action.run();
         await TimeUtil.sleep();
@@ -60,7 +62,7 @@ describe('leper-gnome', () => {
         expect(boardB.child.cards.length).toBe(0);
         expect(roleA.child.death.state.status).toBe(DeathStatus.ACTIVE);
         expect(roleB.child.death.state.status).toBe(DeathStatus.ACTIVE);
-        expect(heroB.state.health).toBe(28);
-        expect(heroB.child.health.state.damage).toBe(2);
+        expect(roleC.state.health).toBe(28);
+        expect(roleC.child.health.state.damage).toBe(2);
     })
 })

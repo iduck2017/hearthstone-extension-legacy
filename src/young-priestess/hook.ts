@@ -19,20 +19,20 @@ export class YoungPriestessHookModel extends EndTurnHookModel {
     }
 
     protected doRun() {
-        const board = this.route.board;
-        if (!board) return;
         const player = this.route.player;
         if (!player) return;
         const card = this.route.card;
         if (!card) return;
-        const role = card.child.role;
+        const minion = card.child.minion;
 
         // Get all friendly minions except this one
-        const roles = player.refer.minions.filter(item => item !== role);
-        if (roles.length === 0) return;
+        const minions = player.refer.minions.filter(item => item !== minion);
+        if (minions.length === 0) return;
+        
         // Select random minion
-        const index = Math.floor(Math.random() * roles.length);
-        const target = roles[index];
+        const index = Math.floor(Math.random() * minions.length);
+        const target = minions[index];
+
         // Add health buff to target
         if (!target) return;
         target.child.features.add(new YoungPriestessBuffModel({}));
