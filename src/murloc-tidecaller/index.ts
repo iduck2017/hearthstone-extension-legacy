@@ -11,7 +11,7 @@ export class MurlocTidecallerModel extends CardModel {
             state: {
                 name: 'Murloc Tidecaller',
                 desc: 'Whenever your summon a Murloc, gain +1 Attack.',
-                flavorDesc: '',
+                flavorDesc: 'This guy gets crazy strong at family reunions.',
                 rarity: RarityType.RARE,
                 class: ClassType.NEUTRAL,
                 ...props.state,

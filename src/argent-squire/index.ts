@@ -10,7 +10,7 @@ export class ArgentSquireModel extends CardModel {
             state: {
                 name: 'Argent Squire',
                 desc: 'Divine Shield',
-                flavorDesc: '',
+                flavorDesc: '"I solemnly swear to uphold the Light, purge the world of darkness, and to eat only burritos." - The Argent Dawn Oath',
                 rarity: RarityType.COMMON,
                 class: ClassType.NEUTRAL,
                 ...props.state,

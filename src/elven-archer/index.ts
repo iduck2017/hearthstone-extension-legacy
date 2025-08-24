@@ -11,7 +11,7 @@ export class ElvenArcherModel extends CardModel {
             state: {
                 name: 'Elven Archer',
                 desc: 'Battlecry: Deal 1 damage.',
-                flavorDesc: '',
+                flavorDesc: 'Don\'t bother asking her out on a date. She\'ll shoot you down.',
                 rarity: RarityType.COMMON,
                 class: ClassType.NEUTRAL,
                 ...props.state,

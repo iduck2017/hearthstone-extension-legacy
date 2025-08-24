@@ -10,7 +10,7 @@ export class EmeraldSkytalonModel extends CardModel {
             state: {
                 name: 'Emerald Skytalon',
                 desc: 'Rush',
-                flavorDesc: '',
+                flavorDesc: 'Sworn protectors of Ysera at the Emerald Dragonshrine, these majestic owls have been touched by the powers of the Emerald Dream, taking on an almost crystalline appearance.',
                 rarity: RarityType.COMMON,
                 class: ClassType.NEUTRAL,
                 ...props.state,

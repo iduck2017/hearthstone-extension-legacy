@@ -10,7 +10,7 @@ export class GoldshireFootmanModel extends CardModel {
             state: {
                 name: 'Goldshire Footman',
                 desc: 'Taunt',
-                flavorDesc: '',
+                flavorDesc: 'If 1/2 minions are all that is defending Goldshire, you would think it would have been overrun years ago.',
                 rarity: RarityType.COMMON,
                 class: ClassType.NEUTRAL,
                 ...props.state

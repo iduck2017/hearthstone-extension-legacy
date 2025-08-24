@@ -14,7 +14,7 @@ export class MurlocTidehunterModel extends CardModel {
             state: {
                 name: 'Murloc Tidehunter',
                 desc: 'Battlecry: Summon a 1/1 Murloc Scout.',
-                flavorDesc: '',
+                flavorDesc: '"Death will rise, from the tides!"',
                 rarity: RarityType.COMMON,
                 class: ClassType.NEUTRAL,
                 ...props.state

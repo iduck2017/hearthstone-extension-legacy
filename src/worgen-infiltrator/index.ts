@@ -9,7 +9,7 @@ export class WorgenInfiltratorModel extends CardModel {
             state: {
                 name: 'Worgen Infiltrator',
                 desc: 'Stealth',
-                flavorDesc: '',
+                flavorDesc: 'If you want to stop a worgen from infiltrating, just yell, "No! Bad boy!"',
                 rarity: RarityType.COMMON,
                 class: ClassType.NEUTRAL,
                 ...props.state,

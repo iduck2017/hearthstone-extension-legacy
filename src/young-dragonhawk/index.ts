@@ -9,7 +9,7 @@ export class YoungDragonhawkModel extends CardModel {
             state: {
                 name: 'Young Dragonhawk',
                 desc: 'Windfury',
-                flavorDesc: '',
+                flavorDesc: 'They were the inspiration for the championship Taurenball team: The Dragonhawks.',
                 rarity: RarityType.COMMON,
                 class: ClassType.NEUTRAL,
                 ...props.state,

@@ -10,7 +10,7 @@ export class StonetuskBoarModel extends CardModel {
             state: {
                 name: 'Stonetusk Boar',
                 desc: 'Charge',
-                flavorDesc: '',
+                flavorDesc: 'This card is boaring.',
                 rarity: RarityType.COMMON,
                 class: ClassType.NEUTRAL,
                 ...props.state,

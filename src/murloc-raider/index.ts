@@ -10,7 +10,7 @@ export class MurlocRaiderCard extends CardModel {
             state: {
                 name: 'Murloc Raider',
                 desc: '',
-                flavorDesc: '',
+                flavorDesc: 'Mrrraggglhlhghghlgh, mrgaaag blarrghlgaahahl mrgggg glhalhah a bghhll graggmgmg Garrosh mglhlhlh mrghlhlhl!!',
                 rarity: RarityType.COMMON,
                 class: ClassType.NEUTRAL,
                 ...props.state
