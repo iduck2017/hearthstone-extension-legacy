@@ -13,7 +13,9 @@
 import { AttackModel, CardModel, ClassType, FeaturesModel, HealthModel, MinionModel, RarityType, RoleModel } from "hearthstone-core";
 import { AncientWatcherFeatureModel } from "./feature";
 import { CostModel } from "hearthstone-core";
+import { LibraryUtil } from "hearthstone-core";
 
+@LibraryUtil.is('ancient-watcher')  
 export class AncientWatcherModel extends CardModel {
     constructor(props: AncientWatcherModel['props']) {
         super({

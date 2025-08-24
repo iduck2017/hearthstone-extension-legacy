@@ -1,5 +1,5 @@
 import { AttackModel, FeatureModel, MinionModel, RaceType, RoleModel } from "hearthstone-core";
-import { DebugUtil, LogLevel, StateUtil, TranxUtil } from "set-piece";
+import { DebugUtil, LogLevel, StateUtil, StoreUtil, TranxUtil } from "set-piece";
 import { DeepReadonly } from "utility-types";
 
 export namespace GrimscaleOracleFeatureModel {
@@ -9,6 +9,7 @@ export namespace GrimscaleOracleFeatureModel {
     }
 }
 
+@StoreUtil.is('grimscale-oracle-feature')
 export class GrimscaleOracleFeatureModel extends FeatureModel<
     GrimscaleOracleFeatureModel.Event,
     GrimscaleOracleFeatureModel.State

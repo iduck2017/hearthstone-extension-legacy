@@ -3,7 +3,9 @@
 import { EndTurnHookModel, FeatureModel, RoleModel } from "hearthstone-core";
 import { EventUtil } from "set-piece";
 import { YoungPriestessBuffModel } from "./buff";
+import { StoreUtil } from "set-piece";
 
+@StoreUtil.is('young-priestess-hook')
 export class YoungPriestessHookModel extends EndTurnHookModel {
     constructor(props: YoungPriestessHookModel['props']) {
         super({

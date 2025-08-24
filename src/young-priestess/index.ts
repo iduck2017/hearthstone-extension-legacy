@@ -4,7 +4,9 @@
 
 import { AttackModel, CardHooksModel, CardModel, ClassType, CostModel, FeaturesModel, HealthModel, MinionModel, RaceType, RarityType, RoleModel } from "hearthstone-core";
 import { YoungPriestessHookModel } from "./hook";
+import { LibraryUtil } from "hearthstone-core";
 
+@LibraryUtil.is('young-priestess')
 export class YoungPriestessModel extends CardModel {
     constructor(props: YoungPriestessModel['props']) {
         super({

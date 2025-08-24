@@ -1,7 +1,9 @@
 import { AttackModel, CardHooksModel, ClassType, HealthModel, MinionModel,RarityType,  RaceType, RoleModel, CardModel } from "hearthstone-core";
 import { VoodooDoctorBattlecryModel } from "./battlecry";
 import { CostModel } from "hearthstone-core";
+import { LibraryUtil } from "hearthstone-core";
 
+@LibraryUtil.is('voodoo-doctor')
 export class VoodooDoctorModel extends CardModel {
     constructor(props: VoodooDoctorModel['props']) {
         super({

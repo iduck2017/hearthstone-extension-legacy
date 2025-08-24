@@ -1,7 +1,9 @@
 import { HealthModel, AttackModel, RoleModel, RaceType, MinionModel, FeaturesModel, RarityType, ClassType, CardModel } from "hearthstone-core";
 import { GrimscaleOracleFeatureModel } from "./feature";
 import { CostModel } from "hearthstone-core";
+import { LibraryUtil } from "hearthstone-core";
 
+@LibraryUtil.is('grimscale-oracle') 
 export class GrimscaleOracleModel extends CardModel {
     constructor(props: GrimscaleOracleModel['props']) {
         super({

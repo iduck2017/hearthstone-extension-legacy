@@ -1,5 +1,5 @@
 import { AttackModel, BuffModel, FeatureModel, HealthModel, RoleModel } from "hearthstone-core";
-import { Event, EventUtil, StateUtil, TranxUtil } from "set-piece";
+import { Event, EventUtil, StateUtil, StoreUtil, TranxUtil } from "set-piece";
 import { DeepReadonly } from "utility-types";
 
 export namespace AmaniBerserkerFeatureModel {
@@ -11,6 +11,7 @@ export namespace AmaniBerserkerFeatureModel {
     export type Refer = {}
 }
 
+@StoreUtil.is('amani-berserker-feature')
 export class AmaniBerserkerFeatureModel extends FeatureModel<
     AmaniBerserkerFeatureModel.Event,
     AmaniBerserkerFeatureModel.State,

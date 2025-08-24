@@ -1,5 +1,7 @@
 import { HealthModel, AttackModel, WindfuryModel, RoleEntriesModel, MinionModel, RaceType, RoleModel, WindfuryStatus, ClassType, RarityType, CostModel, CardModel } from "hearthstone-core";
+import { LibraryUtil } from "hearthstone-core";
 
+@LibraryUtil.is('young-dragonhawk')
 export class YoungDragonhawkModel extends CardModel {
     constructor(props: YoungDragonhawkModel['props']) {
         super({

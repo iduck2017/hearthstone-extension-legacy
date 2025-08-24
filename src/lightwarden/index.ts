@@ -1,7 +1,9 @@
 import { HealthModel, AttackModel, RaceType, FeaturesModel, RoleModel, MinionModel, ClassType, RarityType, CardModel } from "hearthstone-core";
 import { LightwardenFeatureModel } from "./feature";
 import { CostModel } from "hearthstone-core";
+import { LibraryUtil } from "hearthstone-core";
 
+@LibraryUtil.is('lightwarden')
 export class LightwardenModel extends CardModel {
     constructor(props: LightwardenModel['props']) {
         super({

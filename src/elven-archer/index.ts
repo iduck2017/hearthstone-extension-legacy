@@ -1,7 +1,9 @@
 import { MinionModel, FeatureModel, HealthModel, AttackModel, RoleModel, CardHooksModel, ClassType, RarityType, CardModel } from "hearthstone-core";
 import { ElvenArcherBattlecryModel } from "./battlecry";
 import { CostModel } from "hearthstone-core";
+import { LibraryUtil } from "hearthstone-core";
 
+@LibraryUtil.is('elven-archer')
 export class ElvenArcherModel extends CardModel {
     constructor(props: ElvenArcherModel['props']) {
         super({

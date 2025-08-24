@@ -1,6 +1,8 @@
 import { AttackModel, CardModel, ClassType, DivineSheildModel, HealthModel, MinionModel, RarityType, RoleEntriesModel, RoleModel } from "hearthstone-core";
 import { CostModel } from "hearthstone-core";
+import { LibraryUtil } from "hearthstone-core";
 
+@LibraryUtil.is('argent-squire')
 export class ArgentSquireModel extends CardModel {
     public constructor(props: CardModel['props']) {
         super({

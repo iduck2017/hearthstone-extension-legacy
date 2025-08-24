@@ -1,5 +1,7 @@
 import { BattlecryModel, RestoreEvent, RestoreUtil, RoleModel, SelectEvent } from "hearthstone-core";
+import { StoreUtil } from "set-piece";
 
+@StoreUtil.is('voodoo-doctor-battlecry')
 export class VoodooDoctorBattlecryModel extends BattlecryModel<[RoleModel]> {
     constructor(props: VoodooDoctorBattlecryModel['props']) {
         super({

@@ -1,5 +1,7 @@
 import { DamageEvent, DamageType, DamageUtil, DeathrattleModel } from "hearthstone-core";
+import { StoreUtil } from "set-piece";
 
+@StoreUtil.is('leper-gnome-deathrattle')
 export class LeperGnomeDeathrattleModel extends DeathrattleModel {
     constructor(props: LeperGnomeDeathrattleModel['props']) {
         super({

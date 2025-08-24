@@ -1,7 +1,9 @@
 import { AttackModel, CardModel, ClassType, FeaturesModel, HealthModel, MinionModel, RaceType, RarityType, RoleModel } from "hearthstone-core";
 import { MurlocTidecallerFeatureModel } from "./feature";
 import { CostModel } from "hearthstone-core";
+import { LibraryUtil } from "hearthstone-core";
 
+@LibraryUtil.is('murloc-tidecaller')
 export class MurlocTidecallerModel extends CardModel {
     constructor(props: MurlocTidecallerModel['props']) {
         super({

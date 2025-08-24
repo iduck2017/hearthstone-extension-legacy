@@ -1,7 +1,8 @@
 import { BattlecryModel, RoleModel, SelectEvent } from "hearthstone-core";
 import { ShatteredSunClericBuffModel } from "./buff";
-import { DebugUtil } from "set-piece";
+import { DebugUtil, StoreUtil } from "set-piece";
 
+@StoreUtil.is('shattered-sun-cleric-battlecry')
 export class ShatteredSunClericBattlecryModel extends BattlecryModel<
     [RoleModel]
 > {

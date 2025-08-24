@@ -1,7 +1,9 @@
 // Young Priestess Buff - +1 Health
 
 import { BuffModel } from "hearthstone-core";
+import { StoreUtil } from "set-piece";
 
+@StoreUtil.is('young-priestess-buff')
 export class YoungPriestessBuffModel extends BuffModel {
     constructor(props: YoungPriestessBuffModel['props']) {
         super({

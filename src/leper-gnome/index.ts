@@ -1,7 +1,9 @@
 import { AttackModel, CardHooksModel, CardModel, ClassType, HealthModel, MinionModel, RarityType, RoleModel } from "hearthstone-core";
 import { LeperGnomeDeathrattleModel } from "./deathrattle";
 import { CostModel } from "hearthstone-core";
+import { LibraryUtil } from "hearthstone-core";
 
+@LibraryUtil.is('leper-gnome')
 export class LeperGnomeModel extends CardModel {
     constructor(props: LeperGnomeModel['props']) {
         super({

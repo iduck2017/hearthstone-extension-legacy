@@ -17,7 +17,9 @@
 import { AttackModel, ClassType, HealthModel, MinionModel, RaceType, RarityType, RoleModel, SpellDamageModel, RoleEntriesModel, CardHooksModel, CardModel } from "hearthstone-core";
 import { BloodmageThalnosDeathrattleModel } from "./deathrattle";
 import { CostModel } from "hearthstone-core";
+import { LibraryUtil } from "hearthstone-core";
 
+@LibraryUtil.is('bloodmage-thalnos')
 export class BloodmageThalnosModel extends CardModel {
     constructor(props: BloodmageThalnosModel['props']) {
         super({

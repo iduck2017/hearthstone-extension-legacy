@@ -1,6 +1,8 @@
 import { AttackModel, CardModel, ClassType, HealthModel, MinionModel, RarityType, RoleEntriesModel, RoleModel, TauntModel } from "hearthstone-core";
 import { CostModel } from "hearthstone-core";
+import { LibraryUtil } from "hearthstone-core";
 
+@LibraryUtil.is('goldshire-footman')
 export class GoldshireFootmanModel extends CardModel {
     constructor(props: GoldshireFootmanModel['props']) {
         super({

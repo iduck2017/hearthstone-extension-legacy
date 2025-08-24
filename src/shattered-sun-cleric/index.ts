@@ -1,7 +1,9 @@
 import { AttackModel, CardHooksModel, CardModel, ClassType, HealthModel, MinionModel, RarityType, RoleModel } from "hearthstone-core";
 import { ShatteredSunClericBattlecryModel } from "./battlecry";
 import { CostModel } from "hearthstone-core";
+import { LibraryUtil } from "hearthstone-core";
 
+@LibraryUtil.is('shattered-sun-cleric')
 export class ShatteredSunClericModel extends CardModel {
     constructor(props: ShatteredSunClericModel['props']) {
         super({

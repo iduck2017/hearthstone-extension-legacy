@@ -1,6 +1,8 @@
 import { AnchorEvent, BattlecryModel, DamageType, RaceType, RoleModel, SelectEvent } from "hearthstone-core";
 import { HungryCrabBuffModel } from "./buff";
+import { StoreUtil } from "set-piece";
 
+@StoreUtil.is('hungry-crab-battlecry')
 export class HungryCrabBattlecryModel extends BattlecryModel<[RoleModel]> {
     constructor(props: HungryCrabBattlecryModel['props']) {
         super({

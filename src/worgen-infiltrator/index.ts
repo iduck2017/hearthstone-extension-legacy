@@ -1,5 +1,7 @@
 import { AttackModel, CardModel, ClassType, CostModel, HealthModel, MinionModel, RarityType, RoleEntriesModel, RoleModel, StealthModel } from "hearthstone-core";
+import { LibraryUtil } from "hearthstone-core";
 
+@LibraryUtil.is('worgen-infiltrator')
 export class WorgenInfiltratorModel extends CardModel {
     constructor(props: WorgenInfiltratorModel['props']) {
         super({

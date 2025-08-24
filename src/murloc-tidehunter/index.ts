@@ -4,7 +4,9 @@
 import { AttackModel, CardHooksModel, CardModel, ClassType, HealthModel, MinionModel, RaceType, RarityType, RoleModel } from "hearthstone-core";
 import { MurlocTidehunterBattlecryModel } from "./battlecry";
 import { CostModel } from "hearthstone-core";
+import { LibraryUtil } from "hearthstone-core";
 
+@LibraryUtil.is('murloc-tidehunter')
 export class MurlocTidehunterModel extends CardModel {
     constructor(props: MurlocTidehunterModel['props']) {
         super({

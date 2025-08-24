@@ -1,6 +1,8 @@
 import { AttackModel, CardModel, ClassType, FeaturesModel, HealthModel, MinionModel, RaceType, RarityType, RoleEntriesModel, RoleModel, TauntModel } from "hearthstone-core";
 import { CostModel } from "hearthstone-core";
+import { LibraryUtil } from "hearthstone-core";
 
+@LibraryUtil.is('shieldbearer')
 export class ShieldbearerModel extends CardModel {
     constructor(props: ShieldbearerModel['props']) {
         super({

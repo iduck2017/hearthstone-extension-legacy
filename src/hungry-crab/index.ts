@@ -1,7 +1,9 @@
 import { HealthModel, AttackModel, MinionModel, RaceType, RoleModel, CardHooksModel, ClassType, RarityType, CardModel } from "hearthstone-core";
 import { HungryCrabBattlecryModel } from "./battlecry";
 import { CostModel } from "hearthstone-core";
+import { LibraryUtil } from "hearthstone-core";
 
+@LibraryUtil.is('hungry-crab')
 export class HungryCrabModel extends CardModel {
     constructor(props: HungryCrabModel['props']) {
         super({

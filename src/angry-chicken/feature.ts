@@ -1,5 +1,5 @@
 import { AttackModel, BuffModel, FeatureModel, HealthModel, RoleModel } from "hearthstone-core";
-import { Event, EventUtil, StateUtil, TranxUtil } from "set-piece";
+import { Event, EventUtil, StateUtil, StoreUtil, TranxUtil } from "set-piece";
 import { DeepReadonly } from "utility-types";
 
 export namespace AngryChickenFeatureModel {
@@ -11,6 +11,7 @@ export namespace AngryChickenFeatureModel {
     export type Refer = {}
 }
 
+@StoreUtil.is('angry-chicken-feature')
 export class AngryChickenFeatureModel extends FeatureModel<
     AngryChickenFeatureModel.Event,
     AngryChickenFeatureModel.State,

@@ -2,7 +2,9 @@
 
 import { BattlecryModel } from "hearthstone-core";
 import { MurlocScoutModel } from "../murloc-scout";
+import { StoreUtil } from "set-piece";
 
+@StoreUtil.is('murloc-tidehunter-battlecry')
 export class MurlocTidehunterBattlecryModel extends BattlecryModel<[]> {
     constructor(props: MurlocTidehunterBattlecryModel['props']) {
         super({

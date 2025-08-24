@@ -8,11 +8,11 @@
 // Artist: Dan Brereton
 // Collectible
 
-import { AttackModel, CardModel, ClassType, HealthModel, MinionModel, RaceType, RarityType, RoleModel } from "hearthstone-core";
+import { AttackModel, CardModel, ClassType, HealthModel, LibraryUtil, MinionModel, RaceType, RarityType, RoleModel } from "hearthstone-core";
 import { CostModel } from "hearthstone-core";
 import { StoreUtil } from "set-piece";
 
-@StoreUtil.is('bloodfen-raptor')
+@LibraryUtil.is('bloodfen-raptor')
 export class BloodfenRaptorModel extends CardModel {
     constructor(props: BloodfenRaptorModel['props']) {
         super({

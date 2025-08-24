@@ -13,7 +13,9 @@
 
 import { ChargeModel, HealthModel, AttackModel, MinionModel, RaceType, RoleModel, RoleEntriesModel, ClassType, RarityType, CardModel } from "hearthstone-core";
 import { CostModel } from "hearthstone-core";
+import { LibraryUtil } from "hearthstone-core";
 
+@LibraryUtil.is('bluegill-warrior')
 export class BluegillWarriorModel extends CardModel {
     constructor(props: BluegillWarriorModel['props']) {
         super({

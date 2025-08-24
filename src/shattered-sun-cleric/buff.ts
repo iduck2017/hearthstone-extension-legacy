@@ -1,5 +1,7 @@
 import { BuffModel } from "hearthstone-core";
+import { StoreUtil } from "set-piece";
 
+@StoreUtil.is('shattered-sun-cleric-buff')
 export class ShatteredSunClericBuffModel extends BuffModel {
     constructor(props: ShatteredSunClericBuffModel['props']) {
         super({

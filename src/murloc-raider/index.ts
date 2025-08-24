@@ -1,6 +1,8 @@
 import { HealthModel, AttackModel, MinionModel, RaceType, RoleModel, RarityType, ClassType, CardModel } from "hearthstone-core";
 import { CostModel } from "hearthstone-core";
+import { LibraryUtil } from "hearthstone-core";
 
+@LibraryUtil.is('murloc-raider')
 export class MurlocRaiderCard extends CardModel {
     constructor(props: MurlocRaiderCard['props']) {
         super({

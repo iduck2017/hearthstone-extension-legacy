@@ -3,7 +3,9 @@
 
 import { AttackModel, CardModel, ClassType, HealthModel, MinionModel, RaceType, RarityType, RoleModel } from "hearthstone-core";
 import { CostModel } from "hearthstone-core";
+import { LibraryUtil } from "hearthstone-core";
 
+@LibraryUtil.is('murloc-scout')
 export class MurlocScoutModel extends CardModel {
     constructor(props: MurlocScoutModel['props']) {
         super({

@@ -1,6 +1,8 @@
 import { AttackModel, ClassType, HealthModel, MinionModel,RarityType,  RaceType, RoleEntriesModel, RoleModel, RushModel, RushStatus, CardModel } from "hearthstone-core";
 import { CostModel } from "hearthstone-core";
+import { LibraryUtil } from "hearthstone-core";
 
+@LibraryUtil.is('emerald-skytalon')
 export class EmeraldSkytalonModel extends CardModel {
     constructor(props: EmeraldSkytalonModel['props']) {
         super({

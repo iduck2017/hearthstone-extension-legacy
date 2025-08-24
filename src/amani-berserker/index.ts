@@ -10,10 +10,11 @@
 // Artist: Chippy
 // Collectible
 
-import { AttackModel, CardModel, ClassType, FeaturesModel, HealthModel, MinionModel, RaceType, RarityType, RoleModel } from "hearthstone-core";
+import { AttackModel, CardModel, ClassType, FeaturesModel, HealthModel, LibraryUtil, MinionModel, RaceType, RarityType, RoleModel } from "hearthstone-core";
 import { AmaniBerserkerFeatureModel } from "./feature";
 import { CostModel } from "hearthstone-core";
 
+@LibraryUtil.is('amani-berserker')
 export class AmaniBerserkerModel extends CardModel {
     constructor(props: AmaniBerserkerModel['props']) {
         super({

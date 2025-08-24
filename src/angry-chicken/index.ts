@@ -1,7 +1,9 @@
 import { AttackModel, CardModel, ClassType, FeaturesModel, HealthModel, MinionModel, RaceType, RarityType, RoleModel } from "hearthstone-core";
 import { AngryChickenFeatureModel } from "./feature";
 import { CostModel } from "hearthstone-core";
+import { LibraryUtil } from "hearthstone-core";
 
+@LibraryUtil.is('angry-chicken')
 export class AngryChickenModel extends CardModel {
     constructor(props: AngryChickenModel['props']) {
         super({

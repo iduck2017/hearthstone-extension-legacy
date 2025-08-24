@@ -1,5 +1,7 @@
 import { BattlecryModel, CardModel, MinionModel, RaceType } from "hearthstone-core";
+import { StoreUtil } from "set-piece";
 
+@StoreUtil.is('captains-parrot-battlecry')
 export class CaptainsParrotBattlecryModel extends BattlecryModel<[]> {
     constructor(props: CaptainsParrotBattlecryModel['props']) {
         super({

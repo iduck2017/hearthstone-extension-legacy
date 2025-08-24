@@ -1,5 +1,7 @@
 import { MinionModel, BattlecryModel, RoleModel, DamageType, SelectEvent, AnchorModel, DamageUtil, DamageEvent } from "hearthstone-core";
+import { StoreUtil } from "set-piece";
 
+@StoreUtil.is('elven-archer-battlecry')
 export class ElvenArcherBattlecryModel extends BattlecryModel<[RoleModel]> {
     constructor(props: ElvenArcherBattlecryModel['props']) {
         super({

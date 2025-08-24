@@ -1,5 +1,7 @@
 import { DeathrattleModel, RoleModel } from "hearthstone-core";
+import { StoreUtil } from "set-piece";
 
+@StoreUtil.is('bloodmage-thalnos-deathrattle')
 export class BloodmageThalnosDeathrattleModel extends DeathrattleModel {
     constructor(props: BloodmageThalnosDeathrattleModel['props']) {
         super({

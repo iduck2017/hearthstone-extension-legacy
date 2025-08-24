@@ -14,7 +14,9 @@
 import { AttackModel, ClassType, HealthModel, MinionModel, RaceType, RarityType, RoleModel, CardHooksModel, CardModel } from "hearthstone-core";
 import { CaptainsParrotBattlecryModel } from "./battlecry";
 import { CostModel } from "hearthstone-core";
+import { LibraryUtil } from "hearthstone-core";
 
+@LibraryUtil.is('captains-parrot')
 export class CaptainsParrotModel extends CardModel {
     constructor(props: CaptainsParrotModel['props']) {
         super({

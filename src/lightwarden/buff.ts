@@ -1,5 +1,7 @@
 import { BuffModel } from "hearthstone-core";
+import { StoreUtil } from "set-piece";
 
+@StoreUtil.is('lightwarden-buff')
 export class LightwardenBuffModel extends BuffModel {
     constructor(props: LightwardenBuffModel['props']) {
         super({

@@ -1,7 +1,9 @@
 import { FeatureModel, MinionModel, RaceType } from "hearthstone-core";
 import { EventUtil } from "set-piece";
 import { MurlocTidecallerBuffModel } from "./buff";
+import { StoreUtil } from "set-piece";
 
+@StoreUtil.is('murloc-tidecaller-feature')
 export class MurlocTidecallerFeatureModel extends FeatureModel {
     constructor(props: MurlocTidecallerFeatureModel['props']) {
         super({
