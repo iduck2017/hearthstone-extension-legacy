@@ -5,7 +5,7 @@ Initial: Player A has Novice Engineer in hand and wisp in deck
 1. Player A plays Novice Engineer, draws a card
 */
 
-import { GameModel, HandModel, DeckModel, MageModel, TimeUtil, SelectUtil } from "hearthstone-core";
+import { GameModel, HandModel, DeckModel, MageModel, TimeUtil, SelectUtil, ManaModel } from "hearthstone-core";
 import { NoviceEngineerModel } from "../src/novice-engineer";
 import { WispModel } from "../src/wisp";
 import { boot } from "./boot";
@@ -17,6 +17,7 @@ describe('novice-engineer', () => {
         child: {
             playerA: new MageModel({
                 child: {
+                    mana: new ManaModel({ state: { origin: 10 }}),
                     hand: new HandModel({
                         child: { cards: [new NoviceEngineerModel({})] }
                     }),

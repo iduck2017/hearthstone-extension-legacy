@@ -2,7 +2,7 @@
 // Initial setup: Player A has Young Dragonhawk on board, Player B has Shieldbearer on board
 // Test case: Player A uses Dragonhawk to attack Shieldbearer, can attack twice then cannot attack
 
-import { GameModel, BoardModel, HandModel, MageModel, PlayerModel, TimeUtil, SelectUtil } from "hearthstone-core";
+import { GameModel, BoardModel, HandModel, MageModel, PlayerModel, TimeUtil, SelectUtil, ManaModel } from "hearthstone-core";
 import { YoungDragonhawkModel } from "../src/young-dragonhawk";
 import { ShieldbearerModel } from "../src/shieldbearer";
 import { boot } from "./boot";
@@ -14,6 +14,7 @@ describe('young-dragonhawk', () => {
         child: {
             playerA: new MageModel({
                 child: {
+                    mana: new ManaModel({ state: { origin: 10 }}),
                     board: new BoardModel({
                         child: { cards: [new YoungDragonhawkModel({})] }
                     }),
@@ -24,6 +25,7 @@ describe('young-dragonhawk', () => {
             }),
             playerB: new MageModel({
                 child: {
+                    mana: new ManaModel({ state: { origin: 10 }}),
                     board: new BoardModel({
                         child: { cards: [new ShieldbearerModel({})] }
                     }),

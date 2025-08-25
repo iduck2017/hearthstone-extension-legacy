@@ -1,4 +1,4 @@
-import { GameModel, BoardModel, HandModel, MageModel, PlayerModel, TimeUtil, SelectUtil, DeathStatus } from "hearthstone-core";
+import { GameModel, BoardModel, HandModel, MageModel, PlayerModel, TimeUtil, SelectUtil, DeathStatus, ManaModel } from "hearthstone-core";
 import { ShatteredSunClericModel } from "../src/shattered-sun-cleric";
 import { WispModel } from "../src/wisp";
 import { boot } from "./boot";
@@ -10,6 +10,7 @@ describe('shattered-sun-cleric', () => {
         child: {
             playerA: new MageModel({
                 child: {
+                    mana: new ManaModel({ state: { origin: 10 }}),
                     board: new BoardModel({
                         child: { cards: [new WispModel({})] }
                     }),
@@ -20,6 +21,7 @@ describe('shattered-sun-cleric', () => {
             }),
             playerB: new MageModel({
                 child: {
+                    mana: new ManaModel({ state: { origin: 10 }}),
                     hand: new HandModel({
                         child: { cards: [
                             new ShatteredSunClericModel({}),

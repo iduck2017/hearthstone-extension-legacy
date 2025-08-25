@@ -4,7 +4,7 @@
 // Test case 2: Turn switches, Player B uses Worgen to attack Player A's hero, Worgen's stealth status disappears
 // Test case 3: Turn switches, Player A's Wisp attacks again, can attack Worgen, attacks Worgen
 
-import { GameModel, BoardModel, HandModel, MageModel, PlayerModel, TimeUtil, SelectUtil, DeathStatus } from "hearthstone-core";
+import { GameModel, BoardModel, HandModel, MageModel, PlayerModel, TimeUtil, SelectUtil, DeathStatus, ManaModel } from "hearthstone-core";
 import { WorgenInfiltratorModel } from "../src/worgen-infiltrator";
 import { WispModel } from "../src/wisp";
 import { boot } from "./boot";
@@ -16,6 +16,7 @@ describe('worgen-infiltrator', () => {
         child: {
             playerA: new MageModel({
                 child: {
+                    mana: new ManaModel({ state: { origin: 10 }}),
                     board: new BoardModel({
                         child: { cards: [new WispModel({})] }
                     }),
@@ -26,6 +27,7 @@ describe('worgen-infiltrator', () => {
             }),
             playerB: new MageModel({
                 child: {
+                    mana: new ManaModel({ state: { origin: 10 }}),
                     board: new BoardModel({
                         child: { cards: [new WorgenInfiltratorModel({})] }
                     }),

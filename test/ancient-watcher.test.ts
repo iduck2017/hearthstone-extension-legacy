@@ -3,18 +3,18 @@
 // 1. Player A plays Watcher, cannot attack
 // 2. After two turns, Watcher still cannot attack
 
-import { GameModel, BoardModel, HandModel, MageModel, TimeUtil, SelectUtil } from "hearthstone-core";
+import { GameModel, BoardModel, HandModel, MageModel, TimeUtil, SelectUtil, ManaModel } from "hearthstone-core";
 import { AncientWatcherModel } from "../src/ancient-watcher";
 import { WispModel } from "../src/wisp";
 import { boot } from "./boot";
 import { DebugUtil, LogLevel } from "set-piece";
 
-DebugUtil.level = LogLevel.ERROR;
 describe('ancient-watcher', () => {
     const game = boot(new GameModel({
         child: {
             playerA: new MageModel({
                 child: {
+                    mana: new ManaModel({ state: { origin: 10 }}),
                     hand: new HandModel({
                         child: { cards: [new AncientWatcherModel({})] }
                     })
@@ -22,6 +22,7 @@ describe('ancient-watcher', () => {
             }),
             playerB: new MageModel({
                 child: {
+                    mana: new ManaModel({ state: { origin: 10 }}),
                     board: new BoardModel({
                         child: { cards: [new WispModel({})] }
                     })

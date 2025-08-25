@@ -4,7 +4,7 @@
 // Test case 2: Third turn, play Priestess, turn ends, Wisp health becomes 2
 // Test case 3: Fifth turn ends, Wisp health becomes 3
 
-import { GameModel, BoardModel, HandModel, MageModel, PlayerModel, TimeUtil, SelectUtil } from "hearthstone-core";
+import { GameModel, BoardModel, HandModel, MageModel, PlayerModel, TimeUtil, SelectUtil, ManaModel } from "hearthstone-core";
 import { YoungPriestessModel } from "../src/young-priestess";
 import { WispModel } from "../src/wisp";
 import { boot } from "./boot";
@@ -16,6 +16,7 @@ describe('young-priestess', () => {
         child: {
             playerA: new MageModel({
                 child: {
+                    mana: new ManaModel({ state: { origin: 10 }}),
                     board: new BoardModel({
                         child: { cards: [new WispModel({})] }
                     }),

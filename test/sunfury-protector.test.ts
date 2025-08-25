@@ -6,7 +6,7 @@ Initial: Player A has wisp, hungry-crab, and loot-hoarder on board in that order
 2. Turn ends, Player B's wisp attacks, targets include wisp and hungry-crab, but not protector, hoarder, or Player A
 */
 
-import { GameModel, BoardModel, HandModel, MageModel, TimeUtil, SelectUtil } from "hearthstone-core";
+import { GameModel, BoardModel, HandModel, MageModel, TimeUtil, SelectUtil, ManaModel } from "hearthstone-core";
 import { SunfuryProtectorModel } from "../src/sunfury-protector";
 import { WispModel } from "../src/wisp";
 import { HungryCrabModel } from "../src/hungry-crab";
@@ -20,6 +20,7 @@ describe('sunfury-protector', () => {
         child: {
             playerA: new MageModel({
                 child: {
+                    mana: new ManaModel({ state: { origin: 10 }}),
                     board: new BoardModel({
                         child: { 
                             cards: [
@@ -36,6 +37,7 @@ describe('sunfury-protector', () => {
             }),
             playerB: new MageModel({
                 child: {
+                    mana: new ManaModel({ state: { origin: 10 }}),
                     board: new BoardModel({
                         child: { cards: [new WispModel({})] }
                     }),

@@ -2,7 +2,7 @@
 // Initial: Player A has Bloodmage Thalnos on board and wisp in deck, Player B has wisp on board
 // 1. Player A uses Bloodmage Thalnos to attack wisp, both die, Player A triggers deathrattle and draws wisp
 
-import { GameModel, BoardModel, DeckModel, MageModel, TimeUtil, SelectUtil, DeathStatus } from "hearthstone-core";
+import { GameModel, BoardModel, DeckModel, MageModel, TimeUtil, SelectUtil, DeathStatus, ManaModel } from "hearthstone-core";
 import { BloodmageThalnosModel } from "../src/bloodmage-thalnos";
 import { WispModel } from "../src/wisp";
 import { boot } from "./boot";
@@ -14,6 +14,7 @@ describe('bloodmage-thalnos', () => {
         child: {
             playerA: new MageModel({
                 child: {
+                    mana: new ManaModel({ state: { origin: 10 }}),
                     board: new BoardModel({
                         child: { cards: [new BloodmageThalnosModel({})] }
                     }),
@@ -24,6 +25,7 @@ describe('bloodmage-thalnos', () => {
             }),
             playerB: new MageModel({
                 child: {
+                    mana: new ManaModel({ state: { origin: 10 }}),
                     board: new BoardModel({
                         child: { cards: [new WispModel({})] }
                     })

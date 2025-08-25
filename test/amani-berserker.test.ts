@@ -4,7 +4,7 @@
 // 2. Turn ends, Player B uses second wisp to attack Berserker, wisp dies with health -4, Berserker health 1
 // 3. Turn ends, Player A plays woodoo to heal Berserker, Berserker loses attack power gain
 
-import { GameModel, BoardModel, HandModel, MageModel, PlayerModel, TimeUtil, SelectUtil, DeathStatus } from "hearthstone-core";
+import { GameModel, BoardModel, HandModel, MageModel, PlayerModel, TimeUtil, SelectUtil, DeathStatus, ManaModel } from "hearthstone-core";
 import { AmaniBerserkerModel } from "../src/amani-berserker";
 import { WispModel } from "../src/wisp";
 import { VoodooDoctorModel } from "../src/voodoo-doctor";
@@ -18,6 +18,7 @@ describe('amani-berserker', () => {
         child: {
             playerA: new MageModel({
                 child: {
+                    mana: new ManaModel({ state: { origin: 10 }}),
                     board: new BoardModel({
                         child: { cards: [new AmaniBerserkerModel({})] }
                     }),
@@ -28,6 +29,7 @@ describe('amani-berserker', () => {
             }),
             playerB: new MageModel({
                 child: {
+                    mana: new ManaModel({ state: { origin: 10 }}),
                     board: new BoardModel({
                         child: { cards: [
                             new WispModel({}),

@@ -4,7 +4,7 @@
 // Test case 2: Player A plays Tidecaller, then plays another Tidehunter, Tidecaller gains +2 Attack
 // Test case 3: Turn ends, Player B plays Tidehunter, Player A's Tidecaller status unchanged
 
-import { GameModel, BoardModel, HandModel, MageModel, PlayerModel, TimeUtil, SelectUtil } from "hearthstone-core";
+import { GameModel, BoardModel, HandModel, MageModel, PlayerModel, TimeUtil, SelectUtil, ManaModel } from "hearthstone-core";
 import { MurlocTidecallerModel } from "../src/murloc-tidecaller";
 import { MurlocTidehunterModel } from "../src/murloc-tidehunter";
 import { MurlocRaiderCard } from "../src/murloc-raider";
@@ -17,6 +17,7 @@ describe('murloc-tidecaller', () => {
         child: {
             playerA: new MageModel({
                 child: {
+                    mana: new ManaModel({ state: { origin: 10 }}),
                     board: new BoardModel({
                         child: { cards: [] }
                     }),
@@ -31,6 +32,7 @@ describe('murloc-tidecaller', () => {
             }),
             playerB: new MageModel({
                 child: {
+                    mana: new ManaModel({ state: { origin: 10 }}),
                     board: new BoardModel({
                         child: { cards: [] }
                     }),

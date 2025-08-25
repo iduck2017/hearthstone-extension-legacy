@@ -2,7 +2,7 @@
 // Initial setup: Player A has Wisp on board, plays Murloc Tidehunter
 // Test case: Player A plays Murloc Tidehunter, places it to the left of Wisp, board should have three minions from left to right: Tidehunter, Scout, Wisp
 
-import { GameModel, BoardModel, HandModel, MageModel, PlayerModel, TimeUtil, SelectUtil } from "hearthstone-core";
+import { GameModel, BoardModel, HandModel, MageModel, PlayerModel, TimeUtil, SelectUtil, ManaModel } from "hearthstone-core";
 import { MurlocTidehunterModel } from "../src/murloc-tidehunter";
 import { MurlocScoutModel } from "../src/murloc-scout";
 import { WispModel } from "../src/wisp";
@@ -15,6 +15,7 @@ describe('murloc-tidehunter', () => {
         child: {
             playerA: new MageModel({
                 child: {
+                    mana: new ManaModel({ state: { origin: 10 }}),
                     board: new BoardModel({
                         child: { cards: [new WispModel({})] }
                     }),
@@ -25,6 +26,7 @@ describe('murloc-tidehunter', () => {
             }),
             playerB: new MageModel({
                 child: {
+                    mana: new ManaModel({ state: { origin: 10 }}),
                     board: new BoardModel({
                         child: { cards: [] }
                     }),

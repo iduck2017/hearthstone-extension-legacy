@@ -7,7 +7,7 @@ Initial: Player A has juggler, wisp and stonetuskboar in hand, Player B has wisp
 3. Turn ends, Player B plays wisp, health remains 29
 */
 
-import { GameModel, PlayerModel, HandModel, BoardModel, MageModel, TimeUtil, SelectUtil, DeathStatus } from "hearthstone-core";
+import { GameModel, PlayerModel, HandModel, BoardModel, MageModel, TimeUtil, SelectUtil, DeathStatus, ManaModel } from "hearthstone-core";
 import { KnifeJugglerModel } from "../src/knife-juggler";   
 import { WispModel } from "../src/wisp";
 import { StonetuskBoarModel } from "../src/stonetusk-boar";
@@ -20,6 +20,7 @@ describe('knife-juggler', () => {
         child: {
             playerA: new MageModel({
                 child: {
+                    mana: new ManaModel({ state: { origin: 10 }}),
                     hand: new HandModel({
                         child: { 
                             cards: [
@@ -33,6 +34,7 @@ describe('knife-juggler', () => {
             }),
             playerB: new MageModel({
                 child: {
+                    mana: new ManaModel({ state: { origin: 10 }}),
                     hand: new HandModel({
                         child: { cards: [new WispModel({})] }
                     })

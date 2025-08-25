@@ -6,7 +6,7 @@
  * 2. aura: Both raiders initially have 2 attack, after Player A plays oracle, Player A's raider gains +1 attack, no attack occurs
  */
 
-import { GameModel, PlayerModel, HandModel, BoardModel, MageModel, TimeUtil, SelectUtil, DeathStatus } from "hearthstone-core";
+import { GameModel, PlayerModel, HandModel, BoardModel, MageModel, TimeUtil, SelectUtil, DeathStatus, ManaModel } from "hearthstone-core";
 import { GrimscaleOracleModel } from "../src/grimscale-oracle";
 import { MurlocRaiderCard } from "../src/murloc-raider";
 import { WispModel } from "../src/wisp";
@@ -19,6 +19,7 @@ describe('grimscale-oracle', () => {
         child: {
             playerA: new MageModel({
                 child: {
+                    mana: new ManaModel({ state: { origin: 10 }}),
                     board: new BoardModel({
                         child: { cards: [
                             new MurlocRaiderCard({}),
@@ -32,6 +33,7 @@ describe('grimscale-oracle', () => {
             }),
             playerB: new MageModel({
                 child: {
+                    mana: new ManaModel({ state: { origin: 10 }}),
                     board: new BoardModel({
                         child: { cards: [new MurlocRaiderCard({})] }
                     })

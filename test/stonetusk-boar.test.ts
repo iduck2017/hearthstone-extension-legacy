@@ -2,7 +2,7 @@
 // Initial setup: Player A has Stonetusk Boar in hand, Player B has Wisp on board
 // Test case: Player A plays Stonetusk Boar, boar directly attacks Player B's hero
 
-import { GameModel, BoardModel, HandModel, MageModel, PlayerModel, TimeUtil, SelectUtil } from "hearthstone-core";
+import { GameModel, BoardModel, HandModel, MageModel, PlayerModel, TimeUtil, SelectUtil, ManaModel } from "hearthstone-core";
 import { StonetuskBoarModel } from "../src/stonetusk-boar";
 import { WispModel } from "../src/wisp";
 import { boot } from "./boot";
@@ -14,6 +14,7 @@ describe('stonetusk-boar', () => {
         child: {
             playerA: new MageModel({
                 child: {
+                    mana: new ManaModel({ state: { origin: 10 }}),
                     board: new BoardModel({
                         child: { cards: [] }
                     }),
@@ -24,6 +25,7 @@ describe('stonetusk-boar', () => {
             }),
             playerB: new MageModel({
                 child: {
+                    mana: new ManaModel({ state: { origin: 10 }}),
                     board: new BoardModel({
                         child: { cards: [new WispModel({})] }
                     }),

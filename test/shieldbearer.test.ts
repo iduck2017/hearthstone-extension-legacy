@@ -1,4 +1,4 @@
-import { GameModel, PlayerModel, HandModel, BoardModel, MageModel, TimeUtil, SelectUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, HandModel, BoardModel, MageModel, TimeUtil, SelectUtil, ManaModel } from "hearthstone-core";
 import { WispModel } from "../src/wisp";   
 import { boot } from "./boot";
 import { DebugUtil, LogLevel } from "set-piece";
@@ -10,6 +10,7 @@ describe('shieldbearer', () => {
         child: {
             playerA: new MageModel({
                 child: {
+                    mana: new ManaModel({ state: { origin: 10 }}),
                     board: new BoardModel({
                         child: { cards: [new WispModel({})] }
                     }),
@@ -17,6 +18,7 @@ describe('shieldbearer', () => {
             }),
             playerB: new MageModel({
                 child: {
+                    mana: new ManaModel({ state: { origin: 10 }}),
                     board: new BoardModel({
                         child: { cards: [
                             new WispModel({}),

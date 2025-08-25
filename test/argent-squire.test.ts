@@ -1,4 +1,4 @@
-import { GameModel, PlayerModel, MageModel, BoardModel, SelectUtil, DeathStatus } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, SelectUtil, DeathStatus, ManaModel } from "hearthstone-core";
 import { ArgentSquireModel } from "../src/argent-squire";
 import { boot } from "./boot";
 import { DebugUtil, LogLevel } from "set-piece";
@@ -9,6 +9,7 @@ describe('argent-squire', () => {
         child: {
             playerA: new MageModel({
                 child: {
+                    mana: new ManaModel({ state: { origin: 10 }}),
                     board: new BoardModel({
                         child: { cards: [new ArgentSquireModel({})] }
                     }),
@@ -16,6 +17,7 @@ describe('argent-squire', () => {
             }),
             playerB: new MageModel({
                 child: {
+                    mana: new ManaModel({ state: { origin: 10 }}),
                     board: new BoardModel({
                         child: { cards: [new ArgentSquireModel({})] }
                     })

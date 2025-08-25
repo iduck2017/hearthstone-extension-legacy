@@ -7,7 +7,7 @@ Initial: Player A has Blademaster and Voodoo Doctor in hand, Player B has Wisp o
 3. Turn ends, Player B uses Wisp to attack Blademaster, Blademaster health becomes 4, Wisp health becomes -3
 */
 
-import { GameModel, BoardModel, HandModel, MageModel, TimeUtil, SelectUtil } from "hearthstone-core";
+import { GameModel, BoardModel, HandModel, MageModel, TimeUtil, SelectUtil, ManaModel } from "hearthstone-core";
 import { InjuredBlademasterModel } from "../src/injured-blademaster";
 import { VoodooDoctorModel } from "../src/voodoo-doctor";
 import { WispModel } from "../src/wisp";
@@ -20,6 +20,7 @@ describe('injured-blademaster', () => {
         child: {
             playerA: new MageModel({
                 child: {
+                    mana: new ManaModel({ state: { origin: 10 }}),
                     board: new BoardModel({
                         child: { cards: [] }
                     }),
@@ -35,6 +36,7 @@ describe('injured-blademaster', () => {
             }),
             playerB: new MageModel({
                 child: {
+                    mana: new ManaModel({ state: { origin: 10 }}),
                     board: new BoardModel({
                         child: { cards: [new WispModel({})] }
                     }),

@@ -1,4 +1,4 @@
-import { GameModel, HandModel, MageModel, PlayerModel, SelectUtil, TimeUtil } from "hearthstone-core";
+import { GameModel, HandModel, MageModel, ManaModel, PlayerModel, SelectUtil, TimeUtil } from "hearthstone-core";
 import { boot } from "./boot";
 import { AbusiveSergeantModel } from "../src/abusive-sergeant";
 import { WispModel } from "../src/wisp";
@@ -10,6 +10,7 @@ describe('abusive-sergeant', () => {
         child: {
             playerA: new MageModel({
                 child: {
+                    mana: new ManaModel({ state: { origin: 10 }}),
                     hand: new HandModel({
                         child: { cards: [
                             new AbusiveSergeantModel({}),
@@ -20,6 +21,7 @@ describe('abusive-sergeant', () => {
             }),
             playerB: new MageModel({
                 child: {
+                    mana: new ManaModel({ state: { origin: 10 }}),
                     hand: new HandModel({
                         child: { cards: [
                             new AbusiveSergeantModel({}),
@@ -78,6 +80,8 @@ describe('abusive-sergeant', () => {
     })
 
     test('abusive-sergeant-battlecry', async () => {
+
+        turn.next();
         let promise = cardC.play();
         await TimeUtil.sleep();
         expect(SelectUtil.current).toBeDefined();
@@ -86,7 +90,6 @@ describe('abusive-sergeant', () => {
         await promise;
         expect(boardB.child.cards.length).toBe(1);
 
-        turn.next();
         promise = cardD.play();
         await TimeUtil.sleep();
         expect(SelectUtil.current).toBeDefined();

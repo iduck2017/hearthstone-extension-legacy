@@ -2,7 +2,7 @@
 // Initial setup: Player A has Leper Gnome on board, Player B has Wisp on board
 // Test case: Player A's Leper Gnome attacks Player B's Wisp, both die, Player B loses 2 health
 
-import { GameModel, BoardModel, HandModel, MageModel, PlayerModel, TimeUtil, SelectUtil, DeathStatus } from "hearthstone-core";
+import { GameModel, BoardModel, HandModel, MageModel, PlayerModel, TimeUtil, SelectUtil, DeathStatus, ManaModel } from "hearthstone-core";
 import { LeperGnomeModel } from "../src/leper-gnome";
 import { WispModel } from "../src/wisp";
 import { boot } from "./boot";
@@ -14,6 +14,7 @@ describe('leper-gnome', () => {
         child: {
             playerA: new MageModel({
                 child: {
+                    mana: new ManaModel({ state: { origin: 10 }}),
                     board: new BoardModel({
                         child: { cards: [new LeperGnomeModel({})] }
                     }),
@@ -21,6 +22,7 @@ describe('leper-gnome', () => {
             }),
             playerB: new MageModel({
                 child: {
+                    mana: new ManaModel({ state: { origin: 10 }}),
                     board: new BoardModel({
                         child: { cards: [new WispModel({})] }
                     }),

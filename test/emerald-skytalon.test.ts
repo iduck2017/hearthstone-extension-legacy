@@ -6,7 +6,7 @@
  * 2. rush: Player A plays 2 emerald skytalons, they can attack immediately but only target wisps (not Player B hero), one emerald attacks one wisp, the other doesn't move
  * 3. attack: After 2 turns, the other emerald can attack the hero
  */
-import { GameModel, PlayerModel, MageModel, HandModel, BoardModel, SelectUtil, TimeUtil, RushStatus, ActionModel } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, HandModel, BoardModel, SelectUtil, TimeUtil, RushStatus, ActionModel, ManaModel } from "hearthstone-core";
 import { EmeraldSkytalonModel } from "../src/emerald-skytalon";
 import { WispModel } from "../src/wisp";
 import { boot } from "./boot";
@@ -18,6 +18,7 @@ describe('emerald-skytalon', () => {
         child: {
             playerA: new MageModel({
                 child: {
+                    mana: new ManaModel({ state: { origin: 10 }}),
                     hand: new HandModel({
                         child: { cards: [
                             new EmeraldSkytalonModel({}),
@@ -28,6 +29,7 @@ describe('emerald-skytalon', () => {
             }),
             playerB: new MageModel({
                 child: {
+                    mana: new ManaModel({ state: { origin: 10 }}),
                     board: new BoardModel({
                         child: { cards: [new WispModel({})]}
                     })

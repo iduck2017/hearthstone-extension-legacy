@@ -5,7 +5,7 @@ Initial: Player A has empty board, Player B has Demolisher on board
 1. Turn ends, Demolisher triggers, Player A health becomes 28, damage 2
 */
 
-import { GameModel, BoardModel, HandModel, MageModel, TimeUtil, SelectUtil } from "hearthstone-core";
+import { GameModel, BoardModel, HandModel, MageModel, TimeUtil, SelectUtil, ManaModel } from "hearthstone-core";
 import { DemolisherModel } from "../src/demolisher";
 import { boot } from "./boot";
 import { DebugUtil, LogLevel } from "set-piece";
@@ -16,6 +16,7 @@ describe('demolisher', () => {
         child: {
             playerA: new MageModel({
                 child: {
+                    mana: new ManaModel({ state: { origin: 10 }}),
                     board: new BoardModel({
                         child: { cards: [] }
                     }),
@@ -26,6 +27,7 @@ describe('demolisher', () => {
             }),
             playerB: new MageModel({
                 child: {
+                    mana: new ManaModel({ state: { origin: 10 }}),
                     board: new BoardModel({
                         child: { cards: [new DemolisherModel({})] }
                     }),

@@ -5,7 +5,7 @@
  * 1. start: Both players have a wisp and footman on board respectively, turn starts
  * 2. attack: Wisp can only attack the footman due to taunt
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, TimeUtil, SelectUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, TimeUtil, SelectUtil, ManaModel } from "hearthstone-core";
 import { GoldshireFootmanModel } from "../src/goldshire-footman";
 import { WispModel } from "../src/wisp";
 import { boot } from "./boot";
@@ -17,6 +17,7 @@ describe('goldshire-footman', () => {
         child: {
             playerA: new MageModel({
                 child: {
+                    mana: new ManaModel({ state: { origin: 10 }}),
                     board: new BoardModel({
                         child: { cards: [new WispModel({})] }
                     }),
@@ -24,6 +25,7 @@ describe('goldshire-footman', () => {
             }),
             playerB: new MageModel({
                 child: {
+                    mana: new ManaModel({ state: { origin: 10 }}),
                     board: new BoardModel({
                         child: { cards: [new GoldshireFootmanModel({})] }
                     })

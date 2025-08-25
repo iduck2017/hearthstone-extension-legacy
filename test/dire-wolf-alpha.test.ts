@@ -4,7 +4,7 @@
 // 2. Player A plays Dire Wolf Alpha, places it between two wisps, wisp attack becomes 2
 // 3. Player A uses wisp to attack Player B's wisp, Player B's wisp dies with health -1, takes 2 damage
 
-import { GameModel, BoardModel, HandModel, MageModel, TimeUtil, SelectUtil, DeathStatus } from "hearthstone-core";
+import { GameModel, BoardModel, HandModel, MageModel, TimeUtil, SelectUtil, DeathStatus, ManaModel } from "hearthstone-core";
 import { DireWolfAlphaModel } from "../src/dire-wolf-alpha";
 import { WispModel } from "../src/wisp";
 import { boot } from "./boot";
@@ -17,6 +17,7 @@ describe('dire-wolf-alpha', () => {
         child: {
             playerA: new MageModel({
                 child: {
+                    mana: new ManaModel({ state: { origin: 10 }}),
                     board: new BoardModel({
                         child: { cards: [
                             new WispModel({}),
@@ -30,6 +31,7 @@ describe('dire-wolf-alpha', () => {
             }),
             playerB: new MageModel({
                 child: {
+                    mana: new ManaModel({ state: { origin: 10 }}),
                     board: new BoardModel({
                         child: { cards: [new WispModel({})] }
                     })

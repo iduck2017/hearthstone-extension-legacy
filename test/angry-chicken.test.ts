@@ -1,6 +1,6 @@
 import { DebugUtil, LogLevel, RouteUtil } from "set-piece";
 import { AngryChickenModel } from "../src/angry-chicken";
-import { GameModel, PlayerModel, MageModel, BoardModel, SelectUtil, TimeUtil, DeathStatus } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, SelectUtil, TimeUtil, DeathStatus, ManaModel } from "hearthstone-core";
 import { boot } from "./boot";
 
 DebugUtil.level = LogLevel.ERROR;
@@ -9,6 +9,7 @@ describe('angry-chicken', () => {
         child: {
             playerA: new MageModel({
                 child: {
+                    mana: new ManaModel({ state: { origin: 10 }}),
                     board: new BoardModel({
                         child: { cards: [new AngryChickenModel({})] }
                     })
@@ -16,6 +17,7 @@ describe('angry-chicken', () => {
             }),
             playerB: new MageModel({
                 child: {
+                    mana: new ManaModel({ state: { origin: 10 }}),
                     board: new BoardModel({
                         child: { cards: [new AngryChickenModel({})] }
                     })

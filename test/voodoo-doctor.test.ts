@@ -3,7 +3,7 @@
 // Test case 1: Player A's Wisp attacks Player B's Shieldbearer, latter loses 1 health
 // Test case 2: Player A plays Voodoo Doctor, target selection should include all roles, choose Shieldbearer, it restores 1 health
 
-import { GameModel, BoardModel, HandModel, MageModel, PlayerModel, TimeUtil, SelectUtil } from "hearthstone-core";
+import { GameModel, BoardModel, HandModel, MageModel, PlayerModel, TimeUtil, SelectUtil, ManaModel } from "hearthstone-core";
 import { VoodooDoctorModel } from "../src/voodoo-doctor";
 import { WispModel } from "../src/wisp";
 import { ShieldbearerModel } from "../src/shieldbearer";
@@ -16,6 +16,7 @@ describe('voodoo-doctor', () => {
         child: {
             playerA: new MageModel({
                 child: {
+                    mana: new ManaModel({ state: { origin: 10 }}),
                     board: new BoardModel({
                         child: { cards: [new WispModel({})] }
                     }),
@@ -26,6 +27,7 @@ describe('voodoo-doctor', () => {
             }),
             playerB: new MageModel({
                 child: {
+                    mana: new ManaModel({ state: { origin: 10 }}),
                     board: new BoardModel({
                         child: { cards: [new ShieldbearerModel({})] }
                     }),

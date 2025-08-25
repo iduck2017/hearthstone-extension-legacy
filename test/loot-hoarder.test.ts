@@ -5,7 +5,7 @@ Initial: Player A has Loot Hoarder on board and wisp in deck, Player B has wisp 
 1. Player A's Loot Hoarder attacks Player B's wisp, both die, Player A draws a card
 */
 
-import { GameModel, BoardModel, HandModel, DeckModel, MageModel, PlayerModel, TimeUtil, SelectUtil, DeathStatus } from "hearthstone-core";
+import { GameModel, BoardModel, HandModel, DeckModel, MageModel, PlayerModel, TimeUtil, SelectUtil, DeathStatus, ManaModel } from "hearthstone-core";
 import { LootHoarderModel } from "../src/loot-hoarder";
 import { WispModel } from "../src/wisp";
 import { boot } from "./boot";
@@ -17,6 +17,7 @@ describe('loot-hoarder', () => {
         child: {
             playerA: new MageModel({
                 child: {
+                    mana: new ManaModel({ state: { origin: 10 }}),
                     board: new BoardModel({
                         child: { cards: [new LootHoarderModel({})] }
                     }),
@@ -27,6 +28,7 @@ describe('loot-hoarder', () => {
             }),
             playerB: new MageModel({
                 child: {
+                    mana: new ManaModel({ state: { origin: 10 }}),
                     board: new BoardModel({
                         child: { cards: [new WispModel({})] }
                     }),

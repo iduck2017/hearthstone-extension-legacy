@@ -6,7 +6,7 @@
  * 2. battlecry: Player A uses Elven Archer to attack the wisp
  */
 import { ElvenArcherModel } from "../src/elven-archer";
-import { GameModel, PlayerModel, MageModel, HandModel, BoardModel, SelectUtil, TimeUtil, DeathStatus } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, HandModel, BoardModel, SelectUtil, TimeUtil, DeathStatus, ManaModel } from "hearthstone-core";
 import { WispModel } from "../src/wisp";
 import { boot } from "./boot";
 import { DebugUtil, LogLevel } from "set-piece";
@@ -17,6 +17,7 @@ describe('elven-archer', () => {
         child: {
             playerA: new MageModel({
                 child: {
+                    mana: new ManaModel({ state: { origin: 10 }}),
                     hand: new HandModel({
                         child: { cards: [new ElvenArcherModel({})] }
                     })
@@ -24,6 +25,7 @@ describe('elven-archer', () => {
             }),
             playerB: new MageModel({
                 child: {
+                    mana: new ManaModel({ state: { origin: 10 }}),
                     board: new BoardModel({
                         child: { cards: [new WispModel({})] }
                     })
@@ -47,7 +49,7 @@ describe('elven-archer', () => {
         const promise = cardA.play();
         expect(SelectUtil.current?.options).toContain(0);
         SelectUtil.set(0);
-        
+
         await TimeUtil.sleep()
         expect(SelectUtil.current?.options).toContain(roleB);
         expect(SelectUtil.current?.options).toContain(playerA.child.role);
