@@ -1,4 +1,4 @@
-import { MinionModel, HealthModel, AttackModel, RoleModel, MinionHooksModel, LibraryUtil, CostModel } from "hearthstone-core";
+import { MinionModel, HealthModel, AttackModel, RoleModel, HooksModel, LibraryUtil, CostModel } from "hearthstone-core";
 import { AbusiveSergeantBattlecryModel } from "./battlecry";
 import { ClassType, RarityType } from "hearthstone-core";
 import { Loader } from "set-piece";
@@ -28,7 +28,7 @@ export class AbusiveSergeantModel extends MinionModel {
                             health: new HealthModel(() => ({ state: { origin: 1 }})),   
                         }
                     })),
-                    hooks: new MinionHooksModel(() => ({
+                    hooks: new HooksModel(() => ({
                         child: { battlecry: [new AbusiveSergeantBattlecryModel()] }
                     })),
                     ...props.child,

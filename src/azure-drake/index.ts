@@ -15,7 +15,7 @@
  * Collectible
  */
 
-import { MinionModel, HealthModel, AttackModel, RoleModel, ClassType, RarityType, RaceType, RoleEntriesModel, SpellDamageModel, MinionHooksModel, LibraryUtil, CostModel } from "hearthstone-core";
+import { MinionModel, HealthModel, AttackModel, RoleModel, ClassType, RarityType, RaceType, RoleEntriesModel, SpellDamageModel, HooksModel, LibraryUtil, CostModel } from "hearthstone-core";
 import { AzureDrakeBattlecryModel } from "./battlecry";
 import { Loader } from "set-piece";
 
@@ -49,7 +49,7 @@ export class AzureDrakeModel extends MinionModel {
                             }))
                         }
                     })),
-                    hooks: new MinionHooksModel(() => ({
+                    hooks: new HooksModel(() => ({
                         child: {
                             battlecry: [new AzureDrakeBattlecryModel()]
                         }
