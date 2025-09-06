@@ -11,9 +11,7 @@ import { GameModel, PlayerModel, MageModel, HandModel, BoardModel, SelectUtil, T
 import { EmeraldSkytalonModel } from "./index";
 import { WispModel } from "../wisp";
 import { boot } from "../boot";
-import { DebugUtil, LogLevel } from "set-piece";
 
-DebugUtil.level = LogLevel.ERROR;
 describe('emerald-skytalon', () => {
     const game = new GameModel(() => ({
         child: {

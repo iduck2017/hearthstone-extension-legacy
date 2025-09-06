@@ -8,9 +8,7 @@ import { GameModel, BoardModel, HandModel, MageModel, PlayerModel, TimeUtil, Sel
 import { StonetuskBoarModel } from "./index";
 import { WispModel } from "../wisp";
 import { boot } from "../boot";
-import { DebugUtil, LogLevel } from "set-piece";
 
-DebugUtil.level = LogLevel.ERROR;
 describe('stonetusk-boar', () => {
     const game = new GameModel(() => ({
         child: {
