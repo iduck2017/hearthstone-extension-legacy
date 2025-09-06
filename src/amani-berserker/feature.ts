@@ -1,21 +1,21 @@
 import { AttackModel, AttackProps, BuffModel, FeatureModel, HealthModel, HealthProps, RoleModel } from "hearthstone-core";
 import { Event, EventUtil, StateUtil, StoreUtil, TranxUtil, Loader, StateChangeEvent, Decor } from "set-piece";
 
-export namespace AmaniBerserkerFeatureModel {
-    export type Event = {};
-    export type State = {
+export namespace AmaniBerserkerFeatureProps {
+    export type E = {};
+    export type S = {
         offsetAttack: number,
     };
-    export type Child = {};
-    export type Refer = {}
+    export type C = {};
+    export type R = {}
 }
 
 @StoreUtil.is('amani-berserker-feature')
 export class AmaniBerserkerFeatureModel extends FeatureModel<
-    AmaniBerserkerFeatureModel.Event,
-    AmaniBerserkerFeatureModel.State,
-    AmaniBerserkerFeatureModel.Child,
-    AmaniBerserkerFeatureModel.Refer
+    AmaniBerserkerFeatureProps.E,
+    AmaniBerserkerFeatureProps.S,
+    AmaniBerserkerFeatureProps.C,
+    AmaniBerserkerFeatureProps.R
 > {
     constructor(loader?: Loader<AmaniBerserkerFeatureModel>) {
         super(() => {
