@@ -1,18 +1,21 @@
-import { MinionModel, BattlecryModel, RoleModel, DamageType, SelectEvent, AnchorModel, DamageUtil, DamageEvent } from "hearthstone-core";
-import { StoreUtil } from "set-piece";
+import { BattlecryModel, DamageEvent, DamageModel, DamageType, RoleModel, SelectEvent } from "hearthstone-core";
+import { Loader, StoreUtil } from "set-piece";
 
 @StoreUtil.is('elven-archer-battlecry')
 export class ElvenArcherBattlecryModel extends BattlecryModel<[RoleModel]> {
-    constructor(props: ElvenArcherBattlecryModel['props']) {
-        super({
-            uuid: props.uuid,
-            state: {
-                name: 'Elven Archer Battlecry',
-                desc: 'Deal 1 damage.',
-                ...props.state,
-            },
-            child: { ...props.child },
-            refer: { ...props.refer },
+    constructor(loader?: Loader<ElvenArcherBattlecryModel>) {
+        super(() => {
+            const props = loader?.() ?? {};
+            return {
+                uuid: props.uuid,
+                state: {
+                    name: 'Elven Archer Battlecry',
+                    desc: 'Deal 1 damage.',
+                    ...props.state,
+                },
+                child: { ...props.child },
+                refer: { ...props.refer },
+            }
         });
     }
 
@@ -26,14 +29,14 @@ export class ElvenArcherBattlecryModel extends BattlecryModel<[RoleModel]> {
         return [new SelectEvent(options, { hint: 'Choose a target' })]
     }
 
-    public async doRun(target: RoleModel) {
-        const card = this.route.card;
+    protected async doRun(target: RoleModel) {
+        const card = this.route;
         if (!card) return;
-        DamageUtil.run([
+        DamageModel.run([
             new DamageEvent({
-                source: this.child.anchor,
+                source: this.child.damage,
                 target,
-                origin: 1,  
+                origin: 1,
                 type: DamageType.DEFAULT,
             })
         ])

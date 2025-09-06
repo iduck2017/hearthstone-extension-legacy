@@ -17,6 +17,9 @@
   },
   "include": [
     "src/**/*",
-    "test/**/*"
-, "test/abusive-sergeant.test.ts", "test/angry-chicken.test.ts", "test/argent-squire.test.ts", "backup/elven-archer.test.ts", "test/emerald-skytalon.test.ts", "test/goldshire-footman.test.ts", "test/grimscale-oracle.test.ts", "test/shattered-sun-cleric.test.ts"  ]
+    "test/**/*",
+  ],
+  "exclude": [
+    "backup/**/*"
+  ]
 }

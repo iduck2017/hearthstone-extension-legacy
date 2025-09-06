@@ -5,5 +5,5 @@
     "module": "ESNext"
   },
   "include": ["src/**/*"],
-  "exclude": ["test/**/*"]
+  "exclude": ["test/**/*", "**/*.test.ts"]
 }
