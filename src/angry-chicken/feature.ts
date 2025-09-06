@@ -1,7 +1,8 @@
-import { AttackModel, AttackProps, BuffModel, FeatureModel, HealthModel, HealthProps, RoleModel } from "hearthstone-core";
+import { AttackModel, AttackProps, BuffModel, FeatureModel, HealthModel, RoleModel } from "hearthstone-core";
 import { Event, EventUtil, StateUtil, StoreUtil, TranxUtil, Loader, StateChangeEvent, Decor } from "set-piece";
+import { DeepReadonly } from "utility-types";
 
-export namespace AmaniBerserkerFeatureProps {
+export namespace AngryChickenFeatureProps {
     export type E = {};
     export type S = {
         offsetAttack: number,
@@ -10,22 +11,22 @@ export namespace AmaniBerserkerFeatureProps {
     export type R = {}
 }
 
-@StoreUtil.is('amani-berserker-feature')
-export class AmaniBerserkerFeatureModel extends FeatureModel<
-    AmaniBerserkerFeatureProps.E,
-    AmaniBerserkerFeatureProps.S,
-    AmaniBerserkerFeatureProps.C,
-    AmaniBerserkerFeatureProps.R
+@StoreUtil.is('angry-chicken-feature')
+export class AngryChickenFeatureModel extends FeatureModel<
+    AngryChickenFeatureProps.E,
+    AngryChickenFeatureProps.S,
+    AngryChickenFeatureProps.C,
+    AngryChickenFeatureProps.R
 > {
-    constructor(loader?: Loader<AmaniBerserkerFeatureModel>) {
+    constructor(loader?: Loader<AngryChickenFeatureModel>) {
         super(() => {
             const props = loader?.() ?? {};
             return {
                 uuid: props.uuid,
                 state: {
-                    name: 'Amani Berserker\'s Buff',
-                    desc: 'Has +3 Attack while damaged.',
-                    offsetAttack: 3,
+                    name: 'Angry Chicken\'s Buff',
+                    desc: 'Has +5 Attack while damaged.',
+                    offsetAttack: 5,
                     isActive: true,
                     ...props.state,
                 },
@@ -35,14 +36,12 @@ export class AmaniBerserkerFeatureModel extends FeatureModel<
         });
     }
 
-    // Listen to health state changes to trigger enrage effect
     @EventUtil.on(self => self.route.role?.proxy.child.health.event.onStateChange)
     @TranxUtil.span()
     private onHealthChange(that: HealthModel, event: StateChangeEvent<HealthModel>) {
         this.reload();
     }
 
-    // Apply attack buff when damaged
     @StateUtil.on(self => self.route.role?.proxy.child.attack.decor)
     private onCheck(
         that: AttackModel, 
@@ -57,4 +56,4 @@ export class AmaniBerserkerFeatureModel extends FeatureModel<
         
         decor.current.offset += this.state.offsetAttack;
     }
-} 
+}
