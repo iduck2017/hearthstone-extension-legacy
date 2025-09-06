@@ -35,30 +35,30 @@ describe('angry-chicken', () => {
     const root = boot(game);
     const boardA = game.child.playerA.child.board;
     const boardB = game.child.playerB.child.board;
-    const cardA = boardA.child.minions.find((item: any) => item instanceof AngryChickenModel);
-    const cardB = boardB.child.minions.find((item: any) => item instanceof AngryChickenModel);
-    const roleA = cardA?.child.role;
-    const roleB = cardB?.child.role;
-    if (!roleA || !roleB) throw new Error();
+    const cardC = boardA.child.minions.find((item: any) => item instanceof AngryChickenModel);
+    const cardD = boardB.child.minions.find((item: any) => item instanceof AngryChickenModel);
+    const roleC = cardC?.child.role;
+    const roleD = cardD?.child.role;
+    if (!roleC || !roleD) throw new Error();
 
     test('angry-chicken-attack', async () => {
 
-        expect(roleA.state.attack).toBe(1);
-        expect(roleA.state.health).toBe(1);
-        expect(roleB.state.attack).toBe(1);
-        expect(roleB.state.health).toBe(1);
+        expect(roleC.state.attack).toBe(1);
+        expect(roleC.state.health).toBe(1);
+        expect(roleD.state.attack).toBe(1);
+        expect(roleD.state.health).toBe(1);
 
-        const promise = roleA.child.action.run();
+        const promise = roleC.child.action.run();
         await TimeUtil.sleep();
         expect(SelectUtil.current).toBeDefined();
-        expect(SelectUtil.current?.options).toContain(roleB);
-        SelectUtil.set(roleB);
+        expect(SelectUtil.current?.options).toContain(roleD);
+        SelectUtil.set(roleD);
         await promise;
-        expect(roleA.state.attack).toBe(6);
-        expect(roleA.state.health).toBe(0);
-        expect(roleA.state.attack).toBe(6);
-        expect(roleB.state.health).toBe(0);
-        expect(roleA.child.death.state.isActive).toBe(true);
-        expect(roleB.child.death.state.isActive).toBe(true);
+        expect(roleC.state.attack).toBe(6);
+        expect(roleC.state.health).toBe(0);
+        expect(roleC.state.attack).toBe(6);
+        expect(roleD.state.health).toBe(0);
+        expect(roleC.child.death.state.isActive).toBe(true);
+        expect(roleD.child.death.state.isActive).toBe(true);
     })
 })
