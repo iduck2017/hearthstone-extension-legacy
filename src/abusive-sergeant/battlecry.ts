@@ -1,4 +1,4 @@
-import { BattlecryModel, MinionModel, RoleModel, SelectEvent } from "hearthstone-core";
+import { BattlecryModel, MinionCardModel, RoleModel, SelectEvent } from "hearthstone-core";
 import { AbusiveSergeantBuffModel } from "./buff";
 import { DebugUtil, LogLevel, StoreUtil, Loader } from "set-piece";
 

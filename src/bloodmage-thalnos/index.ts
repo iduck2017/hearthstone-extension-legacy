@@ -16,12 +16,12 @@
  * Spell Damage
  */
 
-import { AttackModel, ClassType, HealthModel, MinionModel, RaceType, RarityType, RoleModel, SpellDamageModel, RoleEntriesModel, MinionHooksModel, LibraryUtil, CostModel } from "hearthstone-core";
+import { AttackModel, ClassType, HealthModel, MinionCardModel, RaceType, RarityType, RoleModel, SpellDamageModel, RoleEntriesModel, MinionHooksModel, LibraryUtil, CostModel } from "hearthstone-core";
 import { BloodmageThalnosDeathrattleModel } from "./deathrattle";
 import { Loader } from "set-piece";
 
 @LibraryUtil.is('bloodmage-thalnos')
-export class BloodmageThalnosModel extends MinionModel {
+export class BloodmageThalnosModel extends MinionCardModel {
     constructor(loader?: Loader<BloodmageThalnosModel>) {
         super(() => {
             const props = loader?.() ?? {};

@@ -15,12 +15,12 @@
  * Collectible
  */
 
-import { MinionModel, HealthModel, AttackModel, RoleModel, ClassType, RarityType, RaceType, RoleEntriesModel, SpellDamageModel, MinionHooksModel, LibraryUtil, CostModel } from "hearthstone-core";
+import { MinionCardModel, HealthModel, AttackModel, RoleModel, ClassType, RarityType, RaceType, RoleEntriesModel, SpellDamageModel, MinionHooksModel, LibraryUtil, CostModel } from "hearthstone-core";
 import { AzureDrakeBattlecryModel } from "./battlecry";
 import { Loader } from "set-piece";
 
 @LibraryUtil.is('azure-drake')
-export class AzureDrakeModel extends MinionModel {
+export class AzureDrakeModel extends MinionCardModel {
     constructor(loader?: Loader<AzureDrakeModel>) {
         super(() => {
             const props = loader?.() ?? {};

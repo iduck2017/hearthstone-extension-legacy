@@ -10,11 +10,11 @@
  * Collectible
  */
 
-import { AttackModel, ClassType, HealthModel, LibraryUtil, MinionModel, RaceType, RarityType, RoleModel, CostModel } from "hearthstone-core";
+import { AttackModel, ClassType, HealthModel, LibraryUtil, MinionCardModel, RaceType, RarityType, RoleModel, CostModel } from "hearthstone-core";
 import { Loader } from "set-piece";
 
 @LibraryUtil.is('bloodfen-raptor')
-export class BloodfenRaptorModel extends MinionModel {
+export class BloodfenRaptorModel extends MinionCardModel {
     constructor(loader?: Loader<BloodfenRaptorModel>) {
         super(() => {
             const props = loader?.() ?? {};

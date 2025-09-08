@@ -12,12 +12,12 @@
  * Collectible
  */
 
-import { AttackModel, ClassType, FeaturesModel, HealthModel, MinionModel, RarityType, RoleModel, LibraryUtil, CostModel } from "hearthstone-core";
+import { AttackModel, ClassType, FeaturesModel, HealthModel, MinionCardModel, RarityType, RoleModel, LibraryUtil, CostModel } from "hearthstone-core";
 import { AncientWatcherFeatureModel } from "./feature";
 import { Loader } from "set-piece";
 
 @LibraryUtil.is('ancient-watcher')  
-export class AncientWatcherModel extends MinionModel {
+export class AncientWatcherModel extends MinionCardModel {
     constructor(loader?: Loader<AncientWatcherModel>) {
         super(() => {
             const props = loader?.() ?? {};
