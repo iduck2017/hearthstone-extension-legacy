@@ -16,7 +16,7 @@
  * Spell Damage
  */
 
-import { AttackModel, ClassType, HealthModel, MinionModel, RaceType, RarityType, RoleModel, SpellDamageModel, RoleEntriesModel, HooksModel, LibraryUtil, CostModel } from "hearthstone-core";
+import { AttackModel, ClassType, HealthModel, MinionModel, RaceType, RarityType, RoleModel, SpellDamageModel, RoleEntriesModel, MinionHooksModel, LibraryUtil, CostModel } from "hearthstone-core";
 import { BloodmageThalnosDeathrattleModel } from "./deathrattle";
 import { Loader } from "set-piece";
 
@@ -50,7 +50,7 @@ export class BloodmageThalnosModel extends MinionModel {
                             })),
                         }
                     })),
-                    hooks: new HooksModel(() => ({
+                    hooks: new MinionHooksModel(() => ({
                         child: {
                             deathrattle: [new BloodmageThalnosDeathrattleModel()]
                         }
