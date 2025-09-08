@@ -58,7 +58,7 @@ describe('angry-chicken', () => {
         expect(roleC.state.health).toBe(0);
         expect(roleC.state.attack).toBe(6);
         expect(roleD.state.health).toBe(0);
-        expect(roleC.child.death.state.isActive).toBe(true);
-        expect(roleD.child.death.state.isActive).toBe(true);
+        expect(cardC.child.dispose.state.isActive).toBe(true);
+        expect(cardD.child.dispose.state.isActive).toBe(true);
     })
 })

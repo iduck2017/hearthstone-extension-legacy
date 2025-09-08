@@ -30,6 +30,6 @@ export class AncientWatcherFeatureModel extends FeatureModel {
         decor: Decor<ActionProps.S>
     ) {
         if (!this.state.isActive) return;
-        decor.current.isEnable = false;
+        decor.current.isLock = true;
     }
 } 

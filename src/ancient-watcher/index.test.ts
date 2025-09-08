@@ -57,8 +57,8 @@ describe('ancient-watcher', () => {
         expect(roleA.state.action).toBe(1);
         
         // Verify Watcher cannot attack
-        expect(roleA.child.action.check()).toBe(false);
-        expect(roleA.child.action.state.isEnable).toBe(false);
+        expect(roleA.child.action.state.isLock).toBe(true);
+        expect(roleA.child.action.state.isActive).toBe(false);
         
         // Try to attack and verify no options are available
         promise = roleA.child.action.run();
@@ -73,15 +73,15 @@ describe('ancient-watcher', () => {
         turn.next();
         
         // Verify Watcher still cannot attack after turn change
-        expect(roleA.child.action.check()).toBe(false);
-        expect(roleA.child.action.state.isEnable).toBe(false);
+        expect(roleA.child.action.state.isLock).toBe(true);
+        expect(roleA.child.action.state.isActive).toBe(false);
         
         // End second turn
         turn.next();
         
         // Verify Watcher still cannot attack after second turn change
-        expect(roleA.child.action.check()).toBe(false);
-        expect(roleA.child.action.state.isEnable).toBe(false);
+        expect(roleA.child.action.state.isActive).toBe(false);
+        expect(roleA.child.action.state.isActive).toBe(false);
         expect(roleA.state.action).toBe(1);
     });
 }); 

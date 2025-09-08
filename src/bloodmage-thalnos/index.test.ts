@@ -64,8 +64,8 @@ describe('bloodmage-thalnos', () => {
         await promise;
         
         // Verify both minions die
-        expect(roleC.child.death.state.isActive).toBe(true);
-        expect(roleD.child.death.state.isActive).toBe(true);
+        expect(cardC.child.dispose.state.isActive).toBe(true);
+        expect(cardD.child.dispose.state.isActive).toBe(true);
         expect(boardA.child.minions.length).toBe(0);
         expect(boardB.child.minions.length).toBe(0);
         

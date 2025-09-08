@@ -71,7 +71,7 @@ describe('amani-berserker', () => {
         
         // Verify wisp dies with health -1
         expect(roleD.state.health).toBe(-1);
-        expect(roleD.child.death.state.isActive).toBe(true);
+        expect(cardD.child.dispose.state.isActive).toBe(true);
         expect(boardB.child.minions.length).toBe(1);
         
         // Verify Berserker gains attack power and has health 2
@@ -94,7 +94,7 @@ describe('amani-berserker', () => {
         
         // Verify wisp dies with health -4
         expect(roleF.state.health).toBe(-4);
-        expect(roleF.child.death.state.isActive).toBe(true);
+        expect(cardF.child.dispose.state.isActive).toBe(true);
         expect(boardB.child.minions.length).toBe(0);
         
         // Verify Berserker has health 1 and maintains attack power
