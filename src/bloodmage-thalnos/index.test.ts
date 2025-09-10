@@ -14,7 +14,7 @@ describe('bloodmage-thalnos', () => {
             playerA: new PlayerModel(() => ({
                 child: {
                     mana: new ManaModel(() => ({ state: { origin: 10 }})),
-                    character: new MageModel(),
+                    hero: new MageModel(),
                     board: new BoardModel(() => ({
                         child: { minions: [new BloodmageThalnosModel()] }
                     })),
@@ -26,7 +26,7 @@ describe('bloodmage-thalnos', () => {
             playerB: new PlayerModel(() => ({
                 child: {
                     mana: new ManaModel(() => ({ state: { origin: 10 }})),
-                    character: new MageModel(),
+                    hero: new MageModel(),
                     board: new BoardModel(() => ({
                         child: { minions: [new WispModel()] }
                     }))

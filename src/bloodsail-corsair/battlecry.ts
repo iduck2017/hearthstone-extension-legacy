@@ -26,13 +26,10 @@ export class BloodsailCorsairBattlecryModel extends BattlecryModel<[]> {
     public async doRun() {
         const player = this.route.player;
         if (!player) return;
-        
         const opponent = player.refer.opponent;
         if (!opponent) return;
-        
-        const weapon = opponent.child.character.child.weapon;
+        const weapon = opponent.child.hero.child.weapon;
         if (!weapon) return;
-        
         // Remove 1 durability
         weapon.child.durability.consume()
     }

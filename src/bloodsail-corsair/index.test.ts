@@ -16,7 +16,7 @@ describe('bloodsail-corsair', () => {
             playerA: new PlayerModel(() => ({
                 child: {
                     mana: new ManaModel(() => ({ state: { origin: 10 }})),
-                    character: new MageModel(),
+                    hero: new MageModel(),
                     hand: new HandModel(() => ({
                         child: { minions: [new BloodsailCorsairModel()] }
                     }))
@@ -25,7 +25,7 @@ describe('bloodsail-corsair', () => {
             playerB: new PlayerModel(() => ({
                 child: {
                     mana: new ManaModel(() => ({ state: { origin: 10 }})),
-                    character: new WarriorModel(() => ({
+                    hero: new WarriorModel(() => ({
                         child: { weapon: new FieryWarAxeModel() }
                     })),
                 }
@@ -38,7 +38,7 @@ describe('bloodsail-corsair', () => {
     const handA = playerA.child.hand;
     const cardC = handA.child.minions.find((item: any) => item instanceof BloodsailCorsairModel);
     const roleC = cardC?.child.role;
-    const heroB = playerB.child.character;
+    const heroB = playerB.child.hero;
     const weaponB = heroB.child.weapon;
     if (!roleC || !weaponB) throw new Error();
 

@@ -17,7 +17,7 @@ describe('abusive-sergeant', () => {
             playerA: new PlayerModel(() => ({
                 child: {
                     mana: new ManaModel(() => ({ state: { origin: 10 }})),
-                    character: new MageModel(),
+                    hero: new MageModel(),
                     hand: new HandModel(() => ({
                         child: { 
                             minions: [
@@ -31,7 +31,7 @@ describe('abusive-sergeant', () => {
             playerB: new PlayerModel(() => ({
                 child: {
                     mana: new ManaModel(() => ({ state: { origin: 10 }})),
-                    character: new MageModel(),
+                    hero: new MageModel(),
                     hand: new HandModel(() => ({
                         child: { 
                             minions: [

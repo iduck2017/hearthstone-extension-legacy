@@ -15,7 +15,7 @@ describe('battlecry', () => {
             playerA: new PlayerModel(() => ({
                 child: {
                     mana: new ManaModel(() => ({ state: { origin: 10 }})),
-                    character: new MageModel(),
+                    hero: new MageModel(),
                     hand: new HandModel(() => ({
                         child: { 
                             minions: [new ElvenArcherModel()] 
@@ -26,7 +26,7 @@ describe('battlecry', () => {
             playerB: new PlayerModel(() => ({
                 child: {
                     mana: new ManaModel(() => ({ state: { origin: 10 }})),
-                    character: new MageModel(),
+                    hero: new MageModel(),
                     board: new BoardModel(() => ({
                         child: { minions: [new WispModel()] }
                     })),
@@ -43,8 +43,8 @@ describe('battlecry', () => {
     const cardD = board.child.minions.find(item => item instanceof WispModel);
     const roleC = cardC?.child.role;
     const roleD = cardD?.child.role;
-    const roleA = playerA.child.character.child.role;
-    const roleB = playerB.child.character.child.role;
+    const roleA = playerA.child.hero.child.role;
+    const roleB = playerB.child.hero.child.role;
     if (!roleC || !roleD) throw new Error();
 
     test('elven-archer-battlecry', async () => {

@@ -15,7 +15,7 @@ describe('ancient-watcher', () => {
             playerA: new PlayerModel(() => ({
                 child: {
                     mana: new ManaModel(() => ({ state: { origin: 10 }})),
-                    character: new MageModel(),
+                    hero: new MageModel(),
                     hand: new HandModel(() => ({
                         child: { minions: [new AncientWatcherModel()] }
                     }))
@@ -24,7 +24,7 @@ describe('ancient-watcher', () => {
             playerB: new PlayerModel(() => ({
                 child: {
                     mana: new ManaModel(() => ({ state: { origin: 10 }})),
-                    character: new MageModel(),
+                    hero: new MageModel(),
                     board: new BoardModel(() => ({
                         child: { minions: [new WispModel()] }
                     }))
