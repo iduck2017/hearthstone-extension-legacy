@@ -6,10 +6,8 @@
 import { GameModel, HandModel, MageModel, PlayerModel, TimeUtil, SelectUtil, ManaModel, DurabilityModel, WeaponAttackModel, WeaponCardModel, WarriorModel } from "hearthstone-core";
 import { BloodsailCorsairModel } from ".";
 import { boot } from "../boot";
-import { DebugUtil, LogLevel } from "set-piece";
 import { FieryWarAxeModel } from "../fiery-war-axe";
 
-DebugUtil.level = LogLevel.ERROR;
 describe('bloodsail-corsair', () => {
     const game = new GameModel(() => ({
         child: {

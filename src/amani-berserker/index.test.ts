@@ -12,10 +12,8 @@ import { AmaniBerserkerModel } from ".";
 import { WispModel } from "../wisp";
 import { VoodooDoctorModel } from "../voodoo-doctor";
 import { boot } from "../boot";
-import { DebugUtil, LogLevel } from "set-piece";
 import { StonetuskBoarModel } from "../stonetusk-boar";
 
-DebugUtil.level = LogLevel.ERROR;
 describe('amani-berserker', () => {
     const game = new GameModel(() => ({
         child: {

@@ -11,7 +11,6 @@ import { boot } from "../boot";
 import { WispModel } from "../wisp";
 import { VoodooDoctorModel } from ".";
 
-DebugUtil.level = LogLevel.ERROR;
 describe('voodoo-doctor', () => {
     const game = new GameModel(() => ({
         child: {
