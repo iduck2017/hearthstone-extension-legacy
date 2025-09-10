@@ -50,11 +50,10 @@ export class AmaniBerserkerFeatureModel extends FeatureModel<
     ) {
         const role = that.route.role;
         if (!role) return;
+
         const health = role.child.health;
-        
         const isEnrage = health.state.current < health.state.limit;
         if (!isEnrage) return;
-        
         decor.current.offset += this.state.offsetAttack;
     }
 } 
