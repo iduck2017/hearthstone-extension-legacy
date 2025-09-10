@@ -41,5 +41,3 @@ export class FieryWarAxeModel extends WeaponCardModel {
         })
     }
 }
-
-export const FieryWarAxe = new FieryWarAxeModel();
