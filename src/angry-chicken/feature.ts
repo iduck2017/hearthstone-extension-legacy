@@ -1,4 +1,4 @@
-import { AttackModel, AttackProps, BuffModel, FeatureModel, HealthModel, RoleModel } from "hearthstone-core";
+import { RoleAttackModel, RoleAttackProps, BuffModel, FeatureModel, HealthModel, RoleModel } from "hearthstone-core";
 import { Event, EventUtil, StateUtil, StoreUtil, TranxUtil, Loader, StateChangeEvent, Decor } from "set-piece";
 import { DeepReadonly } from "utility-types";
 
@@ -44,8 +44,8 @@ export class AngryChickenFeatureModel extends FeatureModel<
 
     @StateUtil.on(self => self.route.role?.proxy.child.attack.decor)
     private onCheck(
-        that: AttackModel, 
-        decor: Decor<AttackProps.S>
+        that: RoleAttackModel, 
+        decor: Decor<RoleAttackProps.S>
     ) {
         const role = that.route.role;
         if (!role) return;

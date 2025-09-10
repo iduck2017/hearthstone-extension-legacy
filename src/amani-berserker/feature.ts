@@ -1,4 +1,4 @@
-import { AttackModel, AttackProps, BuffModel, FeatureModel, HealthModel, HealthProps, RoleModel } from "hearthstone-core";
+import { RoleAttackModel, RoleAttackProps, BuffModel, FeatureModel, HealthModel, HealthProps, RoleModel } from "hearthstone-core";
 import { Event, EventUtil, StateUtil, StoreUtil, TranxUtil, Loader, StateChangeEvent, Decor } from "set-piece";
 
 export namespace AmaniBerserkerFeatureProps {
@@ -45,8 +45,8 @@ export class AmaniBerserkerFeatureModel extends FeatureModel<
     // Apply attack buff when damaged
     @StateUtil.on(self => self.route.role?.proxy.child.attack.decor)
     private onCheck(
-        that: AttackModel, 
-        decor: Decor<AttackProps.S>
+        that: RoleAttackModel, 
+        decor: Decor<RoleAttackProps.S>
     ) {
         const role = that.route.role;
         if (!role) return;

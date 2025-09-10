@@ -16,7 +16,7 @@
  * Spell Damage
  */
 
-import { AttackModel, ClassType, HealthModel, MinionCardModel, RaceType, RarityType, RoleModel, SpellDamageModel, RoleEntriesModel, MinionHooksModel, LibraryUtil, CostModel } from "hearthstone-core";
+import { RoleAttackModel, ClassType, HealthModel, MinionCardModel, RaceType, RarityType, RoleModel, SpellDamageModel, RoleEntriesModel, MinionHooksModel, LibraryUtil, CostModel } from "hearthstone-core";
 import { BloodmageThalnosDeathrattleModel } from "./deathrattle";
 import { Loader } from "set-piece";
 
@@ -41,7 +41,7 @@ export class BloodmageThalnosModel extends MinionCardModel {
                     cost: new CostModel(() => ({ state: { origin: 2 }})),
                     role: new RoleModel(() => ({
                         child: {
-                            attack: new AttackModel(() => ({ state: { origin: 1 }})),
+                            attack: new RoleAttackModel(() => ({ state: { origin: 1 }})),
                             health: new HealthModel(() => ({ state: { origin: 1 }})), 
                             entries: new RoleEntriesModel(() => ({
                                 child: { 

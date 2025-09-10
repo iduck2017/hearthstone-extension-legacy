@@ -11,7 +11,7 @@
  * Collectible
  */
 
-import { AttackModel, ClassType, FeaturesModel, HealthModel, MinionCardModel, RaceType, RarityType, RoleModel, LibraryUtil, CostModel } from "hearthstone-core";
+import { RoleAttackModel, ClassType, FeaturesModel, HealthModel, MinionCardModel, RaceType, RarityType, RoleModel, LibraryUtil, CostModel } from "hearthstone-core";
 import { AngryChickenFeatureModel } from "./feature";
 import { Loader } from "set-piece";
 
@@ -36,7 +36,7 @@ export class AngryChickenModel extends MinionCardModel {
                     cost: new CostModel(() => ({ state: { origin: 1 }})),
                     role: new RoleModel(() => ({
                         child: {
-                            attack: new AttackModel(() => ({ state: { origin: 1 }})),
+                            attack: new RoleAttackModel(() => ({ state: { origin: 1 }})),
                             health: new HealthModel(() => ({ state: { origin: 1 }})), 
                             features: new FeaturesModel(() => ({
                                 child: { items: [

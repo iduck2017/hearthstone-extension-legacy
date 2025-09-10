@@ -12,7 +12,7 @@
  * Collectible
  */
 
-import { AttackModel, ClassType, FeaturesModel, HealthModel, LibraryUtil, MinionCardModel, RarityType, RoleModel } from "hearthstone-core";
+import { RoleAttackModel, ClassType, FeaturesModel, HealthModel, LibraryUtil, MinionCardModel, RarityType, RoleModel } from "hearthstone-core";
 import { AmaniBerserkerFeatureModel } from "./feature";
 import { CostModel } from "hearthstone-core";
 import { Loader } from "set-piece";
@@ -38,7 +38,7 @@ export class AmaniBerserkerModel extends MinionCardModel {
                     cost: new CostModel(() => ({ state: { origin: 2 }})),
                     role: new RoleModel(() => ({
                         child: {
-                            attack: new AttackModel(() => ({ state: { origin: 2 }})),
+                            attack: new RoleAttackModel(() => ({ state: { origin: 2 }})),
                             health: new HealthModel(() => ({ state: { origin: 3 }})), 
                             features: new FeaturesModel(() => ({
                                 child: { items: [

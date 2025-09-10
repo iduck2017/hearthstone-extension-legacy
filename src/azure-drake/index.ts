@@ -15,7 +15,7 @@
  * Collectible
  */
 
-import { MinionCardModel, HealthModel, AttackModel, RoleModel, ClassType, RarityType, RaceType, RoleEntriesModel, SpellDamageModel, MinionHooksModel, LibraryUtil, CostModel } from "hearthstone-core";
+import { MinionCardModel, HealthModel, RoleAttackModel, RoleModel, ClassType, RarityType, RaceType, RoleEntriesModel, SpellDamageModel, MinionHooksModel, LibraryUtil, CostModel } from "hearthstone-core";
 import { AzureDrakeBattlecryModel } from "./battlecry";
 import { Loader } from "set-piece";
 
@@ -40,7 +40,7 @@ export class AzureDrakeModel extends MinionCardModel {
                     cost: new CostModel(() => ({ state: { origin: 5 }})),
                     role: new RoleModel(() => ({
                         child: {
-                            attack: new AttackModel(() => ({ state: { origin: 4 }})),
+                            attack: new RoleAttackModel(() => ({ state: { origin: 4 }})),
                             health: new HealthModel(() => ({ state: { origin: 4 }})),
                             entries: new RoleEntriesModel(() => ({
                                 child: {

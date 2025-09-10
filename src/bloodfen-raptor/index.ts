@@ -10,7 +10,7 @@
  * Collectible
  */
 
-import { AttackModel, ClassType, HealthModel, LibraryUtil, MinionCardModel, RaceType, RarityType, RoleModel, CostModel } from "hearthstone-core";
+import { RoleAttackModel, ClassType, HealthModel, LibraryUtil, MinionCardModel, RaceType, RarityType, RoleModel, CostModel } from "hearthstone-core";
 import { Loader } from "set-piece";
 
 @LibraryUtil.is('bloodfen-raptor')
@@ -34,7 +34,7 @@ export class BloodfenRaptorModel extends MinionCardModel {
                     cost: new CostModel(() => ({ state: { origin: 2 }})),
                     role: new RoleModel(() => ({
                         child: {
-                            attack: new AttackModel(() => ({ state: { origin: 3 }})),
+                            attack: new RoleAttackModel(() => ({ state: { origin: 3 }})),
                             health: new HealthModel(() => ({ state: { origin: 2 }})), 
                         }
                     })),

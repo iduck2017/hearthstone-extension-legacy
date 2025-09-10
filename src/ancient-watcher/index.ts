@@ -12,7 +12,7 @@
  * Collectible
  */
 
-import { AttackModel, ClassType, FeaturesModel, HealthModel, MinionCardModel, RarityType, RoleModel, LibraryUtil, CostModel } from "hearthstone-core";
+import { RoleAttackModel, ClassType, FeaturesModel, HealthModel, MinionCardModel, RarityType, RoleModel, LibraryUtil, CostModel } from "hearthstone-core";
 import { AncientWatcherFeatureModel } from "./feature";
 import { Loader } from "set-piece";
 
@@ -37,7 +37,7 @@ export class AncientWatcherModel extends MinionCardModel {
                     cost: new CostModel(() => ({ state: { origin: 2 }})),
                     role: new RoleModel(() => ({
                         child: {
-                            attack: new AttackModel(() => ({ state: { origin: 4 }})),
+                            attack: new RoleAttackModel(() => ({ state: { origin: 4 }})),
                             health: new HealthModel(() => ({ state: { origin: 5 }})), 
                             features: new FeaturesModel(() => ({
                                 child: { items: [
