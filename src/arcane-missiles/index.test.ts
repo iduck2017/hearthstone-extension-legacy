@@ -1,8 +1,7 @@
 /**
  * Test cases for Arcane Missiles
  * 
- * 1. arcane-missiles-damage: Player A plays Arcane Missiles and deals 3 damage randomly split among all enemies
- * 2. arcane-missiles-multiple-targets: Player A plays Arcane Missiles with multiple enemy targets
+ * 1. arcane-missiles-cast: Player A plays Arcane Missiles and deals 3 damage randomly split among all enemies
  */
 
 import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel } from "hearthstone-core";

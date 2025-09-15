@@ -1,0 +1,106 @@
+/**
+ * Test cases for Ice Lance
+ * 
+ * 1. ice-lance-cast: Player A plays Ice Lance on unfrozen target, freezes it and checks mana cost
+ * 2. ice-lance-cast-2: Player B plays Ice Lance on already frozen target, deals 4 damage
+ */
+
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, SelectUtil } from "hearthstone-core";
+import { IceLanceModel } from "./index";
+import { WispModel } from "../wisp";
+import { boot } from "../boot";
+import { DebugUtil, LogLevel } from "set-piece";
+
+DebugUtil.level = LogLevel.ERROR;
+describe('ice-lance', () => {
+    const game = new GameModel(() => ({
+        child: {
+            playerA: new PlayerModel(() => ({
+                child: {
+                    mana: new ManaModel(() => ({ state: { origin: 10 }})),
+                    hero: new MageModel(),
+                    board: new BoardModel(() => ({
+                        child: { minions: [] }
+                    })),
+                    hand: new HandModel(() => ({
+                        child: { spells: [new IceLanceModel()] }
+                    }))
+                }
+            })),
+            playerB: new PlayerModel(() => ({
+                child: {
+                    mana: new ManaModel(() => ({ state: { origin: 10 }})),
+                    hero: new MageModel(),
+                    board: new BoardModel(() => ({
+                        child: { minions: [new WispModel()] }
+                    })),
+                    hand: new HandModel(() => ({
+                        child: { spells: [new IceLanceModel()] }
+                    }))
+                }
+            }))
+        }
+    }));
+    boot(game);
+    
+    const playerA = game.child.playerA;
+    const playerB = game.child.playerB;
+    const handA = playerA.child.hand;
+    const handB = playerB.child.hand;
+    const boardB = playerB.child.board;
+    const cardC = boardB.child.minions.find(item => item instanceof WispModel);
+    const cardD = handA.child.spells.find(item => item instanceof IceLanceModel);
+    const cardE = handB.child.spells.find(item => item instanceof IceLanceModel);
+    const roleA = playerA.child.hero.child.role;
+    const roleB = playerB.child.hero.child.role;
+    const roleC = cardC?.child.role;
+    if (!cardD || !roleC || !cardE) throw new Error();
+    const turn = game.child.turn;
+
+    test('ice-lance-cast', async () => {
+        // Target is not frozen initially
+        expect(playerA.child.mana.state.current).toBe(10);
+        expect(handA.child.spells.length).toBe(1);
+        const frozen = roleC.child.entries.child.frozen;
+        expect(frozen.state.isActive).toBeFalsy();
+
+        // Play Ice Lance targeting enemy minion
+        let promise = cardD.play();
+        expect(SelectUtil.current?.options).toContain(roleA);
+        expect(SelectUtil.current?.options).toContain(roleB);
+        expect(SelectUtil.current?.options).toContain(roleC);
+        SelectUtil.set(roleC);
+        await promise;
+        
+        // Target should be frozen
+        expect(playerA.child.mana.state.current).toBe(9);
+        expect(frozen.state.isActive).toBe(true);
+        turn.next();
+        expect(turn.refer.current).toBe(playerB);
+        expect(frozen.state.isActive).toBe(true);
+        
+        expect(handA.child.spells.length).toBe(0);
+        expect(roleC.child.action.state.isActive).toBeFalsy();
+    })
+
+    test('ice-lance-cast-2', async () => {
+        expect(playerB.child.mana.state.current).toBe(10);
+        expect(handB.child.spells.length).toBe(1);
+        const frozen = roleC.child.entries.child.frozen;
+        expect(frozen.state.isActive).toBe(true);
+
+        let promise = cardE.play();
+        expect(SelectUtil.current?.options).toContain(roleA);
+        expect(SelectUtil.current?.options).toContain(roleB);
+        expect(SelectUtil.current?.options).toContain(roleC);
+        SelectUtil.set(roleC);
+        await promise;
+
+        expect(playerB.child.mana.state.current).toBe(9);
+        expect(handA.child.spells.length).toBe(0);
+        expect(roleC.child.action.state.isActive).toBeFalsy();
+        expect(roleC.child.health.state.current).toBe(-3);
+        expect(cardC.child.dispose.state.isActive).toBe(true);
+        expect(cardC.child.dispose.refer.source).toBe(cardE);
+    })
+}) 
