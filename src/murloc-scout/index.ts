@@ -1,54 +1,49 @@
-
 /**
- * Murloc Tidehunter
+ * Murloc Scout
  * 
- * "Death will rise, from the tides!"
- * 
- * Battlecry: Summon a 1/1 Murloc Scout.
+ * A small but brave murloc scout.
  * 
  * Type: Minion
  * Minion Type: Murloc
  * Rarity: Free
  * Set: Legacy
  * Class: Neutral
- * Artist: Dan Scott
- * Collectible
+ * Collectible: No
  */
 
-import { CardModel, ClassType, HealthModel, MinionCardModel, MinionHooksModel, RaceType, RarityType, RoleAttackModel, RoleModel } from "hearthstone-core";
+import { ClassType, HealthModel, MinionCardModel, MinionHooksModel, RaceType, RarityType, RoleAttackModel, RoleModel } from "hearthstone-core";
 import { CostModel } from "hearthstone-core";
 import { LibraryUtil } from "hearthstone-core";
 import { Loader } from "set-piece";
-import { MurlocTidehunterBattlecryModel } from "./battlecry";
 
-@LibraryUtil.is('murloc-tidehunter')
-export class MurlocTidehunterModel extends MinionCardModel {
-    constructor(loader?: Loader<MurlocTidehunterModel>) {
+@LibraryUtil.is('murloc-scout')
+export class MurlocScoutModel extends MinionCardModel {
+    constructor(loader?: Loader<MurlocScoutModel>) {
         super(() => {
             const props = loader?.() ?? {};
             return {
                 uuid: props.uuid,
                 state: {
-                    name: 'Murloc Tidehunter',
-                    desc: 'Battlecry: Summon a 1/1 Murloc Scout.',
-                    isCollectible: true,
-                    flavorDesc: '"Death will rise, from the tides!"',
+                    name: 'Murloc Scout',
+                    desc: '',
+                    isCollectible: false,
+                    flavorDesc: 'A small but brave murloc scout.',
                     rarity: RarityType.COMMON,
                     races: [RaceType.MURLOC],
                     class: ClassType.NEUTRAL,
                     ...props.state
                 },
                 child: {
-                    cost: new CostModel(() => ({ state: { origin: 2 }})),
+                    cost: new CostModel(() => ({ state: { origin: 1 }})),
                     role: new RoleModel(() => ({
                         state: { races: [RaceType.MURLOC] },
                         child: {
-                            attack: new RoleAttackModel(() => ({ state: { origin: 2 }})),
+                            attack: new RoleAttackModel(() => ({ state: { origin: 1 }})),
                             health: new HealthModel(() => ({ state: { origin: 1 }})),
                         }
                     })),
                     hooks: new MinionHooksModel(() => ({
-                        child: { battlecry: [new MurlocTidehunterBattlecryModel()] }
+                        child: { battlecry: [] }
                     })),
                     ...props.child
                 },
@@ -56,4 +51,4 @@ export class MurlocTidehunterModel extends MinionCardModel {
             }
         });
     }
-}
+} 
