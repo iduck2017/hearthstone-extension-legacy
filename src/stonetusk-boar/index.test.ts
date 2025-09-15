@@ -8,6 +8,7 @@ import { GameModel, BoardModel, HandModel, MageModel, PlayerModel, TimeUtil, Sel
 import { StonetuskBoarModel } from "./index";
 import { WispModel } from "../wisp";
 import { boot } from "../boot";
+import { DebugUtil, LogLevel } from "set-piece";
 
 describe('stonetusk-boar', () => {
     const game = new GameModel(() => ({

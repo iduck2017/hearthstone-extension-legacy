@@ -1,7 +1,7 @@
 /**
  * Test cases for Voodoo Doctor
  * 
- * 1. wisp-attack: Player A's Wisp attacks Player B's hero
+ * 1. wisp-attack-shieldbearer: Player A's Wisp attacks Player B's hero
  * 2. voodoo-doctor-battlecry: Player A plays Voodoo Doctor and heals Player B's hero
  */
 
@@ -16,8 +16,8 @@ describe('voodoo-doctor', () => {
         child: {
             playerA: new PlayerModel(() => ({
                 child: {
-                    mana: new ManaModel(() => ({ state: { origin: 10 }})),
                     hero: new MageModel(),
+                    mana: new ManaModel(() => ({ state: { origin: 10 }})),
                     board: new BoardModel(() => ({
                         child: { minions: [new WispModel()] }
                     })),
@@ -48,9 +48,10 @@ describe('voodoo-doctor', () => {
     const roleB = playerB.child.hero.child.role;
     if (!roleC || !roleD) throw new Error();
 
-    test('wisp-attack', async () => {
+    test('wisp-attack-shieldbearer', async () => {
         expect(boardA.child.minions.length).toBe(1);
         
+        // Wisp attacks Shieldbearer
         let promise = roleC.child.action.run();
         await TimeUtil.sleep();
         expect(SelectUtil.current).toBeDefined();

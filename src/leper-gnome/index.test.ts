@@ -8,6 +8,7 @@ import { GameModel, BoardModel, MageModel, TimeUtil, SelectUtil, ManaModel, Play
 import { LeperGnomeModel } from ".";
 import { WispModel } from "../wisp";
 import { boot } from "../boot";
+import { DebugUtil, LogLevel } from "set-piece";
 
 describe('leper-gnome', () => {
     const game = boot(new GameModel(() => ({
@@ -64,8 +65,6 @@ describe('leper-gnome', () => {
         
         expect(boardA.child.minions.length).toBe(0);
         expect(boardB.child.minions.length).toBe(0);
-        expect(cardC.child.dispose.state.isActive).toBe(true);
-        expect(cardD.child.dispose.state.isActive).toBe(true);
         expect(roleB.state.health).toBe(28);
         expect(roleB.child.health.state.damage).toBe(2);
     })

@@ -7,10 +7,11 @@
  * 4. wisp-attack: Player B plays a wisp, it can attack immediately
  */
 
-import { GameModel, PlayerModel, MageModel, HandModel, BoardModel, SelectUtil, TimeUtil, ActionModel, ManaModel } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, HandModel, BoardModel, SelectUtil, TimeUtil, ManaModel } from "hearthstone-core";
 import { EmeraldSkytalonModel } from "./index";
 import { WispModel } from "../wisp";
 import { boot } from "../boot";
+import { DebugUtil, LogLevel } from "set-piece";
 
 describe('emerald-skytalon', () => {
     const game = new GameModel(() => ({

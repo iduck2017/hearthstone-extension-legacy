@@ -1,9 +1,9 @@
-import { BattlecryModel, DamageEvent, DamageModel, DamageType, RoleModel, SelectEvent } from "hearthstone-core";
+import { RoleBattlecryModel, DamageEvent, DamageModel, DamageType, RoleModel, SelectEvent } from "hearthstone-core";
 import { Loader, StoreUtil } from "set-piece";
 
 @StoreUtil.is('elven-archer-battlecry')
-export class ElvenArcherBattlecryModel extends BattlecryModel<[RoleModel]> {
-    constructor(loader?: Loader<ElvenArcherBattlecryModel>) {
+export class ElvenArcherRoleBattlecryModel extends RoleBattlecryModel<[RoleModel]> {
+    constructor(loader?: Loader<ElvenArcherRoleBattlecryModel>) {
         super(() => {
             const props = loader?.() ?? {};
             return {
@@ -29,13 +29,14 @@ export class ElvenArcherBattlecryModel extends BattlecryModel<[RoleModel]> {
         return [new SelectEvent(options, { hint: 'Choose a target' })]
     }
 
-    protected async doRun(target: RoleModel) {
-        const card = this.route;
+    protected async doRun(from: number, to: number, target: RoleModel) {
+        const card = this.route.card;
         if (!card) return;
         DamageModel.run([
             new DamageEvent({
-                source: this.child.damage,
+                source: card,
                 target,
+                detail: this,
                 origin: 1,
                 type: DamageType.DEFAULT,
             })

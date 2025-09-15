@@ -10,6 +10,7 @@ import { WispModel } from "../wisp";
 import { boot } from "../boot";
 import { DebugUtil, LogLevel } from "set-piece";
 
+DebugUtil.level = LogLevel.ERROR;
 describe('goldshire-footman', () => {
     const game = new GameModel(() => ({
         child: {
@@ -47,7 +48,7 @@ describe('goldshire-footman', () => {
     test('wisp-attack-goldshire-footman', async () => {
         // Initial state verification
         expect(roleC.state.action).toBe(1); // Wisp has action point
-        expect(roleD.child.entries.child.taunt.state.isActive).toBe(1);
+        expect(roleD.child.entries.child.taunt.state.isActive).toBe(true);
         const promise = roleC.child.action.run();
         await TimeUtil.sleep();
         expect(SelectUtil.current?.options).toContain(roleD);

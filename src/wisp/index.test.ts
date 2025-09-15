@@ -82,7 +82,6 @@ describe('role', () => {
         expect(roleC.child.action.state.current).toBe(0);
     })
 
-
     test('wisp-attack-2', async () => {
         turn.next();
 
@@ -110,8 +109,7 @@ describe('role', () => {
 
         expect(boardA.child.minions.length).toBe(0);
         expect(boardB.child.minions.length).toBe(0);
-
-        expect(cardC.child.dispose.refer.reason).toBe(roleD.child.attack.child.damage);
-        expect(cardD.child.dispose.refer.reason).toBe(roleC.child.attack.child.damage);
+        expect(cardC.child.dispose.refer.source).toBe(cardD);
+        expect(cardD.child.dispose.refer.source).toBe(cardC);
     })
 })

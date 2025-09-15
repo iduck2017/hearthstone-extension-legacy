@@ -8,6 +8,7 @@
 import { GameModel, PlayerModel, MageModel, BoardModel, SelectUtil, ManaModel } from "hearthstone-core";
 import { ArgentSquireModel } from "./index";
 import { boot } from "../boot";
+import { DebugUtil, LogLevel } from "set-piece";
 
 describe('argent-squire', () => {
     const game = new GameModel(() => ({
@@ -71,8 +72,8 @@ describe('argent-squire', () => {
         await promise;
 
         expect(roleC.state.health).toBe(0);
-        expect(cardC.child.dispose.state.isActive).toBe(true);
         expect(roleD.state.health).toBe(0);
+        expect(cardC.child.dispose.state.isActive).toBe(true);
         expect(cardD.child.dispose.state.isActive).toBe(true);
 
         expect(boardA.child.minions.length).toBe(0);
