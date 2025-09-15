@@ -63,7 +63,6 @@ describe('fireball', () => {
         expect(boardA.child.secrets.length).toBe(1);
     })
 
-
     test('counterspell-trigger', async () => {
         turn.next();
         let promise = spellD.play();
