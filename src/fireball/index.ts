@@ -1,3 +1,19 @@
+/**
+ * Fireball
+ * 
+ * This spell is useful for burning things. If you're looking for spells that toast things, or just warm them a little, you're in the wrong place.
+ * 
+ * Deal 6 damage.
+ * 
+ * Type: Spell
+ * Spell School: Fire
+ * Rarity: Free
+ * Set: Legacy
+ * Class: Mage
+ * Artist: Ralph Horsley
+ * Collectible
+ */
+
 import { ClassType, CostModel, LibraryUtil, RarityType, SpellCardModel } from "hearthstone-core";
 import { Loader } from "set-piece";
 import { FireballEffectModel } from "./effect";
@@ -10,9 +26,9 @@ export class FireballModel extends SpellCardModel {
             return {
                 uuid: props.uuid,
                 state: { 
-                    name: "",
-                    desc: "",
-                    flavorDesc: "",
+                    name: "Fireball",
+                    desc: "Deal 6 damage.",
+                    flavorDesc: "This spell is useful for burning things. If you're looking for spells that toast things, or just warm them a little, you're in the wrong place.",
                     isCollectible: true,
                     rarity: RarityType.COMMON,
                     class: ClassType.MAGE,
