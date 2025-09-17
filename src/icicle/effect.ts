@@ -22,8 +22,8 @@ export class IcicleEffectModel extends EffectModel<[RoleModel]> {
     toRun(): [SelectEvent<RoleModel>] | undefined {
         const games = this.route.game;
         if (!games) return;
-        const roles = games.query();
-        return [new SelectEvent(roles, { hint: "Choose a target" })]
+        const roles = games.query(true);
+        return [new SelectEvent(roles, { hint: "Choose a minion" })]
     }
 
     protected async doRun(target: RoleModel) {

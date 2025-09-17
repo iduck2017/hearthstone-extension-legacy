@@ -93,7 +93,7 @@ describe('firey-war-axe', () => {
     test('warrior-attack-2', async () => {
         turn.next();
         expect(weapon.child.attack.status).toBe(true);
-        expect(roleA.child.action.state.isActive).toBe(true);
+        expect(roleA.child.action.status).toBe(true);
 
         const promise = roleA.child.action.run();
         expect(SelectUtil.current).toBeDefined();

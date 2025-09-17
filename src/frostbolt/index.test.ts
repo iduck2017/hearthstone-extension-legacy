@@ -81,7 +81,7 @@ describe('frostbolt', () => {
         turn.next();
         expect(turn.refer.current).toBe(playerB);
         expect(frozen.state.isActive).toBe(true);
-        expect(roleC.child.action.state.isActive).toBeFalsy();
+        expect(roleC.child.action.status).toBe(false);
         
     })
 }) 

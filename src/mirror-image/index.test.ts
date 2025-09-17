@@ -85,7 +85,7 @@ describe('mirror-image', () => {
         expect(turn.refer.current).toBe(playerB);
         
         // B's Wisp should not be able to attack A's hero due to Taunt
-        expect(roleC.child.action.state.isActive).toBe(true);
+        expect(roleC.child.action.status).toBe(true);
         
         const cardD = boardA.child.minions[0];
         const cardE = boardA.child.minions[1];

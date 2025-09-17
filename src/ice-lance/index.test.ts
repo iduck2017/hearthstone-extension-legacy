@@ -80,7 +80,7 @@ describe('ice-lance', () => {
         expect(frozen.state.isActive).toBe(true);
         
         expect(handA.child.spells.length).toBe(0);
-        expect(roleC.child.action.state.isActive).toBeFalsy();
+        expect(roleC.child.action.status).toBeFalsy();
     })
 
     test('ice-lance-cast-2', async () => {
@@ -98,7 +98,7 @@ describe('ice-lance', () => {
 
         expect(playerB.child.mana.state.current).toBe(9);
         expect(handA.child.spells.length).toBe(0);
-        expect(roleC.child.action.state.isActive).toBeFalsy();
+        expect(roleC.child.action.status).toBeFalsy();
         expect(roleC.child.health.state.current).toBe(-3);
         expect(cardC.child.dispose.status).toBe(true);
         expect(cardC.child.dispose.refer.source).toBe(cardE);
