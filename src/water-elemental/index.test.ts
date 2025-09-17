@@ -1,0 +1,93 @@
+/**
+ * Test cases for Water Elemental
+ * 
+ * 1. water-elemental-attack: Player A's Water Elemental attacks enemy minion, freezes it
+ * 2. water-elemental-hero-attack: Player A's Water Elemental attacks enemy hero, freezes it
+ */
+
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, TimeUtil, SelectUtil } from "hearthstone-core";
+import { WaterElementalModel } from "./index";
+import { WispModel } from "../wisp";
+import { boot } from "../boot";
+import { DebugUtil, LogLevel } from "set-piece";
+
+DebugUtil.level = LogLevel.ERROR;
+describe('water-elemental', () => {
+    const game = new GameModel(() => ({
+        child: {
+            playerA: new PlayerModel(() => ({
+                child: {
+                    mana: new ManaModel(() => ({ state: { origin: 10 }})),
+                    hero: new MageModel(),
+                    board: new BoardModel(() => ({
+                        child: { minions: [new WaterElementalModel()] }
+                    })),
+                    hand: new HandModel(() => ({
+                        child: { spells: [] }
+                    }))
+                }
+            })),
+            playerB: new PlayerModel(() => ({
+                child: {
+                    mana: new ManaModel(() => ({ state: { origin: 10 }})),
+                    hero: new MageModel(),
+                    board: new BoardModel(() => ({
+                        child: { minions: [new WaterElementalModel()] }
+                    })),
+                    hand: new HandModel(() => ({
+                        child: { spells: [] }
+                    }))
+                }
+            }))
+        }
+    }));
+    boot(game);
+    
+    const playerA = game.child.playerA;
+    const playerB = game.child.playerB;
+    const boardA = playerA.child.board;
+    const boardB = playerB.child.board;
+    const cardC = boardA.child.minions.find(item => item instanceof WaterElementalModel);
+    const cardD = boardB.child.minions.find(item => item instanceof WaterElementalModel);
+    const roleC = cardC?.child.role;
+    const roleD = cardD?.child.role;
+    const roleB = playerB.child.hero.child.role;
+    if (!roleC || !roleD) throw new Error();
+
+    test('water-elemental-attack', async () => {
+        // Check initial stats
+        expect(roleC.child.attack.state.current).toBe(3);
+        expect(roleC.child.health.state.current).toBe(6);
+        expect(roleD.child.entries.child.frozen.state.isActive).toBe(false);
+
+        const promise = roleC.child.action.run();
+        await TimeUtil.sleep();
+        expect(SelectUtil.current?.options).toContain(roleD);
+        SelectUtil.set(roleD);
+        await promise;
+
+        // Wisp should be damaged and frozen
+        expect(roleD.child.health.state.current).toBe(3);
+        expect(roleD.child.health.state.damage).toBe(3);
+        expect(roleD.child.entries.child.frozen.state.isActive).toBe(true);
+
+        expect(roleC.child.health.state.current).toBe(3);
+        expect(roleC.child.health.state.damage).toBe(3);
+        expect(roleC.child.entries.child.frozen.state.isActive).toBe(true);
+    })
+
+    test('water-elemental-attack', async () => {
+        const turn = game.child.turn;
+        turn.next();
+
+        expect(roleC.child.entries.child.frozen.state.isActive).toBe(true);
+        expect(roleD.child.entries.child.frozen.state.isActive).toBe(true);
+        expect(roleC.child.action.status).toBe(false);
+        expect(roleD.child.action.status).toBe(false);
+
+        turn.next();
+
+        expect(roleC.child.entries.child.frozen.state.isActive).toBe(true);
+        expect(roleD.child.entries.child.frozen.state.isActive).toBe(false);
+    })
+})
