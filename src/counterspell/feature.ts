@@ -31,6 +31,6 @@ export class CounterspellFeatureModel extends CardFeatureModel {
         const opponent = player.refer.opponent;
         if (that.route.player !== opponent) return;
         secret.child.dispose.active(true)
-        event.cancel();
+        event.abort();
     }
 }
