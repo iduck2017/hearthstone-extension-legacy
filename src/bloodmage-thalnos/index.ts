@@ -42,7 +42,7 @@ export class BloodmageThalnosModel extends MinionCardModel {
                             health: new HealthModel(() => ({ state: { origin: 1 }})), 
                             entries: new RoleEntriesModel(() => ({
                                 child: { 
-                                    spellDamage: new SpellBuffModel(() => ({ state: { current: 1 }}))
+                                    spellDamage: new SpellBuffModel(() => ({ state: { offset: 1 }}))
                                 }
                             })),
                         }

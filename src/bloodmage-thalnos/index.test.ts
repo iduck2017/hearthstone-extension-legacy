@@ -71,10 +71,10 @@ describe('bloodmage-thalnos', () => {
         expect(boardB.child.minions.length).toBe(1);
         expect(deckA.child.minions.length).toBe(1);
         expect(handA.child.minions.length).toBe(0);
-        expect(roleC.state.attack).toBe(1);
-        expect(roleC.state.health).toBe(1);
-        expect(roleD.state.attack).toBe(1);
-        expect(roleD.state.health).toBe(1);
+        expect(roleC.child.attack.state.current).toBe(1);
+        expect(roleC.child.health.state.current).toBe(1);
+        expect(roleD.child.attack.state.current).toBe(1);
+        expect(roleD.child.health.state.current).toBe(1);
         
         // Player A uses Bloodmage Thalnos to attack wisp
         let promise = roleC.child.action.run();
@@ -84,8 +84,8 @@ describe('bloodmage-thalnos', () => {
         await promise;
         
         // Verify both minions die
-        expect(cardC.child.dispose.state.isActive).toBe(true);
-        expect(cardD.child.dispose.state.isActive).toBe(true);
+        expect(cardC.child.dispose.status).toBe(true);
+        expect(cardD.child.dispose.status).toBe(true);
         expect(boardA.child.minions.length).toBe(0);
         expect(boardB.child.minions.length).toBe(0);
         
