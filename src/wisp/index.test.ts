@@ -57,7 +57,7 @@ describe('role', () => {
         expect(roleC.child.health.state.damage).toBe(0);
         expect(roleC.child.health.state.limit).toBe(1);
         expect(roleC.child.attack.state.current).toBe(1);
-        expect(cardC.child.dispose.state.isActive).toBe(false);
+        expect(cardC.child.dispose.status).toBe(false);
     })
 
 
@@ -78,7 +78,7 @@ describe('role', () => {
         expect(roleB.child.health.state.limit).toBe(30);
 
         expect(roleC.child.health.state.current).toBe(1);
-        expect(cardC.child.dispose.state.isActive).toBe(false);
+        expect(cardC.child.dispose.status).toBe(false);
         expect(roleC.child.action.state.current).toBe(0);
     })
 
@@ -99,12 +99,12 @@ describe('role', () => {
         expect(roleC.child.health.state.current).toBe(0);
         expect(roleC.child.health.state.damage).toBe(1);
         expect(roleC.child.health.state.limit).toBe(1);
-        expect(cardC.child.dispose.state.isActive).toBe(true);
+        expect(cardC.child.dispose.status).toBe(true);
 
         expect(roleD.child.health.state.current).toBe(0);
         expect(roleD.child.health.state.damage).toBe(1);
         expect(roleD.child.health.state.limit).toBe(1);
-        expect(cardD.child.dispose.state.isActive).toBe(true);
+        expect(cardD.child.dispose.status).toBe(true);
         expect(roleD.child.action.state.current).toBe(0);
 
         expect(boardA.child.minions.length).toBe(0);

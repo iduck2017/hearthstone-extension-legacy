@@ -66,7 +66,7 @@ describe('fireball', () => {
         // Hero should take 6 damage
         expect(roleC.child.health.state.current).toBe(-5);
         expect(roleC.child.health.state.damage).toBe(6);
-        expect(cardC.child.dispose.state.isActive).toBe(true);
+        expect(cardC.child.dispose.status).toBe(true);
         expect(cardC.child.dispose.refer.source).toBe(cardD);
     })
 

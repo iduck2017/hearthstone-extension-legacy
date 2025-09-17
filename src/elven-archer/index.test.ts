@@ -47,7 +47,7 @@ describe('battlecry', () => {
     if (!roleC || !roleD) throw new Error();
 
     test('elven-archer-battlecry', async () => {
-        expect(roleD.state.health).toBe(1);
+        expect(roleD.child.health.state.current).toBe(1);
 
         // play elven archer
         const promise = cardC.play();
@@ -60,12 +60,12 @@ describe('battlecry', () => {
         SelectUtil.set(roleD);
         await promise;
 
-        expect(roleD.state.health).toBe(0);
+        expect(roleD.child.health.state.current).toBe(0);
         expect(roleD.child.health.state.damage).toBe(1);
         expect(roleD.child.health.state.limit).toBe(1);
         expect(roleD.child.health.state.current).toBe(0);
         expect(roleD.child.health.state.origin).toBe(1);
-        expect(cardD.child.dispose.state.isActive).toBe(true);
+        expect(cardD.child.dispose.status).toBe(true);
 
         const source = cardD.child.dispose.refer.source;
         expect(source).toBe(cardC);

@@ -47,7 +47,7 @@ describe('goldshire-footman', () => {
 
     test('wisp-attack-goldshire-footman', async () => {
         // Initial state verification
-        expect(roleC.state.action).toBe(1); // Wisp has action point
+        expect(roleC.child.action.state.current).toBe(1); // Wisp has action point
         expect(roleD.child.entries.child.taunt.state.isActive).toBe(true);
         const promise = roleC.child.action.run();
         await TimeUtil.sleep();
@@ -55,7 +55,7 @@ describe('goldshire-footman', () => {
         expect(SelectUtil.current?.options).not.toContain(roleB);
         SelectUtil.set(roleD);
         await promise;
-        expect(roleD.state.health).toBe(1);
+        expect(roleD.child.health.state.current).toBe(1);
         expect(roleD.child.health.state.limit).toBe(2);
         expect(roleD.child.health.state.damage).toBe(1);
         expect(roleD.child.health.state.origin).toBe(2);

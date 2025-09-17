@@ -24,9 +24,8 @@ export class ElvenArcherRoleBattlecryModel extends RoleBattlecryModel<[RoleModel
         const game = this.route.game;
         if (!game) return;
         if (!player) return;
-        const options = game.refer.roles;
-        if (options.length === 0) return;
-        return [new SelectEvent(options, { hint: 'Choose a target' })]
+        const roles = game.query();
+        return [new SelectEvent(roles, { hint: 'Choose a target' })]
     }
 
     protected async doRun(from: number, to: number, target: RoleModel) {

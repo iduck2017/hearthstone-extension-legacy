@@ -29,7 +29,7 @@ export class ArcaneExplosionEffectModel extends EffectModel<[]> {
         if (!card) return;
         
         // Get all enemy minions
-        const roles = opponent.refer.roles;
+        const roles = opponent.query();
         
         // Deal 1 damage to each enemy minion
         await DamageModel.run(roles.map((item) => new DamageEvent({

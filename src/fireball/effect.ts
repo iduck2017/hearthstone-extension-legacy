@@ -22,7 +22,7 @@ export class FireballEffectModel extends EffectModel<[RoleModel]> {
     toRun(): [SelectEvent<RoleModel>] | undefined {
         const games = this.route.game;
         if (!games) return;
-        const roles = games.refer.roles;
+        const roles = games.query();
         return [new SelectEvent(roles, { hint: "Choose a target" })]
     }
 

@@ -22,7 +22,7 @@ export class ManaWyrmFeatureModel extends CardFeatureModel {
     }
 
     @EventUtil.on(self => self.route.game?.proxy.all(SpellCardModel).event.onPlay)
-    private onSpellCast(that: SpellCardModel, event: Event) {
+    private onPlay(that: SpellCardModel, event: Event) {
         const minion = this.route.minion;
         if (!minion) return;
         const player = this.route.player;

@@ -62,9 +62,9 @@ describe('emerald-skytalon', () => {
 
         expect(boardA.child.minions.length).toBe(1);
         expect(turn.refer.current).toBe(playerA);
-        expect(roleC.state.attack).toBe(2);
-        expect(roleC.state.health).toBe(1);
-        expect(roleC.state.action).toBe(1);
+        expect(roleC.child.attack.state.current).toBe(2);
+        expect(roleC.child.health.state.current).toBe(1);
+        expect(roleC.child.action.state.current).toBe(1);
         expect(roleC.child.sleep.state.isActive).toBe(true);
         expect(roleC.child.entries.child.rush.state.isActive).toBe(true)
         promise = roleC.child.action.run()
@@ -74,7 +74,7 @@ describe('emerald-skytalon', () => {
         expect(SelectUtil.current?.options).not.toContain(roleB);
         SelectUtil.set(undefined);
         await promise;
-        expect(roleC.state.action).toBe(1);        
+        expect(roleC.child.action.state.current).toBe(1);        
     })
 
 
@@ -86,7 +86,7 @@ describe('emerald-skytalon', () => {
         await promise;
 
         expect(boardA.child.minions.length).toBe(2);
-        expect(roleD.state.action).toBe(1);
+        expect(roleD.child.action.state.current).toBe(1);
         expect(roleD.child.sleep.state.isActive).toBe(true);
         expect(roleD.child.entries.child.rush.state.isActive).toBe(false);
 
@@ -108,10 +108,10 @@ describe('emerald-skytalon', () => {
         expect(turn.refer.current).toBe(playerA);
 
         expect(roleC.child.sleep.state.isActive).toBe(false);
-        expect(roleC.state.action).toBe(1);
+        expect(roleC.child.action.state.current).toBe(1);
         expect(roleC.child.entries.child.rush.state.isActive).toBe(true);
         expect(roleD.child.sleep.state.isActive).toBe(false);
-        expect(roleD.state.action).toBe(1);
+        expect(roleD.child.action.state.current).toBe(1);
         expect(roleD.child.entries.child.rush.state.isActive).toBe(false);
 
         let promise = roleC.child.action.run();
@@ -121,8 +121,8 @@ describe('emerald-skytalon', () => {
         SelectUtil.set(roleB);
         await promise;
 
-        expect(roleB.state.health).toBe(28);
-        expect(roleC.state.action).toBe(0);
+        expect(roleB.child.health.state.current).toBe(28);
+        expect(roleC.child.action.state.current).toBe(0);
     });
 
     test('wisp-attack', async () => {
@@ -134,7 +134,7 @@ describe('emerald-skytalon', () => {
         SelectUtil.set(roleB);
         await promise;
 
-        expect(roleB.state.health).toBe(27);
-        expect(roleC.state.action).toBe(0);
+        expect(roleB.child.health.state.current).toBe(27);
+        expect(roleC.child.action.state.current).toBe(0);
     })
 })

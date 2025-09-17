@@ -66,7 +66,7 @@ describe('firey-war-axe', () => {
         SelectUtil.set(roleC);
         await promise;
 
-        expect(cardC.child.dispose.state.isActive).toBe(true);
+        expect(cardC.child.dispose.status).toBe(true);
         expect(roleC.child.health.state.current).toBe(-2);
         expect(roleC.child.health.state.damage).toBe(3);
 
@@ -82,17 +82,17 @@ describe('firey-war-axe', () => {
     })
 
     test('fiery-war-axe-deactive', () => {
-        expect(weapon.child.attack.state.isActive).toBe(true);
+        expect(weapon.child.attack.status).toBe(true);
         expect(roleA.child.attack.state.current).toBe(3);
         turn.next();
         expect(turn.refer.current).toBe(playerB);
-        expect(weapon.child.attack.state.isActive).toBe(false);
+        expect(weapon.child.attack.status).toBe(false);
         expect(roleA.child.attack.state.current).toBe(0);
     }) 
 
     test('warrior-attack-2', async () => {
         turn.next();
-        expect(weapon.child.attack.state.isActive).toBe(true);
+        expect(weapon.child.attack.status).toBe(true);
         expect(roleA.child.action.state.isActive).toBe(true);
 
         const promise = roleA.child.action.run();
@@ -104,7 +104,7 @@ describe('firey-war-axe', () => {
         expect(roleB.child.health.state.current).toBe(27);
         expect(roleB.child.health.state.damage).toBe(3);
 
-        expect(weapon.child.dispose.state.isActive).toBe(true);
+        expect(weapon.child.dispose.status).toBe(true);
         expect(weapon.child.action.state.current).toBe(0);
         expect(boardA.child.weapon).toBeUndefined();
         

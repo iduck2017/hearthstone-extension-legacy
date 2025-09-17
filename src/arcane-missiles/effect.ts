@@ -28,7 +28,7 @@ export class ArcaneMissilesEffectModel extends EffectModel<[]> {
         const card = this.route.card;
         if (!card) return;
         for (let loop = 0; loop < 3; loop ++) {
-            const roles = opponent.refer.roles;
+            const roles = opponent.query();
             if (!roles.length) break;
             const index = Math.floor(Math.random() * roles.length);
             const target = roles[index];

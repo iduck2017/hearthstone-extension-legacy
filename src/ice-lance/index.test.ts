@@ -100,7 +100,7 @@ describe('ice-lance', () => {
         expect(handA.child.spells.length).toBe(0);
         expect(roleC.child.action.state.isActive).toBeFalsy();
         expect(roleC.child.health.state.current).toBe(-3);
-        expect(cardC.child.dispose.state.isActive).toBe(true);
+        expect(cardC.child.dispose.status).toBe(true);
         expect(cardC.child.dispose.refer.source).toBe(cardE);
     })
 }) 

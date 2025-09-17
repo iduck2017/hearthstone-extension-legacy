@@ -21,7 +21,7 @@ export class CounterspellFeatureModel extends CardFeatureModel {
     }
 
     @EventUtil.on(self => self.route.game?.proxy.all(SpellPerformModel).event.toRun)
-    private onPlay(that: SpellPerformModel, event: Event) {
+    private toRun(that: SpellPerformModel, event: Event) {
         const secret = this.route.secret;
         if (!secret) return;
         const board = this.route.board;

@@ -22,10 +22,8 @@ export class VoodooDoctorRoleBattlecryModel extends RoleBattlecryModel<[RoleMode
     public toRun(): [SelectEvent<RoleModel>] | undefined {
         const game = this.route.game;
         if (!game) return;
-
-        const options = game.refer.roles;
-        if (!options.length) return;
-        return [new SelectEvent(options, { hint: 'Choose a target' })];
+        const roles = game.query();
+        return [new SelectEvent(roles, { hint: 'Choose a target' })];
     }
 
     public async doRun(from: number, to: number, target: RoleModel) {

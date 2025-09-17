@@ -49,11 +49,11 @@ describe('leper-gnome', () => {
     test('leper-gnome-deathrattle', async () => {
         expect(boardA.child.minions.length).toBe(1);
         expect(boardB.child.minions.length).toBe(1);
-        expect(roleC.state.attack).toBe(2);
-        expect(roleC.state.health).toBe(1);
-        expect(roleD.state.attack).toBe(1);
-        expect(roleD.state.health).toBe(1);
-        expect(roleB.state.health).toBe(30);
+        expect(roleC.child.attack.state.current).toBe(2);
+        expect(roleC.child.health.state.current).toBe(1);
+        expect(roleD.child.attack.state.current).toBe(1);
+        expect(roleD.child.health.state.current).toBe(1);
+        expect(roleB.child.health.state.current).toBe(30);
         
         // attack
         let promise = roleC.child.action.run();
@@ -65,7 +65,7 @@ describe('leper-gnome', () => {
         
         expect(boardA.child.minions.length).toBe(0);
         expect(boardB.child.minions.length).toBe(0);
-        expect(roleB.state.health).toBe(28);
+        expect(roleB.child.health.state.current).toBe(28);
         expect(roleB.child.health.state.damage).toBe(2);
     })
 })

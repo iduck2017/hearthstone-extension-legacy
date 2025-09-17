@@ -60,7 +60,7 @@ describe('voodoo-doctor', () => {
         SelectUtil.set(roleB);
         await promise;
         
-        expect(roleB.state.health).toBe(29);
+        expect(roleB.child.health.state.current).toBe(29);
         expect(roleB.child.health.state.damage).toBe(1);
     })
 
@@ -79,7 +79,7 @@ describe('voodoo-doctor', () => {
         SelectUtil.set(roleB);
         await promise;
         
-        expect(roleB.state.health).toBe(30);
+        expect(roleB.child.health.state.current).toBe(30);
         expect(roleB.child.health.state.damage).toBe(0);
     })
 }) 
