@@ -1,20 +1,20 @@
-import { DamageEvent, DamageModel, DamageType, EffectModel } from "hearthstone-core";
+import { EffectModel, DamageModel, DamageEvent, DamageType } from "hearthstone-core";
 import { Loader, StoreUtil } from "set-piece";
 
-@StoreUtil.is('arcane-explosion-effect')
-export class ArcaneExplosionEffectModel extends EffectModel<[]> {
-    constructor(loader?: Loader<ArcaneExplosionEffectModel>) {
+@StoreUtil.is('blizzard-effect')
+export class BlizzardEffectModel extends EffectModel<[]> {
+    constructor(loader?: Loader<BlizzardEffectModel>) {
         super(() => {
             const props = loader?.() ?? {}
             return {
                 uuid: props.uuid,
-                state: { 
-                    name: "Arcane Explosion's effect",
-                    desc: "Deal 1 damage to all enemy minions.",
-                    ...props.state 
+                state: {
+                    name: "Blizzard's effect",
+                    desc: "Deal 2 damage to all enemy minions and Freeze them.",
+                    ...props.state
                 },
                 child: { ...props.child },
-                refer: { ...props.refer } 
+                refer: { ...props.refer }
             }
         })
     }
@@ -27,17 +27,23 @@ export class ArcaneExplosionEffectModel extends EffectModel<[]> {
         if (!opponent) return;
         const card = this.route.card;
         if (!card) return;
-        
+
         // Get all enemy minions
         const roles = opponent.query(true);
         
-        // Deal 1 damage to each enemy minion
+        // Deal 2 damage to all enemy minions
         await DamageModel.run(roles.map((item) => new DamageEvent({
             type: DamageType.SPELL,
             source: card,
             detail: this,
             target: item,
-            origin: 1,
-        })))
+            origin: 2,
+        })));
+        // Freeze all enemy minions
+        for (const role of roles) {
+            const entries = role.child.entries;
+            const frozen = entries.child.frozen;
+            frozen.active();
+        }
     }
 }

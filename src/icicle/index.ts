@@ -1,8 +1,7 @@
 /**
- * Icicle
+ * Icicle 2
  * 
  * This may appear weak at frost glance, but it's actually a very ice spell.
- * 
  * Deal 2 damage to a minion. If it's Frozen, draw a card.
  * 
  * Type: Spell
