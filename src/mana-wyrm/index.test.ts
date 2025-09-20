@@ -90,7 +90,7 @@ describe('mana-wyrm', () => {
         expect(roleE.child.attack.state.offset).toBe(1);
         expect(roleE.child.health.state.current).toBe(2); 
         expect(roleE.child.health.state.damage).toBe(1);
-        expect(roleE.child.health.state.limit).toBe(3);
+        expect(roleE.child.health.state.maxium).toBe(3);
         expect(playerB.child.mana.state.current).toBe(8); // 10 - 2 cost
         expect(handB.child.spells.length).toBe(0);
     })

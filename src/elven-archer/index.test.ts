@@ -62,7 +62,7 @@ describe('battlecry', () => {
 
         expect(roleD.child.health.state.current).toBe(0);
         expect(roleD.child.health.state.damage).toBe(1);
-        expect(roleD.child.health.state.limit).toBe(1);
+        expect(roleD.child.health.state.maxium).toBe(1);
         expect(roleD.child.health.state.current).toBe(0);
         expect(roleD.child.health.state.origin).toBe(1);
         expect(cardD.child.dispose.status).toBe(true);
