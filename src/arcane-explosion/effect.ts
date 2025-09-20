@@ -35,7 +35,7 @@ export class ArcaneExplosionEffectModel extends EffectModel<[]> {
         await DamageModel.run(roles.map((item) => new DamageEvent({
             type: DamageType.SPELL,
             source: card,
-            detail: this,
+            method: this,
             target: item,
             origin: 1,
         })))

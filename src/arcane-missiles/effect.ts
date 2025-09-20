@@ -37,7 +37,7 @@ export class ArcaneMissilesEffectModel extends EffectModel<[]> {
                 new DamageEvent({
                     type: DamageType.SPELL,
                     source: card,
-                    detail: this,
+                    method: this,
                     target,
                     origin: 1,
                 })

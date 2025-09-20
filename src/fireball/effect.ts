@@ -33,7 +33,7 @@ export class FireballEffectModel extends EffectModel<[RoleModel]> {
             new DamageEvent({
                 type: DamageType.SPELL,
                 source: card,
-                detail: this,
+                method: this,
                 target,
                 origin: 6
             })

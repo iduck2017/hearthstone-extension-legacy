@@ -30,7 +30,7 @@ export class LeperGnomeDeathrattleModel extends DeathrattleModel {
         DamageModel.run([
             new DamageEvent({
                 source: card,
-                detail: this,
+                method: this,
                 target,
                 origin: 2,
                 type: DamageType.DEFAULT,

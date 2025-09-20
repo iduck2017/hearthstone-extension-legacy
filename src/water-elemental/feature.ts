@@ -24,8 +24,7 @@ export class WaterElementalFeatureModel extends CardFeatureModel {
     private onDamageRun(that: DamageModel, event: DamageEvent) {
         const minion = this.route.minion;
         if (!minion) return;
-        
-        const target = event.target;
+        const target = event.detail.target;
         const entries = target.child.entries;
         const frozen = entries.child.frozen;
         frozen.active();

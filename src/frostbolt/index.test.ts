@@ -58,8 +58,7 @@ describe('frostbolt', () => {
         // Target is not frozen initially and has full health
         expect(playerA.child.mana.state.current).toBe(10);
         expect(handA.child.spells.length).toBe(1);
-        const frozen = roleC.child.entries.child.frozen;
-        expect(frozen.state.isActive).toBeFalsy();
+        expect(roleC.child.entries.child.frozen.state.isActive).toBeFalsy();
         expect(roleC.child.health.state.current).toBe(1);
 
         // Play Frostbolt targeting enemy minion
@@ -74,13 +73,13 @@ describe('frostbolt', () => {
         expect(playerA.child.mana.state.current).toBe(8);
         expect(roleC.child.health.state.current).toBe(-2);
         expect(roleC.child.health.state.damage).toBe(3);
-        expect(frozen.state.isActive).toBe(true);
+        expect(roleC.child.entries.child.frozen.state.isActive).toBe(true);
         expect(handA.child.spells.length).toBe(0);
         
         // Check turn progression and frozen state persists
         turn.next();
         expect(turn.refer.current).toBe(playerB);
-        expect(frozen.state.isActive).toBe(true);
+        expect(roleC.child.entries.child.frozen.state.isActive).toBe(true);
         expect(roleC.child.action.status).toBe(false);
         
     })

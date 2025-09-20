@@ -32,7 +32,7 @@ export class VoodooDoctorRoleBattlecryModel extends RoleBattlecryModel<[RoleMode
         RestoreModel.run([
             new RestoreEvent({
                 source: card,
-                detail: this,
+                method: this,
                 target: target,
                 origin: 2,
             })

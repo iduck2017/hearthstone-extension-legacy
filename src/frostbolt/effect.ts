@@ -35,7 +35,7 @@ export class FrostboltEffectModel extends EffectModel<[RoleModel]> {
             new DamageEvent({
                 type: DamageType.SPELL,
                 source: card,
-                detail: this,
+                method: this,
                 target,
                 origin: 3
             })

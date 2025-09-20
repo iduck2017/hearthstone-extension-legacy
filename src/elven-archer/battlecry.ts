@@ -35,7 +35,7 @@ export class ElvenArcherRoleBattlecryModel extends RoleBattlecryModel<[RoleModel
             new DamageEvent({
                 source: card,
                 target,
-                detail: this,
+                method: this,
                 origin: 1,
                 type: DamageType.DEFAULT,
             })
