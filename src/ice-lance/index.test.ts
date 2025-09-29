@@ -2,7 +2,7 @@
  * Test cases for Ice Lance
  * 
  * 1. ice-lance-cast: Player A plays Ice Lance on unfrozen target, freezes it and checks mana cost
- * 2. ice-lance-cast-2: Player B plays Ice Lance on already frozen target, deals 4 damage
+ * 2. ice-lance-cast: Player B plays Ice Lance on already frozen target, deals 4 damage
  */
 
 import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, SelectUtil } from "hearthstone-core";
@@ -82,7 +82,7 @@ describe('ice-lance', () => {
         expect(roleC.child.action.status).toBeFalsy();
     })
 
-    test('ice-lance-cast-2', async () => {
+    test('ice-lance-cast', async () => {
         expect(playerB.child.mana.state.current).toBe(10);
         expect(handB.child.spells.length).toBe(1);
         expect(roleC.child.entries.child.frozen.state.isActive).toBe(true);

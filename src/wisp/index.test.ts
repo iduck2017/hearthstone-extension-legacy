@@ -82,7 +82,7 @@ describe('role', () => {
         expect(roleC.child.action.state.current).toBe(0);
     })
 
-    test('wisp-attack-2', async () => {
+    test('wisp-attack', async () => {
         turn.next();
 
         const promise = roleD.child.action.run();

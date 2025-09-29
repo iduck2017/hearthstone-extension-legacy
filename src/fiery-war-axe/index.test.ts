@@ -90,7 +90,7 @@ describe('firey-war-axe', () => {
         expect(roleA.child.attack.state.current).toBe(0);
     }) 
 
-    test('warrior-attack-2', async () => {
+    test('warrior-attack', async () => {
         turn.next();
         expect(weapon.child.attack.status).toBe(true);
         expect(roleA.child.action.status).toBe(true);
