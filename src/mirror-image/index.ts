@@ -12,7 +12,7 @@
  * Artist: Jim Nelson
  * Collectible
  */
-import { ClassType, CostModel, LibraryUtil, RarityType, SpellCardModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel } from "hearthstone-core";
 import { Loader } from "set-piece";
 import { MirrorImageEffectModel } from "./effect";
 
@@ -30,6 +30,7 @@ export class MirrorImageModel extends SpellCardModel {
                     isCollectible: true,
                     rarity: RarityType.COMMON,
                     class: ClassType.MAGE,
+                    schools: [],
                     ...props.state
                 },
                 refer: { ...props.refer },

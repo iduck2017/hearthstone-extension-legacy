@@ -28,6 +28,7 @@ export class MurlocTidehunterBattlecryModel extends RoleBattlecryModel<[]> {
         console.log('batt', to)
         const board = player.child.board;
         const target = new MurlocScoutModel();
+        // summon
         target.child.deploy.run(board, to);
     }
 }

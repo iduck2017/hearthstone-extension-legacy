@@ -14,7 +14,7 @@
  * Collectible
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, SpellCardModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel } from "hearthstone-core";
 import { Loader } from "set-piece";
 import { FireballEffectModel } from "./effect";
 
@@ -32,6 +32,7 @@ export class FireballModel extends SpellCardModel {
                     isCollectible: true,
                     rarity: RarityType.COMMON,
                     class: ClassType.MAGE,
+                    schools: [SchoolType.FIRE],
                     ...props.state
                 },
                 refer: { ...props.refer },

@@ -15,7 +15,7 @@
  * Collectible
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, SpellCardModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel } from "hearthstone-core";
 import { Loader } from "set-piece";
 import { IcicleEffectModel } from "./effect";
 
@@ -33,6 +33,7 @@ export class IcicleModel extends SpellCardModel {
                     isCollectible: true,
                     rarity: RarityType.EPIC,
                     class: ClassType.MAGE,
+                    schools: [SchoolType.FROST],
                     ...props.state
                 },
                 refer: { ...props.refer },

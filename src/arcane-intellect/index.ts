@@ -13,7 +13,7 @@
  * Collectible
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, SpellCardModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel } from "hearthstone-core";
 import { Loader } from "set-piece";
 import { ArcaneIntellectEffectModel } from "./effect";
 
@@ -31,6 +31,7 @@ export class ArcaneIntellectModel extends SpellCardModel {
                     isCollectible: true,
                     rarity: RarityType.COMMON,
                     class: ClassType.MAGE,
+                    schools: [SchoolType.ARCANE],
                     ...props.state
                 },
                 refer: { ...props.refer },

@@ -1,4 +1,4 @@
-import { ClassType, CostModel, LibraryUtil, RarityType, SecretCardModel, SpellCardModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SecretCardModel, SpellCardModel } from "hearthstone-core";
 import { Loader } from "set-piece";
 import { CounterspellFeatureModel } from "./feature";
 
@@ -16,6 +16,7 @@ export class CounterspellModel extends SecretCardModel {
                     isCollectible: true,
                     rarity: RarityType.COMMON,
                     class: ClassType.MAGE,
+                    schools: [SchoolType.ARCANE],
                     ...props.state
                 },
                 refer: { ...props.refer },
