@@ -91,7 +91,7 @@ describe('ice-barrier', () => {
         await promise;
 
         // Player B should gain 8 armor (health increases by 8) and then take 1 damage
-        expect(roleB.child.health.state.current).toBe(29); // 29 + 8 - 1 = 36
+        expect(roleB.child.health.state.current).toBe(29); 
         expect(heroB.child.armor.state.origin).toBe(7);
         expect(boardB.child.secrets.length).toBe(0);
     })
