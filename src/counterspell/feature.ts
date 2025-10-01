@@ -1,8 +1,8 @@
-import { EffectModel, SelectEvent, RoleModel, DamageModel, DamageEvent, DamageType, CardFeatureModel, CardModel, SpellPerformModel } from "hearthstone-core";
+import { EffectModel, SelectEvent, RoleModel, DamageModel, DamageEvent, DamageType, CardFeatureModel, CardModel, SpellPerformModel, SecretFeatureModel } from "hearthstone-core";
 import { DebugUtil, Event, EventUtil, Loader, LogLevel, Model, StoreUtil } from "set-piece";
 
 @StoreUtil.is('counterspell-effect')
-export class CounterspellFeatureModel extends CardFeatureModel {
+export class CounterspellFeatureModel extends SecretFeatureModel {
     constructor(loader?: Loader<CounterspellFeatureModel>) {
         super(() => {
             const props = loader?.() ?? {}
@@ -15,22 +15,22 @@ export class CounterspellFeatureModel extends CardFeatureModel {
                     ...props.state 
                 },
                 child: { ...props.child },
-                refer: { ...props.refer } 
+                refer: { ...props.refer },
+                route: {},
             }
         })
     }
 
     @EventUtil.on(self => self.route.game?.proxy.all(SpellPerformModel).event.toRun)
-    private toRun(that: SpellPerformModel, event: Event) {
-        const secret = this.route.secret;
-        if (!secret) return;
+    @SecretFeatureModel.span()
+    private toCast(that: SpellPerformModel, event: Event): boolean {
         const board = this.route.board;
-        if (!board) return;
+        if (!board) return false;
         const player = this.route.player;
-        if (!player) return;
+        if (!player) return false;
         const opponent = player.refer.opponent;
-        if (that.route.player !== opponent) return;
-        secret.child.dispose.active(true)
+        if (that.route.player !== opponent) return false;
         event.abort();
+        return true;
     }
 }
