@@ -1,16 +1,16 @@
-import { CardFeatureModel, RoleAttackModel, RoleModel, SecretFeatureModel } from "hearthstone-core";
+import { SecretFeatureModel, RoleModel, RoleAttackModel } from "hearthstone-core";
 import { Event, EventUtil, Loader, StoreUtil } from "set-piece";
 
-@StoreUtil.is('ice-barrier-feature')
-export class IceBarrierFeatureModel extends SecretFeatureModel {
-    constructor(loader?: Loader<IceBarrierFeatureModel>) {
+@StoreUtil.is('vaporize-feature')
+export class VaporizeFeatureModel extends SecretFeatureModel {
+    constructor(loader?: Loader<VaporizeFeatureModel>) {
         super(() => {
             const props = loader?.() ?? {}
             return {
                 uuid: props.uuid,
                 state: {
-                    name: "Ice Barrier's feature",
-                    desc: "When your hero is attacked, gain 8 Armor.",
+                    name: "Vaporize's feature",
+                    desc: "When a minion attacks your hero, destroy it.",
                     isActive: true,
                     ...props.state
                 },
@@ -24,11 +24,13 @@ export class IceBarrierFeatureModel extends SecretFeatureModel {
     @EventUtil.on(self => self.route.player?.proxy.child.hero.child.role.child.attack.event.toRecv)
     @SecretFeatureModel.span()
     private onAttacked(that: RoleAttackModel, event: Event<{ source: RoleModel }>) {
-        const player = this.route.player;
-        if (!player) return;
-        // Check if the attack target is the player's hero
-        const hero = player.child.hero;
-        hero.child.armor.get(8);
+        const card = this.route.secret;
+        if (!card) return;
+        // Get the attack target from the event
+        const role = event.detail.source;
+        const minion = role.route.minion;
+        if (!minion) return;
+        minion.child.dispose.active(true, card, this);
         return true;
     }
 }
