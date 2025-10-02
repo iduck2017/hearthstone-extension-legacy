@@ -39,7 +39,7 @@ export class MurlocTidehunterModel extends MinionCardModel {
                     ...props.state
                 },
                 child: {
-                    cost: new CostModel(() => ({ state: { origin: 2 }})),
+                    cost: new CostModel(() => ({ state: { current: 2 }})),
                     role: new RoleModel(() => ({
                         state: { races: [RaceType.MURLOC] },
                         child: {

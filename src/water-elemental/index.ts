@@ -37,7 +37,7 @@ export class WaterElementalModel extends MinionCardModel {
                     ...props.state
                 },
                 child: {
-                    cost: new CostModel(() => ({ state: { origin: 4 }})),
+                    cost: new CostModel(() => ({ state: { current: 4 }})),
                     role: new RoleModel(() => ({
                         child: {
                             attack: new RoleAttackModel(() => ({ state: { origin: 3 }})),

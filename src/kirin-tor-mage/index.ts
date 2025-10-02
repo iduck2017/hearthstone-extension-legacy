@@ -35,7 +35,7 @@ export class KirinTorMageModel extends MinionCardModel {
                     ...props.state,
                 },
                 child: {
-                    cost: new CostModel(() => ({ state: { origin: 3 }})),
+                    cost: new CostModel(() => ({ state: { current: 3 }})),
                     role: new RoleModel(() => ({
                         child: {
                             attack: new RoleAttackModel(() => ({ state: { origin: 4 }})),

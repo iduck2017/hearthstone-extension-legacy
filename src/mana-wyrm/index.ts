@@ -38,7 +38,7 @@ export class ManaWyrmModel extends MinionCardModel {
                     ...props.state
                 },
                 child: {
-                    cost: new CostModel(() => ({ state: { origin: 1 }})),
+                    cost: new CostModel(() => ({ state: { current: 1 }})),
                     role: new RoleModel(() => ({
                         child: {
                             attack: new RoleAttackModel(() => ({ state: { origin: 1 }})),

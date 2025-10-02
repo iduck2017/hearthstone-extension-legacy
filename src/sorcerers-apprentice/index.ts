@@ -36,7 +36,7 @@ export class SorcerersApprenticeModel extends MinionCardModel {
                     ...props.state
                 },
                 child: {
-                    cost: new CostModel(() => ({ state: { origin: 2 }})),
+                    cost: new CostModel(() => ({ state: { current: 2 }})),
                     role: new RoleModel(() => ({
                         child: {
                             attack: new RoleAttackModel(() => ({ state: { origin: 3 }})),

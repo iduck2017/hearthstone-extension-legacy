@@ -20,7 +20,7 @@ export class LeperGnomeModel extends MinionCardModel {
                     ...props.state
                 },
                 child: {
-                    cost: new CostModel(() => ({ state: { origin: 1 }})),
+                    cost: new CostModel(() => ({ state: { current: 1 }})),
                     role: new RoleModel(() => ({
                         child: {
                             health: new HealthModel(() => ({ state: { origin: 1 }})),

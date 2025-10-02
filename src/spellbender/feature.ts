@@ -1,4 +1,4 @@
-import { MinionCardModel, RoleModel, SecretFeatureModel, SpellCardModel, SpellHooksEvent, SpellPerformEvent, SpellPerformModel } from "hearthstone-core";
+import { MinionCardModel, RoleModel, SecretFeatureModel, SpellCardModel, SpellHooksOptions, SpellCastEvent, SpellPerformModel } from "hearthstone-core";
 import { Event, EventUtil, Loader } from "set-piece";
 import { SpellbenderMinionModel } from "./minion";
 
@@ -23,7 +23,7 @@ export class SpellbenderFeatureModel extends SecretFeatureModel {
 
     @EventUtil.on(self => self.route.game?.proxy.all(SpellPerformModel).event.toRun)
     @SecretFeatureModel.span()
-    private toCast(that: SpellPerformModel, event: SpellPerformEvent) {
+    private toCast(that: SpellPerformModel, event: SpellCastEvent) {
         const board = this.route.board;
         if (!board) return;
 
@@ -31,7 +31,7 @@ export class SpellbenderFeatureModel extends SecretFeatureModel {
         const playerB = that.route.player;
         if (playerA === playerB) return;
 
-        const params = event.detail.params;
+        const params = event.detail.options;
         let isValid = false;
         params.effect.forEach((value, key) => {
             value.forEach(item => {
@@ -47,14 +47,7 @@ export class SpellbenderFeatureModel extends SecretFeatureModel {
         deploy.run(board);
 
         // replace the minion card with the spellbender minion
-        const result: SpellHooksEvent = { effect: new Map(params.effect) };
-        result.effect.forEach((value, key) => {
-            result.effect.set(key, value.map(item => {
-                if (item instanceof RoleModel) return role;
-                return item;
-            }))
-        })
-        event.set(result);
+        event.redirect(role);
         return true;
     }
 }

@@ -37,7 +37,7 @@ export class FrostboltModel extends SpellCardModel {
                 },
                 refer: { ...props.refer },
                 child: { 
-                    cost: props.child?.cost ?? new CostModel(() => ({ state: { origin: 2 }})),
+                    cost: props.child?.cost ?? new CostModel(() => ({ state: { current: 2 }})),
                     effects: props.child?.effects ?? [new FrostboltEffectModel()],
                     ...props.child 
                 }
