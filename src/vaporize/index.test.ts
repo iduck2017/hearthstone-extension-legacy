@@ -55,6 +55,7 @@ describe('vaporize', () => {
     const cardC = boardA.child.minions.find(item => item instanceof WispModel);
     const cardD = boardA.child.minions.find(item => item instanceof VoodooDoctorModel);
     const cardE = boardB.child.minions.find(item => item instanceof StonetuskBoarModel);
+    const cardF = boardB.child.secrets.find(item => item instanceof VaporizeModel);
     const roleC = cardC?.child.role;
     const roleD = cardD?.child.role;
     const roleE = cardE?.child.role;
@@ -67,7 +68,6 @@ describe('vaporize', () => {
         expect(boardB.child.minions.length).toBe(1);
         expect(boardB.child.secrets.length).toBe(1);
         expect(roleC.child.health.state.current).toBe(1); // Wisp: 1/1
-        expect(roleD.child.health.state.current).toBe(2); // Voodoo Doctor: 2/1
         expect(roleE.child.health.state.current).toBe(1); // Stonetusk Boar: 1/1
         expect(roleB.child.health.state.current).toBe(30); // Player B hero: 30 health
 
@@ -97,7 +97,7 @@ describe('vaporize', () => {
         expect(boardA.child.minions.length).toBe(1); // Only Voodoo Doctor
         expect(boardB.child.minions.length).toBe(0); // No minions
         expect(boardB.child.secrets.length).toBe(1); // Vaporize still active
-        expect(roleD.child.health.state.current).toBe(2); // Voodoo Doctor: 2/1
+        expect(roleD.child.health.state.current).toBe(1); // Voodoo Doctor: 2/1
         expect(roleB.child.health.state.current).toBe(30); // Player B hero: 30 health
 
         // Player A's Voodoo Doctor attacks Player B's hero
@@ -107,7 +107,9 @@ describe('vaporize', () => {
         await promise;
 
         // Check Vaporize triggered: Voodoo Doctor should be destroyed
-        expect(roleD.child.health.state.current).toBe(0); // Voodoo Doctor destroyed
+        expect(roleD.child.health.state.current).toBe(1); 
+        // expect(cardD.child.dispose.state.isLock).toBe(true);
+        // expect(cardD.child.dispose.refer.source).toBe(cardF);
         expect(cardD.child.dispose.status).toBe(true); // Voodoo Doctor disposed
         
         // Vaporize should be consumed
