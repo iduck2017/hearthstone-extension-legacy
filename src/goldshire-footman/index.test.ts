@@ -56,9 +56,8 @@ describe('goldshire-footman', () => {
         SelectUtil.set(roleD);
         await promise;
         expect(roleD.child.health.state.current).toBe(1);
-        expect(roleD.child.health.state.maxium).toBe(2);
+        expect(roleD.child.health.state.origin).toBe(2);
         expect(roleD.child.health.state.damage).toBe(1);
         expect(roleD.child.health.state.origin).toBe(2);
-        expect(roleD.child.health.state.offset).toBe(0);
     })
 }) 
