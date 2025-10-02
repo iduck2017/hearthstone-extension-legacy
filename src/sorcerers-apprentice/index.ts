@@ -14,7 +14,7 @@
  * Collectible
  */
 
-import { ClassType, CostModel, HealthModel, LibraryUtil, MinionCardModel, MinionHooksModel, RarityType, RoleAttackModel, RoleModel } from "hearthstone-core";
+import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, MinionHooksModel, RarityType, RoleAttackModel, RoleModel } from "hearthstone-core";
 import { Loader } from "set-piece";
 import { SorcerersApprenticeFeatureModel } from "./feature";
 
@@ -40,7 +40,7 @@ export class SorcerersApprenticeModel extends MinionCardModel {
                     role: new RoleModel(() => ({
                         child: {
                             attack: new RoleAttackModel(() => ({ state: { current: 3 }})),
-                            health: new HealthModel(() => ({ state: { origin: 2 }})),
+                            health: new RoleHealthModel(() => ({ state: { origin: 2 }})),
                         }
                     })),
                     feats: props.child?.feats ?? [new SorcerersApprenticeFeatureModel()],

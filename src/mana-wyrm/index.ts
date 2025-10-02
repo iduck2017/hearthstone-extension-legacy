@@ -16,7 +16,7 @@
  * 1/1/3
  */
 
-import { ClassType, CostModel, HealthModel, LibraryUtil, MinionCardModel, MinionHooksModel, RarityType, RoleAttackModel, RoleModel } from "hearthstone-core";
+import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, MinionHooksModel, RarityType, RoleAttackModel, RoleModel } from "hearthstone-core";
 import { Loader } from "set-piece";
 import { ManaWyrmFeatureModel } from "./feature";
 
@@ -42,7 +42,7 @@ export class ManaWyrmModel extends MinionCardModel {
                     role: new RoleModel(() => ({
                         child: {
                             attack: new RoleAttackModel(() => ({ state: { current: 1 }})),
-                            health: new HealthModel(() => ({ state: { origin: 3 }})),
+                            health: new RoleHealthModel(() => ({ state: { origin: 3 }})),
                         }
                     })),
                     hooks: new MinionHooksModel(() => ({
