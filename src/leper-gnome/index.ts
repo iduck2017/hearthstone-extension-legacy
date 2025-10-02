@@ -24,7 +24,7 @@ export class LeperGnomeModel extends MinionCardModel {
                     role: new RoleModel(() => ({
                         child: {
                             health: new HealthModel(() => ({ state: { origin: 1 }})),
-                            attack: new RoleAttackModel(() => ({ state: { origin: 2 }})),
+                            attack: new RoleAttackModel(() => ({ state: { current: 2 }})),
                         },
                     })),
                     hooks: new MinionHooksModel(() => ({

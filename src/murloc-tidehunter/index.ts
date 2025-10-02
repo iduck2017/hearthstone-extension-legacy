@@ -43,7 +43,7 @@ export class MurlocTidehunterModel extends MinionCardModel {
                     role: new RoleModel(() => ({
                         state: { races: [RaceType.MURLOC] },
                         child: {
-                            attack: new RoleAttackModel(() => ({ state: { origin: 2 }})),
+                            attack: new RoleAttackModel(() => ({ state: { current: 2 }})),
                             health: new HealthModel(() => ({ state: { origin: 1 }})),
                         }
                     })),

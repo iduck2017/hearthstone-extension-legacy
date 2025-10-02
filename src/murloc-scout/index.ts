@@ -38,7 +38,7 @@ export class MurlocScoutModel extends MinionCardModel {
                     role: new RoleModel(() => ({
                         state: { races: [RaceType.MURLOC] },
                         child: {
-                            attack: new RoleAttackModel(() => ({ state: { origin: 1 }})),
+                            attack: new RoleAttackModel(() => ({ state: { current: 1 }})),
                             health: new HealthModel(() => ({ state: { origin: 1 }})),
                         }
                     })),

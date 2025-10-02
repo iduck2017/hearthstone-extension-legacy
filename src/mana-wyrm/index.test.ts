@@ -66,7 +66,6 @@ describe('mana-wyrm', () => {
 
         // Mana Wyrm should gain +1 Attack
         expect(roleE.child.attack.state.current).toBe(2); // 1 + 1
-        expect(roleE.child.attack.state.offset).toBe(1);
         expect(roleE.child.health.state.current).toBe(3); // unchanged
         expect(playerA.child.mana.state.current).toBe(8); // 10 - 2 cost
         expect(handA.child.spells.length).toBe(0);
@@ -78,7 +77,6 @@ describe('mana-wyrm', () => {
         
         // Check initial stats
         expect(roleE.child.attack.state.current).toBe(2);
-        expect(roleE.child.attack.state.offset).toBe(1);
         expect(playerB.child.mana.state.current).toBe(10);
         expect(handB.child.spells.length).toBe(1);
 
@@ -87,7 +85,6 @@ describe('mana-wyrm', () => {
 
         // Mana Wyrm should NOT gain Attack (enemy spell)
         expect(roleE.child.attack.state.current).toBe(2); // unchanged
-        expect(roleE.child.attack.state.offset).toBe(1);
         expect(roleE.child.health.state.current).toBe(2); 
         expect(roleE.child.health.state.damage).toBe(1);
         expect(roleE.child.health.state.origin).toBe(3);

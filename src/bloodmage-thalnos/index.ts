@@ -38,7 +38,7 @@ export class BloodmageThalnosModel extends MinionCardModel {
                     cost: new CostModel(() => ({ state: { current: 2 }})),
                     role: new RoleModel(() => ({
                         child: {
-                            attack: new RoleAttackModel(() => ({ state: { origin: 1 }})),
+                            attack: new RoleAttackModel(() => ({ state: { current: 1 }})),
                             health: new HealthModel(() => ({ state: { origin: 1 }})), 
                             entries: new RoleEntriesModel(() => ({
                                 child: { 

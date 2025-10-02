@@ -24,7 +24,7 @@ export class EmeraldSkytalonModel extends MinionCardModel {
                     cost: new CostModel(() => ({ state: { current: 1 }})),
                     role: new RoleModel(() => ({
                         child: {
-                            attack: new RoleAttackModel(() => ({ state: { origin: 2 }})),
+                            attack: new RoleAttackModel(() => ({ state: { current: 2 }})),
                             health: new HealthModel(() => ({ state: { origin: 1 }})),   
                             entries: new RoleEntriesModel(() => ({
                                 child: { rush: new RushModel() }

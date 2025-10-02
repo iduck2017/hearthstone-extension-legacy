@@ -24,7 +24,7 @@ export class ArgentSquireModel extends MinionCardModel {
                     cost: new CostModel(() => ({ state: { current: 1 }})),
                     role: new RoleModel(() => ({
                         child: {
-                            attack: new RoleAttackModel(() => ({ state: { origin: 1 }})),
+                            attack: new RoleAttackModel(() => ({ state: { current: 1 }})),
                             health: new HealthModel(() => ({ state: { origin: 1 }})),   
                             entries: new RoleEntriesModel(() => ({
                                 child: { 

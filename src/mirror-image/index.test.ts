@@ -73,10 +73,10 @@ describe('mirror-image', () => {
         const roleD = cardD.child.role;
         const roleE = cardE.child.role;
         
-        expect(roleD.child.attack.state.origin).toBe(0);
-        expect(roleD.child.health.state.origin).toBe(2);
-        expect(roleE.child.attack.state.origin).toBe(0);
-        expect(roleE.child.health.state.origin).toBe(2);
+        expect(roleD.child.attack.state.current).toBe(0);
+        expect(roleD.child.health.state.current).toBe(2);
+        expect(roleE.child.attack.state.current).toBe(0);
+        expect(roleE.child.health.state.current).toBe(2);
     })
 
     test('mirror-image-taunt', async () => {
