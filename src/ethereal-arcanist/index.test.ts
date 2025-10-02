@@ -85,7 +85,7 @@ describe('ethereal-arcanist', () => {
 
         // Check Ice Barrier triggered: Player A gains 8 armor
         expect(roleA.child.health.state.current).toBe(30); // 30 + 8 - 1 = 37
-        expect(heroA.child.armor.state.origin).toBe(7);
+        expect(heroA.child.armor.state.current).toBe(7);
         expect(boardA.child.secrets.length).toBe(0); // Secret consumed
     });
 

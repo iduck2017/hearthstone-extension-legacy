@@ -4,7 +4,6 @@
  * 1. wisp-attack: Player A uses Wisp to attack Player B, Player B takes damage and becomes 29 health
  * 2. ice-barrier-cast: Player B plays Ice Barrier, Player A attacks again with Wisp, Player B gains 8 armor and takes damage to 7
  */
-
 import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil } from "hearthstone-core";
 import { IceBarrierModel } from "./index";
 import { WispModel } from "../wisp";
@@ -92,7 +91,7 @@ describe('ice-barrier', () => {
 
         // Player B should gain 8 armor (health increases by 8) and then take 1 damage
         expect(roleB.child.health.state.current).toBe(29); 
-        expect(heroB.child.armor.state.origin).toBe(7);
+        expect(heroB.child.armor.state.current).toBe(7);
         expect(boardB.child.secrets.length).toBe(0);
     })
 })
