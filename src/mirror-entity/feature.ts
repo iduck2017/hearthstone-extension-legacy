@@ -23,17 +23,17 @@ export class MirrorEntityFeatureModel extends SecretFeatureModel {
 
     @EventUtil.on(self => self.route.game?.proxy.all(MinionCardModel).event.onPlay)
     @SecretFeatureModel.span()
-    private onPlay(that: MinionCardModel, event: Event): boolean {
+    private onPlay(that: MinionCardModel, event: Event) {
         const playerA = this.route.player;
-        if (!playerA) return false;
+        if (!playerA) return;
         
         // Only trigger when opponent plays a minion
         const playerB = that.route.player;
-        if (playerB === playerA) return false;
+        if (playerB === playerA) return;
         
         // Create a copy of the minion
         const copy = StoreUtil.copy(that);
-        if (!copy) return false;
+        if (!copy) return;
         const deploy = copy.child.deploy;
         const board = playerA.child.board;
         deploy.run(board);

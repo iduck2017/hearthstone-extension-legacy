@@ -23,13 +23,13 @@ export class CounterspellFeatureModel extends SecretFeatureModel {
 
     @EventUtil.on(self => self.route.game?.proxy.all(SpellPerformModel).event.toRun)
     @SecretFeatureModel.span()
-    private toCast(that: SpellPerformModel, event: Event): boolean {
+    private toCast(that: SpellPerformModel, event: Event) {
         const board = this.route.board;
-        if (!board) return false;
+        if (!board) return;
         const player = this.route.player;
-        if (!player) return false;
+        if (!player) return;
         const opponent = player.refer.opponent;
-        if (that.route.player !== opponent) return false;
+        if (that.route.player !== opponent) return;
         event.abort();
         return true;
     }

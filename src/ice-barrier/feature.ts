@@ -23,9 +23,9 @@ export class IceBarrierFeatureModel extends SecretFeatureModel {
 
     @EventUtil.on(self => self.route.player?.proxy.child.hero.child.role.child.attack.event.toRecv)
     @SecretFeatureModel.span()
-    private onAttacked(that: RoleAttackModel, event: Event<{ target: RoleModel }>): boolean {
+    private onAttacked(that: RoleAttackModel, event: Event<{ target: RoleModel }>) {
         const player = this.route.player;
-        if (!player) return false;
+        if (!player) return;
         // Check if the attack target is the player's hero
         const hero = player.child.hero;
         hero.child.armor.get(8);
