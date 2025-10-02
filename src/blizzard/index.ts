@@ -38,7 +38,7 @@ export class BlizzardModel extends SpellCardModel {
                 },
                 refer: { ...props.refer },
                 child: { 
-                    cost: props.child?.cost ?? new CostModel(() => ({ state: { current: 6 }})),
+                    cost: props.child?.cost ?? new CostModel(() => ({ state: { origin: 6 }})),
                     effects: props.child?.effects ?? [new BlizzardEffectModel()],
                     ...props.child 
                 }

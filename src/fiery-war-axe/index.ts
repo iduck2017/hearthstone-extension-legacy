@@ -31,8 +31,8 @@ export class FieryWarAxeModel extends WeaponCardModel {
                     ...props.state
                 },
                 child: {
-                    cost: new CostModel(() => ({ state: { current: 2 }})),
-                    attack: new WeaponAttackModel(() => ({ state: { current: 3 }})),
+                    cost: new CostModel(() => ({ state: { origin: 2 }})),
+                    attack: new WeaponAttackModel(() => ({ state: { origin: 3 }})),
                     action: new WeaponActionModel(() => ({ state: { origin: 2 }})),
                     ...props.child
                 },

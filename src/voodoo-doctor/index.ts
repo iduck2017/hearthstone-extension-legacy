@@ -22,10 +22,10 @@ export class VoodooDoctorModel extends MinionCardModel {
                     ...props.state,
                 },
                 child: {
-                    cost: new CostModel(() => ({ state: { current: 1 }})),
+                    cost: new CostModel(() => ({ state: { origin: 1 }})),
                     role: new RoleModel(() => ({
                         child: {
-                            attack: new RoleAttackModel(() => ({ state: { current: 2 }})),
+                            attack: new RoleAttackModel(() => ({ state: { origin: 2 }})),
                             health: new RoleHealthModel(() => ({ state: { origin: 1 }})),
                         }
                     })),

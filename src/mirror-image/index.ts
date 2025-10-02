@@ -35,7 +35,7 @@ export class MirrorImageModel extends SpellCardModel {
                 },
                 refer: { ...props.refer },
                 child: { 
-                    cost: props.child?.cost ?? new CostModel(() => ({ state: { current: 1 }})),
+                    cost: props.child?.cost ?? new CostModel(() => ({ state: { origin: 1 }})),
                     effects: props.child?.effects ?? [new MirrorImageEffectModel()],
                     ...props.child 
                 }

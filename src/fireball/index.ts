@@ -37,7 +37,7 @@ export class FireballModel extends SpellCardModel {
                 },
                 refer: { ...props.refer },
                 child: { 
-                    cost: props.child?.cost ?? new CostModel(() => ({ state: { current: 4 }})),
+                    cost: props.child?.cost ?? new CostModel(() => ({ state: { origin: 4 }})),
                     effects: props.child?.effects ?? [new FireballEffectModel()],
                     ...props.child 
                 }

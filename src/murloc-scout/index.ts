@@ -34,11 +34,11 @@ export class MurlocScoutModel extends MinionCardModel {
                     ...props.state
                 },
                 child: {
-                    cost: new CostModel(() => ({ state: { current: 1 }})),
+                    cost: new CostModel(() => ({ state: { origin: 1 }})),
                     role: new RoleModel(() => ({
                         state: { races: [RaceType.MURLOC] },
                         child: {
-                            attack: new RoleAttackModel(() => ({ state: { current: 1 }})),
+                            attack: new RoleAttackModel(() => ({ state: { origin: 1 }})),
                             health: new RoleHealthModel(() => ({ state: { origin: 1 }})),
                         }
                     })),

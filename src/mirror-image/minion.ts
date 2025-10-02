@@ -33,10 +33,10 @@ export class MirrorImageMinionModel extends MinionCardModel {
                     ...props.state
                 },
                 child: {
-                    cost: new CostModel(() => ({ state: { current: 0 }})),
+                    cost: new CostModel(() => ({ state: { origin: 0 }})),
                     role: new RoleModel(() => ({
                         child: {
-                            attack: new RoleAttackModel(() => ({ state: { current: 0 }})),
+                            attack: new RoleAttackModel(() => ({ state: { origin: 0 }})),
                             health: new RoleHealthModel(() => ({ state: { origin: 2 }})),
                             entries: new RoleEntriesModel(() => ({
                                 child: {
