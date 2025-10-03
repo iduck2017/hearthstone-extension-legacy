@@ -1,9 +1,23 @@
-import { CardFeatureModel, SpellCardModel, SpellPerformModel } from "hearthstone-core";
+import { FeatureModel, ROLE_ROUTE, RoleRoute, SpellCardModel, SpellPerformModel } from "hearthstone-core";
 import { Event, EventUtil, Loader, StoreUtil } from "set-piece";
 import { ManaWyrmBuffModel } from "./buff";
 
+export namespace ManaWyrmFeatureProps {
+    export type E = {}
+    export type S = {}
+    export type C = {}
+    export type R = {}
+    export type P = RoleRoute
+}
+
 @StoreUtil.is('mana-wyrm-feature')
-export class ManaWyrmFeatureModel extends CardFeatureModel {
+export class ManaWyrmFeatureModel extends FeatureModel<
+    ManaWyrmFeatureProps.E,
+    ManaWyrmFeatureProps.S,
+    ManaWyrmFeatureProps.C,
+    ManaWyrmFeatureProps.R,
+    ManaWyrmFeatureProps.P
+> {
     constructor(loader?: Loader<ManaWyrmFeatureModel>) {
         super(() => {
             const props = loader?.() ?? {}
@@ -16,7 +30,8 @@ export class ManaWyrmFeatureModel extends CardFeatureModel {
                     ...props.state 
                 },
                 child: { ...props.child },
-                refer: { ...props.refer } 
+                refer: { ...props.refer },
+                route: ROLE_ROUTE,
             }
         })
     }

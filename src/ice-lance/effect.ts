@@ -1,8 +1,22 @@
-import { EffectModel, SelectEvent, RoleModel, DamageModel, DamageEvent, DamageType } from "hearthstone-core";
+import { EffectModel, SelectEvent, RoleModel, DamageModel, DamageEvent, DamageType, RoleRoute, ROLE_ROUTE, CARD_ROUTE, CardRoute } from "hearthstone-core";
 import { Loader, StoreUtil } from "set-piece";
 
+export namespace IceLanceEffectProps {
+    export type E = {}
+    export type S = {}
+    export type C = {}
+    export type R = {}
+    export type P = CardRoute
+}
+
 @StoreUtil.is('ice-lance-effect')
-export class IceLanceEffectModel extends EffectModel<[RoleModel]> {
+export class IceLanceEffectModel extends EffectModel<[RoleModel],
+    IceLanceEffectProps.E,
+    IceLanceEffectProps.S,
+    IceLanceEffectProps.C,
+    IceLanceEffectProps.R,
+    IceLanceEffectProps.P
+> {
     constructor(loader?: Loader<IceLanceEffectModel>) {
         super(() => {
             const props = loader?.() ?? {}
@@ -14,7 +28,8 @@ export class IceLanceEffectModel extends EffectModel<[RoleModel]> {
                     ...props.state 
                 },
                 child: { ...props.child },
-                refer: { ...props.refer } 
+                refer: { ...props.refer },
+                route: CARD_ROUTE,
             }
         })
     }

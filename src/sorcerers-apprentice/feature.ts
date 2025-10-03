@@ -1,8 +1,8 @@
-import { CardFeatureModel, CostDecor, CostModel, CostType, SpellCardModel } from "hearthstone-core";
+import { CostDecor, CostModel, CostType, FeatureModel, SpellCardModel } from "hearthstone-core";
 import { Event, EventUtil, Loader, StateUtil, StoreUtil } from "set-piece";
 
 @StoreUtil.is('sorcerers-apprentice-feature')
-export class SorcerersApprenticeFeatureModel extends CardFeatureModel {
+export class SorcerersApprenticeFeatureModel extends FeatureModel {
     constructor(loader?: Loader<SorcerersApprenticeFeatureModel>) {
         super(() => {
             const props = loader?.() ?? {}
@@ -15,7 +15,8 @@ export class SorcerersApprenticeFeatureModel extends CardFeatureModel {
                     ...props.state
                 },
                 child: { ...props.child },
-                refer: { ...props.refer }
+                refer: { ...props.refer },
+                route: {},
             }
         })
     }

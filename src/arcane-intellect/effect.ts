@@ -1,8 +1,22 @@
-import { EffectModel } from "hearthstone-core";
+import { CARD_ROUTE, CardRoute, EffectModel } from "hearthstone-core";
 import { Loader, StoreUtil } from "set-piece";
 
+export namespace ArcaneIntellectEffectProps {
+    export type E = {}
+    export type S = {}
+    export type C = {}
+    export type R = {}
+    export type P = CardRoute
+}
+
 @StoreUtil.is('arcane-intellect-effect')
-export class ArcaneIntellectEffectModel extends EffectModel<[]> {
+export class ArcaneIntellectEffectModel extends EffectModel<[],
+  ArcaneIntellectEffectProps.E,
+  ArcaneIntellectEffectProps.S,
+  ArcaneIntellectEffectProps.C,
+  ArcaneIntellectEffectProps.R,
+  ArcaneIntellectEffectProps.P
+> {
     constructor(loader?: Loader<ArcaneIntellectEffectModel>) {
         super(() => {
             const props = loader?.() ?? {}
@@ -14,7 +28,8 @@ export class ArcaneIntellectEffectModel extends EffectModel<[]> {
                     ...props.state 
                 },
                 child: { ...props.child },
-                refer: { ...props.refer } 
+                refer: { ...props.refer },
+                route: CARD_ROUTE
             }
         })
     }

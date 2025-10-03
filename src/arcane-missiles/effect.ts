@@ -1,8 +1,22 @@
-import { DamageEvent, DamageModel, DamageType, EffectModel, SelectEvent } from "hearthstone-core";
+import { CARD_ROUTE, CardRoute, DamageEvent, DamageModel, DamageType, EffectModel, SelectEvent } from "hearthstone-core";
 import { Loader, Model, StoreUtil } from "set-piece";
 
+export namespace ArcaneMissilesEffectProps {
+    export type E = {}
+    export type S = {}
+    export type C = {}
+    export type R = {}
+    export type P = CardRoute
+}
+
 @StoreUtil.is('arcane-missiles-effect')
-export class ArcaneMissilesEffectModel extends EffectModel<[]> {
+export class ArcaneMissilesEffectModel extends EffectModel<[],
+    ArcaneMissilesEffectProps.E,
+    ArcaneMissilesEffectProps.S,
+    ArcaneMissilesEffectProps.C,
+    ArcaneMissilesEffectProps.R,
+    ArcaneMissilesEffectProps.P
+> {
     constructor(loader?: Loader<ArcaneMissilesEffectModel>) {
         super(() => {
             const props = loader?.() ?? {}
@@ -14,7 +28,8 @@ export class ArcaneMissilesEffectModel extends EffectModel<[]> {
                     ...props.state 
                 },
                 child: { ...props.child },
-                refer: { ...props.refer } 
+                refer: { ...props.refer },
+                route: CARD_ROUTE,
             }
         })
     }

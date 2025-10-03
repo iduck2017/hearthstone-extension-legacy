@@ -1,8 +1,22 @@
-import { EffectModel, SelectEvent, RoleModel, DamageModel, DamageEvent, DamageType } from "hearthstone-core";
+import { EffectModel, SelectEvent, RoleModel, DamageModel, DamageEvent, DamageType, RoleRoute, ROLE_ROUTE, CardRoute, CARD_ROUTE } from "hearthstone-core";
 import { DebugUtil, Loader, LogLevel, Model, StoreUtil } from "set-piece";
 
+export namespace FireballEffectProps {
+    export type E = {}
+    export type S = {}
+    export type C = {}
+    export type R = {}
+    export type P = CardRoute
+}
+
 @StoreUtil.is('fireball-effect')
-export class FireballEffectModel extends EffectModel<[RoleModel]> {
+export class FireballEffectModel extends EffectModel<[RoleModel],
+    FireballEffectProps.E,
+    FireballEffectProps.S,
+    FireballEffectProps.C,
+    FireballEffectProps.R,
+    FireballEffectProps.P
+> {
     constructor(loader?: Loader<FireballEffectModel>) {
         super(() => {
             const props = loader?.() ?? {}
@@ -14,7 +28,8 @@ export class FireballEffectModel extends EffectModel<[RoleModel]> {
                     ...props.state 
                 },
                 child: { ...props.child },
-                refer: { ...props.refer } 
+                refer: { ...props.refer },
+                route: CARD_ROUTE,
             }
         })
     }

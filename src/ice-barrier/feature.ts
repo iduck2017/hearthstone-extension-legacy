@@ -1,4 +1,4 @@
-import { CardFeatureModel, RoleAttackModel, RoleModel, SecretFeatureModel } from "hearthstone-core";
+import { RoleAttackModel, RoleModel, SecretFeatureModel } from "hearthstone-core";
 import { Event, EventUtil, Loader, StoreUtil } from "set-piece";
 
 @StoreUtil.is('ice-barrier-feature')

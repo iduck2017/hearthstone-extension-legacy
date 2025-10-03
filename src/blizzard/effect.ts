@@ -1,8 +1,22 @@
-import { EffectModel, DamageModel, DamageEvent, DamageType } from "hearthstone-core";
+import { EffectModel, DamageModel, DamageEvent, DamageType, RoleRoute, ROLE_ROUTE } from "hearthstone-core";
 import { Loader, StoreUtil } from "set-piece";
 
+export namespace BlizzardEffectProps {
+    export type E = {}
+    export type S = {}
+    export type C = {}
+    export type R = {}
+    export type P = RoleRoute
+}
+
 @StoreUtil.is('blizzard-effect')
-export class BlizzardEffectModel extends EffectModel<[]> {
+export class BlizzardEffectModel extends EffectModel<[],
+    BlizzardEffectProps.E,
+    BlizzardEffectProps.S,
+    BlizzardEffectProps.C,
+    BlizzardEffectProps.R,
+    BlizzardEffectProps.P
+> {
     constructor(loader?: Loader<BlizzardEffectModel>) {
         super(() => {
             const props = loader?.() ?? {}
@@ -14,7 +28,8 @@ export class BlizzardEffectModel extends EffectModel<[]> {
                     ...props.state
                 },
                 child: { ...props.child },
-                refer: { ...props.refer }
+                refer: { ...props.refer },
+                route: ROLE_ROUTE,
             }
         })
     }

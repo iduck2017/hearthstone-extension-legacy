@@ -1,4 +1,4 @@
-import { CardFeatureModel, MinionCardModel, SecretFeatureModel } from "hearthstone-core";
+import { MinionCardModel, SecretFeatureModel } from "hearthstone-core";
 import { Event, EventUtil, Loader, StoreUtil } from "set-piece";
 
 @StoreUtil.is('mirror-entity-feature')

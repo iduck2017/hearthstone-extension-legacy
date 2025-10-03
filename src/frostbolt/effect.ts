@@ -1,8 +1,22 @@
-import { EffectModel, SelectEvent, RoleModel, DamageModel, DamageEvent, DamageType } from "hearthstone-core";
+import { EffectModel, SelectEvent, RoleModel, DamageModel, DamageEvent, DamageType, RoleRoute, ROLE_ROUTE } from "hearthstone-core";
 import { Loader, StoreUtil } from "set-piece";
 
+export namespace FrostboltEffectProps {
+    export type E = {}
+    export type S = {}
+    export type C = {}
+    export type R = {}
+    export type P = RoleRoute
+}
+
 @StoreUtil.is('frostbolt-effect')
-export class FrostboltEffectModel extends EffectModel<[RoleModel]> {
+export class FrostboltEffectModel extends EffectModel<[RoleModel],
+    FrostboltEffectProps.E,
+    FrostboltEffectProps.S,
+    FrostboltEffectProps.C,
+    FrostboltEffectProps.R,
+    FrostboltEffectProps.P
+> {
     constructor(loader?: Loader<FrostboltEffectModel>) {
         super(() => {
             const props = loader?.() ?? {}
@@ -14,7 +28,8 @@ export class FrostboltEffectModel extends EffectModel<[RoleModel]> {
                     ...props.state 
                 },
                 child: { ...props.child },
-                refer: { ...props.refer } 
+                refer: { ...props.refer },
+                route: ROLE_ROUTE,
             }
         })
     }

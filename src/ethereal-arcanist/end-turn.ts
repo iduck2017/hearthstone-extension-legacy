@@ -1,9 +1,23 @@
-import { EndTurnHookModel } from "hearthstone-core";
+import { EndTurnHookModel, ROLE_ROUTE, RoleRoute } from "hearthstone-core";
 import { DebugUtil, Loader, StoreUtil } from "set-piece";
 import { EtherealArcanistBuffModel } from "./buff";
 
+export namespace EtherealArcanistFeatureProps {
+    export type E = {}
+    export type S = {}
+    export type C = {}
+    export type R = {}
+    export type P = RoleRoute
+}
+
 @StoreUtil.is('ethereal-arcanist-end-turn')
-export class EtherealArcanistFeatureModel extends EndTurnHookModel {
+export class EtherealArcanistFeatureModel extends EndTurnHookModel<
+    EtherealArcanistFeatureProps.E,
+    EtherealArcanistFeatureProps.S,
+    EtherealArcanistFeatureProps.C,
+    EtherealArcanistFeatureProps.R,
+    EtherealArcanistFeatureProps.P
+> {
     constructor(loader?: Loader<EtherealArcanistFeatureModel>) {
         super(() => {
             const props = loader?.() ?? {};
@@ -16,6 +30,7 @@ export class EtherealArcanistFeatureModel extends EndTurnHookModel {
                 },
                 child: { ...props.child },
                 refer: { ...props.refer },
+                route: ROLE_ROUTE,
             }
         });
     }

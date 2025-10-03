@@ -1,6 +1,6 @@
 import { RoleBattlecryModel } from "hearthstone-core";
 import { Loader, StoreUtil } from "set-piece";
-import { KirinTorMageFeatureModel } from "./feature";
+import { KirinTorMageContextModel } from "./context";
 
 @StoreUtil.is('kirin-tor-mage-battlecry')
 export class KirinTorMageBattlecryModel extends RoleBattlecryModel<[]> {
@@ -25,6 +25,6 @@ export class KirinTorMageBattlecryModel extends RoleBattlecryModel<[]> {
     public async doRun(from: number, to: number) {
         const player = this.route.player;
         if (!player) return;
-        player.add(new KirinTorMageFeatureModel());
+        player.add(new KirinTorMageContextModel());
     }
 }

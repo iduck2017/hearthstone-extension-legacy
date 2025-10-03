@@ -1,8 +1,22 @@
-import { CardFeatureModel, DamageEvent, DamageModel } from "hearthstone-core";
+import { DamageEvent, DamageModel, FeatureModel, ROLE_ROUTE, RoleRoute } from "hearthstone-core";
 import { Event, EventUtil, Loader, StoreUtil } from "set-piece";
 
+export namespace WaterElementalFeatureProps {
+    export type E = {}
+    export type S = {}
+    export type C = {}
+    export type R = {}
+    export type P = RoleRoute
+}
+
 @StoreUtil.is('water-elemental-feature')
-export class WaterElementalFeatureModel extends CardFeatureModel {
+export class WaterElementalFeatureModel extends FeatureModel<
+    WaterElementalFeatureProps.E,
+    WaterElementalFeatureProps.S,
+    WaterElementalFeatureProps.C,
+    WaterElementalFeatureProps.R,
+    WaterElementalFeatureProps.P
+> {
     constructor(loader?: Loader<WaterElementalFeatureModel>) {
         super(() => {
             const props = loader?.() ?? {}
@@ -15,7 +29,8 @@ export class WaterElementalFeatureModel extends CardFeatureModel {
                     ...props.state 
                 },
                 child: { ...props.child },
-                refer: { ...props.refer } 
+                refer: { ...props.refer },
+                route: ROLE_ROUTE,
             }
         })
     }

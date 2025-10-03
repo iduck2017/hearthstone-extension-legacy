@@ -1,8 +1,22 @@
-import { EffectModel, SelectEvent, RoleModel, DamageModel, DamageEvent, DamageType, MinionCardModel } from "hearthstone-core";
+import { EffectModel, SelectEvent, RoleModel, DamageModel, DamageEvent, DamageType, MinionCardModel, ROLE_ROUTE, CardRoute, CARD_ROUTE } from "hearthstone-core";
 import { Loader, StoreUtil } from "set-piece";
 
+export namespace ConeOfColdEffectProps {
+    export type E = {}
+    export type S = {}
+    export type C = {}
+    export type R = {}
+    export type P = CardRoute
+}
+
 @StoreUtil.is('cone-of-cold-effect')
-export class ConeOfColdEffectModel extends EffectModel<[RoleModel]> {
+export class ConeOfColdEffectModel extends EffectModel<[RoleModel],
+    ConeOfColdEffectProps.E,
+    ConeOfColdEffectProps.S,
+    ConeOfColdEffectProps.C,
+    ConeOfColdEffectProps.R,
+    ConeOfColdEffectProps.P
+> {
     constructor(loader?: Loader<ConeOfColdEffectModel>) {
         super(() => {
             const props = loader?.() ?? {}
@@ -14,7 +28,8 @@ export class ConeOfColdEffectModel extends EffectModel<[RoleModel]> {
                     ...props.state
                 },
                 child: { ...props.child },
-                refer: { ...props.refer }
+                refer: { ...props.refer },
+                route: CARD_ROUTE,
             }
         })
     }

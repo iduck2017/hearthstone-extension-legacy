@@ -1,8 +1,22 @@
-import { DeathrattleModel, RoleModel } from "hearthstone-core";
+import { DeathrattleModel, ROLE_ROUTE, RoleModel, RoleRoute } from "hearthstone-core";
 import { StoreUtil, Loader } from "set-piece";
 
+export namespace BloodmageThalnosDeathrattleProps {
+    export type E = {}
+    export type S = {}
+    export type C = {}
+    export type R = {}
+    export type P = RoleRoute
+}
+
 @StoreUtil.is('bloodmage-thalnos-deathrattle')
-export class BloodmageThalnosDeathrattleModel extends DeathrattleModel {
+export class BloodmageThalnosDeathrattleModel extends DeathrattleModel<
+    BloodmageThalnosDeathrattleProps.E,
+    BloodmageThalnosDeathrattleProps.S,
+    BloodmageThalnosDeathrattleProps.C,
+    BloodmageThalnosDeathrattleProps.R,
+    BloodmageThalnosDeathrattleProps.P
+> {
     constructor(loader?: Loader<BloodmageThalnosDeathrattleModel>) {
         super(() => {
             const props = loader?.() ?? {};
@@ -15,6 +29,7 @@ export class BloodmageThalnosDeathrattleModel extends DeathrattleModel {
                 },
                 child: { ...props.child },
                 refer: { ...props.refer },
+                route: ROLE_ROUTE,
             }
         });
     }

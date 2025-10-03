@@ -1,8 +1,22 @@
-import { DamageEvent, DamageModel, DamageType, DeathrattleModel } from "hearthstone-core";
+import { DamageEvent, DamageModel, DamageType, DeathrattleModel, ROLE_ROUTE, RoleRoute } from "hearthstone-core";
 import { Loader, StoreUtil } from "set-piece";
 
+export namespace LeperGnomeDeathrattleProps {
+    export type E = {}
+    export type S = {}
+    export type C = {}
+    export type R = {}
+    export type P = RoleRoute
+}
+
 @StoreUtil.is('leper-gnome-deathrattle')
-export class LeperGnomeDeathrattleModel extends DeathrattleModel {
+export class LeperGnomeDeathrattleModel extends DeathrattleModel<
+    LeperGnomeDeathrattleProps.E,
+    LeperGnomeDeathrattleProps.S,
+    LeperGnomeDeathrattleProps.C,
+    LeperGnomeDeathrattleProps.R,
+    LeperGnomeDeathrattleProps.P
+> {
     constructor(loader?: Loader<LeperGnomeDeathrattleModel>) {
         super(() => {
             const props = loader?.() ?? {};
@@ -15,6 +29,7 @@ export class LeperGnomeDeathrattleModel extends DeathrattleModel {
                 },
                 child: { ...props.child },
                 refer: { ...props.refer },
+                route: ROLE_ROUTE,
             }
         });
     }

@@ -1,8 +1,22 @@
-import { EffectModel, SelectEvent, RoleModel, DamageModel, DamageEvent, DamageType } from "hearthstone-core";
+import { EffectModel, SelectEvent, RoleModel, DamageModel, DamageEvent, DamageType, RoleRoute, ROLE_ROUTE } from "hearthstone-core";
 import { Loader, StoreUtil } from "set-piece";
 
+export namespace IcicleEffectProps {
+    export type E = {}
+    export type S = {}
+    export type C = {}
+    export type R = {}
+    export type P = RoleRoute
+}
+
 @StoreUtil.is('icicle-effect')
-export class IcicleEffectModel extends EffectModel<[RoleModel]> {
+export class IcicleEffectModel extends EffectModel<[RoleModel],
+    IcicleEffectProps.E,
+    IcicleEffectProps.S,
+    IcicleEffectProps.C,
+    IcicleEffectProps.R,
+    IcicleEffectProps.P
+> {
     constructor(loader?: Loader<IcicleEffectModel>) {
         super(() => {
             const props = loader?.() ?? {}
@@ -14,7 +28,8 @@ export class IcicleEffectModel extends EffectModel<[RoleModel]> {
                     ...props.state 
                 },
                 child: { ...props.child },
-                refer: { ...props.refer } 
+                refer: { ...props.refer },
+                route: ROLE_ROUTE,
             }
         })
     }

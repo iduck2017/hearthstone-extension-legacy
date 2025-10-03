@@ -1,8 +1,22 @@
-import { EffectModel } from "hearthstone-core";
+import { CARD_ROUTE, CardRoute, EffectModel } from "hearthstone-core";
 import { Loader, StoreUtil } from "set-piece";
 
+export namespace FrostNovaEffectProps {
+    export type E = {}
+    export type S = {}
+    export type C = {}
+    export type R = {}
+    export type P = CardRoute
+}
+
 @StoreUtil.is('frost-nova-effect')
-export class FrostNovaEffectModel extends EffectModel<[]> {
+export class FrostNovaEffectModel extends EffectModel<[],
+    FrostNovaEffectProps.E,
+    FrostNovaEffectProps.S,
+    FrostNovaEffectProps.C,
+    FrostNovaEffectProps.R,
+    FrostNovaEffectProps.P
+> {
     constructor(loader?: Loader<FrostNovaEffectModel>) {
         super(() => {
             const props = loader?.() ?? {}
@@ -14,7 +28,8 @@ export class FrostNovaEffectModel extends EffectModel<[]> {
                     ...props.state
                 },
                 child: { ...props.child },
-                refer: { ...props.refer }
+                refer: { ...props.refer },
+                route: CARD_ROUTE,
             }
         })
     }

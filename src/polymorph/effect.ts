@@ -15,7 +15,8 @@ export class PolymorphEffectModel extends EffectModel<[RoleModel]> {
                     ...props.state 
                 },
                 child: { ...props.child },
-                refer: { ...props.refer } 
+                refer: { ...props.refer },
+                route: {},
             }
         })
     }

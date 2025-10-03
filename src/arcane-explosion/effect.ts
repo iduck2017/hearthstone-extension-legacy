@@ -1,8 +1,22 @@
-import { DamageEvent, DamageModel, DamageType, EffectModel } from "hearthstone-core";
+import { DamageEvent, DamageModel, DamageType, EffectModel, ROLE_ROUTE, RoleRoute } from "hearthstone-core";
 import { Loader, StoreUtil } from "set-piece";
 
+export namespace ArcaneExplosionEffectProps {
+    export type E = {}
+    export type S = {}
+    export type C = {}
+    export type R = {}
+    export type P = RoleRoute
+}
+
 @StoreUtil.is('arcane-explosion-effect')
-export class ArcaneExplosionEffectModel extends EffectModel<[]> {
+export class ArcaneExplosionEffectModel extends EffectModel<[],
+    ArcaneExplosionEffectProps.E,
+    ArcaneExplosionEffectProps.S,
+    ArcaneExplosionEffectProps.C,
+    ArcaneExplosionEffectProps.R,
+    ArcaneExplosionEffectProps.P
+> {
     constructor(loader?: Loader<ArcaneExplosionEffectModel>) {
         super(() => {
             const props = loader?.() ?? {}
@@ -14,7 +28,8 @@ export class ArcaneExplosionEffectModel extends EffectModel<[]> {
                     ...props.state 
                 },
                 child: { ...props.child },
-                refer: { ...props.refer } 
+                refer: { ...props.refer },
+                route: ROLE_ROUTE,
             }
         })
     }

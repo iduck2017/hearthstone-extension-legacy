@@ -40,11 +40,6 @@ export class BloodmageThalnosModel extends MinionCardModel {
                         child: {
                             attack: new RoleAttackModel(() => ({ state: { origin: 1 }})),
                             health: new RoleHealthModel(() => ({ state: { origin: 1 }})), 
-                            entries: new RoleEntriesModel(() => ({
-                                child: { 
-                                    spellDamage: new SpellBuffModel(() => ({ state: { offset: 1 }}))
-                                }
-                            })),
                         }
                     })),
                     hooks: new MinionHooksModel(() => ({
@@ -52,6 +47,7 @@ export class BloodmageThalnosModel extends MinionCardModel {
                             deathrattle: [new BloodmageThalnosDeathrattleModel()]
                         }
                     })),
+                    feats: [new SpellBuffModel(() => ({ state: { offset: 1 }}))],
                     ...props.child,
                 },
                 refer: { ...props.refer },
