@@ -12,6 +12,7 @@ import { DebugUtil, LogLevel } from "set-piece";
 
 describe('leper-gnome', () => {
     const game = boot(new GameModel(() => ({
+        state: { debug: { isDrawDisabled: true }},
         child: {
             playerA: new PlayerModel(() => ({
                 child: {

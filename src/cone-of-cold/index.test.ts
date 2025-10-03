@@ -14,6 +14,7 @@ import { ManaWyrmModel } from "../mana-wyrm";
 
 describe('cone-of-cold', () => {
     const game = new GameModel(() => ({
+        state: { debug: { isDrawDisabled: true }},
         child: {
             playerA: new PlayerModel(() => ({
                 child: {

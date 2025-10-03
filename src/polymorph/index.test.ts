@@ -14,6 +14,7 @@ import { boot } from "../boot";
 
 describe('polymorph', () => {
     const game = new GameModel(() => ({
+        state: { debug: { isDrawDisabled: true }},
         child: {
             playerA: new PlayerModel(() => ({
                 child: {

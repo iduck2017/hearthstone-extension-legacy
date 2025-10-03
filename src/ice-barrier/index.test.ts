@@ -11,6 +11,7 @@ import { boot } from "../boot";
 
 describe('ice-barrier', () => {
     const game = new GameModel(() => ({
+        state: { debug: { isDrawDisabled: true }},
         child: {
             playerA: new PlayerModel(() => ({
                 child: {

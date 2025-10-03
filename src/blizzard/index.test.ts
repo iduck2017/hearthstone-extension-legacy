@@ -12,6 +12,7 @@ import { boot } from "../boot";
 
 describe('blizzard', () => {
     const game = new GameModel(() => ({
+        state: { debug: { isDrawDisabled: true }},
         child: {
             playerA: new PlayerModel(() => ({
                 child: {

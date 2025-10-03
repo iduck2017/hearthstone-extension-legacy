@@ -14,6 +14,7 @@ import { FireballModel } from "../fireball";
 DebugUtil.level = LogLevel.ERROR;
 describe('fireball', () => {
     const game = new GameModel(() => ({
+        state: { debug: { isDrawDisabled: true }},
         child: {
             playerA: new PlayerModel(() => ({
                 child: {

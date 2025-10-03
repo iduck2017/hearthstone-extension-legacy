@@ -13,6 +13,7 @@ import { DebugUtil, LogLevel } from "set-piece";
 DebugUtil.level = LogLevel.ERROR;
 describe('goldshire-footman', () => {
     const game = new GameModel(() => ({
+        state: { debug: { isDrawDisabled: true }},
         child: {
             playerA: new PlayerModel(() => ({
                 child: {

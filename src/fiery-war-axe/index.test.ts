@@ -5,6 +5,7 @@ import { FieryWarAxeModel } from ".";
 
 describe('firey-war-axe', () => {
     const game = boot(new GameModel(() => ({
+        state: { debug: { isDrawDisabled: true }},
         child: {
             playerA: new PlayerModel(() => ({
                 child: {

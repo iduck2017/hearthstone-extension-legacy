@@ -13,6 +13,7 @@ import { boot } from "../boot";
 
 describe('mirror-entity', () => {
     const game = new GameModel(() => ({
+        state: { debug: { isDrawDisabled: true }},
         child: {
             playerA: new PlayerModel(() => ({
                 child: {

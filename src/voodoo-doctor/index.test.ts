@@ -13,6 +13,7 @@ import { VoodooDoctorModel } from ".";
 
 describe('voodoo-doctor', () => {
     const game = new GameModel(() => ({
+        state: { debug: { isDrawDisabled: true }},
         child: {
             playerA: new PlayerModel(() => ({
                 child: {

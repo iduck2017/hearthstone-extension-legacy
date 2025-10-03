@@ -12,6 +12,7 @@ import { DebugUtil, LogLevel } from "set-piece";
 
 describe('argent-squire', () => {
     const game = new GameModel(() => ({
+        state: { debug: { isDrawDisabled: true }},
         child: {
             playerA: new PlayerModel(() => ({
                 child: {

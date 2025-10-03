@@ -11,6 +11,7 @@ import { WispModel } from "../wisp";
 
 describe('bloodmage-thalnos', () => {
     const game = new GameModel(() => ({
+        state: { debug: { isDrawDisabled: true }},
         child: {
             playerA: new PlayerModel(() => ({
                 child: {
