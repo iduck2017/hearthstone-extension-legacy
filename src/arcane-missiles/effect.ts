@@ -22,7 +22,7 @@ export class ArcaneMissilesEffectModel extends SpellEffectModel<[],
                 uuid: props.uuid,
                 state: { 
                     name: "Arcane Missiles's effect",
-                    desc: "Deal **3** damage randomly split among all enemies.",
+                    desc: "Deal {{state.damage[0]}} damage randomly split among all enemies.",
                     damage: [3],
                     ...props.state 
                 },

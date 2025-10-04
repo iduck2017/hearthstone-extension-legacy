@@ -22,7 +22,7 @@ export class ArcaneExplosionEffectModel extends SpellEffectModel<[],
                 uuid: props.uuid,
                 state: { 
                     name: "Arcane Explosion's effect",
-                    desc: "Deal **1** damage to all enemy minions.",
+                    desc: "Deal {{state.damage[0]}} damage to all enemy minions.",
                     damage: [1],
                     ...props.state 
                 },
