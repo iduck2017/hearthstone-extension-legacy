@@ -1,4 +1,4 @@
-import { CARD_ROUTE, CardRoute, EffectModel } from "hearthstone-core";
+import { CARD_ROUTE, CardRoute, EffectModel, SpellEffectModel } from "hearthstone-core";
 import { Loader, StoreUtil } from "set-piece";
 
 export namespace FrostNovaEffectProps {
@@ -6,16 +6,14 @@ export namespace FrostNovaEffectProps {
     export type S = {}
     export type C = {}
     export type R = {}
-    export type P = CardRoute
 }
 
 @StoreUtil.is('frost-nova-effect')
-export class FrostNovaEffectModel extends EffectModel<[],
+export class FrostNovaEffectModel extends SpellEffectModel<[],
     FrostNovaEffectProps.E,
     FrostNovaEffectProps.S,
     FrostNovaEffectProps.C,
-    FrostNovaEffectProps.R,
-    FrostNovaEffectProps.P
+    FrostNovaEffectProps.R
 > {
     constructor(loader?: Loader<FrostNovaEffectModel>) {
         super(() => {
@@ -25,6 +23,7 @@ export class FrostNovaEffectModel extends EffectModel<[],
                 state: {
                     name: "Frost Nova's effect",
                     desc: "Freeze all enemy minions.",
+                    damage: [],
                     ...props.state
                 },
                 child: { ...props.child },

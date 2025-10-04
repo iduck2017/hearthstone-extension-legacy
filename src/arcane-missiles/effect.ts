@@ -1,4 +1,4 @@
-import { CARD_ROUTE, CardRoute, DamageEvent, DamageModel, DamageType, EffectModel, SelectEvent } from "hearthstone-core";
+import { CARD_ROUTE, CardRoute, DamageEvent, DamageModel, DamageType, EffectModel, SelectEvent, SpellEffectModel } from "hearthstone-core";
 import { Loader, Model, StoreUtil } from "set-piece";
 
 export namespace ArcaneMissilesEffectProps {
@@ -6,16 +6,14 @@ export namespace ArcaneMissilesEffectProps {
     export type S = {}
     export type C = {}
     export type R = {}
-    export type P = CardRoute
 }
 
 @StoreUtil.is('arcane-missiles-effect')
-export class ArcaneMissilesEffectModel extends EffectModel<[],
+export class ArcaneMissilesEffectModel extends SpellEffectModel<[],
     ArcaneMissilesEffectProps.E,
     ArcaneMissilesEffectProps.S,
     ArcaneMissilesEffectProps.C,
-    ArcaneMissilesEffectProps.R,
-    ArcaneMissilesEffectProps.P
+    ArcaneMissilesEffectProps.R
 > {
     constructor(loader?: Loader<ArcaneMissilesEffectModel>) {
         super(() => {
@@ -24,12 +22,12 @@ export class ArcaneMissilesEffectModel extends EffectModel<[],
                 uuid: props.uuid,
                 state: { 
                     name: "Arcane Missiles's effect",
-                    desc: "Deal 3 damage randomly split among all enemies.",
+                    desc: "Deal **3** damage randomly split among all enemies.",
+                    damage: [3],
                     ...props.state 
                 },
                 child: { ...props.child },
                 refer: { ...props.refer },
-                route: CARD_ROUTE,
             }
         })
     }
@@ -42,7 +40,9 @@ export class ArcaneMissilesEffectModel extends EffectModel<[],
         if (!opponent) return;
         const card = this.route.card;
         if (!card) return;
-        for (let loop = 0; loop < 3; loop ++) {
+
+        const loop = this.state.damage[0] ?? 0;
+        for (let index = 0; index < loop; index ++) {
             const roles = opponent.query();
             if (!roles.length) break;
             const index = Math.floor(Math.random() * roles.length);

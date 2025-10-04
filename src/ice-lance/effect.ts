@@ -1,4 +1,4 @@
-import { EffectModel, SelectEvent, RoleModel, DamageModel, DamageEvent, DamageType, RoleRoute, ROLE_ROUTE, CARD_ROUTE, CardRoute } from "hearthstone-core";
+import { EffectModel, SelectEvent, RoleModel, DamageModel, DamageEvent, DamageType, RoleRoute, ROLE_ROUTE, CARD_ROUTE, CardRoute, SpellEffectModel } from "hearthstone-core";
 import { Loader, StoreUtil } from "set-piece";
 
 export namespace IceLanceEffectProps {
@@ -6,16 +6,14 @@ export namespace IceLanceEffectProps {
     export type S = {}
     export type C = {}
     export type R = {}
-    export type P = CardRoute
 }
 
 @StoreUtil.is('ice-lance-effect')
-export class IceLanceEffectModel extends EffectModel<[RoleModel],
+export class IceLanceEffectModel extends SpellEffectModel<[RoleModel],
     IceLanceEffectProps.E,
     IceLanceEffectProps.S,
     IceLanceEffectProps.C,
-    IceLanceEffectProps.R,
-    IceLanceEffectProps.P
+    IceLanceEffectProps.R
 > {
     constructor(loader?: Loader<IceLanceEffectModel>) {
         super(() => {
@@ -24,12 +22,12 @@ export class IceLanceEffectModel extends EffectModel<[RoleModel],
                 uuid: props.uuid,
                 state: { 
                     name: "Ice Lance's effect",
-                    desc: "Freeze a character. If it was already Frozen, deal 4 damage instead.",
+                    desc: "Freeze a character. If it was already Frozen, deal {{state.damage[0]}} damage instead.",
+                    damage: [4],
                     ...props.state 
                 },
                 child: { ...props.child },
                 refer: { ...props.refer },
-                route: CARD_ROUTE,
             }
         })
     }
@@ -57,7 +55,7 @@ export class IceLanceEffectModel extends EffectModel<[RoleModel],
                     source: card,
                     method: this,
                     target,
-                    origin: 4
+                    origin: this.state.damage[0] ?? 0,
                 })
             ])
         } else frozen.active();

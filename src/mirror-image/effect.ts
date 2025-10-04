@@ -13,7 +13,7 @@
  * Collectible
  */
 
-import { CARD_ROUTE, CardRoute, EffectModel } from "hearthstone-core";
+import { CARD_ROUTE, CardRoute, EffectModel, SpellEffectModel } from "hearthstone-core";
 import { Loader, StoreUtil } from "set-piece";
 import { MirrorImageMinionModel } from "./minion";
 
@@ -22,16 +22,14 @@ export namespace MirrorImageEffectProps {
     export type S = {}
     export type C = {}
     export type R = {}
-    export type P = CardRoute
 }
 
 @StoreUtil.is('mirror-image-effect')
-export class MirrorImageEffectModel extends EffectModel<[],
+export class MirrorImageEffectModel extends SpellEffectModel<[],
     MirrorImageEffectProps.E,
     MirrorImageEffectProps.S,
     MirrorImageEffectProps.C,
-    MirrorImageEffectProps.R,
-    MirrorImageEffectProps.P
+    MirrorImageEffectProps.R
 > {
     constructor(loader?: Loader<MirrorImageEffectModel>) {
         super(() => {
@@ -41,6 +39,7 @@ export class MirrorImageEffectModel extends EffectModel<[],
                 state: { 
                     name: "Mirror Image's effect",
                     desc: "Summon two 0/2 minions with Taunt.",
+                    damage: [],
                     ...props.state 
                 },
                 child: { ...props.child },

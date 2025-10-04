@@ -1,9 +1,9 @@
-import { EffectModel, SelectEvent, RoleModel, MinionCardModel } from "hearthstone-core";
+import { EffectModel, SelectEvent, RoleModel, MinionCardModel, SpellEffectModel } from "hearthstone-core";
 import { Loader, StoreUtil } from "set-piece";
 import { SheepModel } from "./minion";
 
 @StoreUtil.is('polymorph-effect')
-export class PolymorphEffectModel extends EffectModel<[RoleModel]> {
+export class PolymorphEffectModel extends SpellEffectModel<[RoleModel]> {
     constructor(loader?: Loader<PolymorphEffectModel>) {
         super(() => {
             const props = loader?.() ?? {}
@@ -12,11 +12,11 @@ export class PolymorphEffectModel extends EffectModel<[RoleModel]> {
                 state: { 
                     name: "Polymorph's effect",
                     desc: "Transform a minion into a 1/1 Sheep.",
+                    damage: [],
                     ...props.state 
                 },
                 child: { ...props.child },
                 refer: { ...props.refer },
-                route: {},
             }
         })
     }

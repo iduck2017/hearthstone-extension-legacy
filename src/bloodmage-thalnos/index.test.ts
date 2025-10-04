@@ -61,7 +61,6 @@ describe('bloodmage-thalnos', () => {
         expect(SelectUtil.current?.options).toContain(roleC);
         SelectUtil.set(roleB);
         await promise;
-
         expect(roleB.child.health.state.current).toBe(23)
         expect(roleB.child.health.state.damage).toBe(7)
     })

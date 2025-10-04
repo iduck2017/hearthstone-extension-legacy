@@ -1,4 +1,4 @@
-import { EffectModel, DamageModel, DamageEvent, DamageType, RoleRoute, ROLE_ROUTE } from "hearthstone-core";
+import { EffectModel, DamageModel, DamageEvent, DamageType, RoleRoute, ROLE_ROUTE, SpellEffectModel } from "hearthstone-core";
 import { Loader, StoreUtil } from "set-piece";
 
 export namespace BlizzardEffectProps {
@@ -6,16 +6,14 @@ export namespace BlizzardEffectProps {
     export type S = {}
     export type C = {}
     export type R = {}
-    export type P = RoleRoute
 }
 
 @StoreUtil.is('blizzard-effect')
-export class BlizzardEffectModel extends EffectModel<[],
+export class BlizzardEffectModel extends SpellEffectModel<[],
     BlizzardEffectProps.E,
     BlizzardEffectProps.S,
     BlizzardEffectProps.C,
-    BlizzardEffectProps.R,
-    BlizzardEffectProps.P
+    BlizzardEffectProps.R
 > {
     constructor(loader?: Loader<BlizzardEffectModel>) {
         super(() => {
@@ -24,12 +22,12 @@ export class BlizzardEffectModel extends EffectModel<[],
                 uuid: props.uuid,
                 state: {
                     name: "Blizzard's effect",
-                    desc: "Deal 2 damage to all enemy minions and Freeze them.",
+                    desc: "Deal **2** damage to all enemy minions and Freeze them.",
+                    damage: [2],
                     ...props.state
                 },
                 child: { ...props.child },
                 refer: { ...props.refer },
-                route: ROLE_ROUTE,
             }
         })
     }
@@ -52,7 +50,7 @@ export class BlizzardEffectModel extends EffectModel<[],
             source: card,
             method: this,
             target: item,
-            origin: 2,
+            origin: this.state.damage[0] ?? 0,
         })));
         // Freeze all enemy minions
         for (const role of roles) {

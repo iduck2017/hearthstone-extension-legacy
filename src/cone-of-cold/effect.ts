@@ -1,4 +1,4 @@
-import { EffectModel, SelectEvent, RoleModel, DamageModel, DamageEvent, DamageType, MinionCardModel, ROLE_ROUTE, CardRoute, CARD_ROUTE } from "hearthstone-core";
+import { EffectModel, SelectEvent, RoleModel, DamageModel, DamageEvent, DamageType, MinionCardModel, ROLE_ROUTE, CardRoute, CARD_ROUTE, SpellEffectModel } from "hearthstone-core";
 import { Loader, StoreUtil } from "set-piece";
 
 export namespace ConeOfColdEffectProps {
@@ -6,16 +6,14 @@ export namespace ConeOfColdEffectProps {
     export type S = {}
     export type C = {}
     export type R = {}
-    export type P = CardRoute
 }
 
 @StoreUtil.is('cone-of-cold-effect')
-export class ConeOfColdEffectModel extends EffectModel<[RoleModel],
+export class ConeOfColdEffectModel extends SpellEffectModel<[RoleModel],
     ConeOfColdEffectProps.E,
     ConeOfColdEffectProps.S,
     ConeOfColdEffectProps.C,
-    ConeOfColdEffectProps.R,
-    ConeOfColdEffectProps.P
+    ConeOfColdEffectProps.R
 > {
     constructor(loader?: Loader<ConeOfColdEffectModel>) {
         super(() => {
@@ -24,7 +22,8 @@ export class ConeOfColdEffectModel extends EffectModel<[RoleModel],
                 uuid: props.uuid,
                 state: {
                     name: "Cone of Cold's effect",
-                    desc: "Freeze a minion and the minions next to it, and deal 1 damage to them.",
+                    desc: "Freeze a minion and the minions next to it, and deal {{state.damage[0]}} damage to them.",
+                    damage: [1],
                     ...props.state
                 },
                 child: { ...props.child },
@@ -67,7 +66,7 @@ export class ConeOfColdEffectModel extends EffectModel<[RoleModel],
             source: card,
             method: this,
             target: item.child.role,
-            origin: 1,
+            origin: this.state.damage[0] ?? 0,
         })));
         // Freeze all affected minions
         minions.forEach((item) => { 

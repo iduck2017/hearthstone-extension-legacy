@@ -1,4 +1,4 @@
-import { EffectModel, SelectEvent, RoleModel, DamageModel, DamageEvent, DamageType, RoleRoute, ROLE_ROUTE } from "hearthstone-core";
+import { EffectModel, SelectEvent, RoleModel, DamageModel, DamageEvent, DamageType, RoleRoute, ROLE_ROUTE, SpellEffectModel } from "hearthstone-core";
 import { Loader, StoreUtil } from "set-piece";
 
 export namespace FrostboltEffectProps {
@@ -6,16 +6,14 @@ export namespace FrostboltEffectProps {
     export type S = {}
     export type C = {}
     export type R = {}
-    export type P = RoleRoute
 }
 
 @StoreUtil.is('frostbolt-effect')
-export class FrostboltEffectModel extends EffectModel<[RoleModel],
+export class FrostboltEffectModel extends SpellEffectModel<[RoleModel],
     FrostboltEffectProps.E,
     FrostboltEffectProps.S,
     FrostboltEffectProps.C,
-    FrostboltEffectProps.R,
-    FrostboltEffectProps.P
+    FrostboltEffectProps.R
 > {
     constructor(loader?: Loader<FrostboltEffectModel>) {
         super(() => {
@@ -24,7 +22,8 @@ export class FrostboltEffectModel extends EffectModel<[RoleModel],
                 uuid: props.uuid,
                 state: { 
                     name: "Frostbolt's effect",
-                    desc: "Deal 3 damage to a character and Freeze it.",
+                    desc: "Deal {{state.damage[0]}} damage to a character and Freeze it.",
+                    damage: [3],
                     ...props.state 
                 },
                 child: { ...props.child },
@@ -52,7 +51,7 @@ export class FrostboltEffectModel extends EffectModel<[RoleModel],
                 source: card,
                 method: this,
                 target,
-                origin: 3
+                origin: this.state.damage[0] ?? 0
             })
         ])
         

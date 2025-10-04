@@ -1,4 +1,4 @@
-import { CARD_ROUTE, CardRoute, EffectModel } from "hearthstone-core";
+import { CARD_ROUTE, CardRoute, EffectModel, SpellEffectModel } from "hearthstone-core";
 import { Loader, StoreUtil } from "set-piece";
 
 export namespace ArcaneIntellectEffectProps {
@@ -6,16 +6,14 @@ export namespace ArcaneIntellectEffectProps {
     export type S = {}
     export type C = {}
     export type R = {}
-    export type P = CardRoute
 }
 
 @StoreUtil.is('arcane-intellect-effect')
-export class ArcaneIntellectEffectModel extends EffectModel<[],
+export class ArcaneIntellectEffectModel extends SpellEffectModel<[],
   ArcaneIntellectEffectProps.E,
   ArcaneIntellectEffectProps.S,
   ArcaneIntellectEffectProps.C,
-  ArcaneIntellectEffectProps.R,
-  ArcaneIntellectEffectProps.P
+  ArcaneIntellectEffectProps.R
 > {
     constructor(loader?: Loader<ArcaneIntellectEffectModel>) {
         super(() => {
@@ -25,6 +23,7 @@ export class ArcaneIntellectEffectModel extends EffectModel<[],
                 state: { 
                     name: "Arcane Intellect's effect",
                     desc: "Draw 2 cards.",
+                    damage: [],
                     ...props.state 
                 },
                 child: { ...props.child },

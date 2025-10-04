@@ -1,4 +1,4 @@
-import { EffectModel, SelectEvent, RoleModel, DamageModel, DamageEvent, DamageType, RoleRoute, ROLE_ROUTE, CardRoute, CARD_ROUTE } from "hearthstone-core";
+import { EffectModel, SelectEvent, RoleModel, DamageModel, DamageEvent, DamageType, RoleRoute, ROLE_ROUTE, CardRoute, CARD_ROUTE, SpellEffectModel } from "hearthstone-core";
 import { DebugUtil, Loader, LogLevel, Model, StoreUtil } from "set-piece";
 
 export namespace FireballEffectProps {
@@ -6,16 +6,14 @@ export namespace FireballEffectProps {
     export type S = {}
     export type C = {}
     export type R = {}
-    export type P = CardRoute
 }
 
 @StoreUtil.is('fireball-effect')
-export class FireballEffectModel extends EffectModel<[RoleModel],
+export class FireballEffectModel extends SpellEffectModel<[RoleModel],
     FireballEffectProps.E,
     FireballEffectProps.S,
     FireballEffectProps.C,
-    FireballEffectProps.R,
-    FireballEffectProps.P
+    FireballEffectProps.R
 > {
     constructor(loader?: Loader<FireballEffectModel>) {
         super(() => {
@@ -24,12 +22,12 @@ export class FireballEffectModel extends EffectModel<[RoleModel],
                 uuid: props.uuid,
                 state: { 
                     name: "Fire ball's effect",
-                    desc: "Deal 6 damage",
+                    desc: "Deal {{state.damage[0]}} damage",
+                    damage: [6],
                     ...props.state 
                 },
                 child: { ...props.child },
                 refer: { ...props.refer },
-                route: CARD_ROUTE,
             }
         })
     }
@@ -44,13 +42,14 @@ export class FireballEffectModel extends EffectModel<[RoleModel],
     protected async doRun(target: RoleModel) {
         const card = this.route.card;
         if (!card) return;
+        console.log('fireball-effect', this.state.damage[0]);
         DamageModel.run([
             new DamageEvent({
                 type: DamageType.SPELL,
                 source: card,
                 method: this,
                 target,
-                origin: 6
+                origin: this.state.damage[0] ?? 0
             })
         ])
     }

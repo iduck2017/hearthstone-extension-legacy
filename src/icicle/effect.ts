@@ -1,4 +1,4 @@
-import { EffectModel, SelectEvent, RoleModel, DamageModel, DamageEvent, DamageType, RoleRoute, ROLE_ROUTE } from "hearthstone-core";
+import { EffectModel, SelectEvent, RoleModel, DamageModel, DamageEvent, DamageType, RoleRoute, ROLE_ROUTE, SpellEffectModel } from "hearthstone-core";
 import { Loader, StoreUtil } from "set-piece";
 
 export namespace IcicleEffectProps {
@@ -6,16 +6,14 @@ export namespace IcicleEffectProps {
     export type S = {}
     export type C = {}
     export type R = {}
-    export type P = RoleRoute
 }
 
 @StoreUtil.is('icicle-effect')
-export class IcicleEffectModel extends EffectModel<[RoleModel],
+export class IcicleEffectModel extends SpellEffectModel<[RoleModel],
     IcicleEffectProps.E,
     IcicleEffectProps.S,
     IcicleEffectProps.C,
-    IcicleEffectProps.R,
-    IcicleEffectProps.P
+    IcicleEffectProps.R
 > {
     constructor(loader?: Loader<IcicleEffectModel>) {
         super(() => {
@@ -24,7 +22,8 @@ export class IcicleEffectModel extends EffectModel<[RoleModel],
                 uuid: props.uuid,
                 state: { 
                     name: "Icicle's effect",
-                    desc: "Deal 2 damage to a minion. If it's Frozen, draw a card.",
+                    desc: "Deal {{state.damage[0]}} damage to a minion. If it's Frozen, draw a card.",
+                    damage: [2],
                     ...props.state 
                 },
                 child: { ...props.child },
@@ -54,7 +53,7 @@ export class IcicleEffectModel extends EffectModel<[RoleModel],
                 source: card,
                 method: this,
                 target,
-                origin: 2
+                origin: this.state.damage[0] ?? 0
             })
         ])
         
