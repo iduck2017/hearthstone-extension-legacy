@@ -1,7 +1,8 @@
 import { Loader } from "set-piece";
-import { RoleAttackModel, CostModel, RoleHealthModel, MinionCardModel, RoleModel } from "hearthstone-core";
+import { RoleAttackModel, CostModel, RoleHealthModel, MinionCardModel, RoleModel, LibraryUtil } from "hearthstone-core";
 import { ClassType, RaceType, RarityType } from "hearthstone-core";
 
+@LibraryUtil.is('wisp')
 export class WispModel extends MinionCardModel {
     constructor(loader?: Loader<WispModel>) {
         super(() => {
