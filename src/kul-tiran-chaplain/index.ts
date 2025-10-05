@@ -42,8 +42,8 @@ export class KulTiranChaplainModel extends MinionCardModel {
                     cost: new CostModel(() => ({ state: { origin: 2 }})),
                     role: new RoleModel(() => ({
                         child: {
-                            attack: new RoleAttackModel(() => ({ state: { origin: 3 }})),
-                            health: new RoleHealthModel(() => ({ state: { origin: 2 }})),
+                            attack: new RoleAttackModel(() => ({ state: { origin: 2 }})),
+                            health: new RoleHealthModel(() => ({ state: { origin: 3 }})),
                         }
                     })),
                     hooks: new MinionHooksModel(() => ({

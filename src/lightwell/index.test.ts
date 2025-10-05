@@ -87,7 +87,6 @@ describe('lightwell', () => {
     test('turn-end', async () => {
         // Player A's turn ends, Lightwell should restore 3 Health to a damaged character
         game.child.turn.next();
-        
         // Water Elemental should be healed (it's the only damaged friendly character)
         expect(roleD.child.health.state.current).toBe(6); // 3 + 3 = 6 (back to full health)
     });
