@@ -1,0 +1,43 @@
+import { EffectModel, SpellEffectModel } from "hearthstone-core";
+import { Loader, StoreUtil } from "set-piece";
+
+@StoreUtil.is('mass-dispel-effect')
+export class MassDispelEffectModel extends SpellEffectModel<[]> {
+    constructor(loader?: Loader<MassDispelEffectModel>) {
+        super(() => {
+            const props = loader?.() ?? {};
+            return {
+                uuid: props.uuid,
+                state: {
+                    name: "Mass Dispel's effect",
+                    desc: "Silence all enemy minions. Draw a card.",
+                    damage: [],
+                    ...props.state
+                },
+                child: { ...props.child },
+                refer: { ...props.refer },
+            };
+        });
+    }
+
+    toRun(): [] { return [] }
+
+    protected async doRun() {
+        const player = this.route.player;
+        const opponent = player?.refer.opponent;
+        if (!opponent) return;
+
+        // Get all enemy minions
+        const enemies = opponent.query(true);
+        
+        // Silence all enemy minions
+        for (const role of enemies) {
+            const minion = role.route.minion;
+            if (minion) minion.silence();
+        }
+
+        // Draw a card
+        const deck = player.child.deck;
+        deck.draw();
+    }
+}
