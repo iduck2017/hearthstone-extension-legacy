@@ -1,0 +1,22 @@
+import { RoleBuffModel } from "hearthstone-core";
+import { Loader, StoreUtil } from "set-piece";
+
+@StoreUtil.is('divine-spirit-buff')
+export class DivineSpiritBuffModel extends RoleBuffModel {
+    constructor(loader?: Loader<DivineSpiritBuffModel>) {
+        super(() => {
+            const props = loader?.() ?? {};
+            return {
+                uuid: props.uuid,
+                state: {
+                    name: 'Divine Spirit\'s Buff',
+                    desc: 'Double a minion\'s Health.',
+                    offset: [0, 0], // 0 Attack, +Health equal to current health
+                    ...props.state
+                },
+                child: { ...props.child },
+                refer: { ...props.refer },
+            };
+        });
+    }
+}
