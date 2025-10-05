@@ -35,6 +35,6 @@ export class PolymorphEffectModel extends SpellEffectModel<[RoleModel]> {
         
         // Transform the minion into a Sheep
         const sheep = new SheepModel();
-        minion.trans(sheep);
+        minion.transform(sheep);
     }
 }
