@@ -13,7 +13,6 @@ import { WispModel } from "../wisp";
 import { boot } from "../boot";
 import { DebugUtil } from "set-piece";
 
-DebugUtil.mute(true)
 describe('ethereal-arcanist', () => {
     const game = new GameModel(() => ({
         state: { debug: { isDrawDisabled: true }},

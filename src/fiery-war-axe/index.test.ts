@@ -4,7 +4,6 @@ import { WispModel } from "../wisp";
 import { FieryWarAxeModel } from ".";
 import { DebugUtil } from "set-piece";
 
-DebugUtil.mute(true)
 describe('firey-war-axe', () => {
     const game = boot(new GameModel(() => ({
         state: { debug: { isDrawDisabled: true }},
@@ -51,9 +50,7 @@ describe('firey-war-axe', () => {
         expect(roleA.child.attack.state.current).toBe(0);
         expect(handA.child.weapons.length).toBe(1);
         expect(boardA.child.weapon).toBeUndefined();
-        DebugUtil.mute(false);
         await weapon.play();
-        DebugUtil.mute(true);
         expect(handA.child.weapons.length).toBe(0);
         expect(boardA.child.weapon).toBeDefined();
         expect(roleA.child.attack.state.current).toBe(3);
