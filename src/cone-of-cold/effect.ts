@@ -41,7 +41,6 @@ export class ConeOfColdEffectModel extends SpellEffectModel<[RoleModel],
     }
 
     protected async doRun(target: RoleModel) {
-        console.log("Cone of Cold effect run");
         const card = this.route.card;
         if (!card) return;
 

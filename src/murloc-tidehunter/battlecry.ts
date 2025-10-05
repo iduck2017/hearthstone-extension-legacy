@@ -25,7 +25,6 @@ export class MurlocTidehunterBattlecryModel extends RoleBattlecryModel<[]> {
     public async doRun(from: number, to: number) {
         const player = this.route.player;
         if (!player) return;
-        console.log('batt', to)
         const board = player.child.board;
         const target = new MurlocScoutModel();
         // summon

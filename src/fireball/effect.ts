@@ -42,7 +42,6 @@ export class FireballEffectModel extends SpellEffectModel<[RoleModel],
     protected async doRun(target: RoleModel) {
         const card = this.route.card;
         if (!card) return;
-        console.log('fireball-effect', this.state.damage[0]);
         DamageModel.run([
             new DamageEvent({
                 type: DamageType.SPELL,

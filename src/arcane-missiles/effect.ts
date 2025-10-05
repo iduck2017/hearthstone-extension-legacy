@@ -42,7 +42,6 @@ export class ArcaneMissilesEffectModel extends SpellEffectModel<[],
         if (!card) return;
 
         const loop = this.state.damage[0] ?? 0;
-        console.log('loop', loop);
         for (let index = 0; index < loop; index ++) {
             const roles = opponent.query();
             if (!roles.length) break;
