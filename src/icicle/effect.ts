@@ -58,8 +58,8 @@ export class IcicleEffectModel extends SpellEffectModel<[RoleModel],
         ])
         
         // Check if target is frozen
-        const entries = target.child.entries;
-        const frozen = entries.child.frozen;
+        const feats = target.child.feats;
+        const frozen = feats.child.frozen;
         
         if (frozen.state.isActive) {
             // If frozen, draw a card

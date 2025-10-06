@@ -45,8 +45,8 @@ export class FrostNovaEffectModel extends SpellEffectModel<[],
         
         // Freeze all enemy minions
         for (const role of roles) {
-            const entries = role.child.entries;
-            const frozen = entries.child.frozen;
+            const feats = role.child.feats;
+            const frozen = feats.child.frozen;
             frozen.active();
         }
     }

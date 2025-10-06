@@ -89,7 +89,7 @@ describe('ironfur-grizzly', () => {
         expect(playerA.child.mana.state.current).toBe(7); // 10 - 3 = 7
 
         // Check that Ironfur Grizzly has Taunt
-        expect(roleC.child.entries.child.taunt).toBeDefined(); // Has Taunt
+        expect(roleC.child.feats.child.taunt).toBeDefined(); // Has Taunt
     });
 
     test('taunt-test', async () => {

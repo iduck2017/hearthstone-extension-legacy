@@ -1,4 +1,4 @@
-import { MinionCardModel, RarityType, ClassType, RoleAttackModel, RoleHealthModel, RoleModel, RoleEntriesModel, TauntModel, CostModel, LibraryUtil } from "hearthstone-core";
+import { MinionCardModel, RarityType, ClassType, RoleAttackModel, RoleHealthModel, RoleModel, RoleFeatsModel, TauntModel, CostModel, LibraryUtil } from "hearthstone-core";
 import { Loader } from "set-piece";
 
 @LibraryUtil.is('gnoll')
@@ -25,7 +25,7 @@ export class GnollModel extends MinionCardModel {
                         child: {
                             attack: new RoleAttackModel(() => ({ state: { origin: 2 }})),
                             health: new RoleHealthModel(() => ({ state: { origin: 2 }})),
-                            entries: new RoleEntriesModel(() => ({
+                            feats: new RoleFeatsModel(() => ({
                                 child: {
                                     taunt: new TauntModel()
                                 }

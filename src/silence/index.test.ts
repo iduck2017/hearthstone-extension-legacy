@@ -61,7 +61,7 @@ describe('silence', () => {
         // Check initial stats
         expect(roleC.child.attack.state.current).toBe(1); // Mana Wyrm: 1/3
         expect(roleC.child.health.state.current).toBe(3);
-        expect(roleC.child.entries.child.frozen.state.isActive).toBe(false);
+        expect(roleC.child.feats.child.frozen.state.isActive).toBe(false);
         expect(playerA.child.mana.state.current).toBe(10);
         expect(handA.child.spells.length).toBe(2);
 
@@ -74,7 +74,7 @@ describe('silence', () => {
         // Mana Wyrm should gain +1 attack and be frozen
         expect(roleC.child.attack.state.current).toBe(2); // 1 + 1 from spell cast
         expect(roleC.child.health.state.current).toBe(3);
-        expect(roleC.child.entries.child.frozen.state.isActive).toBe(true);
+        expect(roleC.child.feats.child.frozen.state.isActive).toBe(true);
         expect(roleC.child.action.status).toBe(false);
         expect(playerA.child.mana.state.current).toBe(9); // 10 - 1 cost
         expect(handA.child.spells.length).toBe(1); // Ice Lance consumed
@@ -84,7 +84,7 @@ describe('silence', () => {
         // Check stats after ice lance
         expect(roleC.child.attack.state.current).toBe(2);
         expect(roleC.child.health.state.current).toBe(3);
-        expect(roleC.child.entries.child.frozen.state.isActive).toBe(true);
+        expect(roleC.child.feats.child.frozen.state.isActive).toBe(true);
 
         // Player A uses Silence on Mana Wyrm
         const promise = cardE.play();
@@ -95,7 +95,7 @@ describe('silence', () => {
         // Mana Wyrm should return to original stats and be unfrozen
         expect(roleC.child.attack.state.current).toBe(1); // Back to original
         expect(roleC.child.health.state.current).toBe(3);
-        expect(roleC.child.entries.child.frozen.state.isActive).toBe(false);
+        expect(roleC.child.feats.child.frozen.state.isActive).toBe(false);
         expect(playerA.child.mana.state.current).toBe(9); // 9 - 0 cost
         expect(handA.child.spells.length).toBe(0); // Silence consumed
     });

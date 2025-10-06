@@ -44,8 +44,8 @@ export class IceLanceEffectModel extends SpellEffectModel<[RoleModel],
         if (!card) return;
         
         // Check if target is already frozen
-        const entries = target.child.entries;
-        const frozen = entries.child.frozen;
+        const feats = target.child.feats;
+        const frozen = feats.child.frozen;
         
         if (frozen.state.isActive) {
             // If already frozen, deal 4 damage instead

@@ -63,7 +63,7 @@ describe('icicle', () => {
         // Check initial stats
         expect(roleE.child.health.state.current).toBe(6);
         expect(roleE.child.health.state.damage).toBe(0);
-        expect(roleE.child.entries.child.frozen.state.isActive).toBe(false);
+        expect(roleE.child.feats.child.frozen.state.isActive).toBe(false);
         expect(roleE.child.action.status).toBe(true); // Can attack initially
         expect(playerA.child.mana.state.current).toBe(10);
         expect(handA.child.spells.length).toBe(2);
@@ -76,7 +76,7 @@ describe('icicle', () => {
         await promise;
 
         // Water Elemental should be frozen and cannot attack
-        expect(roleE.child.entries.child.frozen.state.isActive).toBe(true);
+        expect(roleE.child.feats.child.frozen.state.isActive).toBe(true);
         expect(roleE.child.action.status).toBe(false); // Cannot attack when frozen
         expect(playerA.child.mana.state.current).toBe(9); // 10 - 1 cost
         expect(handA.child.spells.length).toBe(1); // Ice Lance consumed

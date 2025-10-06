@@ -48,6 +48,6 @@ export class ManaWyrmFeatureModel extends FeatureModel<
         if (that.route.player !== player) return;
         
         const role = minion.child.role;
-        role.child.entries.add(new ManaWyrmBuffModel())
+        role.child.feats.add(new ManaWyrmBuffModel())
     }
 }

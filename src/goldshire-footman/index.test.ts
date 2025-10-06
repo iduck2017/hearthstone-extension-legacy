@@ -49,7 +49,7 @@ describe('goldshire-footman', () => {
     test('wisp-attack-goldshire-footman', async () => {
         // Initial state verification
         expect(roleC.child.action.state.current).toBe(1); // Wisp has action point
-        expect(roleD.child.entries.child.taunt.state.isActive).toBe(true);
+        expect(roleD.child.feats.child.taunt.state.isActive).toBe(true);
         const promise = roleC.child.action.run();
         await TimeUtil.sleep();
         expect(SelectUtil.current?.options).toContain(roleD);

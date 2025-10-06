@@ -40,8 +40,8 @@ export class WaterElementalFeatureModel extends FeatureModel<
         const minion = this.route.minion;
         if (!minion) return;
         const target = event.detail.target;
-        const entries = target.child.entries;
-        const frozen = entries.child.frozen;
+        const feats = target.child.feats;
+        const frozen = feats.child.frozen;
         frozen.active();
     }
 }

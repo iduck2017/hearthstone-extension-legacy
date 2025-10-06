@@ -47,6 +47,6 @@ export class ArcaneDevourerFeatureModel extends FeatureModel<
         if (that.route.player !== player) return;
         
         const role = minion.child.role;
-        role.child.entries.add(new ArcaneDevourerBuffModel())
+        role.child.feats.add(new ArcaneDevourerBuffModel())
     }
 }

@@ -42,6 +42,6 @@ export class TempleEnforcerBattlecryModel extends RoleBattlecryModel<[RoleModel]
         
         // Apply +3 Health buff
         const buff = new TempleEnforcerBuffModel();
-        target.child.entries.add(buff);
+        target.child.feats.add(buff);
     }
 }

@@ -71,8 +71,8 @@ describe('cone-of-cold', () => {
         // Check initial stats
         expect(roleD.child.health.state.current).toBe(1); // Wisp: 1 health
         expect(roleE.child.health.state.current).toBe(2); // Goldshire Footman: 2 health
-        expect(roleD.child.entries.child.frozen.state.isActive).toBe(false);
-        expect(roleE.child.entries.child.frozen.state.isActive).toBe(false);
+        expect(roleD.child.feats.child.frozen.state.isActive).toBe(false);
+        expect(roleE.child.feats.child.frozen.state.isActive).toBe(false);
         expect(playerA.child.mana.state.current).toBe(10);
         expect(handA.child.spells.length).toBe(1);
         expect(boardB.child.minions.length).toBe(3);
@@ -89,13 +89,13 @@ describe('cone-of-cold', () => {
         // Wisp should die (1 - 1 = 0), Footman should take 1 damage (2 - 1 = 1)
         expect(roleD.child.health.state.current).toBe(0); // Wisp dies
         expect(cardD.child.dispose.status).toBe(true); // Wisp dies
-        expect(roleD.child.entries.child.frozen.state.isActive).toBe(true);
+        expect(roleD.child.feats.child.frozen.state.isActive).toBe(true);
 
         expect(roleE.child.health.state.current).toBe(1); // Footman: 2 - 1 = 1
-        expect(roleE.child.entries.child.frozen.state.isActive).toBe(true);
+        expect(roleE.child.feats.child.frozen.state.isActive).toBe(true);
 
         expect(roleF.child.health.state.current).toBe(3); // Mana Wyrm: 3
-        expect(roleF.child.entries.child.frozen.state.isActive).toBe(false);
+        expect(roleF.child.feats.child.frozen.state.isActive).toBe(false);
         
         expect(playerA.child.mana.state.current).toBe(7); // 10 - 3 cost
         expect(handA.child.spells.length).toBe(0);
@@ -113,9 +113,9 @@ describe('cone-of-cold', () => {
 
         // Check that frozen Footman cannot attack
         expect(roleE.child.action.status).toBe(false); // Goldshire Footman cannot attack
-        expect(roleE.child.entries.child.frozen.state.isActive).toBe(true);
+        expect(roleE.child.feats.child.frozen.state.isActive).toBe(true);
 
         expect(roleF.child.action.status).toBe(true); // Mana Wyrm can attack
-        expect(roleF.child.entries.child.frozen.state.isActive).toBe(false);
+        expect(roleF.child.feats.child.frozen.state.isActive).toBe(false);
     })
 })

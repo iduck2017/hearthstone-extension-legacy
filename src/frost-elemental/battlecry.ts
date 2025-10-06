@@ -30,8 +30,8 @@ export class FrostElementalBattlecryModel extends RoleBattlecryModel<[RoleModel]
 
     public async doRun(from: number, to: number, target: RoleModel) {
         // Freeze the target
-        const entries = target.child.entries;
-        const frozen = entries.child.frozen;
+        const feats = target.child.feats;
+        const frozen = feats.child.frozen;
         frozen.active();
     }
 }

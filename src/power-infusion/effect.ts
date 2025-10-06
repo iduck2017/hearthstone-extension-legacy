@@ -38,6 +38,6 @@ export class PowerInfusionEffectModel extends SpellEffectModel<[RoleModel]> {
         
         // Give the minion +2/+6 buff
         const buff = new PowerInfusionBuffModel();
-        target.child.entries.add(buff);
+        target.child.feats.add(buff);
     }
 }

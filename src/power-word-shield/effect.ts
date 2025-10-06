@@ -31,7 +31,7 @@ export class PowerWordShieldEffectModel extends SpellEffectModel<[RoleModel]> {
     protected async doRun(target: RoleModel) {
         // Give the minion +2 Health buff
         const buff = new PowerWordShieldBuffModel();
-        target.child.entries.add(buff);
+        target.child.feats.add(buff);
 
         // Draw a card
         const player = this.route.player;

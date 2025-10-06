@@ -67,7 +67,7 @@ describe('emerald-skytalon', () => {
         expect(roleC.child.health.state.current).toBe(1);
         expect(roleC.child.action.state.current).toBe(1);
         expect(roleC.child.sleep.state.isActive).toBe(true);
-        expect(roleC.child.entries.child.rush.state.isActive).toBe(true)
+        expect(roleC.child.feats.child.rush.state.isActive).toBe(true)
         promise = roleC.child.action.run()
         await TimeUtil.sleep();
 
@@ -89,7 +89,7 @@ describe('emerald-skytalon', () => {
         expect(boardA.child.minions.length).toBe(2);
         expect(roleD.child.action.state.current).toBe(1);
         expect(roleD.child.sleep.state.isActive).toBe(true);
-        expect(roleD.child.entries.child.rush.state.isActive).toBe(false);
+        expect(roleD.child.feats.child.rush.state.isActive).toBe(false);
 
         // Wisp can not attack immediately
         promise = roleD.child.action.run();
@@ -110,10 +110,10 @@ describe('emerald-skytalon', () => {
 
         expect(roleC.child.sleep.state.isActive).toBe(false);
         expect(roleC.child.action.state.current).toBe(1);
-        expect(roleC.child.entries.child.rush.state.isActive).toBe(true);
+        expect(roleC.child.feats.child.rush.state.isActive).toBe(true);
         expect(roleD.child.sleep.state.isActive).toBe(false);
         expect(roleD.child.action.state.current).toBe(1);
-        expect(roleD.child.entries.child.rush.state.isActive).toBe(false);
+        expect(roleD.child.feats.child.rush.state.isActive).toBe(false);
 
         let promise = roleC.child.action.run();
         await TimeUtil.sleep();

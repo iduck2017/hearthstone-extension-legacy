@@ -1,4 +1,4 @@
-import { MinionCardModel, RarityType, ClassType, RoleAttackModel, RoleHealthModel, RoleModel, CostModel, LibraryUtil, TauntModel, RoleEntriesModel } from "hearthstone-core";
+import { MinionCardModel, RarityType, ClassType, RoleAttackModel, RoleHealthModel, RoleModel, CostModel, LibraryUtil, TauntModel, RoleFeatsModel } from "hearthstone-core";
 import { Loader } from "set-piece";
 
 @LibraryUtil.is('baine-bloodhoof')

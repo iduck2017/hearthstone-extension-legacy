@@ -39,6 +39,6 @@ export class DivineSpiritEffectModel extends SpellEffectModel<[RoleModel]> {
         // Get current health and create a buff with equal value
         const currentHealth = target.child.health.state.current;
         const buff = new DivineSpiritBuffModel(() => ({ state: { offset: [0, currentHealth] }}));
-        target.child.entries.add(buff);
+        target.child.feats.add(buff);
     }
 }

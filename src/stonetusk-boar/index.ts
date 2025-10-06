@@ -1,4 +1,4 @@
-import { ChargeModel, RoleHealthModel, RoleAttackModel, MinionCardModel, RaceType, RoleModel, RoleEntriesModel, ClassType, RarityType } from "hearthstone-core";
+import { ChargeModel, RoleHealthModel, RoleAttackModel, MinionCardModel, RaceType, RoleModel, RoleFeatsModel, ClassType, RarityType } from "hearthstone-core";
 import { CostModel } from "hearthstone-core";
 import { LibraryUtil } from "hearthstone-core";
 import { Loader } from "set-piece";
@@ -26,7 +26,7 @@ export class StonetuskBoarModel extends MinionCardModel {
                         child: {
                             attack: new RoleAttackModel(() => ({ state: { origin: 1 }})),
                             health: new RoleHealthModel(() => ({ state: { origin: 1 }})),
-                            entries: new RoleEntriesModel(() => ({
+                            feats: new RoleFeatsModel(() => ({
                                 child: {
                                     charge: new ChargeModel(() => ({ state: { isActive: true } }))
                                 }

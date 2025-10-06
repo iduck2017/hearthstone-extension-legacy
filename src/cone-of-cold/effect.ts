@@ -69,8 +69,8 @@ export class ConeOfColdEffectModel extends SpellEffectModel<[RoleModel],
         })));
         // Freeze all affected minions
         minions.forEach((item) => { 
-            const entries = item.child.role.child.entries;
-            const frozen = entries.child.frozen;
+            const feats = item.child.role.child.feats;
+            const frozen = feats.child.frozen;
             frozen.active();
         });
     }

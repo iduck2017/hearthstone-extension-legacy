@@ -1,4 +1,4 @@
-import { MinionCardModel, RarityType, ClassType, RaceType, RoleAttackModel, RoleHealthModel, RoleModel, RoleEntriesModel, TauntModel, MinionHooksModel, CostModel, LibraryUtil } from "hearthstone-core";
+import { MinionCardModel, RarityType, ClassType, RaceType, RoleAttackModel, RoleHealthModel, RoleModel, RoleFeatsModel, TauntModel, MinionHooksModel, CostModel, LibraryUtil } from "hearthstone-core";
 import { Loader } from "set-piece";
 import { CairneBloodhoofDeathrattleModel } from "./deathrattle";
 
@@ -26,7 +26,7 @@ export class CairneBloodhoofModel extends MinionCardModel {
                         child: {
                             attack: new RoleAttackModel(() => ({ state: { origin: 5 }})),
                             health: new RoleHealthModel(() => ({ state: { origin: 5 }})),
-                            entries: new RoleEntriesModel(() => ({
+                            feats: new RoleFeatsModel(() => ({
                                 child: {
                                     taunt: new TauntModel()
                                 }

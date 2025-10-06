@@ -42,6 +42,6 @@ export class KulTiranChaplainBattlecryModel extends RoleBattlecryModel<[RoleMode
         
         // Apply +2 Health buff
         const buff = new KulTiranChaplainBuffModel();
-        target.child.entries.add(buff);
+        target.child.feats.add(buff);
     }
 }

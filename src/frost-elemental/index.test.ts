@@ -86,7 +86,7 @@ describe('frost-elemental', () => {
         await promise;
 
         // Wisp should be frozen
-        expect(roleD.child.entries.child.frozen.state.isActive).toBe(true);
+        expect(roleD.child.feats.child.frozen.state.isActive).toBe(true);
 
         // Frost Elemental should be on board
         expect(boardA.child.minions.length).toBe(1); // Frost Elemental on board

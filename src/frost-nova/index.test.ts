@@ -63,8 +63,8 @@ describe('frost-nova', () => {
         // Check initial stats
         expect(roleD.child.health.state.current).toBe(1); // Wisp: 1 health
         expect(roleE.child.health.state.current).toBe(2); // Goldshire Footman: 2 health
-        expect(roleD.child.entries.child.frozen.state.isActive).toBe(false);
-        expect(roleE.child.entries.child.frozen.state.isActive).toBe(false);
+        expect(roleD.child.feats.child.frozen.state.isActive).toBe(false);
+        expect(roleE.child.feats.child.frozen.state.isActive).toBe(false);
         expect(playerA.child.mana.state.current).toBe(10);
         expect(handA.child.spells.length).toBe(1);
         expect(boardB.child.minions.length).toBe(2);
@@ -75,8 +75,8 @@ describe('frost-nova', () => {
         // All enemy minions should be frozen, but no damage dealt
         expect(roleD.child.health.state.current).toBe(1); // Wisp: no damage
         expect(roleE.child.health.state.current).toBe(2); // Goldshire Footman: no damage
-        expect(roleD.child.entries.child.frozen.state.isActive).toBe(true);
-        expect(roleE.child.entries.child.frozen.state.isActive).toBe(true);
+        expect(roleD.child.feats.child.frozen.state.isActive).toBe(true);
+        expect(roleE.child.feats.child.frozen.state.isActive).toBe(true);
         expect(playerA.child.mana.state.current).toBe(7); // 10 - 3 cost
         expect(handA.child.spells.length).toBe(0);
 
@@ -94,7 +94,7 @@ describe('frost-nova', () => {
         // Check that frozen minions cannot attack
         expect(roleD.child.action.status).toBe(false); // Wisp cannot attack
         expect(roleE.child.action.status).toBe(false); // Goldshire Footman cannot attack
-        expect(roleD.child.entries.child.frozen.state.isActive).toBe(true);
-        expect(roleE.child.entries.child.frozen.state.isActive).toBe(true);
+        expect(roleD.child.feats.child.frozen.state.isActive).toBe(true);
+        expect(roleE.child.feats.child.frozen.state.isActive).toBe(true);
     })
 })

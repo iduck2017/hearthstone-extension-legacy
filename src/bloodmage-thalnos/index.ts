@@ -13,7 +13,7 @@
  * Collectible
  */
 
-import { RoleAttackModel, ClassType, RoleHealthModel, MinionCardModel, RaceType, RarityType, RoleModel, SpellBuffModel, RoleEntriesModel, MinionHooksModel, LibraryUtil, CostModel } from "hearthstone-core";
+import { RoleAttackModel, ClassType, RoleHealthModel, MinionCardModel, RaceType, RarityType, RoleModel, SpellBuffModel, RoleFeatsModel, MinionHooksModel, LibraryUtil, CostModel } from "hearthstone-core";
 import { BloodmageThalnosDeathrattleModel } from "./deathrattle";
 import { Loader } from "set-piece";
 

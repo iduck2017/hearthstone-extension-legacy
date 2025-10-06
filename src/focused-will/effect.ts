@@ -37,6 +37,6 @@ export class FocusedWillEffectModel extends SpellEffectModel<[RoleModel]> {
 
         // Then, give it +3 Health buff
         const buff = new FocusedWillBuffModel();
-        target.child.entries.add(buff);
+        target.child.feats.add(buff);
     }
 }

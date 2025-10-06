@@ -62,7 +62,7 @@ describe('ice-lance', () => {
         // Target is not frozen initially
         expect(playerA.child.mana.state.current).toBe(10);
         expect(handA.child.spells.length).toBe(1);
-        expect(roleC.child.entries.child.frozen.state.isActive).toBeFalsy();
+        expect(roleC.child.feats.child.frozen.state.isActive).toBeFalsy();
 
         // Play Ice Lance targeting enemy minion
         let promise = cardD.play();
@@ -74,10 +74,10 @@ describe('ice-lance', () => {
         
         // Target should be frozen
         expect(playerA.child.mana.state.current).toBe(9);
-        expect(roleC.child.entries.child.frozen.state.isActive).toBe(true);
+        expect(roleC.child.feats.child.frozen.state.isActive).toBe(true);
         turn.next();
         expect(turn.refer.current).toBe(playerB);
-        expect(roleC.child.entries.child.frozen.state.isActive).toBe(true);
+        expect(roleC.child.feats.child.frozen.state.isActive).toBe(true);
         
         expect(handA.child.spells.length).toBe(0);
         expect(roleC.child.action.status).toBeFalsy();
@@ -86,7 +86,7 @@ describe('ice-lance', () => {
     test('ice-lance-cast', async () => {
         expect(playerB.child.mana.state.current).toBe(10);
         expect(handB.child.spells.length).toBe(1);
-        expect(roleC.child.entries.child.frozen.state.isActive).toBe(true);
+        expect(roleC.child.feats.child.frozen.state.isActive).toBe(true);
 
         let promise = cardE.play();
         expect(SelectUtil.current?.options).toContain(roleA);

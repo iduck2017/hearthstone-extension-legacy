@@ -12,7 +12,7 @@
  * Collectible
  */
 
-import { TauntModel, RoleHealthModel, RoleAttackModel, MinionCardModel, RoleModel, RoleEntriesModel, ClassType, RarityType, DivineShieldModel } from "hearthstone-core";
+import { TauntModel, RoleHealthModel, RoleAttackModel, MinionCardModel, RoleModel, RoleFeatsModel, ClassType, RarityType, DivineShieldModel } from "hearthstone-core";
 import { CostModel } from "hearthstone-core";
 import { LibraryUtil } from "hearthstone-core";
 import { Loader } from "set-piece";
@@ -40,7 +40,7 @@ export class SunwalkerModel extends MinionCardModel {
                         child: {
                             attack: new RoleAttackModel(() => ({ state: { origin: 4 }})),
                             health: new RoleHealthModel(() => ({ state: { origin: 5 }})),
-                            entries: new RoleEntriesModel(() => ({
+                            feats: new RoleFeatsModel(() => ({
                                 child: {
                                     taunt: new TauntModel(),
                                     divineShield: new DivineShieldModel()

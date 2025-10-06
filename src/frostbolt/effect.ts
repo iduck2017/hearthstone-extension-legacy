@@ -56,8 +56,8 @@ export class FrostboltEffectModel extends SpellEffectModel<[RoleModel],
         ])
         
         // Freeze the target
-        const entries = target.child.entries;
-        const frozen = entries.child.frozen;
+        const feats = target.child.feats;
+        const frozen = feats.child.frozen;
         frozen.active();
     }
 } 

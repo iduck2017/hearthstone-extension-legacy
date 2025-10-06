@@ -59,7 +59,7 @@ describe('water-elemental', () => {
         // Check initial stats
         expect(roleC.child.attack.state.current).toBe(3);
         expect(roleC.child.health.state.current).toBe(6);
-        expect(roleD.child.entries.child.frozen.state.isActive).toBe(false);
+        expect(roleD.child.feats.child.frozen.state.isActive).toBe(false);
 
         const promise = roleC.child.action.run();
         await TimeUtil.sleep();
@@ -70,25 +70,25 @@ describe('water-elemental', () => {
         // Wisp should be damaged and frozen
         expect(roleD.child.health.state.current).toBe(3);
         expect(roleD.child.health.state.damage).toBe(3);
-        expect(roleD.child.entries.child.frozen.state.isActive).toBe(true);
+        expect(roleD.child.feats.child.frozen.state.isActive).toBe(true);
 
         expect(roleC.child.health.state.current).toBe(3);
         expect(roleC.child.health.state.damage).toBe(3);
-        expect(roleC.child.entries.child.frozen.state.isActive).toBe(true);
+        expect(roleC.child.feats.child.frozen.state.isActive).toBe(true);
     })
 
     test('water-elemental-attack', async () => {
         const turn = game.child.turn;
         turn.next();
 
-        expect(roleC.child.entries.child.frozen.state.isActive).toBe(true);
-        expect(roleD.child.entries.child.frozen.state.isActive).toBe(true);
+        expect(roleC.child.feats.child.frozen.state.isActive).toBe(true);
+        expect(roleD.child.feats.child.frozen.state.isActive).toBe(true);
         expect(roleC.child.action.status).toBe(false);
         expect(roleD.child.action.status).toBe(false);
 
         turn.next();
 
-        expect(roleC.child.entries.child.frozen.state.isActive).toBe(true);
-        expect(roleD.child.entries.child.frozen.state.isActive).toBe(false);
+        expect(roleC.child.feats.child.frozen.state.isActive).toBe(true);
+        expect(roleD.child.feats.child.frozen.state.isActive).toBe(false);
     })
 })

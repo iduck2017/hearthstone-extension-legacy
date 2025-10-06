@@ -63,8 +63,8 @@ describe('blizzard', () => {
         // Check initial stats
         expect(roleD.child.health.state.current).toBe(1); // Wisp: 1 health
         expect(roleE.child.health.state.current).toBe(6); // Water Elemental: 6 health
-        expect(roleD.child.entries.child.frozen.state.isActive).toBe(false);
-        expect(roleE.child.entries.child.frozen.state.isActive).toBe(false);
+        expect(roleD.child.feats.child.frozen.state.isActive).toBe(false);
+        expect(roleE.child.feats.child.frozen.state.isActive).toBe(false);
         expect(playerA.child.mana.state.current).toBe(10);
         expect(handA.child.spells.length).toBe(1);
         expect(boardB.child.minions.length).toBe(2);
@@ -74,11 +74,11 @@ describe('blizzard', () => {
 
         // All enemy minions should take 2 damage and be frozen
         expect(roleD.child.health.state.current).toBe(-1); // Wisp: 1 - 2 = -1 (dies)
-        expect(roleD.child.entries.child.frozen.state.isActive).toBe(true);
+        expect(roleD.child.feats.child.frozen.state.isActive).toBe(true);
         expect(cardD.child.dispose.status).toBe(true);
 
         expect(roleE.child.health.state.current).toBe(4); // Water Elemental: 6 - 2 = 4 (survives)
-        expect(roleE.child.entries.child.frozen.state.isActive).toBe(true);
+        expect(roleE.child.feats.child.frozen.state.isActive).toBe(true);
         
         expect(roleB.child.health.state.current).toBe(30);
 

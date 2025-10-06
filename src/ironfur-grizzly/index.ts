@@ -11,7 +11,7 @@
  * Collectible
  */
 
-import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, MinionHooksModel, RarityType, RoleAttackModel, RoleModel, RaceType, RoleEntriesModel, TauntModel } from "hearthstone-core";
+import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, MinionHooksModel, RarityType, RoleAttackModel, RoleModel, RaceType, RoleFeatsModel, TauntModel } from "hearthstone-core";
 import { Loader } from "set-piece";
 
 @LibraryUtil.is('ironfur-grizzly')
@@ -37,7 +37,7 @@ export class IronfurGrizzlyModel extends MinionCardModel {
                         child: {
                             attack: new RoleAttackModel(() => ({ state: { origin: 3 }})),
                             health: new RoleHealthModel(() => ({ state: { origin: 3 }})),
-                            entries: new RoleEntriesModel(() => ({
+                            feats: new RoleFeatsModel(() => ({
                                 child: {
                                     taunt: new TauntModel()
                                 }

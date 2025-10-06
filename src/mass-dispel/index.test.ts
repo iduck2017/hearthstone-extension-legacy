@@ -97,7 +97,7 @@ describe('mass-dispel', () => {
 
         // Player A should take 3 damage but NOT be frozen (silenced Water Elemental lost freeze ability)
         expect(roleA.child.health.state.current).toBe(27); 
-        expect(roleA.child.entries.child.frozen.state.isActive).toBe(false); // Should NOT be frozen
+        expect(roleA.child.feats.child.frozen.state.isActive).toBe(false); // Should NOT be frozen
     });
     
 });
