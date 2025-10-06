@@ -26,21 +26,22 @@ export class HungryCrabBattlecryModel extends RoleBattlecryModel<[RoleModel]> {
         const options = game.query(true).filter(item => (
             item.route.minion?.state.races.includes(RaceType.MURLOC)
         ));
-        console.log(options);
         return [new SelectEvent(options, { hint: 'Select a Murloc' })];
     }
 
     @DebugUtil.log(LogLevel.WARN)
     public async doRun(from: number, to: number, target: RoleModel) {
-        const role = this.route.role;
-        if (!role) return;
+        const cardA = this.route.minion;
+        if (!cardA) return;
         
         // Destroy the target murloc
-        const card = target.route.minion;
-        if (!card) return;
-        card.child.dispose.active(true, this.route.card, this);
+        const cardB = target.route.minion;
+        if (!cardB) return;
+        console.log('kill', cardB.name);
+        cardB.child.dispose.active(true, this.route.card, this);
         
         // Add buff to the crab
+        const role = cardA.child.role;
         role.add(new HungryCrabBuffModel());
     }
 }
