@@ -1,8 +1,8 @@
-import { RoleBattlecryModel, SelectEvent, RoleModel, DamageModel, DamageEvent, RestoreModel, RestoreEvent, DamageType } from "hearthstone-core";
+import { MinionBattlecryModel, SelectEvent, RoleModel, DamageModel, DamageEvent, RestoreModel, RestoreEvent, DamageType } from "hearthstone-core";
 import { Loader, StoreUtil } from "set-piece";
 
 @StoreUtil.is('alexstrasza-battlecry')
-export class AlexstraszaBattlecryModel extends RoleBattlecryModel<[RoleModel]> {
+export class AlexstraszaBattlecryModel extends MinionBattlecryModel<[RoleModel]> {
     constructor(loader?: Loader<AlexstraszaBattlecryModel>) {
         super(() => {
             const props = loader?.() ?? {};

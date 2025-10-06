@@ -1,8 +1,8 @@
-import { RoleBattlecryModel } from "hearthstone-core";
+import { MinionBattlecryModel } from "hearthstone-core";
 import { StoreUtil, Loader } from "set-piece";
 
 @StoreUtil.is('bloodsail-corsair-battlecry')
-export class BloodsailCorsairBattlecryModel extends RoleBattlecryModel<[]> {
+export class BloodsailCorsairBattlecryModel extends MinionBattlecryModel<[]> {
     constructor(loader?: Loader<BloodsailCorsairBattlecryModel>) {
         super(() => {
             const props = loader?.() ?? {};

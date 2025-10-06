@@ -1,8 +1,8 @@
-import { RoleBattlecryModel } from "hearthstone-core";
+import { MinionBattlecryModel } from "hearthstone-core";
 import { StoreUtil, Loader } from "set-piece";
 
 @StoreUtil.is('azure-drake-battlecry')
-export class AzureDrakeBattlecryModel extends RoleBattlecryModel<[]> {
+export class AzureDrakeBattlecryModel extends MinionBattlecryModel<[]> {
     constructor(loader?: Loader<AzureDrakeBattlecryModel>) {
         super(() => {
             const props = loader?.() ?? {};

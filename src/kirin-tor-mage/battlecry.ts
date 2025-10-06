@@ -1,9 +1,9 @@
-import { RoleBattlecryModel } from "hearthstone-core";
+import { MinionBattlecryModel } from "hearthstone-core";
 import { Loader, StoreUtil } from "set-piece";
 import { KirinTorMageContextModel } from "./context";
 
 @StoreUtil.is('kirin-tor-mage-battlecry')
-export class KirinTorMageBattlecryModel extends RoleBattlecryModel<[]> {
+export class KirinTorMageBattlecryModel extends MinionBattlecryModel<[]> {
     constructor(loader?: Loader<KirinTorMageBattlecryModel>) {
         super(() => {
             const props = loader?.() ?? {};

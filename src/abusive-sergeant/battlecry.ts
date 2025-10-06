@@ -1,9 +1,9 @@
-import { MinionCardModel, RoleBattlecryModel, RoleModel, SelectEvent } from "hearthstone-core";
+import { MinionCardModel, MinionBattlecryModel, RoleModel, SelectEvent } from "hearthstone-core";
 import { AbusiveSergeantBuffModel } from "./buff";
 import { DebugUtil, LogLevel, StoreUtil, Loader } from "set-piece";
 
 @StoreUtil.is('abusive-sergeant-battlecry')
-export class AbusiveSergeantBattlecryModel extends RoleBattlecryModel<[RoleModel]> {
+export class AbusiveSergeantBattlecryModel extends MinionBattlecryModel<[RoleModel]> {
     constructor(loader?: Loader<AbusiveSergeantBattlecryModel>) {
         super(() => {
             const props = loader?.() ?? {};

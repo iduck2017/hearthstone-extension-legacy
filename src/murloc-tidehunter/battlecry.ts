@@ -1,9 +1,9 @@
-import { RoleBattlecryModel } from "hearthstone-core";
+import { MinionBattlecryModel } from "hearthstone-core";
 import { Loader, StoreUtil } from "set-piece";
 import { MurlocScoutModel } from "../murloc-scout";
 
 @StoreUtil.is('murloc-tidehunter-battlecry')
-export class MurlocTidehunterBattlecryModel extends RoleBattlecryModel<[]> {
+export class MurlocTidehunterBattlecryModel extends MinionBattlecryModel<[]> {
     constructor(loader?: Loader<MurlocTidehunterBattlecryModel>) {
         super(() => {
             const props = loader?.() ?? {};

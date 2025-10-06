@@ -1,9 +1,9 @@
-import { RoleBattlecryModel, RestoreEvent, RestoreModel, RoleModel, SelectEvent } from "hearthstone-core";
+import { MinionBattlecryModel, RestoreEvent, RestoreModel, RoleModel, SelectEvent } from "hearthstone-core";
 import { Loader, StoreUtil } from "set-piece";
 
 @StoreUtil.is('voodoo-doctor-battlecry')
-export class VoodooDoctorRoleBattlecryModel extends RoleBattlecryModel<[RoleModel]> {
-    constructor(loader?: Loader<VoodooDoctorRoleBattlecryModel>) {
+export class VoodooDoctorMinionBattlecryModel extends MinionBattlecryModel<[RoleModel]> {
+    constructor(loader?: Loader<VoodooDoctorMinionBattlecryModel>) {
         super(() => {
             const props = loader?.() ?? {};
             return {

@@ -1,8 +1,8 @@
-import { RoleBattlecryModel, RestoreModel, RestoreEvent } from "hearthstone-core";
+import { MinionBattlecryModel, RestoreModel, RestoreEvent } from "hearthstone-core";
 import { Loader, StoreUtil } from "set-piece";
 
 @StoreUtil.is('priestess-of-elune-battlecry')
-export class PriestessOfEluneBattlecryModel extends RoleBattlecryModel<[]> {
+export class PriestessOfEluneBattlecryModel extends MinionBattlecryModel<[]> {
     constructor(loader?: Loader<PriestessOfEluneBattlecryModel>) {
         super(() => {
             const props = loader?.() ?? {};

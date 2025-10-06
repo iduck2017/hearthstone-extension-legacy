@@ -1,8 +1,8 @@
-import { CardModel, RoleBattlecryModel } from "hearthstone-core";
+import { CardModel, MinionBattlecryModel } from "hearthstone-core";
 import { Loader, StoreUtil, TranxUtil } from "set-piece";
 
 @StoreUtil.is('psychic-conjurer-battlecry')
-export class PsychicConjurerBattlecryModel extends RoleBattlecryModel<[]> {
+export class PsychicConjurerBattlecryModel extends MinionBattlecryModel<[]> {
     constructor(loader?: Loader<PsychicConjurerBattlecryModel>) {
         super(() => {
             const props = loader?.() ?? {};

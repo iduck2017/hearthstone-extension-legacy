@@ -1,9 +1,9 @@
-import { RaceType, RoleBattlecryModel, RoleModel, SelectEvent } from "hearthstone-core";
+import { RaceType, MinionBattlecryModel, RoleModel, SelectEvent } from "hearthstone-core";
 import { HungryCrabBuffModel } from "./buff";
 import { StoreUtil, Loader, DebugUtil, LogLevel } from "set-piece";
 
 @StoreUtil.is('hungry-crab-battlecry')
-export class HungryCrabBattlecryModel extends RoleBattlecryModel<[RoleModel]> {
+export class HungryCrabBattlecryModel extends MinionBattlecryModel<[RoleModel]> {
     constructor(loader?: Loader<HungryCrabBattlecryModel>) {
         super(() => {
             const props = loader?.() ?? {};
