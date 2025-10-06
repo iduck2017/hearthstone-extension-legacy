@@ -15,7 +15,7 @@
  * Collectible
  */
 
-import { MinionCardModel, RoleHealthModel, RoleAttackModel, RoleModel, RaceType, FeatureModel, RarityType, ClassType, LibraryUtil, CostModel } from "hearthstone-core";
+import { MinionCardModel, RoleHealthModel, RoleAttackModel, RoleModel, RaceType, FeatureModel, RarityType, ClassType, LibraryUtil, CostModel, RoleFeatsModel } from "hearthstone-core";
 import { GrimscaleOracleFeatureModel } from "./feature";
 import { Loader } from "set-piece";
 
@@ -42,7 +42,11 @@ export class GrimscaleOracleModel extends MinionCardModel {
                         child: {
                             attack: new RoleAttackModel(() => ({ state: { origin: 1 }})),
                             health: new RoleHealthModel(() => ({ state: { origin: 1 }})),   
-                            features: [new GrimscaleOracleFeatureModel()]
+                            feats: new RoleFeatsModel(() => ({
+                                child: {
+                                    items: [new GrimscaleOracleFeatureModel()]
+                                }
+                            }))
                         }
                     })),
                     ...props.child,
