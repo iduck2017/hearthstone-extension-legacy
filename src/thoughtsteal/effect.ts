@@ -39,24 +39,16 @@ export class ThoughtstealEffectModel extends SpellEffectModel<[]> {
         
         // Copy up to 2 random cards from opponent's deck
         for (let i = 0; i < 2; i++) {
-            if (cards.length === 0) break;
+            if (!cards.length) break;
             const index = Math.floor(Math.random() * cards.length);
             const card = cards[index];
             if (!card) continue;
             // Create a copy of the random card
-            this.copy(card);
+            const hand = player.child.hand;
+            hand.copy(card);
+
             cards.splice(index, 1);
         }
     }
 
-    @TranxUtil.span()
-    private copy(card: CardModel) {
-        const player = this.route.player;
-        if (!player) return;
-        const copy = CardModel.copy(card);
-        if (!copy) return;
-        // Add the copy to player's hand
-        const handA = player.child.hand;
-        handA.add(copy);
-    }
 }

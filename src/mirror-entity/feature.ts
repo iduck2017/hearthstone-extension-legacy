@@ -32,7 +32,7 @@ export class MirrorEntityFeatureModel extends SecretFeatureModel {
         if (playerB === playerA) return;
         
         // Create a copy of the minion
-        const copy = CardModel.copy(that);
+        const copy = StoreUtil.copy(that);
         if (!copy) return;
         const deploy = copy.child.deploy;
         const board = playerA.child.board;

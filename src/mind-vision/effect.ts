@@ -42,17 +42,8 @@ export class MindVisionEffectModel extends SpellEffectModel<[]> {
         if (!card) return;
         
         // Create a copy of the random card
-        this.copy(card);
+        const hand = player.child.hand;
+        hand.copy(card);
     }
 
-    @TranxUtil.span()
-    private copy(card: CardModel) {
-        const player = this.route.player;
-        if (!player) return;
-        const copy = CardModel.copy(card)
-        if (!copy) return;
-        // Add the copy to player's hand
-        const handA = player.child.hand;
-        handA.add(copy);
-    }
 }

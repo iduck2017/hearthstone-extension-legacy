@@ -42,18 +42,8 @@ export class PsychicConjurerBattlecryModel extends MinionBattlecryModel<[]> {
         if (!card) return;
         
         // Create a copy of the random card
-        this.copy(card);
+        const hand = player.child.hand;
+        hand.copy(card);
     }
 
-    @TranxUtil.span()
-    private copy(card: CardModel) {
-        console.log('copy', card.name);
-        const player = this.route.player;
-        if (!player) return;
-        const copy = CardModel.copy(card);
-        if (!copy) return;
-        // Add the copy to player's hand
-        const hand = player.child.hand;
-        hand.add(copy);
-    }
 }
