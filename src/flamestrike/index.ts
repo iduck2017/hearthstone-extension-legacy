@@ -13,7 +13,7 @@
  * Collectible
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel, SpellFeatsModel } from "hearthstone-core";
 import { Loader } from "set-piece";
 import { FlamestrikeEffectModel } from "./effect";
 
@@ -37,7 +37,9 @@ export class FlamestrikeModel extends SpellCardModel {
                 refer: { ...props.refer },
                 child: {
                     cost: props.child?.cost ?? new CostModel(() => ({ state: { origin: 7 }})),
-                    effects: props.child?.effects ?? [new FlamestrikeEffectModel()],
+                    feats: props.child?.feats ?? new SpellFeatsModel(() => ({
+                        child: { effects: [new FlamestrikeEffectModel()] }
+                    })),
                     ...props.child
                 }
             };

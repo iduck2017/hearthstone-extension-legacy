@@ -15,7 +15,7 @@
  * Collectible
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel, SpellFeatsModel } from "hearthstone-core";
 import { Loader } from "set-piece";
 import { PyroblastEffectModel } from "./effect";
 
@@ -39,7 +39,9 @@ export class PyroblastModel extends SpellCardModel {
                 refer: { ...props.refer },
                 child: {
                     cost: props.child?.cost ?? new CostModel(() => ({ state: { origin: 10 }})),
-                    effects: props.child?.effects ?? [new PyroblastEffectModel()],
+                    feats: props.child?.feats ?? new SpellFeatsModel(() => ({
+                        child: { effects: [new PyroblastEffectModel()] }
+                    })),
                     ...props.child
                 }
             };

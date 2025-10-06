@@ -1,5 +1,5 @@
 import { Loader } from "set-piece";
-import { ClassType, CostModel, LibraryUtil, SpellCardModel, RarityType, SchoolType } from "hearthstone-core";
+import { ClassType, CostModel, LibraryUtil, SpellCardModel, RarityType, SchoolType, SpellFeatsModel } from "hearthstone-core";
 import { HolyNovaEffectModel } from "./effect";
 
 @LibraryUtil.is('holy-nova')
@@ -21,7 +21,9 @@ export class HolyNovaModel extends SpellCardModel {
                 },
                 child: {
                     cost: new CostModel(() => ({ state: { origin: 3 }})),
-                    effects: [new HolyNovaEffectModel()],
+                    feats: props.child?.feats ?? new SpellFeatsModel(() => ({
+                        child: { effects: [new HolyNovaEffectModel()] }
+                    })),
                     ...props.child
                 },
                 refer: { ...props.refer }

@@ -33,7 +33,7 @@ export class SpellbenderFeatureModel extends SecretFeatureModel {
 
         const params = event.detail.options;
         let isValid = false;
-        params.effect.forEach((value, key) => {
+        params.effects.forEach((value, key) => {
             value.forEach(item => {
                 if (item instanceof RoleModel) isValid = true;
             })

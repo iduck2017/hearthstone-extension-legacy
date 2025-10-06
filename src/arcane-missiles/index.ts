@@ -14,7 +14,7 @@
  * Collectible
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel, SpellFeatsModel } from "hearthstone-core";
 import { Loader } from "set-piece";
 import { ArcaneMissilesEffectModel } from "./effect";
 
@@ -38,7 +38,9 @@ export class ArcaneMissilesModel extends SpellCardModel {
                 refer: { ...props.refer },
                 child: { 
                     cost: props.child?.cost ?? new CostModel(() => ({ state: { origin: 1 }})),
-                    effects: props.child?.effects ?? [new ArcaneMissilesEffectModel()],
+                    feats: props.child?.feats ?? new SpellFeatsModel(() => ({
+                        child: { effects: [new ArcaneMissilesEffectModel()] }
+                    })),
                     ...props.child 
                 }
             }

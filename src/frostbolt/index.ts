@@ -14,7 +14,7 @@
  * Collectible
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel, SpellFeatsModel } from "hearthstone-core";
 import { Loader } from "set-piece";
 import { FrostboltEffectModel } from "./effect";
 
@@ -38,7 +38,9 @@ export class FrostboltModel extends SpellCardModel {
                 refer: { ...props.refer },
                 child: { 
                     cost: props.child?.cost ?? new CostModel(() => ({ state: { origin: 2 }})),
-                    effects: props.child?.effects ?? [new FrostboltEffectModel()],
+                    feats: props.child?.feats ?? new SpellFeatsModel(() => ({
+                        child: { effects: [new FrostboltEffectModel()] }
+                    })),
                     ...props.child 
                 }
             }

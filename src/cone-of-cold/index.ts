@@ -15,7 +15,7 @@
  * Collectible
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel, SpellFeatsModel } from "hearthstone-core";
 import { Loader } from "set-piece";
 import { ConeOfColdEffectModel } from "./effect";
 
@@ -39,7 +39,9 @@ export class ConeOfColdModel extends SpellCardModel {
                 refer: { ...props.refer },
                 child: { 
                     cost: props.child?.cost ?? new CostModel(() => ({ state: { origin: 3 }})),
-                    effects: props.child?.effects ?? [new ConeOfColdEffectModel()],
+                    feats: props.child?.feats ?? new SpellFeatsModel(() => ({
+                        child: { effects: [new ConeOfColdEffectModel()] }
+                    })),
                     ...props.child 
                 }
             }

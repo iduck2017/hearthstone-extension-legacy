@@ -12,8 +12,7 @@
  * Artist: Vance Kovacs
  * Collectible
  */
-
-import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel, SpellFeatsModel } from "hearthstone-core";
 import { Loader } from "set-piece";
 import { PolymorphEffectModel } from "./effect";
 
@@ -37,7 +36,9 @@ export class PolymorphModel extends SpellCardModel {
                 refer: { ...props.refer },
                 child: { 
                     cost: props.child?.cost ?? new CostModel(() => ({ state: { origin: 4 }})),
-                    effects: props.child?.effects ?? [new PolymorphEffectModel()],
+                    feats: props.child?.feats ?? new SpellFeatsModel(() => ({
+                        child: { effects: [new PolymorphEffectModel()] }
+                    })),
                     ...props.child 
                 }
             }

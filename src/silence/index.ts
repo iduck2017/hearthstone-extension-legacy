@@ -14,8 +14,7 @@
  * Artist: Zoltan & Gabor
  * Collectible
  */
-
-import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel, SpellFeatsModel } from "hearthstone-core";
 import { Loader } from "set-piece";
 import { SilenceEffectModel } from "./effect";
 
@@ -39,7 +38,9 @@ export class SilenceModel extends SpellCardModel {
                 refer: { ...props.refer },
                 child: {
                     cost: props.child?.cost ?? new CostModel(() => ({ state: { origin: 0 }})),
-                    effects: props.child?.effects ?? [new SilenceEffectModel()],
+                    feats: props.child?.feats ?? new SpellFeatsModel(() => ({
+                        child: { effects: [new SilenceEffectModel()] }
+                    })),
                     ...props.child
                 }
             };

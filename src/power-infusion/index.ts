@@ -1,5 +1,5 @@
 import { Loader } from "set-piece";
-import { ClassType, CostModel, LibraryUtil, SpellCardModel, RarityType, SchoolType } from "hearthstone-core";
+import { ClassType, CostModel, LibraryUtil, SpellCardModel, RarityType, SchoolType, SpellFeatsModel } from "hearthstone-core";
 import { PowerInfusionEffectModel } from "./effect";
 
 @LibraryUtil.is('power-infusion')
@@ -21,7 +21,9 @@ export class PowerInfusionModel extends SpellCardModel {
                 },
                 child: {
                     cost: new CostModel(() => ({ state: { origin: 4 }})),
-                    effects: [new PowerInfusionEffectModel()],
+                    feats: props.child?.feats ?? new SpellFeatsModel(() => ({
+                        child: { effects: [new PowerInfusionEffectModel()] }
+                    })),
                     ...props.child
                 },
                 refer: { ...props.refer }

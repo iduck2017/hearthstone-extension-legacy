@@ -13,8 +13,7 @@
  * Artist: Jessica Jung
  * Collectible
  */
-
-import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel, SpellFeatsModel } from "hearthstone-core";
 import { Loader } from "set-piece";
 import { PowerWordShieldEffectModel } from "./effect";
 
@@ -38,7 +37,9 @@ export class PowerWordShieldModel extends SpellCardModel {
                 refer: { ...props.refer },
                 child: {
                     cost: props.child?.cost ?? new CostModel(() => ({ state: { origin: 1 }})),
-                    effects: props.child?.effects ?? [new PowerWordShieldEffectModel()],
+                    feats: props.child?.feats ?? new SpellFeatsModel(() => ({
+                        child: { effects: [new PowerWordShieldEffectModel()] }
+                    })),
                     ...props.child
                 }
             };

@@ -29,7 +29,7 @@ export class VoodooDoctorModel extends MinionCardModel {
                             health: new RoleHealthModel(() => ({ state: { origin: 1 }})),
                         }
                     })),
-                    feats: props.child?.feats ?? new MinionFeatsModel(() => ({
+                    feats: new MinionFeatsModel(() => ({
                         child: {
                             battlecry: [new VoodooDoctorMinionBattlecryModel()]
                         }

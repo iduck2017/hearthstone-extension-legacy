@@ -15,8 +15,7 @@
  * Artist: Alex Horley Orlandelli
  * Collectible
  */
-
-import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel, SpellFeatsModel } from "hearthstone-core";
 import { Loader } from "set-piece";
 import { IceLanceEffectModel } from "./effect";
 
@@ -40,7 +39,9 @@ export class IceLanceModel extends SpellCardModel {
                 refer: { ...props.refer },
                 child: { 
                     cost: props.child?.cost ?? new CostModel(() => ({ state: { origin: 1 }})),
-                    effects: props.child?.effects ?? [new IceLanceEffectModel()],
+                    feats: props.child?.feats ?? new SpellFeatsModel(() => ({
+                        child: { effects: [new IceLanceEffectModel()] }
+                    })),
                     ...props.child 
                 }
             }

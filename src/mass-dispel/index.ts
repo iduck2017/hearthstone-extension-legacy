@@ -1,5 +1,5 @@
 import { Loader } from "set-piece";
-import { ClassType, CostModel, LibraryUtil, SpellCardModel, RarityType, SchoolType } from "hearthstone-core";
+import { ClassType, CostModel, LibraryUtil, SpellCardModel, RarityType, SchoolType, SpellFeatsModel } from "hearthstone-core";
 import { MassDispelEffectModel } from "./effect";
 
 @LibraryUtil.is('mass-dispel')
@@ -21,7 +21,9 @@ export class MassDispelModel extends SpellCardModel {
                 },
                 child: {
                     cost: new CostModel(() => ({ state: { origin: 4 }})),
-                    effects: [new MassDispelEffectModel()],
+                    feats: props.child?.feats ?? new SpellFeatsModel(() => ({
+                        child: { effects: [new MassDispelEffectModel()] }
+                    })),
                     ...props.child
                 },
                 refer: { ...props.refer }

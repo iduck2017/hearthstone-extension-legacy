@@ -15,8 +15,7 @@
  * 
  * 2 cost
  */
-
-import { ClassType, CostModel, LibraryUtil, RarityType, SpellCardModel, SchoolType } from "hearthstone-core";
+import { ClassType, CostModel, LibraryUtil, RarityType, SpellCardModel, SchoolType, SpellFeatsModel } from "hearthstone-core";
 import { Loader } from "set-piece";
 import { ShadowWordDeathEffectModel } from "./effect";
 
@@ -39,7 +38,9 @@ export class ShadowWordDeathModel extends SpellCardModel {
                 },
                 child: {
                     cost: new CostModel(() => ({ state: { origin: 2 }})),
-                    effects: props.child?.effects ?? [new ShadowWordDeathEffectModel()],
+                    feats: props.child?.feats ?? new SpellFeatsModel(() => ({
+                        child: { effects: [new ShadowWordDeathEffectModel()] }
+                    })),
                     ...props.child
                 },
                 refer: { ...props.refer }

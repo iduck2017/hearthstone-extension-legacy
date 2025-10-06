@@ -17,7 +17,7 @@
  * 
  * 2 cost
  */
-import { ClassType, CostModel, LibraryUtil, RarityType, SpellCardModel, SchoolType } from "hearthstone-core";
+import { ClassType, CostModel, LibraryUtil, RarityType, SpellCardModel, SchoolType, SpellFeatsModel } from "hearthstone-core";
 import { Loader } from "set-piece";
 import { MindBlastEffectModel } from "./effect";
 
@@ -40,7 +40,9 @@ export class MindBlastModel extends SpellCardModel {
                 },
                 child: {
                     cost: new CostModel(() => ({ state: { origin: 2 }})),
-                    effects: props.child?.effects ?? [new MindBlastEffectModel()],
+                    feats: props.child?.feats ?? new SpellFeatsModel(() => ({
+                        child: { effects: [new MindBlastEffectModel()] }
+                    })),
                     ...props.child
                 },
                 refer: { ...props.refer }

@@ -15,7 +15,7 @@
  * 
  * 2 cost
  */
-import { ClassType, CostModel, LibraryUtil, RarityType, SpellCardModel, SchoolType } from "hearthstone-core";
+import { ClassType, CostModel, LibraryUtil, RarityType, SpellCardModel, SchoolType, SpellFeatsModel } from "hearthstone-core";
 import { Loader } from "set-piece";
 import { ShadowWordPainEffectModel } from "./effect";
 
@@ -38,7 +38,9 @@ export class ShadowWordPainModel extends SpellCardModel {
                 },
                 child: {
                     cost: new CostModel(() => ({ state: { origin: 2 }})),
-                    effects: props.child?.effects ?? [new ShadowWordPainEffectModel()],
+                    feats: props.child?.feats ?? new SpellFeatsModel(() => ({
+                        child: { effects: [new ShadowWordPainEffectModel()] }
+                    })),
                     ...props.child
                 },
                 refer: { ...props.refer }
