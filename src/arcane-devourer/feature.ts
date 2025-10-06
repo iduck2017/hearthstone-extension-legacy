@@ -1,0 +1,51 @@
+import { FeatureModel, SpellCardModel, MINION_ROUTE, MinionRoute } from "hearthstone-core";
+import { ArcaneDevourerBuffModel } from "./buff";
+import { Event, EventUtil, Loader, StoreUtil } from "set-piece";
+
+export namespace ArcaneDevourerFeatureProps {
+    export type E = {}
+    export type S = {}
+    export type C = {}
+    export type R = {}
+    export type P = MinionRoute
+}
+
+@StoreUtil.is('arcane-devourer-feature')
+export class ArcaneDevourerFeatureModel extends FeatureModel<
+    ArcaneDevourerFeatureProps.E,
+    ArcaneDevourerFeatureProps.S,
+    ArcaneDevourerFeatureProps.C,
+    ArcaneDevourerFeatureProps.R,
+    ArcaneDevourerFeatureProps.P
+> {
+    constructor(loader?: Loader<ArcaneDevourerFeatureModel>) {
+        super(() => {
+            const props = loader?.() ?? {}
+            return {
+                uuid: props.uuid,
+                state: { 
+                    name: "Arcane Devourer's feature",
+                    desc: "Whenever you cast a spell, gain +2/+2.",
+                    isActive: true,
+                    ...props.state 
+                },
+                child: { ...props.child },
+                refer: { ...props.refer },
+                route: MINION_ROUTE,
+            }
+        })
+    }
+
+    @EventUtil.on(self => self.route.player?.proxy.all(SpellCardModel).event.onPlay)
+    private onPlay(that: SpellCardModel, event: Event) {
+        const minion = this.route.minion;
+        if (!minion) return;
+        const player = this.route.player;
+        if (!player) return;
+        
+        // Only trigger when the minion's owner casts a spell
+        if (that.route.player !== player) return;
+        
+        minion.child.role.add(new ArcaneDevourerBuffModel())
+    }
+}
