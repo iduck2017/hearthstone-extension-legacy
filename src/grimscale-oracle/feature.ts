@@ -1,0 +1,59 @@
+import { RoleAttackModel, FeatureModel, MinionCardModel, RaceType, RoleModel, RoleAttackProps, RoleRoute, ROLE_ROUTE, OperationType, RoleAttackDecor } from "hearthstone-core";
+import { DebugUtil, LogLevel, StateUtil, StoreUtil, TranxUtil, Loader, Decor } from "set-piece";
+
+export namespace GrimscaleOracleFeatureModel {
+    export type E = {}
+    export type S = {
+        offset: number;
+    }
+    export type C = {}
+    export type R = {}
+    export type P = RoleRoute
+}
+
+@StoreUtil.is('grimscale-oracle-feature')
+export class GrimscaleOracleFeatureModel extends FeatureModel<
+    GrimscaleOracleFeatureModel.E,
+    GrimscaleOracleFeatureModel.S,
+    GrimscaleOracleFeatureModel.C,
+    GrimscaleOracleFeatureModel.R,
+    GrimscaleOracleFeatureModel.P
+> {
+    constructor(loader?: Loader<GrimscaleOracleFeatureModel>) {
+        super(() => {
+            const props = loader?.() ?? {};
+            return {
+                uuid: props.uuid,
+                state: {
+                    name: 'Grimscale Oracle\'s Aura',
+                    desc: 'Your other Murlocs have +1 Attack.',
+                    offset: 1,
+                    isActive: true,
+                    ...props.state
+                },
+                child: { ...props.child },
+                refer: { ...props.refer },
+                route: ROLE_ROUTE,
+            }
+        });
+    }
+
+    @StateUtil.on(self => self.route.player?.proxy.child.board.child.minions.child.role.child.attack.decor)
+    @DebugUtil.log(LogLevel.WARN)
+    private onCheck(that: RoleAttackModel, decor: RoleAttackDecor) {
+        if (!this.route.board) return;
+        if (!this.state.isActive) return;
+        
+        const minion = that.route.minion;
+        if (!minion) return;
+        const role = minion.child.role;
+        if (this.route.role === role) return;
+
+        if (!minion.state.races.includes(RaceType.MURLOC)) return;
+        decor.add({
+            value: this.state.offset,
+            type: OperationType.ADD,
+            reason: this,
+        })
+    }
+}
