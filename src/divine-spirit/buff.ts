@@ -1,8 +1,8 @@
-import { RoleBuffModel } from "hearthstone-core";
+import { IRoleBuffModel } from "hearthstone-core";
 import { Loader, StoreUtil } from "set-piece";
 
 @StoreUtil.is('divine-spirit-buff')
-export class DivineSpiritBuffModel extends RoleBuffModel {
+export class DivineSpiritBuffModel extends IRoleBuffModel {
     constructor(loader?: Loader<DivineSpiritBuffModel>) {
         super(() => {
             const props = loader?.() ?? {};

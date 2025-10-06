@@ -1,4 +1,4 @@
-import { MinionBattlecryModel, RoleModel, RoleBuffModel } from "hearthstone-core";
+import { MinionBattlecryModel, RoleModel, IRoleBuffModel } from "hearthstone-core";
 import { Loader, StoreUtil } from "set-piece";
 import { TwilightDrakeBuffModel } from "./buff";
 

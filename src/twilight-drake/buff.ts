@@ -1,8 +1,8 @@
-import { RoleBuffModel } from "hearthstone-core";
+import { IRoleBuffModel } from "hearthstone-core";
 import { Loader, StoreUtil } from "set-piece";
 
 @StoreUtil.is('twilight-drake-buff')
-export class TwilightDrakeBuffModel extends RoleBuffModel {
+export class TwilightDrakeBuffModel extends IRoleBuffModel {
     constructor(loader?: Loader<TwilightDrakeBuffModel>) {
         super(() => {
             const props = loader?.() ?? {};

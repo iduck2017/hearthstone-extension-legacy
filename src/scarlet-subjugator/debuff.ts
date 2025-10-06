@@ -1,4 +1,4 @@
-import { PlayerModel, RoleBuffModel, TurnModel } from "hearthstone-core";
+import { PlayerModel, IRoleBuffModel, TurnModel } from "hearthstone-core";
 import { Event, EventUtil, Loader, StoreUtil } from "set-piece";
 
 export namespace ScarletSubjugatorDebuffProps {
@@ -11,7 +11,7 @@ export namespace ScarletSubjugatorDebuffProps {
 }
 
 @StoreUtil.is('scarlet-subjugator-debuff')
-export class ScarletSubjugatorDebuffModel extends RoleBuffModel<
+export class ScarletSubjugatorDebuffModel extends IRoleBuffModel<
     ScarletSubjugatorDebuffProps.E,
     ScarletSubjugatorDebuffProps.S,
     ScarletSubjugatorDebuffProps.C,

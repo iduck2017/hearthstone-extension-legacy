@@ -1,8 +1,8 @@
-import { RoleBuffModel } from "hearthstone-core";
+import { IRoleBuffModel } from "hearthstone-core";
 import { StoreUtil, Loader } from "set-piece";
 
 @StoreUtil.is('hungry-crab-buff')
-export class HungryCrabBuffModel extends RoleBuffModel {
+export class HungryCrabBuffModel extends IRoleBuffModel {
     constructor(loader?: Loader<HungryCrabBuffModel>) {
         super(() => {
             const props = loader?.() ?? {};

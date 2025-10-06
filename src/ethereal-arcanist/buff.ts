@@ -1,7 +1,7 @@
-import { RoleBuffModel } from "hearthstone-core";
+import { IRoleBuffModel } from "hearthstone-core";
 import { Loader } from "set-piece";
 
-export class EtherealArcanistBuffModel extends RoleBuffModel {
+export class EtherealArcanistBuffModel extends IRoleBuffModel {
     constructor(loader?: Loader<EtherealArcanistBuffModel>) {
         super(() => {
             const props = loader?.() ?? {};

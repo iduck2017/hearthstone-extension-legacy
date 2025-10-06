@@ -1,8 +1,8 @@
-import { RoleBuffModel } from "hearthstone-core";
+import { IRoleBuffModel } from "hearthstone-core";
 import { Loader, StoreUtil } from "set-piece";
 
 @StoreUtil.is('power-infusion-buff')
-export class PowerInfusionBuffModel extends RoleBuffModel {
+export class PowerInfusionBuffModel extends IRoleBuffModel {
     constructor(loader?: Loader<PowerInfusionBuffModel>) {
         super(() => {
             const props = loader?.() ?? {};

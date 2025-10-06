@@ -1,8 +1,8 @@
-import { RoleBuffModel } from "hearthstone-core";
+import { IRoleBuffModel } from "hearthstone-core";
 import { Loader, StoreUtil } from "set-piece";
 
 @StoreUtil.is('temple-enforcer-buff')
-export class TempleEnforcerBuffModel extends RoleBuffModel {
+export class TempleEnforcerBuffModel extends IRoleBuffModel {
     constructor(loader?: Loader<TempleEnforcerBuffModel>) {
         super(() => {
             const props = loader?.() ?? {};

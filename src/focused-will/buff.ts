@@ -1,8 +1,8 @@
-import { RoleBuffModel } from "hearthstone-core";
+import { IRoleBuffModel } from "hearthstone-core";
 import { Loader, StoreUtil } from "set-piece";
 
 @StoreUtil.is('focused-will-buff')
-export class FocusedWillBuffModel extends RoleBuffModel {
+export class FocusedWillBuffModel extends IRoleBuffModel {
     constructor(loader?: Loader<FocusedWillBuffModel>) {
         super(() => {
             const props = loader?.() ?? {};

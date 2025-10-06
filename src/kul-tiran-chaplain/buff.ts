@@ -1,8 +1,8 @@
-import { RoleBuffModel } from "hearthstone-core";
+import { IRoleBuffModel } from "hearthstone-core";
 import { Loader, StoreUtil } from "set-piece";
 
 @StoreUtil.is('kul-tiran-chaplain-buff')
-export class KulTiranChaplainBuffModel extends RoleBuffModel {
+export class KulTiranChaplainBuffModel extends IRoleBuffModel {
     constructor(loader?: Loader<KulTiranChaplainBuffModel>) {
         super(() => {
             const props = loader?.() ?? {};

@@ -1,8 +1,8 @@
-import { RoleBuffModel } from "hearthstone-core";
+import { IRoleBuffModel } from "hearthstone-core";
 import { Loader, StoreUtil } from "set-piece";
 
 @StoreUtil.is('arcane-devourer-buff')
-export class ArcaneDevourerBuffModel extends RoleBuffModel {
+export class ArcaneDevourerBuffModel extends IRoleBuffModel {
     constructor(loader?: Loader<ArcaneDevourerBuffModel>) {
         super(() => {
             const props = loader?.() ?? {};
