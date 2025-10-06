@@ -85,18 +85,32 @@ describe('gruul', () => {
         expect(playerA.child.mana.state.current).toBe(2); // 10 - 8 = 2
     });
 
-    // test('gruul-growth', async () => {
-    //     // Check initial state
-    //     expect(roleC.child.attack.state.current).toBe(7); // Gruul: 7/7
-    //     expect(roleC.child.health.state.current).toBe(7);
-    //     expect(boardA.refer.order.length).toBe(1); // Gruul on board
+    test('turn-end', async () => {
+        // Check initial state
+        expect(roleC.child.attack.state.current).toBe(7); // Gruul: 7/7
+        expect(roleC.child.health.state.current).toBe(7);
+        expect(boardA.refer.order.length).toBe(1); // Gruul on board
 
-    //     // End turn to trigger growth
-    //     game.child.turn.next();
-    //     await TimeUtil.sleep(); // Wait for end turn event
+        // End Player A's turn
+        game.child.turn.next();
 
-    //     // Gruul should have grown by +1/+1
-    //     expect(roleC.child.attack.state.current).toBe(8); // Gruul: 8/8
-    //     expect(roleC.child.health.state.current).toBe(8);
-    // });
+        // Gruul should have grown by +1/+1
+        expect(roleC.child.attack.state.current).toBe(8); // Gruul: 8/8
+        expect(roleC.child.health.state.current).toBe(8);
+    });
+
+    test('turn-end', async () => {
+        // Check initial state
+        expect(roleC.child.attack.state.current).toBe(8); // Gruul: 8/8
+        expect(roleC.child.health.state.current).toBe(8);
+        expect(boardA.refer.order.length).toBe(1); // Gruul on board
+
+        // End Player B's turn
+        game.child.turn.next();
+
+        // Gruul should have grown by +1/+1 again
+        expect(roleC.child.attack.state.current).toBe(9); // Gruul: 9/9
+        expect(roleC.child.health.state.current).toBe(9);
+    });
+
 });

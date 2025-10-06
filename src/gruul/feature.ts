@@ -1,4 +1,4 @@
-import { EndTurnHookModel, FeatureModel, MINION_ROUTE, MinionRoute, IRoleBuffModel, TurnModel } from "hearthstone-core";
+import { EndTurnHookModel, FeatureModel, MINION_ROUTE, MinionRoute, IRoleBuffModel, TurnModel, RoleBuffModel } from "hearthstone-core";
 import { Event, EventUtil, Loader, StoreUtil } from "set-piece";
 
 export namespace GruulFeatureProps {
@@ -35,11 +35,16 @@ export class GruulFeatureModel extends EndTurnHookModel<
         })
     }
 
-    protected doRun(isCurrent: boolean) {
-        if (!isCurrent) return;
+    protected doRun() {
         const minion = this.route.minion;
         if (!minion) return;
         const role = minion.child.role;
-        // role.child.feats.add(new GruulBuffModel());
+        role.child.feats.add(new RoleBuffModel(() => ({
+            state: {
+                name: "Gruul's Growth",
+                desc: "+1/+1",
+                offset: [1, 1]
+            }
+        })));
     }
 }
