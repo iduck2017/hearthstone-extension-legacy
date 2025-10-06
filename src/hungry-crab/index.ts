@@ -15,7 +15,7 @@
  * Collectible
  */
 
-import { MinionCardModel, RoleHealthModel, RoleAttackModel, RaceType, RoleModel, MinionHooksModel, ClassType, RarityType, LibraryUtil, CostModel } from "hearthstone-core";
+import { MinionCardModel, RoleHealthModel, RoleAttackModel, RaceType, RoleModel, MinionFeatsModel, ClassType, RarityType, LibraryUtil, CostModel } from "hearthstone-core";
 import { HungryCrabBattlecryModel } from "./battlecry";
 import { Loader } from "set-piece";
 
@@ -44,7 +44,7 @@ export class HungryCrabModel extends MinionCardModel {
                             health: new RoleHealthModel(() => ({ state: { origin: 2 }})),   
                         }
                     })),
-                    feats: new MinionHooksModel(() => ({
+                    feats: new MinionFeatsModel(() => ({
                         child: {
                             battlecry: [new HungryCrabBattlecryModel()]
                         }

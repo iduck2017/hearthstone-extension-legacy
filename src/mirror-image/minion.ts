@@ -10,7 +10,7 @@
  * Collectible: No
  */
 
-import { ClassType, RoleHealthModel, MinionCardModel, MinionHooksModel, RarityType, RoleAttackModel, RoleModel, RoleFeatsModel, TauntModel } from "hearthstone-core";
+import { ClassType, RoleHealthModel, MinionCardModel, MinionFeatsModel, RarityType, RoleAttackModel, RoleModel, RoleFeatsModel, TauntModel } from "hearthstone-core";
 import { CostModel } from "hearthstone-core";
 import { LibraryUtil } from "hearthstone-core";
 import { Loader } from "set-piece";
@@ -45,7 +45,7 @@ export class MirrorImageMinionModel extends MinionCardModel {
                             }))
                         }
                     })),
-                    feats: new MinionHooksModel(() => ({
+                    feats: new MinionFeatsModel(() => ({
                         child: { battlecry: [] }
                     })),
                     ...props.child

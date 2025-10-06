@@ -14,7 +14,7 @@
  * Collectible
  */
 
-import { RoleAttackModel, ClassType, RoleHealthModel, MinionCardModel, RarityType, RoleModel, MinionHooksModel, LibraryUtil, CostModel } from "hearthstone-core";
+import { RoleAttackModel, ClassType, RoleHealthModel, MinionCardModel, RarityType, RoleModel, MinionFeatsModel, LibraryUtil, CostModel } from "hearthstone-core";
 import { ArchmageAntonidasFeatureModel } from "./feature";
 import { Loader } from "set-piece";
 
@@ -43,7 +43,7 @@ export class ArchmageAntonidasModel extends MinionCardModel {
                             health: new RoleHealthModel(() => ({ state: { origin: 7 }})), 
                         }
                     })),
-                    feats: new MinionHooksModel(() => ({
+                    feats: new MinionFeatsModel(() => ({
                         child: {
                             battlecry: [], 
                             items: [new ArchmageAntonidasFeatureModel()]

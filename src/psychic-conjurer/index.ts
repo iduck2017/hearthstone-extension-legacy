@@ -16,7 +16,7 @@
  * 1/1/2
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, MinionCardModel, MinionHooksModel, RoleAttackModel, RoleHealthModel, RoleModel, RaceType } from "hearthstone-core";
+import { ClassType, CostModel, LibraryUtil, RarityType, MinionCardModel, MinionFeatsModel, RoleAttackModel, RoleHealthModel, RoleModel, RaceType } from "hearthstone-core";
 import { Loader } from "set-piece";
 import { PsychicConjurerBattlecryModel } from "./battlecry";
 
@@ -45,7 +45,7 @@ export class PsychicConjurerModel extends MinionCardModel {
                             health: new RoleHealthModel(() => ({ state: { origin: 2 }})),
                         }
                     })),
-                    feats: new MinionHooksModel(() => ({
+                    feats: new MinionFeatsModel(() => ({
                         child: { 
                             battlecry: [new PsychicConjurerBattlecryModel()]
                         }

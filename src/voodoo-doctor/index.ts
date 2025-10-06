@@ -1,4 +1,4 @@
-import { RoleAttackModel, ClassType, RoleHealthModel, MinionCardModel, RarityType, RaceType, RoleModel, MinionHooksModel } from "hearthstone-core";
+import { RoleAttackModel, ClassType, RoleHealthModel, MinionCardModel, RarityType, RaceType, RoleModel, MinionFeatsModel } from "hearthstone-core";
 import { VoodooDoctorRoleBattlecryModel } from "./battlecry";
 import { CostModel } from "hearthstone-core";
 import { LibraryUtil } from "hearthstone-core";
@@ -29,7 +29,7 @@ export class VoodooDoctorModel extends MinionCardModel {
                             health: new RoleHealthModel(() => ({ state: { origin: 1 }})),
                         }
                     })),
-                    feats: props.child?.feats ?? new MinionHooksModel(() => ({
+                    feats: props.child?.feats ?? new MinionFeatsModel(() => ({
                         child: {
                             battlecry: [new VoodooDoctorRoleBattlecryModel()]
                         }

@@ -13,7 +13,7 @@
  * Artist: Popo Wei
  * Collectible
  */
-import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, MinionHooksModel, RarityType, RoleAttackModel, RoleModel } from "hearthstone-core";
+import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, MinionFeatsModel, RarityType, RoleAttackModel, RoleModel } from "hearthstone-core";
 import { Loader } from "set-piece";
 import { KirinTorMageBattlecryModel } from "./battlecry";
 
@@ -42,7 +42,7 @@ export class KirinTorMageModel extends MinionCardModel {
                             health: new RoleHealthModel(() => ({ state: { origin: 3 }})),
                         }
                     })),
-                    feats: new MinionHooksModel(() => ({
+                    feats: new MinionFeatsModel(() => ({
                         child: { battlecry: [new KirinTorMageBattlecryModel()] }
                     })),
                     ...props.child,

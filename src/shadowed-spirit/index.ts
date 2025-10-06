@@ -1,5 +1,5 @@
 import { Loader } from "set-piece";
-import { RoleAttackModel, ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, RarityType, RoleModel, MinionHooksModel, RaceType } from "hearthstone-core";
+import { RoleAttackModel, ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, RarityType, RoleModel, MinionFeatsModel, RaceType } from "hearthstone-core";
 import { ShadowedSpiritDeathrattleModel } from "./deathrattle";
 
 @LibraryUtil.is('shadowed-spirit')
@@ -27,7 +27,7 @@ export class ShadowedSpiritModel extends MinionCardModel {
                             health: new RoleHealthModel(() => ({ state: { origin: 3 }})),
                         },
                     })),
-                    feats: new MinionHooksModel(() => ({
+                    feats: new MinionFeatsModel(() => ({
                         child: { deathrattle: [new ShadowedSpiritDeathrattleModel()] }
                     })),
                     ...props.child

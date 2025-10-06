@@ -14,7 +14,7 @@
  * Artist: Ben Zhang
  * Collectible
  */
-import { MinionCardModel, RoleHealthModel, RoleAttackModel, RoleModel, ClassType, RarityType, RaceType, MinionHooksModel, LibraryUtil, CostModel, SpellBuffModel } from "hearthstone-core";
+import { MinionCardModel, RoleHealthModel, RoleAttackModel, RoleModel, ClassType, RarityType, RaceType, MinionFeatsModel, LibraryUtil, CostModel, SpellBuffModel } from "hearthstone-core";
 import { AzureDrakeBattlecryModel } from "./battlecry";
 import { Loader } from "set-piece";
 
@@ -43,7 +43,7 @@ export class AzureDrakeModel extends MinionCardModel {
                             health: new RoleHealthModel(() => ({ state: { origin: 4 }})),
                         }
                     })),
-                    feats: new MinionHooksModel(() => ({
+                    feats: new MinionFeatsModel(() => ({
                         child: {
                             battlecry: [new AzureDrakeBattlecryModel()],
                             items: [new SpellBuffModel(() => ({ state: { offset: 1 }}))]

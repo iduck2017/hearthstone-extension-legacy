@@ -17,7 +17,7 @@
  * 1/1/3
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, MinionCardModel, MinionHooksModel, RoleAttackModel, RoleHealthModel, RoleModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryUtil, RarityType, MinionCardModel, MinionFeatsModel, RoleAttackModel, RoleHealthModel, RoleModel } from "hearthstone-core";
 import { Loader } from "set-piece";
 import { NorthshireClericFeatureModel } from "./feature";
 
@@ -46,7 +46,7 @@ export class NorthshireClericModel extends MinionCardModel {
                             health: new RoleHealthModel(() => ({ state: { origin: 3 }})),
                         }
                     })),
-                    feats: new MinionHooksModel(() => ({
+                    feats: new MinionFeatsModel(() => ({
                         child: { 
                             battlecry: [], 
                             items: [new NorthshireClericFeatureModel()]

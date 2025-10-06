@@ -9,7 +9,7 @@
  * Artist: Tooth
  * Collectible
  */
-import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, MinionHooksModel, RarityType, RoleAttackModel, RoleModel, RaceType } from "hearthstone-core";
+import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, MinionFeatsModel, RarityType, RoleAttackModel, RoleModel, RaceType } from "hearthstone-core";
 import { Loader } from "set-piece";
 import { IronforgeRiflemanBattlecryModel } from "./battlecry";
 
@@ -38,7 +38,7 @@ export class IronforgeRiflemanModel extends MinionCardModel {
                             health: new RoleHealthModel(() => ({ state: { origin: 2 }})),
                         }
                     })),
-                    feats: new MinionHooksModel(() => ({
+                    feats: new MinionFeatsModel(() => ({
                         child: { battlecry: [new IronforgeRiflemanBattlecryModel()]}
                     })),
                     ...props.child

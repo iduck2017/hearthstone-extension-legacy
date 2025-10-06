@@ -15,7 +15,7 @@
  * Collectible
  */
 
-import { RoleAttackModel, ClassType, RoleHealthModel, LibraryUtil, RaceType, RarityType, RoleModel, CostModel, MinionHooksModel, MinionCardModel } from "hearthstone-core";
+import { RoleAttackModel, ClassType, RoleHealthModel, LibraryUtil, RaceType, RarityType, RoleModel, CostModel, MinionFeatsModel, MinionCardModel } from "hearthstone-core";
 import { BloodsailCorsairBattlecryModel } from "./battlecry";
 import { Loader } from "set-piece";
 
@@ -44,7 +44,7 @@ export class BloodsailCorsairModel extends MinionCardModel {
                             health: new RoleHealthModel(() => ({ state: { origin: 2 }})),
                         }
                     })),
-                    feats: new MinionHooksModel(() => ({
+                    feats: new MinionFeatsModel(() => ({
                         child: { battlecry: [new BloodsailCorsairBattlecryModel()] }
                     })),
                     ...props.child,

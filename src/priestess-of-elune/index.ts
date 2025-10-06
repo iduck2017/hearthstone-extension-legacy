@@ -1,4 +1,4 @@
-import { MinionCardModel, RarityType, ClassType, RoleAttackModel, RoleHealthModel, RoleModel, MinionHooksModel, CostModel, LibraryUtil } from "hearthstone-core";
+import { MinionCardModel, RarityType, ClassType, RoleAttackModel, RoleHealthModel, RoleModel, MinionFeatsModel, CostModel, LibraryUtil } from "hearthstone-core";
 import { Loader } from "set-piece";
 import { PriestessOfEluneBattlecryModel } from "./battlecry";
 
@@ -28,7 +28,7 @@ export class PriestessOfEluneModel extends MinionCardModel {
                             health: new RoleHealthModel(() => ({ state: { origin: 4 }})),
                         }
                     })),
-                    feats: new MinionHooksModel(() => ({
+                    feats: new MinionFeatsModel(() => ({
                         child: {
                             battlecry: [new PriestessOfEluneBattlecryModel()]
                         }

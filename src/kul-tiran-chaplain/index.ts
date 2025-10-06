@@ -17,7 +17,7 @@
  * 2/3/2
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, MinionCardModel, MinionHooksModel, RoleAttackModel, RoleHealthModel, RoleModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryUtil, RarityType, MinionCardModel, MinionFeatsModel, RoleAttackModel, RoleHealthModel, RoleModel } from "hearthstone-core";
 import { Loader } from "set-piece";
 import { KulTiranChaplainBattlecryModel } from "./battlecry";
 
@@ -46,7 +46,7 @@ export class KulTiranChaplainModel extends MinionCardModel {
                             health: new RoleHealthModel(() => ({ state: { origin: 3 }})),
                         }
                     })),
-                    feats: new MinionHooksModel(() => ({
+                    feats: new MinionFeatsModel(() => ({
                         child: { battlecry: [new KulTiranChaplainBattlecryModel()]}
                     })),
                     ...props.child
