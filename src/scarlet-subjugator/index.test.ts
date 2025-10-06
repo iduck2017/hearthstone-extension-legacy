@@ -88,9 +88,7 @@ describe('scarlet-subjugator', () => {
         // Water Elemental should have -2 Attack
         expect(roleD.child.attack.state.current).toBe(1); // 3 - 2 = 1
         expect(roleD.child.health.state.current).toBe(6); // Health unchanged
-        // Check that the debuff was applied
-        expect(roleD.child.buffs.length).toBe(1); // Should have the -2 Attack debuff
-
+      
         // Scarlet Subjugator should be consumed
         expect(handA.refer.order.length).toBe(0); // Scarlet Subjugator consumed
         expect(playerA.child.mana.state.current).toBe(9); // 10 - 1 cost

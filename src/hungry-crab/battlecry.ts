@@ -42,6 +42,6 @@ export class HungryCrabBattlecryModel extends RoleBattlecryModel<[RoleModel]> {
         
         // Add buff to the crab
         const role = cardA.child.role;
-        role.add(new HungryCrabBuffModel());
+        role.child.entries.add(new HungryCrabBuffModel());
     }
 }

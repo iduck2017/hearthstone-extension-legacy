@@ -17,7 +17,7 @@
  * 1/1/3
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, MinionCardModel, MinionHooksModel, RoleAttackModel, RoleHealthModel, RoleModel, RoleHooksModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryUtil, RarityType, MinionCardModel, MinionHooksModel, RoleAttackModel, RoleHealthModel, RoleModel, RoleEntriesModel } from "hearthstone-core";
 import { Loader } from "set-piece";
 import { CrimsonClergyOverhealModel } from "./overheal";
 
@@ -44,7 +44,7 @@ export class CrimsonClergyModel extends MinionCardModel {
                         child: {
                             attack: new RoleAttackModel(() => ({ state: { origin: 1 }})),
                             health: new RoleHealthModel(() => ({ state: { origin: 3 }})),
-                            hooks: new RoleHooksModel(() => ({
+                            entries: new RoleEntriesModel(() => ({
                                 child: { overheal: [new CrimsonClergyOverhealModel()] }
                             }))
                         },

@@ -30,6 +30,6 @@ export class AbusiveSergeantBattlecryModel extends RoleBattlecryModel<[RoleModel
     }
 
     public async doRun(from: number, to: number, target: RoleModel) {
-        target.add(new AbusiveSergeantBuffModel())
+        target.child.entries.add(new AbusiveSergeantBuffModel())
     }
 }

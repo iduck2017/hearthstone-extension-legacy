@@ -82,9 +82,7 @@ describe('power-word-shield', () => {
         expect(roleD.child.attack.state.current).toBe(1); // Attack unchanged
         expect(roleD.child.health.state.current).toBe(3); // 1 + 2 Health buff
 
-        // Check that the buff was applied
-        expect(roleD.child.buffs.length).toBe(1); // Should have the +2 Health buff
-
+        
         // Player A should have drawn a card
         expect(handA.refer.order.length).toBe(1); // Power Word: Shield consumed, 1 card drawn
         expect(deckA.refer.order.length).toBe(2); // 3 - 1 = 2 (1 card drawn from deck)

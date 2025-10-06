@@ -47,6 +47,7 @@ export class ManaWyrmFeatureModel extends FeatureModel<
         // Only trigger when the minion's owner casts a spell
         if (that.route.player !== player) return;
         
-        minion.child.role.add(new ManaWyrmBuffModel())
+        const role = minion.child.role;
+        role.child.entries.add(new ManaWyrmBuffModel())
     }
 }

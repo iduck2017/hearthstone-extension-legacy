@@ -46,6 +46,7 @@ export class ArcaneDevourerFeatureModel extends FeatureModel<
         // Only trigger when the minion's owner casts a spell
         if (that.route.player !== player) return;
         
-        minion.child.role.add(new ArcaneDevourerBuffModel())
+        const role = minion.child.role;
+        role.child.entries.add(new ArcaneDevourerBuffModel())
     }
 }

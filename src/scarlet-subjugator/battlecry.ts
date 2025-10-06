@@ -44,6 +44,6 @@ export class ScarletSubjugatorBattlecryModel extends RoleBattlecryModel<[RoleMod
         const player = this.route.player;
         if (!player) return;
         const debuff = new ScarletSubjugatorDebuffModel(() => ({ refer: { player }}));
-        target.add(debuff);
+        target.child.entries.add(debuff);
     }
 }

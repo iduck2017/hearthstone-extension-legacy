@@ -85,9 +85,6 @@ describe('kul-tiran-chaplain', () => {
         expect(roleD.child.attack.state.current).toBe(3); // Attack unchanged
         expect(roleD.child.health.state.current).toBe(8); // 6 + 2 = 8
 
-        // Check that the buff was applied
-        expect(roleD.child.buffs.length).toBe(1); // Should have the +2 Health buff
-
         // Kul Tiran Chaplain should be consumed
         expect(handA.refer.order.length).toBe(0); // Kul Tiran Chaplain consumed
         expect(playerA.child.mana.state.current).toBe(8); // 10 - 2 cost

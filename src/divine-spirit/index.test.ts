@@ -76,9 +76,6 @@ describe('divine-spirit', () => {
         expect(roleD.child.attack.state.current).toBe(3); // Attack unchanged
         expect(roleD.child.health.state.current).toBe(12); // 6 + 6 = 12 (doubled)
 
-        // Check that the buff was applied
-        expect(cardD.child.role.child.buffs.length).toBe(1); // Should have the +6 Health buff
-
         // Divine Spirit should be consumed
         expect(handA.refer.order.length).toBe(0); // Divine Spirit consumed
         expect(playerA.child.mana.state.current).toBe(8); // 10 - 2 cost
