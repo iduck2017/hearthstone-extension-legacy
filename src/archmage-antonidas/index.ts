@@ -45,10 +45,10 @@ export class ArchmageAntonidasModel extends MinionCardModel {
                     })),
                     hooks: new MinionHooksModel(() => ({
                         child: {
-                            battlecry: []
+                            battlecry: [], 
+                            items: [new ArchmageAntonidasFeatureModel()]
                         }
                     })),
-                    feats: props.child?.feats ?? [new ArchmageAntonidasFeatureModel()],
                     ...props.child,
                 },
                 refer: { ...props.refer },

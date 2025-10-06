@@ -47,9 +47,11 @@ export class NorthshireClericModel extends MinionCardModel {
                         }
                     })),
                     hooks: new MinionHooksModel(() => ({
-                        child: { battlecry: [] }
+                        child: { 
+                            battlecry: [], 
+                            items: [new NorthshireClericFeatureModel()]
+                        }
                     })),
-                    feats: props.child?.feats ?? [new NorthshireClericFeatureModel()],
                     ...props.child
                 },
                 refer: { ...props.refer }

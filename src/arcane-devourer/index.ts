@@ -43,9 +43,11 @@ export class ArcaneDevourerModel extends MinionCardModel {
                         }
                     })),
                     hooks: new MinionHooksModel(() => ({
-                        child: { battlecry: [] }
+                        child: { 
+                            battlecry: [], 
+                            items: [new ArcaneDevourerFeatureModel()]
+                        }
                     })),
-                    feats: props.child?.feats ?? [new ArcaneDevourerFeatureModel()],
                     ...props.child
                 },
                 refer: { ...props.refer }

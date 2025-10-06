@@ -45,9 +45,11 @@ export class WaterElementalModel extends MinionCardModel {
                         }
                     })),
                     hooks: new MinionHooksModel(() => ({
-                        child: { battlecry: [] }
+                        child: { 
+                            battlecry: [], 
+                            items: [new WaterElementalFeatureModel()]
+                        }
                     })),
-                    feats: props.child?.feats ?? [new WaterElementalFeatureModel()],
                     ...props.child
                 },
                 refer: { ...props.refer }

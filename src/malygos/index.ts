@@ -42,9 +42,11 @@ export class MalygosModel extends MinionCardModel {
                         }
                     })),
                     hooks: new MinionHooksModel(() => ({
-                        child: { battlecry: [] }
+                        child: { 
+                            battlecry: [], 
+                            items: [new SpellBuffModel(() => ({ state: { offset: 5 }}))]
+                        }
                     })),
-                    feats: props.child?.feats ?? [new SpellBuffModel(() => ({ state: { offset: 5 }}))],
                     ...props.child
                 },
                 refer: { ...props.refer }

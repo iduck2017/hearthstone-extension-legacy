@@ -43,7 +43,11 @@ export class SorcerersApprenticeModel extends MinionCardModel {
                             health: new RoleHealthModel(() => ({ state: { origin: 2 }})),
                         }
                     })),
-                    feats: props.child?.feats ?? [new SorcerersApprenticeFeatureModel()],
+                    hooks: new MinionHooksModel(() => ({
+                        child: {
+                            items: [new SorcerersApprenticeFeatureModel()]
+                        }
+                    })),
                     ...props.child
                 },
                 refer: { ...props.refer }

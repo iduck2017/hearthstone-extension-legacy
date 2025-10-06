@@ -27,8 +27,8 @@ export class AegwynnTheGuardianContextModel extends FeatureModel {
         const player = this.route.player;
         if (!player) return;
         if (!this.state.isActive) return;
-        that.add(new SpellBuffModel(() => ({ state: { offset: 2 }})))
-        that.add(new AegwynnTheGuardianDeathrattleModel());
+        that.child.hooks.add(new SpellBuffModel(() => ({ state: { offset: 2 }})))
+        that.child.hooks.add(new AegwynnTheGuardianDeathrattleModel());
         player.del(this);
     }
 }

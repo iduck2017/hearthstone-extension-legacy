@@ -15,7 +15,7 @@
  * Collectible
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SecretCardModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SecretCardModel, SpellCardModel, SpellHooksModel } from "hearthstone-core";
 import { Loader } from "set-piece";
 import { VaporizeFeatureModel } from "./feature";
 
@@ -39,7 +39,11 @@ export class VaporizeModel extends SecretCardModel {
                 refer: { ...props.refer },
                 child: { 
                     cost: props.child?.cost ?? new CostModel(() => ({ state: { origin: 3 }})),
-                    feats: props.child?.feats ?? [new VaporizeFeatureModel()],
+                    hooks: new SpellHooksModel(() => ({
+                        child: {
+                            items: [new VaporizeFeatureModel()]
+                        }
+                    })),
                     ...props.child 
                 }
             }

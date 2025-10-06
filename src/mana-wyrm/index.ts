@@ -46,9 +46,11 @@ export class ManaWyrmModel extends MinionCardModel {
                         }
                     })),
                     hooks: new MinionHooksModel(() => ({
-                        child: { battlecry: [] }
+                        child: { 
+                            battlecry: [], 
+                            items: [new ManaWyrmFeatureModel()]
+                        }
                     })),
-                    feats: props.child?.feats ?? [new ManaWyrmFeatureModel()],
                     ...props.child
                 },
                 refer: { ...props.refer }

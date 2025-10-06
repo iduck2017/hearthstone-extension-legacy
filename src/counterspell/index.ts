@@ -1,4 +1,4 @@
-import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SecretCardModel, SpellCardModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SecretCardModel, SpellCardModel, SpellHooksModel } from "hearthstone-core";
 import { Loader } from "set-piece";
 import { CounterspellFeatureModel } from "./feature";
 
@@ -22,7 +22,11 @@ export class CounterspellModel extends SecretCardModel {
                 refer: { ...props.refer },
                 child: { 
                     cost: props.child?.cost ?? new CostModel(() => ({ state: { origin: 3 }})),
-                    feats: props.child?.feats ?? [new CounterspellFeatureModel()],
+                    hooks: new SpellHooksModel(() => ({
+                        child: {
+                            items: [new CounterspellFeatureModel()]
+                        }
+                    })),
                     ...props.child 
                 }
             }
