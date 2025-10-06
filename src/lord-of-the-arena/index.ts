@@ -32,7 +32,7 @@ export class LordOfTheArenaModel extends MinionCardModel {
                             }))
                         }
                     })),
-                    hooks: new MinionHooksModel(() => ({
+                    feats: new MinionHooksModel(() => ({
                         child: {
                             battlecry: []
                         }

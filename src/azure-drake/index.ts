@@ -43,12 +43,12 @@ export class AzureDrakeModel extends MinionCardModel {
                             health: new RoleHealthModel(() => ({ state: { origin: 4 }})),
                         }
                     })),
-                    hooks: new MinionHooksModel(() => ({
+                    feats: new MinionHooksModel(() => ({
                         child: {
-                            battlecry: [new AzureDrakeBattlecryModel()]
+                            battlecry: [new AzureDrakeBattlecryModel()],
+                            items: [new SpellBuffModel(() => ({ state: { offset: 1 }}))]
                         }
                     })),
-                    feats: [new SpellBuffModel(() => ({ state: { offset: 1 }}))],
                     ...props.child
                 },
                 refer: { ...props.refer }

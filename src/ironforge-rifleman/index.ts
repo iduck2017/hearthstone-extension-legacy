@@ -38,7 +38,7 @@ export class IronforgeRiflemanModel extends MinionCardModel {
                             health: new RoleHealthModel(() => ({ state: { origin: 2 }})),
                         }
                     })),
-                    hooks: new MinionHooksModel(() => ({
+                    feats: new MinionHooksModel(() => ({
                         child: { battlecry: [new IronforgeRiflemanBattlecryModel()]}
                     })),
                     ...props.child

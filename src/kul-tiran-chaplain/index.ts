@@ -46,7 +46,7 @@ export class KulTiranChaplainModel extends MinionCardModel {
                             health: new RoleHealthModel(() => ({ state: { origin: 3 }})),
                         }
                     })),
-                    hooks: new MinionHooksModel(() => ({
+                    feats: new MinionHooksModel(() => ({
                         child: { battlecry: [new KulTiranChaplainBattlecryModel()]}
                     })),
                     ...props.child

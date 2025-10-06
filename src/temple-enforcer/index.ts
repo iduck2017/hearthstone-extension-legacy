@@ -27,7 +27,7 @@ export class TempleEnforcerModel extends MinionCardModel {
                             attack: new RoleAttackModel(() => ({ state: { origin: 5 }})),
                         },
                     })),
-                    hooks: new MinionHooksModel(() => ({
+                    feats: new MinionHooksModel(() => ({
                         child: { battlecry: [new TempleEnforcerBattlecryModel()] }
                     })),
                     ...props.child

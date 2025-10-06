@@ -42,12 +42,12 @@ export class AegwynnTheGuardianModel extends MinionCardModel {
                             health: new RoleHealthModel(() => ({ state: { origin: 5 }})), 
                         }
                     })),
-                    hooks: new MinionHooksModel(() => ({
+                    feats: new MinionHooksModel(() => ({
                         child: {
+                            items: [new SpellBuffModel(() => ({ state: { offset: 2 }}))],
                             deathrattle: [new AegwynnTheGuardianDeathrattleModel()]
                         }
                     })),
-                    feats: [new SpellBuffModel(() => ({ state: { offset: 2 }}))],
                     ...props.child,
                 },
                 refer: { ...props.refer },

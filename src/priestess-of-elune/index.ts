@@ -28,7 +28,7 @@ export class PriestessOfEluneModel extends MinionCardModel {
                             health: new RoleHealthModel(() => ({ state: { origin: 4 }})),
                         }
                     })),
-                    hooks: new MinionHooksModel(() => ({
+                    feats: new MinionHooksModel(() => ({
                         child: {
                             battlecry: [new PriestessOfEluneBattlecryModel()]
                         }

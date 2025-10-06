@@ -45,7 +45,7 @@ export class MirrorImageMinionModel extends MinionCardModel {
                             }))
                         }
                     })),
-                    hooks: new MinionHooksModel(() => ({
+                    feats: new MinionHooksModel(() => ({
                         child: { battlecry: [] }
                     })),
                     ...props.child

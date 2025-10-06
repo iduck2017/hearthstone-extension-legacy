@@ -45,7 +45,7 @@ export class ManaWyrmModel extends MinionCardModel {
                             health: new RoleHealthModel(() => ({ state: { origin: 3 }})),
                         }
                     })),
-                    hooks: new MinionHooksModel(() => ({
+                    feats: new MinionHooksModel(() => ({
                         child: { 
                             battlecry: [], 
                             items: [new ManaWyrmFeatureModel()]

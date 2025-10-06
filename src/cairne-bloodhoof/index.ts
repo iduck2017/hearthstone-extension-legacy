@@ -33,7 +33,7 @@ export class CairneBloodhoofModel extends MinionCardModel {
                             }))
                         }
                     })),
-                    hooks: new MinionHooksModel(() => ({
+                    feats: new MinionHooksModel(() => ({
                         child: {
                             deathrattle: [new CairneBloodhoofDeathrattleModel()]
                         }

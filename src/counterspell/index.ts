@@ -22,7 +22,7 @@ export class CounterspellModel extends SecretCardModel {
                 refer: { ...props.refer },
                 child: { 
                     cost: props.child?.cost ?? new CostModel(() => ({ state: { origin: 3 }})),
-                    hooks: new SpellHooksModel(() => ({
+                    feats: new SpellHooksModel(() => ({
                         child: {
                             items: [new CounterspellFeatureModel()]
                         }

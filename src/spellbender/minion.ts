@@ -40,7 +40,7 @@ export class SpellbenderMinionModel extends MinionCardModel {
                             health: new RoleHealthModel(() => ({ state: { origin: 3 }})),
                         }
                     })),
-                    hooks: new MinionHooksModel(() => ({
+                    feats: new MinionHooksModel(() => ({
                         child: { battlecry: [] }
                     })),
                     ...props.child

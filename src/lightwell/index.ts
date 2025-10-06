@@ -46,7 +46,7 @@ export class LightwellModel extends MinionCardModel {
                             health: new RoleHealthModel(() => ({ state: { origin: 5 }})),
                         }
                     })),
-                    hooks: new MinionHooksModel(() => ({
+                    feats: new MinionHooksModel(() => ({
                         child: { endTurn: [new LightwellEndTurnModel()]}
                     })),
                     ...props.child

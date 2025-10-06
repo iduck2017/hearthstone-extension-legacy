@@ -43,7 +43,7 @@ export class ArchmageAntonidasModel extends MinionCardModel {
                             health: new RoleHealthModel(() => ({ state: { origin: 7 }})), 
                         }
                     })),
-                    hooks: new MinionHooksModel(() => ({
+                    feats: new MinionHooksModel(() => ({
                         child: {
                             battlecry: [], 
                             items: [new ArchmageAntonidasFeatureModel()]

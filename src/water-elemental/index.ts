@@ -44,7 +44,7 @@ export class WaterElementalModel extends MinionCardModel {
                             health: new RoleHealthModel(() => ({ state: { origin: 6 }})),
                         }
                     })),
-                    hooks: new MinionHooksModel(() => ({
+                    feats: new MinionHooksModel(() => ({
                         child: { 
                             battlecry: [], 
                             items: [new WaterElementalFeatureModel()]

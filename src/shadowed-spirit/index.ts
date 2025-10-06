@@ -27,7 +27,7 @@ export class ShadowedSpiritModel extends MinionCardModel {
                             health: new RoleHealthModel(() => ({ state: { origin: 3 }})),
                         },
                     })),
-                    hooks: new MinionHooksModel(() => ({
+                    feats: new MinionHooksModel(() => ({
                         child: { deathrattle: [new ShadowedSpiritDeathrattleModel()] }
                     })),
                     ...props.child

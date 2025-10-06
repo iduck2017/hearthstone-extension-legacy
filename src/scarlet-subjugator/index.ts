@@ -46,7 +46,7 @@ export class ScarletSubjugatorModel extends MinionCardModel {
                             health: new RoleHealthModel(() => ({ state: { origin: 1 }})),
                         }
                     })),
-                    hooks: new MinionHooksModel(() => ({
+                    feats: new MinionHooksModel(() => ({
                         child: { battlecry: [new ScarletSubjugatorBattlecryModel()]}
                     })),
                     ...props.child

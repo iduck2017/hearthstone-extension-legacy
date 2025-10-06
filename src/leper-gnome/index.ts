@@ -27,7 +27,7 @@ export class LeperGnomeModel extends MinionCardModel {
                             attack: new RoleAttackModel(() => ({ state: { origin: 2 }})),
                         },
                     })),
-                    hooks: new MinionHooksModel(() => ({
+                    feats: new MinionHooksModel(() => ({
                         child: { deathrattle: [new LeperGnomeDeathrattleModel()] }
                     })),
                     ...props.child

@@ -49,7 +49,7 @@ export class CrimsonClergyModel extends MinionCardModel {
                             }))
                         },
                     })),
-                    hooks: new MinionHooksModel(() => ({
+                    feats: new MinionHooksModel(() => ({
                         child: { battlecry: [] }
                     })),
                     ...props.child

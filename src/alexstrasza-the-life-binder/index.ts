@@ -42,7 +42,7 @@ export class AlexstraszaTheLifeBinderModel extends MinionCardModel {
                             health: new RoleHealthModel(() => ({ state: { origin: 8 }})),
                         }
                     })),
-                    hooks: new MinionHooksModel(() => ({
+                    feats: new MinionHooksModel(() => ({
                         child: { 
                             battlecry: [new AlexstraszaBattlecryModel()]
                         }

@@ -47,7 +47,7 @@ export class MurlocTidehunterModel extends MinionCardModel {
                             health: new RoleHealthModel(() => ({ state: { origin: 1 }})),
                         }
                     })),
-                    hooks: new MinionHooksModel(() => ({
+                    feats: new MinionHooksModel(() => ({
                         child: { battlecry: [new MurlocTidehunterBattlecryModel()] }
                     })),
                     ...props.child

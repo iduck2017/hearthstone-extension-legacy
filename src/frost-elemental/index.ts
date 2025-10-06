@@ -28,7 +28,7 @@ export class FrostElementalModel extends MinionCardModel {
                             health: new RoleHealthModel(() => ({ state: { origin: 5 }})),
                         }
                     })),
-                    hooks: new MinionHooksModel(() => ({
+                    feats: new MinionHooksModel(() => ({
                         child: {
                             battlecry: [new FrostElementalBattlecryModel()]
                         }

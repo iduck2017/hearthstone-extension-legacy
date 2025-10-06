@@ -42,7 +42,7 @@ export class ArcaneDevourerModel extends MinionCardModel {
                             health: new RoleHealthModel(() => ({ state: { origin: 8 }})),
                         }
                     })),
-                    hooks: new MinionHooksModel(() => ({
+                    feats: new MinionHooksModel(() => ({
                         child: { 
                             battlecry: [], 
                             items: [new ArcaneDevourerFeatureModel()]

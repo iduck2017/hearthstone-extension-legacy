@@ -44,7 +44,7 @@ export class IronfurGrizzlyModel extends MinionCardModel {
                             }))
                         }
                     })),
-                    hooks: new MinionHooksModel(() => ({
+                    feats: new MinionHooksModel(() => ({
                         child: { 
                             battlecry: []
                         }

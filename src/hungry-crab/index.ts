@@ -44,7 +44,7 @@ export class HungryCrabModel extends MinionCardModel {
                             health: new RoleHealthModel(() => ({ state: { origin: 2 }})),   
                         }
                     })),
-                    hooks: new MinionHooksModel(() => ({
+                    feats: new MinionHooksModel(() => ({
                         child: {
                             battlecry: [new HungryCrabBattlecryModel()]
                         }

@@ -41,7 +41,7 @@ export class MalygosModel extends MinionCardModel {
                             health: new RoleHealthModel(() => ({ state: { origin: 12 }})),
                         }
                     })),
-                    hooks: new MinionHooksModel(() => ({
+                    feats: new MinionHooksModel(() => ({
                         child: { 
                             battlecry: [], 
                             items: [new SpellBuffModel(() => ({ state: { offset: 5 }}))]
