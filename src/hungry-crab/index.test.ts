@@ -46,7 +46,7 @@ describe('hungry-crab', () => {
     const handB = game.child.playerB.child.hand;
     const boardB = game.child.playerB.child.board;
     const cardC = handA.child.minions.find((item: any) => item instanceof HungryCrabModel);
-    const cardD = handB.child.minions.find((item: any) => item instanceof MurlocRaiderModel);
+    const cardD = boardA.child.minions.find((item: any) => item instanceof WispModel);
     const cardE = handB.child.minions.find((item: any) => item instanceof HungryCrabModel);
     const cardF = handB.child.minions.find((item: any) => item instanceof MurlocRaiderModel);
     const roleC = cardC?.child.role;
@@ -69,15 +69,12 @@ describe('hungry-crab', () => {
         await promise;
 
         expect(boardA.child.minions.length).toBe(2);
-        expect(roleC.state.attack).toBe(1);
+        expect(roleC.child.attack.state.current).toBe(1); // Hungry Crab
         expect(roleC.child.attack.state.origin).toBe(1);
-        expect(roleC.child.attack.state.offset).toBe(0);
         expect(roleC.child.attack.state.current).toBe(1);
-        expect(roleC.state.health).toBe(2);
 
-        expect(roleC.child.health.state.limit).toBe(2);
+        expect(roleC.child.health.state.maximum).toBe(2);
         expect(roleC.child.health.state.origin).toBe(2);
-        expect(roleC.child.health.state.offset).toBe(0);
         expect(roleC.child.health.state.damage).toBe(0);
         expect(roleC.child.health.state.memory).toBe(2);
         expect(roleC.child.health.state.current).toBe(2);
@@ -103,25 +100,20 @@ describe('hungry-crab', () => {
         await TimeUtil.sleep();
         expect(SelectUtil.current?.options).toContain(roleF);
         expect(SelectUtil.current?.options.length).toBe(1);
-        console.log('xxx')
         SelectUtil.set(roleF);
         await promise;
 
-        expect(cardF.child.dispose.state.isActive).toBe(true);
+        expect(cardF.child.dispose.status).toBe(true); // Murloc Raider destroyed
         expect(cardF.child.dispose.state.isLock).toBe(true);
 
-        expect(boardB.child.minions.length).toBe(1);
+        expect(boardB.child.minions.length).toBe(1); 
 
-
-        expect(roleE.child.attack.state.current).toBe(3);
+        expect(roleE.child.attack.state.current).toBe(3); // Hungry Crab +2/+2
         expect(roleE.child.attack.state.origin).toBe(1);
-        expect(roleE.child.attack.state.offset).toBe(2);
         expect(roleE.child.attack.state.current).toBe(3);
-        expect(roleE.state.health).toBe(4);
 
-        expect(roleE.child.health.state.limit).toBe(4);
+        expect(roleE.child.health.state.maximum).toBe(4); 
         expect(roleE.child.health.state.origin).toBe(2);
-        expect(roleE.child.health.state.offset).toBe(2);
         expect(roleE.child.health.state.damage).toBe(0);
         expect(roleE.child.health.state.memory).toBe(4);
         expect(roleE.child.health.state.current).toBe(4);
