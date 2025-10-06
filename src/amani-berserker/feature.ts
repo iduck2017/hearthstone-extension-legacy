@@ -43,7 +43,7 @@ export class AmaniBerserkerFeatureModel extends FeatureModel<
     @TranxUtil.span()
     private onHealthChange(that: RoleHealthModel, event: Event<Frame<RoleHealthModel>>) {
         if (that.state.current !== event.detail.state.current) this.reload()
-        if (that.state.maxium !== event.detail.state.maxium) this.reload()
+        if (that.state.maximum !== event.detail.state.maximum) this.reload()
     }
 
     // Apply attack buff when damaged
@@ -56,7 +56,7 @@ export class AmaniBerserkerFeatureModel extends FeatureModel<
         if (!role) return;
 
         const health = role.child.health;
-        const isEnrage = health.state.current < health.state.maxium;
+        const isEnrage = health.state.current < health.state.maximum;
         if (!isEnrage) return;
         
         decor.add({

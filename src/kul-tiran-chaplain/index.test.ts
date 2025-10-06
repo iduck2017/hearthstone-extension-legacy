@@ -78,8 +78,8 @@ describe('kul-tiran-chaplain', () => {
 
         // Check that Kul Tiran Chaplain is on board
         expect(boardA.child.minions.length).toBe(2);
-        expect(roleC.child.attack.state.current).toBe(3); // Kul Tiran Chaplain: 3/2
-        expect(roleC.child.health.state.current).toBe(2);
+        expect(roleC.child.attack.state.current).toBe(2); // Kul Tiran Chaplain: 3/2
+        expect(roleC.child.health.state.current).toBe(3);
 
         // Water Elemental should have +2 Health
         expect(roleD.child.attack.state.current).toBe(3); // Attack unchanged

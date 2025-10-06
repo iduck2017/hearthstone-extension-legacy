@@ -5,9 +5,9 @@
 
 import { GameModel, BoardModel, DeckModel, HandModel, MageModel, PlayerModel, TimeUtil, SelectUtil, ManaModel } from "hearthstone-core";
 import { BloodmageThalnosModel } from ".";
-import { boot } from "../../backup/src2/boot";
 import { FireballModel } from "../fireball";
 import { WispModel } from "../wisp";
+import { boot } from "../boot";
 
 describe('bloodmage-thalnos', () => {
     const game = new GameModel(() => ({

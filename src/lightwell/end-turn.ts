@@ -30,7 +30,7 @@ export class LightwellEndTurnModel extends EndTurnHookModel {
         const roles = player.query()
             .filter(role => {
                 const health = role.child.health;
-                if (health.state.maxium > health.state.current) return true;
+                if (health.state.maximum > health.state.current) return true;
                 return false;
             })
         
