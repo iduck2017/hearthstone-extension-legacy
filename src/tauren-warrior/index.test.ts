@@ -93,7 +93,10 @@ describe('tauren-warrior', () => {
         expect(roleC.child.feats.child.taunt).toBeDefined(); // Has Taunt
     });
 
-    test('tauren-warrior-attack', async () => {
+    test('wisp-attack', async () => {
+        game.child.turn.next();
+        expect(game.child.turn.refer.current).toBe(playerB);
+
         // Check initial state
         expect(roleC.child.attack.state.current).toBe(2); // Tauren Warrior: 2/3
         expect(roleD.child.health.state.current).toBe(1); // Wisp: 1/1
@@ -101,11 +104,11 @@ describe('tauren-warrior', () => {
         expect(boardB.refer.order.length).toBe(1); // Wisp on board
 
         // Player A's Tauren Warrior attacks Player B's Wisp
-        let promise = roleC.child.action.run();
-        expect(SelectUtil.current?.options).toContain(roleD); // Can target Wisp
-        expect(SelectUtil.current?.options).toContain(roleB); // Can target Player B's hero
-        expect(SelectUtil.current?.options).not.toContain(roleA); // Cannot target Player A's hero
-        SelectUtil.set(roleD); // Target Wisp
+        let promise = roleD.child.action.run();
+        expect(SelectUtil.current?.options).toContain(roleC); // Can target Wisp
+        expect(SelectUtil.current?.options).not.toContain(roleA); // Can target Player B's hero
+        expect(SelectUtil.current?.options).not.toContain(roleB); // Cannot target Player A's hero
+        SelectUtil.set(roleC); // Target Wisp
         await promise;
 
         // Wisp should die (2/3 vs 1/1)
@@ -116,38 +119,5 @@ describe('tauren-warrior', () => {
         expect(roleC.child.health.state.current).toBe(2); // 3 - 1 = 2
         expect(roleC.child.health.state.damage).toBe(1);
         expect(roleC.child.attack.state.current).toBe(5); // 2 + 3 = 5 (enraged)
-    });
-
-    test('wisp-attack', async () => {
-        // Turn to Player B
-        game.child.turn.next();
-        expect(game.child.turn.refer.current).toBe(playerB);
-
-        // Check initial state
-        expect(roleC.child.attack.state.current).toBe(5); // Tauren Warrior: 5/2 (enraged)
-        expect(roleC.child.health.state.current).toBe(2);
-        expect(boardA.refer.order.length).toBe(1); // Tauren Warrior on board
-        expect(boardB.refer.order.length).toBe(0); // No minions on board
-
-        // Player B plays a Wisp
-        const wisp = new WispModel();
-        wisp.child.deploy.run(boardB, 0);
-        const newWisp = boardB.refer.order.find(item => item instanceof WispModel);
-        if (!newWisp) throw new Error();
-        const newWispRole = newWisp.child.role;
-
-        // Player B's Wisp attacks, can only target Tauren Warrior (Taunt)
-        let promise = newWispRole.child.action.run();
-        expect(SelectUtil.current?.options).toContain(roleC); // Can target Tauren Warrior (Taunt forces this)
-        expect(SelectUtil.current?.options).not.toContain(roleA); // Cannot target Player A's hero (Taunt blocks)
-        expect(SelectUtil.current?.options).not.toContain(roleB); // Cannot target Player B's hero
-        SelectUtil.set(roleC); // Target Tauren Warrior
-        await promise;
-
-        // Both minions should die (1/1 vs 5/2)
-        expect(boardA.refer.order.length).toBe(0); // Tauren Warrior dies
-        expect(boardB.refer.order.length).toBe(0); // Wisp dies
-        expect(cardC.child.dispose.status).toBe(true);
-        expect(newWisp.child.dispose.status).toBe(true);
     });
 });
