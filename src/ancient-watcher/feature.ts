@@ -38,7 +38,6 @@ export class AncientWatcherFeatureModel extends FeatureModel<
     // Disable attack action
     @StateUtil.on(self => self.route.role?.proxy.child.action.decor)
     private onCheck(that: RoleActionModel, decor: RoleActionDecor) {
-        console.log('onCheck', this.state.isActive);
         if (!this.state.isActive) return;
         decor.lock()
     }

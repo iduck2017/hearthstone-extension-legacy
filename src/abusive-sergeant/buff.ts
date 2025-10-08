@@ -1,5 +1,4 @@
 import { GameModel, IRoleBuffModel, RoleModel, TurnModel } from "hearthstone-core";
-import { CardModel } from "hearthstone-core/dist/type/models/cards";
 import { DebugUtil, Event, EventUtil, Loader, LogLevel, StoreUtil, TranxUtil } from "set-piece";
 
 @StoreUtil.is('abusive-sergeant-buff')
