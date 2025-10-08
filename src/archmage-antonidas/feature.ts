@@ -38,6 +38,7 @@ export class ArchmageAntonidasFeatureModel extends FeatureModel<
 
     @EventUtil.on(self => self.route.player?.proxy.all(SpellCardModel).event.onPlay)
     private onPlay(that: SpellCardModel, event: Event) {
+        if (!this.route.board) return;
         const player = this.route.player;
         if (!player) return;
         // Add a Fireball spell to the player's hand

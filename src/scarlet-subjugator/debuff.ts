@@ -37,6 +37,7 @@ export class ScarletSubjugatorDebuffModel extends IRoleBuffModel<
 
     @EventUtil.on(self => self.route.game?.proxy.child.turn.event.onStart)
     public async onStart(that: TurnModel, event: Event) {
+        if (!this.route.board) return;
         const player = this.refer.player;
         console.log('onStart', player?.child.hero.name)
         if (!player) return;

@@ -38,7 +38,7 @@ export class ManaWyrmFeatureModel extends FeatureModel<
 
     @EventUtil.on(self => self.route.player?.proxy.all(SpellCardModel).event.onPlay)
     private onPlay(that: SpellCardModel, event: Event) {
-        console.log('onPlay', this.state.isActive)
+        if (!this.route.board) return;
         const minion = this.route.minion;
         if (!minion) return;
         const player = this.route.player;

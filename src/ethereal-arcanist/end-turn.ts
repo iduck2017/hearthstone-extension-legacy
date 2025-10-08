@@ -37,6 +37,7 @@ export class EtherealArcanistFeatureModel extends EndTurnHookModel<
 
     protected doRun(isCurrent: boolean) {
         if (!isCurrent) return;
+        if (!this.route.board) return;
 
         const player = this.route.player;
         if (!player) return;

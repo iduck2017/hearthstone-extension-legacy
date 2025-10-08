@@ -37,6 +37,7 @@ export class DemolisherFeatureModel extends StartTurnHookModel<
 
     protected async doRun(isCurrent: boolean) {
         if (!isCurrent) return;
+        if (!this.route.board) return;
 
         const player = this.route.player;
         const opponent = player?.refer.opponent;
