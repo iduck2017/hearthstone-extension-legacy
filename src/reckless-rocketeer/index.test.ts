@@ -57,8 +57,8 @@ describe('reckless-rocketeer', () => {
     const boardA = playerA.child.board;
     const boardB = playerB.child.board;
     const handA = playerA.child.hand;
-    const cardC = handA.refer.order.find(item => item instanceof RecklessRocketeerModel);
-    const cardD = boardB.refer.order.find(item => item instanceof WispModel);
+    const cardC = handA.refer.queue?.find(item => item instanceof RecklessRocketeerModel);
+    const cardD = boardB.refer.queue?.find(item => item instanceof WispModel);
     if (!cardC || !cardD) throw new Error();
     const roleA = playerA.child.hero.child.role;
     const roleB = playerB.child.hero.child.role;
@@ -69,8 +69,8 @@ describe('reckless-rocketeer', () => {
         // Check initial state
         expect(roleC.child.attack.state.current).toBe(5); // Reckless Rocketeer: 5/2
         expect(roleC.child.health.state.current).toBe(2);
-        expect(handA.refer.order.length).toBe(1); // Reckless Rocketeer in hand
-        expect(boardA.refer.order.length).toBe(0); // No minions on board
+        expect(handA.refer.queue?.length).toBe(1); // Reckless Rocketeer in hand
+        expect(boardA.refer.queue?.length).toBe(0); // No minions on board
         expect(playerA.child.mana.state.current).toBe(10); // Full mana
 
         // Play Reckless Rocketeer
@@ -79,8 +79,8 @@ describe('reckless-rocketeer', () => {
         await promise;
 
         // Reckless Rocketeer should be on board
-        expect(boardA.refer.order.length).toBe(1); // Reckless Rocketeer on board
-        expect(handA.refer.order.length).toBe(0); // Reckless Rocketeer moved to board
+        expect(boardA.refer.queue?.length).toBe(1); // Reckless Rocketeer on board
+        expect(handA.refer.queue?.length).toBe(0); // Reckless Rocketeer moved to board
         expect(playerA.child.mana.state.current).toBe(4); // 10 - 6 = 4
 
         // Check that Reckless Rocketeer has Charge (can attack immediately)

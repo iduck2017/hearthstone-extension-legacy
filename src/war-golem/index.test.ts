@@ -60,7 +60,7 @@ describe('war-golem', () => {
     const playerB = game.child.playerB;
     const boardA = playerA.child.board;
     const handA = playerA.child.hand;
-    const cardC = handA.refer.order.find(item => item instanceof WarGolemModel);
+    const cardC = handA.refer.queue?.find(item => item instanceof WarGolemModel);
     if (!cardC) throw new Error();
     const roleA = playerA.child.hero.child.role;
     const roleB = playerB.child.hero.child.role;
@@ -70,8 +70,8 @@ describe('war-golem', () => {
         // Check initial state
         expect(roleC.child.attack.state.current).toBe(7); // War Golem: 7/7
         expect(roleC.child.health.state.current).toBe(7);
-        expect(handA.refer.order.length).toBe(1); // War Golem in hand
-        expect(boardA.refer.order.length).toBe(0); // No minions on board
+        expect(handA.refer.queue?.length).toBe(1); // War Golem in hand
+        expect(boardA.refer.queue?.length).toBe(0); // No minions on board
         expect(playerA.child.mana.state.current).toBe(10); // Full mana
 
         // Play War Golem
@@ -80,8 +80,8 @@ describe('war-golem', () => {
         await promise;
 
         // War Golem should be on board
-        expect(boardA.refer.order.length).toBe(1); // War Golem on board
-        expect(handA.refer.order.length).toBe(0); // War Golem moved to board
+        expect(boardA.refer.queue?.length).toBe(1); // War Golem on board
+        expect(handA.refer.queue?.length).toBe(0); // War Golem moved to board
         expect(playerA.child.mana.state.current).toBe(3); // 10 - 7 = 3
     });
 
@@ -93,7 +93,7 @@ describe('war-golem', () => {
         // Check initial state
         expect(roleC.child.health.state.current).toBe(7); // War Golem: 7/7
         expect(roleB.child.health.state.current).toBe(30); // Player B hero: 30 health
-        expect(boardA.refer.order.length).toBe(1); // War Golem on board
+        expect(boardA.refer.queue?.length).toBe(1); // War Golem on board
 
         // Player A's War Golem attacks Player B's hero
         let promise = roleC.child.action.run();

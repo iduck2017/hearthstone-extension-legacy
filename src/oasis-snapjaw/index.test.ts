@@ -59,8 +59,8 @@ describe('oasis-snapjaw', () => {
     const boardA = playerA.child.board;
     const boardB = playerB.child.board;
     const handA = playerA.child.hand;
-    const cardC = handA.refer.order.find(item => item instanceof OasisSnapjawModel);
-    const cardD = boardB.refer.order.find(item => item instanceof OasisSnapjawModel);
+    const cardC = handA.refer.queue?.find(item => item instanceof OasisSnapjawModel);
+    const cardD = boardB.refer.queue?.find(item => item instanceof OasisSnapjawModel);
     if (!cardC || !cardD) throw new Error();
     const roleC = cardC.child.role;
     const roleD = cardD.child.role;
@@ -70,8 +70,8 @@ describe('oasis-snapjaw', () => {
         // Check initial state
         expect(roleC.child.attack.state.current).toBe(2); // Oasis Snapjaw: 2/7
         expect(roleC.child.health.state.current).toBe(7);
-        expect(handA.refer.order.length).toBe(1); // Oasis Snapjaw in hand
-        expect(boardA.refer.order.length).toBe(0); // No minions on board
+        expect(handA.refer.queue?.length).toBe(1); // Oasis Snapjaw in hand
+        expect(boardA.refer.queue?.length).toBe(0); // No minions on board
         expect(playerA.child.mana.state.current).toBe(10); // Full mana
 
         // Play Oasis Snapjaw
@@ -80,8 +80,8 @@ describe('oasis-snapjaw', () => {
         await promise;
 
         // Oasis Snapjaw should be on board
-        expect(boardA.refer.order.length).toBe(1); // Oasis Snapjaw on board
-        expect(handA.refer.order.length).toBe(0); // Oasis Snapjaw moved to board
+        expect(boardA.refer.queue?.length).toBe(1); // Oasis Snapjaw on board
+        expect(handA.refer.queue?.length).toBe(0); // Oasis Snapjaw moved to board
         expect(playerA.child.mana.state.current).toBe(6); // 10 - 4 = 6
 
         // Check that Oasis Snapjaw has no special abilities
@@ -114,7 +114,7 @@ describe('oasis-snapjaw', () => {
         expect(roleD.child.health.state.damage).toBe(2);
         expect(cardD.child.dispose.status).toBe(false);
         
-        expect(boardA.refer.order.length).toBe(1); // Oasis Snapjaw on board
-        expect(boardB.refer.order.length).toBe(1); // Oasis Snapjaw on board
+        expect(boardA.refer.queue?.length).toBe(1); // Oasis Snapjaw on board
+        expect(boardB.refer.queue?.length).toBe(1); // Oasis Snapjaw on board
     });
 });

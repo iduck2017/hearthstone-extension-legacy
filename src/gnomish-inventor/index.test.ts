@@ -61,7 +61,7 @@ describe('gnomish-inventor', () => {
     const boardA = playerA.child.board;
     const handA = playerA.child.hand;
     const deckA = playerA.child.deck;
-    const cardC = handA.refer.order.find(item => item instanceof GnomishInventorModel);
+    const cardC = handA.refer.queue?.find(item => item instanceof GnomishInventorModel);
     if (!cardC) throw new Error();
     const roleA = playerA.child.hero.child.role;
     const roleB = playerB.child.hero.child.role;
@@ -71,9 +71,9 @@ describe('gnomish-inventor', () => {
         // Check initial state
         expect(roleC.child.attack.state.current).toBe(2); // Gnomish Inventor: 2/4
         expect(roleC.child.health.state.current).toBe(4);
-        expect(handA.refer.order.length).toBe(1); // Gnomish Inventor in hand
-        expect(deckA.refer.order.length).toBe(2); // 2 Wisp in deck
-        expect(boardA.refer.order.length).toBe(0); // No minions on board
+        expect(handA.refer.queue?.length).toBe(1); // Gnomish Inventor in hand
+        expect(deckA.refer.queue?.length).toBe(2); // 2 Wisp in deck
+        expect(boardA.refer.queue?.length).toBe(0); // No minions on board
         expect(playerA.child.mana.state.current).toBe(10); // Full mana
 
         // Play Gnomish Inventor
@@ -82,9 +82,9 @@ describe('gnomish-inventor', () => {
         await promise;
 
         // Gnomish Inventor should be on board
-        expect(boardA.refer.order.length).toBe(1); // Gnomish Inventor on board
-        expect(handA.refer.order.length).toBe(1); // 1 card drawn from deck (2 - 1 = 1)
-        expect(deckA.refer.order.length).toBe(1); // 1 Wisp remaining in deck
+        expect(boardA.refer.queue?.length).toBe(1); // Gnomish Inventor on board
+        expect(handA.refer.queue?.length).toBe(1); // 1 card drawn from deck (2 - 1 = 1)
+        expect(deckA.refer.queue?.length).toBe(1); // 1 Wisp remaining in deck
         expect(playerA.child.mana.state.current).toBe(6); // 10 - 4 = 6
     });
 });

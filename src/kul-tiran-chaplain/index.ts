@@ -18,41 +18,38 @@
  */
 
 import { ClassType, CostModel, LibraryUtil, RarityType, MinionCardModel, MinionFeatsModel, RoleAttackModel, RoleHealthModel, RoleModel } from "hearthstone-core";
-import { Loader } from "set-piece";
 import { KulTiranChaplainBattlecryModel } from "./battlecry";
 
 @LibraryUtil.is('kul-tiran-chaplain')
 export class KulTiranChaplainModel extends MinionCardModel {
-    constructor(loader?: Loader<KulTiranChaplainModel>) {
-        super(() => {
-            const props = loader?.() ?? {};
-            return {
-                uuid: props.uuid,
-                state: {
-                    name: 'Kul Tiran Chaplain',
-                    desc: 'Battlecry: Give a friendly minion +2 Health.',
-                    flavorDesc: '"The maritime Kul Tiran clergy are unique among priests for using holy saltwater."',
-                    isCollectible: true,
-                    rarity: RarityType.RARE,
-                    class: ClassType.PRIEST,
-                    races: [],
-                    ...props.state
-                },
-                child: {
-                    cost: new CostModel(() => ({ state: { origin: 2 }})),
-                    role: new RoleModel(() => ({
-                        child: {
-                            attack: new RoleAttackModel(() => ({ state: { origin: 2 }})),
-                            health: new RoleHealthModel(() => ({ state: { origin: 3 }})),
-                        }
-                    })),
-                    feats: new MinionFeatsModel(() => ({
-                        child: { battlecry: [new KulTiranChaplainBattlecryModel()]}
-                    })),
-                    ...props.child
-                },
-                refer: { ...props.refer }
-            };
+    constructor(props?: KulTiranChaplainModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: {
+                name: 'Kul Tiran Chaplain',
+                desc: 'Battlecry: Give a friendly minion +2 Health.',
+                flavorDesc: '"The maritime Kul Tiran clergy are unique among priests for using holy saltwater."',
+                isCollectible: true,
+                rarity: RarityType.RARE,
+                class: ClassType.PRIEST,
+                races: [],
+                ...props.state
+            },
+            child: {
+                cost: new CostModel({ state: { origin: 2 }}),
+                role: new RoleModel({
+                    child: {
+                        attack: new RoleAttackModel({ state: { origin: 2 }}),
+                        health: new RoleHealthModel({ state: { origin: 3 }}),
+                    }
+                }),
+                feats: new MinionFeatsModel({
+                    child: { battlecry: [new KulTiranChaplainBattlecryModel()]}
+                }),
+                ...props.child
+            },
+            refer: { ...props.refer }
         });
     }
 }

@@ -67,7 +67,7 @@ describe('shadow-word-pain', () => {
         // Check initial state
         expect(boardB.child.minions.length).toBe(2);
         expect(playerA.child.mana.state.current).toBe(10);
-        expect(handA.refer.order.length).toBe(1);
+        expect(handA.refer.queue?.length).toBe(1);
 
         // Player A uses Shadow Word: Pain
         const promise = cardC.play();
@@ -85,7 +85,7 @@ describe('shadow-word-pain', () => {
         expect(boardB.child.minions[0]).toBe(cardD);
 
         // Shadow Word: Pain should be consumed
-        expect(handA.refer.order.length).toBe(0); // Shadow Word: Pain consumed
+        expect(handA.refer.queue?.length).toBe(0); // Shadow Word: Pain consumed
         expect(playerA.child.mana.state.current).toBe(8); // 10 - 2 cost
     });
 });

@@ -57,7 +57,7 @@ describe('ragnaros-the-firelord', () => {
     const playerB = game.child.playerB;
     const boardA = playerA.child.board;
     const handA = playerA.child.hand;
-    const cardC = handA.refer.order.find(item => item instanceof RagnarosTheFirelordModel);
+    const cardC = handA.refer.queue?.find(item => item instanceof RagnarosTheFirelordModel);
     if (!cardC) throw new Error();
     const roleA = playerA.child.hero.child.role;
     const roleB = playerB.child.hero.child.role;
@@ -67,8 +67,8 @@ describe('ragnaros-the-firelord', () => {
         // Check initial state
         expect(roleC.child.attack.state.current).toBe(8); // Ragnaros: 8/8
         expect(roleC.child.health.state.current).toBe(8);
-        expect(handA.refer.order.length).toBe(1); // Ragnaros in hand
-        expect(boardA.refer.order.length).toBe(0); // No minions on board
+        expect(handA.refer.queue?.length).toBe(1); // Ragnaros in hand
+        expect(boardA.refer.queue?.length).toBe(0); // No minions on board
         expect(playerA.child.mana.state.current).toBe(10); // Full mana
 
         // Play Ragnaros the Firelord
@@ -77,8 +77,8 @@ describe('ragnaros-the-firelord', () => {
         await promise;
 
         // Ragnaros should be on board
-        expect(boardA.refer.order.length).toBe(1); // Ragnaros on board
-        expect(handA.refer.order.length).toBe(0); // Ragnaros moved to board
+        expect(boardA.refer.queue?.length).toBe(1); // Ragnaros on board
+        expect(handA.refer.queue?.length).toBe(0); // Ragnaros moved to board
         expect(playerA.child.mana.state.current).toBe(2); // 10 - 8 = 2
 
         // Check that Ragnaros cannot attack
@@ -89,7 +89,7 @@ describe('ragnaros-the-firelord', () => {
     test('turn-end', async () => {
         // Check initial state
         expect(roleB.child.health.state.current).toBe(30); // Player B hero: 30 health
-        expect(boardA.refer.order.length).toBe(1); // Ragnaros on board
+        expect(boardA.refer.queue?.length).toBe(1); // Ragnaros on board
 
         // End Player A's turn - Ragnaros should deal 8 damage to Player B's hero
         game.child.turn.next();

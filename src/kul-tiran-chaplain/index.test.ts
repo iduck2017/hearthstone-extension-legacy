@@ -66,7 +66,7 @@ describe('kul-tiran-chaplain', () => {
         expect(roleD.child.health.state.current).toBe(6);
         expect(playerA.child.mana.state.current).toBe(10);
         expect(boardA.child.minions.length).toBe(1);
-        expect(handA.refer.order.length).toBe(1);
+        expect(handA.refer.queue?.length).toBe(1);
 
         // Player A plays Kul Tiran Chaplain
         const promise = cardC.play();
@@ -86,7 +86,7 @@ describe('kul-tiran-chaplain', () => {
         expect(roleD.child.health.state.current).toBe(8); // 6 + 2 = 8
 
         // Kul Tiran Chaplain should be consumed
-        expect(handA.refer.order.length).toBe(0); // Kul Tiran Chaplain consumed
+        expect(handA.refer.queue?.length).toBe(0); // Kul Tiran Chaplain consumed
         expect(playerA.child.mana.state.current).toBe(8); // 10 - 2 cost
     });
 });

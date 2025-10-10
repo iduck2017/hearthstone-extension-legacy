@@ -1,24 +1,21 @@
 import { CostDecor, CostModel, FeatureModel, ManaModel, SecretCardModel, TurnModel } from "hearthstone-core";
-import { Event, EventUtil, Loader, Model, StateUtil, TemplUtil } from "set-piece";
+import { Event, EventUtil, Model, StateUtil, TemplUtil } from "set-piece";
 
 @TemplUtil.is('kirin-tor-mage-feature')
 export class KirinTorMageContextModel extends FeatureModel {
-    constructor(loader?: Loader<KirinTorMageContextModel>) {
-        super(() => {
-            const props = loader?.() ?? {}
-            return {
-                uuid: props.uuid,
-                state: {
-                    name: "Kirin Tor Mage's feature",
-                    desc: "The next Secret you play this turn costs (0).",
-                    isActive: true,
-                    ...props.state
-                },
-                child: { ...props.child },
-                refer: { ...props.refer },
-                route: {},
-            }
-        })
+    constructor(props?: KirinTorMageContextModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: {
+                name: "Kirin Tor Mage's feature",
+                desc: "The next Secret you play this turn costs (0).",
+                isActive: true,
+                ...props.state
+            },
+            child: { ...props.child },
+            refer: { ...props.refer },
+        });
     }
 
     @StateUtil.on(self => self.route.player?.proxy.child.hand.child.spells.child.cost.decor)

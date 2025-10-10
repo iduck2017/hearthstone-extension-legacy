@@ -63,9 +63,9 @@ describe('arcane-devourer', () => {
     const boardA = playerA.child.board;
     const handA = playerA.child.hand;
     const handB = playerB.child.hand;
-    const cardC = handA.refer.order.find(item => item instanceof FireballModel);
-    const cardD = handB.refer.order.find(item => item instanceof FrostboltModel);
-    const cardE = boardA.refer.order.find(item => item instanceof ArcaneDevourerModel);
+    const cardC = handA.refer.queue?.find(item => item instanceof FireballModel);
+    const cardD = handB.refer.queue?.find(item => item instanceof FrostboltModel);
+    const cardE = boardA.refer.queue?.find(item => item instanceof ArcaneDevourerModel);
     if (!cardC || !cardD || !cardE) throw new Error();
     const roleA = playerA.child.hero.child.role;
     const roleB = playerB.child.hero.child.role;
@@ -76,7 +76,7 @@ describe('arcane-devourer', () => {
         expect(roleE.child.attack.state.current).toBe(4); // Arcane Devourer: 4/8
         expect(roleE.child.health.state.current).toBe(8);
         expect(playerA.child.mana.state.current).toBe(10);
-        expect(handA.refer.order.filter(item => item instanceof FireballModel).length).toBe(1);
+        expect(handA.refer.queue?.filter(item => item instanceof FireballModel).length).toBe(1);
 
         // Player A casts Fireball
         const promise = cardC.play();
@@ -89,7 +89,7 @@ describe('arcane-devourer', () => {
         expect(roleE.child.attack.state.current).toBe(6); // 4 + 2
         expect(roleE.child.health.state.current).toBe(10); // 8 + 2
         expect(playerA.child.mana.state.current).toBe(6); // 10 - 4 cost (Fireball costs 4)
-        expect(handA.refer.order.filter(item => item instanceof FireballModel).length).toBe(0);
+        expect(handA.refer.queue?.filter(item => item instanceof FireballModel).length).toBe(0);
     });
 
     test('frostbolt-cast', async () => {
@@ -101,7 +101,7 @@ describe('arcane-devourer', () => {
         expect(roleE.child.attack.state.current).toBe(6); // Previous buff
         expect(roleE.child.health.state.current).toBe(10);
         expect(playerB.child.mana.state.current).toBe(10);
-        expect(handB.refer.order.filter(item => item instanceof FrostboltModel).length).toBe(1);
+        expect(handB.refer.queue?.filter(item => item instanceof FrostboltModel).length).toBe(1);
 
         // Player B casts Frostbolt
         const promise = cardD.play();
@@ -114,6 +114,6 @@ describe('arcane-devourer', () => {
         expect(roleE.child.attack.state.current).toBe(6); // unchanged
         expect(roleE.child.health.state.current).toBe(10); // unchanged
         expect(playerB.child.mana.state.current).toBe(8); // 10 - 2 cost (Frostbolt costs 2)
-        expect(handB.refer.order.filter(item => item instanceof FrostboltModel).length).toBe(0);
+        expect(handB.refer.queue?.filter(item => item instanceof FrostboltModel).length).toBe(0);
     });
 });

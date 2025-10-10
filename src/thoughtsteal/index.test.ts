@@ -67,15 +67,15 @@ describe('thoughtsteal', () => {
     test('thoughtsteal-cast', async () => {
         // Check initial state
         expect(playerA.child.mana.state.current).toBe(10);
-        expect(handA.refer.order.length).toBe(1);
-        expect(deckB.refer.order.length).toBe(2);
+        expect(handA.refer.queue?.length).toBe(1);
+        expect(deckB.refer.queue?.length).toBe(2);
 
         // Player A uses Thoughtsteal
         const promise = cardC.play();
         await promise;
 
         // Player A should have copied 2 cards from Player B's deck
-        expect(handA.refer.order.length).toBe(2); // Thoughtsteal consumed, 2 cards copied
+        expect(handA.refer.queue?.length).toBe(2); // Thoughtsteal consumed, 2 cards copied
         expect(handA.child.minions.length).toBe(2); // Should be 2 copies (1 Wisp + 1 Stonetusk Boar)
 
         const cardF = handA.child.minions.find(item => item instanceof WispModel);

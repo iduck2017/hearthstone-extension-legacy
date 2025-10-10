@@ -33,7 +33,7 @@ export class TwilightDrakeBattlecryModel extends MinionBattlecryModel<[]> {
         if (!player) return;
 
         const hand = player.child.hand;
-        const size = hand.refer.order.length;
+        const size = hand.refer.queue?.length;
         console.log('size', size);
         if (!size) return;
 

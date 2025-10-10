@@ -62,8 +62,8 @@ describe('emperor-cobra', () => {
     const boardA = playerA.child.board;
     const boardB = playerB.child.board;
     const handA = playerA.child.hand;
-    const cardC = handA.refer.order.find(item => item instanceof EmperorCobraModel);
-    const cardD = boardB.refer.order.find(item => item instanceof MogushanWardenModel);
+    const cardC = handA.refer.queue?.find(item => item instanceof EmperorCobraModel);
+    const cardD = boardB.refer.queue?.find(item => item instanceof MogushanWardenModel);
     if (!cardC || !cardD) throw new Error();
     const roleA = playerA.child.hero.child.role;
     const roleB = playerB.child.hero.child.role;
@@ -74,8 +74,8 @@ describe('emperor-cobra', () => {
         // Check initial state
         expect(roleC.child.attack.state.current).toBe(2); // Emperor Cobra: 2/3
         expect(roleC.child.health.state.current).toBe(3);
-        expect(handA.refer.order.length).toBe(1); // Emperor Cobra in hand
-        expect(boardA.refer.order.length).toBe(0); // No minions on board
+        expect(handA.refer.queue?.length).toBe(1); // Emperor Cobra in hand
+        expect(boardA.refer.queue?.length).toBe(0); // No minions on board
         expect(playerA.child.mana.state.current).toBe(10); // Full mana
 
         // Play Emperor Cobra
@@ -84,8 +84,8 @@ describe('emperor-cobra', () => {
         await promise;
 
         // Emperor Cobra should be on board
-        expect(boardA.refer.order.length).toBe(1); // Emperor Cobra on board
-        expect(handA.refer.order.length).toBe(0); // Emperor Cobra moved to board
+        expect(boardA.refer.queue?.length).toBe(1); // Emperor Cobra on board
+        expect(handA.refer.queue?.length).toBe(0); // Emperor Cobra moved to board
         expect(playerA.child.mana.state.current).toBe(7); // 10 - 3 = 7
 
         // Check that Emperor Cobra has Poisonous
@@ -100,8 +100,8 @@ describe('emperor-cobra', () => {
         // Check initial state
         expect(roleC.child.health.state.current).toBe(3); // Emperor Cobra: 2/3
         expect(roleD.child.health.state.current).toBe(7); // Mogu'shan Warden: 1/7
-        expect(boardA.refer.order.length).toBe(1); // Emperor Cobra on board
-        expect(boardB.refer.order.length).toBe(1); // Mogu'shan Warden on board
+        expect(boardA.refer.queue?.length).toBe(1); // Emperor Cobra on board
+        expect(boardB.refer.queue?.length).toBe(1); // Mogu'shan Warden on board
 
         // Mogu'shan Warden attacks Emperor Cobra - should die from Poisonous despite high health
         let promise = roleD.child.action.run();
@@ -117,7 +117,7 @@ describe('emperor-cobra', () => {
         expect(cardD.child.dispose.refer.source).toBe(cardC);
         expect(cardD.child.dispose.state.isLock).toBe(true);
         
-        expect(boardB.refer.order.length).toBe(0); // Mogu'shan Warden dies
+        expect(boardB.refer.queue?.length).toBe(0); // Mogu'shan Warden dies
         // Emperor Cobra should also take damage from the attack
         expect(roleC.child.health.state.current).toBe(2); // Emperor Cobra: 3 - 1 = 2
     });

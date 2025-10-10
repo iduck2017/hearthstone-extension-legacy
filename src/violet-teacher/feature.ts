@@ -49,7 +49,7 @@ export class VioletTeacherFeatureModel extends FeatureModel<
         const board = player.child.board;
         
         // Summon a Violet Apprentice
-        const index = board.refer.order.indexOf(minion);
+        const index = board.refer.queue?.indexOf(minion);
         const target = new VioletApprenticeModel();
         target.child.deploy.run(board, index === -1 ? -1 : index + 1);
     }

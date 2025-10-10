@@ -69,8 +69,8 @@ describe('power-word-shield', () => {
         expect(roleD.child.attack.state.current).toBe(1); // Stonetusk Boar: 1/1
         expect(roleD.child.health.state.current).toBe(1);
         expect(playerA.child.mana.state.current).toBe(10);
-        expect(handA.refer.order.length).toBe(1);
-        expect(deckA.refer.order.length).toBe(3);
+        expect(handA.refer.queue?.length).toBe(1);
+        expect(deckA.refer.queue?.length).toBe(3);
 
         // Player A uses Power Word: Shield on Stonetusk Boar
         const promise = cardC.play();
@@ -84,8 +84,8 @@ describe('power-word-shield', () => {
 
         
         // Player A should have drawn a card
-        expect(handA.refer.order.length).toBe(1); // Power Word: Shield consumed, 1 card drawn
-        expect(deckA.refer.order.length).toBe(2); // 3 - 1 = 2 (1 card drawn from deck)
+        expect(handA.refer.queue?.length).toBe(1); // Power Word: Shield consumed, 1 card drawn
+        expect(deckA.refer.queue?.length).toBe(2); // 3 - 1 = 2 (1 card drawn from deck)
 
         expect(playerA.child.mana.state.current).toBe(9); // 10 - 1 cost
     });

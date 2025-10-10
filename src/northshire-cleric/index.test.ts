@@ -99,8 +99,8 @@ describe('northshire-cleric', () => {
         expect(roleE.child.health.state.current).toBe(2); // Damaged
 
         // Check initial hand and deck size
-        expect(handA.refer.order.length).toBe(1); // Only Circle of Healing
-        expect(deckA.refer.order.length).toBe(5); // 5 Wisps
+        expect(handA.refer.queue?.length).toBe(1); // Only Circle of Healing
+        expect(deckA.refer.queue?.length).toBe(5); // 5 Wisps
 
         // Player A uses Circle of Healing
         const promise = cardD.play();
@@ -111,8 +111,8 @@ describe('northshire-cleric', () => {
         expect(roleE.child.health.state.current).toBe(3); // 2 + 4 = 3 (capped at max)
 
         // Player A should have drawn 2 cards (one for each minion healed)
-        expect(handA.refer.order.length).toBe(2); 
-        expect(deckA.refer.order.length).toBe(3); // 5 - 2 = 3 (2 cards drawn from deck)
+        expect(handA.refer.queue?.length).toBe(2); 
+        expect(deckA.refer.queue?.length).toBe(3); // 5 - 2 = 3 (2 cards drawn from deck)
 
         expect(playerA.child.mana.state.current).toBe(10); // 10 - 0 cost
     });

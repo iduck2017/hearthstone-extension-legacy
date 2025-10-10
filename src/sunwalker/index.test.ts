@@ -60,8 +60,8 @@ describe('sunwalker', () => {
     const boardA = playerA.child.board;
     const boardB = playerB.child.board;
     const handA = playerA.child.hand;
-    const cardC = handA.refer.order.find(item => item instanceof SunwalkerModel);
-    const cardD = boardB.refer.order.find(item => item instanceof WispModel);
+    const cardC = handA.refer.queue?.find(item => item instanceof SunwalkerModel);
+    const cardD = boardB.refer.queue?.find(item => item instanceof WispModel);
     if (!cardC || !cardD) throw new Error();
     const roleA = playerA.child.hero.child.role;
     const roleB = playerB.child.hero.child.role;
@@ -72,8 +72,8 @@ describe('sunwalker', () => {
         // Check initial state
         expect(roleC.child.attack.state.current).toBe(4); // Sunwalker: 4/5
         expect(roleC.child.health.state.current).toBe(5);
-        expect(handA.refer.order.length).toBe(1); // Sunwalker in hand
-        expect(boardA.refer.order.length).toBe(0); // No minions on board
+        expect(handA.refer.queue?.length).toBe(1); // Sunwalker in hand
+        expect(boardA.refer.queue?.length).toBe(0); // No minions on board
         expect(playerA.child.mana.state.current).toBe(10); // Full mana
 
         // Play Sunwalker
@@ -82,8 +82,8 @@ describe('sunwalker', () => {
         await promise;
 
         // Sunwalker should be on board
-        expect(boardA.refer.order.length).toBe(1); // Sunwalker on board
-        expect(handA.refer.order.length).toBe(0); // Sunwalker moved to board
+        expect(boardA.refer.queue?.length).toBe(1); // Sunwalker on board
+        expect(handA.refer.queue?.length).toBe(0); // Sunwalker moved to board
         expect(playerA.child.mana.state.current).toBe(4); // 10 - 6 = 4
 
         // Check that Sunwalker has Taunt and Divine Shield
@@ -97,8 +97,8 @@ describe('sunwalker', () => {
         expect(game.child.turn.refer.current).toBe(playerB);
 
         // Check that Wisp cannot attack hero due to Sunwalker's Taunt
-        expect(boardA.refer.order.length).toBe(1); // Sunwalker on board
-        expect(boardB.refer.order.length).toBe(1); // Wisp on board
+        expect(boardA.refer.queue?.length).toBe(1); // Sunwalker on board
+        expect(boardB.refer.queue?.length).toBe(1); // Wisp on board
         expect(roleD.child.attack.state.current).toBe(1); // Wisp: 1/1
         expect(roleD.child.health.state.current).toBe(1);
 

@@ -62,8 +62,8 @@ describe('stranglethorn-tiger', () => {
     const boardA = playerA.child.board;
     const boardB = playerB.child.board;
     const handA = playerA.child.hand;
-    const cardC = handA.refer.order.find(item => item instanceof StranglethornTigerModel);
-    const cardD = boardB.refer.order.find(item => item instanceof WispModel);
+    const cardC = handA.refer.queue?.find(item => item instanceof StranglethornTigerModel);
+    const cardD = boardB.refer.queue?.find(item => item instanceof WispModel);
     if (!cardC || !cardD) throw new Error();
     const roleA = playerA.child.hero.child.role;
     const roleB = playerB.child.hero.child.role;
@@ -74,8 +74,8 @@ describe('stranglethorn-tiger', () => {
         // Check initial state
         expect(roleC.child.attack.state.current).toBe(5); // Stranglethorn Tiger: 5/5
         expect(roleC.child.health.state.current).toBe(5);
-        expect(handA.refer.order.length).toBe(1); // Stranglethorn Tiger in hand
-        expect(boardA.refer.order.length).toBe(0); // No minions on board
+        expect(handA.refer.queue?.length).toBe(1); // Stranglethorn Tiger in hand
+        expect(boardA.refer.queue?.length).toBe(0); // No minions on board
         expect(playerA.child.mana.state.current).toBe(10); // Full mana
 
         // Play Stranglethorn Tiger
@@ -84,8 +84,8 @@ describe('stranglethorn-tiger', () => {
         await promise;
 
         // Stranglethorn Tiger should be on board
-        expect(boardA.refer.order.length).toBe(1); // Stranglethorn Tiger on board
-        expect(handA.refer.order.length).toBe(0); // Stranglethorn Tiger moved to board
+        expect(boardA.refer.queue?.length).toBe(1); // Stranglethorn Tiger on board
+        expect(handA.refer.queue?.length).toBe(0); // Stranglethorn Tiger moved to board
         expect(playerA.child.mana.state.current).toBe(5); // 10 - 5 = 5
 
         // Check that Stranglethorn Tiger has Stealth
@@ -100,8 +100,8 @@ describe('stranglethorn-tiger', () => {
         // Check initial state
         expect(roleC.child.health.state.current).toBe(5); // Stranglethorn Tiger: 5/5
         expect(roleA.child.health.state.current).toBe(30); // Player A hero: 30 health
-        expect(boardA.refer.order.length).toBe(1); // Stranglethorn Tiger on board
-        expect(boardB.refer.order.length).toBe(1); // Wisp on board
+        expect(boardA.refer.queue?.length).toBe(1); // Stranglethorn Tiger on board
+        expect(boardB.refer.queue?.length).toBe(1); // Wisp on board
 
         // Player B's Wisp attacks, can only target Player A's hero (Stranglethorn Tiger has Stealth)
         let promise = roleD.child.action.run();

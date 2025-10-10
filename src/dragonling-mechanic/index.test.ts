@@ -60,7 +60,7 @@ describe('dragonling-mechanic', () => {
     const playerB = game.child.playerB;
     const boardA = playerA.child.board;
     const handA = playerA.child.hand;
-    const cardC = handA.refer.order.find(item => item instanceof DragonlingMechanicModel);
+    const cardC = handA.refer.queue?.find(item => item instanceof DragonlingMechanicModel);
     if (!cardC) throw new Error();
     const roleA = playerA.child.hero.child.role;
     const roleB = playerB.child.hero.child.role;
@@ -70,8 +70,8 @@ describe('dragonling-mechanic', () => {
         // Check initial state
         expect(roleC.child.attack.state.current).toBe(2); // Dragonling Mechanic: 2/4
         expect(roleC.child.health.state.current).toBe(4);
-        expect(handA.refer.order.length).toBe(1); // Dragonling Mechanic in hand
-        expect(boardA.refer.order.length).toBe(0); // No minions on board
+        expect(handA.refer.queue?.length).toBe(1); // Dragonling Mechanic in hand
+        expect(boardA.refer.queue?.length).toBe(0); // No minions on board
         expect(playerA.child.mana.state.current).toBe(10); // Full mana
 
         // Play Dragonling Mechanic
@@ -80,12 +80,12 @@ describe('dragonling-mechanic', () => {
         await promise;
 
         // Dragonling Mechanic should be on board
-        expect(boardA.refer.order.length).toBe(2); // Dragonling Mechanic + Mechanical Dragonling on board
-        expect(handA.refer.order.length).toBe(0); // Dragonling Mechanic moved to board
+        expect(boardA.refer.queue?.length).toBe(2); // Dragonling Mechanic + Mechanical Dragonling on board
+        expect(handA.refer.queue?.length).toBe(0); // Dragonling Mechanic moved to board
         expect(playerA.child.mana.state.current).toBe(6); // 10 - 4 = 6
 
         // Check that Mechanical Dragonling was summoned
-        const cardD = boardA.refer.order.find(item => item instanceof MechanicalDragonlingModel);
+        const cardD = boardA.refer.queue?.find(item => item instanceof MechanicalDragonlingModel);
         expect(cardD).toBeDefined(); // Should have summoned a Mechanical Dragonling
         const roleD = cardD?.child.role;
         if (!roleD) throw new Error();

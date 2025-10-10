@@ -1,22 +1,20 @@
 import { MinionBattlecryModel, SelectEvent, RoleModel } from "hearthstone-core";
-import { Loader, TemplUtil } from "set-piece";
+import { TemplUtil } from "set-piece";
 import { KulTiranChaplainBuffModel } from "./buff";
 
 @TemplUtil.is('kul-tiran-chaplain-battlecry')
 export class KulTiranChaplainBattlecryModel extends MinionBattlecryModel<[RoleModel]> {
-    constructor(loader?: Loader<KulTiranChaplainBattlecryModel>) {
-        super(() => {
-            const props = loader?.() ?? {};
-            return {
-                uuid: props.uuid,
-                state: {
-                    name: 'Kul Tiran Chaplain\'s Battlecry',
-                    desc: 'Give a friendly minion +2 Health.',
-                    ...props.state,
-                },
-                child: { ...props.child },
-                refer: { ...props.refer },
-            };
+    constructor(props?: KulTiranChaplainBattlecryModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: {
+                name: 'Kul Tiran Chaplain\'s Battlecry',
+                desc: 'Give a friendly minion +2 Health.',
+                ...props.state,
+            },
+            child: { ...props.child },
+            refer: { ...props.refer },
         });
     }
 

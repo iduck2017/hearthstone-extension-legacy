@@ -69,7 +69,7 @@ describe('scarlet-subjugator', () => {
         expect(cardD.child.role.child.attack.state.current).toBe(3); // Water Elemental: 3/6
         expect(playerA.child.mana.state.current).toBe(10);
         expect(boardA.child.minions.length).toBe(0);
-        expect(handA.refer.order.length).toBe(1);
+        expect(handA.refer.queue?.length).toBe(1);
 
         // Player A plays Scarlet Subjugator
         const promise = cardC.play();
@@ -90,7 +90,7 @@ describe('scarlet-subjugator', () => {
         expect(roleD.child.health.state.current).toBe(6); // Health unchanged
       
         // Scarlet Subjugator should be consumed
-        expect(handA.refer.order.length).toBe(0); // Scarlet Subjugator consumed
+        expect(handA.refer.queue?.length).toBe(0); // Scarlet Subjugator consumed
         expect(playerA.child.mana.state.current).toBe(9); // 10 - 1 cost
     });
 

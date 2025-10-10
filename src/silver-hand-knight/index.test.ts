@@ -61,7 +61,7 @@ describe('silver-hand-knight', () => {
     const playerB = game.child.playerB;
     const boardA = playerA.child.board;
     const handA = playerA.child.hand;
-    const cardC = handA.refer.order.find(item => item instanceof SilverHandKnightModel);
+    const cardC = handA.refer.queue?.find(item => item instanceof SilverHandKnightModel);
     if (!cardC) throw new Error();
     const roleA = playerA.child.hero.child.role;
     const roleB = playerB.child.hero.child.role;
@@ -71,8 +71,8 @@ describe('silver-hand-knight', () => {
         // Check initial state
         expect(roleC.child.attack.state.current).toBe(4); // Silver Hand Knight: 4/4
         expect(roleC.child.health.state.current).toBe(4);
-        expect(handA.refer.order.length).toBe(1); // Silver Hand Knight in hand
-        expect(boardA.refer.order.length).toBe(0); // No minions on board
+        expect(handA.refer.queue?.length).toBe(1); // Silver Hand Knight in hand
+        expect(boardA.refer.queue?.length).toBe(0); // No minions on board
         expect(playerA.child.mana.state.current).toBe(10); // Full mana
 
         // Play Silver Hand Knight
@@ -81,12 +81,12 @@ describe('silver-hand-knight', () => {
         await promise;
 
         // Silver Hand Knight should be on board
-        expect(boardA.refer.order.length).toBe(2); // Silver Hand Knight + Squire on board
-        expect(handA.refer.order.length).toBe(0); // Silver Hand Knight moved to board
+        expect(boardA.refer.queue?.length).toBe(2); // Silver Hand Knight + Squire on board
+        expect(handA.refer.queue?.length).toBe(0); // Silver Hand Knight moved to board
         expect(playerA.child.mana.state.current).toBe(5); // 10 - 5 = 5
 
         // Check that Squire was summoned
-        const cardD = boardA.refer.order.find(item => item instanceof SquireModel);
+        const cardD = boardA.refer.queue?.find(item => item instanceof SquireModel);
         expect(cardD).toBeDefined();
         if (cardD) {
             expect(cardD.child.role.child.attack.state.current).toBe(2); // Squire: 2/2

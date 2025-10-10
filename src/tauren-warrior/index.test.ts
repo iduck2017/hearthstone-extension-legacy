@@ -63,8 +63,8 @@ describe('tauren-warrior', () => {
     const boardA = playerA.child.board;
     const boardB = playerB.child.board;
     const handA = playerA.child.hand;
-    const cardC = handA.refer.order.find(item => item instanceof TaurenWarriorModel);
-    const cardD = boardB.refer.order.find(item => item instanceof WispModel);
+    const cardC = handA.refer.queue?.find(item => item instanceof TaurenWarriorModel);
+    const cardD = boardB.refer.queue?.find(item => item instanceof WispModel);
     if (!cardC || !cardD) throw new Error();
     const roleA = playerA.child.hero.child.role;
     const roleB = playerB.child.hero.child.role;
@@ -75,8 +75,8 @@ describe('tauren-warrior', () => {
         // Check initial state
         expect(roleC.child.attack.state.current).toBe(2); // Tauren Warrior: 2/3
         expect(roleC.child.health.state.current).toBe(3);
-        expect(handA.refer.order.length).toBe(1); // Tauren Warrior in hand
-        expect(boardA.refer.order.length).toBe(0); // No minions on board
+        expect(handA.refer.queue?.length).toBe(1); // Tauren Warrior in hand
+        expect(boardA.refer.queue?.length).toBe(0); // No minions on board
         expect(playerA.child.mana.state.current).toBe(10); // Full mana
 
         // Play Tauren Warrior
@@ -85,8 +85,8 @@ describe('tauren-warrior', () => {
         await promise;
 
         // Tauren Warrior should be on board
-        expect(boardA.refer.order.length).toBe(1); // Tauren Warrior on board
-        expect(handA.refer.order.length).toBe(0); // Tauren Warrior moved to board
+        expect(boardA.refer.queue?.length).toBe(1); // Tauren Warrior on board
+        expect(handA.refer.queue?.length).toBe(0); // Tauren Warrior moved to board
         expect(playerA.child.mana.state.current).toBe(7); // 10 - 3 = 7
 
         // Check that Tauren Warrior has Taunt
@@ -100,8 +100,8 @@ describe('tauren-warrior', () => {
         // Check initial state
         expect(roleC.child.attack.state.current).toBe(2); // Tauren Warrior: 2/3
         expect(roleD.child.health.state.current).toBe(1); // Wisp: 1/1
-        expect(boardA.refer.order.length).toBe(1); // Tauren Warrior on board
-        expect(boardB.refer.order.length).toBe(1); // Wisp on board
+        expect(boardA.refer.queue?.length).toBe(1); // Tauren Warrior on board
+        expect(boardB.refer.queue?.length).toBe(1); // Wisp on board
 
         // Player A's Tauren Warrior attacks Player B's Wisp
         let promise = roleD.child.action.run();
@@ -112,7 +112,7 @@ describe('tauren-warrior', () => {
         await promise;
 
         // Wisp should die (2/3 vs 1/1)
-        expect(boardB.refer.order.length).toBe(0); // Wisp dies
+        expect(boardB.refer.queue?.length).toBe(0); // Wisp dies
         expect(cardD.child.dispose.status).toBe(true);
         
         // Tauren Warrior should be damaged and gain +3 Attack
