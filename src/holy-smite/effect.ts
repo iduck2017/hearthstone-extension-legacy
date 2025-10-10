@@ -1,22 +1,20 @@
 import { EffectModel, SelectEvent, RoleModel, SpellEffectModel, DamageModel, DamageEvent, DamageType } from "hearthstone-core";
-import { Loader, TemplUtil } from "set-piece";
+import { TemplUtil } from "set-piece";
 
 @TemplUtil.is('holy-smite-effect')
 export class HolySmiteEffectModel extends SpellEffectModel<[RoleModel]> {
-    constructor(loader?: Loader<HolySmiteEffectModel>) {
-        super(() => {
-            const props = loader?.() ?? {};
-            return {
-                uuid: props.uuid,
-                state: {
-                    name: "Holy Smite's effect",
-                    desc: "Deal {{state.damage[0]}} damage to a minion.",
-                    damage: [3],
-                    ...props.state
-                },
-                child: { ...props.child },
-                refer: { ...props.refer },
-            };
+    constructor(props?: HolySmiteEffectModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: {
+                name: "Holy Smite's effect",
+                desc: "Deal {{state.damage[0]}} damage to a minion.",
+                damage: [3],
+                ...props.state
+            },
+            child: { ...props.child },
+            refer: { ...props.refer },
         });
     }
 

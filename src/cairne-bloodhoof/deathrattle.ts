@@ -1,4 +1,4 @@
-import { DeathrattleModel, ROLE_ROUTE } from "hearthstone-core";
+import { DeathrattleModel } from "hearthstone-core";
 import { TemplUtil } from "set-piece";
 import { BaineBloodhoofModel } from "../baine-bloodhoof";
 

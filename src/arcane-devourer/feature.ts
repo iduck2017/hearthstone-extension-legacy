@@ -1,4 +1,4 @@
-import { FeatureModel, SpellCardModel, MINION_ROUTE, MinionRoute } from "hearthstone-core";
+import { FeatureModel, SpellCardModel } from "hearthstone-core";
 import { ArcaneDevourerBuffModel } from "./buff";
 import { Event, EventUtil, TemplUtil } from "set-piece";
 
@@ -7,7 +7,6 @@ export namespace ArcaneDevourerFeatureProps {
     export type S = {}
     export type C = {}
     export type R = {}
-    export type P = MinionRoute
 }
 
 @TemplUtil.is('arcane-devourer-feature')

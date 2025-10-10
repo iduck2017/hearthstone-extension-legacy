@@ -1,4 +1,4 @@
-import { EffectModel, DamageModel, DamageEvent, DamageType, RoleRoute, ROLE_ROUTE, SpellEffectModel } from "hearthstone-core";
+import { EffectModel, DamageModel, DamageEvent, DamageType, SpellEffectModel } from "hearthstone-core";
 import { TemplUtil } from "set-piece";
 
 export namespace BlizzardEffectProps {

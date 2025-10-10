@@ -1,22 +1,20 @@
 import { EffectModel, SpellEffectModel, DamageModel, DamageEvent, RestoreModel, RestoreEvent, DamageType } from "hearthstone-core";
-import { Loader, TemplUtil } from "set-piece";
+import { TemplUtil } from "set-piece";
 
 @TemplUtil.is('holy-nova-effect')
 export class HolyNovaEffectModel extends SpellEffectModel<[]> {
-    constructor(loader?: Loader<HolyNovaEffectModel>) {
-        super(() => {
-            const props = loader?.() ?? {};
-            return {
-                uuid: props.uuid,
-                state: {
-                    name: "Holy Nova's effect",
-                    desc: "Deal {{state.damage[0]}} damage to all enemy minions. Restore 2 Health to all friendly characters.",
-                    damage: [2],
-                    ...props.state
-                },
-                child: { ...props.child },
-                refer: { ...props.refer },
-            };
+    constructor(props?: HolyNovaEffectModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: {
+                name: "Holy Nova's effect",
+                desc: "Deal {{state.damage[0]}} damage to all enemy minions. Restore 2 Health to all friendly characters.",
+                damage: [2],
+                ...props.state
+            },
+            child: { ...props.child },
+            refer: { ...props.refer },
         });
     }
 

@@ -1,4 +1,4 @@
-import { EffectModel, SelectEvent, RoleModel, DamageModel, DamageEvent, DamageType, MinionCardModel, ROLE_ROUTE, CardRoute, CARD_ROUTE, SpellEffectModel } from "hearthstone-core";
+import { SelectEvent, RoleModel, DamageModel, DamageEvent, DamageType, MinionCardModel, SpellEffectModel } from "hearthstone-core";
 import { TemplUtil } from "set-piece";
 
 export namespace ConeOfColdEffectProps {

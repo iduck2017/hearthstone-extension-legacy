@@ -1,4 +1,4 @@
-import { FeatureModel, MINION_ROUTE, MinionRoute, RoleRoute, SpellCardModel } from "hearthstone-core";
+import { FeatureModel, SpellCardModel } from "hearthstone-core";
 import { Event, EventUtil, TemplUtil } from "set-piece";
 import { FireballModel } from "../fireball";
 

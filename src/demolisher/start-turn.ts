@@ -1,4 +1,4 @@
-import { StartTurnHookModel, RoleModel, DamageModel, DamageEvent, MINION_ROUTE, MinionRoute } from "hearthstone-core";
+import { StartTurnHookModel, DamageModel, DamageEvent } from "hearthstone-core";
 import { TemplUtil } from "set-piece";
 
 export namespace DemolisherFeatureProps {
@@ -6,7 +6,6 @@ export namespace DemolisherFeatureProps {
     export type S = {}
     export type C = {}
     export type R = {}
-    export type P = MinionRoute
 }
 
 @TemplUtil.is('demolisher-feature')

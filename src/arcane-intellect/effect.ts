@@ -1,4 +1,4 @@
-import { CARD_ROUTE, CardRoute, EffectModel, SpellEffectModel } from "hearthstone-core";
+import { EffectModel, SpellEffectModel } from "hearthstone-core";
 import { TemplUtil } from "set-piece";
 
 export namespace ArcaneIntellectEffectProps {

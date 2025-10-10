@@ -1,22 +1,20 @@
 import { EffectModel, SelectEvent, RoleModel, DamageModel, DamageEvent, RestoreModel, RestoreEvent, DamageType, SpellEffectModel } from "hearthstone-core";
-import { Loader, TemplUtil } from "set-piece";
+import { TemplUtil } from "set-piece";
 
 @TemplUtil.is('holy-fire-effect')
 export class HolyFireEffectModel extends SpellEffectModel<[RoleModel]> {
-    constructor(loader?: Loader<HolyFireEffectModel>) {
-        super(() => {
-            const props = loader?.() ?? {};
-            return {
-                uuid: props.uuid,
-                state: {
-                    name: "Holy Fire's effect",
-                    desc: "Deal {{state.damage[0]}} damage. Restore 5 Health to your hero.",
-                    damage: [5],
-                    ...props.state
-                },
-                child: { ...props.child },
-                refer: { ...props.refer },
-            };
+    constructor(props?: HolyFireEffectModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: {
+                name: "Holy Fire's effect",
+                desc: "Deal {{state.damage[0]}} damage. Restore 5 Health to your hero.",
+                damage: [5],
+                ...props.state
+            },
+            child: { ...props.child },
+            refer: { ...props.refer },
         });
     }
 

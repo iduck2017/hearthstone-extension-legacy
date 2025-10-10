@@ -1,4 +1,4 @@
-import { RoleAttackModel, RoleAttackProps, FeatureModel, RoleModel, RoleRoute, RoleHealthModel, RoleAttackDecor, ROLE_ROUTE, OperationType } from "hearthstone-core";
+import { RoleAttackModel, FeatureModel, RoleHealthModel, RoleAttackDecor, OperationType } from "hearthstone-core";
 import { Event, EventUtil, StateUtil, TemplUtil, TranxUtil, Decor, Frame } from "set-piece";
 import { DeepReadonly } from "utility-types";
 

@@ -1,4 +1,4 @@
-import { DamageEvent, DamageModel, DamageType, EffectModel, ROLE_ROUTE, RoleRoute, SpellEffectModel } from "hearthstone-core";
+import { DamageEvent, DamageModel, DamageType, SpellEffectModel } from "hearthstone-core";
 import { TemplUtil } from "set-piece";
 
 export namespace ArcaneExplosionEffectProps {

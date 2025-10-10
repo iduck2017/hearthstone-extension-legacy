@@ -1,22 +1,20 @@
-import { DeathrattleModel, ROLE_ROUTE } from "hearthstone-core";
-import { Loader, TemplUtil } from "set-piece";
+import { DeathrattleModel } from "hearthstone-core";
+import { TemplUtil } from "set-piece";
 import { DamagedGolemModel } from "../damaged-golem";
 
 @TemplUtil.is('harvest-golem-deathrattle')
 export class HarvestGolemDeathrattleModel extends DeathrattleModel {
-    constructor(loader?: Loader<HarvestGolemDeathrattleModel>) {
-        super(() => {
-            const props = loader?.() ?? {};
-            return {
-                uuid: props.uuid,
-                state: {
-                    name: "Harvest Golem's Deathrattle",
-                    desc: "Summon a 2/1 Damaged Golem.",
-                    ...props.state
-                },
-                child: { ...props.child },
-                refer: { ...props.refer },
-            }
+    constructor(props?: HarvestGolemDeathrattleModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: {
+                name: "Harvest Golem's Deathrattle",
+                desc: "Summon a 2/1 Damaged Golem.",
+                ...props.state
+            },
+            child: { ...props.child },
+            refer: { ...props.refer },
         });
     }
 

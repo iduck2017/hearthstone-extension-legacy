@@ -14,44 +14,41 @@
  */
 
 import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, MinionFeatsModel, RarityType, RoleAttackModel, RoleModel, RaceType } from "hearthstone-core";
-import { Loader } from "set-piece";
 import { HarvestGolemDeathrattleModel } from "./deathrattle";
 
 @LibraryUtil.is('harvest-golem')
 export class HarvestGolemModel extends MinionCardModel {
-    constructor(loader?: Loader<HarvestGolemModel>) {
-        super(() => {
-            const props = loader?.() ?? {};
-            return {
-                uuid: props.uuid,
-                state: {
-                    name: 'Harvest Golem',
-                    desc: 'Deathrattle: Summon a 2/1 Damaged Golem.',
-                    flavorDesc: '"Overheat threshold exceeded. System failure. Wheat clog in port two. Shutting down."',
-                    isCollectible: true,
-                    rarity: RarityType.COMMON,
-                    class: ClassType.NEUTRAL,
-                    races: [RaceType.MECH],
-                    ...props.state
-                },
-                child: {
-                    cost: new CostModel(() => ({ state: { origin: 3 }})),
-                    role: new RoleModel(() => ({
-                        child: {
-                            attack: new RoleAttackModel(() => ({ state: { origin: 2 }})),
-                            health: new RoleHealthModel(() => ({ state: { origin: 3 }})),
-                        }
-                    })),
-                    feats: new MinionFeatsModel(() => ({
-                        child: { 
-                            battlecry: [],
-                            deathrattle: [new HarvestGolemDeathrattleModel()]
-                        }
-                    })),
-                    ...props.child
-                },
-                refer: { ...props.refer }
-            }
+    constructor(props?: HarvestGolemModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: {
+                name: 'Harvest Golem',
+                desc: 'Deathrattle: Summon a 2/1 Damaged Golem.',
+                flavorDesc: '"Overheat threshold exceeded. System failure. Wheat clog in port two. Shutting down."',
+                isCollectible: true,
+                rarity: RarityType.COMMON,
+                class: ClassType.NEUTRAL,
+                races: [RaceType.MECH],
+                ...props.state
+            },
+            child: {
+                cost: new CostModel({ state: { origin: 3 }}),
+                role: new RoleModel({
+                    child: {
+                        attack: new RoleAttackModel({ state: { origin: 2 }}),
+                        health: new RoleHealthModel({ state: { origin: 3 }}),
+                    }
+                }),
+                feats: new MinionFeatsModel({
+                    child: { 
+                        battlecry: [],
+                        deathrattle: [new HarvestGolemDeathrattleModel()]
+                    }
+                }),
+                ...props.child
+            },
+            refer: { ...props.refer }
         });
     }
 }

@@ -1,5 +1,5 @@
-import { RoleAttackModel, FeatureModel, MinionCardModel, RaceType, RoleModel, RoleAttackProps, RoleRoute, ROLE_ROUTE, OperationType, RoleAttackDecor } from "hearthstone-core";
-import { DebugUtil, LogLevel, StateUtil, TemplUtil, TranxUtil, Decor } from "set-piece";
+import { RoleAttackModel, FeatureModel, MinionCardModel, RaceType, RoleModel, OperationType, RoleAttackDecor } from "hearthstone-core";
+import { DebugUtil, StateUtil, TemplUtil, TranxUtil, Decor } from "set-piece";
 
 export namespace GrimscaleOracleFeatureModel {
     export type E = {}
@@ -34,7 +34,6 @@ export class GrimscaleOracleFeatureModel extends FeatureModel<
     }
 
     @StateUtil.on(self => self.route.player?.proxy.child.board.child.minions.child.role.child.attack.decor)
-    @DebugUtil.log(LogLevel.WARN)
     private onCheck(that: RoleAttackModel, decor: RoleAttackDecor) {
         if (!this.route.board) return;
         if (!this.state.isActive) return;

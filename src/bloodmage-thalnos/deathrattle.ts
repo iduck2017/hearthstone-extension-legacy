@@ -1,4 +1,4 @@
-import { DeathrattleModel, ROLE_ROUTE, RoleModel, RoleRoute } from "hearthstone-core";
+import { DeathrattleModel } from "hearthstone-core";
 import { TemplUtil } from "set-piece";
 
 export namespace BloodmageThalnosDeathrattleProps {

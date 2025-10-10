@@ -1,4 +1,4 @@
-import { CARD_ROUTE, CardRoute, DamageEvent, DamageModel, DamageType, EffectModel, SelectEvent, SpellEffectModel } from "hearthstone-core";
+import { DamageEvent, DamageModel, DamageType, EffectModel, SelectEvent, SpellEffectModel } from "hearthstone-core";
 import { Model, TemplUtil } from "set-piece";
 
 export namespace ArcaneMissilesEffectProps {

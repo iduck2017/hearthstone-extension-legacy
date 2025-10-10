@@ -6,7 +6,6 @@ export namespace LeperGnomeDeathrattleProps {
     export type S = {}
     export type C = {}
     export type R = {}
-    export type P = RoleRoute
 }
 
 @TemplUtil.is('leper-gnome-deathrattle')
@@ -14,8 +13,7 @@ export class LeperGnomeDeathrattleModel extends DeathrattleModel<
     LeperGnomeDeathrattleProps.E,
     LeperGnomeDeathrattleProps.S,
     LeperGnomeDeathrattleProps.C,
-    LeperGnomeDeathrattleProps.R,
-    LeperGnomeDeathrattleProps.P
+    LeperGnomeDeathrattleProps.R
 > {
     constructor(loader?: Loader<LeperGnomeDeathrattleModel>) {
         super(() => {

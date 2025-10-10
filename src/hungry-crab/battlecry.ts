@@ -1,22 +1,20 @@
 import { RaceType, MinionBattlecryModel, RoleModel, SelectEvent } from "hearthstone-core";
 import { HungryCrabBuffModel } from "./buff";
-import { TemplUtil, Loader, DebugUtil, LogLevel } from "set-piece";
+import { TemplUtil, DebugUtil, LogLevel } from "set-piece";
 
 @TemplUtil.is('hungry-crab-battlecry')
 export class HungryCrabBattlecryModel extends MinionBattlecryModel<[RoleModel]> {
-    constructor(loader?: Loader<HungryCrabBattlecryModel>) {
-        super(() => {
-            const props = loader?.() ?? {};
-            return {
-                uuid: props.uuid,
-                state: {
-                    name: 'Hungry Crab\'s Battlecry',
-                    desc: 'Destroy a Murloc and gain +2/+2.',
-                    ...props.state
-                },
-                child: { ...props.child },
-                refer: { ...props.refer }
-            }
+    constructor(props?: HungryCrabBattlecryModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: {
+                name: 'Hungry Crab\'s Battlecry',
+                desc: 'Destroy a Murloc and gain +2/+2.',
+                ...props.state
+            },
+            child: { ...props.child },
+            refer: { ...props.refer }
         });
     }
 

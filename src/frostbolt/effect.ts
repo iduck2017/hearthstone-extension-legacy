@@ -1,5 +1,5 @@
-import { EffectModel, SelectEvent, RoleModel, DamageModel, DamageEvent, DamageType, RoleRoute, ROLE_ROUTE, SpellEffectModel } from "hearthstone-core";
-import { Loader, TemplUtil } from "set-piece";
+import { SelectEvent, RoleModel, DamageModel, DamageEvent, DamageType, SpellEffectModel } from "hearthstone-core";
+import { TemplUtil } from "set-piece";
 
 export namespace FrostboltEffectProps {
     export type E = {}
@@ -28,7 +28,6 @@ export class FrostboltEffectModel extends SpellEffectModel<[RoleModel],
                 },
                 child: { ...props.child },
                 refer: { ...props.refer },
-                route: ROLE_ROUTE,
             }
         })
     }
