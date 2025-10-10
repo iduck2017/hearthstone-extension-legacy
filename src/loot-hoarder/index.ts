@@ -13,44 +13,41 @@
  */
 
 import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, MinionFeatsModel, RarityType, RoleAttackModel, RoleModel, RaceType } from "hearthstone-core";
-import { Loader } from "set-piece";
 import { LootHoarderDeathrattleModel } from "./deathrattle";
 
 @LibraryUtil.is('loot-hoarder')
 export class LootHoarderModel extends MinionCardModel {
-    constructor(loader?: Loader<LootHoarderModel>) {
-        super(() => {
-            const props = loader?.() ?? {};
-            return {
-                uuid: props.uuid,
-                state: {
-                    name: 'Loot Hoarder',
-                    desc: 'Deathrattle: Draw a card.',
-                    flavorDesc: 'Always roll need.',
-                    isCollectible: true,
-                    rarity: RarityType.COMMON,
-                    class: ClassType.NEUTRAL,
-                    races: [],
-                    ...props.state
-                },
-                child: {
-                    cost: new CostModel(() => ({ state: { origin: 2 }})),
-                    role: new RoleModel(() => ({
-                        child: {
-                            attack: new RoleAttackModel(() => ({ state: { origin: 2 }})),
-                            health: new RoleHealthModel(() => ({ state: { origin: 1 }})),
-                        }
-                    })),
-                    feats: new MinionFeatsModel(() => ({
-                        child: { 
-                            battlecry: [],
-                            deathrattle: [new LootHoarderDeathrattleModel()]
-                        }
-                    })),
-                    ...props.child
-                },
-                refer: { ...props.refer }
-            }
+    constructor(props?: LootHoarderModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: {
+                name: 'Loot Hoarder',
+                desc: 'Deathrattle: Draw a card.',
+                flavorDesc: 'Always roll need.',
+                isCollectible: true,
+                rarity: RarityType.COMMON,
+                class: ClassType.NEUTRAL,
+                races: [],
+                ...props.state
+            },
+            child: {
+                cost: new CostModel({ state: { origin: 2 }}),
+                role: new RoleModel({
+                    child: {
+                        attack: new RoleAttackModel({ state: { origin: 2 }}),
+                        health: new RoleHealthModel({ state: { origin: 1 }}),
+                    }
+                }),
+                feats: new MinionFeatsModel({
+                    child: { 
+                        battlecry: [],
+                        deathrattle: [new LootHoarderDeathrattleModel()]
+                    }
+                }),
+                ...props.child
+            },
+            refer: { ...props.refer }
         });
     }
 }

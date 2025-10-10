@@ -1,22 +1,19 @@
 import { EndTurnHookModel, RestoreModel, RestoreEvent } from "hearthstone-core";
-import { Loader, TemplUtil } from "set-piece";
+import { TemplUtil } from "set-piece";
 
 @TemplUtil.is('lightwell-end-turn')
 export class LightwellEndTurnModel extends EndTurnHookModel {
-    constructor(loader?: Loader<LightwellEndTurnModel>) {
-        super(() => {
-            const props = loader?.() ?? {};
-            return {
-                uuid: props.uuid,
-                state: {
-                    name: 'Lightwell\'s End Turn',
-                    desc: 'At the start of your turn, restore 3 Health to a damaged friendly character.',
-                    ...props.state,
-                },
-                child: { ...props.child },
-                refer: { ...props.refer },
-                route: {}
-            };
+    constructor(props?: LightwellEndTurnModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: {
+                name: 'Lightwell\'s End Turn',
+                desc: 'At the start of your turn, restore 3 Health to a damaged friendly character.',
+                ...props.state,
+            },
+            child: { ...props.child },
+            refer: { ...props.refer },
         });
     }
 

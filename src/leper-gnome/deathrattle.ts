@@ -1,5 +1,5 @@
-import { DamageEvent, DamageModel, DamageType, DeathrattleModel, ROLE_ROUTE, RoleRoute } from "hearthstone-core";
-import { Loader, TemplUtil } from "set-piece";
+import { DamageEvent, DamageModel, DamageType, DeathrattleModel } from "hearthstone-core";
+import { TemplUtil } from "set-piece";
 
 export namespace LeperGnomeDeathrattleProps {
     export type E = {}
@@ -15,20 +15,17 @@ export class LeperGnomeDeathrattleModel extends DeathrattleModel<
     LeperGnomeDeathrattleProps.C,
     LeperGnomeDeathrattleProps.R
 > {
-    constructor(loader?: Loader<LeperGnomeDeathrattleModel>) {
-        super(() => {
-            const props = loader?.() ?? {};
-            return {
-                uuid: props.uuid,
-                state: {
-                    name: 'Leper Gnome\'s Deathrattle',
-                    desc: 'Deal 2 damage to the enemy hero.',
-                    ...props.state,
-                },
-                child: { ...props.child },
-                refer: { ...props.refer },
-                route: ROLE_ROUTE,
-            }
+    constructor(props?: LeperGnomeDeathrattleModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: {
+                name: 'Leper Gnome\'s Deathrattle',
+                desc: 'Deal 2 damage to the enemy hero.',
+                ...props.state,
+            },
+            child: { ...props.child },
+            refer: { ...props.refer },
         });
     }
 
