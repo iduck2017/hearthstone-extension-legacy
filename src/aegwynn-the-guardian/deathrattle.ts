@@ -15,7 +15,6 @@ export class AegwynnTheGuardianDeathrattleModel extends DeathrattleModel {
             },
             child: { ...props.child },
             refer: { ...props.refer },
-            route: {},
         });
     }
 

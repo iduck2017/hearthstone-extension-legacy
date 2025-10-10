@@ -15,7 +15,6 @@ export class CounterspellFeatureModel extends SecretFeatureModel {
             },
             child: { ...props.child },
             refer: { ...props.refer },
-            route: {},
         });
     }
 

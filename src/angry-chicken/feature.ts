@@ -9,7 +9,6 @@ export namespace AngryChickenFeatureProps {
     };
     export type C = {};
     export type R = {}
-    export type P = RoleRoute
 }
 
 @TemplUtil.is('angry-chicken-feature')
@@ -17,8 +16,7 @@ export class AngryChickenFeatureModel extends FeatureModel<
     AngryChickenFeatureProps.E,
     AngryChickenFeatureProps.S,
     AngryChickenFeatureProps.C,
-    AngryChickenFeatureProps.R,
-    AngryChickenFeatureProps.P
+    AngryChickenFeatureProps.R
 > {
     constructor(props?: AngryChickenFeatureModel['props']) {
         props = props ?? {};
@@ -33,7 +31,6 @@ export class AngryChickenFeatureModel extends FeatureModel<
             },
             child: { ...props.child },
             refer: { ...props.refer },
-            route: ROLE_ROUTE,
         });
     }
  // Listen to health state changes to trigger enrage effect

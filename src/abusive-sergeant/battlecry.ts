@@ -1,6 +1,6 @@
 import { MinionCardModel, MinionBattlecryModel, RoleModel, SelectEvent } from "hearthstone-core";
 import { AbusiveSergeantBuffModel } from "./buff";
-import { DebugUtil, LogLevel, TemplUtil } from "set-piece";
+import { DebugUtil, TemplUtil } from "set-piece";
 
 @TemplUtil.is('abusive-sergeant-battlecry')
 export class AbusiveSergeantBattlecryModel extends MinionBattlecryModel<[RoleModel]> {

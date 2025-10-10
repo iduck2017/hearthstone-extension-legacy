@@ -27,7 +27,6 @@ export class ArcaneIntellectEffectModel extends SpellEffectModel<[],
             },
             child: { ...props.child },
             refer: { ...props.refer },
-            route: CARD_ROUTE
         });
     }
 

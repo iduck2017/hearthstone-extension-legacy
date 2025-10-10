@@ -1,12 +1,11 @@
 import { EndTurnHookModel, FeatureModel, MINION_ROUTE, MinionRoute, IRoleBuffModel, TurnModel, RoleBuffModel } from "hearthstone-core";
-import { Event, EventUtil, Loader, TemplUtil } from "set-piece";
+import { Event, EventUtil, TemplUtil } from "set-piece";
 
 export namespace GruulFeatureProps {
     export type E = {}
     export type S = {}
     export type C = {}
     export type R = {}
-    export type P = MinionRoute
 }
 
 @TemplUtil.is('gruul-feature')
@@ -14,24 +13,20 @@ export class GruulFeatureModel extends EndTurnHookModel<
     GruulFeatureProps.E,
     GruulFeatureProps.S,
     GruulFeatureProps.C,
-    GruulFeatureProps.R,
-    GruulFeatureProps.P
+    GruulFeatureProps.R
 > {
-    constructor(loader?: Loader<GruulFeatureModel>) {
-        super(() => {
-            const props = loader?.() ?? {}
-            return {
-                uuid: props.uuid,
-                state: { 
-                    name: "Gruul's feature",
-                    desc: "At the end of each turn, gain +1/+1.",
-                    isActive: true,
-                    ...props.state 
-                },
-                child: { ...props.child },
-                refer: { ...props.refer },
-                route: MINION_ROUTE,
-            }
+    constructor(props?: GruulFeatureModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: { 
+                name: "Gruul's feature",
+                desc: "At the end of each turn, gain +1/+1.",
+                isActive: true,
+                ...props.state 
+            },
+            child: { ...props.child },
+            refer: { ...props.refer },
         })
     }
 
@@ -40,12 +35,12 @@ export class GruulFeatureModel extends EndTurnHookModel<
         const minion = this.route.minion;
         if (!minion) return;
         const role = minion.child.role;
-        role.child.feats.add(new RoleBuffModel(() => ({
+        role.child.feats.add(new RoleBuffModel({
             state: {
                 name: "Gruul's Growth",
                 desc: "+1/+1",
                 offset: [1, 1]
             }
-        })));
+        }));
     }
 }

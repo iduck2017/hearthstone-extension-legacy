@@ -6,7 +6,6 @@ export namespace BloodmageThalnosDeathrattleProps {
     export type S = {}
     export type C = {}
     export type R = {}
-    export type P = RoleRoute
 }
 
 @TemplUtil.is('bloodmage-thalnos-deathrattle')
@@ -14,8 +13,7 @@ export class BloodmageThalnosDeathrattleModel extends DeathrattleModel<
     BloodmageThalnosDeathrattleProps.E,
     BloodmageThalnosDeathrattleProps.S,
     BloodmageThalnosDeathrattleProps.C,
-    BloodmageThalnosDeathrattleProps.R,
-    BloodmageThalnosDeathrattleProps.P
+    BloodmageThalnosDeathrattleProps.R
 > {
     constructor(props?: BloodmageThalnosDeathrattleModel['props']) {
         props = props ?? {};
@@ -28,7 +26,6 @@ export class BloodmageThalnosDeathrattleModel extends DeathrattleModel<
             },
             child: { ...props.child },
             refer: { ...props.refer },
-            route: ROLE_ROUTE,
         });
     }
 

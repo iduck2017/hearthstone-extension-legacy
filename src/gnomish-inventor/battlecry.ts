@@ -1,21 +1,19 @@
 import { MinionBattlecryModel } from "hearthstone-core";
-import { Loader, TemplUtil } from "set-piece";
+import { TemplUtil } from "set-piece";
 
 @TemplUtil.is('gnomish-inventor-battlecry')
 export class GnomishInventorBattlecryModel extends MinionBattlecryModel<[]> {
-    constructor(loader?: Loader<GnomishInventorBattlecryModel>) {
-        super(() => {
-            const props = loader?.() ?? {};
-            return {
-                uuid: props.uuid,
-                state: {
-                    name: "Gnomish Inventor's Battlecry",
-                    desc: "Draw a card.",
-                    ...props.state
-                },
-                child: { ...props.child },
-                refer: { ...props.refer },
-            };
+    constructor(props?: GnomishInventorBattlecryModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: {
+                name: "Gnomish Inventor's Battlecry",
+                desc: "Draw a card.",
+                ...props.state
+            },
+            child: { ...props.child },
+            refer: { ...props.refer },
         });
     }
 

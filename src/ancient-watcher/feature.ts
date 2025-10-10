@@ -1,4 +1,4 @@
-import { FeatureModel, ROLE_ROUTE, RoleActionDecor, RoleActionModel, RoleActionProps, RoleRoute } from "hearthstone-core";
+import { FeatureModel, RoleActionDecor, RoleActionModel } from "hearthstone-core";
 import { StateUtil, TemplUtil, Decor } from "set-piece";
 
 export namespace AncientWatcherFeatureProps {
@@ -6,7 +6,6 @@ export namespace AncientWatcherFeatureProps {
     export type S = {};
     export type C = {};
     export type R = {}
-    export type P = RoleRoute
 }
 
 @TemplUtil.is('ancient-watcher-feature')
@@ -14,8 +13,7 @@ export class AncientWatcherFeatureModel extends FeatureModel<
     AncientWatcherFeatureProps.E,
     AncientWatcherFeatureProps.S,
     AncientWatcherFeatureProps.C,
-    AncientWatcherFeatureProps.R,
-    AncientWatcherFeatureProps.P
+    AncientWatcherFeatureProps.R
 > {
     constructor(props?: AncientWatcherFeatureModel['props']) {
         props = props ?? {};
@@ -29,7 +27,6 @@ export class AncientWatcherFeatureModel extends FeatureModel<
             },
             child: { ...props.child },
             refer: { ...props.refer },
-            route: ROLE_ROUTE,
         });
     }
 

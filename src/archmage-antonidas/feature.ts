@@ -7,7 +7,6 @@ export namespace ArchmageAntonidasFeatureProps {
     export type S = {}
     export type C = {}
     export type R = {}
-    export type P = MinionRoute
 }
 
 @TemplUtil.is('archmage-antonidas-feature')
@@ -15,8 +14,7 @@ export class ArchmageAntonidasFeatureModel extends FeatureModel<
     ArchmageAntonidasFeatureProps.E,
     ArchmageAntonidasFeatureProps.S,
     ArchmageAntonidasFeatureProps.C,
-    ArchmageAntonidasFeatureProps.R,
-    ArchmageAntonidasFeatureProps.P
+    ArchmageAntonidasFeatureProps.R
 > {
     constructor(props?: ArchmageAntonidasFeatureModel['props']) {
         props = props ?? {};
@@ -30,7 +28,6 @@ export class ArchmageAntonidasFeatureModel extends FeatureModel<
             },
             child: { ...props.child },
             refer: { ...props.refer },
-            route: MINION_ROUTE,
         });
     }
 

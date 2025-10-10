@@ -1,4 +1,4 @@
-import { RoleAttackModel, RoleAttackProps, FeatureModel, RoleHealthModel, RoleModel, RoleRoute, ROLE_ROUTE, RoleAttackDecor, OperationType } from "hearthstone-core";
+import { RoleAttackModel, FeatureModel, RoleHealthModel, RoleAttackDecor, OperationType } from "hearthstone-core";
 import { Event, EventUtil, StateUtil, TemplUtil, TranxUtil, Decor, Frame } from "set-piece";
 
 export namespace AmaniBerserkerFeatureProps {
@@ -8,7 +8,6 @@ export namespace AmaniBerserkerFeatureProps {
     };
     export type C = {};
     export type R = {}
-    export type P = RoleRoute
 }
 
 @TemplUtil.is('amani-berserker-feature')
@@ -16,8 +15,7 @@ export class AmaniBerserkerFeatureModel extends FeatureModel<
     AmaniBerserkerFeatureProps.E,
     AmaniBerserkerFeatureProps.S,
     AmaniBerserkerFeatureProps.C,
-    AmaniBerserkerFeatureProps.R,
-    AmaniBerserkerFeatureProps.P
+    AmaniBerserkerFeatureProps.R
 > {
     constructor(props?: AmaniBerserkerFeatureModel['props']) {
         props = props ?? {};
@@ -32,7 +30,6 @@ export class AmaniBerserkerFeatureModel extends FeatureModel<
             },
             child: { ...props.child },
             refer: { ...props.refer },
-            route: ROLE_ROUTE,
         });
     }
 

@@ -29,7 +29,6 @@ export class ArcaneDevourerFeatureModel extends FeatureModel<
             },
             child: { ...props.child },
             refer: { ...props.refer },
-            route: MINION_ROUTE,
         });
     }
 

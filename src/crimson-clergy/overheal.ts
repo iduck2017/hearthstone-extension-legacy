@@ -15,7 +15,6 @@ export class CrimsonClergyOverhealModel extends OverhealModel {
             },
             child: { ...props.child },
             refer: { ...props.refer },
-            route: {},
         });
     }
 

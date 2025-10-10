@@ -17,42 +17,39 @@
 
 import { MinionCardModel, RoleHealthModel, RoleAttackModel, RoleModel, RaceType, FeatureModel, RarityType, ClassType, LibraryUtil, CostModel, RoleFeatsModel } from "hearthstone-core";
 import { GrimscaleOracleFeatureModel } from "./feature";
-import { Loader } from "set-piece";
 
 @LibraryUtil.is('grimscale-oracle') 
 export class GrimscaleOracleModel extends MinionCardModel {
-    constructor(loader?: Loader<GrimscaleOracleModel>) {
-        super(() => {
-            const props = loader?.() ?? {};
-            return {
-                uuid: props.uuid,
-                state: {
-                    name: 'Grimscale Oracle',
-                    desc: 'Your other Murlocs have +1 Attack.',
-                    isCollectible: true,
-                    flavorDesc: 'These are the brainy murlocs. It turns out that doesn\'t mean much.',
-                    rarity: RarityType.COMMON,
-                    class: ClassType.NEUTRAL,
-                    races: [RaceType.MURLOC],
-                    ...props.state
-                },
-                child: {
-                    cost: new CostModel(() => ({ state: { origin: 1 }})),
-                    role: new RoleModel(() => ({
-                        child: {
-                            attack: new RoleAttackModel(() => ({ state: { origin: 1 }})),
-                            health: new RoleHealthModel(() => ({ state: { origin: 1 }})),   
-                            feats: new RoleFeatsModel(() => ({
-                                child: {
-                                    items: [new GrimscaleOracleFeatureModel()]
-                                }
-                            }))
-                        }
-                    })),
-                    ...props.child,
-                },
-                refer: { ...props.refer }
-            }
+    constructor(props?: GrimscaleOracleModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: {
+                name: 'Grimscale Oracle',
+                desc: 'Your other Murlocs have +1 Attack.',
+                isCollectible: true,
+                flavorDesc: 'These are the brainy murlocs. It turns out that doesn\'t mean much.',
+                rarity: RarityType.COMMON,
+                class: ClassType.NEUTRAL,
+                races: [RaceType.MURLOC],
+                ...props.state
+            },
+            child: {
+                cost: new CostModel({ state: { origin: 1 }}),
+                role: new RoleModel({
+                    child: {
+                        attack: new RoleAttackModel({ state: { origin: 1 }}),
+                        health: new RoleHealthModel({ state: { origin: 1 }}),   
+                        feats: new RoleFeatsModel({
+                            child: {
+                                items: [new GrimscaleOracleFeatureModel()]
+                            }
+                        })
+                    }
+                }),
+                ...props.child,
+            },
+            refer: { ...props.refer }
         });
     }
 }

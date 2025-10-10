@@ -1,5 +1,5 @@
 import { RoleAttackModel, FeatureModel, MinionCardModel, RaceType, RoleModel, RoleAttackProps, RoleRoute, ROLE_ROUTE, OperationType, RoleAttackDecor } from "hearthstone-core";
-import { DebugUtil, LogLevel, StateUtil, TemplUtil, TranxUtil, Loader, Decor } from "set-piece";
+import { DebugUtil, LogLevel, StateUtil, TemplUtil, TranxUtil, Decor } from "set-piece";
 
 export namespace GrimscaleOracleFeatureModel {
     export type E = {}
@@ -8,7 +8,6 @@ export namespace GrimscaleOracleFeatureModel {
     }
     export type C = {}
     export type R = {}
-    export type P = RoleRoute
 }
 
 @TemplUtil.is('grimscale-oracle-feature')
@@ -16,25 +15,21 @@ export class GrimscaleOracleFeatureModel extends FeatureModel<
     GrimscaleOracleFeatureModel.E,
     GrimscaleOracleFeatureModel.S,
     GrimscaleOracleFeatureModel.C,
-    GrimscaleOracleFeatureModel.R,
-    GrimscaleOracleFeatureModel.P
+    GrimscaleOracleFeatureModel.R
 > {
-    constructor(loader?: Loader<GrimscaleOracleFeatureModel>) {
-        super(() => {
-            const props = loader?.() ?? {};
-            return {
-                uuid: props.uuid,
-                state: {
-                    name: 'Grimscale Oracle\'s Aura',
-                    desc: 'Your other Murlocs have +1 Attack.',
-                    offset: 1,
-                    isActive: true,
-                    ...props.state
-                },
-                child: { ...props.child },
-                refer: { ...props.refer },
-                route: ROLE_ROUTE,
-            }
+    constructor(props?: GrimscaleOracleFeatureModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: {
+                name: 'Grimscale Oracle\'s Aura',
+                desc: 'Your other Murlocs have +1 Attack.',
+                offset: 1,
+                isActive: true,
+                ...props.state
+            },
+            child: { ...props.child },
+            refer: { ...props.refer },
         });
     }
 

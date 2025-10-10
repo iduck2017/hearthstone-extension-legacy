@@ -1,5 +1,5 @@
-import { CARD_ROUTE, CardRoute, EffectModel, SpellEffectModel } from "hearthstone-core";
-import { Loader, TemplUtil } from "set-piece";
+import { EffectModel, SpellEffectModel } from "hearthstone-core";
+import { TemplUtil } from "set-piece";
 
 export namespace FrostNovaEffectProps {
     export type E = {}
@@ -28,7 +28,6 @@ export class FrostNovaEffectModel extends SpellEffectModel<[],
                 },
                 child: { ...props.child },
                 refer: { ...props.refer },
-                route: CARD_ROUTE,
             }
         })
     }

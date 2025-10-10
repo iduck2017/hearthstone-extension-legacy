@@ -16,7 +16,6 @@ export class HarvestGolemDeathrattleModel extends DeathrattleModel {
                 },
                 child: { ...props.child },
                 refer: { ...props.refer },
-                route: ROLE_ROUTE,
             }
         });
     }

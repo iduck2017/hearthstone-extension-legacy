@@ -16,7 +16,6 @@ export class AegwynnTheGuardianContextModel extends FeatureModel {
             },
             child: { ...props.child },
             refer: { ...props.refer },
-            route: {},
         });
     }
 
