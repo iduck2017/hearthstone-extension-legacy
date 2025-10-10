@@ -1,5 +1,5 @@
 import { StartTurnHookModel, RoleModel, DamageModel, DamageEvent, MINION_ROUTE, MinionRoute } from "hearthstone-core";
-import { Loader, TemplUtil } from "set-piece";
+import { TemplUtil } from "set-piece";
 
 export namespace DemolisherFeatureProps {
     export type E = {}
@@ -17,21 +17,19 @@ export class DemolisherFeatureModel extends StartTurnHookModel<
     DemolisherFeatureProps.R,
     DemolisherFeatureProps.P
 > {
-    constructor(loader?: Loader<DemolisherFeatureModel>) {
-        super(() => {
-            const props = loader?.() ?? {};
-            return {
-                uuid: props.uuid,
-                state: {
-                    name: "Demolisher's Feature",
-                    desc: "At the start of your turn, deal 2 damage to a random enemy.",
-                    isActive: true,
-                    ...props.state
-                },
-                child: { ...props.child },
-                refer: { ...props.refer },
-                route: MINION_ROUTE,
-            }
+    constructor(props?: DemolisherFeatureModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: {
+                name: "Demolisher's Feature",
+                desc: "At the start of your turn, deal 2 damage to a random enemy.",
+                isActive: true,
+                ...props.state
+            },
+            child: { ...props.child },
+            refer: { ...props.refer },
+            route: MINION_ROUTE,
         });
     }
 

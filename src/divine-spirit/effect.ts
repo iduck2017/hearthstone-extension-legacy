@@ -1,23 +1,21 @@
 import { EffectModel, SpellEffectModel, SelectEvent, RoleModel } from "hearthstone-core";
-import { Loader, TemplUtil } from "set-piece";
+import { TemplUtil } from "set-piece";
 import { DivineSpiritBuffModel } from "./buff";
 
 @TemplUtil.is('divine-spirit-effect')
 export class DivineSpiritEffectModel extends SpellEffectModel<[RoleModel]> {
-    constructor(loader?: Loader<DivineSpiritEffectModel>) {
-        super(() => {
-            const props = loader?.() ?? {};
-            return {
-                uuid: props.uuid,
-                state: {
-                    name: "Divine Spirit's effect",
-                    desc: "Double a minion's Health.",
-                    damage: [],
-                    ...props.state
-                },
-                child: { ...props.child },
-                refer: { ...props.refer },
-            };
+    constructor(props?: DivineSpiritEffectModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: {
+                name: "Divine Spirit's effect",
+                desc: "Double a minion's Health.",
+                damage: [],
+                ...props.state
+            },
+            child: { ...props.child },
+            refer: { ...props.refer },
         });
     }
 
@@ -38,7 +36,7 @@ export class DivineSpiritEffectModel extends SpellEffectModel<[RoleModel]> {
         
         // Get current health and create a buff with equal value
         const currentHealth = target.child.health.state.current;
-        const buff = new DivineSpiritBuffModel(() => ({ state: { offset: [0, currentHealth] }}));
+        const buff = new DivineSpiritBuffModel({ state: { offset: [0, currentHealth] }});
         target.child.feats.add(buff);
     }
 }

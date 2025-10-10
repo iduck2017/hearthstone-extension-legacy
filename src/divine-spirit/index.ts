@@ -19,35 +19,32 @@
  */
 
 import { ClassType, CostModel, LibraryUtil, RarityType, SpellCardModel, SchoolType, SpellFeatsModel } from "hearthstone-core";
-import { Loader } from "set-piece";
 import { DivineSpiritEffectModel } from "./effect";
 
 @LibraryUtil.is('divine-spirit')
 export class DivineSpiritModel extends SpellCardModel {
-    constructor(loader?: Loader<DivineSpiritModel>) {
-        super(() => {
-            const props = loader?.() ?? {};
-            return {
-                uuid: props.uuid,
-                state: {
-                    name: 'Divine Spirit',
-                    desc: 'Double a minion\'s Health.',
-                    flavorDesc: '"Double the trouble. Double the fun!"',
-                    isCollectible: true,
-                    rarity: RarityType.COMMON,
-                    class: ClassType.PRIEST,
-                    schools: [SchoolType.HOLY],
-                    ...props.state
-                },
-                child: {
-                    cost: new CostModel(() => ({ state: { origin: 2 }})),
-                    feats: props.child?.feats ?? new SpellFeatsModel(() => ({
-                        child: { effects: [new DivineSpiritEffectModel()] }
-                    })),
-                    ...props.child
-                },
-                refer: { ...props.refer }
-            };
+    constructor(props?: DivineSpiritModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: {
+                name: 'Divine Spirit',
+                desc: 'Double a minion\'s Health.',
+                flavorDesc: '"Double the trouble. Double the fun!"',
+                isCollectible: true,
+                rarity: RarityType.COMMON,
+                class: ClassType.PRIEST,
+                schools: [SchoolType.HOLY],
+                ...props.state
+            },
+            child: {
+                cost: new CostModel({ state: { origin: 2 }}),
+                feats: props.child?.feats ?? new SpellFeatsModel({
+                    child: { effects: [new DivineSpiritEffectModel()] }
+                }),
+                ...props.child
+            },
+            refer: { ...props.refer }
         });
     }
 }

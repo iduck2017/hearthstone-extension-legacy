@@ -1,22 +1,20 @@
 import { MinionBattlecryModel, DeployModel } from "hearthstone-core";
-import { Loader, TemplUtil } from "set-piece";
+import { TemplUtil } from "set-piece";
 import { MechanicalDragonlingModel } from "../mechanical-dragonling";
 
 @TemplUtil.is('dragonling-mechanic-battlecry')
 export class DragonlingMechanicBattlecryModel extends MinionBattlecryModel<[]> {
-    constructor(loader?: Loader<DragonlingMechanicBattlecryModel>) {
-        super(() => {
-            const props = loader?.() ?? {};
-            return {
-                uuid: props.uuid,
-                state: {
-                    name: "Dragonling Mechanic's Battlecry",
-                    desc: "Summon a 2/1 Mechanical Dragonling.",
-                    ...props.state
-                },
-                child: { ...props.child },
-                refer: { ...props.refer },
-            };
+    constructor(props?: DragonlingMechanicBattlecryModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: {
+                name: "Dragonling Mechanic's Battlecry",
+                desc: "Summon a 2/1 Mechanical Dragonling.",
+                ...props.state
+            },
+            child: { ...props.child },
+            refer: { ...props.refer },
         });
     }
 
