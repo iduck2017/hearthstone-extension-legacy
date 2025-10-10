@@ -14,47 +14,44 @@
  */
 
 import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, MinionFeatsModel, RarityType, RoleAttackModel, RoleModel, RaceType, TauntModel, RoleFeatsModel } from "hearthstone-core";
-import { Loader } from "set-piece";
 
 @LibraryUtil.is('shieldbearer')
 export class ShieldbearerModel extends MinionCardModel {
-    constructor(loader?: Loader<ShieldbearerModel>) {
-        super(() => {
-            const props = loader?.() ?? {};
-            return {
-                uuid: props.uuid,
-                state: {
-                    name: 'Shieldbearer',
-                    desc: 'Taunt',
-                    flavorDesc: 'Have you seen the size of the shields in this game?? This is no easy job.',
-                    isCollectible: true,
-                    rarity: RarityType.COMMON,
-                    class: ClassType.NEUTRAL,
-                    races: [RaceType.DRAENEI],
-                    ...props.state
-                },
-                child: {
-                    cost: new CostModel(() => ({ state: { origin: 1 }})),
-                    role: new RoleModel(() => ({
-                        child: {
-                            attack: new RoleAttackModel(() => ({ state: { origin: 0 }})),
-                            health: new RoleHealthModel(() => ({ state: { origin: 4 }})),
-                            feats: new RoleFeatsModel(() => ({
-                                child: {
-                                    taunt: new TauntModel()
-                                }
-                            }))
-                        }
-                    })),
-                    feats: new MinionFeatsModel(() => ({
-                        child: { 
-                            battlecry: []
-                        }
-                    })),
-                    ...props.child
-                },
-                refer: { ...props.refer }
-            }
+    constructor(props?: ShieldbearerModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: {
+                name: 'Shieldbearer',
+                desc: 'Taunt',
+                flavorDesc: 'Have you seen the size of the shields in this game?? This is no easy job.',
+                isCollectible: true,
+                rarity: RarityType.COMMON,
+                class: ClassType.NEUTRAL,
+                races: [RaceType.DRAENEI],
+                ...props.state
+            },
+            child: {
+                cost: new CostModel({ state: { origin: 1 }}),
+                role: new RoleModel({
+                    child: {
+                        attack: new RoleAttackModel({ state: { origin: 0 }}),
+                        health: new RoleHealthModel({ state: { origin: 4 }}),
+                        feats: new RoleFeatsModel({
+                            child: {
+                                taunt: new TauntModel()
+                            }
+                        })
+                    }
+                }),
+                feats: new MinionFeatsModel({
+                    child: { 
+                        battlecry: []
+                    }
+                }),
+                ...props.child
+            },
+            refer: { ...props.refer }
         });
     }
 } 

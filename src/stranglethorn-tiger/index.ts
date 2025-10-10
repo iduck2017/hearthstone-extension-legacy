@@ -14,40 +14,37 @@
  */
 
 import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, MinionFeatsModel, RarityType, RoleAttackModel, RoleModel, RaceType, StealthModel, RoleFeatsModel } from "hearthstone-core";
-import { Loader } from "set-piece";
 
 @LibraryUtil.is('stranglethorn-tiger')
 export class StranglethornTigerModel extends MinionCardModel {
-    constructor(loader?: Loader<StranglethornTigerModel>) {
-        super(() => {
-            const props = loader?.() ?? {};
-            return {
-                uuid: props.uuid,
-                state: {
-                    name: 'Stranglethorn Tiger',
-                    desc: 'Stealth',
-                    flavorDesc: 'The wonderful thing about tigers is tigers are wonderful things!',
-                    isCollectible: true,
-                    rarity: RarityType.COMMON,
-                    class: ClassType.NEUTRAL,
-                    races: [RaceType.BEAST],
-                    ...props.state
-                },
-                child: {
-                    cost: new CostModel(() => ({ state: { origin: 5 }})),
-                    role: new RoleModel(() => ({
-                        child: {
-                            attack: new RoleAttackModel(() => ({ state: { origin: 5 }})),
-                            health: new RoleHealthModel(() => ({ state: { origin: 5 }})),
-                            feats: new RoleFeatsModel(() => ({
-                                child: { stealth: new StealthModel() }
-                            }))
-                        }
-                    })),
-                    ...props.child
-                },
-                refer: { ...props.refer }
-            }
+    constructor(props?: StranglethornTigerModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: {
+                name: 'Stranglethorn Tiger',
+                desc: 'Stealth',
+                flavorDesc: 'The wonderful thing about tigers is tigers are wonderful things!',
+                isCollectible: true,
+                rarity: RarityType.COMMON,
+                class: ClassType.NEUTRAL,
+                races: [RaceType.BEAST],
+                ...props.state
+            },
+            child: {
+                cost: new CostModel({ state: { origin: 5 }}),
+                role: new RoleModel({
+                    child: {
+                        attack: new RoleAttackModel({ state: { origin: 5 }}),
+                        health: new RoleHealthModel({ state: { origin: 5 }}),
+                        feats: new RoleFeatsModel({
+                            child: { stealth: new StealthModel() }
+                        })
+                    }
+                }),
+                ...props.child
+            },
+            refer: { ...props.refer }
         });
     }
 }

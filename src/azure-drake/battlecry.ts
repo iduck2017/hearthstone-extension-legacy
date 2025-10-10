@@ -1,21 +1,19 @@
 import { MinionBattlecryModel } from "hearthstone-core";
-import { TemplUtil, Loader } from "set-piece";
+import { TemplUtil } from "set-piece";
 
 @TemplUtil.is('azure-drake-battlecry')
 export class AzureDrakeBattlecryModel extends MinionBattlecryModel<[]> {
-    constructor(loader?: Loader<AzureDrakeBattlecryModel>) {
-        super(() => {
-            const props = loader?.() ?? {};
-            return {
-                uuid: props.uuid,
-                state: {
-                    name: 'Azure Drake Battlecry',
-                    desc: 'Draw a card.',
-                    ...props.state
-                },
-                child: { ...props.child },
-                refer: { ...props.refer }
-            }
+    constructor(props?: AzureDrakeBattlecryModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: {
+                name: 'Azure Drake Battlecry',
+                desc: 'Draw a card.',
+                ...props.state
+            },
+            child: { ...props.child },
+            refer: { ...props.refer },
         });
     }
 

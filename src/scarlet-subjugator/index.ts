@@ -18,41 +18,38 @@
  */
 
 import { ClassType, CostModel, LibraryUtil, RarityType, MinionCardModel, MinionFeatsModel, RoleAttackModel, RoleHealthModel, RoleModel } from "hearthstone-core";
-import { Loader } from "set-piece";
 import { ScarletSubjugatorBattlecryModel } from "./battlecry";
 
 @LibraryUtil.is('scarlet-subjugator')
 export class ScarletSubjugatorModel extends MinionCardModel {
-    constructor(loader?: Loader<ScarletSubjugatorModel>) {
-        super(() => {
-            const props = loader?.() ?? {};
-            return {
-                uuid: props.uuid,
-                state: {
-                    name: 'Scarlet Subjugator',
-                    desc: 'Battlecry: Give an enemy minion -2 Attack until your next turn.',
-                    flavorDesc: '"At the Scarlet Monastery, he learned the sacred art of kicking people when they\'re up."',
-                    isCollectible: true,
-                    rarity: RarityType.RARE,
-                    class: ClassType.PRIEST,
-                    races: [],
-                    ...props.state
-                },
-                child: {
-                    cost: new CostModel(() => ({ state: { origin: 1 }})),
-                    role: new RoleModel(() => ({
-                        child: {
-                            attack: new RoleAttackModel(() => ({ state: { origin: 2 }})),
-                            health: new RoleHealthModel(() => ({ state: { origin: 1 }})),
-                        }
-                    })),
-                    feats: new MinionFeatsModel(() => ({
-                        child: { battlecry: [new ScarletSubjugatorBattlecryModel()]}
-                    })),
-                    ...props.child
-                },
-                refer: { ...props.refer }
-            };
+    constructor(props?: ScarletSubjugatorModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: {
+                name: 'Scarlet Subjugator',
+                desc: 'Battlecry: Give an enemy minion -2 Attack until your next turn.',
+                flavorDesc: '"At the Scarlet Monastery, he learned the sacred art of kicking people when they\'re up."',
+                isCollectible: true,
+                rarity: RarityType.RARE,
+                class: ClassType.PRIEST,
+                races: [],
+                ...props.state
+            },
+            child: {
+                cost: new CostModel({ state: { origin: 1 }}),
+                role: new RoleModel({
+                    child: {
+                        attack: new RoleAttackModel({ state: { origin: 2 }}),
+                        health: new RoleHealthModel({ state: { origin: 1 }}),
+                    }
+                }),
+                feats: new MinionFeatsModel({
+                    child: { battlecry: [new ScarletSubjugatorBattlecryModel()]}
+                }),
+                ...props.child
+            },
+            refer: { ...props.refer }
         });
     }
 }

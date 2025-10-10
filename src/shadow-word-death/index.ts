@@ -16,35 +16,32 @@
  * 2 cost
  */
 import { ClassType, CostModel, LibraryUtil, RarityType, SpellCardModel, SchoolType, SpellFeatsModel } from "hearthstone-core";
-import { Loader } from "set-piece";
 import { ShadowWordDeathEffectModel } from "./effect";
 
 @LibraryUtil.is('shadow-word-death')
 export class ShadowWordDeathModel extends SpellCardModel {
-    constructor(loader?: Loader<ShadowWordDeathModel>) {
-        super(() => {
-            const props = loader?.() ?? {};
-            return {
-                uuid: props.uuid,
-                state: {
-                    name: 'Shadow Word: Death',
-                    desc: 'Destroy a minion with 5 or more Attack.',
-                    flavorDesc: '"If you miss, it leaves a lightning-bolt-shaped scar on your target."',
-                    isCollectible: true,
-                    rarity: RarityType.COMMON,
-                    class: ClassType.PRIEST,
-                    schools: [SchoolType.SHADOW],
-                    ...props.state
-                },
-                child: {
-                    cost: new CostModel(() => ({ state: { origin: 2 }})),
-                    feats: props.child?.feats ?? new SpellFeatsModel(() => ({
-                        child: { effects: [new ShadowWordDeathEffectModel()] }
-                    })),
-                    ...props.child
-                },
-                refer: { ...props.refer }
-            };
+    constructor(props?: ShadowWordDeathModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: {
+                name: 'Shadow Word: Death',
+                desc: 'Destroy a minion with 5 or more Attack.',
+                flavorDesc: '"If you miss, it leaves a lightning-bolt-shaped scar on your target."',
+                isCollectible: true,
+                rarity: RarityType.COMMON,
+                class: ClassType.PRIEST,
+                schools: [SchoolType.SHADOW],
+                ...props.state
+            },
+            child: {
+                cost: new CostModel({ state: { origin: 2 }}),
+                feats: props.child?.feats ?? new SpellFeatsModel({
+                    child: { effects: [new ShadowWordDeathEffectModel()] }
+                }),
+                ...props.child
+            },
+            refer: { ...props.refer }
         });
     }
 }

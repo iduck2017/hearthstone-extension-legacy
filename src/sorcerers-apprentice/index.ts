@@ -15,43 +15,40 @@
  */
 
 import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, MinionFeatsModel, RarityType, RoleAttackModel, RoleModel } from "hearthstone-core";
-import { Loader } from "set-piece";
 import { SorcerersApprenticeFeatureModel } from "./feature";
 
 @LibraryUtil.is('sorcerers-apprentice')
 export class SorcerersApprenticeModel extends MinionCardModel {
-    constructor(loader?: Loader<SorcerersApprenticeModel>) {
-        super(() => {
-            const props = loader?.() ?? {};
-            return {
-                uuid: props.uuid,
-                state: {
-                    name: 'Sorcerer\'s Apprentice',
-                    desc: 'Your spells cost (1) less (but not less than 1).',
-                    flavorDesc: 'Apprentices are great for bossing around. "Conjure me some mana buns! And a coffee! Make that a mana coffee!"',
-                    isCollectible: true,
-                    rarity: RarityType.COMMON,
-                    class: ClassType.MAGE,
-                    races: [],
-                    ...props.state
-                },
-                child: {
-                    cost: new CostModel(() => ({ state: { origin: 2 }})),
-                    role: new RoleModel(() => ({
-                        child: {
-                            attack: new RoleAttackModel(() => ({ state: { origin: 3 }})),
-                            health: new RoleHealthModel(() => ({ state: { origin: 2 }})),
-                        }
-                    })),
-                    feats: new MinionFeatsModel(() => ({
-                        child: {
-                            list: [new SorcerersApprenticeFeatureModel()]
-                        }
-                    })),
-                    ...props.child
-                },
-                refer: { ...props.refer }
-            };
+    constructor(props?: SorcerersApprenticeModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: {
+                name: 'Sorcerer\'s Apprentice',
+                desc: 'Your spells cost (1) less (but not less than 1).',
+                flavorDesc: 'Apprentices are great for bossing around. "Conjure me some mana buns! And a coffee! Make that a mana coffee!"',
+                isCollectible: true,
+                rarity: RarityType.COMMON,
+                class: ClassType.MAGE,
+                races: [],
+                ...props.state
+            },
+            child: {
+                cost: new CostModel({ state: { origin: 2 }}),
+                role: new RoleModel({
+                    child: {
+                        attack: new RoleAttackModel({ state: { origin: 3 }}),
+                        health: new RoleHealthModel({ state: { origin: 2 }}),
+                    }
+                }),
+                feats: new MinionFeatsModel({
+                    child: {
+                        list: [new SorcerersApprenticeFeatureModel()]
+                    }
+                }),
+                ...props.child
+            },
+            refer: { ...props.refer }
         });
     }
 }

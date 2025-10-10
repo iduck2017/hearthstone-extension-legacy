@@ -11,47 +11,44 @@
  */
 
 import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, MinionFeatsModel, RarityType, RoleAttackModel, RoleModel, RaceType, RoleFeatsModel, TauntModel } from "hearthstone-core";
-import { Loader } from "set-piece";
 
 @LibraryUtil.is('senjin-shieldmasta')
 export class SenjinShieldmastaModel extends MinionCardModel {
-    constructor(loader?: Loader<SenjinShieldmastaModel>) {
-        super(() => {
-            const props = loader?.() ?? {};
-            return {
-                uuid: props.uuid,
-                state: {
-                    name: 'Sen\'jin Shieldmasta',
-                    desc: 'Taunt',
-                    flavorDesc: 'Sen\'jin Village is nice, if you like trolls and dust.',
-                    isCollectible: true,
-                    rarity: RarityType.COMMON,
-                    class: ClassType.NEUTRAL,
-                    races: [],
-                    ...props.state
-                },
-                child: {
-                    cost: new CostModel(() => ({ state: { origin: 4 }})),
-                    role: new RoleModel(() => ({
-                        child: {
-                            attack: new RoleAttackModel(() => ({ state: { origin: 3 }})),
-                            health: new RoleHealthModel(() => ({ state: { origin: 5 }})),
-                            feats: new RoleFeatsModel(() => ({
-                                child: {
-                                    taunt: new TauntModel()
-                                }
-                            }))
-                        }
-                    })),
-                    feats: new MinionFeatsModel(() => ({
-                        child: { 
-                            battlecry: []
-                        }
-                    })),
-                    ...props.child
-                },
-                refer: { ...props.refer }
-            }
+    constructor(props?: SenjinShieldmastaModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: {
+                name: 'Sen\'jin Shieldmasta',
+                desc: 'Taunt',
+                flavorDesc: 'Sen\'jin Village is nice, if you like trolls and dust.',
+                isCollectible: true,
+                rarity: RarityType.COMMON,
+                class: ClassType.NEUTRAL,
+                races: [],
+                ...props.state
+            },
+            child: {
+                cost: new CostModel({ state: { origin: 4 }}),
+                role: new RoleModel({
+                    child: {
+                        attack: new RoleAttackModel({ state: { origin: 3 }}),
+                        health: new RoleHealthModel({ state: { origin: 5 }}),
+                        feats: new RoleFeatsModel({
+                            child: {
+                                taunt: new TauntModel()
+                            }
+                        })
+                    }
+                }),
+                feats: new MinionFeatsModel({
+                    child: { 
+                        battlecry: []
+                    }
+                }),
+                ...props.child
+            },
+            refer: { ...props.refer }
         });
     }
 }

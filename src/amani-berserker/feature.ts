@@ -1,4 +1,4 @@
-import { RoleAttackModel, FeatureModel, RoleHealthModel, RoleAttackDecor, OperationType } from "hearthstone-core";
+import { RoleAttackModel, FeatureModel, RoleHealthModel, RoleAttackDecor, OperationType, RoleModel } from "hearthstone-core";
 import { Event, EventUtil, StateUtil, TemplUtil, TranxUtil, Decor, Frame } from "set-piece";
 
 export namespace AmaniBerserkerFeatureProps {
@@ -17,6 +17,15 @@ export class AmaniBerserkerFeatureModel extends FeatureModel<
     AmaniBerserkerFeatureProps.C,
     AmaniBerserkerFeatureProps.R
 > {
+    public get route() {
+        const result = super.route;
+        const role = result.list.find(item => item instanceof RoleModel);
+        return {
+            ...result,
+            role
+        };
+    }
+
     constructor(props?: AmaniBerserkerFeatureModel['props']) {
         props = props ?? {};
         super({
@@ -33,17 +42,25 @@ export class AmaniBerserkerFeatureModel extends FeatureModel<
         });
     }
 
+    @EventUtil.on(self => self.handleChange)
+    private listenChange() {
+        return this.route.role?.proxy.child.health.event?.onChange
+    }
+
     // Listen to health state changes to trigger enrage effect
-    @EventUtil.on(self => self.route.role?.proxy.child.health.event.onChange)
     @TranxUtil.span()
-    private onHealthChange(that: RoleHealthModel, event: Event<Frame<RoleHealthModel>>) {
-        if (that.state.current !== event.detail.state.current) this.reload()
-        if (that.state.maximum !== event.detail.state.maximum) this.reload()
+    private handleChange(that: RoleHealthModel, event: { prev: Frame<RoleHealthModel> }) {
+        if (that.state.current !== event.prev.state.current) this.reload()
+        if (that.state.maximum !== event.prev.state.maximum) this.reload()
+    }
+
+    @StateUtil.on(self => self.handleAttack)
+    private listenAttack() {
+        return this.route.role?.proxy.child.attack.decor
     }
 
     // Apply attack buff when damaged
-    @StateUtil.on(self => self.route.role?.proxy.child.attack.decor)
-    private onCheck(
+    private handleAttack(
         that: RoleAttackModel,
         decor: RoleAttackDecor
     ) {

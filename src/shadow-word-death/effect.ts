@@ -1,22 +1,20 @@
 import { EffectModel, SpellEffectModel, SelectEvent, RoleModel } from "hearthstone-core";
-import { Loader, TemplUtil } from "set-piece";
+import { TemplUtil } from "set-piece";
 
 @TemplUtil.is('shadow-word-death-effect')
 export class ShadowWordDeathEffectModel extends SpellEffectModel<[RoleModel]> {
-    constructor(loader?: Loader<ShadowWordDeathEffectModel>) {
-        super(() => {
-            const props = loader?.() ?? {};
-            return {
-                uuid: props.uuid,
-                state: {
-                    name: "Shadow Word: Death's effect",
-                    desc: "Destroy a minion with 5 or more Attack.",
-                    damage: [],
-                    ...props.state
-                },
-                child: { ...props.child },
-                refer: { ...props.refer },
-            };
+    constructor(props?: ShadowWordDeathEffectModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: {
+                name: "Shadow Word: Death's effect",
+                desc: "Destroy a minion with 5 or more Attack.",
+                damage: [],
+                ...props.state
+            },
+            child: { ...props.child },
+            refer: { ...props.refer },
         });
     }
 

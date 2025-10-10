@@ -13,47 +13,44 @@
  */
 
 import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, MinionFeatsModel, RarityType, RoleAttackModel, RoleModel, RaceType, RoleFeatsModel, DivineShieldModel } from "hearthstone-core";
-import { Loader } from "set-piece";
 
 @LibraryUtil.is('silvermoon-guardian')
 export class SilvermoonGuardianModel extends MinionCardModel {
-    constructor(loader?: Loader<SilvermoonGuardianModel>) {
-        super(() => {
-            const props = loader?.() ?? {};
-            return {
-                uuid: props.uuid,
-                state: {
-                    name: 'Silvermoon Guardian',
-                    desc: 'Divine Shield',
-                    flavorDesc: 'The first time they tried to guard Silvermoon against the scourge, it didn\'t go so well…',
-                    isCollectible: true,
-                    rarity: RarityType.COMMON,
-                    class: ClassType.NEUTRAL,
-                    races: [],
-                    ...props.state
-                },
-                child: {
-                    cost: new CostModel(() => ({ state: { origin: 4 }})),
-                    role: new RoleModel(() => ({
-                        child: {
-                            attack: new RoleAttackModel(() => ({ state: { origin: 3 }})),
-                            health: new RoleHealthModel(() => ({ state: { origin: 3 }})),
-                            feats: new RoleFeatsModel(() => ({
-                                child: {
-                                    divineShield: new DivineShieldModel()
-                                }
-                            }))
-                        }
-                    })),
-                    feats: new MinionFeatsModel(() => ({
-                        child: { 
-                            battlecry: []
-                        }
-                    })),
-                    ...props.child
-                },
-                refer: { ...props.refer }
-            }
+    constructor(props?: SilvermoonGuardianModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: {
+                name: 'Silvermoon Guardian',
+                desc: 'Divine Shield',
+                flavorDesc: 'The first time they tried to guard Silvermoon against the scourge, it didn\'t go so well…',
+                isCollectible: true,
+                rarity: RarityType.COMMON,
+                class: ClassType.NEUTRAL,
+                races: [],
+                ...props.state
+            },
+            child: {
+                cost: new CostModel({ state: { origin: 4 }}),
+                role: new RoleModel({
+                    child: {
+                        attack: new RoleAttackModel({ state: { origin: 3 }}),
+                        health: new RoleHealthModel({ state: { origin: 3 }}),
+                        feats: new RoleFeatsModel({
+                            child: {
+                                divineShield: new DivineShieldModel()
+                            }
+                        })
+                    }
+                }),
+                feats: new MinionFeatsModel({
+                    child: { 
+                        battlecry: []
+                    }
+                }),
+                ...props.child
+            },
+            refer: { ...props.refer }
         });
     }
 }

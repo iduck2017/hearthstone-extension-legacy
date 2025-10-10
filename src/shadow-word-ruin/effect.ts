@@ -1,22 +1,20 @@
 import { EffectModel, SpellEffectModel } from "hearthstone-core";
-import { Loader, TemplUtil } from "set-piece";
+import { TemplUtil } from "set-piece";
 
 @TemplUtil.is('shadow-word-ruin-effect')
 export class ShadowWordRuinEffectModel extends SpellEffectModel<[]> {
-    constructor(loader?: Loader<ShadowWordRuinEffectModel>) {
-        super(() => {
-            const props = loader?.() ?? {};
-            return {
-                uuid: props.uuid,
-                state: {
-                    name: "Shadow Word: Ruin's effect",
-                    desc: "Destroy all minions with 5 or more Attack.",
-                    damage: [],
-                    ...props.state
-                },
-                child: { ...props.child },
-                refer: { ...props.refer },
-            };
+    constructor(props?: ShadowWordRuinEffectModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: {
+                name: "Shadow Word: Ruin's effect",
+                desc: "Destroy all minions with 5 or more Attack.",
+                damage: [],
+                ...props.state
+            },
+            child: { ...props.child },
+            refer: { ...props.refer },
         });
     }
 

@@ -1,22 +1,20 @@
 import { MinionBattlecryModel, SelectEvent, RoleModel } from "hearthstone-core";
-import { Loader, TemplUtil, TranxUtil } from "set-piece";
+import { TemplUtil, TranxUtil } from "set-piece";
 import { ScarletSubjugatorDebuffModel } from "./debuff";
 
 @TemplUtil.is('scarlet-subjugator-battlecry')
 export class ScarletSubjugatorBattlecryModel extends MinionBattlecryModel<[RoleModel]> {
-    constructor(loader?: Loader<ScarletSubjugatorBattlecryModel>) {
-        super(() => {
-            const props = loader?.() ?? {};
-            return {
-                uuid: props.uuid,
-                state: {
-                    name: 'Scarlet Subjugator\'s Battlecry',
-                    desc: 'Give an enemy minion -2 Attack until your next turn.',
-                    ...props.state,
-                },
-                child: { ...props.child },
-                refer: { ...props.refer },
-            };
+    constructor(props?: ScarletSubjugatorBattlecryModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: {
+                name: 'Scarlet Subjugator\'s Battlecry',
+                desc: 'Give an enemy minion -2 Attack until your next turn.',
+                ...props.state,
+            },
+            child: { ...props.child },
+            refer: { ...props.refer },
         });
     }
 

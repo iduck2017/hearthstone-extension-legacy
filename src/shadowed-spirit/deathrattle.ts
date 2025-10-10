@@ -15,19 +15,17 @@ export class ShadowedSpiritDeathrattleModel extends DeathrattleModel<
     ShadowedSpiritDeathrattleProps.C,
     ShadowedSpiritDeathrattleProps.R
 > {
-    constructor(loader?: Loader<ShadowedSpiritDeathrattleModel>) {
-        super(() => {
-            const props = loader?.() ?? {};
-            return {
-                uuid: props.uuid,
-                state: {
-                    name: 'Shadowed Spirit\'s Deathrattle',
-                    desc: 'Deal 3 damage to the enemy hero.',
-                    ...props.state,
-                },
-                child: { ...props.child },
-                refer: { ...props.refer },
-            }
+    constructor(props?: ShadowedSpiritDeathrattleModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: {
+                name: 'Shadowed Spirit\'s Deathrattle',
+                desc: 'Deal 3 damage to the enemy hero.',
+                ...props.state,
+            },
+            child: { ...props.child },
+            refer: { ...props.refer },
         });
     }
 

@@ -1,5 +1,5 @@
 import { PlayerModel, IRoleBuffModel, TurnModel } from "hearthstone-core";
-import { Event, EventUtil, Loader, TemplUtil } from "set-piece";
+import { Event, EventUtil, TemplUtil } from "set-piece";
 
 export namespace ScarletSubjugatorDebuffProps {
     export type E = {};
@@ -17,20 +17,18 @@ export class ScarletSubjugatorDebuffModel extends IRoleBuffModel<
     ScarletSubjugatorDebuffProps.C,
     ScarletSubjugatorDebuffProps.R
 > {
-    constructor(loader?: Loader<ScarletSubjugatorDebuffModel>) {
-        super(() => {
-            const props = loader?.() ?? {};
-            return {
-                uuid: props.uuid,
-                state: {
-                    name: 'Scarlet Subjugator\'s Debuff',
-                    desc: '-2 Attack until your next turn.',
-                    offset: [-2, 0], // -2 Attack, 0 Health
-                    ...props.state,
-                },
-                child: { ...props.child },
-                refer: { ...props.refer },
-            };
+    constructor(props?: ScarletSubjugatorDebuffModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: {
+                name: 'Scarlet Subjugator\'s Debuff',
+                desc: '-2 Attack until your next turn.',
+                offset: [-2, 0], // -2 Attack, 0 Health
+                ...props.state,
+            },
+            child: { ...props.child },
+            refer: { ...props.refer },
         });
     }
 

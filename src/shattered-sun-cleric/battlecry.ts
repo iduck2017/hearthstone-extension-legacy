@@ -1,21 +1,19 @@
 import { MinionBattlecryModel, SelectEvent, RoleModel, RoleBuffModel } from "hearthstone-core";
-import { Loader, TemplUtil } from "set-piece";
+import { TemplUtil } from "set-piece";
 
 @TemplUtil.is('shattered-sun-cleric-battlecry')
 export class ShatteredSunClericBattlecryModel extends MinionBattlecryModel<[RoleModel]> {
-    constructor(loader?: Loader<ShatteredSunClericBattlecryModel>) {
-        super(() => {
-            const props = loader?.() ?? {};
-            return {
-                uuid: props.uuid,
-                state: {
-                    name: "Shattered Sun Cleric's Battlecry",
-                    desc: "Give a friendly minion +1/+1.",
-                    ...props.state
-                },
-                child: { ...props.child },
-                refer: { ...props.refer },
-            };
+    constructor(props?: ShatteredSunClericBattlecryModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: {
+                name: "Shattered Sun Cleric's Battlecry",
+                desc: "Give a friendly minion +1/+1.",
+                ...props.state
+            },
+            child: { ...props.child },
+            refer: { ...props.refer },
         });
     }
 

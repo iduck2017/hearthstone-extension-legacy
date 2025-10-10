@@ -16,43 +16,40 @@
  */
 import { MinionCardModel, RoleHealthModel, RoleAttackModel, RoleModel, ClassType, RarityType, RaceType, MinionFeatsModel, LibraryUtil, CostModel, SpellDamageModel } from "hearthstone-core";
 import { AzureDrakeBattlecryModel } from "./battlecry";
-import { Loader } from "set-piece";
 
 @LibraryUtil.is('azure-drake')
 export class AzureDrakeModel extends MinionCardModel {
-    constructor(loader?: Loader<AzureDrakeModel>) {
-        super(() => {
-            const props = loader?.() ?? {};
-            return {
-                uuid: props.uuid,
-                state: {
-                    name: 'Azure Drake',
-                    desc: 'Spell Damage +1 Battlecry: Draw a card.',
-                    isCollectible: true,
-                    flavorDesc: 'They initially planned to be the Beryl or Cerulean drakes, but those felt a tad too pretentious.',
-                    rarity: RarityType.RARE,
-                    class: ClassType.NEUTRAL,
-                    races: [RaceType.DRAGON],
-                    ...props.state,
-                },
-                child: {
-                    cost: new CostModel(() => ({ state: { origin: 5 }})),
-                    role: new RoleModel(() => ({
-                        child: {
-                            attack: new RoleAttackModel(() => ({ state: { origin: 4 }})),
-                            health: new RoleHealthModel(() => ({ state: { origin: 4 }})),
-                        }
-                    })),
-                    feats: new MinionFeatsModel(() => ({
-                        child: {
-                            battlecry: [new AzureDrakeBattlecryModel()],
-                            list: [new SpellDamageModel(() => ({ state: { offset: 1 }}))]
-                        }
-                    })),
-                    ...props.child
-                },
-                refer: { ...props.refer }
-            }
+    constructor(props?: AzureDrakeModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: {
+                name: 'Azure Drake',
+                desc: 'Spell Damage +1 Battlecry: Draw a card.',
+                isCollectible: true,
+                flavorDesc: 'They initially planned to be the Beryl or Cerulean drakes, but those felt a tad too pretentious.',
+                rarity: RarityType.RARE,
+                class: ClassType.NEUTRAL,
+                races: [RaceType.DRAGON],
+                ...props.state,
+            },
+            child: {
+                cost: new CostModel({ state: { origin: 5 }}),
+                role: new RoleModel({
+                    child: {
+                        attack: new RoleAttackModel({ state: { origin: 4 }}),
+                        health: new RoleHealthModel({ state: { origin: 4 }}),
+                    }
+                }),
+                feats: new MinionFeatsModel({
+                    child: {
+                        battlecry: [new AzureDrakeBattlecryModel()],
+                        list: [new SpellDamageModel(({ state: { offset: 1 }}))]
+                    }
+                }),
+                ...props.child
+            },
+            refer: { ...props.refer }
         });
     }
 } 
