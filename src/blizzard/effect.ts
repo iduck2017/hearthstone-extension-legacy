@@ -1,5 +1,5 @@
 import { EffectModel, DamageModel, DamageEvent, DamageType, RoleRoute, ROLE_ROUTE, SpellEffectModel } from "hearthstone-core";
-import { Loader, TemplUtil } from "set-piece";
+import { TemplUtil } from "set-piece";
 
 export namespace BlizzardEffectProps {
     export type E = {}
@@ -15,21 +15,19 @@ export class BlizzardEffectModel extends SpellEffectModel<[],
     BlizzardEffectProps.C,
     BlizzardEffectProps.R
 > {
-    constructor(loader?: Loader<BlizzardEffectModel>) {
-        super(() => {
-            const props = loader?.() ?? {}
-            return {
-                uuid: props.uuid,
-                state: {
-                    name: "Blizzard's effect",
-                    desc: "Deal {{state.damage[0]}} damage to all enemy minions and Freeze them.",
-                    damage: [2],
-                    ...props.state
-                },
-                child: { ...props.child },
-                refer: { ...props.refer },
-            }
-        })
+    constructor(props?: BlizzardEffectModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: {
+                name: "Blizzard's effect",
+                desc: "Deal {{state.damage[0]}} damage to all enemy minions and Freeze them.",
+                damage: [2],
+                ...props.state
+            },
+            child: { ...props.child },
+            refer: { ...props.refer },
+        });
     }
 
     toRun(): [] { return [] }

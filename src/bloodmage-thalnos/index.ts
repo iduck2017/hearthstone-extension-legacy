@@ -15,43 +15,40 @@
 
 import { RoleAttackModel, ClassType, RoleHealthModel, MinionCardModel, RaceType, RarityType, RoleModel, SpellBuffModel, RoleFeatsModel, MinionFeatsModel, LibraryUtil, CostModel } from "hearthstone-core";
 import { BloodmageThalnosDeathrattleModel } from "./deathrattle";
-import { Loader } from "set-piece";
 
 @LibraryUtil.is('bloodmage-thalnos')
 export class BloodmageThalnosModel extends MinionCardModel {
-    constructor(loader?: Loader<BloodmageThalnosModel>) {
-        super(() => {
-            const props = loader?.() ?? {};
-            return {
-                uuid: props.uuid,
-                state: {
-                    name: 'Bloodmage Thalnos',
-                    desc: 'Spell Damage +1 Deathrattle: Draw a card.',
-                    isCollectible: true,
-                    flavorDesc: 'He\'s in charge of the Annual Scarlet Monastery Blood Drive!',
-                    rarity: RarityType.LEGENDARY,
-                    class: ClassType.NEUTRAL,
-                    races: [RaceType.UNDEAD],
-                    ...props.state,
-                },
-                child: {
-                    cost: new CostModel(() => ({ state: { origin: 2 }})),
-                    role: new RoleModel(() => ({
-                        child: {
-                            attack: new RoleAttackModel(() => ({ state: { origin: 1 }})),
-                            health: new RoleHealthModel(() => ({ state: { origin: 1 }})), 
-                        }
-                    })),
-                    feats: new MinionFeatsModel(() => ({
-                        child: {
-                            deathrattle: [new BloodmageThalnosDeathrattleModel()],
-                            items: [new SpellBuffModel(() => ({ state: { offset: 1 }}))]
-                        }
-                    })),
-                    ...props.child,
-                },
-                refer: { ...props.refer },
-            }
+    constructor(props?: BloodmageThalnosModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: {
+                name: 'Bloodmage Thalnos',
+                desc: 'Spell Damage +1 Deathrattle: Draw a card.',
+                isCollectible: true,
+                flavorDesc: 'He\'s in charge of the Annual Scarlet Monastery Blood Drive!',
+                rarity: RarityType.LEGENDARY,
+                class: ClassType.NEUTRAL,
+                races: [RaceType.UNDEAD],
+                ...props.state,
+            },
+            child: {
+                cost: new CostModel({ state: { origin: 2 }}),
+                role: new RoleModel({
+                    child: {
+                        attack: new RoleAttackModel({ state: { origin: 1 }}),
+                        health: new RoleHealthModel({ state: { origin: 1 }}), 
+                    }
+                }),
+                feats: new MinionFeatsModel({
+                    child: {
+                        deathrattle: [new BloodmageThalnosDeathrattleModel()],
+                        items: [new SpellBuffModel({ state: { offset: 1 }})]
+                    }
+                }),
+                ...props.child,
+            },
+            refer: { ...props.refer },
         });
     }
 } 
