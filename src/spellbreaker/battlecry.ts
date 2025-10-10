@@ -1,21 +1,19 @@
 import { MinionBattlecryModel, SelectEvent, RoleModel } from "hearthstone-core";
-import { Loader, TemplUtil } from "set-piece";
+import { TemplUtil } from "set-piece";
 
 @TemplUtil.is('spellbreaker-battlecry')
 export class SpellbreakerBattlecryModel extends MinionBattlecryModel<[RoleModel]> {
-    constructor(loader?: Loader<SpellbreakerBattlecryModel>) {
-        super(() => {
-            const props = loader?.() ?? {};
-            return {
-                uuid: props.uuid,
-                state: {
-                    name: "Spellbreaker's Battlecry",
-                    desc: "Silence a minion.",
-                    ...props.state
-                },
-                child: { ...props.child },
-                refer: { ...props.refer },
-            };
+    constructor(props?: SpellbreakerBattlecryModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: {
+                name: "Spellbreaker's Battlecry",
+                desc: "Silence a minion.",
+                ...props.state
+            },
+            child: { ...props.child },
+            refer: { ...props.refer },
         });
     }
 

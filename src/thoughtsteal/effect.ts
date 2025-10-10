@@ -1,22 +1,20 @@
 import { CardModel, SpellEffectModel } from "hearthstone-core";
-import { Loader, TemplUtil, TranxUtil } from "set-piece";
+import { TemplUtil, TranxUtil } from "set-piece";
 
 @TemplUtil.is('thoughtsteal-effect')
 export class ThoughtstealEffectModel extends SpellEffectModel<[]> {
-    constructor(loader?: Loader<ThoughtstealEffectModel>) {
-        super(() => {
-            const props = loader?.() ?? {};
-            return {
-                uuid: props.uuid,
-                state: {
-                    name: "Thoughtsteal's effect",
-                    desc: "Copy 2 cards in your opponent's deck and add them to your hand.",
-                    damage: [],
-                    ...props.state
-                },
-                child: { ...props.child },
-                refer: { ...props.refer },
-            };
+    constructor(props?: ThoughtstealEffectModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: {
+                name: "Thoughtsteal's effect",
+                desc: "Copy 2 cards in your opponent's deck and add them to your hand.",
+                damage: [],
+                ...props.state
+            },
+            child: { ...props.child },
+            refer: { ...props.refer },
         });
     }
 

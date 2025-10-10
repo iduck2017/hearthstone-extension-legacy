@@ -1,22 +1,20 @@
 import { MinionBattlecryModel, RoleModel, IRoleBuffModel } from "hearthstone-core";
-import { Loader, TemplUtil } from "set-piece";
+import { TemplUtil } from "set-piece";
 import { TwilightDrakeBuffModel } from "./buff";
 
 @TemplUtil.is('twilight-drake-battlecry')
 export class TwilightDrakeBattlecryModel extends MinionBattlecryModel<[]> {
-    constructor(loader?: Loader<TwilightDrakeBattlecryModel>) {
-        super(() => {
-            const props = loader?.() ?? {};
-            return {
-                uuid: props.uuid,
-                state: {
-                    name: "Twilight Drake's Battlecry",
-                    desc: "Gain +1 Health for each card in your hand.",
-                    ...props.state
-                },
-                child: { ...props.child },
-                refer: { ...props.refer },
-            };
+    constructor(props?: TwilightDrakeBattlecryModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: {
+                name: "Twilight Drake's Battlecry",
+                desc: "Gain +1 Health for each card in your hand.",
+                ...props.state
+            },
+            child: { ...props.child },
+            refer: { ...props.refer },
         });
     }
 

@@ -1,22 +1,20 @@
 import { EffectModel, SelectEvent, RoleModel, SpellEffectModel } from "hearthstone-core";
-import { Loader, TemplUtil } from "set-piece";
+import { TemplUtil } from "set-piece";
 
 @TemplUtil.is('silence-effect')
 export class SilenceEffectModel extends SpellEffectModel<[RoleModel]> {
-    constructor(loader?: Loader<SilenceEffectModel>) {
-        super(() => {
-            const props = loader?.() ?? {};
-            return {
-                uuid: props.uuid,
-                state: {
-                    name: "Silence's effect",
-                    desc: "Silence a minion.",
-                    damage: [],
-                    ...props.state
-                },
-                child: { ...props.child },
-                refer: { ...props.refer },
-            };
+    constructor(props?: SilenceEffectModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: {
+                name: "Silence's effect",
+                desc: "Silence a minion.",
+                damage: [],
+                ...props.state
+            },
+            child: { ...props.child },
+            refer: { ...props.refer },
         });
     }
 

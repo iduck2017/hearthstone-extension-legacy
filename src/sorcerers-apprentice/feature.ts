@@ -1,23 +1,20 @@
 import { CostDecor, CostModel, CostType, FeatureModel, SpellCardModel } from "hearthstone-core";
-import { Event, EventUtil, Loader, StateUtil, TemplUtil } from "set-piece";
+import { Event, EventUtil, StateUtil, TemplUtil } from "set-piece";
 
 @TemplUtil.is('sorcerers-apprentice-feature')
 export class SorcerersApprenticeFeatureModel extends FeatureModel {
-    constructor(loader?: Loader<SorcerersApprenticeFeatureModel>) {
-        super(() => {
-            const props = loader?.() ?? {}
-            return {
-                uuid: props.uuid,
-                state: {
-                    name: "Sorcerer's Apprentice's feature",
-                    desc: "Your spells cost (1) less (but not less than 1).",
-                    isActive: true,
-                    ...props.state
-                },
-                child: { ...props.child },
-                refer: { ...props.refer },
-                route: {},
-            }
+    constructor(props?: SorcerersApprenticeFeatureModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: {
+                name: "Sorcerer's Apprentice's feature",
+                desc: "Your spells cost (1) less (but not less than 1).",
+                isActive: true,
+                ...props.state
+            },
+            child: { ...props.child },
+            refer: { ...props.refer },
         })
     }
 

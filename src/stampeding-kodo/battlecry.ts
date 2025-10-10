@@ -1,21 +1,19 @@
 import { MinionBattlecryModel, RoleModel } from "hearthstone-core";
-import { Loader, TemplUtil } from "set-piece";
+import { TemplUtil } from "set-piece";
 
 @TemplUtil.is('stampeding-kodo-battlecry')
 export class StampedingKodoBattlecryModel extends MinionBattlecryModel<[]> {
-    constructor(loader?: Loader<StampedingKodoBattlecryModel>) {
-        super(() => {
-            const props = loader?.() ?? {};
-            return {
-                uuid: props.uuid,
-                state: {
-                    name: "Stampeding Kodo's Battlecry",
-                    desc: "Destroy a random enemy minion with 2 or less Attack.",
-                    ...props.state
-                },
-                child: { ...props.child },
-                refer: { ...props.refer },
-            };
+    constructor(props?: StampedingKodoBattlecryModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: {
+                name: "Stampeding Kodo's Battlecry",
+                desc: "Destroy a random enemy minion with 2 or less Attack.",
+                ...props.state
+            },
+            child: { ...props.child },
+            refer: { ...props.refer },
         });
     }
 

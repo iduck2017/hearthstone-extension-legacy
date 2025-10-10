@@ -1,22 +1,20 @@
 import { MinionBattlecryModel, SelectEvent, RoleModel } from "hearthstone-core";
-import { Loader, TemplUtil } from "set-piece";
+import { TemplUtil } from "set-piece";
 import { TempleEnforcerBuffModel } from "./buff";
 
 @TemplUtil.is('temple-enforcer-battlecry')
 export class TempleEnforcerBattlecryModel extends MinionBattlecryModel<[RoleModel]> {
-    constructor(loader?: Loader<TempleEnforcerBattlecryModel>) {
-        super(() => {
-            const props = loader?.() ?? {};
-            return {
-                uuid: props.uuid,
-                state: {
-                    name: "Temple Enforcer's Battlecry",
-                    desc: "Give a friendly minion +3 Health.",
-                    ...props.state
-                },
-                child: { ...props.child },
-                refer: { ...props.refer },
-            };
+    constructor(props?: TempleEnforcerBattlecryModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: {
+                name: "Temple Enforcer's Battlecry",
+                desc: "Give a friendly minion +3 Health.",
+                ...props.state
+            },
+            child: { ...props.child },
+            refer: { ...props.refer },
         });
     }
 

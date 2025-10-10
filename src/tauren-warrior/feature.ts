@@ -17,21 +17,19 @@ export class TaurenWarriorFeatureModel extends FeatureModel<
     TaurenWarriorFeatureProps.C,
     TaurenWarriorFeatureProps.R
 > {
-    constructor(loader?: Loader<TaurenWarriorFeatureModel>) {
-        super(() => {
-            const props = loader?.() ?? {};
-            return {
-                uuid: props.uuid,
-                state: {
-                    name: "Tauren Warrior's Buff",
-                    desc: "Has +3 Attack while damaged.",
-                    offset: 3,
-                    isActive: true,
-                    ...props.state,
-                },
-                child: { ...props.child },
-                refer: { ...props.refer },
-            }
+    constructor(props?: TaurenWarriorFeatureModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: {
+                name: "Tauren Warrior's Buff",
+                desc: "Has +3 Attack while damaged.",
+                offset: 3,
+                isActive: true,
+                ...props.state,
+            },
+            child: { ...props.child },
+            refer: { ...props.refer },
         });
     }
 
