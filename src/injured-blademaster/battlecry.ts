@@ -1,21 +1,19 @@
 import { MinionBattlecryModel, DamageModel, DamageEvent, DamageType } from "hearthstone-core";
-import { Loader, TemplUtil } from "set-piece";
+import { TemplUtil } from "set-piece";
 
 @TemplUtil.is('injured-blademaster-battlecry')
 export class InjuredBlademasterBattlecryModel extends MinionBattlecryModel<[]> {
-    constructor(loader?: Loader<InjuredBlademasterBattlecryModel>) {
-        super(() => {
-            const props = loader?.() ?? {};
-            return {
-                uuid: props.uuid,
-                state: {
-                    name: "Injured Blademaster's Battlecry",
-                    desc: "Deal 4 damage to HIMSELF.",
-                    ...props.state
-                },
-                child: { ...props.child },
-                refer: { ...props.refer },
-            };
+    constructor(props?: InjuredBlademasterBattlecryModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: {
+                name: "Injured Blademaster's Battlecry",
+                desc: "Deal 4 damage to HIMSELF.",
+                ...props.state
+            },
+            child: { ...props.child },
+            refer: { ...props.refer },
         });
     }
 

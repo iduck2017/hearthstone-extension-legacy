@@ -16,35 +16,32 @@
  * Collectible
  */
 import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel, SpellFeatsModel } from "hearthstone-core";
-import { Loader } from "set-piece";
 import { IceLanceEffectModel } from "./effect";
 
 @LibraryUtil.is('ice-lance')
 export class IceLanceModel extends SpellCardModel {
-    constructor(loader?: Loader<IceLanceModel>) {
-        super(() => {
-            const props = loader?.() ?? {}
-            return {
-                uuid: props.uuid,
-                state: { 
-                    name: "Ice Lance",
-                    desc: "Freeze a character. If it was already Frozen, deal 4 damage instead.",
-                    flavorDesc: "The trick is not to break the lance. Otherwise, you have \"Ice Pieces.\" Ice Pieces aren't as effective.",
-                    isCollectible: true,
-                    rarity: RarityType.COMMON,
-                    class: ClassType.MAGE,
-                    schools: [SchoolType.FROST],
-                    ...props.state
-                },
-                refer: { ...props.refer },
-                child: { 
-                    cost: props.child?.cost ?? new CostModel(() => ({ state: { origin: 1 }})),
-                    feats: props.child?.feats ?? new SpellFeatsModel(() => ({
-                        child: { effects: [new IceLanceEffectModel()] }
-                    })),
-                    ...props.child 
-                }
+    constructor(props?: IceLanceModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: { 
+                name: "Ice Lance",
+                desc: "Freeze a character. If it was already Frozen, deal 4 damage instead.",
+                flavorDesc: "The trick is not to break the lance. Otherwise, you have \"Ice Pieces.\" Ice Pieces aren't as effective.",
+                isCollectible: true,
+                rarity: RarityType.COMMON,
+                class: ClassType.MAGE,
+                schools: [SchoolType.FROST],
+                ...props.state
+            },
+            refer: { ...props.refer },
+            child: { 
+                cost: props.child?.cost ?? new CostModel({ state: { origin: 1 }}),
+                feats: props.child?.feats ?? new SpellFeatsModel({
+                    child: { effects: [new IceLanceEffectModel()] }
+                }),
+                ...props.child 
             }
-        })
+        });
     }
 } 

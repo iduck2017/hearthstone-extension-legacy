@@ -1,5 +1,5 @@
-import { EffectModel, SelectEvent, RoleModel, DamageModel, DamageEvent, DamageType, RoleRoute, ROLE_ROUTE, SpellEffectModel } from "hearthstone-core";
-import { Loader, TemplUtil } from "set-piece";
+import { SelectEvent, RoleModel, DamageModel, DamageEvent, DamageType, SpellEffectModel } from "hearthstone-core";
+import { TemplUtil } from "set-piece";
 
 export namespace IcicleEffectProps {
     export type E = {}
@@ -15,22 +15,19 @@ export class IcicleEffectModel extends SpellEffectModel<[RoleModel],
     IcicleEffectProps.C,
     IcicleEffectProps.R
 > {
-    constructor(loader?: Loader<IcicleEffectModel>) {
-        super(() => {
-            const props = loader?.() ?? {}
-            return {
-                uuid: props.uuid,
-                state: { 
-                    name: "Icicle's effect",
-                    desc: "Deal {{state.damage[0]}} damage to a minion. If it's Frozen, draw a card.",
-                    damage: [2],
-                    ...props.state 
-                },
-                child: { ...props.child },
-                refer: { ...props.refer },
-                route: ROLE_ROUTE,
-            }
-        })
+    constructor(props?: IcicleEffectModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: { 
+                name: "Icicle's effect",
+                desc: "Deal {{state.damage[0]}} damage to a minion. If it's Frozen, draw a card.",
+                damage: [2],
+                ...props.state 
+            },
+            child: { ...props.child },
+            refer: { ...props.refer },
+        });
     }
 
     toRun(): [SelectEvent<RoleModel>] | undefined {

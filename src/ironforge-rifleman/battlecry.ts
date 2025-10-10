@@ -1,21 +1,19 @@
 import { MinionBattlecryModel, SelectEvent, RoleModel, DamageModel, DamageEvent, DamageType } from "hearthstone-core";
-import { Loader, TemplUtil } from "set-piece";
+import { TemplUtil } from "set-piece";
 
 @TemplUtil.is('ironforge-rifleman-battlecry')
 export class IronforgeRiflemanBattlecryModel extends MinionBattlecryModel<[RoleModel]> {
-    constructor(loader?: Loader<IronforgeRiflemanBattlecryModel>) {
-        super(() => {
-            const props = loader?.() ?? {};
-            return {
-                uuid: props.uuid,
-                state: {
-                    name: "Ironforge Rifleman's Battlecry",
-                    desc: "Deal 1 damage.",
-                    ...props.state
-                },
-                child: { ...props.child },
-                refer: { ...props.refer },
-            };
+    constructor(props?: IronforgeRiflemanBattlecryModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: {
+                name: "Ironforge Rifleman's Battlecry",
+                desc: "Deal 1 damage.",
+                ...props.state
+            },
+            child: { ...props.child },
+            refer: { ...props.refer },
         });
     }
 

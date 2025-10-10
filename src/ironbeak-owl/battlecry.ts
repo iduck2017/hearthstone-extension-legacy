@@ -1,21 +1,19 @@
 import { MinionBattlecryModel, SelectEvent, RoleModel } from "hearthstone-core";
-import { Loader, TemplUtil } from "set-piece";
+import { TemplUtil } from "set-piece";
 
 @TemplUtil.is('ironbeak-owl-battlecry')
 export class IronbeakOwlBattlecryModel extends MinionBattlecryModel<[RoleModel]> {
-    constructor(loader?: Loader<IronbeakOwlBattlecryModel>) {
-        super(() => {
-            const props = loader?.() ?? {};
-            return {
-                uuid: props.uuid,
-                state: {
-                    name: "Ironbeak Owl's Battlecry",
-                    desc: "Silence a minion.",
-                    ...props.state
-                },
-                child: { ...props.child },
-                refer: { ...props.refer },
-            };
+    constructor(props?: IronbeakOwlBattlecryModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: {
+                name: "Ironbeak Owl's Battlecry",
+                desc: "Silence a minion.",
+                ...props.state
+            },
+            child: { ...props.child },
+            refer: { ...props.refer },
         });
     }
 

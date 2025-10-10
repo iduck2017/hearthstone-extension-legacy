@@ -16,37 +16,34 @@
  */
 
 import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SecretCardModel, SpellFeatsModel } from "hearthstone-core";
-import { Loader } from "set-piece";
 import { IceBarrierFeatureModel } from "./feature";
 
 @LibraryUtil.is('ice-barrier')
 export class IceBarrierModel extends SecretCardModel {
-    constructor(loader?: Loader<IceBarrierModel>) {
-        super(() => {
-            const props = loader?.() ?? {}
-            return {
-                uuid: props.uuid,
-                state: { 
-                    name: "Ice Barrier",
-                    desc: "Secret: When your hero is attacked, gain 8 Armor.",
-                    flavorDesc: "This is Rank 1. Rank 2 is Chocolate Milk Barrier.",
-                    isCollectible: true,
-                    rarity: RarityType.COMMON,
-                    class: ClassType.MAGE,
-                    schools: [SchoolType.FROST],
-                    ...props.state
-                },
-                refer: { ...props.refer },
-                child: { 
-                    cost: props.child?.cost ?? new CostModel(() => ({ state: { origin: 3 }})),
-                    feats: new SpellFeatsModel(() => ({
-                        child: {
-                            items: [new IceBarrierFeatureModel()]
-                        }
-                    })),
-                    ...props.child 
-                }
+    constructor(props?: IceBarrierModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: { 
+                name: "Ice Barrier",
+                desc: "Secret: When your hero is attacked, gain 8 Armor.",
+                flavorDesc: "This is Rank 1. Rank 2 is Chocolate Milk Barrier.",
+                isCollectible: true,
+                rarity: RarityType.COMMON,
+                class: ClassType.MAGE,
+                schools: [SchoolType.FROST],
+                ...props.state
+            },
+            refer: { ...props.refer },
+            child: { 
+                cost: props.child?.cost ?? new CostModel({ state: { origin: 3 }}),
+                feats: new SpellFeatsModel({
+                    child: {
+                        items: [new IceBarrierFeatureModel()]
+                    }
+                }),
+                ...props.child 
             }
-        })
+        });
     }
 }

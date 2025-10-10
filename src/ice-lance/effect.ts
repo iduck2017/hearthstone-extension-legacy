@@ -15,21 +15,19 @@ export class IceLanceEffectModel extends SpellEffectModel<[RoleModel],
     IceLanceEffectProps.C,
     IceLanceEffectProps.R
 > {
-    constructor(loader?: Loader<IceLanceEffectModel>) {
-        super(() => {
-            const props = loader?.() ?? {}
-            return {
-                uuid: props.uuid,
-                state: { 
-                    name: "Ice Lance's effect",
-                    desc: "Freeze a character. If it was already Frozen, deal {{state.damage[0]}} damage instead.",
-                    damage: [4],
-                    ...props.state 
-                },
-                child: { ...props.child },
-                refer: { ...props.refer },
-            }
-        })
+    constructor(props?: IceLanceEffectModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: { 
+                name: "Ice Lance's effect",
+                desc: "Freeze a character. If it was already Frozen, deal {{state.damage[0]}} damage instead.",
+                damage: [4],
+                ...props.state 
+            },
+            child: { ...props.child },
+            refer: { ...props.refer },
+        });
     }
 
     toRun(): [SelectEvent<RoleModel>] | undefined {
