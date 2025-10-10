@@ -1,23 +1,20 @@
 import { FeatureModel, RestoreEvent, RoleHealthModel, RoleModel } from "hearthstone-core";
-import { Event, EventUtil, Loader, TemplUtil } from "set-piece";
+import { Event, EventUtil, TemplUtil } from "set-piece";
 
 @TemplUtil.is('northshire-cleric-feature')
 export class NorthshireClericFeatureModel extends FeatureModel {
-    constructor(loader?: Loader<NorthshireClericFeatureModel>) {
-        super(() => {
-            const props = loader?.() ?? {};
-            return {
-                uuid: props.uuid,
-                state: {
-                    name: 'Northshire Cleric\'s feature',
-                    desc: 'Whenever a minion is healed, draw a card.',
-                    isActive: true,
-                    ...props.state,
-                },
-                child: { ...props.child },
-                refer: { ...props.refer },
-                route: {},
-            };
+    constructor(props?: NorthshireClericFeatureModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: {
+                name: 'Northshire Cleric\'s feature',
+                desc: 'Whenever a minion is healed, draw a card.',
+                isActive: true,
+                ...props.state,
+            },
+            child: { ...props.child },
+            refer: { ...props.refer },
         });
     }
 

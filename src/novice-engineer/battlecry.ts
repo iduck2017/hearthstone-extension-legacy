@@ -1,21 +1,19 @@
 import { MinionBattlecryModel } from "hearthstone-core";
-import { Loader, TemplUtil } from "set-piece";
+import { TemplUtil } from "set-piece";
 
 @TemplUtil.is('novice-engineer-battlecry')
 export class NoviceEngineerBattlecryModel extends MinionBattlecryModel<[]> {
-    constructor(loader?: Loader<NoviceEngineerBattlecryModel>) {
-        super(() => {
-            const props = loader?.() ?? {};
-            return {
-                uuid: props.uuid,
-                state: {
-                    name: "Novice Engineer's Battlecry",
-                    desc: "Draw a card.",
-                    ...props.state
-                },
-                child: { ...props.child },
-                refer: { ...props.refer },
-            };
+    constructor(props?: NoviceEngineerBattlecryModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: {
+                name: "Novice Engineer's Battlecry",
+                desc: "Draw a card.",
+                ...props.state
+            },
+            child: { ...props.child },
+            refer: { ...props.refer },
         });
     }
 
