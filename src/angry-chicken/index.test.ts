@@ -6,7 +6,6 @@
 import { GameModel, BoardModel, PlayerModel, MageModel, SelectUtil, TimeUtil, ManaModel } from "hearthstone-core";
 import { AngryChickenModel } from ".";
 import { boot } from "../boot";
-import { DebugUtil, LogLevel } from "set-piece";
 
 describe('angry-chicken', () => {
     const game = new GameModel(() => ({

@@ -7,11 +7,11 @@
 import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, SelectUtil, ManaModel } from "hearthstone-core";
 import { WispModel } from "../wisp";
 import { boot } from "../boot";
-import { DebugUtil, LogLevel } from "set-piece";
+
 import { CounterspellModel } from ".";
 import { FireballModel } from "../fireball";
 
-DebugUtil.level = LogLevel.ERROR;
+
 describe('fireball', () => {
     const game = new GameModel(() => ({
         state: { debug: { isDrawDisabled: true }},

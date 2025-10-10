@@ -1,23 +1,21 @@
 import { EffectModel, SelectEvent, RoleModel, SpellEffectModel } from "hearthstone-core";
-import { Loader, TemplUtil } from "set-piece";
+import { TemplUtil } from "set-piece";
 import { FocusedWillBuffModel } from "./buff";
 
 @TemplUtil.is('focused-will-effect')
 export class FocusedWillEffectModel extends SpellEffectModel<[RoleModel]> {
-    constructor(loader?: Loader<FocusedWillEffectModel>) {
-        super(() => {
-            const props = loader?.() ?? {};
-            return {
-                uuid: props.uuid,
-                state: {
-                    name: "Focused Will's effect",
-                    desc: "Silence a minion, then give it +3 Health.",
-                    damage: [],
-                    ...props.state
-                },
-                child: { ...props.child },
-                refer: { ...props.refer },
-            };
+    constructor(props?: FocusedWillEffectModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: {
+                name: "Focused Will's effect",
+                desc: "Silence a minion, then give it +3 Health.",
+                damage: [],
+                ...props.state
+            },
+            child: { ...props.child },
+            refer: { ...props.refer },
         });
     }
 

@@ -1,21 +1,19 @@
 import { MinionBattlecryModel, SelectEvent, RoleModel } from "hearthstone-core";
-import { Loader, TemplUtil } from "set-piece";
+import { TemplUtil } from "set-piece";
 
 @TemplUtil.is('frost-elemental-battlecry')
 export class FrostElementalBattlecryModel extends MinionBattlecryModel<[RoleModel]> {
-    constructor(loader?: Loader<FrostElementalBattlecryModel>) {
-        super(() => {
-            const props = loader?.() ?? {};
-            return {
-                uuid: props.uuid,
-                state: {
-                    name: "Frost Elemental's Battlecry",
-                    desc: "Freeze a character.",
-                    ...props.state
-                },
-                child: { ...props.child },
-                refer: { ...props.refer },
-            };
+    constructor(props?: FrostElementalBattlecryModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: {
+                name: "Frost Elemental's Battlecry",
+                desc: "Freeze a character.",
+                ...props.state
+            },
+            child: { ...props.child },
+            refer: { ...props.refer },
         });
     }
 

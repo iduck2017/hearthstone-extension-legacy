@@ -8,7 +8,7 @@
 import { GameModel, PlayerModel, MageModel, BoardModel, SelectUtil, ManaModel } from "hearthstone-core";
 import { ArgentSquireModel } from "./index";
 import { boot } from "../boot";
-import { DebugUtil, LogLevel } from "set-piece";
+
 
 describe('argent-squire', () => {
     const game = new GameModel(() => ({

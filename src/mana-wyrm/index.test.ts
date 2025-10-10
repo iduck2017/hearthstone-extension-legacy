@@ -9,9 +9,9 @@ import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel } f
 import { ManaWyrmModel } from "./index";
 import { ArcaneExplosionModel } from "../arcane-explosion";
 import { boot } from "../boot";
-import { DebugUtil, LogLevel } from "set-piece";
 
-DebugUtil.level = LogLevel.ERROR;
+
+
 describe('mana-wyrm', () => {
     const game = new GameModel(() => ({
         state: { debug: { isDrawDisabled: true }},

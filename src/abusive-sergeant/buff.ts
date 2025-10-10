@@ -1,5 +1,5 @@
 import { GameModel, IRoleBuffModel, RoleModel, TurnModel } from "hearthstone-core";
-import { DebugUtil, Event, EventUtil, LogLevel, TemplUtil, TranxUtil } from "set-piece";
+import { DebugUtil, Event, EventUtil, TemplUtil, TranxUtil } from "set-piece";
 
 @TemplUtil.is('abusive-sergeant-buff')
 export class AbusiveSergeantBuffModel extends IRoleBuffModel {

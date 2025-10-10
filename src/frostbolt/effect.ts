@@ -15,21 +15,19 @@ export class FrostboltEffectModel extends SpellEffectModel<[RoleModel],
     FrostboltEffectProps.C,
     FrostboltEffectProps.R
 > {
-    constructor(loader?: Loader<FrostboltEffectModel>) {
-        super(() => {
-            const props = loader?.() ?? {}
-            return {
-                uuid: props.uuid,
-                state: { 
-                    name: "Frostbolt's effect",
-                    desc: "Deal {{state.damage[0]}} damage to a character and Freeze it.",
-                    damage: [3],
-                    ...props.state 
-                },
-                child: { ...props.child },
-                refer: { ...props.refer },
-            }
-        })
+    constructor(props?: FrostboltEffectModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: { 
+                name: "Frostbolt's effect",
+                desc: "Deal {{state.damage[0]}} damage to a character and Freeze it.",
+                damage: [3],
+                ...props.state 
+            },
+            child: { ...props.child },
+            refer: { ...props.refer },
+        });
     }
 
     toRun(): [SelectEvent<RoleModel>] | undefined {

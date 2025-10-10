@@ -8,9 +8,8 @@ import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel } f
 import { ArcaneMissilesModel } from "./index";
 import { WispModel } from "../wisp";
 import { boot } from "../boot";
-import { DebugUtil, LogLevel } from "set-piece";
 
-DebugUtil.level = LogLevel.ERROR;
+
 describe('arcane-missiles', () => {
     const game = new GameModel(() => ({
         state: { debug: { isDrawDisabled: true }},

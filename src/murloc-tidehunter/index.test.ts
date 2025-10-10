@@ -9,9 +9,9 @@ import { MurlocTidehunterModel } from "./index";
 import { MurlocScoutModel } from "../murloc-scout";
 import { WispModel } from "../wisp";
 import { boot } from "../boot";
-import { DebugUtil, LogLevel } from "set-piece";
 
-DebugUtil.level = LogLevel.ERROR;
+
+
 describe('murloc-tidehunter', () => {
     const game = new GameModel(() => ({
         state: { debug: { isDrawDisabled: true }},

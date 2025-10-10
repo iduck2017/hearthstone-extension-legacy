@@ -8,9 +8,7 @@ import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, De
 import { ArcaneIntellectModel } from "./index";
 import { WispModel } from "../wisp";
 import { boot } from "../boot";
-import { DebugUtil, LogLevel } from "set-piece";
 
-DebugUtil.level = LogLevel.ERROR;
 describe('arcane-intellect', () => {
     const game = new GameModel(() => ({
         state: { debug: { isDrawDisabled: true }},

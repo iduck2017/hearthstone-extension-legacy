@@ -15,21 +15,19 @@ export class FrostNovaEffectModel extends SpellEffectModel<[],
     FrostNovaEffectProps.C,
     FrostNovaEffectProps.R
 > {
-    constructor(loader?: Loader<FrostNovaEffectModel>) {
-        super(() => {
-            const props = loader?.() ?? {}
-            return {
-                uuid: props.uuid,
-                state: {
-                    name: "Frost Nova's effect",
-                    desc: "Freeze all enemy minions.",
-                    damage: [],
-                    ...props.state
-                },
-                child: { ...props.child },
-                refer: { ...props.refer },
-            }
-        })
+    constructor(props?: FrostNovaEffectModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: {
+                name: "Frost Nova's effect",
+                desc: "Freeze all enemy minions.",
+                damage: [],
+                ...props.state
+            },
+            child: { ...props.child },
+            refer: { ...props.refer },
+        });
     }
 
     toRun(): [] { return [] }

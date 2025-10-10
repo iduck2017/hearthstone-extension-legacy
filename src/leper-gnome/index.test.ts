@@ -8,7 +8,7 @@ import { GameModel, BoardModel, MageModel, TimeUtil, SelectUtil, ManaModel, Play
 import { LeperGnomeModel } from ".";
 import { WispModel } from "../wisp";
 import { boot } from "../boot";
-import { DebugUtil, LogLevel } from "set-piece";
+
 
 describe('leper-gnome', () => {
     const game = boot(new GameModel(() => ({

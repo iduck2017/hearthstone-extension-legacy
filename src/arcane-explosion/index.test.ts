@@ -9,9 +9,7 @@ import { ArcaneExplosionModel } from "./index";
 import { WispModel } from "../wisp";
 import { GoldshireFootmanModel } from "../goldshire-footman";
 import { boot } from "../boot";
-import { DebugUtil, LogLevel } from "set-piece";
 
-DebugUtil.level = LogLevel.ERROR;
 describe('arcane-explosion', () => {
     const game = new GameModel(() => ({
         state: { debug: { isDrawDisabled: true }},

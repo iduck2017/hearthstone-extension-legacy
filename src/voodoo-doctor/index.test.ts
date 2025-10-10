@@ -6,7 +6,7 @@
  */
 
 import { GameModel, BoardModel, HandModel, MageModel, PlayerModel, TimeUtil, SelectUtil, ManaModel } from "hearthstone-core";
-import { DebugUtil, LogLevel } from "set-piece";
+
 import { boot } from "../boot";
 import { WispModel } from "../wisp";
 import { VoodooDoctorModel } from ".";

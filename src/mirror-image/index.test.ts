@@ -9,9 +9,9 @@ import { MirrorImageModel } from "./index";
 import { MirrorImageMinionModel } from "./minion";
 import { WispModel } from "../wisp";
 import { boot } from "../boot";
-import { DebugUtil, LogLevel } from "set-piece";
 
-DebugUtil.level = LogLevel.ERROR;
+
+
 describe('mirror-image', () => {
     const game = new GameModel(() => ({
         state: { debug: { isDrawDisabled: true }},
