@@ -13,44 +13,41 @@
  */
 
 import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, MinionFeatsModel, RarityType, RoleAttackModel, RoleModel, RaceType } from "hearthstone-core";
-import { Loader } from "set-piece";
 import { VioletTeacherFeatureModel } from "./feature";
 
 @LibraryUtil.is('violet-teacher')
 export class VioletTeacherModel extends MinionCardModel {
-    constructor(loader?: Loader<VioletTeacherModel>) {
-        super(() => {
-            const props = loader?.() ?? {};
-            return {
-                uuid: props.uuid,
-                state: {
-                    name: 'Violet Teacher',
-                    desc: 'Whenever you cast a spell, summon a 1/1 Violet Apprentice.',
-                    flavorDesc: 'If you don\'t pay attention, you may be turned into a pig. And then you get your name on the board.',
-                    isCollectible: true,
-                    rarity: RarityType.RARE,
-                    class: ClassType.NEUTRAL,
-                    races: [],
-                    ...props.state
-                },
-                child: {
-                    cost: new CostModel(() => ({ state: { origin: 4 }})),
-                    role: new RoleModel(() => ({
-                        child: {
-                            attack: new RoleAttackModel(() => ({ state: { origin: 3 }})),
-                            health: new RoleHealthModel(() => ({ state: { origin: 5 }})),
-                        }
-                    })),
-                    feats: new MinionFeatsModel(() => ({
-                        child: { 
-                            battlecry: [],
-                            feature: new VioletTeacherFeatureModel()
-                        }
-                    })),
-                    ...props.child
-                },
-                refer: { ...props.refer }
-            }
+    constructor(props?: VioletTeacherModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: {
+                name: 'Violet Teacher',
+                desc: 'Whenever you cast a spell, summon a 1/1 Violet Apprentice.',
+                flavorDesc: 'If you don\'t pay attention, you may be turned into a pig. And then you get your name on the board.',
+                isCollectible: true,
+                rarity: RarityType.RARE,
+                class: ClassType.NEUTRAL,
+                races: [],
+                ...props.state
+            },
+            child: {
+                cost: new CostModel({ state: { origin: 4 }}),
+                role: new RoleModel({
+                    child: {
+                        attack: new RoleAttackModel({ state: { origin: 3 }}),
+                        health: new RoleHealthModel({ state: { origin: 5 }}),
+                    }
+                }),
+                feats: new MinionFeatsModel({
+                    child: { 
+                        battlecry: [],
+                        feature: new VioletTeacherFeatureModel()
+                    }
+                }),
+                ...props.child
+            },
+            refer: { ...props.refer }
         });
     }
 }

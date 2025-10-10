@@ -1,21 +1,19 @@
 import { MinionBattlecryModel, RestoreEvent, RestoreModel, RoleModel, SelectEvent } from "hearthstone-core";
-import { Loader, TemplUtil } from "set-piece";
+import { TemplUtil } from "set-piece";
 
 @TemplUtil.is('voodoo-doctor-battlecry')
 export class VoodooDoctorMinionBattlecryModel extends MinionBattlecryModel<[RoleModel]> {
-    constructor(loader?: Loader<VoodooDoctorMinionBattlecryModel>) {
-        super(() => {
-            const props = loader?.() ?? {};
-            return {
-                uuid: props.uuid,
-                state: {
-                    name: 'Voodoo Doctor\'s Battlecry',
-                    desc: 'Restore 2 Health.',
-                    ...props.state,
-                },
-                child: { ...props.child },
-                refer: { ...props.refer },
-            }
+    constructor(props?: VoodooDoctorMinionBattlecryModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: {
+                name: 'Voodoo Doctor\'s Battlecry',
+                desc: 'Restore 2 Health.',
+                ...props.state,
+            },
+            child: { ...props.child },
+            refer: { ...props.refer },
         });
     }
 

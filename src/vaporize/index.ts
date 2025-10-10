@@ -16,37 +16,34 @@
  */
 
 import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SecretCardModel, SpellCardModel, SpellFeatsModel } from "hearthstone-core";
-import { Loader } from "set-piece";
 import { VaporizeFeatureModel } from "./feature";
 
 @LibraryUtil.is('vaporize')
 export class VaporizeModel extends SecretCardModel {
-    constructor(loader?: Loader<VaporizeModel>) {
-        super(() => {
-            const props = loader?.() ?? {}
-            return {
-                uuid: props.uuid,
-                state: { 
-                    name: "Vaporize",
-                    desc: "Secret: When a minion attacks your hero, destroy it.",
-                    flavorDesc: "Rumor has it that Deathwing brought about the Cataclysm after losing a game to this card. We may never know the truth.",
-                    isCollectible: true,
-                    rarity: RarityType.RARE,
-                    class: ClassType.MAGE,
-                    schools: [SchoolType.FIRE],
-                    ...props.state
-                },
-                refer: { ...props.refer },
-                child: { 
-                    cost: props.child?.cost ?? new CostModel(() => ({ state: { origin: 3 }})),
-                    feats: new SpellFeatsModel(() => ({
-                        child: {
-                            list: [new VaporizeFeatureModel()]
-                        }
-                    })),
-                    ...props.child 
-                }
+    constructor(props?: VaporizeModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: { 
+                name: "Vaporize",
+                desc: "Secret: When a minion attacks your hero, destroy it.",
+                flavorDesc: "Rumor has it that Deathwing brought about the Cataclysm after losing a game to this card. We may never know the truth.",
+                isCollectible: true,
+                rarity: RarityType.RARE,
+                class: ClassType.MAGE,
+                schools: [SchoolType.FIRE],
+                ...props.state
+            },
+            refer: { ...props.refer },
+            child: { 
+                cost: props.child?.cost ?? new CostModel({ state: { origin: 3 }}),
+                feats: new SpellFeatsModel({
+                    child: {
+                        list: [new VaporizeFeatureModel()]
+                    }
+                }),
+                ...props.child 
             }
-        })
+        });
     }
 }

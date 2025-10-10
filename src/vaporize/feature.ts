@@ -1,24 +1,21 @@
 import { SecretFeatureModel, RoleModel, RoleAttackModel } from "hearthstone-core";
-import { Event, EventUtil, Loader, TemplUtil } from "set-piece";
+import { Event, EventUtil, TemplUtil } from "set-piece";
 
 @TemplUtil.is('vaporize-feature')
 export class VaporizeFeatureModel extends SecretFeatureModel {
-    constructor(loader?: Loader<VaporizeFeatureModel>) {
-        super(() => {
-            const props = loader?.() ?? {}
-            return {
-                uuid: props.uuid,
-                state: {
-                    name: "Vaporize's feature",
-                    desc: "When a minion attacks your hero, destroy it.",
-                    isActive: true,
-                    ...props.state
-                },
-                child: { ...props.child },
-                refer: { ...props.refer },
-                route: {},
-            }
-        })
+    constructor(props?: VaporizeFeatureModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: {
+                name: "Vaporize's feature",
+                desc: "When a minion attacks your hero, destroy it.",
+                isActive: true,
+                ...props.state
+            },
+            child: { ...props.child },
+            refer: { ...props.refer },
+        });
     }
 
     @EventUtil.on(self => self.route.player?.proxy.child.hero.child.role.child.attack.event.toRecv)

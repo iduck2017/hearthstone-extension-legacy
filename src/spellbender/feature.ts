@@ -1,5 +1,5 @@
 import { MinionCardModel, RoleModel, SecretFeatureModel, SpellCardModel, SpellHooksOptions, SpellCastEvent, SpellPerformModel } from "hearthstone-core";
-import { Event, EventUtil, Loader } from "set-piece";
+import { Event, EventUtil } from "set-piece";
 import { SpellbenderMinionModel } from "./minion";
 
 export class SpellbenderFeatureModel extends SecretFeatureModel {

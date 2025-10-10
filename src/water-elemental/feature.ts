@@ -15,21 +15,19 @@ export class WaterElementalFeatureModel extends FeatureModel<
     WaterElementalFeatureProps.C,
     WaterElementalFeatureProps.R
 > {
-    constructor(loader?: Loader<WaterElementalFeatureModel>) {
-        super(() => {
-            const props = loader?.() ?? {}
-            return {
-                uuid: props.uuid,
-                state: { 
-                    name: "Water Elemental's feature",
-                    desc: "Freeze any character damaged by this minion.",
-                    isActive: true,
-                    ...props.state 
-                },
-                child: { ...props.child },
-                refer: { ...props.refer },
-            }
-        })
+    constructor(props?: WaterElementalFeatureModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: { 
+                name: "Water Elemental's feature",
+                desc: "Freeze any character damaged by this minion.",
+                isActive: true,
+                ...props.state 
+            },
+            child: { ...props.child },
+            refer: { ...props.refer },
+        });
     }
 
     @EventUtil.on(self => self.route.minion?.proxy.child.damage.event.onRun)

@@ -1,5 +1,5 @@
 import { FeatureModel, SpellCardModel } from "hearthstone-core";
-import { Event, EventUtil, Loader, TemplUtil } from "set-piece";
+import { Event, EventUtil, TemplUtil } from "set-piece";
 import { VioletApprenticeModel } from "../violet-apprentice";
 
 export namespace VioletTeacherFeatureProps {
@@ -16,21 +16,19 @@ export class VioletTeacherFeatureModel extends FeatureModel<
     VioletTeacherFeatureProps.C,
     VioletTeacherFeatureProps.R
 > {
-    constructor(loader?: Loader<VioletTeacherFeatureModel>) {
-        super(() => {
-            const props = loader?.() ?? {}
-            return {
-                uuid: props.uuid,
-                state: { 
-                    name: "Violet Teacher's feature",
-                    desc: "Whenever you cast a spell, summon a 1/1 Violet Apprentice.",
-                    isActive: true,
-                    ...props.state 
-                },
-                child: { ...props.child },
-                refer: { ...props.refer },
-            }
-        })
+    constructor(props?: VioletTeacherFeatureModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: { 
+                name: "Violet Teacher's feature",
+                desc: "Whenever you cast a spell, summon a 1/1 Violet Apprentice.",
+                isActive: true,
+                ...props.state 
+            },
+            child: { ...props.child },
+            refer: { ...props.refer },
+        });
     }
 
     @EventUtil.on(self => self.route.player?.proxy.all(SpellCardModel).event.onPlay)
