@@ -13,43 +13,40 @@
  */
 
 import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, MinionFeatsModel, RarityType, RoleAttackModel, RoleModel, RaceType } from "hearthstone-core";
-import { Loader } from "set-piece";
 import { EarthenRingFarseerBattlecryModel } from "./battlecry";
 
 @LibraryUtil.is('earthen-ring-farseer')
 export class EarthenRingFarseerModel extends MinionCardModel {
-    constructor(loader?: Loader<EarthenRingFarseerModel>) {
-        super(() => {
-            const props = loader?.() ?? {};
-            return {
-                uuid: props.uuid,
-                state: {
-                    name: 'Earthen Ring Farseer',
-                    desc: 'Battlecry: Restore 3 Health.',
-                    flavorDesc: 'He can see really far, and he doesn\'t use a telescope like those filthy pirates.',
-                    isCollectible: true,
-                    rarity: RarityType.COMMON,
-                    class: ClassType.NEUTRAL,
-                    races: [],
-                    ...props.state
-                },
-                child: {
-                    cost: new CostModel(() => ({ state: { origin: 3 }})),
-                    role: new RoleModel(() => ({
-                        child: {
-                            attack: new RoleAttackModel(() => ({ state: { origin: 3 }})),
-                            health: new RoleHealthModel(() => ({ state: { origin: 3 }})),
-                        }
-                    })),
-                    feats: new MinionFeatsModel(() => ({
-                        child: { 
-                            battlecry: [new EarthenRingFarseerBattlecryModel()]
-                        }
-                    })),
-                    ...props.child
-                },
-                refer: { ...props.refer }
-            }
+    constructor(props?: EarthenRingFarseerModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: {
+                name: 'Earthen Ring Farseer',
+                desc: 'Battlecry: Restore 3 Health.',
+                flavorDesc: 'He can see really far, and he doesn\'t use a telescope like those filthy pirates.',
+                isCollectible: true,
+                rarity: RarityType.COMMON,
+                class: ClassType.NEUTRAL,
+                races: [],
+                ...props.state
+            },
+            child: {
+                cost: new CostModel({ state: { origin: 3 }}),
+                role: new RoleModel({
+                    child: {
+                        attack: new RoleAttackModel({ state: { origin: 3 }}),
+                        health: new RoleHealthModel({ state: { origin: 3 }}),
+                    }
+                }),
+                feats: new MinionFeatsModel({
+                    child: { 
+                        battlecry: [new EarthenRingFarseerBattlecryModel()]
+                    }
+                }),
+                ...props.child
+            },
+            refer: { ...props.refer }
         });
     }
 } 

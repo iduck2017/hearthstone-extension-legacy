@@ -1,5 +1,5 @@
 import { EndTurnHookModel, ROLE_ROUTE, RoleRoute } from "hearthstone-core";
-import { DebugUtil, Loader, TemplUtil } from "set-piece";
+import { DebugUtil, TemplUtil } from "set-piece";
 import { EtherealArcanistBuffModel } from "./buff";
 
 export namespace EtherealArcanistFeatureProps {
@@ -16,22 +16,19 @@ export class EtherealArcanistFeatureModel extends EndTurnHookModel<
     EtherealArcanistFeatureProps.S,
     EtherealArcanistFeatureProps.C,
     EtherealArcanistFeatureProps.R,
-    EtherealArcanistFeatureProps.P
 > {
-    constructor(loader?: Loader<EtherealArcanistFeatureModel>) {
-        super(() => {
-            const props = loader?.() ?? {};
-            return {
-                uuid: props.uuid,
-                state: {
-                    name: 'Ethereal Arcanist\'s Hook',
-                    desc: 'If you control a Secret at the end of your turn, gain +2/+2.',
-                    ...props.state,
-                },
-                child: { ...props.child },
-                refer: { ...props.refer },
-                route: ROLE_ROUTE,
-            }
+    constructor(props?: EtherealArcanistFeatureModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: {
+                name: 'Ethereal Arcanist\'s Hook',
+                desc: 'If you control a Secret at the end of your turn, gain +2/+2.',
+                ...props.state,
+            },
+            child: { ...props.child },
+            refer: { ...props.refer },
+            route: ROLE_ROUTE,
         });
     }
 

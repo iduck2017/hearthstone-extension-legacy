@@ -1,21 +1,19 @@
 import { MinionBattlecryModel, SelectEvent, RoleModel, RestoreModel, RestoreEvent } from "hearthstone-core";
-import { Loader, TemplUtil } from "set-piece";
+import { TemplUtil } from "set-piece";
 
 @TemplUtil.is('earthen-ring-farseer-battlecry')
 export class EarthenRingFarseerBattlecryModel extends MinionBattlecryModel<[RoleModel]> {
-    constructor(loader?: Loader<EarthenRingFarseerBattlecryModel>) {
-        super(() => {
-            const props = loader?.() ?? {};
-            return {
-                uuid: props.uuid,
-                state: {
-                    name: "Earthen Ring Farseer's Battlecry",
-                    desc: "Restore 3 Health.",
-                    ...props.state
-                },
-                child: { ...props.child },
-                refer: { ...props.refer },
-            };
+    constructor(props?: EarthenRingFarseerBattlecryModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: {
+                name: "Earthen Ring Farseer's Battlecry",
+                desc: "Restore 3 Health.",
+                ...props.state
+            },
+            child: { ...props.child },
+            refer: { ...props.refer },
         });
     }
 

@@ -14,43 +14,40 @@
  */
 
 import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, MinionFeatsModel, RarityType, RoleAttackModel, RoleModel, RaceType, RoleFeatsModel, PoisonousModel } from "hearthstone-core";
-import { Loader } from "set-piece";
 
 @LibraryUtil.is('emperor-cobra')
 export class EmperorCobraModel extends MinionCardModel {
-    constructor(loader?: Loader<EmperorCobraModel>) {
-        super(() => {
-            const props = loader?.() ?? {};
-            return {
-                uuid: props.uuid,
-                state: {
-                    name: 'Emperor Cobra',
-                    desc: 'Poisonous',
-                    flavorDesc: 'The Sholazar Basin is home to a lot of really horrible things. If you\'re going to visit, wear bug spray. And plate armor.',
-                    isCollectible: true,
-                    rarity: RarityType.RARE,
-                    class: ClassType.NEUTRAL,
-                    races: [RaceType.BEAST],
-                    ...props.state
-                },
-                child: {
-                    cost: new CostModel(() => ({ state: { origin: 3 }})),
-                    role: new RoleModel(() => ({
-                        child: {
-                            attack: new RoleAttackModel(() => ({ state: { origin: 2 }})),
-                            health: new RoleHealthModel(() => ({ state: { origin: 3 }})),
-                        }
-                    })),
-                    feats: new MinionFeatsModel(() => ({
-                        child: { 
-                            battlecry: [],
-                            poisonous: new PoisonousModel()
-                        }
-                    })),
-                    ...props.child
-                },
-                refer: { ...props.refer }
-            }
+    constructor(props?: EmperorCobraModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: {
+                name: 'Emperor Cobra',
+                desc: 'Poisonous',
+                flavorDesc: 'The Sholazar Basin is home to a lot of really horrible things. If you\'re going to visit, wear bug spray. And plate armor.',
+                isCollectible: true,
+                rarity: RarityType.RARE,
+                class: ClassType.NEUTRAL,
+                races: [RaceType.BEAST],
+                ...props.state
+            },
+            child: {
+                cost: new CostModel({ state: { origin: 3 }}),
+                role: new RoleModel({
+                    child: {
+                        attack: new RoleAttackModel({ state: { origin: 2 }}),
+                        health: new RoleHealthModel({ state: { origin: 3 }}),
+                    }
+                }),
+                feats: new MinionFeatsModel({
+                    child: { 
+                        battlecry: [],
+                        poisonous: new PoisonousModel()
+                    }
+                }),
+                ...props.child
+            },
+            refer: { ...props.refer }
         });
     }
 }

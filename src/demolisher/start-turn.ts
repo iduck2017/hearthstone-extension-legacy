@@ -14,8 +14,7 @@ export class DemolisherFeatureModel extends StartTurnHookModel<
     DemolisherFeatureProps.E,
     DemolisherFeatureProps.S,
     DemolisherFeatureProps.C,
-    DemolisherFeatureProps.R,
-    DemolisherFeatureProps.P
+    DemolisherFeatureProps.R
 > {
     constructor(props?: DemolisherFeatureModel['props']) {
         props = props ?? {};
@@ -28,8 +27,7 @@ export class DemolisherFeatureModel extends StartTurnHookModel<
                 ...props.state
             },
             child: { ...props.child },
-            refer: { ...props.refer },
-            route: MINION_ROUTE,
+            refer: { ...props.refer }
         });
     }
 

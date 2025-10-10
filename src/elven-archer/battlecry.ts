@@ -1,21 +1,19 @@
 import { MinionBattlecryModel, DamageEvent, DamageModel, DamageType, RoleModel, SelectEvent } from "hearthstone-core";
-import { Loader, TemplUtil } from "set-piece";
+import { TemplUtil } from "set-piece";
 
 @TemplUtil.is('elven-archer-battlecry')
 export class ElvenArcherMinionBattlecryModel extends MinionBattlecryModel<[RoleModel]> {
-    constructor(loader?: Loader<ElvenArcherMinionBattlecryModel>) {
-        super(() => {
-            const props = loader?.() ?? {};
-            return {
-                uuid: props.uuid,
-                state: {
-                    name: 'Elven Archer Battlecry',
-                    desc: 'Deal 1 damage.',
-                    ...props.state,
-                },
-                child: { ...props.child },
-                refer: { ...props.refer },
-            }
+    constructor(props?: ElvenArcherMinionBattlecryModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: {
+                name: 'Elven Archer Battlecry',
+                desc: 'Deal 1 damage.',
+                ...props.state,
+            },
+            child: { ...props.child },
+            refer: { ...props.refer },
         });
     }
 
