@@ -1,24 +1,22 @@
 import { EffectModel, SelectEvent, RoleModel, DamageModel, DamageEvent, DamageType, CardModel, SpellPerformModel, SecretFeatureModel } from "hearthstone-core";
-import { DebugUtil, Event, EventUtil, Loader, LogLevel, Model, TemplUtil } from "set-piece";
+import { DebugUtil, Event, EventUtil, LogLevel, Model, TemplUtil } from "set-piece";
 
 @TemplUtil.is('counterspell-effect')
 export class CounterspellFeatureModel extends SecretFeatureModel {
-    constructor(loader?: Loader<CounterspellFeatureModel>) {
-        super(() => {
-            const props = loader?.() ?? {}
-            return {
-                uuid: props.uuid,
-                state: { 
-                    name: "Counterspell's feature",
-                    desc: "When your opponent casts a spell, Counter it.",
-                    isActive: true,
-                    ...props.state 
-                },
-                child: { ...props.child },
-                refer: { ...props.refer },
-                route: {},
-            }
-        })
+    constructor(props?: CounterspellFeatureModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: { 
+                name: "Counterspell's feature",
+                desc: "When your opponent casts a spell, Counter it.",
+                isActive: true,
+                ...props.state 
+            },
+            child: { ...props.child },
+            refer: { ...props.refer },
+            route: {},
+        });
     }
 
     @EventUtil.on(self => self.route.game?.proxy.all(SpellPerformModel).event.toRun)

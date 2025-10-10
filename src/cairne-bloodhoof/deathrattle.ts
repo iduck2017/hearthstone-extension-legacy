@@ -1,23 +1,21 @@
 import { DeathrattleModel, ROLE_ROUTE } from "hearthstone-core";
-import { Loader, TemplUtil } from "set-piece";
+import { TemplUtil } from "set-piece";
 import { BaineBloodhoofModel } from "../baine-bloodhoof";
 
 @TemplUtil.is('cairne-bloodhoof-deathrattle')
 export class CairneBloodhoofDeathrattleModel extends DeathrattleModel {
-    constructor(loader?: Loader<CairneBloodhoofDeathrattleModel>) {
-        super(() => {
-            const props = loader?.() ?? {};
-            return {
-                uuid: props.uuid,
-                state: {
-                    name: "Cairne Bloodhoof's Deathrattle",
-                    desc: "Summon a 5/5 Baine Bloodhoof.",
-                    ...props.state
-                },
-                child: { ...props.child },
-                refer: { ...props.refer },
-                route: ROLE_ROUTE,
-            };
+    constructor(props?: CairneBloodhoofDeathrattleModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: {
+                name: "Cairne Bloodhoof's Deathrattle",
+                desc: "Summon a 5/5 Baine Bloodhoof.",
+                ...props.state
+            },
+            child: { ...props.child },
+            refer: { ...props.refer },
+            route: ROLE_ROUTE,
         });
     }
 

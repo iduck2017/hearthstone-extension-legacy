@@ -1,22 +1,20 @@
 import { EffectModel, RestoreEvent, RestoreModel, SpellEffectModel } from "hearthstone-core";
-import { Loader, TemplUtil } from "set-piece";
+import { TemplUtil } from "set-piece";
 
 @TemplUtil.is('circle-of-healing-effect')
 export class CircleOfHealingEffectModel extends SpellEffectModel<[]> {
-    constructor(loader?: Loader<CircleOfHealingEffectModel>) {
-        super(() => {
-            const props = loader?.() ?? {};
-            return {
-                uuid: props.uuid,
-                state: {
-                    name: "Circle of Healing's effect",
-                    desc: "Restore 4 Health to ALL minions.",
-                    damage: [],
-                    ...props.state
-                },
-                child: { ...props.child },
-                refer: { ...props.refer },
-            };
+    constructor(props?: CircleOfHealingEffectModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: {
+                name: "Circle of Healing's effect",
+                desc: "Restore 4 Health to ALL minions.",
+                damage: [],
+                ...props.state
+            },
+            child: { ...props.child },
+            refer: { ...props.refer },
         });
     }
 

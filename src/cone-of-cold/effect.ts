@@ -1,5 +1,5 @@
 import { EffectModel, SelectEvent, RoleModel, DamageModel, DamageEvent, DamageType, MinionCardModel, ROLE_ROUTE, CardRoute, CARD_ROUTE, SpellEffectModel } from "hearthstone-core";
-import { Loader, TemplUtil } from "set-piece";
+import { TemplUtil } from "set-piece";
 
 export namespace ConeOfColdEffectProps {
     export type E = {}
@@ -15,22 +15,19 @@ export class ConeOfColdEffectModel extends SpellEffectModel<[RoleModel],
     ConeOfColdEffectProps.C,
     ConeOfColdEffectProps.R
 > {
-    constructor(loader?: Loader<ConeOfColdEffectModel>) {
-        super(() => {
-            const props = loader?.() ?? {}
-            return {
-                uuid: props.uuid,
-                state: {
-                    name: "Cone of Cold's effect",
-                    desc: "Freeze a minion and the minions next to it, and deal {{state.damage[0]}} damage to them.",
-                    damage: [1],
-                    ...props.state
-                },
-                child: { ...props.child },
-                refer: { ...props.refer },
-                route: CARD_ROUTE,
-            }
-        })
+    constructor(props?: ConeOfColdEffectModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: {
+                name: "Cone of Cold's effect",
+                desc: "Freeze a minion and the minions next to it, and deal {{state.damage[0]}} damage to them.",
+                damage: [1],
+                ...props.state
+            },
+            child: { ...props.child },
+            refer: { ...props.refer },
+        });
     }
 
     toRun(): [SelectEvent<RoleModel>] | undefined {

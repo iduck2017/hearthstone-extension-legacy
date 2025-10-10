@@ -1,23 +1,21 @@
 import { FeatureModel, OverhealModel, RoleHealthModel, RoleModel } from "hearthstone-core";
-import { Event, EventUtil, Loader, TemplUtil } from "set-piece";
+import { Event, EventUtil, TemplUtil } from "set-piece";
 
 @TemplUtil.is('crimson-clergy-overheal')
 export class CrimsonClergyOverhealModel extends OverhealModel {
-    constructor(loader?: Loader<CrimsonClergyOverhealModel>) {
-        super(() => {
-            const props = loader?.() ?? {};
-            return {
-                uuid: props.uuid,
-                state: {
-                    name: 'Crimson Clergy\'s feature',
-                    desc: 'Overheal: Draw a card.',
-                    isActive: true,
-                    ...props.state,
-                },
-                child: { ...props.child },
-                refer: { ...props.refer },
-                route: {},
-            };
+    constructor(props?: CrimsonClergyOverhealModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: {
+                name: 'Crimson Clergy\'s feature',
+                desc: 'Overheal: Draw a card.',
+                isActive: true,
+                ...props.state,
+            },
+            child: { ...props.child },
+            refer: { ...props.refer },
+            route: {},
         });
     }
 
