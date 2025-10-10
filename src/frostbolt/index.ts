@@ -15,34 +15,31 @@
  */
 
 import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel, SpellFeatsModel } from "hearthstone-core";
-import { Loader } from "set-piece";
 import { FrostboltEffectModel } from "./effect";
 
 @LibraryUtil.is('frostbolt')
 export class FrostboltModel extends SpellCardModel {
-    constructor(loader?: Loader<FrostboltModel>) {
-        super(() => {
-            const props = loader?.() ?? {}
-            return {
-                uuid: props.uuid,
-                state: { 
-                    name: "Frostbolt",
-                    desc: "Deal 3 damage to a character and Freeze it.",
-                    flavorDesc: "It is customary to yell \"Chill out!\" or \"Freeze!\" or \"Ice ice, baby!\" when you play this card.",
-                    isCollectible: true,
-                    rarity: RarityType.COMMON,
-                    class: ClassType.MAGE,
-                    schools: [SchoolType.FROST],
-                    ...props.state
-                },
-                refer: { ...props.refer },
-                child: { 
-                    cost: props.child?.cost ?? new CostModel(() => ({ state: { origin: 2 }})),
-                    feats: props.child?.feats ?? new SpellFeatsModel(() => ({
-                        child: { effects: [new FrostboltEffectModel()] }
-                    })),
-                    ...props.child 
-                }
+    constructor(props?: FrostboltModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: { 
+                name: "Frostbolt",
+                desc: "Deal 3 damage to a character and Freeze it.",
+                flavorDesc: "It is customary to yell \"Chill out!\" or \"Freeze!\" or \"Ice ice, baby!\" when you play this card.",
+                isCollectible: true,
+                rarity: RarityType.COMMON,
+                class: ClassType.MAGE,
+                schools: [SchoolType.FROST],
+                ...props.state
+            },
+            refer: { ...props.refer },
+            child: { 
+                cost: props.child?.cost ?? new CostModel({ state: { origin: 2 }}),
+                feats: props.child?.feats ?? new SpellFeatsModel({
+                    child: { effects: [new FrostboltEffectModel()] }
+                }),
+                ...props.child 
             }
         })
     }

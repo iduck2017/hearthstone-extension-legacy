@@ -1,21 +1,19 @@
 import { MinionBattlecryModel, DamageModel, DamageEvent } from "hearthstone-core";
-import { Loader, TemplUtil } from "set-piece";
+import { TemplUtil } from "set-piece";
 
 @TemplUtil.is('flame-imp-battlecry')
 export class FlameImpBattlecryModel extends MinionBattlecryModel<[]> {
-    constructor(loader?: Loader<FlameImpBattlecryModel>) {
-        super(() => {
-            const props = loader?.() ?? {};
-            return {
-                uuid: props.uuid,
-                state: {
-                    name: "Flame Imp's Battlecry",
-                    desc: "Deal 3 damage to your hero.",
-                    ...props.state
-                },
-                child: { ...props.child },
-                refer: { ...props.refer },
-            };
+    constructor(props?: FlameImpBattlecryModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: {
+                name: "Flame Imp's Battlecry",
+                desc: "Deal 3 damage to your hero.",
+                ...props.state
+            },
+            child: { ...props.child },
+            refer: { ...props.refer },
         });
     }
 

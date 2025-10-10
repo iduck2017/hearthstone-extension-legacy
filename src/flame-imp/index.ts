@@ -14,43 +14,40 @@
  */
 
 import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, MinionFeatsModel, RarityType, RoleAttackModel, RoleModel, RaceType } from "hearthstone-core";
-import { Loader } from "set-piece";
 import { FlameImpBattlecryModel } from "./battlecry";
 
 @LibraryUtil.is('flame-imp')
 export class FlameImpModel extends MinionCardModel {
-    constructor(loader?: Loader<FlameImpModel>) {
-        super(() => {
-            const props = loader?.() ?? {};
-            return {
-                uuid: props.uuid,
-                state: {
-                    name: 'Flame Imp',
-                    desc: 'Battlecry: Deal 3 damage to your hero.',
-                    flavorDesc: 'Imps like being on fire. They just do.',
-                    isCollectible: true,
-                    rarity: RarityType.COMMON,
-                    class: ClassType.WARLOCK,
-                    races: [RaceType.DEMON],
-                    ...props.state
-                },
-                child: {
-                    cost: new CostModel(() => ({ state: { origin: 1 }})),
-                    role: new RoleModel(() => ({
-                        child: {
-                            attack: new RoleAttackModel(() => ({ state: { origin: 3 }})),
-                            health: new RoleHealthModel(() => ({ state: { origin: 2 }})),
-                        }
-                    })),
-                    feats: new MinionFeatsModel(() => ({
-                        child: { 
-                            battlecry: [new FlameImpBattlecryModel()]
-                        }
-                    })),
-                    ...props.child
-                },
-                refer: { ...props.refer }
-            }
+    constructor(props?: FlameImpModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: {
+                name: 'Flame Imp',
+                desc: 'Battlecry: Deal 3 damage to your hero.',
+                flavorDesc: 'Imps like being on fire. They just do.',
+                isCollectible: true,
+                rarity: RarityType.COMMON,
+                class: ClassType.WARLOCK,
+                races: [RaceType.DEMON],
+                ...props.state
+            },
+            child: {
+                cost: new CostModel({ state: { origin: 1 }}),
+                role: new RoleModel({
+                    child: {
+                        attack: new RoleAttackModel({ state: { origin: 3 }}),
+                        health: new RoleHealthModel({ state: { origin: 2 }}),
+                    }
+                }),
+                feats: new MinionFeatsModel({
+                    child: { 
+                        battlecry: [new FlameImpBattlecryModel()]
+                    }
+                }),
+                ...props.child
+            },
+            refer: { ...props.refer }
         });
     }
 }

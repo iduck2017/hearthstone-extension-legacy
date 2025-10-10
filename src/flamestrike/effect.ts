@@ -1,22 +1,20 @@
 import { EffectModel, DamageModel, DamageEvent, DamageType, SpellEffectModel } from "hearthstone-core";
-import { Loader, TemplUtil } from "set-piece";
+import { TemplUtil } from "set-piece";
 
 @TemplUtil.is('flamestrike-effect')
 export class FlamestrikeEffectModel extends SpellEffectModel<[]> {
-    constructor(loader?: Loader<FlamestrikeEffectModel>) {
-        super(() => {
-            const props = loader?.() ?? {};
-            return {
-                uuid: props.uuid,
-                state: {
-                    name: "Flamestrike's effect",
-                    desc: "Deal {{state.damage[0]}} damage to all enemy minions.",
-                    damage: [5],
-                    ...props.state
-                },
-                child: { ...props.child },
-                refer: { ...props.refer },
-            };
+    constructor(props?: FlamestrikeEffectModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: {
+                name: "Flamestrike's effect",
+                desc: "Deal {{state.damage[0]}} damage to all enemy minions.",
+                damage: [5],
+                ...props.state
+            },
+            child: { ...props.child },
+            refer: { ...props.refer },
         });
     }
 

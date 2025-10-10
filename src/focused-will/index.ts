@@ -16,35 +16,32 @@
  */
 
 import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel, SpellFeatsModel } from "hearthstone-core";
-import { Loader } from "set-piece";
 import { FocusedWillEffectModel } from "./effect";
 
 @LibraryUtil.is('focused-will')
 export class FocusedWillModel extends SpellCardModel {
-    constructor(loader?: Loader<FocusedWillModel>) {
-        super(() => {
-            const props = loader?.() ?? {};
-            return {
-                uuid: props.uuid,
-                state: {
-                    name: "Focused Will",
-                    desc: "Silence a minion, then give it +3 Health.",
-                    flavorDesc: "Extreme focus is almost as effective as a really flashy distraction.",
-                    isCollectible: true,
-                    rarity: RarityType.RARE,
-                    class: ClassType.PRIEST,
-                    schools: [],
-                    ...props.state
-                },
-                refer: { ...props.refer },
-                child: {
-                    cost: props.child?.cost ?? new CostModel(() => ({ state: { origin: 1 }})),
-                    feats: props.child?.feats ?? new SpellFeatsModel(() => ({
-                        child: { effects: [new FocusedWillEffectModel()] }
-                    })),
-                    ...props.child
-                }
-            };
+    constructor(props?: FocusedWillModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: {
+                name: "Focused Will",
+                desc: "Silence a minion, then give it +3 Health.",
+                flavorDesc: "Extreme focus is almost as effective as a really flashy distraction.",
+                isCollectible: true,
+                rarity: RarityType.RARE,
+                class: ClassType.PRIEST,
+                schools: [],
+                ...props.state
+            },
+            refer: { ...props.refer },
+            child: {
+                cost: props.child?.cost ?? new CostModel({ state: { origin: 1 }}),
+                feats: props.child?.feats ?? new SpellFeatsModel({
+                    child: { effects: [new FocusedWillEffectModel()] }
+                }),
+                ...props.child
+            }
         });
     }
 }

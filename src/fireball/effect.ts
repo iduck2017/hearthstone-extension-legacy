@@ -1,5 +1,5 @@
 import { EffectModel, SelectEvent, RoleModel, DamageModel, DamageEvent, DamageType, RoleRoute, ROLE_ROUTE, CardRoute, CARD_ROUTE, SpellEffectModel } from "hearthstone-core";
-import { DebugUtil, Loader, LogLevel, Model, TemplUtil } from "set-piece";
+import { DebugUtil, LogLevel, Model, TemplUtil } from "set-piece";
 
 export namespace FireballEffectProps {
     export type E = {}
@@ -15,20 +15,18 @@ export class FireballEffectModel extends SpellEffectModel<[RoleModel],
     FireballEffectProps.C,
     FireballEffectProps.R
 > {
-    constructor(loader?: Loader<FireballEffectModel>) {
-        super(() => {
-            const props = loader?.() ?? {}
-            return {
-                uuid: props.uuid,
-                state: { 
-                    name: "Fire ball's effect",
-                    desc: "Deal {{state.damage[0]}} damage",
-                    damage: [6],
-                    ...props.state 
-                },
-                child: { ...props.child },
-                refer: { ...props.refer },
-            }
+    constructor(props?: FireballEffectModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: { 
+                name: "Fire ball's effect",
+                desc: "Deal {{state.damage[0]}} damage",
+                damage: [6],
+                ...props.state 
+            },
+            child: { ...props.child },
+            refer: { ...props.refer },
         })
     }
 
