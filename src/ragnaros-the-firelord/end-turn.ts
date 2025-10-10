@@ -1,22 +1,19 @@
 import { EndTurnHookModel, DamageModel, DamageEvent, DamageType } from "hearthstone-core";
-import { Loader, TemplUtil } from "set-piece";
+import { TemplUtil } from "set-piece";
 
 @TemplUtil.is('ragnaros-end-turn')
 export class RagnarosEndTurnModel extends EndTurnHookModel {
-    constructor(loader?: Loader<RagnarosEndTurnModel>) {
-        super(() => {
-            const props = loader?.() ?? {};
-            return {
-                uuid: props.uuid,
-                state: {
-                    name: 'Ragnaros\'s End Turn',
-                    desc: 'At the end of your turn, deal 8 damage to a random enemy.',
-                    ...props.state,
-                },
-                child: { ...props.child },
-                refer: { ...props.refer },
-                route: {}
-            };
+    constructor(props?: RagnarosEndTurnModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: {
+                name: 'Ragnaros\'s End Turn',
+                desc: 'At the end of your turn, deal 8 damage to a random enemy.',
+                ...props.state,
+            },
+            child: { ...props.child },
+            refer: { ...props.refer },
         });
     }
 

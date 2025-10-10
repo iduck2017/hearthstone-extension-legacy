@@ -18,8 +18,12 @@ export class AbusiveSergeantBuffModel extends IRoleBuffModel {
         });
     }
 
-    @EventUtil.on(self => self.route.game?.proxy.child.turn.event.onEnd)
-    private onTurnEnd(that: TurnModel, event: Event) {
+    @EventUtil.on(self => self.handleTurn)
+    private listenTurn() {
+        return this.route.game?.proxy.child.turn.event?.onEnd
+    }
+
+    private handleTurn(that: TurnModel, event: Event) {
         this.deactive();
     }   
 }

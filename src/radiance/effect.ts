@@ -1,22 +1,20 @@
 import { EffectModel, SpellEffectModel, RestoreModel, RestoreEvent } from "hearthstone-core";
-import { Loader, TemplUtil } from "set-piece";
+import { TemplUtil } from "set-piece";
 
 @TemplUtil.is('radiance-effect')
 export class RadianceEffectModel extends SpellEffectModel<[]> {
-    constructor(loader?: Loader<RadianceEffectModel>) {
-        super(() => {
-            const props = loader?.() ?? {};
-            return {
-                uuid: props.uuid,
-                state: {
-                    name: "Radiance's effect",
-                    desc: "Restore 5 Health to your hero.",
-                    damage: [],
-                    ...props.state
-                },
-                child: { ...props.child },
-                refer: { ...props.refer },
-            };
+    constructor(props?: RadianceEffectModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: {
+                name: "Radiance's effect",
+                desc: "Restore 5 Health to your hero.",
+                damage: [],
+                ...props.state
+            },
+            child: { ...props.child },
+            refer: { ...props.refer },
         });
     }
 

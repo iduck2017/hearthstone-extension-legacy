@@ -19,8 +19,12 @@ export class AegwynnTheGuardianContextModel extends FeatureModel {
         });
     }
 
-    @EventUtil.on(self => self.route.player?.proxy.child.hand.child.minions.event.onDraw)
-    private onDraw(that: MinionCardModel, event: Event) {
+    @EventUtil.on(self => self.handleDraw)
+    private listenDraw() {
+        return this.route.player?.proxy.child.hand.child.minions.event?.onDraw
+    }
+
+    private handleDraw(that: MinionCardModel, event: Event) {
         const player = this.route.player;
         if (!player) return;
         if (!this.state.isActive) return;

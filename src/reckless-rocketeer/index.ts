@@ -10,45 +10,40 @@
  * Collectible
  */
 
-import { ChargeModel, RoleHealthModel, RoleAttackModel, MinionCardModel, RoleModel, RoleFeatsModel, ClassType, RarityType } from "hearthstone-core";
-import { CostModel } from "hearthstone-core";
-import { LibraryUtil } from "hearthstone-core";
-import { Loader } from "set-piece";
+import { ChargeModel, RoleHealthModel, RoleAttackModel, MinionCardModel, RoleModel, RoleFeatsModel, ClassType, RarityType, CostModel, LibraryUtil } from "hearthstone-core";
 
 @LibraryUtil.is('reckless-rocketeer')
 export class RecklessRocketeerModel extends MinionCardModel {
-    constructor(loader?: Loader<RecklessRocketeerModel>) {
-        super(() => {
-            const props = loader?.() ?? {};
-            return {
-                uuid: props.uuid,
-                state: {
-                    name: 'Reckless Rocketeer',
-                    desc: 'Charge',
-                    isCollectible: true,
-                    flavorDesc: 'One Insane Rocketeer. One Rocket full of Explosives. Infinite Fun.',
-                    rarity: RarityType.COMMON,
-                    class: ClassType.NEUTRAL,
-                    races: [],
-                    ...props.state,
-                },
-                child: {
-                    cost: new CostModel(() => ({ state: { origin: 6 }})),
-                    role: new RoleModel(() => ({
-                        child: {
-                            attack: new RoleAttackModel(() => ({ state: { origin: 5 }})),
-                            health: new RoleHealthModel(() => ({ state: { origin: 2 }})),
-                            feats: new RoleFeatsModel(() => ({
-                                child: {
-                                    charge: new ChargeModel(() => ({ state: { isActive: true } }))
-                                }
-                            }))
-                        }
-                    })),
-                    ...props.child
-                },
-                refer: { ...props.refer }
-            }
+    constructor(props?: RecklessRocketeerModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: {
+                name: 'Reckless Rocketeer',
+                desc: 'Charge',
+                isCollectible: true,
+                flavorDesc: 'One Insane Rocketeer. One Rocket full of Explosives. Infinite Fun.',
+                rarity: RarityType.COMMON,
+                class: ClassType.NEUTRAL,
+                races: [],
+                ...props.state,
+            },
+            child: {
+                cost: new CostModel({ state: { origin: 6 }}),
+                role: new RoleModel({
+                    child: {
+                        attack: new RoleAttackModel({ state: { origin: 5 }}),
+                        health: new RoleHealthModel({ state: { origin: 2 }}),
+                        feats: new RoleFeatsModel({
+                            child: {
+                                charge: new ChargeModel({ state: { isActive: true } })
+                            }
+                        })
+                    }
+                }),
+                ...props.child
+            },
+            refer: { ...props.refer }
         });
     }
 }

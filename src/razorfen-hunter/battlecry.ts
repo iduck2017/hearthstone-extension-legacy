@@ -1,22 +1,20 @@
 import { MinionBattlecryModel, DeployModel } from "hearthstone-core";
-import { Loader, TemplUtil } from "set-piece";
+import { TemplUtil } from "set-piece";
 import { BoarModel } from "../boar";
 
 @TemplUtil.is('razorfen-hunter-battlecry')
 export class RazorfenHunterBattlecryModel extends MinionBattlecryModel<[]> {
-    constructor(loader?: Loader<RazorfenHunterBattlecryModel>) {
-        super(() => {
-            const props = loader?.() ?? {};
-            return {
-                uuid: props.uuid,
-                state: {
-                    name: "Razorfen Hunter's Battlecry",
-                    desc: "Summon a 1/1 Boar.",
-                    ...props.state
-                },
-                child: { ...props.child },
-                refer: { ...props.refer },
-            };
+    constructor(props?: RazorfenHunterBattlecryModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: {
+                name: "Razorfen Hunter's Battlecry",
+                desc: "Summon a 1/1 Boar.",
+                ...props.state
+            },
+            child: { ...props.child },
+            refer: { ...props.refer },
         });
     }
 

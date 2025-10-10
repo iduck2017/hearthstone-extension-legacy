@@ -15,20 +15,18 @@ export class RagnarosFeatureModel extends FeatureModel<
     RagnarosFeatureProps.C,
     RagnarosFeatureProps.R
 > {
-    constructor(loader?: Loader<RagnarosFeatureModel>) {
-        super(() => {
-            const props = loader?.() ?? {};
-            return {
-                uuid: props.uuid,
-                state: {
-                    name: 'Ragnaros\'s Restriction',
-                    desc: 'Can\'t attack.',
-                    isActive: true,
-                    ...props.state,
-                },
-                child: { ...props.child },
-                refer: { ...props.refer },
-            }
+    constructor(props?: RagnarosFeatureModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: {
+                name: 'Ragnaros\'s Restriction',
+                desc: 'Can\'t attack.',
+                isActive: true,
+                ...props.state,
+            },
+            child: { ...props.child },
+            refer: { ...props.refer },
         });
     }
 
