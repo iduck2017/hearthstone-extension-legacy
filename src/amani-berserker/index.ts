@@ -40,7 +40,7 @@ export class AmaniBerserkerModel extends MinionCardModel {
                         health: new RoleHealthModel({ state: { origin: 3 }}), 
                         feats: new RoleFeatsModel({
                             child: {
-                                items: [new AmaniBerserkerFeatureModel()]
+                                list: [new AmaniBerserkerFeatureModel()]
                             }
                         })
                     }

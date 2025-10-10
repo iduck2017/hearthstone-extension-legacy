@@ -39,7 +39,7 @@ export class AncientWatcherModel extends MinionCardModel {
                         health: new RoleHealthModel({ state: { origin: 5 }}), 
                         feats: new RoleFeatsModel({
                             child: {
-                                items: [new AncientWatcherFeatureModel()]
+                                list: [new AncientWatcherFeatureModel()]
                             }
                         })
                     }

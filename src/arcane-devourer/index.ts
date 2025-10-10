@@ -43,7 +43,7 @@ export class ArcaneDevourerModel extends MinionCardModel {
                 feats: new MinionFeatsModel({
                     child: { 
                         battlecry: [], 
-                        items: [new ArcaneDevourerFeatureModel()]
+                        list: [new ArcaneDevourerFeatureModel()]
                     }
                 }),
                 ...props.child

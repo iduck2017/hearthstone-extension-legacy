@@ -39,7 +39,7 @@ export class IceBarrierModel extends SecretCardModel {
                 cost: props.child?.cost ?? new CostModel({ state: { origin: 3 }}),
                 feats: new SpellFeatsModel({
                     child: {
-                        items: [new IceBarrierFeatureModel()]
+                        list: [new IceBarrierFeatureModel()]
                     }
                 }),
                 ...props.child 

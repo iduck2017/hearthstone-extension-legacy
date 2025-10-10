@@ -41,7 +41,7 @@ export class VaporizeModel extends SecretCardModel {
                     cost: props.child?.cost ?? new CostModel(() => ({ state: { origin: 3 }})),
                     feats: new SpellFeatsModel(() => ({
                         child: {
-                            items: [new VaporizeFeatureModel()]
+                            list: [new VaporizeFeatureModel()]
                         }
                     })),
                     ...props.child 

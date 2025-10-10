@@ -42,7 +42,7 @@ export class GrimscaleOracleModel extends MinionCardModel {
                         health: new RoleHealthModel({ state: { origin: 1 }}),   
                         feats: new RoleFeatsModel({
                             child: {
-                                items: [new GrimscaleOracleFeatureModel()]
+                                list: [new GrimscaleOracleFeatureModel()]
                             }
                         })
                     }

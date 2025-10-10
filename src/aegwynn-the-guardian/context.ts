@@ -1,4 +1,4 @@
-import { FeatureModel, MinionCardModel, SpellBuffModel } from "hearthstone-core";
+import { FeatureModel, MinionCardModel, SpellDamageModel } from "hearthstone-core";
 import { Event, EventUtil, TemplUtil } from "set-piece";
 import { AegwynnTheGuardianDeathrattleModel } from "./deathrattle";
 
@@ -24,7 +24,7 @@ export class AegwynnTheGuardianContextModel extends FeatureModel {
         const player = this.route.player;
         if (!player) return;
         if (!this.state.isActive) return;
-        that.child.feats.add(new SpellBuffModel({ state: { offset: 2 }}))
+        that.child.feats.add(new SpellDamageModel({ state: { offset: 2 }}))
         that.child.feats.add(new AegwynnTheGuardianDeathrattleModel());
         player.del(this);
     }

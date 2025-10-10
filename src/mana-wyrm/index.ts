@@ -46,7 +46,7 @@ export class ManaWyrmModel extends MinionCardModel {
                 feats: new MinionFeatsModel({
                     child: { 
                         battlecry: [], 
-                        items: [new ManaWyrmFeatureModel()]
+                        list: [new ManaWyrmFeatureModel()]
                     }
                 }),
                 ...props.child

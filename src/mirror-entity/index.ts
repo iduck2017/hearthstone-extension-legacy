@@ -16,37 +16,34 @@
  */
 
 import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SecretCardModel, SpellFeatsModel } from "hearthstone-core";
-import { Loader } from "set-piece";
 import { MirrorEntityFeatureModel } from "./feature";
 
 @LibraryUtil.is('mirror-entity')
 export class MirrorEntityModel extends SecretCardModel {
-    constructor(loader?: Loader<MirrorEntityModel>) {
-        super(() => {
-            const props = loader?.() ?? {}
-            return {
-                uuid: props.uuid,
-                state: { 
-                    name: "Mirror Entity",
-                    desc: "Secret: After your opponent plays a minion, summon a copy of it.",
-                    flavorDesc: "\"You go first.\" - Krush'gor the Behemoth, to his pet boar.",
-                    isCollectible: true,
-                    rarity: RarityType.COMMON,
-                    class: ClassType.MAGE,
-                    schools: [SchoolType.ARCANE],
-                    ...props.state
-                },
-                refer: { ...props.refer },
-                child: { 
-                    cost: props.child?.cost ?? new CostModel(() => ({ state: { origin: 3 }})),
-                    feats: new SpellFeatsModel(() => ({
-                        child: {
-                            items: [new MirrorEntityFeatureModel()]
-                        }
-                    })),
-                    ...props.child 
-                }
+    constructor(props?: MirrorEntityModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: { 
+                name: "Mirror Entity",
+                desc: "Secret: After your opponent plays a minion, summon a copy of it.",
+                flavorDesc: "\"You go first.\" - Krush'gor the Behemoth, to his pet boar.",
+                isCollectible: true,
+                rarity: RarityType.COMMON,
+                class: ClassType.MAGE,
+                schools: [SchoolType.ARCANE],
+                ...props.state
+            },
+            refer: { ...props.refer },
+            child: { 
+                cost: props.child?.cost ?? new CostModel({ state: { origin: 3 }}),
+                feats: new SpellFeatsModel({
+                    child: {
+                        list: [new MirrorEntityFeatureModel()]
+                    }
+                }),
+                ...props.child 
             }
-        })
+        });
     }
 }

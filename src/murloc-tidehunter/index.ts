@@ -15,45 +15,40 @@
  * Collectible
  */
 
-import { CardModel, ClassType, RoleHealthModel, MinionCardModel, MinionFeatsModel, RaceType, RarityType, RoleAttackModel, RoleModel } from "hearthstone-core";
-import { CostModel } from "hearthstone-core";
-import { LibraryUtil } from "hearthstone-core";
-import { Loader } from "set-piece";
+import { CardModel, ClassType, RoleHealthModel, MinionCardModel, MinionFeatsModel, RaceType, RarityType, RoleAttackModel, RoleModel, CostModel, LibraryUtil } from "hearthstone-core";
 import { MurlocTidehunterBattlecryModel } from "./battlecry";
 
 @LibraryUtil.is('murloc-tidehunter')
 export class MurlocTidehunterModel extends MinionCardModel {
-    constructor(loader?: Loader<MurlocTidehunterModel>) {
-        super(() => {
-            const props = loader?.() ?? {};
-            return {
-                uuid: props.uuid,
-                state: {
-                    name: 'Murloc Tidehunter',
-                    desc: 'Battlecry: Summon a 1/1 Murloc Scout.',
-                    isCollectible: true,
-                    flavorDesc: '"Death will rise, from the tides!"',
-                    rarity: RarityType.COMMON,
-                    races: [RaceType.MURLOC],
-                    class: ClassType.NEUTRAL,
-                    ...props.state
-                },
-                child: {
-                    cost: new CostModel(() => ({ state: { origin: 2 }})),
-                    role: new RoleModel(() => ({
-                        state: { races: [RaceType.MURLOC] },
-                        child: {
-                            attack: new RoleAttackModel(() => ({ state: { origin: 2 }})),
-                            health: new RoleHealthModel(() => ({ state: { origin: 1 }})),
-                        }
-                    })),
-                    feats: new MinionFeatsModel(() => ({
-                        child: { battlecry: [new MurlocTidehunterBattlecryModel()] }
-                    })),
-                    ...props.child
-                },
-                refer: { ...props.refer }
-            }
+    constructor(props?: MurlocTidehunterModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: {
+                name: 'Murloc Tidehunter',
+                desc: 'Battlecry: Summon a 1/1 Murloc Scout.',
+                isCollectible: true,
+                flavorDesc: '"Death will rise, from the tides!"',
+                rarity: RarityType.COMMON,
+                races: [RaceType.MURLOC],
+                class: ClassType.NEUTRAL,
+                ...props.state
+            },
+            child: {
+                cost: new CostModel({ state: { origin: 2 }}),
+                role: new RoleModel({
+                    state: { races: [RaceType.MURLOC] },
+                    child: {
+                        attack: new RoleAttackModel({ state: { origin: 2 }}),
+                        health: new RoleHealthModel({ state: { origin: 1 }}),
+                    }
+                }),
+                feats: new MinionFeatsModel({
+                    child: { battlecry: [new MurlocTidehunterBattlecryModel()] }
+                }),
+                ...props.child
+            },
+            refer: { ...props.refer }
         });
     }
 }

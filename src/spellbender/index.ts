@@ -40,7 +40,7 @@ export class SpellbenderModel extends SecretCardModel {
                     cost: props.child?.cost ?? new CostModel(() => ({ state: { origin: 3 }})),
                     feats: new SpellFeatsModel(() => ({
                         child: {
-                            items: [new SpellbenderFeatureModel()]
+                            list: [new SpellbenderFeatureModel()]
                         }
                     })),
                     ...props.child 

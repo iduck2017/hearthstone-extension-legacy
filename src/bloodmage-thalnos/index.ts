@@ -13,7 +13,7 @@
  * Collectible
  */
 
-import { RoleAttackModel, ClassType, RoleHealthModel, MinionCardModel, RaceType, RarityType, RoleModel, SpellBuffModel, RoleFeatsModel, MinionFeatsModel, LibraryUtil, CostModel } from "hearthstone-core";
+import { RoleAttackModel, ClassType, RoleHealthModel, MinionCardModel, RaceType, RarityType, RoleModel, SpellDamageModel, RoleFeatsModel, MinionFeatsModel, LibraryUtil, CostModel } from "hearthstone-core";
 import { BloodmageThalnosDeathrattleModel } from "./deathrattle";
 
 @LibraryUtil.is('bloodmage-thalnos')
@@ -43,7 +43,7 @@ export class BloodmageThalnosModel extends MinionCardModel {
                 feats: new MinionFeatsModel({
                     child: {
                         deathrattle: [new BloodmageThalnosDeathrattleModel()],
-                        items: [new SpellBuffModel({ state: { offset: 1 }})]
+                        list: [new SpellDamageModel({ state: { offset: 1 }})]
                     }
                 }),
                 ...props.child,

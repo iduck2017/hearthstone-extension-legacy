@@ -38,7 +38,7 @@ export class AngryChickenModel extends MinionCardModel {
                         health: new RoleHealthModel({ state: { origin: 1 }}), 
                         feats: new RoleFeatsModel({
                             child: {
-                                items: [new AngryChickenFeatureModel()]
+                                list: [new AngryChickenFeatureModel()]
                             }
                         })
                     }

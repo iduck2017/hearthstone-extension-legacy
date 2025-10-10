@@ -31,21 +31,19 @@ export class MirrorImageEffectModel extends SpellEffectModel<[],
     MirrorImageEffectProps.C,
     MirrorImageEffectProps.R
 > {
-    constructor(loader?: Loader<MirrorImageEffectModel>) {
-        super(() => {
-            const props = loader?.() ?? {}
-            return {
-                uuid: props.uuid,
-                state: { 
-                    name: "Mirror Image's effect",
-                    desc: "Summon two 0/2 minions with Taunt.",
-                    damage: [],
-                    ...props.state 
-                },
-                child: { ...props.child },
-                refer: { ...props.refer },
-            }
-        })
+    constructor(props?: MirrorImageEffectModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: { 
+                name: "Mirror Image's effect",
+                desc: "Summon two 0/2 minions with Taunt.",
+                damage: [],
+                ...props.state 
+            },
+            child: { ...props.child },
+            refer: { ...props.refer },
+        });
     }
 
     toRun(): [] { return [] }

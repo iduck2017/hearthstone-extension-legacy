@@ -1,24 +1,21 @@
 import { CardModel, MinionCardModel, SecretFeatureModel } from "hearthstone-core";
-import { Event, EventUtil, Loader, TemplUtil } from "set-piece";
+import { Event, EventUtil, TemplUtil } from "set-piece";
 
 @TemplUtil.is('mirror-entity-feature')
 export class MirrorEntityFeatureModel extends SecretFeatureModel {
-    constructor(loader?: Loader<MirrorEntityFeatureModel>) {
-        super(() => {
-            const props = loader?.() ?? {}
-            return {
-                uuid: props.uuid,
-                state: {
-                    name: "Mirror Entity's feature",
-                    desc: "Secret: After your opponent plays a minion, summon a copy of it.",
-                    isActive: true,
-                    ...props.state
-                },
-                child: { ...props.child },
-                refer: { ...props.refer },
-                route: {},
-            }
-        })
+    constructor(props?: MirrorEntityFeatureModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: {
+                name: "Mirror Entity's feature",
+                desc: "Secret: After your opponent plays a minion, summon a copy of it.",
+                isActive: true,
+                ...props.state
+            },
+            child: { ...props.child },
+            refer: { ...props.refer },
+        });
     }
 
     @EventUtil.on(self => self.route.game?.proxy.all(MinionCardModel).event.onPlay)

@@ -1,4 +1,4 @@
-import { FeatureModel, SpellCardModel } from "hearthstone-core";
+import { FeatureModel, MinionCardModel, SpellCardModel } from "hearthstone-core";
 import { Event, EventUtil, TemplUtil } from "set-piece";
 import { ManaWyrmBuffModel } from "./buff";
 
@@ -16,6 +16,15 @@ export class ManaWyrmFeatureModel extends FeatureModel<
     ManaWyrmFeatureProps.C,
     ManaWyrmFeatureProps.R
 > {
+    public get route() {
+        const result = super.route;
+        const minion: MinionCardModel | undefined = result.list.find(item => item instanceof MinionCardModel);
+        return {
+            ...result,
+            minion
+        };
+    }
+
     constructor(props?: ManaWyrmFeatureModel['props']) {
         props = props ?? {};
         super({
