@@ -15,35 +15,32 @@
  */
 
 import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel, SpellFeatsModel } from "hearthstone-core";
-import { Loader } from "set-piece";
 import { MindVisionEffectModel } from "./effect";
 
 @LibraryUtil.is('mind-vision')
 export class MindVisionModel extends SpellCardModel {
-    constructor(loader?: Loader<MindVisionModel>) {
-        super(() => {
-            const props = loader?.() ?? {};
-            return {
-                uuid: props.uuid,
-                state: {
-                    name: "Mind Vision",
-                    desc: "Put a copy of a random card in your opponent's hand into your hand.",
-                    flavorDesc: "I see what you did there.",
-                    isCollectible: true,
-                    rarity: RarityType.COMMON,
-                    class: ClassType.PRIEST,
-                    schools: [SchoolType.SHADOW],
-                    ...props.state
-                },
-                refer: { ...props.refer },
-                child: {
-                    cost: props.child?.cost ?? new CostModel(() => ({ state: { origin: 1 }})),
-                    feats: props.child?.feats ?? new SpellFeatsModel(() => ({
-                        child: { effects: [new MindVisionEffectModel()] }
-                    })),
-                    ...props.child
-                }
-            };
+    constructor(props?: MindVisionModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: {
+                name: "Mind Vision",
+                desc: "Put a copy of a random card in your opponent's hand into your hand.",
+                flavorDesc: "I see what you did there.",
+                isCollectible: true,
+                rarity: RarityType.COMMON,
+                class: ClassType.PRIEST,
+                schools: [SchoolType.SHADOW],
+                ...props.state
+            },
+            refer: { ...props.refer },
+            child: {
+                cost: props.child?.cost ?? new CostModel({ state: { origin: 1 }}),
+                feats: props.child?.feats ?? new SpellFeatsModel({
+                    child: { effects: [new MindVisionEffectModel()] }
+                }),
+                ...props.child
+            }
         });
     }
 }

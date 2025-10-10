@@ -1,12 +1,11 @@
-import { DamageEvent, DamageModel, DamageType, DeathrattleModel, ROLE_ROUTE, RoleRoute } from "hearthstone-core";
-import { Loader, TemplUtil } from "set-piece";
+import { DamageEvent, DamageModel, DamageType, DeathrattleModel } from "hearthstone-core";
+import { TemplUtil } from "set-piece";
 
 export namespace ShadowedSpiritDeathrattleProps {
     export type E = {}
     export type S = {}
     export type C = {}
     export type R = {}
-    export type P = RoleRoute
 }
 
 @TemplUtil.is('shadowed-spirit-deathrattle')
@@ -14,8 +13,7 @@ export class ShadowedSpiritDeathrattleModel extends DeathrattleModel<
     ShadowedSpiritDeathrattleProps.E,
     ShadowedSpiritDeathrattleProps.S,
     ShadowedSpiritDeathrattleProps.C,
-    ShadowedSpiritDeathrattleProps.R,
-    ShadowedSpiritDeathrattleProps.P
+    ShadowedSpiritDeathrattleProps.R
 > {
     constructor(loader?: Loader<ShadowedSpiritDeathrattleModel>) {
         super(() => {
@@ -29,7 +27,6 @@ export class ShadowedSpiritDeathrattleModel extends DeathrattleModel<
                 },
                 child: { ...props.child },
                 refer: { ...props.refer },
-                route: ROLE_ROUTE,
             }
         });
     }

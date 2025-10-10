@@ -17,6 +17,15 @@ export class GrimscaleOracleFeatureModel extends FeatureModel<
     GrimscaleOracleFeatureModel.C,
     GrimscaleOracleFeatureModel.R
 > {
+    public get route() {
+        const result = super.route;
+        const role = result.list.find(item => item instanceof RoleModel);
+        return {
+            ...result,
+            role
+        };
+    }
+
     constructor(props?: GrimscaleOracleFeatureModel['props']) {
         props = props ?? {};
         super({

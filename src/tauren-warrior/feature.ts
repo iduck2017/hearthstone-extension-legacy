@@ -1,5 +1,5 @@
-import { FeatureModel, RoleAttackModel, RoleAttackDecor, OperationType, ROLE_ROUTE } from "hearthstone-core";
-import { EventUtil, Loader, TemplUtil, StateUtil, TranxUtil } from "set-piece";
+import { FeatureModel, RoleAttackModel, RoleAttackDecor, OperationType } from "hearthstone-core";
+import { EventUtil, TemplUtil, StateUtil, TranxUtil } from "set-piece";
 
 export namespace TaurenWarriorFeatureProps {
     export type E = {}
@@ -8,7 +8,6 @@ export namespace TaurenWarriorFeatureProps {
     }
     export type C = {}
     export type R = {}
-    export type P = typeof ROLE_ROUTE
 }
 
 @TemplUtil.is('tauren-warrior-feature')
@@ -16,8 +15,7 @@ export class TaurenWarriorFeatureModel extends FeatureModel<
     TaurenWarriorFeatureProps.E,
     TaurenWarriorFeatureProps.S,
     TaurenWarriorFeatureProps.C,
-    TaurenWarriorFeatureProps.R,
-    TaurenWarriorFeatureProps.P
+    TaurenWarriorFeatureProps.R
 > {
     constructor(loader?: Loader<TaurenWarriorFeatureModel>) {
         super(() => {
@@ -33,7 +31,6 @@ export class TaurenWarriorFeatureModel extends FeatureModel<
                 },
                 child: { ...props.child },
                 refer: { ...props.refer },
-                route: ROLE_ROUTE,
             }
         });
     }

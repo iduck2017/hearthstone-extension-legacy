@@ -14,43 +14,40 @@
  */
 
 import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, MinionFeatsModel, RarityType, RoleAttackModel, RoleModel, RaceType, SpellBuffModel } from "hearthstone-core";
-import { Loader } from "set-piece";
 
 @LibraryUtil.is('malygos')
 export class MalygosModel extends MinionCardModel {
-    constructor(loader?: Loader<MalygosModel>) {
-        super(() => {
-            const props = loader?.() ?? {};
-            return {
-                uuid: props.uuid,
-                state: {
-                    name: 'Malygos',
-                    desc: 'Spell Damage +5',
-                    flavorDesc: 'Malygos hates it when mortals use magic. He gets so mad!',
-                    isCollectible: true,
-                    rarity: RarityType.LEGENDARY,
-                    class: ClassType.NEUTRAL,
-                    races: [RaceType.DRAGON],
-                    ...props.state
-                },
-                child: {
-                    cost: new CostModel(() => ({ state: { origin: 9 }})),
-                    role: new RoleModel(() => ({
-                        child: {
-                            attack: new RoleAttackModel(() => ({ state: { origin: 4 }})),
-                            health: new RoleHealthModel(() => ({ state: { origin: 12 }})),
-                        }
-                    })),
-                    feats: new MinionFeatsModel(() => ({
-                        child: { 
-                            battlecry: [], 
-                            items: [new SpellBuffModel(() => ({ state: { offset: 5 }}))]
-                        }
-                    })),
-                    ...props.child
-                },
-                refer: { ...props.refer }
-            }
+    constructor(props?: MalygosModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: {
+                name: 'Malygos',
+                desc: 'Spell Damage +5',
+                flavorDesc: 'Malygos hates it when mortals use magic. He gets so mad!',
+                isCollectible: true,
+                rarity: RarityType.LEGENDARY,
+                class: ClassType.NEUTRAL,
+                races: [RaceType.DRAGON],
+                ...props.state
+            },
+            child: {
+                cost: new CostModel({ state: { origin: 9 }}),
+                role: new RoleModel({
+                    child: {
+                        attack: new RoleAttackModel({ state: { origin: 4 }}),
+                        health: new RoleHealthModel({ state: { origin: 12 }}),
+                    }
+                }),
+                feats: new MinionFeatsModel({
+                    child: { 
+                        battlecry: [], 
+                        items: [new SpellBuffModel({ state: { offset: 5 }})]
+                    }
+                }),
+                ...props.child
+            },
+            refer: { ...props.refer }
         });
     }
 }

@@ -1,5 +1,5 @@
 import { EffectModel, SelectEvent, RoleModel, DamageModel, DamageEvent, DamageType, CardModel, SpellPerformModel, SecretFeatureModel } from "hearthstone-core";
-import { DebugUtil, Event, EventUtil, LogLevel, Model, TemplUtil } from "set-piece";
+import { DebugUtil, Event, EventUtil, Model, TemplUtil } from "set-piece";
 
 @TemplUtil.is('counterspell-effect')
 export class CounterspellFeatureModel extends SecretFeatureModel {

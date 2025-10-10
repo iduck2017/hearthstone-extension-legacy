@@ -1,22 +1,20 @@
 import { CardModel, EffectModel, SpellEffectModel } from "hearthstone-core";
-import { Loader, TemplUtil, TranxUtil } from "set-piece";
+import { TemplUtil, TranxUtil } from "set-piece";
 
 @TemplUtil.is('mind-vision-effect')
 export class MindVisionEffectModel extends SpellEffectModel<[]> {
-    constructor(loader?: Loader<MindVisionEffectModel>) {
-        super(() => {
-            const props = loader?.() ?? {};
-            return {
-                uuid: props.uuid,
-                state: {
-                    name: "Mind Vision's effect",
-                    desc: "Put a copy of a random card in your opponent's hand into your hand.",
-                    damage: [],
-                    ...props.state
-                },
-                child: { ...props.child },
-                refer: { ...props.refer },
-            };
+    constructor(props?: MindVisionEffectModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: {
+                name: "Mind Vision's effect",
+                desc: "Put a copy of a random card in your opponent's hand into your hand.",
+                damage: [],
+                ...props.state
+            },
+            child: { ...props.child },
+            refer: { ...props.refer },
         });
     }
 

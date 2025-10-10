@@ -1,12 +1,11 @@
-import { FeatureModel, ROLE_ROUTE, RoleActionDecor, RoleActionModel, RoleRoute } from "hearthstone-core";
-import { StateUtil, TemplUtil, Loader } from "set-piece";
+import { FeatureModel, RoleActionDecor, RoleActionModel } from "hearthstone-core";
+import { StateUtil, TemplUtil } from "set-piece";
 
 export namespace RagnarosFeatureProps {
     export type E = {};
     export type S = {};
     export type C = {};
     export type R = {};
-    export type P = RoleRoute;
 }
 
 @TemplUtil.is('ragnaros-feature')
@@ -14,8 +13,7 @@ export class RagnarosFeatureModel extends FeatureModel<
     RagnarosFeatureProps.E,
     RagnarosFeatureProps.S,
     RagnarosFeatureProps.C,
-    RagnarosFeatureProps.R,
-    RagnarosFeatureProps.P
+    RagnarosFeatureProps.R
 > {
     constructor(loader?: Loader<RagnarosFeatureModel>) {
         super(() => {
@@ -30,7 +28,6 @@ export class RagnarosFeatureModel extends FeatureModel<
                 },
                 child: { ...props.child },
                 refer: { ...props.refer },
-                route: ROLE_ROUTE,
             }
         });
     }

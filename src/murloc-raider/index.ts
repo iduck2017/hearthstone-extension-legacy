@@ -14,37 +14,34 @@
  */
 
 import { MinionCardModel, RoleHealthModel, RoleAttackModel, RaceType, RoleModel, RarityType, ClassType, LibraryUtil, CostModel } from "hearthstone-core";
-import { Loader } from "set-piece";
 
 @LibraryUtil.is('murloc-raider')
 export class MurlocRaiderModel extends MinionCardModel {
-    constructor(loader?: Loader<MurlocRaiderModel>) {
-        super(() => {
-            const props = loader?.() ?? {};
-            return {
-                uuid: props.uuid,
-                state: {
-                    name: 'Murloc Raider',
-                    desc: '',
-                    isCollectible: true,
-                    flavorDesc: 'Mrrraggglhlhghghlgh, mrgaaag blarrghlgaahahl mrgggg glhalhah a bghhll graggmgmg Garrosh mglhlhlh mrghlhlhl!!',
-                    rarity: RarityType.COMMON,
-                    class: ClassType.NEUTRAL,
-                    races: [RaceType.MURLOC],
-                    ...props.state
-                },
-                child: {
-                    cost: new CostModel(() => ({ state: { origin: 1 }})),
-                    role: new RoleModel(() => ({
-                        child: {
-                            attack: new RoleAttackModel(() => ({ state: { origin: 2 }})),
-                            health: new RoleHealthModel(() => ({ state: { origin: 1 }})),
-                        }
-                    })),
-                    ...props.child
-                },
-                refer: { ...props.refer }
-            }
+    constructor(props?: MurlocRaiderModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: {
+                name: 'Murloc Raider',
+                desc: '',
+                isCollectible: true,
+                flavorDesc: 'Mrrraggglhlhghghlgh, mrgaaag blarrghlgaahahl mrgggg glhalhah a bghhll graggmgmg Garrosh mglhlhlh mrghlhlhl!!',
+                rarity: RarityType.COMMON,
+                class: ClassType.NEUTRAL,
+                races: [RaceType.MURLOC],
+                ...props.state
+            },
+            child: {
+                cost: new CostModel({ state: { origin: 1 }}),
+                role: new RoleModel({
+                    child: {
+                        attack: new RoleAttackModel({ state: { origin: 2 }}),
+                        health: new RoleHealthModel({ state: { origin: 1 }}),
+                    }
+                }),
+                ...props.child
+            },
+            refer: { ...props.refer }
         });
     }
 }   

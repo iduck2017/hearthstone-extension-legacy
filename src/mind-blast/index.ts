@@ -18,35 +18,32 @@
  * 2 cost
  */
 import { ClassType, CostModel, LibraryUtil, RarityType, SpellCardModel, SchoolType, SpellFeatsModel } from "hearthstone-core";
-import { Loader } from "set-piece";
 import { MindBlastEffectModel } from "./effect";
 
 @LibraryUtil.is('mind-blast')
 export class MindBlastModel extends SpellCardModel {
-    constructor(loader?: Loader<MindBlastModel>) {
-        super(() => {
-            const props = loader?.() ?? {};
-            return {
-                uuid: props.uuid,
-                state: {
-                    name: 'Mind Blast',
-                    desc: 'Deal 5 damage to the enemy hero.',
-                    flavorDesc: '"This spell blasts you directly in the MIND."',
-                    isCollectible: true,
-                    rarity: RarityType.COMMON,
-                    class: ClassType.PRIEST,
-                    schools: [SchoolType.SHADOW],
-                    ...props.state
-                },
-                child: {
-                    cost: new CostModel(() => ({ state: { origin: 2 }})),
-                    feats: props.child?.feats ?? new SpellFeatsModel(() => ({
-                        child: { effects: [new MindBlastEffectModel()] }
-                    })),
-                    ...props.child
-                },
-                refer: { ...props.refer }
-            };
+    constructor(props?: MindBlastModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: {
+                name: 'Mind Blast',
+                desc: 'Deal 5 damage to the enemy hero.',
+                flavorDesc: '"This spell blasts you directly in the MIND."',
+                isCollectible: true,
+                rarity: RarityType.COMMON,
+                class: ClassType.PRIEST,
+                schools: [SchoolType.SHADOW],
+                ...props.state
+            },
+            child: {
+                cost: new CostModel({ state: { origin: 2 }}),
+                feats: props.child?.feats ?? new SpellFeatsModel({
+                    child: { effects: [new MindBlastEffectModel()] }
+                }),
+                ...props.child
+            },
+            refer: { ...props.refer }
         });
     }
 }

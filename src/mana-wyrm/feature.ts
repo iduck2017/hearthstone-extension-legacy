@@ -16,22 +16,19 @@ export class ManaWyrmFeatureModel extends FeatureModel<
     ManaWyrmFeatureProps.C,
     ManaWyrmFeatureProps.R
 > {
-    constructor(loader?: Loader<ManaWyrmFeatureModel>) {
-        super(() => {
-            const props = loader?.() ?? {}
-            return {
-                uuid: props.uuid,
-                state: { 
-                    name: "Mana Wyrm's feature",
-                    desc: "Whenever you cast a spell, gain +1 Attack.",
-                    isActive: true,
-                    ...props.state 
-                },
-                child: { ...props.child },
-                refer: { ...props.refer },
-                route: MINION_ROUTE,
-            }
-        })
+    constructor(props?: ManaWyrmFeatureModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: { 
+                name: "Mana Wyrm's feature",
+                desc: "Whenever you cast a spell, gain +1 Attack.",
+                isActive: true,
+                ...props.state 
+            },
+            child: { ...props.child },
+            refer: { ...props.refer },
+        });
     }
 
     @EventUtil.on(self => self.route.player?.proxy.all(SpellCardModel).event.onPlay)

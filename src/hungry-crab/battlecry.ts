@@ -1,6 +1,6 @@
 import { RaceType, MinionBattlecryModel, RoleModel, SelectEvent } from "hearthstone-core";
 import { HungryCrabBuffModel } from "./buff";
-import { TemplUtil, DebugUtil, LogLevel } from "set-piece";
+import { TemplUtil, DebugUtil } from "set-piece";
 
 @TemplUtil.is('hungry-crab-battlecry')
 export class HungryCrabBattlecryModel extends MinionBattlecryModel<[RoleModel]> {
@@ -27,7 +27,6 @@ export class HungryCrabBattlecryModel extends MinionBattlecryModel<[RoleModel]> 
         return [new SelectEvent(options, { hint: 'Select a Murloc' })];
     }
 
-    @DebugUtil.log(LogLevel.WARN)
     public async doRun(from: number, to: number, target: RoleModel) {
         const cardA = this.route.minion;
         if (!cardA) return;
