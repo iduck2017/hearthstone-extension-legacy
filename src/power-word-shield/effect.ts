@@ -1,23 +1,21 @@
 import { EffectModel, SelectEvent, RoleModel, SpellEffectModel } from "hearthstone-core";
-import { Loader, TemplUtil } from "set-piece";
+import { TemplUtil } from "set-piece";
 import { PowerWordShieldBuffModel } from "./buff";
 
 @TemplUtil.is('power-word-shield-effect')
 export class PowerWordShieldEffectModel extends SpellEffectModel<[RoleModel]> {
-    constructor(loader?: Loader<PowerWordShieldEffectModel>) {
-        super(() => {
-            const props = loader?.() ?? {};
-            return {
-                uuid: props.uuid,
-                state: {
-                    name: "Power Word: Shield's effect",
-                    desc: "Give a minion +2 Health. Draw a card.",
-                    damage: [],
-                    ...props.state
-                },
-                child: { ...props.child },
-                refer: { ...props.refer },
-            };
+    constructor(props?: PowerWordShieldEffectModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: {
+                name: "Power Word: Shield's effect",
+                desc: "Give a minion +2 Health. Draw a card.",
+                damage: [],
+                ...props.state
+            },
+            child: { ...props.child },
+            refer: { ...props.refer },
         });
     }
 

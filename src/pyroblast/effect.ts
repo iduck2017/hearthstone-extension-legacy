@@ -1,22 +1,20 @@
 import { EffectModel, SelectEvent, RoleModel, DamageModel, DamageEvent, DamageType, SpellEffectModel } from "hearthstone-core";
-import { Loader, TemplUtil } from "set-piece";
+import { TemplUtil } from "set-piece";
 
 @TemplUtil.is('pyroblast-effect')
 export class PyroblastEffectModel extends SpellEffectModel<[RoleModel]> {
-    constructor(loader?: Loader<PyroblastEffectModel>) {
-        super(() => {
-            const props = loader?.() ?? {};
-            return {
-                uuid: props.uuid,
-                state: {
-                    name: "Pyroblast's effect",
-                    desc: "Deal {{state.damage[0]}} damage.",
-                    damage: [10],
-                    ...props.state
-                },
-                child: { ...props.child },
-                refer: { ...props.refer },
-            };
+    constructor(props?: PyroblastEffectModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: {
+                name: "Pyroblast's effect",
+                desc: "Deal {{state.damage[0]}} damage.",
+                damage: [10],
+                ...props.state
+            },
+            child: { ...props.child },
+            refer: { ...props.refer },
         });
     }
 

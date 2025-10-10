@@ -1,21 +1,19 @@
 import { MinionBattlecryModel, RestoreModel, RestoreEvent } from "hearthstone-core";
-import { Loader, TemplUtil } from "set-piece";
+import { TemplUtil } from "set-piece";
 
 @TemplUtil.is('priestess-of-elune-battlecry')
 export class PriestessOfEluneBattlecryModel extends MinionBattlecryModel<[]> {
-    constructor(loader?: Loader<PriestessOfEluneBattlecryModel>) {
-        super(() => {
-            const props = loader?.() ?? {};
-            return {
-                uuid: props.uuid,
-                state: {
-                    name: "Priestess of Elune's Battlecry",
-                    desc: "Restore 4 Health to your hero.",
-                    ...props.state
-                },
-                child: { ...props.child },
-                refer: { ...props.refer },
-            };
+    constructor(props?: PriestessOfEluneBattlecryModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: {
+                name: "Priestess of Elune's Battlecry",
+                desc: "Restore 4 Health to your hero.",
+                ...props.state
+            },
+            child: { ...props.child },
+            refer: { ...props.refer },
         });
     }
 

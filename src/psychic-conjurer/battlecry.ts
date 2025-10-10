@@ -1,21 +1,19 @@
 import { CardModel, MinionBattlecryModel } from "hearthstone-core";
-import { Loader, TemplUtil, TranxUtil } from "set-piece";
+import { TemplUtil, TranxUtil } from "set-piece";
 
 @TemplUtil.is('psychic-conjurer-battlecry')
 export class PsychicConjurerBattlecryModel extends MinionBattlecryModel<[]> {
-    constructor(loader?: Loader<PsychicConjurerBattlecryModel>) {
-        super(() => {
-            const props = loader?.() ?? {};
-            return {
-                uuid: props.uuid,
-                state: {
-                    name: 'Psychic Conjurer\'s Battlecry',
-                    desc: 'Copy a card in your opponent\'s deck and add it to your hand.',
-                    ...props.state,
-                },
-                child: { ...props.child },
-                refer: { ...props.refer },
-            };
+    constructor(props?: PsychicConjurerBattlecryModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: {
+                name: 'Psychic Conjurer\'s Battlecry',
+                desc: 'Copy a card in your opponent\'s deck and add it to your hand.',
+                ...props.state,
+            },
+            child: { ...props.child },
+            refer: { ...props.refer },
         });
     }
 

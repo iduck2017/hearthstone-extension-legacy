@@ -1,33 +1,30 @@
-import { Loader } from "set-piece";
 import { ClassType, CostModel, LibraryUtil, SpellCardModel, RarityType, SchoolType, SpellFeatsModel } from "hearthstone-core";
 import { PowerInfusionEffectModel } from "./effect";
 
 @LibraryUtil.is('power-infusion')
 export class PowerInfusionModel extends SpellCardModel {
-    constructor(loader?: Loader<PowerInfusionModel>) {
-        super(() => {
-            const props = loader?.() ?? {};
-            return {
-                uuid: props.uuid,
-                state: {
-                    name: 'Power Infusion',
-                    desc: 'Give a minion +2/+6.',
-                    isCollectible: true,
-                    flavorDesc: 'It infuses, it enthuses, it amuses!',
-                    rarity: RarityType.COMMON,
-                    class: ClassType.PRIEST,
-                    schools: [SchoolType.HOLY],
-                    ...props.state
-                },
-                child: {
-                    cost: new CostModel(() => ({ state: { origin: 4 }})),
-                    feats: props.child?.feats ?? new SpellFeatsModel(() => ({
-                        child: { effects: [new PowerInfusionEffectModel()] }
-                    })),
-                    ...props.child
-                },
-                refer: { ...props.refer }
-            }
+    constructor(props?: PowerInfusionModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: {
+                name: 'Power Infusion',
+                desc: 'Give a minion +2/+6.',
+                isCollectible: true,
+                flavorDesc: 'It infuses, it enthuses, it amuses!',
+                rarity: RarityType.COMMON,
+                class: ClassType.PRIEST,
+                schools: [SchoolType.HOLY],
+                ...props.state
+            },
+            child: {
+                cost: new CostModel({ state: { origin: 4 }}),
+                feats: props.child?.feats ?? new SpellFeatsModel({
+                    child: { effects: [new PowerInfusionEffectModel()] }
+                }),
+                ...props.child
+            },
+            refer: { ...props.refer }
         });
     }
 }

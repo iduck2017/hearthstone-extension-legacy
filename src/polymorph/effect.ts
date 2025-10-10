@@ -1,24 +1,22 @@
 import { EffectModel, SelectEvent, RoleModel, MinionCardModel, SpellEffectModel } from "hearthstone-core";
-import { Loader, TemplUtil } from "set-piece";
+import { TemplUtil } from "set-piece";
 import { SheepModel } from "./minion";
 
 @TemplUtil.is('polymorph-effect')
 export class PolymorphEffectModel extends SpellEffectModel<[RoleModel]> {
-    constructor(loader?: Loader<PolymorphEffectModel>) {
-        super(() => {
-            const props = loader?.() ?? {}
-            return {
-                uuid: props.uuid,
-                state: { 
-                    name: "Polymorph's effect",
-                    desc: "Transform a minion into a 1/1 Sheep.",
-                    damage: [],
-                    ...props.state 
-                },
-                child: { ...props.child },
-                refer: { ...props.refer },
-            }
-        })
+    constructor(props?: PolymorphEffectModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: { 
+                name: "Polymorph's effect",
+                desc: "Transform a minion into a 1/1 Sheep.",
+                damage: [],
+                ...props.state 
+            },
+            child: { ...props.child },
+            refer: { ...props.refer },
+        });
     }
 
     toRun(): [SelectEvent<RoleModel>] | undefined {

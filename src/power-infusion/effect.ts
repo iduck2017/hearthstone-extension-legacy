@@ -1,23 +1,21 @@
 import { EffectModel, SelectEvent, RoleModel, SpellEffectModel } from "hearthstone-core";
-import { Loader, TemplUtil } from "set-piece";
+import { TemplUtil } from "set-piece";
 import { PowerInfusionBuffModel } from "./buff";
 
 @TemplUtil.is('power-infusion-effect')
 export class PowerInfusionEffectModel extends SpellEffectModel<[RoleModel]> {
-    constructor(loader?: Loader<PowerInfusionEffectModel>) {
-        super(() => {
-            const props = loader?.() ?? {};
-            return {
-                uuid: props.uuid,
-                state: {
-                    name: "Power Infusion's effect",
-                    desc: "Give a minion +2/+6.",
-                    damage: [],
-                    ...props.state
-                },
-                child: { ...props.child },
-                refer: { ...props.refer },
-            };
+    constructor(props?: PowerInfusionEffectModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: {
+                name: "Power Infusion's effect",
+                desc: "Give a minion +2/+6.",
+                damage: [],
+                ...props.state
+            },
+            child: { ...props.child },
+            refer: { ...props.refer },
         });
     }
 
