@@ -1,7 +1,7 @@
 import { EffectModel, SelectEvent, RoleModel, SpellEffectModel, DamageModel, DamageEvent, DamageType } from "hearthstone-core";
-import { Loader, StoreUtil } from "set-piece";
+import { Loader, TemplUtil } from "set-piece";
 
-@StoreUtil.is('holy-smite-effect')
+@TemplUtil.is('holy-smite-effect')
 export class HolySmiteEffectModel extends SpellEffectModel<[RoleModel]> {
     constructor(loader?: Loader<HolySmiteEffectModel>) {
         super(() => {

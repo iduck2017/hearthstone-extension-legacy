@@ -1,8 +1,8 @@
 import { EndTurnHookModel } from "hearthstone-core";
-import { Loader, StoreUtil } from "set-piece";
+import { Loader, TemplUtil } from "set-piece";
 import { GnollModel } from "../gnoll";
 
-@StoreUtil.is('hogger-end-turn')
+@TemplUtil.is('hogger-end-turn')
 export class HoggerEndTurnModel extends EndTurnHookModel {
     constructor(loader?: Loader<HoggerEndTurnModel>) {
         super(() => {

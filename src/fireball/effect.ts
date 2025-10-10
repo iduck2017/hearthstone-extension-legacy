@@ -1,5 +1,5 @@
 import { EffectModel, SelectEvent, RoleModel, DamageModel, DamageEvent, DamageType, RoleRoute, ROLE_ROUTE, CardRoute, CARD_ROUTE, SpellEffectModel } from "hearthstone-core";
-import { DebugUtil, Loader, LogLevel, Model, StoreUtil } from "set-piece";
+import { DebugUtil, Loader, LogLevel, Model, TemplUtil } from "set-piece";
 
 export namespace FireballEffectProps {
     export type E = {}
@@ -8,7 +8,7 @@ export namespace FireballEffectProps {
     export type R = {}
 }
 
-@StoreUtil.is('fireball-effect')
+@TemplUtil.is('fireball-effect')
 export class FireballEffectModel extends SpellEffectModel<[RoleModel],
     FireballEffectProps.E,
     FireballEffectProps.S,

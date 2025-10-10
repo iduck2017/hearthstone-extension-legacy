@@ -1,7 +1,7 @@
 import { EffectModel, SpellEffectModel, DamageModel, DamageEvent } from "hearthstone-core";
-import { Loader, StoreUtil } from "set-piece";
+import { Loader, TemplUtil } from "set-piece";
 
-@StoreUtil.is('mind-blast-effect')
+@TemplUtil.is('mind-blast-effect')
 export class MindBlastEffectModel extends SpellEffectModel<[]> {
     constructor(loader?: Loader<MindBlastEffectModel>) {
         super(() => {

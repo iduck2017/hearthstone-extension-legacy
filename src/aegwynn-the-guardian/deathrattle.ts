@@ -1,23 +1,21 @@
 import { DeathrattleModel, MinionCardModel, SpellBuffModel, RoleFeatsModel } from "hearthstone-core";
-import { StoreUtil, Loader } from "set-piece";
+import { TemplUtil } from "set-piece";
 import { AegwynnTheGuardianContextModel } from "./context";
 
-@StoreUtil.is('aegwynn-the-guardian-deathrattle')
+@TemplUtil.is('aegwynn-the-guardian-deathrattle')
 export class AegwynnTheGuardianDeathrattleModel extends DeathrattleModel {
-    constructor(loader?: Loader<AegwynnTheGuardianDeathrattleModel>) {
-        super(() => {
-            const props = loader?.() ?? {};
-            return {
-                uuid: props.uuid,
-                state: {
-                    name: 'Aegwynn\'s Deathrattle',
-                    desc: 'The next minion you draw inherits these powers.',
-                    ...props.state,
-                },
-                child: { ...props.child },
-                refer: { ...props.refer },
-                route: {},
-            }
+    constructor(props?: AegwynnTheGuardianDeathrattleModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: {
+                name: 'Aegwynn\'s Deathrattle',
+                desc: 'The next minion you draw inherits these powers.',
+                ...props.state,
+            },
+            child: { ...props.child },
+            refer: { ...props.refer },
+            route: {},
         });
     }
 

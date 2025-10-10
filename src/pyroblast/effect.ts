@@ -1,7 +1,7 @@
 import { EffectModel, SelectEvent, RoleModel, DamageModel, DamageEvent, DamageType, SpellEffectModel } from "hearthstone-core";
-import { Loader, StoreUtil } from "set-piece";
+import { Loader, TemplUtil } from "set-piece";
 
-@StoreUtil.is('pyroblast-effect')
+@TemplUtil.is('pyroblast-effect')
 export class PyroblastEffectModel extends SpellEffectModel<[RoleModel]> {
     constructor(loader?: Loader<PyroblastEffectModel>) {
         super(() => {

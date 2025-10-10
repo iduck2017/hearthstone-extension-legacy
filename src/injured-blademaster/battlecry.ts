@@ -1,7 +1,7 @@
 import { MinionBattlecryModel, DamageModel, DamageEvent, DamageType } from "hearthstone-core";
-import { Loader, StoreUtil } from "set-piece";
+import { Loader, TemplUtil } from "set-piece";
 
-@StoreUtil.is('injured-blademaster-battlecry')
+@TemplUtil.is('injured-blademaster-battlecry')
 export class InjuredBlademasterBattlecryModel extends MinionBattlecryModel<[]> {
     constructor(loader?: Loader<InjuredBlademasterBattlecryModel>) {
         super(() => {

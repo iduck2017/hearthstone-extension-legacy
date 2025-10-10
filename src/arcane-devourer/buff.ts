@@ -1,22 +1,20 @@
 import { IRoleBuffModel } from "hearthstone-core";
-import { Loader, StoreUtil } from "set-piece";
+import { TemplUtil } from "set-piece";
 
-@StoreUtil.is('arcane-devourer-buff')
+@TemplUtil.is('arcane-devourer-buff')
 export class ArcaneDevourerBuffModel extends IRoleBuffModel {
-    constructor(loader?: Loader<ArcaneDevourerBuffModel>) {
-        super(() => {
-            const props = loader?.() ?? {};
-            return {
-                uuid: props.uuid,
-                state: {
-                    name: 'Arcane Devourer\'s Buff',
-                    desc: '+2/+2.',
-                    offset: [2, 2],
-                    ...props.state,
-                },
-                child: { ...props.child },
-                refer: { ...props.refer },
-            }
+    constructor(props?: ArcaneDevourerBuffModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: {
+                name: 'Arcane Devourer\'s Buff',
+                desc: '+2/+2.',
+                offset: [2, 2],
+                ...props.state,
+            },
+            child: { ...props.child },
+            refer: { ...props.refer },
         });
     }
 }

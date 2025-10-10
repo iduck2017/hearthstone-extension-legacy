@@ -1,5 +1,5 @@
 import { CARD_ROUTE, CardRoute, DamageEvent, DamageModel, DamageType, EffectModel, SelectEvent, SpellEffectModel } from "hearthstone-core";
-import { Loader, Model, StoreUtil } from "set-piece";
+import { Model, TemplUtil } from "set-piece";
 
 export namespace ArcaneMissilesEffectProps {
     export type E = {}
@@ -8,28 +8,26 @@ export namespace ArcaneMissilesEffectProps {
     export type R = {}
 }
 
-@StoreUtil.is('arcane-missiles-effect')
+@TemplUtil.is('arcane-missiles-effect')
 export class ArcaneMissilesEffectModel extends SpellEffectModel<[],
     ArcaneMissilesEffectProps.E,
     ArcaneMissilesEffectProps.S,
     ArcaneMissilesEffectProps.C,
     ArcaneMissilesEffectProps.R
 > {
-    constructor(loader?: Loader<ArcaneMissilesEffectModel>) {
-        super(() => {
-            const props = loader?.() ?? {}
-            return {
-                uuid: props.uuid,
-                state: { 
-                    name: "Arcane Missiles's effect",
-                    desc: "Deal {{state.damage[0]}} damage randomly split among all enemies.",
-                    damage: [3],
-                    ...props.state 
-                },
-                child: { ...props.child },
-                refer: { ...props.refer },
-            }
-        })
+    constructor(props?: ArcaneMissilesEffectModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: { 
+                name: "Arcane Missiles's effect",
+                desc: "Deal {{state.damage[0]}} damage randomly split among all enemies.",
+                damage: [3],
+                ...props.state 
+            },
+            child: { ...props.child },
+            refer: { ...props.refer },
+        });
     }
 
     toRun(): [] { return [] }

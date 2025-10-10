@@ -1,7 +1,7 @@
 import { IRoleBuffModel } from "hearthstone-core";
-import { Loader, StoreUtil } from "set-piece";
+import { Loader, TemplUtil } from "set-piece";
 
-@StoreUtil.is('twilight-drake-buff')
+@TemplUtil.is('twilight-drake-buff')
 export class TwilightDrakeBuffModel extends IRoleBuffModel {
     constructor(loader?: Loader<TwilightDrakeBuffModel>) {
         super(() => {

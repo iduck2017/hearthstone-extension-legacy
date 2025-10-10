@@ -1,7 +1,7 @@
 import { EndTurnHookModel, RestoreModel, RestoreEvent } from "hearthstone-core";
-import { Loader, StoreUtil } from "set-piece";
+import { Loader, TemplUtil } from "set-piece";
 
-@StoreUtil.is('lightwell-end-turn')
+@TemplUtil.is('lightwell-end-turn')
 export class LightwellEndTurnModel extends EndTurnHookModel {
     constructor(loader?: Loader<LightwellEndTurnModel>) {
         super(() => {

@@ -1,8 +1,8 @@
 import { MinionBattlecryModel, RoleModel, IRoleBuffModel } from "hearthstone-core";
-import { Loader, StoreUtil } from "set-piece";
+import { Loader, TemplUtil } from "set-piece";
 import { TwilightDrakeBuffModel } from "./buff";
 
-@StoreUtil.is('twilight-drake-battlecry')
+@TemplUtil.is('twilight-drake-battlecry')
 export class TwilightDrakeBattlecryModel extends MinionBattlecryModel<[]> {
     constructor(loader?: Loader<TwilightDrakeBattlecryModel>) {
         super(() => {

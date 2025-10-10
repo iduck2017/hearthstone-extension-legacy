@@ -1,7 +1,7 @@
 import { EffectModel, SelectEvent, RoleModel, DamageModel, DamageEvent, RestoreModel, RestoreEvent, DamageType, SpellEffectModel } from "hearthstone-core";
-import { Loader, StoreUtil } from "set-piece";
+import { Loader, TemplUtil } from "set-piece";
 
-@StoreUtil.is('holy-fire-effect')
+@TemplUtil.is('holy-fire-effect')
 export class HolyFireEffectModel extends SpellEffectModel<[RoleModel]> {
     constructor(loader?: Loader<HolyFireEffectModel>) {
         super(() => {

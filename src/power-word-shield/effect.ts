@@ -1,8 +1,8 @@
 import { EffectModel, SelectEvent, RoleModel, SpellEffectModel } from "hearthstone-core";
-import { Loader, StoreUtil } from "set-piece";
+import { Loader, TemplUtil } from "set-piece";
 import { PowerWordShieldBuffModel } from "./buff";
 
-@StoreUtil.is('power-word-shield-effect')
+@TemplUtil.is('power-word-shield-effect')
 export class PowerWordShieldEffectModel extends SpellEffectModel<[RoleModel]> {
     constructor(loader?: Loader<PowerWordShieldEffectModel>) {
         super(() => {

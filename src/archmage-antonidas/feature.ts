@@ -1,5 +1,5 @@
 import { FeatureModel, MINION_ROUTE, MinionRoute, RoleRoute, SpellCardModel } from "hearthstone-core";
-import { Event, EventUtil, Loader, StoreUtil } from "set-piece";
+import { Event, EventUtil, TemplUtil } from "set-piece";
 import { FireballModel } from "../fireball";
 
 export namespace ArchmageAntonidasFeatureProps {
@@ -10,7 +10,7 @@ export namespace ArchmageAntonidasFeatureProps {
     export type P = MinionRoute
 }
 
-@StoreUtil.is('archmage-antonidas-feature')
+@TemplUtil.is('archmage-antonidas-feature')
 export class ArchmageAntonidasFeatureModel extends FeatureModel<
     ArchmageAntonidasFeatureProps.E,
     ArchmageAntonidasFeatureProps.S,
@@ -18,21 +18,19 @@ export class ArchmageAntonidasFeatureModel extends FeatureModel<
     ArchmageAntonidasFeatureProps.R,
     ArchmageAntonidasFeatureProps.P
 > {
-    constructor(loader?: Loader<ArchmageAntonidasFeatureModel>) {
-        super(() => {
-            const props = loader?.() ?? {};
-            return {
-                uuid: props.uuid,
-                state: {
-                    name: "Archmage Antonidas's feature",
-                    desc: "Whenever you cast a spell, add a 'Fireball' spell to your hand.",
-                    isActive: true,
-                    ...props.state,
-                },
-                child: { ...props.child },
-                refer: { ...props.refer },
-                route: MINION_ROUTE,
-            }
+    constructor(props?: ArchmageAntonidasFeatureModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: {
+                name: "Archmage Antonidas's feature",
+                desc: "Whenever you cast a spell, add a 'Fireball' spell to your hand.",
+                isActive: true,
+                ...props.state,
+            },
+            child: { ...props.child },
+            refer: { ...props.refer },
+            route: MINION_ROUTE,
         });
     }
 

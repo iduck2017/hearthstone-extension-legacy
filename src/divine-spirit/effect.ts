@@ -1,8 +1,8 @@
 import { EffectModel, SpellEffectModel, SelectEvent, RoleModel } from "hearthstone-core";
-import { Loader, StoreUtil } from "set-piece";
+import { Loader, TemplUtil } from "set-piece";
 import { DivineSpiritBuffModel } from "./buff";
 
-@StoreUtil.is('divine-spirit-effect')
+@TemplUtil.is('divine-spirit-effect')
 export class DivineSpiritEffectModel extends SpellEffectModel<[RoleModel]> {
     constructor(loader?: Loader<DivineSpiritEffectModel>) {
         super(() => {

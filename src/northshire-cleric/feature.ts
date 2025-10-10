@@ -1,7 +1,7 @@
 import { FeatureModel, RestoreEvent, RoleHealthModel, RoleModel } from "hearthstone-core";
-import { Event, EventUtil, Loader, StoreUtil } from "set-piece";
+import { Event, EventUtil, Loader, TemplUtil } from "set-piece";
 
-@StoreUtil.is('northshire-cleric-feature')
+@TemplUtil.is('northshire-cleric-feature')
 export class NorthshireClericFeatureModel extends FeatureModel {
     constructor(loader?: Loader<NorthshireClericFeatureModel>) {
         super(() => {

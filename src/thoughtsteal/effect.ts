@@ -1,7 +1,7 @@
 import { CardModel, SpellEffectModel } from "hearthstone-core";
-import { Loader, StoreUtil, TranxUtil } from "set-piece";
+import { Loader, TemplUtil, TranxUtil } from "set-piece";
 
-@StoreUtil.is('thoughtsteal-effect')
+@TemplUtil.is('thoughtsteal-effect')
 export class ThoughtstealEffectModel extends SpellEffectModel<[]> {
     constructor(loader?: Loader<ThoughtstealEffectModel>) {
         super(() => {

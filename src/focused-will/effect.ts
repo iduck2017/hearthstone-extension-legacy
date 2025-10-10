@@ -1,8 +1,8 @@
 import { EffectModel, SelectEvent, RoleModel, SpellEffectModel } from "hearthstone-core";
-import { Loader, StoreUtil } from "set-piece";
+import { Loader, TemplUtil } from "set-piece";
 import { FocusedWillBuffModel } from "./buff";
 
-@StoreUtil.is('focused-will-effect')
+@TemplUtil.is('focused-will-effect')
 export class FocusedWillEffectModel extends SpellEffectModel<[RoleModel]> {
     constructor(loader?: Loader<FocusedWillEffectModel>) {
         super(() => {

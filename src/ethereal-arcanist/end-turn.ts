@@ -1,5 +1,5 @@
 import { EndTurnHookModel, ROLE_ROUTE, RoleRoute } from "hearthstone-core";
-import { DebugUtil, Loader, StoreUtil } from "set-piece";
+import { DebugUtil, Loader, TemplUtil } from "set-piece";
 import { EtherealArcanistBuffModel } from "./buff";
 
 export namespace EtherealArcanistFeatureProps {
@@ -10,7 +10,7 @@ export namespace EtherealArcanistFeatureProps {
     export type P = RoleRoute
 }
 
-@StoreUtil.is('ethereal-arcanist-end-turn')
+@TemplUtil.is('ethereal-arcanist-end-turn')
 export class EtherealArcanistFeatureModel extends EndTurnHookModel<
     EtherealArcanistFeatureProps.E,
     EtherealArcanistFeatureProps.S,

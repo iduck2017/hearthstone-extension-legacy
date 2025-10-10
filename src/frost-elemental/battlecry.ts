@@ -1,7 +1,7 @@
 import { MinionBattlecryModel, SelectEvent, RoleModel } from "hearthstone-core";
-import { Loader, StoreUtil } from "set-piece";
+import { Loader, TemplUtil } from "set-piece";
 
-@StoreUtil.is('frost-elemental-battlecry')
+@TemplUtil.is('frost-elemental-battlecry')
 export class FrostElementalBattlecryModel extends MinionBattlecryModel<[RoleModel]> {
     constructor(loader?: Loader<FrostElementalBattlecryModel>) {
         super(() => {

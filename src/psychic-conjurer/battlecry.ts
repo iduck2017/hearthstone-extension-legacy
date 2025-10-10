@@ -1,7 +1,7 @@
 import { CardModel, MinionBattlecryModel } from "hearthstone-core";
-import { Loader, StoreUtil, TranxUtil } from "set-piece";
+import { Loader, TemplUtil, TranxUtil } from "set-piece";
 
-@StoreUtil.is('psychic-conjurer-battlecry')
+@TemplUtil.is('psychic-conjurer-battlecry')
 export class PsychicConjurerBattlecryModel extends MinionBattlecryModel<[]> {
     constructor(loader?: Loader<PsychicConjurerBattlecryModel>) {
         super(() => {

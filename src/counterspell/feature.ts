@@ -1,7 +1,7 @@
 import { EffectModel, SelectEvent, RoleModel, DamageModel, DamageEvent, DamageType, CardModel, SpellPerformModel, SecretFeatureModel } from "hearthstone-core";
-import { DebugUtil, Event, EventUtil, Loader, LogLevel, Model, StoreUtil } from "set-piece";
+import { DebugUtil, Event, EventUtil, Loader, LogLevel, Model, TemplUtil } from "set-piece";
 
-@StoreUtil.is('counterspell-effect')
+@TemplUtil.is('counterspell-effect')
 export class CounterspellFeatureModel extends SecretFeatureModel {
     constructor(loader?: Loader<CounterspellFeatureModel>) {
         super(() => {

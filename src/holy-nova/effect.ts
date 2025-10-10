@@ -1,7 +1,7 @@
 import { EffectModel, SpellEffectModel, DamageModel, DamageEvent, RestoreModel, RestoreEvent, DamageType } from "hearthstone-core";
-import { Loader, StoreUtil } from "set-piece";
+import { Loader, TemplUtil } from "set-piece";
 
-@StoreUtil.is('holy-nova-effect')
+@TemplUtil.is('holy-nova-effect')
 export class HolyNovaEffectModel extends SpellEffectModel<[]> {
     constructor(loader?: Loader<HolyNovaEffectModel>) {
         super(() => {

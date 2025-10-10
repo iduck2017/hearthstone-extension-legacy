@@ -1,7 +1,7 @@
 import { EffectModel, RestoreEvent, RestoreModel, SpellEffectModel } from "hearthstone-core";
-import { Loader, StoreUtil } from "set-piece";
+import { Loader, TemplUtil } from "set-piece";
 
-@StoreUtil.is('circle-of-healing-effect')
+@TemplUtil.is('circle-of-healing-effect')
 export class CircleOfHealingEffectModel extends SpellEffectModel<[]> {
     constructor(loader?: Loader<CircleOfHealingEffectModel>) {
         super(() => {

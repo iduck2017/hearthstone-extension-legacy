@@ -1,22 +1,20 @@
 import { MinionCardModel, MinionBattlecryModel, RoleModel, SelectEvent } from "hearthstone-core";
 import { AbusiveSergeantBuffModel } from "./buff";
-import { DebugUtil, LogLevel, StoreUtil, Loader } from "set-piece";
+import { DebugUtil, LogLevel, TemplUtil } from "set-piece";
 
-@StoreUtil.is('abusive-sergeant-battlecry')
+@TemplUtil.is('abusive-sergeant-battlecry')
 export class AbusiveSergeantBattlecryModel extends MinionBattlecryModel<[RoleModel]> {
-    constructor(loader?: Loader<AbusiveSergeantBattlecryModel>) {
-        super(() => {
-            const props = loader?.() ?? {};
-            return {
-                uuid: props.uuid,
-                state: {
-                    name: 'Abusive Sergeant\'s Battlecry',
-                    desc: '+2 Attack this turn.',
-                    ...props.state,
-                },
-                child: { ...props.child },
-                refer: { ...props.refer },
-            }
+    constructor(props?: AbusiveSergeantBattlecryModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: {
+                name: 'Abusive Sergeant\'s Battlecry',
+                desc: '+2 Attack this turn.',
+                ...props.state,
+            },
+            child: { ...props.child },
+            refer: { ...props.refer },
         });
     }
 

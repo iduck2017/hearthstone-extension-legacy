@@ -13,42 +13,39 @@
 
 import { RoleAttackModel, ClassType, FeatureModel, MinionCardModel, RaceType, RarityType, RoleModel, LibraryUtil, CostModel, RoleHealthModel, RoleFeatsModel } from "hearthstone-core";
 import { AngryChickenFeatureModel } from "./feature";
-import { Loader } from "set-piece";
 
 @LibraryUtil.is('angry-chicken')
 export class AngryChickenModel extends MinionCardModel {
-    constructor(loader?: Loader<AngryChickenModel>) {
-        super(() => {
-            const props = loader?.() ?? {};
-            return {
-                uuid: props.uuid,
-                state: {
-                    name: 'Angry Chicken',
-                    desc: '+5 Attack while damaged.',
-                    isCollectible: true,
-                    flavorDesc: 'There is no beast more frightening (or ridiculous) than a fully enraged chicken.',
-                    rarity: RarityType.RARE,
-                    class: ClassType.NEUTRAL,
-                    races: [RaceType.BEAST],
-                    ...props.state,
-                },
-                child: {
-                    cost: new CostModel(() => ({ state: { origin: 1 }})),
-                    role: new RoleModel(() => ({
-                        child: {
-                            attack: new RoleAttackModel(() => ({ state: { origin: 1 }})),
-                            health: new RoleHealthModel(() => ({ state: { origin: 1 }})), 
-                            feats: new RoleFeatsModel(() => ({
-                                child: {
-                                    items: [new AngryChickenFeatureModel()]
-                                }
-                            }))
-                        }
-                    })),
-                    ...props.child,
-                },
-                refer: { ...props.refer },
-            }
+    constructor(props?: AngryChickenModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: {
+                name: 'Angry Chicken',
+                desc: '+5 Attack while damaged.',
+                isCollectible: true,
+                flavorDesc: 'There is no beast more frightening (or ridiculous) than a fully enraged chicken.',
+                rarity: RarityType.RARE,
+                class: ClassType.NEUTRAL,
+                races: [RaceType.BEAST],
+                ...props.state,
+            },
+            child: {
+                cost: new CostModel({ state: { origin: 1 }}),
+                role: new RoleModel({
+                    child: {
+                        attack: new RoleAttackModel({ state: { origin: 1 }}),
+                        health: new RoleHealthModel({ state: { origin: 1 }}), 
+                        feats: new RoleFeatsModel({
+                            child: {
+                                items: [new AngryChickenFeatureModel()]
+                            }
+                        })
+                    }
+                }),
+                ...props.child,
+            },
+            refer: { ...props.refer },
         });
     }
 }

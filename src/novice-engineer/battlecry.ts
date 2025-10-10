@@ -1,7 +1,7 @@
 import { MinionBattlecryModel } from "hearthstone-core";
-import { Loader, StoreUtil } from "set-piece";
+import { Loader, TemplUtil } from "set-piece";
 
-@StoreUtil.is('novice-engineer-battlecry')
+@TemplUtil.is('novice-engineer-battlecry')
 export class NoviceEngineerBattlecryModel extends MinionBattlecryModel<[]> {
     constructor(loader?: Loader<NoviceEngineerBattlecryModel>) {
         super(() => {

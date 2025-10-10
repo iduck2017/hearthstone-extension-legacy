@@ -1,5 +1,5 @@
 import { DeathrattleModel, ROLE_ROUTE, RoleModel, RoleRoute } from "hearthstone-core";
-import { StoreUtil, Loader } from "set-piece";
+import { TemplUtil, Loader } from "set-piece";
 
 export namespace BloodmageThalnosDeathrattleProps {
     export type E = {}
@@ -9,7 +9,7 @@ export namespace BloodmageThalnosDeathrattleProps {
     export type P = RoleRoute
 }
 
-@StoreUtil.is('bloodmage-thalnos-deathrattle')
+@TemplUtil.is('bloodmage-thalnos-deathrattle')
 export class BloodmageThalnosDeathrattleModel extends DeathrattleModel<
     BloodmageThalnosDeathrattleProps.E,
     BloodmageThalnosDeathrattleProps.S,

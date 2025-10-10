@@ -1,5 +1,5 @@
 import { RoleAttackModel, RoleAttackProps, FeatureModel, RoleModel, RoleRoute, RoleHealthModel, RoleAttackDecor, ROLE_ROUTE, OperationType } from "hearthstone-core";
-import { Event, EventUtil, StateUtil, StoreUtil, TranxUtil, Loader, Decor, Frame } from "set-piece";
+import { Event, EventUtil, StateUtil, TemplUtil, TranxUtil, Decor, Frame } from "set-piece";
 import { DeepReadonly } from "utility-types";
 
 export namespace AngryChickenFeatureProps {
@@ -12,7 +12,7 @@ export namespace AngryChickenFeatureProps {
     export type P = RoleRoute
 }
 
-@StoreUtil.is('angry-chicken-feature')
+@TemplUtil.is('angry-chicken-feature')
 export class AngryChickenFeatureModel extends FeatureModel<
     AngryChickenFeatureProps.E,
     AngryChickenFeatureProps.S,
@@ -20,22 +20,20 @@ export class AngryChickenFeatureModel extends FeatureModel<
     AngryChickenFeatureProps.R,
     AngryChickenFeatureProps.P
 > {
-    constructor(loader?: Loader<AngryChickenFeatureModel>) {
-        super(() => {
-            const props = loader?.() ?? {};
-            return {
-                uuid: props.uuid,
-                state: {
-                    name: 'Angry Chicken\'s Buff',
-                    desc: 'Has +5 Attack while damaged.',
-                    offset: 5,
-                    isActive: true,
-                    ...props.state,
-                },
-                child: { ...props.child },
-                refer: { ...props.refer },
-                route: ROLE_ROUTE,
-            }
+    constructor(props?: AngryChickenFeatureModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: {
+                name: 'Angry Chicken\'s Buff',
+                desc: 'Has +5 Attack while damaged.',
+                offset: 5,
+                isActive: true,
+                ...props.state,
+            },
+            child: { ...props.child },
+            refer: { ...props.refer },
+            route: ROLE_ROUTE,
         });
     }
  // Listen to health state changes to trigger enrage effect

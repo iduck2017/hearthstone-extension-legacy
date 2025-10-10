@@ -1,8 +1,8 @@
 import { MinionBattlecryModel, DeployModel } from "hearthstone-core";
-import { Loader, StoreUtil } from "set-piece";
+import { Loader, TemplUtil } from "set-piece";
 import { MechanicalDragonlingModel } from "../mechanical-dragonling";
 
-@StoreUtil.is('dragonling-mechanic-battlecry')
+@TemplUtil.is('dragonling-mechanic-battlecry')
 export class DragonlingMechanicBattlecryModel extends MinionBattlecryModel<[]> {
     constructor(loader?: Loader<DragonlingMechanicBattlecryModel>) {
         super(() => {

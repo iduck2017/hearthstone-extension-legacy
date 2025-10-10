@@ -1,5 +1,5 @@
 import { RoleAttackModel, FeatureModel, MinionCardModel, RaceType, RoleModel, RoleAttackProps, RoleRoute, ROLE_ROUTE, OperationType, RoleAttackDecor } from "hearthstone-core";
-import { DebugUtil, LogLevel, StateUtil, StoreUtil, TranxUtil, Loader, Decor } from "set-piece";
+import { DebugUtil, LogLevel, StateUtil, TemplUtil, TranxUtil, Loader, Decor } from "set-piece";
 
 export namespace GrimscaleOracleFeatureModel {
     export type E = {}
@@ -11,7 +11,7 @@ export namespace GrimscaleOracleFeatureModel {
     export type P = RoleRoute
 }
 
-@StoreUtil.is('grimscale-oracle-feature')
+@TemplUtil.is('grimscale-oracle-feature')
 export class GrimscaleOracleFeatureModel extends FeatureModel<
     GrimscaleOracleFeatureModel.E,
     GrimscaleOracleFeatureModel.S,

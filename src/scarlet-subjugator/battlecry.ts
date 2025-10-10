@@ -1,8 +1,8 @@
 import { MinionBattlecryModel, SelectEvent, RoleModel } from "hearthstone-core";
-import { Loader, StoreUtil, TranxUtil } from "set-piece";
+import { Loader, TemplUtil, TranxUtil } from "set-piece";
 import { ScarletSubjugatorDebuffModel } from "./debuff";
 
-@StoreUtil.is('scarlet-subjugator-battlecry')
+@TemplUtil.is('scarlet-subjugator-battlecry')
 export class ScarletSubjugatorBattlecryModel extends MinionBattlecryModel<[RoleModel]> {
     constructor(loader?: Loader<ScarletSubjugatorBattlecryModel>) {
         super(() => {

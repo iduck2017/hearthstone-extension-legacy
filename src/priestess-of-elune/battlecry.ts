@@ -1,7 +1,7 @@
 import { MinionBattlecryModel, RestoreModel, RestoreEvent } from "hearthstone-core";
-import { Loader, StoreUtil } from "set-piece";
+import { Loader, TemplUtil } from "set-piece";
 
-@StoreUtil.is('priestess-of-elune-battlecry')
+@TemplUtil.is('priestess-of-elune-battlecry')
 export class PriestessOfEluneBattlecryModel extends MinionBattlecryModel<[]> {
     constructor(loader?: Loader<PriestessOfEluneBattlecryModel>) {
         super(() => {

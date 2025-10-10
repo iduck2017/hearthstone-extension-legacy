@@ -14,35 +14,32 @@
  */
 
 import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel, SpellFeatsModel } from "hearthstone-core";
-import { Loader } from "set-piece";
 import { ArcaneIntellectEffectModel } from "./effect";
 
 @LibraryUtil.is('arcane-intellect')
 export class ArcaneIntellectModel extends SpellCardModel {
-    constructor(loader?: Loader<ArcaneIntellectModel>) {
-        super(() => {
-            const props = loader?.() ?? {}
-            return {
-                uuid: props.uuid,
-                state: { 
-                    name: "Arcane Intellect",
-                    desc: "Draw 2 cards.",
-                    flavorDesc: "Playing this card makes you SMARTER. And let's face it: we could all stand to be a little smarter.",
-                    isCollectible: true,
-                    rarity: RarityType.COMMON,
-                    class: ClassType.MAGE,
-                    schools: [SchoolType.ARCANE],
-                    ...props.state
-                },
-                refer: { ...props.refer },
-                child: { 
-                    cost: props.child?.cost ?? new CostModel(() => ({ state: { origin: 3 }})),
-                    feats: props.child?.feats ?? new SpellFeatsModel(() => ({
-                        child: { effects: [new ArcaneIntellectEffectModel()] }
-                    })),
-                    ...props.child 
-                }
+    constructor(props?: ArcaneIntellectModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: { 
+                name: "Arcane Intellect",
+                desc: "Draw 2 cards.",
+                flavorDesc: "Playing this card makes you SMARTER. And let's face it: we could all stand to be a little smarter.",
+                isCollectible: true,
+                rarity: RarityType.COMMON,
+                class: ClassType.MAGE,
+                schools: [SchoolType.ARCANE],
+                ...props.state
+            },
+            refer: { ...props.refer },
+            child: { 
+                cost: props.child?.cost ?? new CostModel({ state: { origin: 3 }}),
+                feats: props.child?.feats ?? new SpellFeatsModel({
+                    child: { effects: [new ArcaneIntellectEffectModel()] }
+                }),
+                ...props.child 
             }
-        })
+        });
     }
 }

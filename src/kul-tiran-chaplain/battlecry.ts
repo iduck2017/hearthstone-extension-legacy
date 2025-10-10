@@ -1,8 +1,8 @@
 import { MinionBattlecryModel, SelectEvent, RoleModel } from "hearthstone-core";
-import { Loader, StoreUtil } from "set-piece";
+import { Loader, TemplUtil } from "set-piece";
 import { KulTiranChaplainBuffModel } from "./buff";
 
-@StoreUtil.is('kul-tiran-chaplain-battlecry')
+@TemplUtil.is('kul-tiran-chaplain-battlecry')
 export class KulTiranChaplainBattlecryModel extends MinionBattlecryModel<[RoleModel]> {
     constructor(loader?: Loader<KulTiranChaplainBattlecryModel>) {
         super(() => {

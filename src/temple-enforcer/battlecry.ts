@@ -1,8 +1,8 @@
 import { MinionBattlecryModel, SelectEvent, RoleModel } from "hearthstone-core";
-import { Loader, StoreUtil } from "set-piece";
+import { Loader, TemplUtil } from "set-piece";
 import { TempleEnforcerBuffModel } from "./buff";
 
-@StoreUtil.is('temple-enforcer-battlecry')
+@TemplUtil.is('temple-enforcer-battlecry')
 export class TempleEnforcerBattlecryModel extends MinionBattlecryModel<[RoleModel]> {
     constructor(loader?: Loader<TempleEnforcerBattlecryModel>) {
         super(() => {

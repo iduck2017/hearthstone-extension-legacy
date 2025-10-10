@@ -14,7 +14,7 @@
  */
 
 import { CARD_ROUTE, CardRoute, EffectModel, SpellEffectModel } from "hearthstone-core";
-import { Loader, StoreUtil } from "set-piece";
+import { Loader, TemplUtil } from "set-piece";
 import { MirrorImageMinionModel } from "./minion";
 
 export namespace MirrorImageEffectProps {
@@ -24,7 +24,7 @@ export namespace MirrorImageEffectProps {
     export type R = {}
 }
 
-@StoreUtil.is('mirror-image-effect')
+@TemplUtil.is('mirror-image-effect')
 export class MirrorImageEffectModel extends SpellEffectModel<[],
     MirrorImageEffectProps.E,
     MirrorImageEffectProps.S,

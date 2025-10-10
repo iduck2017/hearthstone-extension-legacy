@@ -1,5 +1,5 @@
 import { StartTurnHookModel, RoleModel, DamageModel, DamageEvent, MINION_ROUTE, MinionRoute } from "hearthstone-core";
-import { Loader, StoreUtil } from "set-piece";
+import { Loader, TemplUtil } from "set-piece";
 
 export namespace DemolisherFeatureProps {
     export type E = {}
@@ -9,7 +9,7 @@ export namespace DemolisherFeatureProps {
     export type P = MinionRoute
 }
 
-@StoreUtil.is('demolisher-feature')
+@TemplUtil.is('demolisher-feature')
 export class DemolisherFeatureModel extends StartTurnHookModel<
     DemolisherFeatureProps.E,
     DemolisherFeatureProps.S,

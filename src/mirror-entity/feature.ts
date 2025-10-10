@@ -1,7 +1,7 @@
 import { CardModel, MinionCardModel, SecretFeatureModel } from "hearthstone-core";
-import { Event, EventUtil, Loader, StoreUtil } from "set-piece";
+import { Event, EventUtil, Loader, TemplUtil } from "set-piece";
 
-@StoreUtil.is('mirror-entity-feature')
+@TemplUtil.is('mirror-entity-feature')
 export class MirrorEntityFeatureModel extends SecretFeatureModel {
     constructor(loader?: Loader<MirrorEntityFeatureModel>) {
         super(() => {
@@ -32,7 +32,7 @@ export class MirrorEntityFeatureModel extends SecretFeatureModel {
         if (playerB === playerA) return;
         
         // Create a copy of the minion
-        const copy = StoreUtil.copy(that);
+        const copy = TemplUtil.copy(that);
         if (!copy) return;
         const deploy = copy.child.deploy;
         const board = playerA.child.board;

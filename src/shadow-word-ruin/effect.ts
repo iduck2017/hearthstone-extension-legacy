@@ -1,7 +1,7 @@
 import { EffectModel, SpellEffectModel } from "hearthstone-core";
-import { Loader, StoreUtil } from "set-piece";
+import { Loader, TemplUtil } from "set-piece";
 
-@StoreUtil.is('shadow-word-ruin-effect')
+@TemplUtil.is('shadow-word-ruin-effect')
 export class ShadowWordRuinEffectModel extends SpellEffectModel<[]> {
     constructor(loader?: Loader<ShadowWordRuinEffectModel>) {
         super(() => {

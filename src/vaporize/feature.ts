@@ -1,7 +1,7 @@
 import { SecretFeatureModel, RoleModel, RoleAttackModel } from "hearthstone-core";
-import { Event, EventUtil, Loader, StoreUtil } from "set-piece";
+import { Event, EventUtil, Loader, TemplUtil } from "set-piece";
 
-@StoreUtil.is('vaporize-feature')
+@TemplUtil.is('vaporize-feature')
 export class VaporizeFeatureModel extends SecretFeatureModel {
     constructor(loader?: Loader<VaporizeFeatureModel>) {
         super(() => {

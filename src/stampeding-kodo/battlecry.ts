@@ -1,7 +1,7 @@
 import { MinionBattlecryModel, RoleModel } from "hearthstone-core";
-import { Loader, StoreUtil } from "set-piece";
+import { Loader, TemplUtil } from "set-piece";
 
-@StoreUtil.is('stampeding-kodo-battlecry')
+@TemplUtil.is('stampeding-kodo-battlecry')
 export class StampedingKodoBattlecryModel extends MinionBattlecryModel<[]> {
     constructor(loader?: Loader<StampedingKodoBattlecryModel>) {
         super(() => {

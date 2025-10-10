@@ -1,7 +1,7 @@
 import { MinionBattlecryModel } from "hearthstone-core";
-import { Loader, StoreUtil } from "set-piece";
+import { Loader, TemplUtil } from "set-piece";
 
-@StoreUtil.is('gnomish-inventor-battlecry')
+@TemplUtil.is('gnomish-inventor-battlecry')
 export class GnomishInventorBattlecryModel extends MinionBattlecryModel<[]> {
     constructor(loader?: Loader<GnomishInventorBattlecryModel>) {
         super(() => {

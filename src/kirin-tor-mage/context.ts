@@ -1,7 +1,7 @@
 import { CostDecor, CostModel, FeatureModel, ManaModel, SecretCardModel, TurnModel } from "hearthstone-core";
-import { Event, EventUtil, Loader, Model, StateUtil, StoreUtil } from "set-piece";
+import { Event, EventUtil, Loader, Model, StateUtil, TemplUtil } from "set-piece";
 
-@StoreUtil.is('kirin-tor-mage-feature')
+@TemplUtil.is('kirin-tor-mage-feature')
 export class KirinTorMageContextModel extends FeatureModel {
     constructor(loader?: Loader<KirinTorMageContextModel>) {
         super(() => {

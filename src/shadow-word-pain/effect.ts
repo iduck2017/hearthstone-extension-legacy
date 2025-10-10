@@ -1,7 +1,7 @@
 import { EffectModel, SpellEffectModel, SelectEvent, RoleModel } from "hearthstone-core";
-import { Loader, StoreUtil } from "set-piece";
+import { Loader, TemplUtil } from "set-piece";
 
-@StoreUtil.is('shadow-word-pain-effect')
+@TemplUtil.is('shadow-word-pain-effect')
 export class ShadowWordPainEffectModel extends SpellEffectModel<[RoleModel]> {
     constructor(loader?: Loader<ShadowWordPainEffectModel>) {
         super(() => {

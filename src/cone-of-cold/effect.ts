@@ -1,5 +1,5 @@
 import { EffectModel, SelectEvent, RoleModel, DamageModel, DamageEvent, DamageType, MinionCardModel, ROLE_ROUTE, CardRoute, CARD_ROUTE, SpellEffectModel } from "hearthstone-core";
-import { Loader, StoreUtil } from "set-piece";
+import { Loader, TemplUtil } from "set-piece";
 
 export namespace ConeOfColdEffectProps {
     export type E = {}
@@ -8,7 +8,7 @@ export namespace ConeOfColdEffectProps {
     export type R = {}
 }
 
-@StoreUtil.is('cone-of-cold-effect')
+@TemplUtil.is('cone-of-cold-effect')
 export class ConeOfColdEffectModel extends SpellEffectModel<[RoleModel],
     ConeOfColdEffectProps.E,
     ConeOfColdEffectProps.S,

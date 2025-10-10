@@ -1,5 +1,5 @@
 import { CARD_ROUTE, CardRoute, FeatureModel, MINION_ROUTE, MinionRoute, ROLE_ROUTE, RoleRoute, SpellCardModel, SpellPerformModel } from "hearthstone-core";
-import { Event, EventUtil, Loader, StoreUtil } from "set-piece";
+import { Event, EventUtil, Loader, TemplUtil } from "set-piece";
 import { ManaWyrmBuffModel } from "./buff";
 
 export namespace ManaWyrmFeatureProps {
@@ -10,7 +10,7 @@ export namespace ManaWyrmFeatureProps {
     export type P = MinionRoute
 }
 
-@StoreUtil.is('mana-wyrm-feature')
+@TemplUtil.is('mana-wyrm-feature')
 export class ManaWyrmFeatureModel extends FeatureModel<
     ManaWyrmFeatureProps.E,
     ManaWyrmFeatureProps.S,

@@ -1,7 +1,7 @@
 import { EffectModel, SpellEffectModel, RestoreModel, RestoreEvent } from "hearthstone-core";
-import { Loader, StoreUtil } from "set-piece";
+import { Loader, TemplUtil } from "set-piece";
 
-@StoreUtil.is('radiance-effect')
+@TemplUtil.is('radiance-effect')
 export class RadianceEffectModel extends SpellEffectModel<[]> {
     constructor(loader?: Loader<RadianceEffectModel>) {
         super(() => {

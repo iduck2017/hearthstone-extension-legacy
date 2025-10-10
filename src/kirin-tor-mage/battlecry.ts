@@ -1,8 +1,8 @@
 import { MinionBattlecryModel } from "hearthstone-core";
-import { Loader, StoreUtil } from "set-piece";
+import { Loader, TemplUtil } from "set-piece";
 import { KirinTorMageContextModel } from "./context";
 
-@StoreUtil.is('kirin-tor-mage-battlecry')
+@TemplUtil.is('kirin-tor-mage-battlecry')
 export class KirinTorMageBattlecryModel extends MinionBattlecryModel<[]> {
     constructor(loader?: Loader<KirinTorMageBattlecryModel>) {
         super(() => {

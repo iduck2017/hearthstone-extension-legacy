@@ -1,8 +1,8 @@
 import { EffectModel, SelectEvent, RoleModel, MinionCardModel, SpellEffectModel } from "hearthstone-core";
-import { Loader, StoreUtil } from "set-piece";
+import { Loader, TemplUtil } from "set-piece";
 import { SheepModel } from "./minion";
 
-@StoreUtil.is('polymorph-effect')
+@TemplUtil.is('polymorph-effect')
 export class PolymorphEffectModel extends SpellEffectModel<[RoleModel]> {
     constructor(loader?: Loader<PolymorphEffectModel>) {
         super(() => {

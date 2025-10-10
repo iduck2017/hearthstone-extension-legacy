@@ -1,7 +1,7 @@
 import { DeathrattleModel, ROLE_ROUTE } from "hearthstone-core";
-import { Loader, StoreUtil } from "set-piece";
+import { Loader, TemplUtil } from "set-piece";
 
-@StoreUtil.is('loot-hoarder-deathrattle')
+@TemplUtil.is('loot-hoarder-deathrattle')
 export class LootHoarderDeathrattleModel extends DeathrattleModel {
     constructor(loader?: Loader<LootHoarderDeathrattleModel>) {
         super(() => {

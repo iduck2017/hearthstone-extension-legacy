@@ -1,7 +1,7 @@
 import { IRoleBuffModel } from "hearthstone-core";
-import { Loader, StoreUtil } from "set-piece";
+import { Loader, TemplUtil } from "set-piece";
 
-@StoreUtil.is('divine-spirit-buff')
+@TemplUtil.is('divine-spirit-buff')
 export class DivineSpiritBuffModel extends IRoleBuffModel {
     constructor(loader?: Loader<DivineSpiritBuffModel>) {
         super(() => {

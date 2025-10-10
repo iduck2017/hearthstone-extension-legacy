@@ -1,8 +1,8 @@
 import { MinionBattlecryModel, DeployModel } from "hearthstone-core";
-import { Loader, StoreUtil } from "set-piece";
+import { Loader, TemplUtil } from "set-piece";
 import { BoarModel } from "../boar";
 
-@StoreUtil.is('razorfen-hunter-battlecry')
+@TemplUtil.is('razorfen-hunter-battlecry')
 export class RazorfenHunterBattlecryModel extends MinionBattlecryModel<[]> {
     constructor(loader?: Loader<RazorfenHunterBattlecryModel>) {
         super(() => {

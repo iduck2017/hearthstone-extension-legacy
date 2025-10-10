@@ -1,5 +1,5 @@
 import { EndTurnHookModel, FeatureModel, MINION_ROUTE, MinionRoute, IRoleBuffModel, TurnModel, RoleBuffModel } from "hearthstone-core";
-import { Event, EventUtil, Loader, StoreUtil } from "set-piece";
+import { Event, EventUtil, Loader, TemplUtil } from "set-piece";
 
 export namespace GruulFeatureProps {
     export type E = {}
@@ -9,7 +9,7 @@ export namespace GruulFeatureProps {
     export type P = MinionRoute
 }
 
-@StoreUtil.is('gruul-feature')
+@TemplUtil.is('gruul-feature')
 export class GruulFeatureModel extends EndTurnHookModel<
     GruulFeatureProps.E,
     GruulFeatureProps.S,

@@ -1,5 +1,5 @@
 import { EffectModel, SelectEvent, RoleModel, DamageModel, DamageEvent, DamageType, RoleRoute, ROLE_ROUTE, SpellEffectModel } from "hearthstone-core";
-import { Loader, StoreUtil } from "set-piece";
+import { Loader, TemplUtil } from "set-piece";
 
 export namespace IcicleEffectProps {
     export type E = {}
@@ -8,7 +8,7 @@ export namespace IcicleEffectProps {
     export type R = {}
 }
 
-@StoreUtil.is('icicle-effect')
+@TemplUtil.is('icicle-effect')
 export class IcicleEffectModel extends SpellEffectModel<[RoleModel],
     IcicleEffectProps.E,
     IcicleEffectProps.S,

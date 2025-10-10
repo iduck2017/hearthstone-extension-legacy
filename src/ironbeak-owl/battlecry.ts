@@ -1,7 +1,7 @@
 import { MinionBattlecryModel, SelectEvent, RoleModel } from "hearthstone-core";
-import { Loader, StoreUtil } from "set-piece";
+import { Loader, TemplUtil } from "set-piece";
 
-@StoreUtil.is('ironbeak-owl-battlecry')
+@TemplUtil.is('ironbeak-owl-battlecry')
 export class IronbeakOwlBattlecryModel extends MinionBattlecryModel<[RoleModel]> {
     constructor(loader?: Loader<IronbeakOwlBattlecryModel>) {
         super(() => {

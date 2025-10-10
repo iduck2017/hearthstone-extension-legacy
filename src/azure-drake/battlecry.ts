@@ -1,7 +1,7 @@
 import { MinionBattlecryModel } from "hearthstone-core";
-import { StoreUtil, Loader } from "set-piece";
+import { TemplUtil, Loader } from "set-piece";
 
-@StoreUtil.is('azure-drake-battlecry')
+@TemplUtil.is('azure-drake-battlecry')
 export class AzureDrakeBattlecryModel extends MinionBattlecryModel<[]> {
     constructor(loader?: Loader<AzureDrakeBattlecryModel>) {
         super(() => {

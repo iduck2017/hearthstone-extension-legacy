@@ -1,7 +1,7 @@
 import { IRoleBuffModel } from "hearthstone-core";
-import { Loader, StoreUtil } from "set-piece";
+import { Loader, TemplUtil } from "set-piece";
 
-@StoreUtil.is('power-infusion-buff')
+@TemplUtil.is('power-infusion-buff')
 export class PowerInfusionBuffModel extends IRoleBuffModel {
     constructor(loader?: Loader<PowerInfusionBuffModel>) {
         super(() => {

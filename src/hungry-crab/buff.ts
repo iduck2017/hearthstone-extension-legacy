@@ -1,7 +1,7 @@
 import { IRoleBuffModel } from "hearthstone-core";
-import { StoreUtil, Loader } from "set-piece";
+import { TemplUtil, Loader } from "set-piece";
 
-@StoreUtil.is('hungry-crab-buff')
+@TemplUtil.is('hungry-crab-buff')
 export class HungryCrabBuffModel extends IRoleBuffModel {
     constructor(loader?: Loader<HungryCrabBuffModel>) {
         super(() => {

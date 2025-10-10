@@ -1,7 +1,7 @@
 import { IRoleBuffModel } from "hearthstone-core";
-import { Loader, StoreUtil } from "set-piece";
+import { Loader, TemplUtil } from "set-piece";
 
-@StoreUtil.is('kul-tiran-chaplain-buff')
+@TemplUtil.is('kul-tiran-chaplain-buff')
 export class KulTiranChaplainBuffModel extends IRoleBuffModel {
     constructor(loader?: Loader<KulTiranChaplainBuffModel>) {
         super(() => {

@@ -1,7 +1,7 @@
 import { IRoleBuffModel, GameModel, RoleModel, TurnModel } from "hearthstone-core";
-import { DebugUtil, Event, EventUtil, Loader, LogLevel, StoreUtil, TranxUtil } from "set-piece";
+import { DebugUtil, Event, EventUtil, Loader, LogLevel, TemplUtil, TranxUtil } from "set-piece";
 
-@StoreUtil.is('mana-wyrm-buff')
+@TemplUtil.is('mana-wyrm-buff')
 export class ManaWyrmBuffModel extends IRoleBuffModel {
     constructor(loader?: Loader<ManaWyrmBuffModel>) {
         super(() => {

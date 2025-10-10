@@ -1,7 +1,7 @@
 import { MinionBattlecryModel, SelectEvent, RoleModel, RestoreModel, RestoreEvent } from "hearthstone-core";
-import { Loader, StoreUtil } from "set-piece";
+import { Loader, TemplUtil } from "set-piece";
 
-@StoreUtil.is('earthen-ring-farseer-battlecry')
+@TemplUtil.is('earthen-ring-farseer-battlecry')
 export class EarthenRingFarseerBattlecryModel extends MinionBattlecryModel<[RoleModel]> {
     constructor(loader?: Loader<EarthenRingFarseerBattlecryModel>) {
         super(() => {

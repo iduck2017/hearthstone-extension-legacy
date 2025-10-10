@@ -1,6 +1,6 @@
 import { FeatureModel, SpellCardModel, MINION_ROUTE, MinionRoute } from "hearthstone-core";
 import { ArcaneDevourerBuffModel } from "./buff";
-import { Event, EventUtil, Loader, StoreUtil } from "set-piece";
+import { Event, EventUtil, TemplUtil } from "set-piece";
 
 export namespace ArcaneDevourerFeatureProps {
     export type E = {}
@@ -10,30 +10,27 @@ export namespace ArcaneDevourerFeatureProps {
     export type P = MinionRoute
 }
 
-@StoreUtil.is('arcane-devourer-feature')
+@TemplUtil.is('arcane-devourer-feature')
 export class ArcaneDevourerFeatureModel extends FeatureModel<
     ArcaneDevourerFeatureProps.E,
     ArcaneDevourerFeatureProps.S,
     ArcaneDevourerFeatureProps.C,
-    ArcaneDevourerFeatureProps.R,
-    ArcaneDevourerFeatureProps.P
+    ArcaneDevourerFeatureProps.R
 > {
-    constructor(loader?: Loader<ArcaneDevourerFeatureModel>) {
-        super(() => {
-            const props = loader?.() ?? {}
-            return {
-                uuid: props.uuid,
-                state: { 
-                    name: "Arcane Devourer's feature",
-                    desc: "Whenever you cast a spell, gain +2/+2.",
-                    isActive: true,
-                    ...props.state 
-                },
-                child: { ...props.child },
-                refer: { ...props.refer },
-                route: MINION_ROUTE,
-            }
-        })
+    constructor(props?: ArcaneDevourerFeatureModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: { 
+                name: "Arcane Devourer's feature",
+                desc: "Whenever you cast a spell, gain +2/+2.",
+                isActive: true,
+                ...props.state 
+            },
+            child: { ...props.child },
+            refer: { ...props.refer },
+            route: MINION_ROUTE,
+        });
     }
 
     @EventUtil.on(self => self.route.player?.proxy.all(SpellCardModel).event.onPlay)

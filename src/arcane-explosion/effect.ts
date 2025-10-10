@@ -1,5 +1,5 @@
 import { DamageEvent, DamageModel, DamageType, EffectModel, ROLE_ROUTE, RoleRoute, SpellEffectModel } from "hearthstone-core";
-import { Loader, StoreUtil } from "set-piece";
+import { TemplUtil } from "set-piece";
 
 export namespace ArcaneExplosionEffectProps {
     export type E = {}
@@ -8,28 +8,26 @@ export namespace ArcaneExplosionEffectProps {
     export type R = {}
 }
 
-@StoreUtil.is('arcane-explosion-effect')
+@TemplUtil.is('arcane-explosion-effect')
 export class ArcaneExplosionEffectModel extends SpellEffectModel<[],
     ArcaneExplosionEffectProps.E,
     ArcaneExplosionEffectProps.S,
     ArcaneExplosionEffectProps.C,
     ArcaneExplosionEffectProps.R
 > {
-    constructor(loader?: Loader<ArcaneExplosionEffectModel>) {
-        super(() => {
-            const props = loader?.() ?? {}
-            return {
-                uuid: props.uuid,
-                state: { 
-                    name: "Arcane Explosion's effect",
-                    desc: "Deal {{state.damage[0]}} damage to all enemy minions.",
-                    damage: [1],
-                    ...props.state 
-                },
-                child: { ...props.child },
-                refer: { ...props.refer },
-            }
-        })
+    constructor(props?: ArcaneExplosionEffectModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: { 
+                name: "Arcane Explosion's effect",
+                desc: "Deal {{state.damage[0]}} damage to all enemy minions.",
+                damage: [1],
+                ...props.state 
+            },
+            child: { ...props.child },
+            refer: { ...props.refer },
+        });
     }
 
     toRun(): [] { return [] }

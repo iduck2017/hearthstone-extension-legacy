@@ -1,5 +1,5 @@
 import { FeatureModel, ROLE_ROUTE, RoleActionDecor, RoleActionModel, RoleRoute } from "hearthstone-core";
-import { StateUtil, StoreUtil, Loader } from "set-piece";
+import { StateUtil, TemplUtil, Loader } from "set-piece";
 
 export namespace RagnarosFeatureProps {
     export type E = {};
@@ -9,7 +9,7 @@ export namespace RagnarosFeatureProps {
     export type P = RoleRoute;
 }
 
-@StoreUtil.is('ragnaros-feature')
+@TemplUtil.is('ragnaros-feature')
 export class RagnarosFeatureModel extends FeatureModel<
     RagnarosFeatureProps.E,
     RagnarosFeatureProps.S,

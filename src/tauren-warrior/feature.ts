@@ -1,5 +1,5 @@
 import { FeatureModel, RoleAttackModel, RoleAttackDecor, OperationType, ROLE_ROUTE } from "hearthstone-core";
-import { EventUtil, Loader, StoreUtil, StateUtil, TranxUtil } from "set-piece";
+import { EventUtil, Loader, TemplUtil, StateUtil, TranxUtil } from "set-piece";
 
 export namespace TaurenWarriorFeatureProps {
     export type E = {}
@@ -11,7 +11,7 @@ export namespace TaurenWarriorFeatureProps {
     export type P = typeof ROLE_ROUTE
 }
 
-@StoreUtil.is('tauren-warrior-feature')
+@TemplUtil.is('tauren-warrior-feature')
 export class TaurenWarriorFeatureModel extends FeatureModel<
     TaurenWarriorFeatureProps.E,
     TaurenWarriorFeatureProps.S,

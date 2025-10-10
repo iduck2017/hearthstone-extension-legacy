@@ -1,8 +1,8 @@
 import { MinionBattlecryModel } from "hearthstone-core";
-import { Loader, StoreUtil } from "set-piece";
+import { Loader, TemplUtil } from "set-piece";
 import { SquireModel } from "../squire";
 
-@StoreUtil.is('silver-hand-knight-battlecry')
+@TemplUtil.is('silver-hand-knight-battlecry')
 export class SilverHandKnightBattlecryModel extends MinionBattlecryModel<[]> {
     constructor(loader?: Loader<SilverHandKnightBattlecryModel>) {
         super(() => {

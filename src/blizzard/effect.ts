@@ -1,5 +1,5 @@
 import { EffectModel, DamageModel, DamageEvent, DamageType, RoleRoute, ROLE_ROUTE, SpellEffectModel } from "hearthstone-core";
-import { Loader, StoreUtil } from "set-piece";
+import { Loader, TemplUtil } from "set-piece";
 
 export namespace BlizzardEffectProps {
     export type E = {}
@@ -8,7 +8,7 @@ export namespace BlizzardEffectProps {
     export type R = {}
 }
 
-@StoreUtil.is('blizzard-effect')
+@TemplUtil.is('blizzard-effect')
 export class BlizzardEffectModel extends SpellEffectModel<[],
     BlizzardEffectProps.E,
     BlizzardEffectProps.S,

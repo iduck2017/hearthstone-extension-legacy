@@ -16,43 +16,40 @@
 
 import { RoleAttackModel, ClassType, RoleHealthModel, MinionCardModel, RarityType, RoleModel, MinionFeatsModel, LibraryUtil, CostModel } from "hearthstone-core";
 import { ArchmageAntonidasFeatureModel } from "./feature";
-import { Loader } from "set-piece";
 
 @LibraryUtil.is('archmage-antonidas')
 export class ArchmageAntonidasModel extends MinionCardModel {
-    constructor(loader?: Loader<ArchmageAntonidasModel>) {
-        super(() => {
-            const props = loader?.() ?? {};
-            return {
-                uuid: props.uuid,
-                state: {
-                    name: 'Archmage Antonidas',
-                    desc: 'Whenever you cast a spell, add a \'Fireball\' spell to your hand.',
-                    isCollectible: true,
-                    flavorDesc: 'Antonidas was the Grand Magus of the Kirin Tor, and Jaina\'s mentor. This was a big step up from being Grand Magus of Jelly Donuts.',
-                    rarity: RarityType.LEGENDARY,
-                    class: ClassType.MAGE,
-                    races: [],
-                    ...props.state,
-                },
-                child: {
-                    cost: new CostModel(() => ({ state: { origin: 7 }})),
-                    role: new RoleModel(() => ({
-                        child: {
-                            attack: new RoleAttackModel(() => ({ state: { origin: 5 }})),
-                            health: new RoleHealthModel(() => ({ state: { origin: 7 }})), 
-                        }
-                    })),
-                    feats: new MinionFeatsModel(() => ({
-                        child: {
-                            battlecry: [], 
-                            items: [new ArchmageAntonidasFeatureModel()]
-                        }
-                    })),
-                    ...props.child,
-                },
-                refer: { ...props.refer },
-            }
+    constructor(props?: ArchmageAntonidasModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: {
+                name: 'Archmage Antonidas',
+                desc: 'Whenever you cast a spell, add a \'Fireball\' spell to your hand.',
+                isCollectible: true,
+                flavorDesc: 'Antonidas was the Grand Magus of the Kirin Tor, and Jaina\'s mentor. This was a big step up from being Grand Magus of Jelly Donuts.',
+                rarity: RarityType.LEGENDARY,
+                class: ClassType.MAGE,
+                races: [],
+                ...props.state,
+            },
+            child: {
+                cost: new CostModel({ state: { origin: 7 }}),
+                role: new RoleModel({
+                    child: {
+                        attack: new RoleAttackModel({ state: { origin: 5 }}),
+                        health: new RoleHealthModel({ state: { origin: 7 }}), 
+                    }
+                }),
+                feats: new MinionFeatsModel({
+                    child: {
+                        battlecry: [], 
+                        items: [new ArchmageAntonidasFeatureModel()]
+                    }
+                }),
+                ...props.child,
+            },
+            refer: { ...props.refer },
         });
     }
 }

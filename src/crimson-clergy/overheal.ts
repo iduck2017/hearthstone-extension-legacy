@@ -1,7 +1,7 @@
 import { FeatureModel, OverhealModel, RoleHealthModel, RoleModel } from "hearthstone-core";
-import { Event, EventUtil, Loader, StoreUtil } from "set-piece";
+import { Event, EventUtil, Loader, TemplUtil } from "set-piece";
 
-@StoreUtil.is('crimson-clergy-overheal')
+@TemplUtil.is('crimson-clergy-overheal')
 export class CrimsonClergyOverhealModel extends OverhealModel {
     constructor(loader?: Loader<CrimsonClergyOverhealModel>) {
         super(() => {

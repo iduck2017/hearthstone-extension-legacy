@@ -1,5 +1,5 @@
 import { FeatureModel, ROLE_ROUTE, RoleActionDecor, RoleActionModel, RoleActionProps, RoleRoute } from "hearthstone-core";
-import { StateUtil, StoreUtil, Loader, Decor } from "set-piece";
+import { StateUtil, TemplUtil, Decor } from "set-piece";
 
 export namespace AncientWatcherFeatureProps {
     export type E = {};
@@ -9,7 +9,7 @@ export namespace AncientWatcherFeatureProps {
     export type P = RoleRoute
 }
 
-@StoreUtil.is('ancient-watcher-feature')
+@TemplUtil.is('ancient-watcher-feature')
 export class AncientWatcherFeatureModel extends FeatureModel<
     AncientWatcherFeatureProps.E,
     AncientWatcherFeatureProps.S,
@@ -17,21 +17,19 @@ export class AncientWatcherFeatureModel extends FeatureModel<
     AncientWatcherFeatureProps.R,
     AncientWatcherFeatureProps.P
 > {
-    constructor(loader?: Loader<AncientWatcherFeatureModel>) {
-        super(() => {
-            const props = loader?.() ?? {};
-            return {
-                uuid: props.uuid,
-                state: {
-                    name: 'Ancient Watcher\'s Restriction',
-                    desc: 'Can\'t attack.',
-                    isActive: true,
-                    ...props.state,
-                },
-                child: { ...props.child },
-                refer: { ...props.refer },
-                route: ROLE_ROUTE,
-            }
+    constructor(props?: AncientWatcherFeatureModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: {
+                name: 'Ancient Watcher\'s Restriction',
+                desc: 'Can\'t attack.',
+                isActive: true,
+                ...props.state,
+            },
+            child: { ...props.child },
+            refer: { ...props.refer },
+            route: ROLE_ROUTE,
         });
     }
 

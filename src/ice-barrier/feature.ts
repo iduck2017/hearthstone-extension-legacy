@@ -1,7 +1,7 @@
 import { RoleAttackModel, RoleModel, SecretFeatureModel } from "hearthstone-core";
-import { Event, EventUtil, Loader, StoreUtil } from "set-piece";
+import { Event, EventUtil, Loader, TemplUtil } from "set-piece";
 
-@StoreUtil.is('ice-barrier-feature')
+@TemplUtil.is('ice-barrier-feature')
 export class IceBarrierFeatureModel extends SecretFeatureModel {
     constructor(loader?: Loader<IceBarrierFeatureModel>) {
         super(() => {

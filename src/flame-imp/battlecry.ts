@@ -1,7 +1,7 @@
 import { MinionBattlecryModel, DamageModel, DamageEvent } from "hearthstone-core";
-import { Loader, StoreUtil } from "set-piece";
+import { Loader, TemplUtil } from "set-piece";
 
-@StoreUtil.is('flame-imp-battlecry')
+@TemplUtil.is('flame-imp-battlecry')
 export class FlameImpBattlecryModel extends MinionBattlecryModel<[]> {
     constructor(loader?: Loader<FlameImpBattlecryModel>) {
         super(() => {

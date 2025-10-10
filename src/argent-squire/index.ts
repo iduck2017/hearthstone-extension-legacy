@@ -1,42 +1,39 @@
 import { RoleAttackModel, ClassType, RoleHealthModel, MinionCardModel, RarityType, RoleFeatsModel, RoleModel, DivineShieldModel } from "hearthstone-core";
 import { CostModel } from "hearthstone-core";
 import { LibraryUtil } from "hearthstone-core";
-import { Loader } from "set-piece";
 
 @LibraryUtil.is('argent-squire')
 export class ArgentSquireModel extends MinionCardModel {
-    constructor(loader?: Loader<ArgentSquireModel>) {
-        super(() => {
-            const props = loader?.() ?? {};
-            return {
-                uuid: props.uuid,
-                state: {
-                    name: 'Argent Squire',
-                    desc: 'Divine Shield',
-                    isCollectible: true,
-                    flavorDesc: '"I solemnly swear to uphold the Light, purge the world of darkness, and to eat only burritos." - The Argent Dawn Oath',
-                    rarity: RarityType.COMMON,
-                    class: ClassType.NEUTRAL,
-                    races: [],
-                    ...props.state,
-                },
-                child: {
-                    cost: new CostModel(() => ({ state: { origin: 1 }})),
-                    role: new RoleModel(() => ({
-                        child: {
-                            attack: new RoleAttackModel(() => ({ state: { origin: 1 }})),
-                            health: new RoleHealthModel(() => ({ state: { origin: 1 }})),   
-                            feats: new RoleFeatsModel(() => ({
-                                child: { 
-                                    divineShield: new DivineShieldModel(() => ({ state: { isActive: true } }))
-                                }
-                            }))
-                        }
-                    })),
-                    ...props.child,
-                },
-                refer: { ...props.refer },
-            }
+    constructor(props?: ArgentSquireModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: {
+                name: 'Argent Squire',
+                desc: 'Divine Shield',
+                isCollectible: true,
+                flavorDesc: '"I solemnly swear to uphold the Light, purge the world of darkness, and to eat only burritos." - The Argent Dawn Oath',
+                rarity: RarityType.COMMON,
+                class: ClassType.NEUTRAL,
+                races: [],
+                ...props.state,
+            },
+            child: {
+                cost: new CostModel({ state: { origin: 1 }}),
+                role: new RoleModel({
+                    child: {
+                        attack: new RoleAttackModel({ state: { origin: 1 }}),
+                        health: new RoleHealthModel({ state: { origin: 1 }}),   
+                        feats: new RoleFeatsModel({
+                            child: { 
+                                divineShield: new DivineShieldModel({ state: { isActive: true } })
+                            }
+                        })
+                    }
+                }),
+                ...props.child,
+            },
+            refer: { ...props.refer },
         });
     }
 }

@@ -1,5 +1,5 @@
 import { FeatureModel, MINION_ROUTE, MinionRoute, SpellCardModel } from "hearthstone-core";
-import { Event, EventUtil, Loader, StoreUtil } from "set-piece";
+import { Event, EventUtil, Loader, TemplUtil } from "set-piece";
 import { VioletApprenticeModel } from "../violet-apprentice";
 
 export namespace VioletTeacherFeatureProps {
@@ -10,7 +10,7 @@ export namespace VioletTeacherFeatureProps {
     export type P = MinionRoute
 }
 
-@StoreUtil.is('violet-teacher-feature')
+@TemplUtil.is('violet-teacher-feature')
 export class VioletTeacherFeatureModel extends FeatureModel<
     VioletTeacherFeatureProps.E,
     VioletTeacherFeatureProps.S,

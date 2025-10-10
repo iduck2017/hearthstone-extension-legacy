@@ -1,8 +1,8 @@
 import { SpellCardModel, RarityType, ClassType, SchoolType, CostModel, SpellFeatsModel } from "hearthstone-core";
-import { Loader, StoreUtil } from "set-piece";
+import { Loader, TemplUtil } from "set-piece";
 import { HolyFireEffectModel } from "./effect";
 
-@StoreUtil.is('holy-fire')
+@TemplUtil.is('holy-fire')
 export class HolyFireModel extends SpellCardModel {
     constructor(loader?: Loader<HolyFireModel>) {
         super(() => {

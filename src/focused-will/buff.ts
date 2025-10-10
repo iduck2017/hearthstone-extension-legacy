@@ -1,7 +1,7 @@
 import { IRoleBuffModel } from "hearthstone-core";
-import { Loader, StoreUtil } from "set-piece";
+import { Loader, TemplUtil } from "set-piece";
 
-@StoreUtil.is('focused-will-buff')
+@TemplUtil.is('focused-will-buff')
 export class FocusedWillBuffModel extends IRoleBuffModel {
     constructor(loader?: Loader<FocusedWillBuffModel>) {
         super(() => {

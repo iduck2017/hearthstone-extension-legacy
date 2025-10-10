@@ -1,7 +1,7 @@
 import { CardModel, EffectModel, SpellEffectModel } from "hearthstone-core";
-import { Loader, StoreUtil, TranxUtil } from "set-piece";
+import { Loader, TemplUtil, TranxUtil } from "set-piece";
 
-@StoreUtil.is('mind-vision-effect')
+@TemplUtil.is('mind-vision-effect')
 export class MindVisionEffectModel extends SpellEffectModel<[]> {
     constructor(loader?: Loader<MindVisionEffectModel>) {
         super(() => {

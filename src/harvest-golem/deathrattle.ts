@@ -1,8 +1,8 @@
 import { DeathrattleModel, ROLE_ROUTE } from "hearthstone-core";
-import { Loader, StoreUtil } from "set-piece";
+import { Loader, TemplUtil } from "set-piece";
 import { DamagedGolemModel } from "../damaged-golem";
 
-@StoreUtil.is('harvest-golem-deathrattle')
+@TemplUtil.is('harvest-golem-deathrattle')
 export class HarvestGolemDeathrattleModel extends DeathrattleModel {
     constructor(loader?: Loader<HarvestGolemDeathrattleModel>) {
         super(() => {

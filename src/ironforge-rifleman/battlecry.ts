@@ -1,7 +1,7 @@
 import { MinionBattlecryModel, SelectEvent, RoleModel, DamageModel, DamageEvent, DamageType } from "hearthstone-core";
-import { Loader, StoreUtil } from "set-piece";
+import { Loader, TemplUtil } from "set-piece";
 
-@StoreUtil.is('ironforge-rifleman-battlecry')
+@TemplUtil.is('ironforge-rifleman-battlecry')
 export class IronforgeRiflemanBattlecryModel extends MinionBattlecryModel<[RoleModel]> {
     constructor(loader?: Loader<IronforgeRiflemanBattlecryModel>) {
         super(() => {

@@ -1,21 +1,19 @@
 import { MinionBattlecryModel, SelectEvent, RoleModel, DamageModel, DamageEvent, RestoreModel, RestoreEvent, DamageType } from "hearthstone-core";
-import { Loader, StoreUtil } from "set-piece";
+import { TemplUtil } from "set-piece";
 
-@StoreUtil.is('alexstrasza-battlecry')
+@TemplUtil.is('alexstrasza-battlecry')
 export class AlexstraszaBattlecryModel extends MinionBattlecryModel<[RoleModel]> {
-    constructor(loader?: Loader<AlexstraszaBattlecryModel>) {
-        super(() => {
-            const props = loader?.() ?? {};
-            return {
-                uuid: props.uuid,
-                state: {
-                    name: "Alexstrasza's Battlecry",
-                    desc: "Choose a character. If it's friendly, restore 8 Health. If it's an enemy, deal 8 damage.",
-                    ...props.state
-                },
-                child: { ...props.child },
-                refer: { ...props.refer },
-            };
+    constructor(props?: AlexstraszaBattlecryModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: {
+                name: "Alexstrasza's Battlecry",
+                desc: "Choose a character. If it's friendly, restore 8 Health. If it's an enemy, deal 8 damage.",
+                ...props.state
+            },
+            child: { ...props.child },
+            refer: { ...props.refer },
         });
     }
 

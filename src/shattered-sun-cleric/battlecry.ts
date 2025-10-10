@@ -1,7 +1,7 @@
 import { MinionBattlecryModel, SelectEvent, RoleModel, RoleBuffModel } from "hearthstone-core";
-import { Loader, StoreUtil } from "set-piece";
+import { Loader, TemplUtil } from "set-piece";
 
-@StoreUtil.is('shattered-sun-cleric-battlecry')
+@TemplUtil.is('shattered-sun-cleric-battlecry')
 export class ShatteredSunClericBattlecryModel extends MinionBattlecryModel<[RoleModel]> {
     constructor(loader?: Loader<ShatteredSunClericBattlecryModel>) {
         super(() => {

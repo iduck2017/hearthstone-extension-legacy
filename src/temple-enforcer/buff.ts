@@ -1,7 +1,7 @@
 import { IRoleBuffModel } from "hearthstone-core";
-import { Loader, StoreUtil } from "set-piece";
+import { Loader, TemplUtil } from "set-piece";
 
-@StoreUtil.is('temple-enforcer-buff')
+@TemplUtil.is('temple-enforcer-buff')
 export class TempleEnforcerBuffModel extends IRoleBuffModel {
     constructor(loader?: Loader<TempleEnforcerBuffModel>) {
         super(() => {

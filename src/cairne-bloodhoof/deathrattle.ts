@@ -1,8 +1,8 @@
 import { DeathrattleModel, ROLE_ROUTE } from "hearthstone-core";
-import { Loader, StoreUtil } from "set-piece";
+import { Loader, TemplUtil } from "set-piece";
 import { BaineBloodhoofModel } from "../baine-bloodhoof";
 
-@StoreUtil.is('cairne-bloodhoof-deathrattle')
+@TemplUtil.is('cairne-bloodhoof-deathrattle')
 export class CairneBloodhoofDeathrattleModel extends DeathrattleModel {
     constructor(loader?: Loader<CairneBloodhoofDeathrattleModel>) {
         super(() => {

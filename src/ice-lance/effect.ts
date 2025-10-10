@@ -1,5 +1,5 @@
 import { EffectModel, SelectEvent, RoleModel, DamageModel, DamageEvent, DamageType, RoleRoute, ROLE_ROUTE, CARD_ROUTE, CardRoute, SpellEffectModel } from "hearthstone-core";
-import { Loader, StoreUtil } from "set-piece";
+import { Loader, TemplUtil } from "set-piece";
 
 export namespace IceLanceEffectProps {
     export type E = {}
@@ -8,7 +8,7 @@ export namespace IceLanceEffectProps {
     export type R = {}
 }
 
-@StoreUtil.is('ice-lance-effect')
+@TemplUtil.is('ice-lance-effect')
 export class IceLanceEffectModel extends SpellEffectModel<[RoleModel],
     IceLanceEffectProps.E,
     IceLanceEffectProps.S,

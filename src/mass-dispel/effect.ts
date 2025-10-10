@@ -1,7 +1,7 @@
 import { EffectModel, SpellEffectModel } from "hearthstone-core";
-import { Loader, StoreUtil } from "set-piece";
+import { Loader, TemplUtil } from "set-piece";
 
-@StoreUtil.is('mass-dispel-effect')
+@TemplUtil.is('mass-dispel-effect')
 export class MassDispelEffectModel extends SpellEffectModel<[]> {
     constructor(loader?: Loader<MassDispelEffectModel>) {
         super(() => {

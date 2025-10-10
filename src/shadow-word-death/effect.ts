@@ -1,7 +1,7 @@
 import { EffectModel, SpellEffectModel, SelectEvent, RoleModel } from "hearthstone-core";
-import { Loader, StoreUtil } from "set-piece";
+import { Loader, TemplUtil } from "set-piece";
 
-@StoreUtil.is('shadow-word-death-effect')
+@TemplUtil.is('shadow-word-death-effect')
 export class ShadowWordDeathEffectModel extends SpellEffectModel<[RoleModel]> {
     constructor(loader?: Loader<ShadowWordDeathEffectModel>) {
         super(() => {

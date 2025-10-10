@@ -1,5 +1,5 @@
 import { RoleAttackModel, RoleAttackProps, FeatureModel, RoleHealthModel, RoleModel, RoleRoute, ROLE_ROUTE, RoleAttackDecor, OperationType } from "hearthstone-core";
-import { Event, EventUtil, StateUtil, StoreUtil, TranxUtil, Loader, Decor, Frame } from "set-piece";
+import { Event, EventUtil, StateUtil, TemplUtil, TranxUtil, Decor, Frame } from "set-piece";
 
 export namespace AmaniBerserkerFeatureProps {
     export type E = {};
@@ -11,7 +11,7 @@ export namespace AmaniBerserkerFeatureProps {
     export type P = RoleRoute
 }
 
-@StoreUtil.is('amani-berserker-feature')
+@TemplUtil.is('amani-berserker-feature')
 export class AmaniBerserkerFeatureModel extends FeatureModel<
     AmaniBerserkerFeatureProps.E,
     AmaniBerserkerFeatureProps.S,
@@ -19,22 +19,20 @@ export class AmaniBerserkerFeatureModel extends FeatureModel<
     AmaniBerserkerFeatureProps.R,
     AmaniBerserkerFeatureProps.P
 > {
-    constructor(loader?: Loader<AmaniBerserkerFeatureModel>) {
-        super(() => {
-            const props = loader?.() ?? {};
-            return {
-                uuid: props.uuid,
-                state: {
-                    name: 'Amani Berserker\'s Buff',
-                    desc: 'Has +3 Attack while damaged.',
-                    offset: 3,
-                    isActive: true,
-                    ...props.state,
-                },
-                child: { ...props.child },
-                refer: { ...props.refer },
-                route: ROLE_ROUTE,
-            }
+    constructor(props?: AmaniBerserkerFeatureModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: {
+                name: 'Amani Berserker\'s Buff',
+                desc: 'Has +3 Attack while damaged.',
+                offset: 3,
+                isActive: true,
+                ...props.state,
+            },
+            child: { ...props.child },
+            refer: { ...props.refer },
+            route: ROLE_ROUTE,
         });
     }
 

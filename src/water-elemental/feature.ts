@@ -1,5 +1,5 @@
 import { DamageEvent, DamageModel, FeatureModel, ROLE_ROUTE, RoleRoute } from "hearthstone-core";
-import { Event, EventUtil, Loader, StoreUtil } from "set-piece";
+import { Event, EventUtil, Loader, TemplUtil } from "set-piece";
 
 export namespace WaterElementalFeatureProps {
     export type E = {}
@@ -9,7 +9,7 @@ export namespace WaterElementalFeatureProps {
     export type P = RoleRoute
 }
 
-@StoreUtil.is('water-elemental-feature')
+@TemplUtil.is('water-elemental-feature')
 export class WaterElementalFeatureModel extends FeatureModel<
     WaterElementalFeatureProps.E,
     WaterElementalFeatureProps.S,

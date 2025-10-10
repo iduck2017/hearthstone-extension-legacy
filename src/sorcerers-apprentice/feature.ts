@@ -1,7 +1,7 @@
 import { CostDecor, CostModel, CostType, FeatureModel, SpellCardModel } from "hearthstone-core";
-import { Event, EventUtil, Loader, StateUtil, StoreUtil } from "set-piece";
+import { Event, EventUtil, Loader, StateUtil, TemplUtil } from "set-piece";
 
-@StoreUtil.is('sorcerers-apprentice-feature')
+@TemplUtil.is('sorcerers-apprentice-feature')
 export class SorcerersApprenticeFeatureModel extends FeatureModel {
     constructor(loader?: Loader<SorcerersApprenticeFeatureModel>) {
         super(() => {

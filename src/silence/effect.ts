@@ -1,7 +1,7 @@
 import { EffectModel, SelectEvent, RoleModel, SpellEffectModel } from "hearthstone-core";
-import { Loader, StoreUtil } from "set-piece";
+import { Loader, TemplUtil } from "set-piece";
 
-@StoreUtil.is('silence-effect')
+@TemplUtil.is('silence-effect')
 export class SilenceEffectModel extends SpellEffectModel<[RoleModel]> {
     constructor(loader?: Loader<SilenceEffectModel>) {
         super(() => {

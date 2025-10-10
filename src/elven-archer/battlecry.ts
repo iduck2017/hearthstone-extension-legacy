@@ -1,7 +1,7 @@
 import { MinionBattlecryModel, DamageEvent, DamageModel, DamageType, RoleModel, SelectEvent } from "hearthstone-core";
-import { Loader, StoreUtil } from "set-piece";
+import { Loader, TemplUtil } from "set-piece";
 
-@StoreUtil.is('elven-archer-battlecry')
+@TemplUtil.is('elven-archer-battlecry')
 export class ElvenArcherMinionBattlecryModel extends MinionBattlecryModel<[RoleModel]> {
     constructor(loader?: Loader<ElvenArcherMinionBattlecryModel>) {
         super(() => {

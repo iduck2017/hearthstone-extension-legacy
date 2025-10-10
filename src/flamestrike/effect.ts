@@ -1,7 +1,7 @@
 import { EffectModel, DamageModel, DamageEvent, DamageType, SpellEffectModel } from "hearthstone-core";
-import { Loader, StoreUtil } from "set-piece";
+import { Loader, TemplUtil } from "set-piece";
 
-@StoreUtil.is('flamestrike-effect')
+@TemplUtil.is('flamestrike-effect')
 export class FlamestrikeEffectModel extends SpellEffectModel<[]> {
     constructor(loader?: Loader<FlamestrikeEffectModel>) {
         super(() => {
