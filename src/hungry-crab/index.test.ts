@@ -12,34 +12,34 @@ import { MurlocRaiderModel } from "../murloc-raider";
 import { boot } from "../boot";
 
 describe('hungry-crab', () => {
-    const game = new GameModel(() => ({
+    const game = new GameModel({
         child: {
-            playerA: new PlayerModel(() => ({
+            playerA: new PlayerModel({
                 child: {
-                    mana: new ManaModel(() => ({ state: { origin: 10 }})),
+                    mana: new ManaModel({ state: { origin: 10 }}),
                     hero: new MageModel(),
-                    board: new BoardModel(() => ({
+                    board: new BoardModel({
                         child: { minions: [new WispModel()] }
-                    })),
-                    hand: new HandModel(() => ({
+                    }),
+                    hand: new HandModel({
                         child: { minions: [new HungryCrabModel()] }
-                    }))
+                    })
                 }
-            })),
-            playerB: new PlayerModel(() => ({
+            }),
+            playerB: new PlayerModel({
                 child: {
-                    mana: new ManaModel(() => ({ state: { origin: 10 }})),
+                    mana: new ManaModel({ state: { origin: 10 }}),
                     hero: new MageModel(),
-                    hand: new HandModel(() => ({
+                    hand: new HandModel({
                         child: { minions: [
                             new HungryCrabModel(),
                             new MurlocRaiderModel()
                         ]}
-                    }))
+                    })
                 }
-            }))
+            })
         }
-    }));
+    });
     boot(game);
     const handA = game.child.playerA.child.hand;
     const boardA = game.child.playerA.child.board;
