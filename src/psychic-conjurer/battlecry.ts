@@ -29,7 +29,7 @@ export class PsychicConjurerBattlecryModel extends MinionBattlecryModel<[]> {
         if (!opponent) return;
         
         const deck = opponent.child.deck;
-        const cards = deck.refer.order;
+        const cards = deck.refer.queue;
         
         // If opponent has no cards in deck, do nothing
         if (cards.length === 0) return;

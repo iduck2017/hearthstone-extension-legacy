@@ -10,7 +10,6 @@ export class BaineBloodhoofModel extends MinionCardModel {
                 name: "Baine Bloodhoof",
                 desc: "",
                 flavorDesc: "",
-                cost: 0,
                 rarity: RarityType.LEGENDARY,
                 class: ClassType.NEUTRAL,
                 races: [],

@@ -31,14 +31,13 @@ export class TwilightDrakeBattlecryModel extends MinionBattlecryModel<[]> {
         if (!player) return;
 
         const hand = player.child.hand;
-        const size = hand.refer.queue?.length;
-        console.log('size', size);
-        if (!size) return;
+        const count = hand.refer.queue?.length;
+        if (!count) return;
 
         // Apply health buff based on hand size
-        const buff = new TwilightDrakeBuffModel(() => ({
-            state: { offset: [0, size] }
-        }));
+        const buff = new TwilightDrakeBuffModel({
+            state: { offset: [0, count] }
+        });
         const role = card.child.role;
         if (!role) return;
         role.child.feats.add(buff);

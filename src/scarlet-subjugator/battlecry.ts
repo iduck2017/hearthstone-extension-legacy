@@ -41,7 +41,7 @@ export class ScarletSubjugatorBattlecryModel extends MinionBattlecryModel<[RoleM
     private debuff(target: RoleModel) {
         const player = this.route.player;
         if (!player) return;
-        const debuff = new ScarletSubjugatorDebuffModel(() => ({ refer: { player }}));
+        const debuff = new ScarletSubjugatorDebuffModel({ refer: { player }});
         target.child.feats.add(debuff);
     }
 }

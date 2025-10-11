@@ -11,7 +11,6 @@ export class CairneBloodhoofModel extends MinionCardModel {
                 name: "Cairne Bloodhoof",
                 desc: "Taunt Deathrattle: Summon a 5/5 Baine Bloodhoof.",
                 flavorDesc: "Cairne was killed by Garrosh, so... don't put this guy in a Warrior deck. It's pretty insensitive.",
-                cost: 6,
                 rarity: RarityType.LEGENDARY,
                 class: ClassType.NEUTRAL,
                 races: [],

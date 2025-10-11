@@ -12,7 +12,6 @@ export class HolyFireModel extends SpellCardModel {
                 name: "Holy Fire",
                 desc: "Deal 5 damage. Restore 5 Health to your hero.",
                 flavorDesc: "Often followed by Holy Smokes!",
-                cost: 6,
                 rarity: RarityType.RARE,
                 class: ClassType.PRIEST,
                 schools: [SchoolType.HOLY],

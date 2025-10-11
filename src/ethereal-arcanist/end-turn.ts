@@ -1,4 +1,4 @@
-import { EndTurnHookModel } from "hearthstone-core";
+import { EndTurnHookModel, MinionCardModel } from "hearthstone-core";
 import { DebugUtil, TemplUtil } from "set-piece";
 import { EtherealArcanistBuffModel } from "./buff";
 
@@ -16,6 +16,15 @@ export class EtherealArcanistFeatureModel extends EndTurnHookModel<
     EtherealArcanistFeatureProps.C,
     EtherealArcanistFeatureProps.R
 > {
+    public get route() {
+        const result = super.route;
+        const minion: MinionCardModel | undefined = result.list.find(item => item instanceof MinionCardModel);
+        return {
+            ...result,
+            minion
+        };
+    }
+
     constructor(props?: EtherealArcanistFeatureModel['props']) {
         props = props ?? {};
         super({

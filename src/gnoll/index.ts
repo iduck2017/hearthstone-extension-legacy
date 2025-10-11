@@ -10,7 +10,6 @@ export class GnollModel extends MinionCardModel {
                 name: "Gnoll",
                 desc: "Taunt",
                 flavorDesc: "",
-                cost: 0,
                 rarity: RarityType.COMMON,
                 class: ClassType.NEUTRAL,
                 races: [],

@@ -38,7 +38,7 @@ export class OgreMagiModel extends MinionCardModel {
                 feats: new MinionFeatsModel({
                     child: { 
                         battlecry: [],
-                        spellBuff: new SpellDamageModel({ state: { offset: 1 }})
+                        list: [new SpellDamageModel({ state: { offset: 1 }})]
                     }
                 }),
                 ...props.child

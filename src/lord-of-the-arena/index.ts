@@ -10,7 +10,6 @@ export class LordOfTheArenaModel extends MinionCardModel {
                 name: "Lord of the Arena",
                 desc: "Taunt",
                 flavorDesc: "He used to be a 2100+ rated arena player, but that was years ago and nobody can get him to shut up about it.",
-                cost: 6,
                 rarity: RarityType.COMMON,
                 class: ClassType.NEUTRAL,
                 races: [],

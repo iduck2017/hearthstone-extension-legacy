@@ -42,8 +42,11 @@ export class GrimscaleOracleFeatureModel extends FeatureModel<
         });
     }
 
-    @StateUtil.on(self => self.route.player?.proxy.child.board.child.minions.child.role.child.attack.decor)
-    private onCheck(that: RoleAttackModel, decor: RoleAttackDecor) {
+    @StateUtil.on(self => self.modifyAttack)
+    private listenAttack() {
+        return this.route.player?.proxy.child.board.child.minions.child.role.child.attack.decor
+    }
+    private modifyAttack(that: RoleAttackModel, decor: RoleAttackDecor) {
         if (!this.route.board) return;
         if (!this.state.isActive) return;
         

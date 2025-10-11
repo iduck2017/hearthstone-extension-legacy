@@ -29,13 +29,13 @@ export class ShatteredSunClericBattlecryModel extends MinionBattlecryModel<[Role
 
     public async doRun(from: number, to: number, target: RoleModel) {
         // Give the target minion +1/+1
-        const buff = new RoleBuffModel(() => ({
+        const buff = new RoleBuffModel({
             state: { 
                 name: "Shattered Sun Cleric's Buff",
                 desc: "+1/+1",
                 offset: [1, 1] // +1 Attack, +1 Health
             }
-        }));
+        });
         target.child.feats.add(buff);
     }
 }

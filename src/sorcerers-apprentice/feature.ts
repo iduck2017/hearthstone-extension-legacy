@@ -18,8 +18,11 @@ export class SorcerersApprenticeFeatureModel extends FeatureModel {
         })
     }
 
-    @StateUtil.on(self => self.route.player?.proxy.child.hand.child.spells.child.cost.decor)
-    private onCompute(that: CostModel, decor: CostDecor) {
+    @StateUtil.on(self => self.modifyCost)
+    private listenCost() {
+        return this.route.player?.proxy.child.hand.child.spells.child.cost.decor
+    }
+    private modifyCost(that: CostModel, decor: CostDecor) {
         if (!this.route.board) return;
         const card = that.route.card;
         const player = that.route.player;

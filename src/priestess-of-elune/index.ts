@@ -11,7 +11,6 @@ export class PriestessOfEluneModel extends MinionCardModel {
                 name: "Priestess of Elune",
                 desc: "Battlecry: Restore 4 Health to your hero.",
                 flavorDesc: "If she threatens to \"moon\" you, it's not what you think.",
-                cost: 6,
                 rarity: RarityType.COMMON,
                 class: ClassType.NEUTRAL,
                 races: [],

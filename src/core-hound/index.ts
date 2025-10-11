@@ -10,7 +10,6 @@ export class CoreHoundModel extends MinionCardModel {
                 name: "Core Hound",
                 desc: "",
                 flavorDesc: "You don't tame a Core Hound. You just train it to eat someone else before it eats you.",
-                cost: 7,
                 rarity: RarityType.COMMON,
                 class: ClassType.NEUTRAL,
                 races: [RaceType.BEAST],

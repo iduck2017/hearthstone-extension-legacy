@@ -36,7 +36,7 @@ export class MindVisionEffectModel extends SpellEffectModel<[]> {
         
         // Select a random card from opponent's hand
         const index = Math.floor(Math.random() * handB.refer.queue?.length);
-        const card = handB.refer.order[index];
+        const card = handB.refer.queue[index];
         if (!card) return;
         
         // Create a copy of the random card

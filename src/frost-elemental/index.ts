@@ -11,7 +11,6 @@ export class FrostElementalModel extends MinionCardModel {
                 name: "Frost Elemental",
                 desc: "Battlecry: Freeze a character.",
                 flavorDesc: "When a Water elemental and an Ice elemental love each other VERY much...",
-                cost: 6,
                 rarity: RarityType.COMMON,
                 class: ClassType.NEUTRAL,
                 races: [RaceType.ELEMENTAL],
