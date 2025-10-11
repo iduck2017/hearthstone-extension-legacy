@@ -46,7 +46,7 @@ export class ConeOfColdEffectModel extends SpellEffectModel<[RoleModel]> {
         });
 
         // Deal 1 damage to all affected minions
-        await DamageModel.run(minions.map((item) => new DamageEvent({
+        await DamageModel.deal(minions.map((item) => new DamageEvent({
             type: DamageType.SPELL,
             source: card,
             method: this,

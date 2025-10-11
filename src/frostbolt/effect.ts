@@ -31,7 +31,7 @@ export class FrostboltEffectModel extends SpellEffectModel<[RoleModel]> {
         if (!card) return;
         
         // Deal 3 damage to the target
-        await DamageModel.run([
+        await DamageModel.deal([
             new DamageEvent({
                 type: DamageType.SPELL,
                 source: card,

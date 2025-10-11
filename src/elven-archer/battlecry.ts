@@ -29,7 +29,7 @@ export class ElvenArcherMinionBattlecryModel extends MinionBattlecryModel<[RoleM
     protected async doRun(from: number, to: number, target: RoleModel) {
         const card = this.route.card;
         if (!card) return;
-        DamageModel.run([
+        DamageModel.deal([
             new DamageEvent({
                 source: card,
                 target,

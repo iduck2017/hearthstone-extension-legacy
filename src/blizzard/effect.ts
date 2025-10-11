@@ -32,7 +32,7 @@ export class BlizzardEffectModel extends SpellEffectModel<[]> {
         const roles = opponent.query(true);
         
         // Deal 2 damage to all enemy minions
-        await DamageModel.run(roles.map((item) => new DamageEvent({
+        await DamageModel.deal(roles.map((item) => new DamageEvent({
             type: DamageType.SPELL,
             source: card,
             method: this,

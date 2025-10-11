@@ -34,7 +34,7 @@ export class AlexstraszaBattlecryModel extends MinionBattlecryModel<[RoleModel]>
 
         if (isAlly) {
             // Restore 8 Health to friendly character
-            RestoreModel.run([
+            RestoreModel.deal([
                 new RestoreEvent({
                     source: card,
                     method: this,
@@ -44,7 +44,7 @@ export class AlexstraszaBattlecryModel extends MinionBattlecryModel<[RoleModel]>
             ]);
         } else {
             // Deal 8 damage to enemy character
-            DamageModel.run([
+            DamageModel.deal([
                 new DamageEvent({
                     type: DamageType.SPELL,
                     source: card,

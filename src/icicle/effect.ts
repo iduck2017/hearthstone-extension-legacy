@@ -33,7 +33,7 @@ export class IcicleEffectModel extends SpellEffectModel<[RoleModel]> {
         if (!player) return;
         
         // Deal 2 damage to the target
-        await DamageModel.run([
+        await DamageModel.deal([
             new DamageEvent({
                 type: DamageType.SPELL,
                 source: card,

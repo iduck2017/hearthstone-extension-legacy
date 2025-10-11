@@ -42,7 +42,7 @@ export class LightwellEndTurnModel extends EndTurnHookModel {
         const source = this.route.card;
         if (!source) return;
         
-        RestoreModel.run([
+        RestoreModel.deal([
             new RestoreEvent({
                 source: source,
                 method: this,

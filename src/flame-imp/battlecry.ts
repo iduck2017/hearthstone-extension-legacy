@@ -29,7 +29,7 @@ export class FlameImpBattlecryModel extends MinionBattlecryModel<[]> {
         if (!player) return;
         const hero = player.child.hero;
         
-        DamageModel.run([
+        DamageModel.deal([
             new DamageEvent({
                 source: card,
                 target: hero.child.role,

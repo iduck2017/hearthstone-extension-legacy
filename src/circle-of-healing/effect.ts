@@ -31,7 +31,7 @@ export class CircleOfHealingEffectModel extends SpellEffectModel<[]> {
 
         const minions = game.query(true); // Get all minions (both friendly and enemy)
         // Restore 4 Health to all minions
-        await RestoreModel.run(minions.map((item) => new RestoreEvent({
+        await RestoreModel.deal(minions.map((item) => new RestoreEvent({
             source: card,
             method: this,
             target: item,

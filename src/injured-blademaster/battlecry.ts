@@ -31,7 +31,7 @@ export class InjuredBlademasterBattlecryModel extends MinionBattlecryModel<[]> {
 
         const role = minion.child.role;
         // Deal 4 damage to himself
-        DamageModel.run([new DamageEvent({
+        DamageModel.deal([new DamageEvent({
             type: DamageType.SPELL,
             source: card,
             method: this,

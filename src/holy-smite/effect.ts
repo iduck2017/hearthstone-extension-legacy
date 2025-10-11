@@ -30,7 +30,7 @@ export class HolySmiteEffectModel extends SpellEffectModel<[RoleModel]> {
         if (!card) return;
 
         // Deal 3 damage to the target minion
-        await DamageModel.run([
+        await DamageModel.deal([
             new DamageEvent({
                 type: DamageType.SPELL,
                 source: card,

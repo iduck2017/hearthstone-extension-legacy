@@ -28,7 +28,7 @@ export class IronforgeRiflemanBattlecryModel extends MinionBattlecryModel<[RoleM
         const card = this.route.card;
         if (!card) return;
         // Deal 1 damage to the target
-        DamageModel.run([
+        DamageModel.deal([
             new DamageEvent({
                 type: DamageType.SPELL,
                 source: card,

@@ -35,7 +35,7 @@ export class ArcaneMissilesEffectModel extends SpellEffectModel<[]> {
             const index = Math.floor(Math.random() * roles.length);
             const target = roles[index];
             if (!target) break;
-            await DamageModel.run([
+            await DamageModel.deal([
                 new DamageEvent({
                     type: DamageType.SPELL,
                     source: card,

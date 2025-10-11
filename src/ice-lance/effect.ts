@@ -36,7 +36,7 @@ export class IceLanceEffectModel extends SpellEffectModel<[RoleModel]> {
         
         if (frozen.state.isActive) {
             // If already frozen, deal 4 damage instead
-            await DamageModel.run([
+            await DamageModel.deal([
                 new DamageEvent({
                     type: DamageType.SPELL,
                     source: card,

@@ -28,7 +28,7 @@ export class EarthenRingFarseerBattlecryModel extends MinionBattlecryModel<[Role
         // Restore 3 health to the selected target
         const card = this.route.card;
         if (!card) return;
-        RestoreModel.run([
+        RestoreModel.deal([
             new RestoreEvent({
                 source: card,
                 target: target,

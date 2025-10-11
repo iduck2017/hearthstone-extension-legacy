@@ -38,7 +38,7 @@ export class DemolisherFeatureModel extends StartTurnHookModel {
         // Deal 2 damage to random enemy
         const card = this.route.card;
         if (!card) return;
-        DamageModel.run([
+        DamageModel.deal([
             new DamageEvent({
                 source: card,
                 target: target,

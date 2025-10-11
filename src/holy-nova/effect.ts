@@ -33,7 +33,7 @@ export class HolyNovaEffectModel extends SpellEffectModel<[]> {
 
         // Deal 2 damage to all enemy minions
         const enemies = opponent.query(true);
-        DamageModel.run(enemies.map((item) => new DamageEvent({
+        DamageModel.deal(enemies.map((item) => new DamageEvent({
             source: card,
             method: this,
             target: item,
@@ -43,7 +43,7 @@ export class HolyNovaEffectModel extends SpellEffectModel<[]> {
 
         // Restore 2 Health to all friendly characters (hero and minions)
         const allies = player.query();
-        RestoreModel.run(allies.map((item) => new RestoreEvent({
+        RestoreModel.deal(allies.map((item) => new RestoreEvent({
             source: card,
             method: this,
             target: item,

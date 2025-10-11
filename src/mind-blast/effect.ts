@@ -35,7 +35,7 @@ export class MindBlastEffectModel extends SpellEffectModel<[]> {
         const hero = opponent.child.hero;
         
         // Deal 5 damage to the enemy hero
-        DamageModel.run([
+        DamageModel.deal([
             new DamageEvent({
                 source: card,
                 method: this,

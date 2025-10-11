@@ -31,7 +31,7 @@ export class HolyFireEffectModel extends SpellEffectModel<[RoleModel]> {
         if (!card || !player) return;
 
         // Deal 5 damage to the target
-        DamageModel.run([
+        DamageModel.deal([
             new DamageEvent({
                 type: DamageType.SPELL,
                 source: card,
@@ -43,7 +43,7 @@ export class HolyFireEffectModel extends SpellEffectModel<[RoleModel]> {
 
         // Restore 5 Health to your hero
         const hero = player.child.hero;
-        RestoreModel.run([
+        RestoreModel.deal([
             new RestoreEvent({
                 source: card,
                 method: this,

@@ -27,7 +27,7 @@ export class VoodooDoctorMinionBattlecryModel extends MinionBattlecryModel<[Role
     public async doRun(from: number, to: number, target: RoleModel) {
         const card = this.route.card;
         if (!card) return;
-        RestoreModel.run([
+        RestoreModel.deal([
             new RestoreEvent({
                 source: card,
                 method: this,

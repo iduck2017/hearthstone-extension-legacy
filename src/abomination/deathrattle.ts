@@ -48,6 +48,6 @@ export class AbominationDeathrattleModel extends DeathrattleModel {
                 origin: 2,
             })
         );
-        DamageModel.run(damageEvents);
+        DamageModel.deal(damageEvents);
     }
 }

@@ -31,7 +31,7 @@ export class RadianceEffectModel extends SpellEffectModel<[]> {
         const hero = player.child.hero;
         
         // Restore 5 Health to the hero
-        await RestoreModel.run([
+        await RestoreModel.deal([
             new RestoreEvent({
                 source: card,
                 method: this,

@@ -31,7 +31,7 @@ export class WaterElementalFeatureModel extends FeatureModel {
 
     @EventUtil.on(self => self.handleDamage)
     private listenDamage() {
-        return this.route.minion?.proxy.child.damage.event?.onRun
+        return this.route.minion?.proxy.child.damage.event?.onDeal
     }
     private handleDamage(that: DamageModel, event: DamageEvent) {
         const minion = this.route.minion;

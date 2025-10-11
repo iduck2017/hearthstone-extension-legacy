@@ -37,7 +37,7 @@ export class RagnarosEndTurnModel extends EndTurnHookModel {
         if (!target) return;
 
         // Deal 8 damage to the random enemy
-        DamageModel.run([
+        DamageModel.deal([
             new DamageEvent({
                 type: DamageType.SPELL,
                 source: card,

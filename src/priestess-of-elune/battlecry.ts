@@ -31,7 +31,7 @@ export class PriestessOfEluneBattlecryModel extends MinionBattlecryModel<[]> {
         if (!card) return;
         
         // Restore 4 Health to your hero
-        RestoreModel.run([
+        RestoreModel.deal([
             new RestoreEvent({
                 source: card,
                 method: this,
