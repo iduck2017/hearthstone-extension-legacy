@@ -44,7 +44,7 @@ export class AzureDrakeModel extends MinionCardModel {
                 feats: props.child?.feats ?? new MinionFeatsModel({
                     child: {
                         battlecry: [new AzureDrakeBattlecryModel()],
-                        list: [new SpellDamageModel(({ state: { offset: 1 }}))]
+                        feats: [new SpellDamageModel(({ state: { offset: 1 }}))]
                     }
                 }),
                 ...props.child

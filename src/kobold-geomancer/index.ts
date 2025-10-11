@@ -39,7 +39,7 @@ export class KoboldGeomancerModel extends MinionCardModel {
                 feats: props.child?.feats ?? new MinionFeatsModel({
                     child: { 
                         battlecry: [],
-                        list: [new SpellDamageModel({ state: { offset: 1 }})]
+                        feats: [new SpellDamageModel({ state: { offset: 1 }})]
                     }
                 }),
                 ...props.child

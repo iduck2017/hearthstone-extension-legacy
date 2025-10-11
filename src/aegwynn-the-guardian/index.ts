@@ -42,7 +42,7 @@ export class AegwynnTheGuardianModel extends MinionCardModel {
                 }),
                 feats: props.child?.feats ?? new MinionFeatsModel({
                     child: {
-                        list: [new SpellDamageModel({ state: { offset: 2 }})],
+                        feats: [new SpellDamageModel({ state: { offset: 2 }})],
                         deathrattle: [new AegwynnTheGuardianDeathrattleModel()]
                     }
                 }),

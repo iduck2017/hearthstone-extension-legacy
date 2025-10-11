@@ -45,7 +45,7 @@ export class WaterElementalModel extends MinionCardModel {
                 feats: props.child?.feats ?? new MinionFeatsModel({
                     child: { 
                         battlecry: [], 
-                        list: [new WaterElementalFeatureModel()]
+                        feats: [new WaterElementalFeatureModel()]
                     }
                 }),
                 ...props.child

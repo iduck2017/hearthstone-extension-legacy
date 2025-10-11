@@ -39,7 +39,7 @@ export class MirrorEntityModel extends SecretCardModel {
                 cost: props.child?.cost ?? new CostModel({ state: { origin: 3 }}),
                 feats: new SpellFeatsModel({
                     child: {
-                        list: [new MirrorEntityFeatureModel()]
+                        feats: [new MirrorEntityFeatureModel()]
                     }
                 }),
                 ...props.child 

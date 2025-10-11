@@ -41,7 +41,7 @@ export class RagnarosTheFirelordModel extends MinionCardModel {
                         health: new RoleHealthModel({ state: { origin: 8 }}),
                         feats: new RoleFeatsModel({
                             child: {
-                                list: [new RagnarosFeatureModel()]
+                                feats: [new RagnarosFeatureModel()]
                             }
                         })
                     }

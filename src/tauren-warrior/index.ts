@@ -40,7 +40,7 @@ export class TaurenWarriorModel extends MinionCardModel {
                         feats: new RoleFeatsModel({
                             child: {
                                 taunt: new TauntModel(),
-                                list: [new TaurenWarriorFeatureModel()]
+                                feats: [new TaurenWarriorFeatureModel()]
                             }
                         })
                     }

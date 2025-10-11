@@ -42,7 +42,7 @@ export class MalygosModel extends MinionCardModel {
                 feats: props.child?.feats ?? new MinionFeatsModel({
                     child: { 
                         battlecry: [], 
-                        list: [new SpellDamageModel({ state: { offset: 5 }})]
+                        feats: [new SpellDamageModel({ state: { offset: 5 }})]
                     }
                 }),
                 ...props.child

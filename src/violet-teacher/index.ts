@@ -42,7 +42,7 @@ export class VioletTeacherModel extends MinionCardModel {
                 feats: props.child?.feats ?? new MinionFeatsModel({
                     child: { 
                         battlecry: [],
-                        list: [new VioletTeacherFeatureModel()]
+                        feats: [new VioletTeacherFeatureModel()]
                     }
                 }),
                 ...props.child

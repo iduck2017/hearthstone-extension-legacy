@@ -43,7 +43,7 @@ export class SorcerersApprenticeModel extends MinionCardModel {
                 }),
                 feats: props.child?.feats ?? new MinionFeatsModel({
                     child: {
-                        list: [new SorcerersApprenticeFeatureModel()]
+                        feats: [new SorcerersApprenticeFeatureModel()]
                     }
                 }),
                 ...props.child

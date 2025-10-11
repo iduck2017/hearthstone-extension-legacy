@@ -18,12 +18,12 @@ export class CounterspellFeatureModel extends SecretFeatureModel {
         });
     }
 
-    @EventUtil.on(self => self.handle)
-    private listen() {
+    @EventUtil.on(self => self.handleCast)
+    private listenCast() {
         return this.route.game?.proxy.any(SpellPerformModel).event?.toRun
     }
     @SecretFeatureModel.span()
-    private handle(that: SpellPerformModel, event: SpellCastEvent) {
+    private handleCast(that: SpellPerformModel, event: SpellCastEvent) {
         const board = this.route.board;
         if (!board) return;
         const player = this.route.player;
