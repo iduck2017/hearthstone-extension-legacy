@@ -13,35 +13,35 @@ import { boot } from "../boot";
 
 
 describe('fireball', () => {
-    const game = new GameModel(() => ({
+    const game = new GameModel({
         state: { debug: { isDrawDisabled: true }},
         child: {
-            playerA: new PlayerModel(() => ({
+            playerA: new PlayerModel({
                 child: {
-                    mana: new ManaModel(() => ({ state: { origin: 10 }})),
+                    mana: new ManaModel({ state: { origin: 10 }}),
                     hero: new MageModel(),
-                    board: new BoardModel(() => ({
+                    board: new BoardModel({
                         child: { minions: [] }
-                    })),
-                    hand: new HandModel(() => ({
+                    }),
+                    hand: new HandModel({
                         child: { spells: [new FireballModel()] }
-                    }))
+                    })
                 }
-            })),
-            playerB: new PlayerModel(() => ({
+            }),
+            playerB: new PlayerModel({
                 child: {
-                    mana: new ManaModel(() => ({ state: { origin: 10 }})),
+                    mana: new ManaModel({ state: { origin: 10 }}),
                     hero: new MageModel(),
-                    board: new BoardModel(() => ({
+                    board: new BoardModel({
                         child: { minions: [new WispModel()] }
-                    })),
-                    hand: new HandModel(() => ({
+                    }),
+                    hand: new HandModel({
                         child: { spells: [] }
-                    }))
+                    })
                 }
-            }))
+            })
         }
-    }));
+    });
     boot(game);
     
     const handA = game.child.playerA.child.hand;
