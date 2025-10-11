@@ -1,20 +1,9 @@
 import { DamageEvent, DamageModel, DamageType, DeathrattleModel } from "hearthstone-core";
 import { TemplUtil } from "set-piece";
 
-export namespace ShadowedSpiritDeathrattleProps {
-    export type E = {}
-    export type S = {}
-    export type C = {}
-    export type R = {}
-}
 
 @TemplUtil.is('shadowed-spirit-deathrattle')
-export class ShadowedSpiritDeathrattleModel extends DeathrattleModel<
-    ShadowedSpiritDeathrattleProps.E,
-    ShadowedSpiritDeathrattleProps.S,
-    ShadowedSpiritDeathrattleProps.C,
-    ShadowedSpiritDeathrattleProps.R
-> {
+export class ShadowedSpiritDeathrattleModel extends DeathrattleModel {
     constructor(props?: ShadowedSpiritDeathrattleModel['props']) {
         props = props ?? {};
         super({

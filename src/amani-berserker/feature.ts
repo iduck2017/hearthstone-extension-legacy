@@ -1,21 +1,19 @@
 import { RoleAttackModel, FeatureModel, RoleHealthModel, RoleAttackDecor, OperationType, RoleModel } from "hearthstone-core";
 import { Event, EventUtil, StateUtil, TemplUtil, TranxUtil, Decor, Frame } from "set-piece";
 
-export namespace AmaniBerserkerFeatureProps {
+export namespace AmaniBerserkerFeatureModel {
     export type E = {};
-    export type S = {
-        offset: number,
-    };
+    export type S = { offset: number };
     export type C = {};
     export type R = {}
 }
 
 @TemplUtil.is('amani-berserker-feature')
 export class AmaniBerserkerFeatureModel extends FeatureModel<
-    AmaniBerserkerFeatureProps.E,
-    AmaniBerserkerFeatureProps.S,
-    AmaniBerserkerFeatureProps.C,
-    AmaniBerserkerFeatureProps.R
+    AmaniBerserkerFeatureModel.E,
+    AmaniBerserkerFeatureModel.S,
+    AmaniBerserkerFeatureModel.C,
+    AmaniBerserkerFeatureModel.R
 > {
     public get route() {
         const result = super.route;

@@ -2,20 +2,9 @@ import { FeatureModel, MinionCardModel, SpellCardModel } from "hearthstone-core"
 import { Event, EventUtil, TemplUtil } from "set-piece";
 import { VioletApprenticeModel } from "../violet-apprentice";
 
-export namespace VioletTeacherFeatureProps {
-    export type E = {}
-    export type S = {}
-    export type C = {}
-    export type R = {}
-}
 
 @TemplUtil.is('violet-teacher-feature')
-export class VioletTeacherFeatureModel extends FeatureModel<
-    VioletTeacherFeatureProps.E,
-    VioletTeacherFeatureProps.S,
-    VioletTeacherFeatureProps.C,
-    VioletTeacherFeatureProps.R
-> {
+export class VioletTeacherFeatureModel extends FeatureModel {
     public get route() {
         const result = super.route;
         const minion: MinionCardModel | undefined = result.list.find(item => item instanceof MinionCardModel);

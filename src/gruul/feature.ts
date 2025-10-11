@@ -1,20 +1,9 @@
 import { EndTurnHookModel, FeatureModel, IRoleBuffModel, MinionCardModel, RoleBuffModel } from "hearthstone-core";
 import { Event, EventUtil, TemplUtil } from "set-piece";
 
-export namespace GruulFeatureProps {
-    export type E = {}
-    export type S = {}
-    export type C = {}
-    export type R = {}
-}
 
 @TemplUtil.is('gruul-feature')
-export class GruulFeatureModel extends EndTurnHookModel<
-    GruulFeatureProps.E,
-    GruulFeatureProps.S,
-    GruulFeatureProps.C,
-    GruulFeatureProps.R
-> {
+export class GruulFeatureModel extends EndTurnHookModel {
     public get route() {
         const result = super.route;
         const minion: MinionCardModel | undefined = result.list.find(item => item instanceof MinionCardModel);

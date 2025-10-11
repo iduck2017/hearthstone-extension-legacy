@@ -1,21 +1,19 @@
 import { PlayerModel, IRoleBuffModel, TurnModel } from "hearthstone-core";
 import { Event, EventUtil, TemplUtil } from "set-piece";
 
-export namespace ScarletSubjugatorDebuffProps {
+export namespace ScarletSubjugatorDebuffModel {
     export type E = {};
     export type S = {};
     export type C = {};
-    export type R = {
-        player?: PlayerModel;
-    };
+    export type R = { player?: PlayerModel };
 }
 
 @TemplUtil.is('scarlet-subjugator-debuff')
 export class ScarletSubjugatorDebuffModel extends IRoleBuffModel<
-    ScarletSubjugatorDebuffProps.E,
-    ScarletSubjugatorDebuffProps.S,
-    ScarletSubjugatorDebuffProps.C,
-    ScarletSubjugatorDebuffProps.R
+    ScarletSubjugatorDebuffModel.E,
+    ScarletSubjugatorDebuffModel.S,
+    ScarletSubjugatorDebuffModel.C,
+    ScarletSubjugatorDebuffModel.R
 > {
     constructor(props?: ScarletSubjugatorDebuffModel['props']) {
         props = props ?? {};

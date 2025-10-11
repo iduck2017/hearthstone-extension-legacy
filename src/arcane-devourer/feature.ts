@@ -2,20 +2,8 @@ import { FeatureModel, MinionCardModel, SpellCardModel } from "hearthstone-core"
 import { ArcaneDevourerBuffModel } from "./buff";
 import { Event, EventUtil, TemplUtil } from "set-piece";
 
-export namespace ArcaneDevourerFeatureProps {
-    export type E = {}
-    export type S = {}
-    export type C = {}
-    export type R = {}
-}
-
 @TemplUtil.is('arcane-devourer-feature')
-export class ArcaneDevourerFeatureModel extends FeatureModel<
-    ArcaneDevourerFeatureProps.E,
-    ArcaneDevourerFeatureProps.S,
-    ArcaneDevourerFeatureProps.C,
-    ArcaneDevourerFeatureProps.R
-> {
+export class ArcaneDevourerFeatureModel extends FeatureModel {
     public get route() {
         const result = super.route;
         const minion: MinionCardModel | undefined = result.list.find(item => item instanceof MinionCardModel);

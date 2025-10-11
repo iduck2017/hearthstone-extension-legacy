@@ -1,20 +1,9 @@
 import { SelectEvent, RoleModel, DamageModel, DamageEvent, DamageType, SpellEffectModel } from "hearthstone-core";
 import { TemplUtil } from "set-piece";
 
-export namespace FireballEffectProps {
-    export type E = {}
-    export type S = {}
-    export type C = {}
-    export type R = {}
-}
 
 @TemplUtil.is('fireball-effect')
-export class FireballEffectModel extends SpellEffectModel<[RoleModel],
-    FireballEffectProps.E,
-    FireballEffectProps.S,
-    FireballEffectProps.C,
-    FireballEffectProps.R
-> {
+export class FireballEffectModel extends SpellEffectModel<[RoleModel]> {
     constructor(props?: FireballEffectModel['props']) {
         props = props ?? {};
         super({

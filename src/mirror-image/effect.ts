@@ -17,20 +17,9 @@ import { EffectModel, SpellEffectModel } from "hearthstone-core";
 import { TemplUtil } from "set-piece";
 import { MirrorImageMinionModel } from "./minion";
 
-export namespace MirrorImageEffectProps {
-    export type E = {}
-    export type S = {}
-    export type C = {}
-    export type R = {}
-}
 
 @TemplUtil.is('mirror-image-effect')
-export class MirrorImageEffectModel extends SpellEffectModel<[],
-    MirrorImageEffectProps.E,
-    MirrorImageEffectProps.S,
-    MirrorImageEffectProps.C,
-    MirrorImageEffectProps.R
-> {
+export class MirrorImageEffectModel extends SpellEffectModel<[]> {
     constructor(props?: MirrorImageEffectModel['props']) {
         props = props ?? {};
         super({

@@ -2,20 +2,8 @@ import { FeatureModel, MinionCardModel, SpellCardModel } from "hearthstone-core"
 import { Event, EventUtil, TemplUtil } from "set-piece";
 import { ManaWyrmBuffModel } from "./buff";
 
-export namespace ManaWyrmFeatureProps {
-    export type E = {}
-    export type S = {}
-    export type C = {}
-    export type R = {}
-}
-
 @TemplUtil.is('mana-wyrm-feature')
-export class ManaWyrmFeatureModel extends FeatureModel<
-    ManaWyrmFeatureProps.E,
-    ManaWyrmFeatureProps.S,
-    ManaWyrmFeatureProps.C,
-    ManaWyrmFeatureProps.R
-> {
+export class ManaWyrmFeatureModel extends FeatureModel {
     public get route() {
         const result = super.route;
         const minion: MinionCardModel | undefined = result.list.find(item => item instanceof MinionCardModel);

@@ -1,20 +1,8 @@
 import { EffectModel, SpellEffectModel } from "hearthstone-core";
 import { TemplUtil } from "set-piece";
 
-export namespace ArcaneIntellectEffectProps {
-    export type E = {}
-    export type S = {}
-    export type C = {}
-    export type R = {}
-}
-
 @TemplUtil.is('arcane-intellect-effect')
-export class ArcaneIntellectEffectModel extends SpellEffectModel<[],
-  ArcaneIntellectEffectProps.E,
-  ArcaneIntellectEffectProps.S,
-  ArcaneIntellectEffectProps.C,
-  ArcaneIntellectEffectProps.R
-> {
+export class ArcaneIntellectEffectModel extends SpellEffectModel<[]> {
     constructor(props?: ArcaneIntellectEffectModel['props']) {
         props = props ?? {};
         super({

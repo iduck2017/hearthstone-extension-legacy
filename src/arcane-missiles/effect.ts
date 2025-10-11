@@ -1,20 +1,9 @@
 import { DamageEvent, DamageModel, DamageType, EffectModel, SelectEvent, SpellEffectModel } from "hearthstone-core";
 import { Model, TemplUtil } from "set-piece";
 
-export namespace ArcaneMissilesEffectProps {
-    export type E = {}
-    export type S = {}
-    export type C = {}
-    export type R = {}
-}
 
 @TemplUtil.is('arcane-missiles-effect')
-export class ArcaneMissilesEffectModel extends SpellEffectModel<[],
-    ArcaneMissilesEffectProps.E,
-    ArcaneMissilesEffectProps.S,
-    ArcaneMissilesEffectProps.C,
-    ArcaneMissilesEffectProps.R
-> {
+export class ArcaneMissilesEffectModel extends SpellEffectModel<[]> {
     constructor(props?: ArcaneMissilesEffectModel['props']) {
         props = props ?? {};
         super({

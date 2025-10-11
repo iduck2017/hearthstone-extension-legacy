@@ -1,20 +1,9 @@
 import { FeatureModel, RoleActionDecor, RoleActionModel, RoleModel } from "hearthstone-core";
 import { StateUtil, TemplUtil } from "set-piece";
 
-export namespace RagnarosFeatureProps {
-    export type E = {};
-    export type S = {};
-    export type C = {};
-    export type R = {};
-}
 
 @TemplUtil.is('ragnaros-feature')
-export class RagnarosFeatureModel extends FeatureModel<
-    RagnarosFeatureProps.E,
-    RagnarosFeatureProps.S,
-    RagnarosFeatureProps.C,
-    RagnarosFeatureProps.R
-> {
+export class RagnarosFeatureModel extends FeatureModel {
     public get route() {
         const result = super.route;
         const role: RoleModel | undefined = result.list.find(item => item instanceof RoleModel);

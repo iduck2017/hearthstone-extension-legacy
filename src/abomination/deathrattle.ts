@@ -1,20 +1,10 @@
 import { DeathrattleModel, DamageModel, DamageEvent, DamageType, MinionCardModel } from "hearthstone-core";
 import { TemplUtil } from "set-piece";
 
-export namespace AbominationDeathrattleModel {
-    export type E = {}
-    export type S = {}
-    export type C = {}
-    export type R = {}
-}
+
 
 @TemplUtil.is('abomination-deathrattle')
-export class AbominationDeathrattleModel extends DeathrattleModel<
-    AbominationDeathrattleModel.E,
-    AbominationDeathrattleModel.S,
-    AbominationDeathrattleModel.C,
-    AbominationDeathrattleModel.R
-> {
+export class AbominationDeathrattleModel extends DeathrattleModel {
     public get route() {
         const result = super.route;
         const minion: MinionCardModel | undefined = result.list.find(item => item instanceof MinionCardModel)

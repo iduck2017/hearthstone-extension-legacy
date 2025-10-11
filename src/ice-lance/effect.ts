@@ -1,20 +1,9 @@
 import { SelectEvent, RoleModel, DamageModel, DamageEvent, DamageType, SpellEffectModel } from "hearthstone-core";
 import { TemplUtil } from "set-piece";
 
-export namespace IceLanceEffectProps {
-    export type E = {}
-    export type S = {}
-    export type C = {}
-    export type R = {}
-}
 
 @TemplUtil.is('ice-lance-effect')
-export class IceLanceEffectModel extends SpellEffectModel<[RoleModel],
-    IceLanceEffectProps.E,
-    IceLanceEffectProps.S,
-    IceLanceEffectProps.C,
-    IceLanceEffectProps.R
-> {
+export class IceLanceEffectModel extends SpellEffectModel<[RoleModel]> {
     constructor(props?: IceLanceEffectModel['props']) {
         props = props ?? {};
         super({

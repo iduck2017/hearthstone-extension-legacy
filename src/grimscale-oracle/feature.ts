@@ -3,9 +3,7 @@ import { DebugUtil, StateUtil, TemplUtil, TranxUtil, Decor } from "set-piece";
 
 export namespace GrimscaleOracleFeatureModel {
     export type E = {}
-    export type S = {
-        offset: number;
-    }
+    export type S = { offset: number; }
     export type C = {}
     export type R = {}
 }

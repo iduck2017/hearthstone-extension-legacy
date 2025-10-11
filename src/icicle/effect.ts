@@ -1,20 +1,9 @@
 import { SelectEvent, RoleModel, DamageModel, DamageEvent, DamageType, SpellEffectModel } from "hearthstone-core";
 import { TemplUtil } from "set-piece";
 
-export namespace IcicleEffectProps {
-    export type E = {}
-    export type S = {}
-    export type C = {}
-    export type R = {}
-}
 
 @TemplUtil.is('icicle-effect')
-export class IcicleEffectModel extends SpellEffectModel<[RoleModel],
-    IcicleEffectProps.E,
-    IcicleEffectProps.S,
-    IcicleEffectProps.C,
-    IcicleEffectProps.R
-> {
+export class IcicleEffectModel extends SpellEffectModel<[RoleModel]> {
     constructor(props?: IcicleEffectModel['props']) {
         props = props ?? {};
         super({

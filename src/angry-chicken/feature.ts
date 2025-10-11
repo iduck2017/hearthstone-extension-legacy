@@ -2,21 +2,19 @@ import { RoleAttackModel, FeatureModel, RoleHealthModel, RoleAttackDecor, Operat
 import { Event, EventUtil, StateUtil, TemplUtil, TranxUtil, Decor, Frame } from "set-piece";
 import { DeepReadonly } from "utility-types";
 
-export namespace AngryChickenFeatureProps {
+export namespace AngryChickenFeatureModel {
     export type E = {};
-    export type S = {
-        offset: number,
-    };
+    export type S = { offset: number };
     export type C = {};
     export type R = {}
 }
 
 @TemplUtil.is('angry-chicken-feature')
 export class AngryChickenFeatureModel extends FeatureModel<
-    AngryChickenFeatureProps.E,
-    AngryChickenFeatureProps.S,
-    AngryChickenFeatureProps.C,
-    AngryChickenFeatureProps.R
+    AngryChickenFeatureModel.E,
+    AngryChickenFeatureModel.S,
+    AngryChickenFeatureModel.C,
+    AngryChickenFeatureModel.R
 > {
     public get route() {
         const result = super.route;

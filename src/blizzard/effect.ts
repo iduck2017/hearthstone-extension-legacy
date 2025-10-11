@@ -1,20 +1,9 @@
 import { EffectModel, DamageModel, DamageEvent, DamageType, SpellEffectModel } from "hearthstone-core";
 import { TemplUtil } from "set-piece";
 
-export namespace BlizzardEffectProps {
-    export type E = {}
-    export type S = {}
-    export type C = {}
-    export type R = {}
-}
 
 @TemplUtil.is('blizzard-effect')
-export class BlizzardEffectModel extends SpellEffectModel<[],
-    BlizzardEffectProps.E,
-    BlizzardEffectProps.S,
-    BlizzardEffectProps.C,
-    BlizzardEffectProps.R
-> {
+export class BlizzardEffectModel extends SpellEffectModel<[]> {
     constructor(props?: BlizzardEffectModel['props']) {
         props = props ?? {};
         super({

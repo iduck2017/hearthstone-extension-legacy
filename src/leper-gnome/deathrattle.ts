@@ -1,20 +1,9 @@
 import { DamageEvent, DamageModel, DamageType, DeathrattleModel } from "hearthstone-core";
 import { TemplUtil } from "set-piece";
 
-export namespace LeperGnomeDeathrattleProps {
-    export type E = {}
-    export type S = {}
-    export type C = {}
-    export type R = {}
-}
 
 @TemplUtil.is('leper-gnome-deathrattle')
-export class LeperGnomeDeathrattleModel extends DeathrattleModel<
-    LeperGnomeDeathrattleProps.E,
-    LeperGnomeDeathrattleProps.S,
-    LeperGnomeDeathrattleProps.C,
-    LeperGnomeDeathrattleProps.R
-> {
+export class LeperGnomeDeathrattleModel extends DeathrattleModel {
     constructor(props?: LeperGnomeDeathrattleModel['props']) {
         props = props ?? {};
         super({

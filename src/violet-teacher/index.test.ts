@@ -114,7 +114,7 @@ describe('violet-teacher', () => {
         expect(roleF.child.attack.state.current).toBe(1); // Violet Apprentice: 1/1
         expect(roleF.child.health.state.current).toBe(1);
 
-        expect(boardA.refer.order[0]).toBe(cardC);
-        expect(boardA.refer.order[1]).toBe(cardF);
+        expect(boardA.refer.queue?.[0]).toBe(cardC);
+        expect(boardA.refer.queue?.[1]).toBe(cardF);
     });
 });

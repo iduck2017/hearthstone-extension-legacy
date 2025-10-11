@@ -1,20 +1,9 @@
 import { EffectModel, SpellEffectModel } from "hearthstone-core";
 import { TemplUtil } from "set-piece";
 
-export namespace FrostNovaEffectProps {
-    export type E = {}
-    export type S = {}
-    export type C = {}
-    export type R = {}
-}
 
 @TemplUtil.is('frost-nova-effect')
-export class FrostNovaEffectModel extends SpellEffectModel<[],
-    FrostNovaEffectProps.E,
-    FrostNovaEffectProps.S,
-    FrostNovaEffectProps.C,
-    FrostNovaEffectProps.R
-> {
+export class FrostNovaEffectModel extends SpellEffectModel<[]>{
     constructor(props?: FrostNovaEffectModel['props']) {
         props = props ?? {};
         super({

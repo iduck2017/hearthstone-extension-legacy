@@ -1,20 +1,8 @@
 import { FeatureModel, RoleActionDecor, RoleActionModel, RoleModel } from "hearthstone-core";
 import { StateUtil, TemplUtil, Decor } from "set-piece";
 
-export namespace AncientWatcherFeatureProps {
-    export type E = {};
-    export type S = {};
-    export type C = {};
-    export type R = {}
-}
-
 @TemplUtil.is('ancient-watcher-feature')
-export class AncientWatcherFeatureModel extends FeatureModel<
-    AncientWatcherFeatureProps.E,
-    AncientWatcherFeatureProps.S,
-    AncientWatcherFeatureProps.C,
-    AncientWatcherFeatureProps.R
-> {
+export class AncientWatcherFeatureModel extends FeatureModel {
     public get route() {
         const result = super.route;
         const role: RoleModel | undefined = result.list.find(item => item instanceof RoleModel);

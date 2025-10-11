@@ -1,20 +1,8 @@
 import { DamageEvent, DamageModel, FeatureModel, MinionCardModel } from "hearthstone-core";
 import { Event, EventUtil, TemplUtil } from "set-piece";
 
-export namespace WaterElementalFeatureProps {
-    export type E = {}
-    export type S = {}
-    export type C = {}
-    export type R = {}
-}
-
 @TemplUtil.is('water-elemental-feature')
-export class WaterElementalFeatureModel extends FeatureModel<
-    WaterElementalFeatureProps.E,
-    WaterElementalFeatureProps.S,
-    WaterElementalFeatureProps.C,
-    WaterElementalFeatureProps.R
-> {
+export class WaterElementalFeatureModel extends FeatureModel {
     public get route() {
         const result = super.route;
         const minion: MinionCardModel | undefined = result.list.find(item => item instanceof MinionCardModel);

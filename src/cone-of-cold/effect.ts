@@ -1,20 +1,9 @@
 import { SelectEvent, RoleModel, DamageModel, DamageEvent, DamageType, MinionCardModel, SpellEffectModel } from "hearthstone-core";
 import { TemplUtil } from "set-piece";
 
-export namespace ConeOfColdEffectProps {
-    export type E = {}
-    export type S = {}
-    export type C = {}
-    export type R = {}
-}
 
 @TemplUtil.is('cone-of-cold-effect')
-export class ConeOfColdEffectModel extends SpellEffectModel<[RoleModel],
-    ConeOfColdEffectProps.E,
-    ConeOfColdEffectProps.S,
-    ConeOfColdEffectProps.C,
-    ConeOfColdEffectProps.R
-> {
+export class ConeOfColdEffectModel extends SpellEffectModel<[RoleModel]> {
     constructor(props?: ConeOfColdEffectModel['props']) {
         props = props ?? {};
         super({

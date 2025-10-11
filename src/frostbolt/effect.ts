@@ -1,20 +1,9 @@
 import { SelectEvent, RoleModel, DamageModel, DamageEvent, DamageType, SpellEffectModel } from "hearthstone-core";
 import { TemplUtil } from "set-piece";
 
-export namespace FrostboltEffectProps {
-    export type E = {}
-    export type S = {}
-    export type C = {}
-    export type R = {}
-}
 
 @TemplUtil.is('frostbolt-effect')
-export class FrostboltEffectModel extends SpellEffectModel<[RoleModel],
-    FrostboltEffectProps.E,
-    FrostboltEffectProps.S,
-    FrostboltEffectProps.C,
-    FrostboltEffectProps.R
-> {
+export class FrostboltEffectModel extends SpellEffectModel<[RoleModel]> {
     constructor(props?: FrostboltEffectModel['props']) {
         props = props ?? {};
         super({

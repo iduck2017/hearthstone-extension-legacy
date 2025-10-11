@@ -2,20 +2,9 @@ import { EndTurnHookModel, MinionCardModel } from "hearthstone-core";
 import { DebugUtil, TemplUtil } from "set-piece";
 import { EtherealArcanistBuffModel } from "./buff";
 
-export namespace EtherealArcanistFeatureProps {
-    export type E = {}
-    export type S = {}
-    export type C = {}
-    export type R = {}
-}
 
 @TemplUtil.is('ethereal-arcanist-end-turn')
-export class EtherealArcanistFeatureModel extends EndTurnHookModel<
-    EtherealArcanistFeatureProps.E,
-    EtherealArcanistFeatureProps.S,
-    EtherealArcanistFeatureProps.C,
-    EtherealArcanistFeatureProps.R
-> {
+export class EtherealArcanistFeatureModel extends EndTurnHookModel {
     public get route() {
         const result = super.route;
         const minion: MinionCardModel | undefined = result.list.find(item => item instanceof MinionCardModel);

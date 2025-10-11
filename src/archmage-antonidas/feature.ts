@@ -2,20 +2,10 @@ import { FeatureModel, SpellCardModel } from "hearthstone-core";
 import { Event, EventUtil, TemplUtil } from "set-piece";
 import { FireballModel } from "../fireball";
 
-export namespace ArchmageAntonidasFeatureProps {
-    export type E = {}
-    export type S = {}
-    export type C = {}
-    export type R = {}
-}
+
 
 @TemplUtil.is('archmage-antonidas-feature')
-export class ArchmageAntonidasFeatureModel extends FeatureModel<
-    ArchmageAntonidasFeatureProps.E,
-    ArchmageAntonidasFeatureProps.S,
-    ArchmageAntonidasFeatureProps.C,
-    ArchmageAntonidasFeatureProps.R
-> {
+export class ArchmageAntonidasFeatureModel extends FeatureModel {
     constructor(props?: ArchmageAntonidasFeatureModel['props']) {
         props = props ?? {};
         super({

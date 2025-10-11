@@ -12,29 +12,29 @@ import { WispModel } from "../wisp";
 import { VoodooDoctorModel } from ".";
 
 describe('voodoo-doctor', () => {
-    const game = new GameModel(() => ({
+    const game = new GameModel({
         state: { debug: { isDrawDisabled: true }},
         child: {
-            playerA: new PlayerModel(() => ({
+            playerA: new PlayerModel({
                 child: {
                     hero: new MageModel(),
-                    mana: new ManaModel(() => ({ state: { origin: 10 }})),
-                    board: new BoardModel(() => ({
+                    mana: new ManaModel({ state: { origin: 10 }}),
+                    board: new BoardModel({
                         child: { minions: [new WispModel()] }
-                    })),
-                    hand: new HandModel(() => ({
+                    }),
+                    hand: new HandModel({
                         child: { minions: [new VoodooDoctorModel()] }
-                    }))
+                    })
                 }
-            })),
-            playerB: new PlayerModel(() => ({
+            }),
+            playerB: new PlayerModel({
                 child: {
-                    mana: new ManaModel(() => ({ state: { origin: 10 }})),
+                    mana: new ManaModel({ state: { origin: 10 }}),
                     hero: new MageModel(),
                 }
-            }))
+            })
         }
-    }));
+    });
     boot(game)
     const turn = game.child.turn;
     const boardA = game.child.playerA.child.board;

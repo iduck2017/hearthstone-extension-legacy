@@ -1,20 +1,10 @@
 import { DeathrattleModel } from "hearthstone-core";
 import { TemplUtil } from "set-piece";
 
-export namespace BloodmageThalnosDeathrattleProps {
-    export type E = {}
-    export type S = {}
-    export type C = {}
-    export type R = {}
-}
+
 
 @TemplUtil.is('bloodmage-thalnos-deathrattle')
-export class BloodmageThalnosDeathrattleModel extends DeathrattleModel<
-    BloodmageThalnosDeathrattleProps.E,
-    BloodmageThalnosDeathrattleProps.S,
-    BloodmageThalnosDeathrattleProps.C,
-    BloodmageThalnosDeathrattleProps.R
-> {
+export class BloodmageThalnosDeathrattleModel extends DeathrattleModel {
     constructor(props?: BloodmageThalnosDeathrattleModel['props']) {
         props = props ?? {};
         super({
