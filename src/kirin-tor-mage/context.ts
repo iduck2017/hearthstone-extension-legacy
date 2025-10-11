@@ -1,4 +1,4 @@
-import { CostDecor, CostModel, FeatureModel, ManaModel, SecretCardModel, TurnModel } from "hearthstone-core";
+import { CostDecor, CostModel, FeatureModel, ManaModel, OperatorType, SecretCardModel, TurnModel } from "hearthstone-core";
 import { Event, EventUtil, Model, StateUtil, TemplUtil } from "set-piece";
 
 @TemplUtil.is('kirin-tor-mage-feature')
@@ -28,7 +28,11 @@ export class KirinTorMageContextModel extends FeatureModel {
         if (!player) return;
         const card = that.route.card;
         if (!(card instanceof SecretCardModel)) return;
-        decor.free();
+        decor.add({
+            offset: 0,
+            type: OperatorType.SET,
+            reason: this,
+        });
     }
 
     @EventUtil.on(self => self.handleCast)

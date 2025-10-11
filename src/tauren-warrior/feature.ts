@@ -1,4 +1,4 @@
-import { FeatureModel, RoleAttackModel, RoleAttackDecor, OperationType, RoleModel, RoleHealthModel } from "hearthstone-core";
+import { FeatureModel, RoleAttackModel, RoleAttackDecor, OperatorType, RoleModel, RoleHealthModel } from "hearthstone-core";
 import { EventUtil, TemplUtil, StateUtil, TranxUtil, Frame, Event } from "set-piece";
 
 export namespace TaurenWarriorFeatureModel {
@@ -69,8 +69,8 @@ export class TaurenWarriorFeatureModel extends FeatureModel<
         if (!isEnrage) return;
         
         decor.add({
-            value: this.state.offset,
-            type: OperationType.ADD,
+            type: OperatorType.ADD,
+            offset: this.state.offset,
             reason: this,
         })
     }

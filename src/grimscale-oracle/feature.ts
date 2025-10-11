@@ -1,4 +1,4 @@
-import { RoleAttackModel, FeatureModel, MinionCardModel, RaceType, RoleModel, OperationType, RoleAttackDecor } from "hearthstone-core";
+import { RoleAttackModel, FeatureModel, MinionCardModel, RaceType, RoleModel, OperatorType, RoleAttackDecor } from "hearthstone-core";
 import { DebugUtil, StateUtil, TemplUtil, TranxUtil, Decor } from "set-piece";
 
 export namespace GrimscaleOracleFeatureModel {
@@ -55,8 +55,8 @@ export class GrimscaleOracleFeatureModel extends FeatureModel<
 
         if (!minion.state.races.includes(RaceType.MURLOC)) return;
         decor.add({
-            value: this.state.offset,
-            type: OperationType.ADD,
+            offset: this.state.offset,
+            type: OperatorType.ADD,
             reason: this,
         })
     }

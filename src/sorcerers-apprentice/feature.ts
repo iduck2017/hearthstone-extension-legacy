@@ -1,5 +1,5 @@
-import { CostDecor, CostModel, CostType, FeatureModel, SpellCardModel } from "hearthstone-core";
-import { Event, EventUtil, StateUtil, TemplUtil } from "set-piece";
+import { CostDecor, CostModel, CostType, FeatureModel, OperatorType, SpellCardModel } from "hearthstone-core";
+import { StateUtil, TemplUtil } from "set-piece";
 
 @TemplUtil.is('sorcerers-apprentice-feature')
 export class SorcerersApprenticeFeatureModel extends FeatureModel {
@@ -28,6 +28,11 @@ export class SorcerersApprenticeFeatureModel extends FeatureModel {
         const player = that.route.player;
         if (player !== this.route.player) return;
         if (that.state.type !== CostType.MANA) return;
-        decor.add(-1, true);
+        decor.add({
+            offset: -1,
+            type: OperatorType.ADD,
+            reason: this,
+            minumum: 1,
+        });
     }
 }

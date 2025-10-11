@@ -1,4 +1,4 @@
-import { RoleAttackModel, FeatureModel, RoleHealthModel, RoleAttackDecor, OperationType, RoleModel } from "hearthstone-core";
+import { RoleAttackModel, FeatureModel, RoleHealthModel, RoleAttackDecor, OperatorType, RoleModel } from "hearthstone-core";
 import { Event, EventUtil, StateUtil, TemplUtil, TranxUtil, Decor, Frame } from "set-piece";
 import { DeepReadonly } from "utility-types";
 
@@ -71,8 +71,8 @@ export class AngryChickenFeatureModel extends FeatureModel<
         if (!isEnrage) return;
         
         decor.add({
-            value: this.state.offset,
-            type: OperationType.ADD,
+            offset: this.state.offset,
+            type: OperatorType.ADD,
             reason: this,
         })
     }
