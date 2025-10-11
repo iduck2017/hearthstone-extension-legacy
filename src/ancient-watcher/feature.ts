@@ -17,6 +17,7 @@ export class AncientWatcherFeatureModel extends FeatureModel {
         super({
             uuid: props.uuid,
             state: {
+                isBoard: true,
                 name: 'Ancient Watcher\'s Restriction',
                 desc: 'Can\'t attack.',
                 isActive: true,

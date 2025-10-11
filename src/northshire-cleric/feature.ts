@@ -8,6 +8,7 @@ export class NorthshireClericFeatureModel extends FeatureModel {
         super({
             uuid: props.uuid,
             state: {
+                isBoard: true,
                 name: 'Northshire Cleric\'s feature',
                 desc: 'Whenever a minion is healed, draw a card.',
                 isActive: true,

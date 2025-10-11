@@ -17,6 +17,7 @@ export class WaterElementalFeatureModel extends FeatureModel {
         super({
             uuid: props.uuid,
             state: { 
+                isBoard: true,
                 name: "Water Elemental's feature",
                 desc: "Freeze any character damaged by this minion.",
                 isActive: true,
@@ -28,12 +29,11 @@ export class WaterElementalFeatureModel extends FeatureModel {
     }
 
 
-    @EventUtil.on(self => self.handle)
-    private listen() {
+    @EventUtil.on(self => self.handleDamage)
+    private listenDamage() {
         return this.route.minion?.proxy.child.damage.event?.onRun
     }
-
-    private handle(that: DamageModel, event: DamageEvent) {
+    private handleDamage(that: DamageModel, event: DamageEvent) {
         const minion = this.route.minion;
         if (!minion) return;
         const target = event.detail.target;

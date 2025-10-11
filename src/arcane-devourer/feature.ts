@@ -18,6 +18,7 @@ export class ArcaneDevourerFeatureModel extends FeatureModel {
         super({
             uuid: props.uuid,
             state: { 
+                isBoard: true,
                 name: "Arcane Devourer's feature",
                 desc: "Whenever you cast a spell, gain +2/+2.",
                 isActive: true,

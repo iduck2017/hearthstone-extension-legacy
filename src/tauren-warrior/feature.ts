@@ -29,6 +29,7 @@ export class TaurenWarriorFeatureModel extends FeatureModel<
         super({
             uuid: props.uuid,
             state: {
+                isBoard: true,
                 name: "Tauren Warrior's Buff",
                 desc: "Has +3 Attack while damaged.",
                 offset: 3,

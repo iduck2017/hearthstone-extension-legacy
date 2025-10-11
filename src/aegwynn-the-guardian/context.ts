@@ -11,6 +11,7 @@ export class AegwynnTheGuardianContextModel extends FeatureModel {
             state: {
                 name: 'Aegwynn The Guardian\'s feature',
                 desc: 'The next minion you draw inherits Spell Damage +2.',
+                isBoard: false,
                 isActive: true,
                 ...props.state,
             },

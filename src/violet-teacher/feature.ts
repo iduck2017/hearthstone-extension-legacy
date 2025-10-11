@@ -19,6 +19,7 @@ export class VioletTeacherFeatureModel extends FeatureModel {
         super({
             uuid: props.uuid,
             state: { 
+                isBoard: true,
                 name: "Violet Teacher's feature",
                 desc: "Whenever you cast a spell, summon a 1/1 Violet Apprentice.",
                 isActive: true,

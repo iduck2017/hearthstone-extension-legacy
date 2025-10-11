@@ -8,6 +8,7 @@ export class KirinTorMageContextModel extends FeatureModel {
         super({
             uuid: props.uuid,
             state: {
+                isBoard: false,
                 name: "Kirin Tor Mage's feature",
                 desc: "The next Secret you play this turn costs (0).",
                 isActive: true,

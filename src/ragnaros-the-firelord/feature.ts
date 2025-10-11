@@ -18,6 +18,7 @@ export class RagnarosFeatureModel extends FeatureModel {
         super({
             uuid: props.uuid,
             state: {
+                isBoard: true,
                 name: 'Ragnaros\'s Restriction',
                 desc: 'Can\'t attack.',
                 isActive: true,

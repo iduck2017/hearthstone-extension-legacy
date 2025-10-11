@@ -11,6 +11,7 @@ export class ArchmageAntonidasFeatureModel extends FeatureModel {
         super({
             uuid: props.uuid,
             state: {
+                isBoard: true,
                 name: "Archmage Antonidas's feature",
                 desc: "Whenever you cast a spell, add a 'Fireball' spell to your hand.",
                 isActive: true,

@@ -18,6 +18,7 @@ export class ManaWyrmFeatureModel extends FeatureModel {
         super({
             uuid: props.uuid,
             state: { 
+                isBoard: true,
                 name: "Mana Wyrm's feature",
                 desc: "Whenever you cast a spell, gain +1 Attack.",
                 isActive: true,

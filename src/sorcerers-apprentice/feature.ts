@@ -8,6 +8,7 @@ export class SorcerersApprenticeFeatureModel extends FeatureModel {
         super({
             uuid: props.uuid,
             state: {
+                isBoard: true,
                 name: "Sorcerer's Apprentice's feature",
                 desc: "Your spells cost (1) less (but not less than 1).",
                 isActive: true,

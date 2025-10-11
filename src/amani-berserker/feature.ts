@@ -29,6 +29,7 @@ export class AmaniBerserkerFeatureModel extends FeatureModel<
         super({
             uuid: props.uuid,
             state: {
+                isBoard: true,
                 name: 'Amani Berserker\'s Buff',
                 desc: 'Has +3 Attack while damaged.',
                 offset: 3,

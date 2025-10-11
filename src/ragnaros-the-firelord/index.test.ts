@@ -63,6 +63,12 @@ describe('ragnaros-the-firelord', () => {
     const roleB = playerB.child.hero.child.role;
     const roleC = cardC.child.role;
 
+    test('turn-end', async () => {
+        game.child.turn.next();
+        expect(roleB.child.health.state.current).toBe(30);
+        game.child.turn.next();
+    })
+
     test('ragnaros-the-firelord-play', async () => {
         // Check initial state
         expect(roleC.child.attack.state.current).toBe(8); // Ragnaros: 8/8

@@ -19,7 +19,6 @@ export class RagnarosEndTurnModel extends EndTurnHookModel {
 
     public async doRun(isCurrent: boolean) {
         if (!isCurrent) return; // Only trigger at the end of the current player's turn
-        if (!this.route.board) return;
 
         const player = this.route.player;
         if (!player) return;

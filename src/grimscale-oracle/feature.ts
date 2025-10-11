@@ -29,6 +29,7 @@ export class GrimscaleOracleFeatureModel extends FeatureModel<
         super({
             uuid: props.uuid,
             state: {
+                isBoard: true,
                 name: 'Grimscale Oracle\'s Aura',
                 desc: 'Your other Murlocs have +1 Attack.',
                 offset: 1,
