@@ -24,7 +24,6 @@ export class NorthshireClericFeatureModel extends FeatureModel {
         return this.route.game?.proxy.any(RoleHealthModel).event?.onHeal
     }
     private handleHeal(that: RoleHealthModel, event: RestoreEvent) {
-        if (!this.route.board) return;
         const player = this.route.player;
         if (!player) return;
         // Only trigger for minions (not heroes)

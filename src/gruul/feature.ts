@@ -29,7 +29,6 @@ export class GruulFeatureModel extends EndTurnHookModel {
     }
 
     protected doRun() {
-        if (!this.route.board) return;
         const minion = this.route.minion;
         if (!minion) return;
         const role = minion.child.role;

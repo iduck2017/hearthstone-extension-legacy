@@ -19,7 +19,6 @@ export class LightwellEndTurnModel extends EndTurnHookModel {
 
     public async doRun(isCurrent: boolean) {
         if (!isCurrent) return;
-        if (!this.route.board) return;
 
         const player = this.route.player;
         if (!player) return;

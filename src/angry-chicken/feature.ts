@@ -31,7 +31,7 @@ export class AngryChickenFeatureModel extends FeatureModel<
         super({
             uuid: props.uuid,
             state: {
-                isBoard: true,
+                isBoard: false,
                 name: 'Angry Chicken\'s Buff',
                 desc: 'Has +5 Attack while damaged.',
                 offset: 5,

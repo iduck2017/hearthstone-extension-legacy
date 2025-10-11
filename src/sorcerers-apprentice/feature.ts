@@ -24,7 +24,6 @@ export class SorcerersApprenticeFeatureModel extends FeatureModel {
         return this.route.player?.proxy.child.hand.child.spells.child.cost.decor
     }
     private modifyCost(that: CostModel, decor: CostDecor) {
-        if (!this.route.board) return;
         const card = that.route.card;
         const player = that.route.player;
         if (player !== this.route.player) return;

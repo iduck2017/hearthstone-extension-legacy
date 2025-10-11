@@ -37,7 +37,6 @@ export class ScarletSubjugatorDebuffModel extends IRoleBuffModel<
         return this.route.game?.proxy.child.turn.event?.onStart
     }
     public async handleTurn(that: TurnModel, event: Event) {
-        if (!this.route.board) return;
         const count = this.state.count;
         const current = that.state.current;
         if (current !== count) return;

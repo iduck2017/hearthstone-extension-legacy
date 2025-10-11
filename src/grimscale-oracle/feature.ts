@@ -46,7 +46,6 @@ export class GrimscaleOracleFeatureModel extends FeatureModel<
         return this.route.player?.proxy.child.board.child.minions.child.role.child.attack.decor
     }
     private modifyAttack(that: RoleAttackModel, decor: RoleAttackDecor) {
-        if (!this.route.board) return;
         if (!this.state.isActive) return;
         
         const minion = that.route.minion;
