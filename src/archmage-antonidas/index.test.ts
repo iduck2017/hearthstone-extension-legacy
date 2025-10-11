@@ -82,7 +82,7 @@ describe('archmage-antonidas', () => {
         // Antonidas should add a Fireball to hand
         expect(handA.child.spells.length).toBe(1); // Arcane Intellect + generated Fireball
         expect(handA.child.spells.some(spell => spell instanceof FireballModel)).toBe(true);
-        expect(boardB.refer.queue?.length).toBe(0);
+        expect(boardB.refer.queue.length).toBe(0);
         expect(roleF.child.health.state.current).toBe(-2); // Wisp: 1 - 3 = -2 (dies)
         expect(playerA.child.mana.state.current).toBe(8); // 3 - 2 cost
     });

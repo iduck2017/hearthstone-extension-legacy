@@ -62,8 +62,8 @@ describe('wolfrider', () => {
     const boardA = playerA.child.board;
     const boardB = playerB.child.board;
     const handA = playerA.child.hand;
-    const cardC = handA.refer.queue?.find(item => item instanceof WolfriderModel);
-    const cardD = boardB.refer.queue?.find(item => item instanceof WispModel);
+    const cardC = handA.refer.queue.find(item => item instanceof WolfriderModel);
+    const cardD = boardB.refer.queue.find(item => item instanceof WispModel);
     if (!cardC || !cardD) throw new Error();
     const roleA = playerA.child.hero.child.role;
     const roleB = playerB.child.hero.child.role;
@@ -74,8 +74,8 @@ describe('wolfrider', () => {
         // Check initial state
         expect(roleC.child.attack.state.current).toBe(3); // Wolfrider: 3/1
         expect(roleC.child.health.state.current).toBe(1);
-        expect(handA.refer.queue?.length).toBe(1); // Wolfrider in hand
-        expect(boardA.refer.queue?.length).toBe(0); // No minions on board
+        expect(handA.refer.queue.length).toBe(1); // Wolfrider in hand
+        expect(boardA.refer.queue.length).toBe(0); // No minions on board
         expect(playerA.child.mana.state.current).toBe(10); // Full mana
 
         // Play Wolfrider
@@ -84,8 +84,8 @@ describe('wolfrider', () => {
         await promise;
 
         // Wolfrider should be on board
-        expect(boardA.refer.queue?.length).toBe(1); // Wolfrider on board
-        expect(handA.refer.queue?.length).toBe(0); // Wolfrider moved to board
+        expect(boardA.refer.queue.length).toBe(1); // Wolfrider on board
+        expect(handA.refer.queue.length).toBe(0); // Wolfrider moved to board
         expect(playerA.child.mana.state.current).toBe(7); // 10 - 3 = 7
 
         // Check that Wolfrider has Charge
@@ -96,8 +96,8 @@ describe('wolfrider', () => {
         // Check initial state
         expect(roleC.child.health.state.current).toBe(1); // Wolfrider: 3/1
         expect(roleD.child.health.state.current).toBe(1); // Wisp: 1/1
-        expect(boardA.refer.queue?.length).toBe(1); // Wolfrider on board
-        expect(boardB.refer.queue?.length).toBe(1); // Wisp on board
+        expect(boardA.refer.queue.length).toBe(1); // Wolfrider on board
+        expect(boardB.refer.queue.length).toBe(1); // Wisp on board
 
         // Player A's Wolfrider attacks Player B's Wisp immediately (Charge allows immediate attack)
         let promise = roleC.child.action.run();
@@ -107,13 +107,13 @@ describe('wolfrider', () => {
         await promise;
 
         // Wisp should die (1/1 vs 3/1)
-        expect(boardB.refer.queue?.length).toBe(0); // Wisp dies
+        expect(boardB.refer.queue.length).toBe(0); // Wisp dies
         expect(roleC.child.health.state.current).toBe(0); // Wolfrider: 1 - 1 = 0 (dies)
 
         expect(cardD.child.dispose.status).toBe(true);
         expect(roleD.child.health.state.damage).toBe(3);
         expect(roleD.child.health.state.current).toBe(-2);
 
-        expect(boardA.refer.queue?.length).toBe(0); // Wolfrider dies
+        expect(boardA.refer.queue.length).toBe(0); // Wolfrider dies
     });
 });

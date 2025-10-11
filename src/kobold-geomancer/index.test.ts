@@ -61,8 +61,8 @@ describe('kobold-geomancer', () => {
     const playerB = game.child.playerB;
     const boardA = playerA.child.board;
     const handA = playerA.child.hand;
-    const cardC = handA.refer.queue?.find(item => item instanceof KoboldGeomancerModel);
-    const cardD = handA.refer.queue?.find(item => item instanceof FireballModel);
+    const cardC = handA.refer.queue.find(item => item instanceof KoboldGeomancerModel);
+    const cardD = handA.refer.queue.find(item => item instanceof FireballModel);
     if (!cardC || !cardD) throw new Error();
     const roleA = playerA.child.hero.child.role;
     const roleB = playerB.child.hero.child.role;
@@ -72,8 +72,8 @@ describe('kobold-geomancer', () => {
         // Check initial state
         expect(roleC.child.attack.state.current).toBe(2); // Kobold Geomancer: 2/2
         expect(roleC.child.health.state.current).toBe(2);
-        expect(handA.refer.queue?.length).toBe(2); // Kobold Geomancer + Fireball in hand
-        expect(boardA.refer.queue?.length).toBe(0); // No minions on board
+        expect(handA.refer.queue.length).toBe(2); // Kobold Geomancer + Fireball in hand
+        expect(boardA.refer.queue.length).toBe(0); // No minions on board
         expect(playerA.child.mana.state.current).toBe(10); // Full mana
 
         // Play Kobold Geomancer
@@ -82,16 +82,16 @@ describe('kobold-geomancer', () => {
         await promise;
 
         // Kobold Geomancer should be on board
-        expect(boardA.refer.queue?.length).toBe(1); // Kobold Geomancer on board
-        expect(handA.refer.queue?.length).toBe(1); // Kobold Geomancer moved to board
+        expect(boardA.refer.queue.length).toBe(1); // Kobold Geomancer on board
+        expect(handA.refer.queue.length).toBe(1); // Kobold Geomancer moved to board
         expect(playerA.child.mana.state.current).toBe(8); // 10 - 2 = 8
     });
 
     test('fireball-cast', async () => {
         // Check initial state
         expect(roleB.child.health.state.current).toBe(30); // Player B hero: 30 health
-        expect(handA.refer.queue?.length).toBe(1); // Fireball in hand
-        expect(boardA.refer.queue?.length).toBe(1); // Kobold Geomancer on board
+        expect(handA.refer.queue.length).toBe(1); // Fireball in hand
+        expect(boardA.refer.queue.length).toBe(1); // Kobold Geomancer on board
 
         // Player A casts Fireball
         let promise = cardD.play();

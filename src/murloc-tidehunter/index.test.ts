@@ -60,7 +60,7 @@ describe('murloc-tidehunter', () => {
         await promise;
 
         expect(boardA.child.minions.length).toBe(3);
-        expect(boardA.refer.queue?.length).toBe(3);
+        expect(boardA.refer.queue.length).toBe(3);
         expect(boardA.refer.queue[0] instanceof MurlocTidehunterModel).toBe(true);
         expect(boardA.refer.queue[1] instanceof MurlocScoutModel).toBe(true);
         expect(boardA.refer.queue[2] instanceof WispModel).toBe(true);

@@ -62,8 +62,8 @@ describe('stormwind-knight', () => {
     const boardA = playerA.child.board;
     const boardB = playerB.child.board;
     const handA = playerA.child.hand;
-    const cardC = handA.refer.queue?.find(item => item instanceof StormwindKnightModel);
-    const cardD = boardB.refer.queue?.find(item => item instanceof WispModel);
+    const cardC = handA.refer.queue.find(item => item instanceof StormwindKnightModel);
+    const cardD = boardB.refer.queue.find(item => item instanceof WispModel);
     if (!cardC || !cardD) throw new Error();
     const roleA = playerA.child.hero.child.role;
     const roleB = playerB.child.hero.child.role;
@@ -74,8 +74,8 @@ describe('stormwind-knight', () => {
         // Check initial state
         expect(roleC.child.attack.state.current).toBe(2); // Stormwind Knight: 2/5
         expect(roleC.child.health.state.current).toBe(5);
-        expect(handA.refer.queue?.length).toBe(1); // Stormwind Knight in hand
-        expect(boardA.refer.queue?.length).toBe(0); // No minions on board
+        expect(handA.refer.queue.length).toBe(1); // Stormwind Knight in hand
+        expect(boardA.refer.queue.length).toBe(0); // No minions on board
         expect(playerA.child.mana.state.current).toBe(10); // Full mana
 
         // Play Stormwind Knight
@@ -84,8 +84,8 @@ describe('stormwind-knight', () => {
         await promise;
 
         // Stormwind Knight should be on board
-        expect(boardA.refer.queue?.length).toBe(1); // Stormwind Knight on board
-        expect(handA.refer.queue?.length).toBe(0); // Stormwind Knight moved to board
+        expect(boardA.refer.queue.length).toBe(1); // Stormwind Knight on board
+        expect(handA.refer.queue.length).toBe(0); // Stormwind Knight moved to board
         expect(playerA.child.mana.state.current).toBe(6); // 10 - 4 = 6
 
         // Check that Stormwind Knight has Charge
@@ -96,8 +96,8 @@ describe('stormwind-knight', () => {
         // Check initial state
         expect(roleC.child.health.state.current).toBe(5); // Stormwind Knight: 2/5
         expect(roleD.child.health.state.current).toBe(1); // Wisp: 1/1
-        expect(boardA.refer.queue?.length).toBe(1); // Stormwind Knight on board
-        expect(boardB.refer.queue?.length).toBe(1); // Wisp on board
+        expect(boardA.refer.queue.length).toBe(1); // Stormwind Knight on board
+        expect(boardB.refer.queue.length).toBe(1); // Wisp on board
 
         // Player A's Stormwind Knight attacks Player B's Wisp immediately (Charge allows immediate attack)
         let promise = roleC.child.action.run();
@@ -107,7 +107,7 @@ describe('stormwind-knight', () => {
         await promise;
 
         // Wisp should die (1/1 vs 2/5)
-        expect(boardB.refer.queue?.length).toBe(0); // Wisp dies
+        expect(boardB.refer.queue.length).toBe(0); // Wisp dies
         expect(cardD.child.dispose.refer.source).toBe(cardC);
         expect(cardD.child.dispose.status).toBe(true);
         

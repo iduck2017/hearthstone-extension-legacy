@@ -95,8 +95,8 @@ describe('polymorph', () => {
         expect(roleF.child.health.state.current).toBe(1);
 
         // Check that Wisp is still at position 1
-        expect(boardB.refer.queue?.[0]).toBe(cardF); // Sheep at position 0
-        expect(boardB.refer.queue?.[1]).toBe(cardE); // Wisp still at position 1
+        expect(boardB.refer.queue.[0]).toBe(cardF); // Sheep at position 0
+        expect(boardB.refer.queue.[1]).toBe(cardE); // Wisp still at position 1
 
         expect(roleD.route.board).toBeUndefined();
     });

@@ -77,8 +77,8 @@ describe('mass-dispel', () => {
         expect(roleD.child.health.state.current).toBe(6);
 
         // Player A should draw a card
-        expect(deckA.refer.queue?.length).toBe(0); // Deck is empty
-        expect(handA.refer.queue?.length).toBe(1); // Wisp drawn to hand
+        expect(deckA.refer.queue.length).toBe(0); // Deck is empty
+        expect(handA.refer.queue.length).toBe(1); // Wisp drawn to hand
 
         // Mass Dispel should be consumed
         expect(handA.child.spells.length).toBe(0); // Mass Dispel consumed

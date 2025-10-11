@@ -72,7 +72,7 @@ describe('radiance', () => {
         // Check initial state
         expect(heroB.child.role.child.health.state.current).toBe(30); // Full health
         expect(playerA.child.mana.state.current).toBe(10);
-        expect(handA.refer.queue?.length).toBe(1);
+        expect(handA.refer.queue.length).toBe(1);
 
         // Player A uses Fireball on Player B's hero
         const promise = cardC.play();
@@ -84,7 +84,7 @@ describe('radiance', () => {
         expect(heroB.child.role.child.health.state.current).toBe(24); // 30 - 6 = 24
 
         // Fireball should be consumed
-        expect(handA.refer.queue?.length).toBe(0); // Fireball consumed
+        expect(handA.refer.queue.length).toBe(0); // Fireball consumed
         expect(playerA.child.mana.state.current).toBe(6); // 10 - 4 cost
     });
 
@@ -94,7 +94,7 @@ describe('radiance', () => {
         // Check initial state
         expect(roleB.child.health.state.current).toBe(24); // Damaged hero
         expect(playerB.child.mana.state.current).toBe(10);
-        expect(handB.refer.queue?.length).toBe(1);
+        expect(handB.refer.queue.length).toBe(1);
 
         // Player B uses Radiance
         const promise = cardD.play();
@@ -104,7 +104,7 @@ describe('radiance', () => {
         expect(roleB.child.health.state.current).toBe(29); // 24 + 5 = 29
 
         // Radiance should be consumed
-        expect(handB.refer.queue?.length).toBe(0); // Radiance consumed
+        expect(handB.refer.queue.length).toBe(0); // Radiance consumed
         expect(playerB.child.mana.state.current).toBe(9); // 10 - 1 cost
     });
 });

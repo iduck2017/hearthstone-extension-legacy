@@ -60,7 +60,7 @@ describe('mind-blast', () => {
         // Check initial state
         expect(roleB.child.health.state.current).toBe(30); // Full health
         expect(playerA.child.mana.state.current).toBe(10);
-        expect(handA.refer.queue?.length).toBe(1);
+        expect(handA.refer.queue.length).toBe(1);
 
         // Player A uses Mind Blast
         const promise = cardC.play();
@@ -70,7 +70,7 @@ describe('mind-blast', () => {
         expect(roleB.child.health.state.current).toBe(25); // 30 - 5 = 25
 
         // Mind Blast should be consumed
-        expect(handA.refer.queue?.length).toBe(0); // Mind Blast consumed
+        expect(handA.refer.queue.length).toBe(0); // Mind Blast consumed
         expect(playerA.child.mana.state.current).toBe(8); // 10 - 2 cost
     });
 });

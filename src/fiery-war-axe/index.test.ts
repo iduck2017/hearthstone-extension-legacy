@@ -79,7 +79,7 @@ describe('firey-war-axe', () => {
         expect(weapon.child.action.state.origin).toBe(2);
 
         expect(boardB.child.minions.length).toBe(0);
-        expect(boardB.refer.queue?.length).toBe(0);
+        expect(boardB.refer.queue.length).toBe(0);
     })
 
     test('fiery-war-axe-deactive', () => {

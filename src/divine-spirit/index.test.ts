@@ -64,7 +64,7 @@ describe('divine-spirit', () => {
         expect(roleD.child.attack.state.current).toBe(3); // Water Elemental: 3/6
         expect(roleD.child.health.state.current).toBe(6);
         expect(playerA.child.mana.state.current).toBe(10);
-        expect(handA.refer.queue?.length).toBe(1);
+        expect(handA.refer.queue.length).toBe(1);
 
         // Player A uses Divine Spirit on Water Elemental
         const promise = cardC.play();
@@ -77,7 +77,7 @@ describe('divine-spirit', () => {
         expect(roleD.child.health.state.current).toBe(12); // 6 + 6 = 12 (doubled)
 
         // Divine Spirit should be consumed
-        expect(handA.refer.queue?.length).toBe(0); // Divine Spirit consumed
+        expect(handA.refer.queue.length).toBe(0); // Divine Spirit consumed
         expect(playerA.child.mana.state.current).toBe(8); // 10 - 2 cost
     });
 });

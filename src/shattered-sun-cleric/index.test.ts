@@ -67,10 +67,10 @@ describe('shattered-sun-cleric', () => {
     const boardB = playerB.child.board;
     const handA = playerA.child.hand;
     const handB = playerB.child.hand;
-    const cardC = handA.refer.queue?.find(item => item instanceof ShatteredSunClericModel);
-    const cardD = boardA.refer.queue?.find(item => item instanceof WispModel);
-    const cardE = handB.refer.queue?.find(item => item instanceof ShatteredSunClericModel);
-    const cardF = handB.refer.queue?.find(item => item instanceof WispModel);
+    const cardC = handA.refer.queue.find(item => item instanceof ShatteredSunClericModel);
+    const cardD = boardA.refer.queue.find(item => item instanceof WispModel);
+    const cardE = handB.refer.queue.find(item => item instanceof ShatteredSunClericModel);
+    const cardF = handB.refer.queue.find(item => item instanceof WispModel);
     if (!cardC || !cardD || !cardE || !cardF) throw new Error();
     const roleA = playerA.child.hero.child.role;
     const roleB = playerB.child.hero.child.role;
@@ -83,8 +83,8 @@ describe('shattered-sun-cleric', () => {
         // Check initial state
         expect(roleD.child.attack.state.current).toBe(1); // Wisp: 1/1
         expect(roleD.child.health.state.current).toBe(1);
-        expect(boardA.refer.queue?.length).toBe(1); // Wisp on board
-        expect(handA.refer.queue?.length).toBe(1); // Shattered Sun Cleric in hand
+        expect(boardA.refer.queue.length).toBe(1); // Wisp on board
+        expect(handA.refer.queue.length).toBe(1); // Shattered Sun Cleric in hand
 
         // Play Shattered Sun Cleric
         let promise = cardC.play();
@@ -100,8 +100,8 @@ describe('shattered-sun-cleric', () => {
         await promise;
         
         // Shattered Sun Cleric should be on board
-        expect(boardA.refer.queue?.length).toBe(2); // Wisp + Shattered Sun Cleric on board
-        expect(handA.refer.queue?.length).toBe(0); // Shattered Sun Cleric moved to board
+        expect(boardA.refer.queue.length).toBe(2); // Wisp + Shattered Sun Cleric on board
+        expect(handA.refer.queue.length).toBe(0); // Shattered Sun Cleric moved to board
         
         // Wisp should be buffed to 2/2
         expect(roleD.child.attack.state.current).toBe(2); // Wisp: 2/2 (buffed)
@@ -116,8 +116,8 @@ describe('shattered-sun-cleric', () => {
         expect(game.child.turn.refer.current).toBe(playerB);
         
         // Player B has no minions on board, so battlecry cannot trigger
-        expect(boardB.refer.queue?.length).toBe(0);
-        expect(handB.refer.queue?.length).toBe(2); // Shattered Sun Cleric + Wisp in hand
+        expect(boardB.refer.queue.length).toBe(0);
+        expect(handB.refer.queue.length).toBe(2); // Shattered Sun Cleric + Wisp in hand
         
         // Play Shattered Sun Cleric (no targets available)
         let promise = cardE.play();
@@ -129,8 +129,8 @@ describe('shattered-sun-cleric', () => {
         await promise;
         
         // Shattered Sun Cleric should be on board
-        expect(boardB.refer.queue?.length).toBe(1);
-        expect(handB.refer.queue?.length).toBe(1); // Only Wisp left in hand
+        expect(boardB.refer.queue.length).toBe(1);
+        expect(handB.refer.queue.length).toBe(1); // Only Wisp left in hand
         
         // Play Wisp
         promise = cardF.play();
@@ -140,8 +140,8 @@ describe('shattered-sun-cleric', () => {
         await promise;
 
         // Both minions should be on board
-        expect(boardB.refer.queue?.length).toBe(2);
-        expect(handB.refer.queue?.length).toBe(0);
+        expect(boardB.refer.queue.length).toBe(2);
+        expect(handB.refer.queue.length).toBe(0);
         expect(roleF.child.attack.state.current).toBe(1); // Wisp: 1/1
         expect(roleF.child.health.state.current).toBe(1);
     });
@@ -156,8 +156,8 @@ describe('shattered-sun-cleric', () => {
         expect(roleD.child.health.state.current).toBe(2);
         expect(roleF.child.attack.state.current).toBe(1); // Player B's Wisp: 1/1
         expect(roleF.child.health.state.current).toBe(1);
-        expect(boardA.refer.queue?.length).toBe(2); // Wisp + Shattered Sun Cleric on board
-        expect(boardB.refer.queue?.length).toBe(2); // Wisp + Shattered Sun Cleric on board
+        expect(boardA.refer.queue.length).toBe(2); // Wisp + Shattered Sun Cleric on board
+        expect(boardB.refer.queue.length).toBe(2); // Wisp + Shattered Sun Cleric on board
 
         // Player A's buffed Wisp attacks Player B's Wisp
         let promise = roleD.child.action.run();
@@ -181,8 +181,8 @@ describe('shattered-sun-cleric', () => {
         expect(cardF.child.dispose.status).toBe(true);
         
         // Board state
-        expect(boardA.refer.queue?.length).toBe(2); // Wisp + Shattered Sun Cleric on board
-        expect(boardB.refer.queue?.length).toBe(1); // Only Shattered Sun Cleric on board
+        expect(boardA.refer.queue.length).toBe(2); // Wisp + Shattered Sun Cleric on board
+        expect(boardB.refer.queue.length).toBe(1); // Only Shattered Sun Cleric on board
     });
 });
 

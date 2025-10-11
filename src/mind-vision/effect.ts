@@ -32,10 +32,10 @@ export class MindVisionEffectModel extends SpellEffectModel<[]> {
         
         const handB = opponent.child.hand;
         // If opponent has no cards, do nothing
-        if (handB.refer.queue?.length === 0) return;
+        if (handB.refer.queue.length === 0) return;
         
         // Select a random card from opponent's hand
-        const index = Math.floor(Math.random() * handB.refer.queue?.length);
+        const index = Math.floor(Math.random() * handB.refer.queue.length);
         const card = handB.refer.queue[index];
         if (!card) return;
         

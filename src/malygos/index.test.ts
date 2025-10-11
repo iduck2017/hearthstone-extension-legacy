@@ -61,9 +61,9 @@ describe('malygos', () => {
     const playerB = game.child.playerB;
     const boardA = playerA.child.board;
     const handA = playerA.child.hand;
-    const cardC = handA.refer.queue?.find(item => item instanceof ArcaneMissilesModel);
-    const cardD = handA.refer.queue?.find(item => item instanceof FireballModel);
-    const cardE = boardA.refer.queue?.find(item => item instanceof MalygosModel);
+    const cardC = handA.refer.queue.find(item => item instanceof ArcaneMissilesModel);
+    const cardD = handA.refer.queue.find(item => item instanceof FireballModel);
+    const cardE = boardA.refer.queue.find(item => item instanceof MalygosModel);
     if (!cardC || !cardD || !cardE) throw new Error();
     const roleA = playerA.child.hero.child.role;
     const roleB = playerB.child.hero.child.role;
@@ -73,8 +73,8 @@ describe('malygos', () => {
         // Check initial state
         expect(roleE.child.attack.state.current).toBe(4); // Malygos: 4/12
         expect(roleE.child.health.state.current).toBe(12);
-        expect(boardA.refer.queue?.length).toBe(1); // Malygos on board
-        expect(handA.refer.queue?.filter(item => item instanceof ArcaneMissilesModel).length).toBe(1);
+        expect(boardA.refer.queue.length).toBe(1); // Malygos on board
+        expect(handA.refer.queue.filter(item => item instanceof ArcaneMissilesModel).length).toBe(1);
         expect(playerA.child.mana.state.current).toBe(10);
         expect(roleB.child.health.state.current).toBe(30); // Player B hero: 30 health
 
@@ -84,13 +84,13 @@ describe('malygos', () => {
         // Arcane Missiles should deal 3+5=8 damage (3 base + 5 from Malygos)
         expect(roleB.child.health.state.current).toBe(22); // 30 - 8 = 22
         expect(playerA.child.mana.state.current).toBe(9); // 10 - 1 cost (Arcane Missiles costs 1)
-        expect(handA.refer.queue?.filter(item => item instanceof ArcaneMissilesModel).length).toBe(0);
+        expect(handA.refer.queue.filter(item => item instanceof ArcaneMissilesModel).length).toBe(0);
     });
 
     test('fireball-cast', async () => {
         // Check initial state
         expect(roleB.child.health.state.current).toBe(22); // Player B hero: 22 health (from previous test)
-        expect(handA.refer.queue?.filter(item => item instanceof FireballModel).length).toBe(1);
+        expect(handA.refer.queue.filter(item => item instanceof FireballModel).length).toBe(1);
         expect(playerA.child.mana.state.current).toBe(9);
 
         // Player A casts Fireball with Malygos on board
@@ -103,6 +103,6 @@ describe('malygos', () => {
         // Fireball should deal 6+5=11 damage (6 base + 5 from Malygos)
         expect(roleB.child.health.state.current).toBe(11); // 22 - 11 = 11
         expect(playerA.child.mana.state.current).toBe(5); // 9 - 4 cost (Fireball costs 4)
-        expect(handA.refer.queue?.filter(item => item instanceof FireballModel).length).toBe(0);
+        expect(handA.refer.queue.filter(item => item instanceof FireballModel).length).toBe(0);
     });
 });

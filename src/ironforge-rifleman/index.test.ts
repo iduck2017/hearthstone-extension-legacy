@@ -59,7 +59,7 @@ describe('ironforge-rifleman', () => {
     const playerB = game.child.playerB;
     const boardA = playerA.child.board;
     const handA = playerA.child.hand;
-    const cardC = handA.refer.queue?.find(item => item instanceof IronforgeRiflemanModel);
+    const cardC = handA.refer.queue.find(item => item instanceof IronforgeRiflemanModel);
     if (!cardC) throw new Error();
     const roleA = playerA.child.hero.child.role;
     const roleB = playerB.child.hero.child.role;
@@ -69,8 +69,8 @@ describe('ironforge-rifleman', () => {
         // Check initial state
         expect(roleC.child.attack.state.current).toBe(2); // Ironforge Rifleman: 2/2
         expect(roleC.child.health.state.current).toBe(2);
-        expect(handA.refer.queue?.length).toBe(1); // Ironforge Rifleman in hand
-        expect(boardA.refer.queue?.length).toBe(0); // No minions on board
+        expect(handA.refer.queue.length).toBe(1); // Ironforge Rifleman in hand
+        expect(boardA.refer.queue.length).toBe(0); // No minions on board
         expect(playerA.child.mana.state.current).toBe(10); // Full mana
         expect(roleB.child.health.state.current).toBe(30); // Player B hero: 30 health
 
@@ -86,8 +86,8 @@ describe('ironforge-rifleman', () => {
         await promise;
 
         // Ironforge Rifleman should be on board
-        expect(boardA.refer.queue?.length).toBe(1); // Ironforge Rifleman on board
-        expect(handA.refer.queue?.length).toBe(0); // Ironforge Rifleman moved to board
+        expect(boardA.refer.queue.length).toBe(1); // Ironforge Rifleman on board
+        expect(handA.refer.queue.length).toBe(0); // Ironforge Rifleman moved to board
         expect(playerA.child.mana.state.current).toBe(7); // 10 - 3 = 7
 
         // Player B's hero should be damaged by 1

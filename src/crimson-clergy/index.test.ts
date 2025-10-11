@@ -82,17 +82,17 @@ describe('crimson-clergy', () => {
 
     test('circle-of-healing-cast', async () => {
         // Check initial hand and deck size
-        console.log(handA.refer.queue?.map(item => item.name));
-        expect(handA.refer.queue?.length).toBe(1); // Only Circle of Healing
-        expect(deckA.refer.queue?.length).toBe(3); // 3 Wisps
+        console.log(handA.refer.queue.map(item => item.name));
+        expect(handA.refer.queue.length).toBe(1); // Only Circle of Healing
+        expect(deckA.refer.queue.length).toBe(3); // 3 Wisps
 
         // Player A uses Circle of Healing on full health minions
         const promise = cardD.play();
         await promise;
 
         // Player A should have drawn cards due to overheal (all minions were at full health)
-        expect(handA.refer.queue?.length).toBe(1); 
-        expect(deckA.refer.queue?.length).toBe(2); // 3 - 1 = 2 (1 card drawn from deck)
+        expect(handA.refer.queue.length).toBe(1); 
+        expect(deckA.refer.queue.length).toBe(2); // 3 - 1 = 2 (1 card drawn from deck)
         expect(playerA.child.mana.state.current).toBe(9); // 9 - 0 cost
     });
 });

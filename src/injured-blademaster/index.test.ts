@@ -57,8 +57,8 @@ describe('injured-blademaster', () => {
     const playerB = game.child.playerB;
     const boardA = playerA.child.board;
     const handA = playerA.child.hand;
-    const cardC = handA.refer.queue?.find(item => item instanceof InjuredBlademasterModel);
-    const cardD = handA.refer.queue?.find(item => item instanceof EarthenRingFarseerModel);
+    const cardC = handA.refer.queue.find(item => item instanceof InjuredBlademasterModel);
+    const cardD = handA.refer.queue.find(item => item instanceof EarthenRingFarseerModel);
     if (!cardC || !cardD) throw new Error();
     const roleA = playerA.child.hero.child.role;
     const roleB = playerB.child.hero.child.role;
@@ -69,8 +69,8 @@ describe('injured-blademaster', () => {
         // Check initial state
         expect(roleC.child.attack.state.current).toBe(4); // Injured Blademaster: 4/7
         expect(roleC.child.health.state.current).toBe(7);
-        expect(handA.refer.queue?.length).toBe(2); // Injured Blademaster in hand
-        expect(boardA.refer.queue?.length).toBe(0); // No minions on board
+        expect(handA.refer.queue.length).toBe(2); // Injured Blademaster in hand
+        expect(boardA.refer.queue.length).toBe(0); // No minions on board
         expect(playerA.child.mana.state.current).toBe(10); // Full mana
 
         // Play Injured Blademaster
@@ -79,8 +79,8 @@ describe('injured-blademaster', () => {
         await promise;
 
         // Injured Blademaster should be on board
-        expect(boardA.refer.queue?.length).toBe(1); // Injured Blademaster on board
-        expect(handA.refer.queue?.length).toBe(1); // Injured Blademaster moved to board
+        expect(boardA.refer.queue.length).toBe(1); // Injured Blademaster on board
+        expect(handA.refer.queue.length).toBe(1); // Injured Blademaster moved to board
         expect(playerA.child.mana.state.current).toBe(7); // 10 - 3 = 7
 
         // Injured Blademaster should have taken 4 damage (7 - 4 = 3)
@@ -93,8 +93,8 @@ describe('injured-blademaster', () => {
     test('earthen-ring-farseer-heal', async () => {
         // Check initial state
         expect(roleC.child.health.state.current).toBe(3); // Injured Blademaster: 4/3 (damaged)
-        expect(handA.refer.queue?.length).toBe(1); // Earthen Ring Farseer in hand
-        expect(boardA.refer.queue?.length).toBe(1); // Injured Blademaster on board
+        expect(handA.refer.queue.length).toBe(1); // Earthen Ring Farseer in hand
+        expect(boardA.refer.queue.length).toBe(1); // Injured Blademaster on board
         expect(playerA.child.mana.state.current).toBe(7); // 7 mana
 
         // Play Earthen Ring Farseer
@@ -109,8 +109,8 @@ describe('injured-blademaster', () => {
         await promise;
 
         // Earthen Ring Farseer should be on board
-        expect(boardA.refer.queue?.length).toBe(2); // Injured Blademaster + Earthen Ring Farseer on board
-        expect(handA.refer.queue?.length).toBe(0); // Earthen Ring Farseer moved to board
+        expect(boardA.refer.queue.length).toBe(2); // Injured Blademaster + Earthen Ring Farseer on board
+        expect(handA.refer.queue.length).toBe(0); // Earthen Ring Farseer moved to board
         expect(playerA.child.mana.state.current).toBe(4); // 7 - 3 = 4
 
         // Injured Blademaster should be healed (3 + 3 = 6)

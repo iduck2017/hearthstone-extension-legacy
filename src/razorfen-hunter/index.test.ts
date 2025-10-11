@@ -60,7 +60,7 @@ describe('razorfen-hunter', () => {
     const playerB = game.child.playerB;
     const boardA = playerA.child.board;
     const handA = playerA.child.hand;
-    const cardC = handA.refer.queue?.find(item => item instanceof RazorfenHunterModel);
+    const cardC = handA.refer.queue.find(item => item instanceof RazorfenHunterModel);
     if (!cardC) throw new Error();
     const roleA = playerA.child.hero.child.role;
     const roleB = playerB.child.hero.child.role;
@@ -70,8 +70,8 @@ describe('razorfen-hunter', () => {
         // Check initial state
         expect(roleC.child.attack.state.current).toBe(2); // Razorfen Hunter: 2/3
         expect(roleC.child.health.state.current).toBe(3);
-        expect(handA.refer.queue?.length).toBe(1); // Razorfen Hunter in hand
-        expect(boardA.refer.queue?.length).toBe(0); // No minions on board
+        expect(handA.refer.queue.length).toBe(1); // Razorfen Hunter in hand
+        expect(boardA.refer.queue.length).toBe(0); // No minions on board
         expect(playerA.child.mana.state.current).toBe(10); // Full mana
 
         // Play Razorfen Hunter
@@ -80,17 +80,17 @@ describe('razorfen-hunter', () => {
         await promise;
 
         // Razorfen Hunter should be on board
-        expect(boardA.refer.queue?.length).toBe(2); // Razorfen Hunter + Boar on board
-        expect(handA.refer.queue?.length).toBe(0); // Razorfen Hunter moved to board
+        expect(boardA.refer.queue.length).toBe(2); // Razorfen Hunter + Boar on board
+        expect(handA.refer.queue.length).toBe(0); // Razorfen Hunter moved to board
         expect(playerA.child.mana.state.current).toBe(7); // 10 - 3 = 7
 
         // Check that a Boar was summoned
-        const cardD = boardA.refer.queue?.find(item => item instanceof BoarModel);
+        const cardD = boardA.refer.queue.find(item => item instanceof BoarModel);
         expect(cardD).toBeDefined(); // Boar was summoned
         expect(cardD?.child.role.child.attack.state.current).toBe(1); // Boar: 1/1
         expect(cardD?.child.role.child.health.state.current).toBe(1);
 
-        expect(boardA.refer.queue?.[0]).toBe(cardC);
-        expect(boardA.refer.queue?.[1]).toBe(cardD);
+        expect(boardA.refer.queue.[0]).toBe(cardC);
+        expect(boardA.refer.queue.[1]).toBe(cardD);
     });
 });

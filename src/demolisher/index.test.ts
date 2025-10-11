@@ -62,7 +62,7 @@ describe('demolisher', () => {
     const playerB = game.child.playerB;
     const boardA = playerA.child.board;
     const boardB = playerB.child.board;
-    const cardC = boardB.refer.queue?.find(item => item instanceof DemolisherModel);
+    const cardC = boardB.refer.queue.find(item => item instanceof DemolisherModel);
     if (!cardC) throw new Error();
     const roleA = playerA.child.hero.child.role;
     const roleB = playerB.child.hero.child.role;
@@ -70,8 +70,8 @@ describe('demolisher', () => {
 
     test('demolisher-hook', async () => {
         // Check initial state
-        expect(boardA.refer.queue?.length).toBe(0); // Player A has empty board
-        expect(boardB.refer.queue?.length).toBe(1); // Player B has Demolisher on board
+        expect(boardA.refer.queue.length).toBe(0); // Player A has empty board
+        expect(boardB.refer.queue.length).toBe(1); // Player B has Demolisher on board
         expect(roleA.child.health.state.current).toBe(30); // Player A hero: 30 health
         
         // End turn to trigger Demolisher's start turn effect

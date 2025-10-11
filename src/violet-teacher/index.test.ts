@@ -63,9 +63,9 @@ describe('violet-teacher', () => {
     const playerB = game.child.playerB;
     const boardA = playerA.child.board;
     const handA = playerA.child.hand;
-    const cardC = handA.refer.queue?.find(item => item instanceof VioletTeacherModel);
-    const cardD = handA.refer.queue?.find(item => item instanceof FireballModel);
-    const cardE = handA.refer.queue?.find(item => item instanceof FrostboltModel);
+    const cardC = handA.refer.queue.find(item => item instanceof VioletTeacherModel);
+    const cardD = handA.refer.queue.find(item => item instanceof FireballModel);
+    const cardE = handA.refer.queue.find(item => item instanceof FrostboltModel);
     if (!cardC || !cardD || !cardE) throw new Error();
     const roleA = playerA.child.hero.child.role;
     const roleB = playerB.child.hero.child.role;
@@ -74,8 +74,8 @@ describe('violet-teacher', () => {
 
     test('frostbolt-play', async () => {
         // Check initial state
-        expect(handA.refer.queue?.length).toBe(3); // Violet Teacher + Fireball + Frostbolt in hand
-        expect(boardA.refer.queue?.length).toBe(0); // No minions on board
+        expect(handA.refer.queue.length).toBe(3); // Violet Teacher + Fireball + Frostbolt in hand
+        expect(boardA.refer.queue.length).toBe(0); // No minions on board
         expect(playerA.child.mana.state.current).toBe(10); // Full mana
 
         // Cast Frostbolt
@@ -86,8 +86,8 @@ describe('violet-teacher', () => {
         await promise;
 
         // No minions should be summoned (Violet Teacher not on board yet)
-        expect(boardA.refer.queue?.length).toBe(0); // No minions on board
-        expect(handA.refer.queue?.length).toBe(2); // Violet Teacher + Fireball remaining in hand
+        expect(boardA.refer.queue.length).toBe(0); // No minions on board
+        expect(handA.refer.queue.length).toBe(2); // Violet Teacher + Fireball remaining in hand
         expect(playerA.child.mana.state.current).toBe(8); // 10 - 2 = 8
     })
 
@@ -95,8 +95,8 @@ describe('violet-teacher', () => {
         // Check state after frostbolt-play (Frostbolt was used, mana = 8)
         expect(roleC.child.attack.state.current).toBe(3); // Violet Teacher: 3/5
         expect(roleC.child.health.state.current).toBe(5);
-        expect(handA.refer.queue?.length).toBe(2); // Violet Teacher + Fireball in hand (Frostbolt was used)
-        expect(boardA.refer.queue?.length).toBe(0); // No minions on board
+        expect(handA.refer.queue.length).toBe(2); // Violet Teacher + Fireball in hand (Frostbolt was used)
+        expect(boardA.refer.queue.length).toBe(0); // No minions on board
         expect(playerA.child.mana.state.current).toBe(8); // 10 - 2 = 8 (after Frostbolt)
 
         // Play Violet Teacher
@@ -105,15 +105,15 @@ describe('violet-teacher', () => {
         await promise;
 
         // Violet Teacher should be on board
-        expect(boardA.refer.queue?.length).toBe(1); // Violet Teacher on board
-        expect(handA.refer.queue?.length).toBe(1); // Fireball remaining in hand
+        expect(boardA.refer.queue.length).toBe(1); // Violet Teacher on board
+        expect(handA.refer.queue.length).toBe(1); // Fireball remaining in hand
         expect(playerA.child.mana.state.current).toBe(4); // 8 - 4 = 4
     });
 
     test('spell-cast', async () => {
         // Check state after violet-teacher-play (Violet Teacher is on board, mana = 4)
-        expect(boardA.refer.queue?.length).toBe(1); // Violet Teacher on board
-        expect(handA.refer.queue?.length).toBe(1); // Fireball in hand
+        expect(boardA.refer.queue.length).toBe(1); // Violet Teacher on board
+        expect(handA.refer.queue.length).toBe(1); // Fireball in hand
         expect(playerA.child.mana.state.current).toBe(4); // 8 - 4 = 4 (after playing Violet Teacher)
 
         // Cast Fireball
@@ -124,19 +124,19 @@ describe('violet-teacher', () => {
         await promise;
 
         // Violet Apprentice should be summoned
-        expect(boardA.refer.queue?.length).toBe(2); // Violet Teacher + Violet Apprentice on board
-        expect(handA.refer.queue?.length).toBe(0); // Fireball used
+        expect(boardA.refer.queue.length).toBe(2); // Violet Teacher + Violet Apprentice on board
+        expect(handA.refer.queue.length).toBe(0); // Fireball used
         expect(playerA.child.mana.state.current).toBe(0); // 4 - 4 = 0
 
         // Check that Violet Apprentice was summoned
-        const cardF = boardA.refer.queue?.find(item => item instanceof VioletApprenticeModel);
+        const cardF = boardA.refer.queue.find(item => item instanceof VioletApprenticeModel);
         expect(cardF).toBeDefined(); // Should have summoned a Violet Apprentice
         const roleF = cardF?.child.role;
         if (!roleF) throw new Error();
         expect(roleF.child.attack.state.current).toBe(1); // Violet Apprentice: 1/1
         expect(roleF.child.health.state.current).toBe(1);
 
-        expect(boardA.refer.queue?.[0]).toBe(cardC);
-        expect(boardA.refer.queue?.[1]).toBe(cardF);
+        expect(boardA.refer.queue.[0]).toBe(cardC);
+        expect(boardA.refer.queue.[1]).toBe(cardF);
     });
 });

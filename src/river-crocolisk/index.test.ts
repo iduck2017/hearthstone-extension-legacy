@@ -59,7 +59,7 @@ describe('river-crocolisk', () => {
     const playerB = game.child.playerB;
     const boardA = playerA.child.board;
     const handA = playerA.child.hand;
-    const cardC = handA.refer.queue?.find(item => item instanceof RiverCrocoliskModel);
+    const cardC = handA.refer.queue.find(item => item instanceof RiverCrocoliskModel);
     if (!cardC) throw new Error();
     const roleA = playerA.child.hero.child.role;
     const roleB = playerB.child.hero.child.role;
@@ -69,8 +69,8 @@ describe('river-crocolisk', () => {
         // Check initial state
         expect(roleC.child.attack.state.current).toBe(2); // River Crocolisk: 2/3
         expect(roleC.child.health.state.current).toBe(3);
-        expect(handA.refer.queue?.length).toBe(1); // River Crocolisk in hand
-        expect(boardA.refer.queue?.length).toBe(0); // No minions on board
+        expect(handA.refer.queue.length).toBe(1); // River Crocolisk in hand
+        expect(boardA.refer.queue.length).toBe(0); // No minions on board
         expect(playerA.child.mana.state.current).toBe(10); // Full mana
 
         // Play River Crocolisk
@@ -79,8 +79,8 @@ describe('river-crocolisk', () => {
         await promise;
 
         // River Crocolisk should be on board
-        expect(boardA.refer.queue?.length).toBe(1); // River Crocolisk on board
-        expect(handA.refer.queue?.length).toBe(0); // River Crocolisk moved to board
+        expect(boardA.refer.queue.length).toBe(1); // River Crocolisk on board
+        expect(handA.refer.queue.length).toBe(0); // River Crocolisk moved to board
         expect(playerA.child.mana.state.current).toBe(8); // 10 - 2 = 8
     });
 });

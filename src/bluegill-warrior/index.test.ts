@@ -59,8 +59,8 @@ describe('bluegill-warrior', () => {
     const boardA = playerA.child.board;
     const boardB = playerB.child.board;
     const handA = playerA.child.hand;
-    const cardC = handA.refer.queue?.find(item => item instanceof BluegillWarriorModel);
-    const cardD = boardB.refer.queue?.find(item => item instanceof WispModel);
+    const cardC = handA.refer.queue.find(item => item instanceof BluegillWarriorModel);
+    const cardD = boardB.refer.queue.find(item => item instanceof WispModel);
     if (!cardC || !cardD) throw new Error();
     const roleA = playerA.child.hero.child.role;
     const roleB = playerB.child.hero.child.role;
@@ -71,8 +71,8 @@ describe('bluegill-warrior', () => {
         // Check initial state
         expect(roleC.child.attack.state.current).toBe(2); // Bluegill Warrior: 2/1
         expect(roleC.child.health.state.current).toBe(1);
-        expect(handA.refer.queue?.length).toBe(1); // Bluegill Warrior in hand
-        expect(boardA.refer.queue?.length).toBe(0); // No minions on board
+        expect(handA.refer.queue.length).toBe(1); // Bluegill Warrior in hand
+        expect(boardA.refer.queue.length).toBe(0); // No minions on board
         expect(playerA.child.mana.state.current).toBe(10); // Full mana
 
         // Play Bluegill Warrior
@@ -81,8 +81,8 @@ describe('bluegill-warrior', () => {
         await promise;
 
         // Bluegill Warrior should be on board
-        expect(boardA.refer.queue?.length).toBe(1); // Bluegill Warrior on board
-        expect(handA.refer.queue?.length).toBe(0); // Bluegill Warrior moved to board
+        expect(boardA.refer.queue.length).toBe(1); // Bluegill Warrior on board
+        expect(handA.refer.queue.length).toBe(0); // Bluegill Warrior moved to board
         expect(playerA.child.mana.state.current).toBe(8); // 10 - 2 = 8
 
         // Check that Bluegill Warrior has Charge (can attack immediately)

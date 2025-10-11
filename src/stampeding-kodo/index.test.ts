@@ -62,9 +62,9 @@ describe('stampeding-kodo', () => {
     const boardA = playerA.child.board;
     const boardB = playerB.child.board;
     const handA = playerA.child.hand;
-    const cardC = handA.refer.queue?.find(item => item instanceof StampedingKodoModel);
-    const cardD = boardB.refer.queue?.find(item => item instanceof WispModel);
-    const cardE = boardB.refer.queue?.find(item => item instanceof ChillwindYetiModel);
+    const cardC = handA.refer.queue.find(item => item instanceof StampedingKodoModel);
+    const cardD = boardB.refer.queue.find(item => item instanceof WispModel);
+    const cardE = boardB.refer.queue.find(item => item instanceof ChillwindYetiModel);
     if (!cardC || !cardD || !cardE) throw new Error();
     const roleA = playerA.child.hero.child.role;
     const roleB = playerB.child.hero.child.role;
@@ -76,9 +76,9 @@ describe('stampeding-kodo', () => {
         // Check initial state
         expect(roleC.child.attack.state.current).toBe(3); // Stampeding Kodo: 3/5
         expect(roleC.child.health.state.current).toBe(5);
-        expect(handA.refer.queue?.length).toBe(1); // Stampeding Kodo in hand
-        expect(boardA.refer.queue?.length).toBe(0); // No minions on board
-        expect(boardB.refer.queue?.length).toBe(2); // Wisp and Chillwind Yeti on board
+        expect(handA.refer.queue.length).toBe(1); // Stampeding Kodo in hand
+        expect(boardA.refer.queue.length).toBe(0); // No minions on board
+        expect(boardB.refer.queue.length).toBe(2); // Wisp and Chillwind Yeti on board
         expect(playerA.child.mana.state.current).toBe(10); // Full mana
 
         // Check enemy minions
@@ -91,12 +91,12 @@ describe('stampeding-kodo', () => {
         await promise;
 
         // Stampeding Kodo should be on board
-        expect(boardA.refer.queue?.length).toBe(1); // Stampeding Kodo on board
-        expect(handA.refer.queue?.length).toBe(0); // Stampeding Kodo moved to board
+        expect(boardA.refer.queue.length).toBe(1); // Stampeding Kodo on board
+        expect(handA.refer.queue.length).toBe(0); // Stampeding Kodo moved to board
         expect(playerA.child.mana.state.current).toBe(5); // 10 - 5 = 5
 
         // Wisp should be destroyed (random target with 2 or less attack)
-        expect(boardB.refer.queue?.length).toBe(1); // Only Chillwind Yeti remains
+        expect(boardB.refer.queue.length).toBe(1); // Only Chillwind Yeti remains
 
         // Check Wisp destruction
         expect(cardD.child.dispose.status).toBe(true);

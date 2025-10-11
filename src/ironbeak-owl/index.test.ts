@@ -61,8 +61,8 @@ describe('ironbeak-owl', () => {
     const playerB = game.child.playerB;
     const boardA = playerA.child.board;
     const handA = playerA.child.hand;
-    const cardC = handA.refer.queue?.find(item => item instanceof IronbeakOwlModel);
-    const cardD = boardA.refer.queue?.find(item => item instanceof AncientWatcherModel);
+    const cardC = handA.refer.queue.find(item => item instanceof IronbeakOwlModel);
+    const cardD = boardA.refer.queue.find(item => item instanceof AncientWatcherModel);
     if (!cardC || !cardD) throw new Error();
     const roleA = playerA.child.hero.child.role;
     const roleB = playerB.child.hero.child.role;
@@ -73,8 +73,8 @@ describe('ironbeak-owl', () => {
         // Check initial state
         expect(roleC.child.attack.state.current).toBe(2); // Ironbeak Owl: 2/1
         expect(roleC.child.health.state.current).toBe(1);
-        expect(handA.refer.queue?.length).toBe(1); // Ironbeak Owl in hand
-        expect(boardA.refer.queue?.length).toBe(1); // Ancient Watcher on board
+        expect(handA.refer.queue.length).toBe(1); // Ironbeak Owl in hand
+        expect(boardA.refer.queue.length).toBe(1); // Ancient Watcher on board
         expect(playerA.child.mana.state.current).toBe(10); // Full mana
 
         // Check that Ancient Watcher has the restriction (cannot attack)
@@ -93,8 +93,8 @@ describe('ironbeak-owl', () => {
         await promise;
 
         // Ironbeak Owl should be on board
-        expect(boardA.refer.queue?.length).toBe(2); // Ironbeak Owl + Ancient Watcher on board
-        expect(handA.refer.queue?.length).toBe(0); // Ironbeak Owl moved to board
+        expect(boardA.refer.queue.length).toBe(2); // Ironbeak Owl + Ancient Watcher on board
+        expect(handA.refer.queue.length).toBe(0); // Ironbeak Owl moved to board
         expect(playerA.child.mana.state.current).toBe(7); // 10 - 3 = 7
 
         // Ancient Watcher should be silenced (can now attack)
@@ -106,7 +106,7 @@ describe('ironbeak-owl', () => {
         // Check initial state
         expect(roleD.child.health.state.current).toBe(5); // Ancient Watcher: 4/5
         expect(roleB.child.health.state.current).toBe(30); // Player B hero: 30 health
-        expect(boardA.refer.queue?.length).toBe(2); // Ironbeak Owl + Ancient Watcher on board
+        expect(boardA.refer.queue.length).toBe(2); // Ironbeak Owl + Ancient Watcher on board
 
         // Ancient Watcher attacks Player B's hero
         let promise = roleD.child.action.run();

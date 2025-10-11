@@ -68,8 +68,8 @@ describe('psychic-conjurer', () => {
         // Check initial state
         expect(playerA.child.mana.state.current).toBe(10);
         expect(boardA.child.minions.length).toBe(0);
-        expect(handA.refer.queue?.length).toBe(1);
-        expect(deckB.refer.queue?.length).toBe(1);
+        expect(handA.refer.queue.length).toBe(1);
+        expect(deckB.refer.queue.length).toBe(1);
 
         // Player A plays Psychic Conjurer
         const promise = cardC.play();
@@ -90,7 +90,7 @@ describe('psychic-conjurer', () => {
         expect(cardD.refer.creator).toBe(cardE);
 
         // Player A should have copied a card from Player B's deck
-        expect(handA.refer.queue?.length).toBe(1); // Psychic Conjurer consumed, 1 card copied
+        expect(handA.refer.queue.length).toBe(1); // Psychic Conjurer consumed, 1 card copied
         // Player B's deck should be unchanged
         expect(deckB.child.minions.length).toBe(1); // Original deck unchanged
 
