@@ -23,44 +23,44 @@ import { ManaWyrmModel } from "../mana-wyrm";
 import { boot } from "../boot";
 
 describe('aegwynn-the-guardian', () => {
-    const game = new GameModel(() => ({
+    const game = new GameModel({
         child: {
-            playerA: new PlayerModel(() => ({
+            playerA: new PlayerModel({
                 child: {
-                    mana: new ManaModel(() => ({ state: { origin: 10 }})),
+                    mana: new ManaModel({ state: { origin: 10 }}),
                     hero: new MageModel(),
-                    board: new BoardModel(() => ({
+                    board: new BoardModel({
                         child: { minions: [] }
-                    })),
-                    hand: new HandModel(() => ({
+                    }),
+                    hand: new HandModel({
                         child: { spells: [new FireballModel()] }
-                    })),
-                    deck: new DeckModel(() => ({
+                    }),
+                    deck: new DeckModel({
                         child: { minions: [new WispModel()] }
-                    }))
+                    })
                 }
-            })),
-            playerB: new PlayerModel(() => ({
+            }),
+            playerB: new PlayerModel({
                 child: {
-                    mana: new ManaModel(() => ({ state: { origin: 10 }})),
+                    mana: new ManaModel({ state: { origin: 10 }}),
                     hero: new MageModel(),
-                    board: new BoardModel(() => ({
+                    board: new BoardModel({
                         child: { minions: [new AegwynnTheGuardianModel()] }
-                    })),
-                    hand: new HandModel(() => ({
+                    }),
+                    hand: new HandModel({
                         child: { 
                             spells: [new ArcaneIntellectModel(), new FrostboltModel(), new ArcaneMissilesModel()]
                         }
-                    })),
-                    deck: new DeckModel(() => ({
+                    }),
+                    deck: new DeckModel({
                         child: {
                             minions: [new WispModel(), new StonetuskBoarModel(), new ManaWyrmModel()]
                         }
-                    }))
+                    })
                 }
-            }))
+            })
         }
-    }));
+    });
     boot(game);
 
     const playerA = game.child.playerA;

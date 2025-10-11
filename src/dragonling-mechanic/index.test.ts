@@ -12,48 +12,48 @@ import { MechanicalDragonlingModel } from "../mechanical-dragonling";
 import { boot } from "../boot";
 
 describe('dragonling-mechanic', () => {
-    const game = new GameModel(() => ({
+    const game = new GameModel({
         state: { debug: { isDrawDisabled: true }},
         child: {
-            playerA: new PlayerModel(() => ({
+            playerA: new PlayerModel({
                 child: {
-                    mana: new ManaModel(() => ({ state: { origin: 10 }})),
+                    mana: new ManaModel({ state: { origin: 10 }}),
                     hero: new MageModel(),
-                    board: new BoardModel(() => ({
+                    board: new BoardModel({
                         child: { 
                             minions: []
                         }
-                    })),
-                    hand: new HandModel(() => ({
+                    }),
+                    hand: new HandModel({
                         child: { 
                             minions: [new DragonlingMechanicModel()],
                             spells: []
                         }
-                    })),
-                    deck: new DeckModel(() => ({
+                    }),
+                    deck: new DeckModel({
                         child: { minions: [] }
-                    }))
+                    })
                 }
-            })),
-            playerB: new PlayerModel(() => ({
+            }),
+            playerB: new PlayerModel({
                 child: {
-                    mana: new ManaModel(() => ({ state: { origin: 10 }})),
+                    mana: new ManaModel({ state: { origin: 10 }}),
                     hero: new MageModel(),
-                    board: new BoardModel(() => ({
+                    board: new BoardModel({
                         child: { 
                             minions: []
                         }
-                    })),
-                    hand: new HandModel(() => ({
+                    }),
+                    hand: new HandModel({
                         child: { 
                             minions: [],
                             spells: []
                         }
-                    }))
+                    })
                 }
-            }))
+            })
         }
-    }));
+    });
     boot(game);
 
     const playerA = game.child.playerA;
@@ -90,8 +90,8 @@ describe('dragonling-mechanic', () => {
         const roleD = cardD?.child.role;
         if (!roleD) throw new Error();
 
-        expect(boardA.refer.order[1]).toBe(cardD);
-        expect(boardA.refer.order[0]).toBe(cardC);
+        expect(boardA.refer.queue[1]).toBe(cardD);
+        expect(boardA.refer.queue[0]).toBe(cardC);
         expect(roleD.child.attack.state.current).toBe(2); // Mechanical Dragonling: 2/1
         expect(roleD.child.health.state.current).toBe(1);
     });

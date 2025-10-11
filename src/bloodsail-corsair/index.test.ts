@@ -9,28 +9,28 @@ import { boot } from "../boot";
 import { FieryWarAxeModel } from "../fiery-war-axe";
 
 describe('bloodsail-corsair', () => {
-    const game = new GameModel(() => ({
+    const game = new GameModel({
         child: {
-            playerA: new PlayerModel(() => ({
+            playerA: new PlayerModel({
                 child: {
-                    mana: new ManaModel(() => ({ state: { origin: 10 }})),
+                    mana: new ManaModel({ state: { origin: 10 }}),
                     hero: new MageModel(),
-                    hand: new HandModel(() => ({
+                    hand: new HandModel({
                         child: { minions: [new BloodsailCorsairModel()] }
-                    }))
+                    })
                 }
-            })),
-            playerB: new PlayerModel(() => ({
+            }),
+            playerB: new PlayerModel({
                 child: {
-                    mana: new ManaModel(() => ({ state: { origin: 10 }})),
+                    mana: new ManaModel({ state: { origin: 10 }}),
                     hero: new WarriorModel(),
-                    board: new BoardModel(() => ({
+                    board: new BoardModel({
                         child: { weapon: new FieryWarAxeModel() }
-                    }))
+                    })
                 }
-            }))
+            })
         }
-    }));
+    });
     boot(game);
     const playerA = game.child.playerA;
     const playerB = game.child.playerB;

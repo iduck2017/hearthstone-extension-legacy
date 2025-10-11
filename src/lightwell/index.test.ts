@@ -14,45 +14,45 @@ import { WispModel } from "../wisp";
 import { boot } from "../boot";
 
 describe('lightwell', () => {
-    const game = new GameModel(() => ({
+    const game = new GameModel({
         state: { debug: { isDrawDisabled: true }},
         child: {
-            playerA: new PlayerModel(() => ({
+            playerA: new PlayerModel({
                 child: {
-                    mana: new ManaModel(() => ({ state: { origin: 10 }})),
+                    mana: new ManaModel({ state: { origin: 10 }}),
                     hero: new MageModel(),
-                    board: new BoardModel(() => ({
+                    board: new BoardModel({
                         child: { 
                             minions: [new WaterElementalModel(), new LightwellModel()]
                         }
-                    })),
-                    hand: new HandModel(() => ({
+                    }),
+                    hand: new HandModel({
                         child: { 
                             minions: [],
                             spells: []
                         }
-                    })),
-                    deck: new DeckModel(() => ({
+                    }),
+                    deck: new DeckModel({
                         child: { minions: [] }
-                    }))
+                    })
                 }
-            })),
-            playerB: new PlayerModel(() => ({
+            }),
+            playerB: new PlayerModel({
                 child: {
-                    mana: new ManaModel(() => ({ state: { origin: 10 }})),
+                    mana: new ManaModel({ state: { origin: 10 }}),
                     hero: new MageModel(),
-                    board: new BoardModel(() => ({
+                    board: new BoardModel({
                         child: { 
                             minions: [new WispModel()]
                         }
-                    })),
-                    hand: new HandModel(() => ({
+                    }),
+                    hand: new HandModel({
                         child: { spells: [] }
-                    }))
+                    })
                 }
-            }))
+            })
         }
-    }));
+    });
     boot(game);
 
     const playerA = game.child.playerA;

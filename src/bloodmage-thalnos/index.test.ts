@@ -10,35 +10,35 @@ import { WispModel } from "../wisp";
 import { boot } from "../boot";
 
 describe('bloodmage-thalnos', () => {
-    const game = new GameModel(() => ({
+    const game = new GameModel({
         state: { debug: { isDrawDisabled: true }},
         child: {
-            playerA: new PlayerModel(() => ({
+            playerA: new PlayerModel({
                 child: {
-                    mana: new ManaModel(() => ({ state: { origin: 10 }})),
+                    mana: new ManaModel({ state: { origin: 10 }}),
                     hero: new MageModel(),
-                    hand: new HandModel(() => ({
+                    hand: new HandModel({
                         child: { spells: [new FireballModel()] }
-                    })),
-                    board: new BoardModel(() => ({
+                    }),
+                    board: new BoardModel({
                         child: { minions: [new BloodmageThalnosModel()] }
-                    })),
-                    deck: new DeckModel(() => ({
+                    }),
+                    deck: new DeckModel({
                         child: { minions: [new WispModel()] }
-                    })),
+                    }),
                 }
-            })),
-            playerB: new PlayerModel(() => ({
+            }),
+            playerB: new PlayerModel({
                 child: {
-                    mana: new ManaModel(() => ({ state: { origin: 10 }})),
+                    mana: new ManaModel({ state: { origin: 10 }}),
                     hero: new MageModel(),
-                    board: new BoardModel(() => ({
+                    board: new BoardModel({
                         child: { minions: [new WispModel()] }
-                    }))
+                    })
                 }
-            }))
+            })
         }
-    }));
+    });
     boot(game);
     const playerA = game.child.playerA;
     const playerB = game.child.playerB;

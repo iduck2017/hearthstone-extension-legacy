@@ -11,29 +11,29 @@ import { boot } from "../boot";
 
 
 describe('argent-squire', () => {
-    const game = new GameModel(() => ({
+    const game = new GameModel({
         state: { debug: { isDrawDisabled: true }},
         child: {
-            playerA: new PlayerModel(() => ({
+            playerA: new PlayerModel({
                 child: {
-                    mana: new ManaModel(() => ({ state: { origin: 10 }})),
+                    mana: new ManaModel({ state: { origin: 10 }}),
                     hero: new MageModel(),
-                    board: new BoardModel(() => ({
+                    board: new BoardModel({
                         child: { minions: [new ArgentSquireModel()] }
-                    })),
+                    }),
                 }
-            })),
-            playerB: new PlayerModel(() => ({
+            }),
+            playerB: new PlayerModel({
                 child: {
-                    mana: new ManaModel(() => ({ state: { origin: 10 }})),
+                    mana: new ManaModel({ state: { origin: 10 }}),
                     hero: new MageModel(),
-                    board: new BoardModel(() => ({
+                    board: new BoardModel({
                         child: { minions: [new ArgentSquireModel()] }
-                    }))
+                    })
                 }
-            }))
+            })
         }
-    }));
+    });
     boot(game);
     
     const boardA = game.child.playerA.child.board;

@@ -12,38 +12,38 @@ import { boot } from "../boot";
 import { WispModel } from "../wisp";
 
 describe('abusive-sergeant', () => {
-    const game = new GameModel(() => ({
+    const game = new GameModel({
         child: {
-            playerA: new PlayerModel(() => ({
+            playerA: new PlayerModel({
                 child: {
-                    mana: new ManaModel(() => ({ state: { origin: 10 }})),
+                    mana: new ManaModel({ state: { origin: 10 }}),
                     hero: new MageModel(),
-                    hand: new HandModel(() => ({
+                    hand: new HandModel({
                         child: { 
                             minions: [
                                 new AbusiveSergeantModel(),
                                 new WispModel()
                             ] 
                         }
-                    })),
+                    }),
                 }
-            })),
-            playerB: new PlayerModel(() => ({
+            }),
+            playerB: new PlayerModel({
                 child: {
-                    mana: new ManaModel(() => ({ state: { origin: 10 }})),
+                    mana: new ManaModel({ state: { origin: 10 }}),
                     hero: new MageModel(),
-                    hand: new HandModel(() => ({
+                    hand: new HandModel({
                         child: { 
                             minions: [
                                 new AbusiveSergeantModel(),
                                 new WispModel()
                             ] 
                         }
-                    })),
+                    }),
                 }
-            })),
+            }),
         }
-    }));
+    });
     boot(game);
 
     const turn = game.child.turn;

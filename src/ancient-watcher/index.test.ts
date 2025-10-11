@@ -10,28 +10,28 @@ import { WispModel } from "../wisp";
 import { boot } from "../boot";
 
 describe('ancient-watcher', () => {
-    const game = new GameModel(() => ({
+    const game = new GameModel({
         child: {
-            playerA: new PlayerModel(() => ({
+            playerA: new PlayerModel({
                 child: {
-                    mana: new ManaModel(() => ({ state: { origin: 10 }})),
+                    mana: new ManaModel({ state: { origin: 10 }}),
                     hero: new MageModel(),
-                    hand: new HandModel(() => ({
+                    hand: new HandModel({
                         child: { minions: [new AncientWatcherModel()] }
-                    }))
+                    })
                 }
-            })),
-            playerB: new PlayerModel(() => ({
+            }),
+            playerB: new PlayerModel({
                 child: {
-                    mana: new ManaModel(() => ({ state: { origin: 10 }})),
+                    mana: new ManaModel({ state: { origin: 10 }}),
                     hero: new MageModel(),
-                    board: new BoardModel(() => ({
+                    board: new BoardModel({
                         child: { minions: [new WispModel()] }
-                    }))
+                    })
                 }
-            }))
+            })
         }
-    }));
+    });
     const root = boot(game);
     const handA = game.child.playerA.child.hand;
     const boardA = game.child.playerA.child.board;
