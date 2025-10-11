@@ -18,9 +18,12 @@ export class SpellbenderFeatureModel extends SecretFeatureModel {
         })
     }
 
-    @EventUtil.on(self => self.route.game?.proxy.all(SpellPerformModel).event.toRun)
+    @EventUtil.on(self => self.handleCast)
+    private listenCast() {
+        return this.route.game?.proxy.any(SpellPerformModel).event?.toRun
+    }
     @SecretFeatureModel.span()
-    private toCast(that: SpellPerformModel, event: SpellCastEvent) {
+    private handleCast(that: SpellPerformModel, event: SpellCastEvent) {
         const board = this.route.board;
         if (!board) return;
 

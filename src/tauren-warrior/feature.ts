@@ -1,5 +1,5 @@
-import { FeatureModel, RoleAttackModel, RoleAttackDecor, OperationType } from "hearthstone-core";
-import { EventUtil, TemplUtil, StateUtil, TranxUtil } from "set-piece";
+import { FeatureModel, RoleAttackModel, RoleAttackDecor, OperationType, RoleModel, RoleHealthModel } from "hearthstone-core";
+import { EventUtil, TemplUtil, StateUtil, TranxUtil, Frame, Event } from "set-piece";
 
 export namespace TaurenWarriorFeatureProps {
     export type E = {}
@@ -17,6 +17,15 @@ export class TaurenWarriorFeatureModel extends FeatureModel<
     TaurenWarriorFeatureProps.C,
     TaurenWarriorFeatureProps.R
 > {
+    public get route() {
+        const result = super.route;
+        const role: RoleModel | undefined = result.list.find(item => item instanceof RoleModel);
+        return {
+            ...result,
+            role
+        };
+    }
+
     constructor(props?: TaurenWarriorFeatureModel['props']) {
         props = props ?? {};
         super({
@@ -34,16 +43,23 @@ export class TaurenWarriorFeatureModel extends FeatureModel<
     }
 
     // Listen to health state changes to trigger enrage effect
-    @EventUtil.on(self => self.route.role?.proxy.child.health.event.onChange)
+    @EventUtil.on(self => self.handleChange)
+    private listenChange() {
+        return this.route.role?.proxy.child.health.event?.onChange
+    }
     @TranxUtil.span()
-    private onHealthChange(that: any, event: any) {
+    private handleChange(that: RoleHealthModel, event: Event<Frame<RoleHealthModel>>) {
         if (that.state.current !== event.detail.state.current) this.reload()
         if (that.state.maximum !== event.detail.state.maximum) this.reload()
     }
 
+
     // Apply attack buff when damaged
-    @StateUtil.on(self => self.route.role?.proxy.child.attack.decor)
-    private onCheck(
+    @StateUtil.on(self => self.modifyAttack)
+    private listenAttack() {
+        return this.route.role?.proxy.child.attack.decor
+    }
+    private modifyAttack(
         that: RoleAttackModel,
         decor: RoleAttackDecor
     ) {

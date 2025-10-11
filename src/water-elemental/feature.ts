@@ -1,4 +1,4 @@
-import { DamageEvent, DamageModel, FeatureModel } from "hearthstone-core";
+import { DamageEvent, DamageModel, FeatureModel, MinionCardModel } from "hearthstone-core";
 import { Event, EventUtil, TemplUtil } from "set-piece";
 
 export namespace WaterElementalFeatureProps {
@@ -15,6 +15,15 @@ export class WaterElementalFeatureModel extends FeatureModel<
     WaterElementalFeatureProps.C,
     WaterElementalFeatureProps.R
 > {
+    public get route() {
+        const result = super.route;
+        const minion: MinionCardModel | undefined = result.list.find(item => item instanceof MinionCardModel);
+        return {
+            ...result,
+            minion
+        };
+    }
+
     constructor(props?: WaterElementalFeatureModel['props']) {
         props = props ?? {};
         super({
@@ -30,8 +39,13 @@ export class WaterElementalFeatureModel extends FeatureModel<
         });
     }
 
-    @EventUtil.on(self => self.route.minion?.proxy.child.damage.event.onRun)
-    private onDamageRun(that: DamageModel, event: DamageEvent) {
+
+    @EventUtil.on(self => self.handle)
+    private listen() {
+        return this.route.minion?.proxy.child.damage.event?.onRun
+    }
+
+    private handle(that: DamageModel, event: DamageEvent) {
         const minion = this.route.minion;
         if (!minion) return;
         const target = event.detail.target;

@@ -1,4 +1,4 @@
-import { FeatureModel, SpellCardModel } from "hearthstone-core";
+import { FeatureModel, MinionCardModel, SpellCardModel } from "hearthstone-core";
 import { ArcaneDevourerBuffModel } from "./buff";
 import { Event, EventUtil, TemplUtil } from "set-piece";
 
@@ -16,6 +16,15 @@ export class ArcaneDevourerFeatureModel extends FeatureModel<
     ArcaneDevourerFeatureProps.C,
     ArcaneDevourerFeatureProps.R
 > {
+    public get route() {
+        const result = super.route;
+        const minion: MinionCardModel | undefined = result.list.find(item => item instanceof MinionCardModel);
+        return {
+            ...result,
+            minion
+        };
+    }
+
     constructor(props?: ArcaneDevourerFeatureModel['props']) {
         props = props ?? {};
         super({
@@ -31,8 +40,11 @@ export class ArcaneDevourerFeatureModel extends FeatureModel<
         });
     }
 
-    @EventUtil.on(self => self.route.player?.proxy.all(SpellCardModel).event.onPlay)
-    private onPlay(that: SpellCardModel, event: Event) {
+    @EventUtil.on(self => self.handleCast)
+    private listenCast() {
+        return this.route.player?.proxy.any(SpellCardModel).event?.onPlay
+    }
+    private handleCast(that: SpellCardModel, event: Event) {
         if (!this.route.board) return;
         const minion = this.route.minion;
         if (!minion) return;

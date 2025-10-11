@@ -18,8 +18,11 @@ export class NorthshireClericFeatureModel extends FeatureModel {
         });
     }
 
-    @EventUtil.on(self => self.route.game?.proxy.all(RoleHealthModel).event.onHeal)
-    private onHeal(that: RoleHealthModel, event: RestoreEvent) {
+    @EventUtil.on(self => self.handleHeal)
+    private listenHeal() {
+        return this.route.game?.proxy.any(RoleHealthModel).event?.onHeal
+    }
+    private handleHeal(that: RoleHealthModel, event: RestoreEvent) {
         if (!this.route.board) return;
         const player = this.route.player;
         if (!player) return;

@@ -42,25 +42,23 @@ export class AmaniBerserkerFeatureModel extends FeatureModel<
         });
     }
 
+    // Listen to health state changes to trigger enrage effect
     @EventUtil.on(self => self.handleChange)
     private listenChange() {
         return this.route.role?.proxy.child.health.event?.onChange
     }
-
-    // Listen to health state changes to trigger enrage effect
     @TranxUtil.span()
-    private handleChange(that: RoleHealthModel, event: { prev: Frame<RoleHealthModel> }) {
-        if (that.state.current !== event.prev.state.current) this.reload()
-        if (that.state.maximum !== event.prev.state.maximum) this.reload()
-    }
-
-    @StateUtil.on(self => self.handleAttack)
-    private listenAttack() {
-        return this.route.role?.proxy.child.attack.decor
+    private handleChange(that: RoleHealthModel, event: Event<Frame<RoleHealthModel>>) {
+        if (that.state.current !== event.detail.state.current) this.reload()
+        if (that.state.maximum !== event.detail.state.maximum) this.reload()
     }
 
     // Apply attack buff when damaged
-    private handleAttack(
+    @StateUtil.on(self => self.modifyAttack)
+    private listenAttack() {
+        return this.route.role?.proxy.child.attack.decor
+    }
+    private modifyAttack(
         that: RoleAttackModel,
         decor: RoleAttackDecor
     ) {

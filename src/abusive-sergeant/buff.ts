@@ -22,8 +22,8 @@ export class AbusiveSergeantBuffModel extends IRoleBuffModel {
     private listenTurn() {
         return this.route.game?.proxy.child.turn.event?.onEnd
     }
-
     private handleTurn(that: TurnModel, event: Event) {
         this.deactive();
-    }   
+    }
+    
 }

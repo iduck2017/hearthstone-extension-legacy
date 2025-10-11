@@ -1,4 +1,4 @@
-import { EffectModel, SelectEvent, RoleModel, DamageModel, DamageEvent, DamageType, CardModel, SpellPerformModel, SecretFeatureModel } from "hearthstone-core";
+import { EffectModel, SelectEvent, RoleModel, DamageModel, DamageEvent, DamageType, CardModel, SpellPerformModel, SecretFeatureModel, AbortEvent, SpellCastEvent } from "hearthstone-core";
 import { DebugUtil, Event, EventUtil, Model, TemplUtil } from "set-piece";
 
 @TemplUtil.is('counterspell-effect')
@@ -18,9 +18,12 @@ export class CounterspellFeatureModel extends SecretFeatureModel {
         });
     }
 
-    @EventUtil.on(self => self.route.game?.proxy.all(SpellPerformModel).event.toRun)
+    @EventUtil.on(self => self.handle)
+    private listen() {
+        return this.route.game?.proxy.any(SpellPerformModel).event?.toRun
+    }
     @SecretFeatureModel.span()
-    private toCast(that: SpellPerformModel, event: Event) {
+    private handle(that: SpellPerformModel, event: SpellCastEvent) {
         const board = this.route.board;
         if (!board) return;
         const player = this.route.player;

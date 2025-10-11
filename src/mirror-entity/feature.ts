@@ -18,9 +18,12 @@ export class MirrorEntityFeatureModel extends SecretFeatureModel {
         });
     }
 
-    @EventUtil.on(self => self.route.game?.proxy.all(MinionCardModel).event.onPlay)
+    @EventUtil.on(self => self.handlePlay)
+    private listenPlay() {
+        return this.route.game?.proxy.any(MinionCardModel).event?.onPlay
+    }
     @SecretFeatureModel.span()
-    private onPlay(that: MinionCardModel, event: Event) {
+    private handlePlay(that: MinionCardModel, event: Event) {
         const playerA = this.route.player;
         if (!playerA) return;
         

@@ -23,7 +23,6 @@ export class AegwynnTheGuardianContextModel extends FeatureModel {
     private listenDraw() {
         return this.route.player?.proxy.child.hand.child.minions.event?.onDraw
     }
-
     private handleDraw(that: MinionCardModel, event: Event) {
         const player = this.route.player;
         if (!player) return;
@@ -32,4 +31,6 @@ export class AegwynnTheGuardianContextModel extends FeatureModel {
         that.child.feats.add(new AegwynnTheGuardianDeathrattleModel());
         player.del(this);
     }
+
+    
 }

@@ -31,8 +31,11 @@ export class ArchmageAntonidasFeatureModel extends FeatureModel<
         });
     }
 
-    @EventUtil.on(self => self.route.player?.proxy.all(SpellCardModel).event.onPlay)
-    private onPlay(that: SpellCardModel, event: Event) {
+    @EventUtil.on(self => self.handleCast)
+    private listenCast() {
+        return this.route.player?.proxy.any(SpellCardModel).event?.onPlay
+    }
+    private handleCast(that: SpellCardModel, event: Event) {
         if (!this.route.board) return;
         const player = this.route.player;
         if (!player) return;

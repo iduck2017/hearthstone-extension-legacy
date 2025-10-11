@@ -1,4 +1,4 @@
-import { RoleAttackModel, RoleModel, SecretFeatureModel } from "hearthstone-core";
+import { AbortEvent, RoleAttackModel, RoleModel, SecretFeatureModel } from "hearthstone-core";
 import { Event, EventUtil, TemplUtil } from "set-piece";
 
 @TemplUtil.is('ice-barrier-feature')
@@ -18,9 +18,12 @@ export class IceBarrierFeatureModel extends SecretFeatureModel {
         });
     }
 
-    @EventUtil.on(self => self.route.player?.proxy.child.hero.child.role.child.attack.event.toRecv)
+    @EventUtil.on(self => self.handleRecv)
+    private listenRecv() {
+        return this.route.player?.proxy.child.hero.child.role.child.attack.event?.toRecv
+    }
     @SecretFeatureModel.span()
-    private onAttacked(that: RoleAttackModel, event: Event<{ source: RoleModel }>) {
+    private handleRecv(that: RoleAttackModel, event: AbortEvent<{ source: RoleModel }>) {
         const player = this.route.player;
         if (!player) return;
         // Check if the attack target is the player's hero
