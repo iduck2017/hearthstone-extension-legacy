@@ -39,9 +39,11 @@ export class ScarletSubjugatorBattlecryModel extends MinionBattlecryModel<[RoleM
 
     @TranxUtil.span()
     private debuff(target: RoleModel) {
-        const player = this.route.player;
-        if (!player) return;
-        const debuff = new ScarletSubjugatorDebuffModel({ refer: { player }});
+        const game = this.route.game;
+        if (!game) return;
+        const turn = game.child.turn;
+        const current = turn.state.current;
+        const debuff = new ScarletSubjugatorDebuffModel({ state: { count: current + 2 }});
         target.child.feats.add(debuff);
     }
 }

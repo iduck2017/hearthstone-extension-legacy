@@ -3,9 +3,9 @@ import { Event, EventUtil, TemplUtil } from "set-piece";
 
 export namespace ScarletSubjugatorDebuffModel {
     export type E = {};
-    export type S = {};
+    export type S = { count: number};
     export type C = {};
-    export type R = { player?: PlayerModel };
+    export type R = {};
 }
 
 @TemplUtil.is('scarlet-subjugator-debuff')
@@ -23,6 +23,7 @@ export class ScarletSubjugatorDebuffModel extends IRoleBuffModel<
                 name: 'Scarlet Subjugator\'s Debuff',
                 desc: '-2 Attack until your next turn.',
                 offset: [-2, 0], // -2 Attack, 0 Health
+                count: 0,
                 ...props.state,
             },
             child: { ...props.child },
@@ -37,12 +38,9 @@ export class ScarletSubjugatorDebuffModel extends IRoleBuffModel<
     }
     public async handleTurn(that: TurnModel, event: Event) {
         if (!this.route.board) return;
-        const player = this.refer.player;
-        console.log('onStart', player?.child.hero.name)
-        if (!player) return;
-        const current = that.refer.current;
-        if (current !== player) return;
-        console.log('deactive', player.child.hero.name, current.child.hero.name)
+        const count = this.state.count;
+        const current = that.state.current;
+        if (current !== count) return;
         this.deactive();
     }
 }
