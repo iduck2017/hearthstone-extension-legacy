@@ -29,8 +29,8 @@ export class FrostwolfGruntModel extends MinionCardModel {
                 ...props.state
             },
             child: {
-                cost: new CostModel({ state: { origin: 2 }}),
-                role: new RoleModel({
+                cost: props.child?.cost ??  new CostModel({ state: { origin: 2 }}),
+                role: props.child?.role ?? new RoleModel({
                     child: {
                         attack: new RoleAttackModel({ state: { origin: 2 }}),
                         health: new RoleHealthModel({ state: { origin: 2 }}),
@@ -41,7 +41,7 @@ export class FrostwolfGruntModel extends MinionCardModel {
                         })
                     }
                 }),
-                feats: new MinionFeatsModel({
+                feats: props.child?.feats ?? new MinionFeatsModel({
                     child: { 
                         battlecry: []
                     }

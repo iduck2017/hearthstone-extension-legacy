@@ -35,7 +35,7 @@ export class ShadowWordPainModel extends SpellCardModel {
                 ...props.state
             },
             child: {
-                cost: new CostModel({ state: { origin: 2 }}),
+                cost: props.child?.cost ??  new CostModel({ state: { origin: 2 }}),
                 feats: props.child?.feats ?? new SpellFeatsModel({
                     child: { effects: [new ShadowWordPainEffectModel()] }
                 }),

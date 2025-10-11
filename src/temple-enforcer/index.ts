@@ -18,14 +18,14 @@ export class TempleEnforcerModel extends MinionCardModel {
                 ...props.state
             },
             child: {
-                cost: new CostModel({ state: { origin: 5 }}),
-                role: new RoleModel({
+                cost: props.child?.cost ??  new CostModel({ state: { origin: 5 }}),
+                role: props.child?.role ?? new RoleModel({
                     child: {
                         health: new RoleHealthModel({ state: { origin: 6 }}),
                         attack: new RoleAttackModel({ state: { origin: 5 }}),
                     },
                 }),
-                feats: new MinionFeatsModel({
+                feats: props.child?.feats ?? new MinionFeatsModel({
                     child: { battlecry: [new TempleEnforcerBattlecryModel()] }
                 }),
                 ...props.child

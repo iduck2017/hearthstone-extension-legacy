@@ -18,7 +18,7 @@ export class ShadowWordRuinModel extends SpellCardModel {
                 ...props.state
             },
             child: {
-                cost: new CostModel({ state: { origin: 4 }}),
+                cost: props.child?.cost ??  new CostModel({ state: { origin: 4 }}),
                 feats: props.child?.feats ?? new SpellFeatsModel({
                     child: { effects: [new ShadowWordRuinEffectModel()] }
                 }),

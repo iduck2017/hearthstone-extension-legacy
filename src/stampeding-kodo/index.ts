@@ -33,14 +33,14 @@ export class StampedingKodoModel extends MinionCardModel {
                 ...props.state
             },
             child: {
-                cost: new CostModel({ state: { origin: 5 }}),
-                role: new RoleModel({
+                cost: props.child?.cost ??  new CostModel({ state: { origin: 5 }}),
+                role: props.child?.role ?? new RoleModel({
                     child: {
                         attack: new RoleAttackModel({ state: { origin: 3 }}),
                         health: new RoleHealthModel({ state: { origin: 5 }}),
                     }
                 }),
-                feats: new MinionFeatsModel({
+                feats: props.child?.feats ?? new MinionFeatsModel({
                     child: { 
                         battlecry: [new StampedingKodoBattlecryModel()]
                     }

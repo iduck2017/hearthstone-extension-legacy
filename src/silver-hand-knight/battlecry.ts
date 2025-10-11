@@ -9,8 +9,8 @@ export class SilverHandKnightBattlecryModel extends MinionBattlecryModel<[]> {
         super({
             uuid: props.uuid,
             state: {
-            name: "Silver Hand Knight's Battlecry",
-            desc: "Summon a 2/2 Squire.",
+                name: "Silver Hand Knight's Battlecry",
+                desc: "Summon a 2/2 Squire.",
                 ...props.state
             },
             child: { ...props.child },

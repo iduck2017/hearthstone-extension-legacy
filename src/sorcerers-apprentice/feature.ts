@@ -26,7 +26,6 @@ export class SorcerersApprenticeFeatureModel extends FeatureModel {
         if (!this.route.board) return;
         const card = that.route.card;
         const player = that.route.player;
-        if (!(card instanceof SpellCardModel)) return;
         if (player !== this.route.player) return;
         if (that.state.type !== CostType.MANA) return;
         decor.add(-1, true);

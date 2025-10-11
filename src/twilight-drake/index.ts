@@ -33,14 +33,14 @@ export class TwilightDrakeModel extends MinionCardModel {
                 ...props.state
             },
             child: {
-                cost: new CostModel({ state: { origin: 4 }}),
-                role: new RoleModel({
+                cost: props.child?.cost ??  new CostModel({ state: { origin: 4 }}),
+                role: props.child?.role ?? new RoleModel({
                     child: {
                         attack: new RoleAttackModel({ state: { origin: 4 }}),
                         health: new RoleHealthModel({ state: { origin: 1 }}),
                     }
                 }),
-                feats: new MinionFeatsModel({
+                feats: props.child?.feats ?? new MinionFeatsModel({
                     child: { 
                         battlecry: [new TwilightDrakeBattlecryModel()]
                     }

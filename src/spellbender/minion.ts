@@ -31,14 +31,14 @@ export class SpellbenderMinionModel extends MinionCardModel {
                 ...props.state
             },
             child: {
-                cost: new CostModel({ state: { origin: 1 }}),
-                role: new RoleModel({
+                cost: props.child?.cost ??  new CostModel({ state: { origin: 1 }}),
+                role: props.child?.role ?? new RoleModel({
                     child: {
                         attack: new RoleAttackModel({ state: { origin: 1 }}),
                         health: new RoleHealthModel({ state: { origin: 3 }}),
                     }
                 }),
-                feats: new MinionFeatsModel({
+                feats: props.child?.feats ?? new MinionFeatsModel({
                     child: { battlecry: [] }
                 }),
                 ...props.child

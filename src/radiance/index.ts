@@ -35,7 +35,7 @@ export class RadianceModel extends SpellCardModel {
                 ...props.state
             },
             child: {
-                cost: new CostModel({ state: { origin: 1 }}),
+                cost: props.child?.cost ??  new CostModel({ state: { origin: 1 }}),
                 feats: props.child?.feats ?? new SpellFeatsModel({
                     child: { effects: [new RadianceEffectModel()] }
                 }),

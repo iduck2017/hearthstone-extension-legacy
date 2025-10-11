@@ -19,7 +19,7 @@ export class HolyFireModel extends SpellCardModel {
                 ...props.state
             },
             child: {
-                cost: new CostModel({ state: { origin: 6 }}),
+                cost: props.child?.cost ??  new CostModel({ state: { origin: 6 }}),
                 feats: props.child?.feats ?? new SpellFeatsModel({
                     child: { effects: [new HolyFireEffectModel()] }
                 }),

@@ -18,14 +18,14 @@ export class LeperGnomeModel extends MinionCardModel {
                 ...props.state
             },
             child: {
-                cost: new CostModel({ state: { origin: 1 }}),
-                role: new RoleModel({
+                cost: props.child?.cost ??  new CostModel({ state: { origin: 1 }}),
+                role: props.child?.role ?? new RoleModel({
                     child: {
                         health: new RoleHealthModel({ state: { origin: 1 }}),
                         attack: new RoleAttackModel({ state: { origin: 2 }}),
                     },
                 }),
-                feats: new MinionFeatsModel({
+                feats: props.child?.feats ?? new MinionFeatsModel({
                     child: { deathrattle: [new LeperGnomeDeathrattleModel()] }
                 }),
                 ...props.child

@@ -18,7 +18,7 @@ export class HolyNovaModel extends SpellCardModel {
                 ...props.state
             },
             child: {
-                cost: new CostModel({ state: { origin: 3 }}),
+                cost: props.child?.cost ??  new CostModel({ state: { origin: 3 }}),
                 feats: props.child?.feats ?? new SpellFeatsModel({
                     child: { effects: [new HolyNovaEffectModel()] }
                 }),

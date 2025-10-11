@@ -33,14 +33,14 @@ export class ArcaneDevourerModel extends MinionCardModel {
                 ...props.state
             },
             child: {
-                cost: new CostModel({ state: { origin: 8 }}),
-                role: new RoleModel({
+                cost: props.child?.cost ??  new CostModel({ state: { origin: 8 }}),
+                role: props.child?.role ?? new RoleModel({
                     child: {
                         attack: new RoleAttackModel({ state: { origin: 4 }}),
                         health: new RoleHealthModel({ state: { origin: 8 }}),
                     }
                 }),
-                feats: new MinionFeatsModel({
+                feats: props.child?.feats ?? new MinionFeatsModel({
                     child: { 
                         battlecry: [], 
                         list: [new ArcaneDevourerFeatureModel()]

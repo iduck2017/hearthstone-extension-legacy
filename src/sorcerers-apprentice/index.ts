@@ -34,14 +34,14 @@ export class SorcerersApprenticeModel extends MinionCardModel {
                 ...props.state
             },
             child: {
-                cost: new CostModel({ state: { origin: 2 }}),
-                role: new RoleModel({
+                cost: props.child?.cost ??  new CostModel({ state: { origin: 2 }}),
+                role: props.child?.role ?? new RoleModel({
                     child: {
                         attack: new RoleAttackModel({ state: { origin: 3 }}),
                         health: new RoleHealthModel({ state: { origin: 2 }}),
                     }
                 }),
-                feats: new MinionFeatsModel({
+                feats: props.child?.feats ?? new MinionFeatsModel({
                     child: {
                         list: [new SorcerersApprenticeFeatureModel()]
                     }

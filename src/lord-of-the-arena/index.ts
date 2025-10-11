@@ -17,8 +17,8 @@ export class LordOfTheArenaModel extends MinionCardModel {
                 ...props.state
             },
             child: {
-                cost: new CostModel({ state: { origin: 6 }}),
-                role: new RoleModel({
+                cost: props.child?.cost ??  new CostModel({ state: { origin: 6 }}),
+                role: props.child?.role ?? new RoleModel({
                     child: {
                         attack: new RoleAttackModel({ state: { origin: 6 }}),
                         health: new RoleHealthModel({ state: { origin: 5 }}),
@@ -29,7 +29,7 @@ export class LordOfTheArenaModel extends MinionCardModel {
                         })
                     }
                 }),
-                feats: new MinionFeatsModel({
+                feats: props.child?.feats ?? new MinionFeatsModel({
                     child: {
                         battlecry: []
                     }
