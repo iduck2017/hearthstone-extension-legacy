@@ -15,7 +15,7 @@
  * Collectible
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel, SpellFeatsModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel, SpellFeaturesModel } from "hearthstone-core";
 import { CircleOfHealingEffectModel } from "./effect";
 
 @LibraryUtil.is('circle-of-healing')
@@ -37,7 +37,7 @@ export class CircleOfHealingModel extends SpellCardModel {
             refer: { ...props.refer },
             child: {
                 cost: props.child?.cost ?? new CostModel({ state: { origin: 0 }}),
-                feats: props.child?.feats ?? new SpellFeatsModel({
+                feats: props.child?.feats ?? new SpellFeaturesModel({
                     child: { effects: [new CircleOfHealingEffectModel()] }
                 }),
                 ...props.child

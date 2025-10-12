@@ -1,4 +1,4 @@
-import { MinionCardModel, RarityType, ClassType, RaceType, RoleAttackModel, RoleHealthModel, RoleModel, MinionFeatsModel, CostModel, LibraryUtil } from "hearthstone-core";
+import { MinionCardModel, RarityType, ClassType, RaceType, RoleAttackModel, RoleHealthModel, RoleModel, MinionFeaturesModel, CostModel, LibraryUtil } from "hearthstone-core";
 import { FrostElementalBattlecryModel } from "./battlecry";
 
 @LibraryUtil.is('frost-elemental')
@@ -25,7 +25,7 @@ export class FrostElementalModel extends MinionCardModel {
                         health: new RoleHealthModel({ state: { origin: 5 }}),
                     }
                 }),
-                feats: props.child?.feats ?? new MinionFeatsModel({
+                feats: props.child?.feats ?? new MinionFeaturesModel({
                     child: {
                         battlecry: [new FrostElementalBattlecryModel()]
                     }

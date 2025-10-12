@@ -15,7 +15,7 @@
  * Collectible
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel, SpellFeatsModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel, SpellFeaturesModel } from "hearthstone-core";
 import { FocusedWillEffectModel } from "./effect";
 
 @LibraryUtil.is('focused-will')
@@ -37,7 +37,7 @@ export class FocusedWillModel extends SpellCardModel {
             refer: { ...props.refer },
             child: {
                 cost: props.child?.cost ?? new CostModel({ state: { origin: 1 }}),
-                feats: props.child?.feats ?? new SpellFeatsModel({
+                feats: props.child?.feats ?? new SpellFeaturesModel({
                     child: { effects: [new FocusedWillEffectModel()] }
                 }),
                 ...props.child

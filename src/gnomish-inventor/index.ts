@@ -10,7 +10,7 @@
  * Collectible
  */
 
-import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, MinionFeatsModel, RarityType, RoleAttackModel, RoleModel, RaceType } from "hearthstone-core";
+import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, MinionFeaturesModel, RarityType, RoleAttackModel, RoleModel, RaceType } from "hearthstone-core";
 import { GnomishInventorBattlecryModel } from "./battlecry";
 
 @LibraryUtil.is('gnomish-inventor')
@@ -37,7 +37,7 @@ export class GnomishInventorModel extends MinionCardModel {
                         health: new RoleHealthModel({ state: { origin: 4 }}),
                     }
                 }),
-                feats: props.child?.feats ?? new MinionFeatsModel({
+                feats: props.child?.feats ?? new MinionFeaturesModel({
                     child: { 
                         battlecry: [new GnomishInventorBattlecryModel()]
                     }

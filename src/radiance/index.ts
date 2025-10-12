@@ -15,7 +15,7 @@
  * 
  * 1 cost
  */
-import { ClassType, CostModel, LibraryUtil, RarityType, SpellCardModel, SchoolType, SpellFeatsModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryUtil, RarityType, SpellCardModel, SchoolType, SpellFeaturesModel } from "hearthstone-core";
 import { RadianceEffectModel } from "./effect";
 
 @LibraryUtil.is('radiance')
@@ -36,7 +36,7 @@ export class RadianceModel extends SpellCardModel {
             },
             child: {
                 cost: props.child?.cost ??  new CostModel({ state: { origin: 1 }}),
-                feats: props.child?.feats ?? new SpellFeatsModel({
+                feats: props.child?.feats ?? new SpellFeaturesModel({
                     child: { effects: [new RadianceEffectModel()] }
                 }),
                 ...props.child

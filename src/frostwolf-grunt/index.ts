@@ -10,7 +10,7 @@
  * Collectible
  */
 
-import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, MinionFeatsModel, RarityType, RoleAttackModel, RoleModel, RaceType, TauntModel, RoleFeatsModel } from "hearthstone-core";
+import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, MinionFeaturesModel, RarityType, RoleAttackModel, RoleModel, RaceType, TauntModel, RoleFeaturesModel } from "hearthstone-core";
 
 @LibraryUtil.is('frostwolf-grunt')
 export class FrostwolfGruntModel extends MinionCardModel {
@@ -34,14 +34,14 @@ export class FrostwolfGruntModel extends MinionCardModel {
                     child: {
                         attack: new RoleAttackModel({ state: { origin: 2 }}),
                         health: new RoleHealthModel({ state: { origin: 2 }}),
-                        feats: new RoleFeatsModel({
+                        feats: new RoleFeaturesModel({
                             child: {
                                 taunt: new TauntModel()
                             }
                         })
                     }
                 }),
-                feats: props.child?.feats ?? new MinionFeatsModel({
+                feats: props.child?.feats ?? new MinionFeaturesModel({
                     child: { 
                         battlecry: []
                     }

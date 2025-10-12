@@ -13,7 +13,7 @@
  * Collectible
  */
 
-import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, MinionFeatsModel, RarityType, RoleAttackModel, RoleModel, RaceType, TauntModel, RoleFeatsModel } from "hearthstone-core";
+import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, MinionFeaturesModel, RarityType, RoleAttackModel, RoleModel, RaceType, TauntModel, RoleFeaturesModel } from "hearthstone-core";
 
 @LibraryUtil.is('shieldbearer')
 export class ShieldbearerModel extends MinionCardModel {
@@ -37,14 +37,14 @@ export class ShieldbearerModel extends MinionCardModel {
                     child: {
                         attack: new RoleAttackModel({ state: { origin: 0 }}),
                         health: new RoleHealthModel({ state: { origin: 4 }}),
-                        feats: new RoleFeatsModel({
+                        feats: new RoleFeaturesModel({
                             child: {
                                 taunt: new TauntModel()
                             }
                         })
                     }
                 }),
-                feats: props.child?.feats ?? new MinionFeatsModel({
+                feats: props.child?.feats ?? new MinionFeaturesModel({
                     child: { 
                         battlecry: []
                     }

@@ -17,7 +17,7 @@
  * 1/2/1
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, MinionCardModel, MinionFeatsModel, RoleAttackModel, RoleHealthModel, RoleModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryUtil, RarityType, MinionCardModel, MinionFeaturesModel, RoleAttackModel, RoleHealthModel, RoleModel } from "hearthstone-core";
 import { ScarletSubjugatorBattlecryModel } from "./battlecry";
 
 @LibraryUtil.is('scarlet-subjugator')
@@ -44,7 +44,7 @@ export class ScarletSubjugatorModel extends MinionCardModel {
                         health: new RoleHealthModel({ state: { origin: 1 }}),
                     }
                 }),
-                feats: props.child?.feats ?? new MinionFeatsModel({
+                feats: props.child?.feats ?? new MinionFeaturesModel({
                     child: { battlecry: [new ScarletSubjugatorBattlecryModel()]}
                 }),
                 ...props.child

@@ -13,7 +13,7 @@
  * Collectible
  */
 
-import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, MinionFeatsModel, RarityType, RoleAttackModel, RoleModel, RaceType, RoleFeatsModel, PoisonousModel } from "hearthstone-core";
+import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, MinionFeaturesModel, RarityType, RoleAttackModel, RoleModel, RaceType, RoleFeaturesModel, PoisonousModel } from "hearthstone-core";
 
 @LibraryUtil.is('emperor-cobra')
 export class EmperorCobraModel extends MinionCardModel {
@@ -39,7 +39,7 @@ export class EmperorCobraModel extends MinionCardModel {
                         health: new RoleHealthModel({ state: { origin: 3 }}),
                     }
                 }),
-                feats: props.child?.feats ?? new MinionFeatsModel({
+                feats: props.child?.feats ?? new MinionFeaturesModel({
                     child: { 
                         battlecry: [],
                         poisonous: new PoisonousModel()

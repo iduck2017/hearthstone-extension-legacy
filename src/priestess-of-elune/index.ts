@@ -1,4 +1,4 @@
-import { MinionCardModel, RarityType, ClassType, RoleAttackModel, RoleHealthModel, RoleModel, MinionFeatsModel, CostModel, LibraryUtil } from "hearthstone-core";
+import { MinionCardModel, RarityType, ClassType, RoleAttackModel, RoleHealthModel, RoleModel, MinionFeaturesModel, CostModel, LibraryUtil } from "hearthstone-core";
 import { PriestessOfEluneBattlecryModel } from "./battlecry";
 
 @LibraryUtil.is('priestess-of-elune')
@@ -25,7 +25,7 @@ export class PriestessOfEluneModel extends MinionCardModel {
                         health: new RoleHealthModel({ state: { origin: 4 }}),
                     }
                 }),
-                feats: props.child?.feats ?? new MinionFeatsModel({
+                feats: props.child?.feats ?? new MinionFeaturesModel({
                     child: {
                         battlecry: [new PriestessOfEluneBattlecryModel()]
                     }

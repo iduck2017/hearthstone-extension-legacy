@@ -1,4 +1,4 @@
-import { MinionCardModel, RarityType, ClassType, RoleAttackModel, RoleHealthModel, RoleModel, CostModel, LibraryUtil, TauntModel, RoleFeatsModel } from "hearthstone-core";
+import { MinionCardModel, RarityType, ClassType, RoleAttackModel, RoleHealthModel, RoleModel, CostModel, LibraryUtil, TauntModel, RoleFeaturesModel } from "hearthstone-core";
 
 @LibraryUtil.is('baine-bloodhoof')
 export class BaineBloodhoofModel extends MinionCardModel {

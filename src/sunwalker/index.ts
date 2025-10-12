@@ -12,7 +12,7 @@
  * Collectible
  */
 
-import { TauntModel, RoleHealthModel, RoleAttackModel, MinionCardModel, RoleModel, RoleFeatsModel, ClassType, RarityType, DivineShieldModel, CostModel, LibraryUtil } from "hearthstone-core";
+import { TauntModel, RoleHealthModel, RoleAttackModel, MinionCardModel, RoleModel, RoleFeaturesModel, ClassType, RarityType, DivineShieldModel, CostModel, LibraryUtil } from "hearthstone-core";
 
 @LibraryUtil.is('sunwalker')
 export class SunwalkerModel extends MinionCardModel {
@@ -36,7 +36,7 @@ export class SunwalkerModel extends MinionCardModel {
                     child: {
                         attack: new RoleAttackModel({ state: { origin: 4 }}),
                         health: new RoleHealthModel({ state: { origin: 5 }}),
-                        feats: new RoleFeatsModel({
+                        feats: new RoleFeaturesModel({
                             child: {
                                 taunt: new TauntModel(),
                                 divineShield: new DivineShieldModel()

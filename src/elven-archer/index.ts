@@ -1,4 +1,4 @@
-import { MinionCardModel, RoleHealthModel, RoleAttackModel, RoleModel, LibraryUtil, CostModel, MinionFeatsModel } from "hearthstone-core";
+import { MinionCardModel, RoleHealthModel, RoleAttackModel, RoleModel, LibraryUtil, CostModel, MinionFeaturesModel } from "hearthstone-core";
 import { ElvenArcherMinionBattlecryModel } from "./battlecry";
 import { ClassType, RarityType } from "hearthstone-core";
 
@@ -26,7 +26,7 @@ export class ElvenArcherModel extends MinionCardModel {
                         health: new RoleHealthModel({ state: { origin: 1 }}),   
                     }
                 }),
-                feats: props.child?.feats ?? new MinionFeatsModel({
+                feats: props.child?.feats ?? new MinionFeaturesModel({
                     child: { battlecry: [new ElvenArcherMinionBattlecryModel()] }
                 }),
                 ...props.child,

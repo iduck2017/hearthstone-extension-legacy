@@ -14,7 +14,7 @@
  * Collectible
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, SecretCardModel, SpellFeatsModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryUtil, RarityType, SecretCardModel, SpellFeaturesModel } from "hearthstone-core";
 import { SpellbenderFeatureModel } from "./feature";
 
 @LibraryUtil.is('spellbender')
@@ -36,7 +36,7 @@ export class SpellbenderModel extends SecretCardModel {
             refer: { ...props.refer },
             child: { 
                 cost: props.child?.cost ?? new CostModel({ state: { origin: 3 }}),
-                feats: new SpellFeatsModel({
+                feats: new SpellFeaturesModel({
                     child: {
                         feats: [new SpellbenderFeatureModel()]
                     }

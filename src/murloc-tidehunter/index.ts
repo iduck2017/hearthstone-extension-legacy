@@ -15,7 +15,7 @@
  * Collectible
  */
 
-import { CardModel, ClassType, RoleHealthModel, MinionCardModel, MinionFeatsModel, RaceType, RarityType, RoleAttackModel, RoleModel, CostModel, LibraryUtil } from "hearthstone-core";
+import { CardModel, ClassType, RoleHealthModel, MinionCardModel, MinionFeaturesModel, RaceType, RarityType, RoleAttackModel, RoleModel, CostModel, LibraryUtil } from "hearthstone-core";
 import { MurlocTidehunterBattlecryModel } from "./battlecry";
 
 @LibraryUtil.is('murloc-tidehunter')
@@ -42,7 +42,7 @@ export class MurlocTidehunterModel extends MinionCardModel {
                         health: new RoleHealthModel({ state: { origin: 1 }}),
                     }
                 }),
-                feats: props.child?.feats ?? new MinionFeatsModel({
+                feats: props.child?.feats ?? new MinionFeaturesModel({
                     child: { battlecry: [new MurlocTidehunterBattlecryModel()] }
                 }),
                 ...props.child

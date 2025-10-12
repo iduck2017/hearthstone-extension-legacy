@@ -15,7 +15,7 @@
  * 4/3/6
  */
 
-import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, MinionFeatsModel, RarityType, RoleAttackModel, RoleModel, RaceType } from "hearthstone-core";
+import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, MinionFeaturesModel, RarityType, RoleAttackModel, RoleModel, RaceType } from "hearthstone-core";
 import { WaterElementalFeatureModel } from "./feature";
 
 @LibraryUtil.is('water-elemental')
@@ -42,7 +42,7 @@ export class WaterElementalModel extends MinionCardModel {
                         health: new RoleHealthModel({ state: { origin: 6 }}),
                     }
                 }),
-                feats: props.child?.feats ?? new MinionFeatsModel({
+                feats: props.child?.feats ?? new MinionFeaturesModel({
                     child: { 
                         battlecry: [], 
                         feats: [new WaterElementalFeatureModel()]

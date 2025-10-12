@@ -13,7 +13,7 @@
  * Collectible
  */
 
-import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, MinionFeatsModel, RarityType, RoleAttackModel, RoleModel, RaceType, RoleFeatsModel, TauntModel } from "hearthstone-core";
+import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, MinionFeaturesModel, RarityType, RoleAttackModel, RoleModel, RaceType, RoleFeaturesModel, TauntModel } from "hearthstone-core";
 import { AbominationDeathrattleModel } from "./deathrattle";
 
 @LibraryUtil.is('abomination')
@@ -38,14 +38,14 @@ export class AbominationModel extends MinionCardModel {
                     child: {
                         attack: new RoleAttackModel({ state: { origin: 4 }}),
                         health: new RoleHealthModel({ state: { origin: 4 }}),
-                        feats: new RoleFeatsModel({
+                        feats: new RoleFeaturesModel({
                             child: {
                                 taunt: new TauntModel(),
                             }
                         })
                     }
                 }),
-                feats: props.child?.feats ?? new MinionFeatsModel({
+                feats: props.child?.feats ?? new MinionFeaturesModel({
                     child: { 
                         battlecry: [],
                         deathrattle: [new AbominationDeathrattleModel()],

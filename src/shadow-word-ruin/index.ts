@@ -1,4 +1,4 @@
-import { ClassType, CostModel, LibraryUtil, SpellCardModel, RarityType, SchoolType, SpellFeatsModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryUtil, SpellCardModel, RarityType, SchoolType, SpellFeaturesModel } from "hearthstone-core";
 import { ShadowWordRuinEffectModel } from "./effect";
 
 @LibraryUtil.is('shadow-word-ruin')
@@ -19,7 +19,7 @@ export class ShadowWordRuinModel extends SpellCardModel {
             },
             child: {
                 cost: props.child?.cost ??  new CostModel({ state: { origin: 4 }}),
-                feats: props.child?.feats ?? new SpellFeatsModel({
+                feats: props.child?.feats ?? new SpellFeaturesModel({
                     child: { effects: [new ShadowWordRuinEffectModel()] }
                 }),
                 ...props.child

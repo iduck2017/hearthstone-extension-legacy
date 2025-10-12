@@ -10,7 +10,7 @@
  * Collectible
  */
 
-import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, MinionFeatsModel, RarityType, RoleAttackModel, RoleModel, RaceType, RoleFeatsModel, TauntModel } from "hearthstone-core";
+import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, MinionFeaturesModel, RarityType, RoleAttackModel, RoleModel, RaceType, RoleFeaturesModel, TauntModel } from "hearthstone-core";
 
 @LibraryUtil.is('senjin-shieldmasta')
 export class SenjinShieldmastaModel extends MinionCardModel {
@@ -34,14 +34,14 @@ export class SenjinShieldmastaModel extends MinionCardModel {
                     child: {
                         attack: new RoleAttackModel({ state: { origin: 3 }}),
                         health: new RoleHealthModel({ state: { origin: 5 }}),
-                        feats: new RoleFeatsModel({
+                        feats: new RoleFeaturesModel({
                             child: {
                                 taunt: new TauntModel()
                             }
                         })
                     }
                 }),
-                feats: props.child?.feats ?? new MinionFeatsModel({
+                feats: props.child?.feats ?? new MinionFeaturesModel({
                     child: { 
                         battlecry: []
                     }

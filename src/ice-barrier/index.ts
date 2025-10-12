@@ -15,7 +15,7 @@
  * Collectible
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SecretCardModel, SpellFeatsModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SecretCardModel, SpellFeaturesModel } from "hearthstone-core";
 import { IceBarrierFeatureModel } from "./feature";
 
 @LibraryUtil.is('ice-barrier')
@@ -37,7 +37,7 @@ export class IceBarrierModel extends SecretCardModel {
             refer: { ...props.refer },
             child: { 
                 cost: props.child?.cost ?? new CostModel({ state: { origin: 3 }}),
-                feats: new SpellFeatsModel({
+                feats: new SpellFeaturesModel({
                     child: {
                         feats: [new IceBarrierFeatureModel()]
                     }

@@ -13,7 +13,7 @@
  * Collectible
  */
 
-import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, MinionFeatsModel, RarityType, RoleAttackModel, RoleModel, RaceType, RoleFeatsModel } from "hearthstone-core";
+import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, MinionFeaturesModel, RarityType, RoleAttackModel, RoleModel, RaceType, RoleFeaturesModel } from "hearthstone-core";
 import { ArcaneDevourerFeatureModel } from "./feature";
 
 @LibraryUtil.is('arcane-devourer')
@@ -38,14 +38,14 @@ export class ArcaneDevourerModel extends MinionCardModel {
                     child: {
                         attack: new RoleAttackModel({ state: { origin: 4 }}),
                         health: new RoleHealthModel({ state: { origin: 8 }}),
-                        feats: new RoleFeatsModel({
+                        feats: new RoleFeaturesModel({
                             child: {
                                 feats: [new ArcaneDevourerFeatureModel()]
                             }
                         })
                     }
                 }),
-                feats: props.child?.feats ?? new MinionFeatsModel({
+                feats: props.child?.feats ?? new MinionFeaturesModel({
                     child: { 
                         battlecry: [], 
                     }

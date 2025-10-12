@@ -13,7 +13,7 @@
  * Artist: Luke Mancini
  * Collectible
  */
-import { RoleAttackModel, ClassType, RoleHealthModel, MinionCardModel, RarityType, RoleModel, SpellDamageModel, RoleFeatsModel, MinionFeatsModel, LibraryUtil, CostModel } from "hearthstone-core";
+import { RoleAttackModel, ClassType, RoleHealthModel, MinionCardModel, RarityType, RoleModel, SpellDamageModel, RoleFeaturesModel, MinionFeaturesModel, LibraryUtil, CostModel } from "hearthstone-core";
 import { AegwynnTheGuardianDeathrattleModel } from "./deathrattle";
 
 @LibraryUtil.is('aegwynn-the-guardian')
@@ -40,7 +40,7 @@ export class AegwynnTheGuardianModel extends MinionCardModel {
                         health: new RoleHealthModel({ state: { origin: 5 }}), 
                     }
                 }),
-                feats: props.child?.feats ?? new MinionFeatsModel({
+                feats: props.child?.feats ?? new MinionFeaturesModel({
                     child: {
                         feats: [new SpellDamageModel({ state: { offset: 2 }})],
                         deathrattle: [new AegwynnTheGuardianDeathrattleModel()]

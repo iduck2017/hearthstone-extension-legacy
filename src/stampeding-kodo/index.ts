@@ -13,7 +13,7 @@
  * Collectible
  */
 
-import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, MinionFeatsModel, RarityType, RoleAttackModel, RoleModel, RaceType } from "hearthstone-core";
+import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, MinionFeaturesModel, RarityType, RoleAttackModel, RoleModel, RaceType } from "hearthstone-core";
 import { StampedingKodoBattlecryModel } from "./battlecry";
 
 @LibraryUtil.is('stampeding-kodo')
@@ -40,7 +40,7 @@ export class StampedingKodoModel extends MinionCardModel {
                         health: new RoleHealthModel({ state: { origin: 5 }}),
                     }
                 }),
-                feats: props.child?.feats ?? new MinionFeatsModel({
+                feats: props.child?.feats ?? new MinionFeaturesModel({
                     child: { 
                         battlecry: [new StampedingKodoBattlecryModel()]
                     }

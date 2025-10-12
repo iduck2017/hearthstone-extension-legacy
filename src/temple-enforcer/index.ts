@@ -1,4 +1,4 @@
-import { RoleAttackModel, ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, RarityType, RoleModel, MinionFeatsModel, RaceType } from "hearthstone-core";
+import { RoleAttackModel, ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, RarityType, RoleModel, MinionFeaturesModel, RaceType } from "hearthstone-core";
 import { TempleEnforcerBattlecryModel } from "./battlecry";
 
 @LibraryUtil.is('temple-enforcer')
@@ -25,7 +25,7 @@ export class TempleEnforcerModel extends MinionCardModel {
                         attack: new RoleAttackModel({ state: { origin: 5 }}),
                     },
                 }),
-                feats: props.child?.feats ?? new MinionFeatsModel({
+                feats: props.child?.feats ?? new MinionFeaturesModel({
                     child: { battlecry: [new TempleEnforcerBattlecryModel()] }
                 }),
                 ...props.child

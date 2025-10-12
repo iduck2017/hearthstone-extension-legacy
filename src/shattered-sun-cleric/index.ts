@@ -12,7 +12,7 @@
  * Collectible
  */
 
-import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, MinionFeatsModel, RarityType, RoleAttackModel, RoleModel, RaceType } from "hearthstone-core";
+import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, MinionFeaturesModel, RarityType, RoleAttackModel, RoleModel, RaceType } from "hearthstone-core";
 import { ShatteredSunClericBattlecryModel } from "./battlecry";
 
 @LibraryUtil.is('shattered-sun-cleric')
@@ -39,7 +39,7 @@ export class ShatteredSunClericModel extends MinionCardModel {
                         health: new RoleHealthModel({ state: { origin: 2 }}),
                     }
                 }),
-                feats: props.child?.feats ?? new MinionFeatsModel({
+                feats: props.child?.feats ?? new MinionFeaturesModel({
                     child: { 
                         battlecry: [new ShatteredSunClericBattlecryModel()]
                     }

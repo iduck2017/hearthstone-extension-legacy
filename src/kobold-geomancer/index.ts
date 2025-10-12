@@ -10,7 +10,7 @@
  * Collectible
  */
 
-import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, MinionFeatsModel, RarityType, RoleAttackModel, RoleModel, RaceType, SpellDamageModel } from "hearthstone-core";
+import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, MinionFeaturesModel, RarityType, RoleAttackModel, RoleModel, RaceType, SpellDamageModel } from "hearthstone-core";
 
 @LibraryUtil.is('kobold-geomancer')
 export class KoboldGeomancerModel extends MinionCardModel {
@@ -36,7 +36,7 @@ export class KoboldGeomancerModel extends MinionCardModel {
                         health: new RoleHealthModel({ state: { origin: 2 }}),
                     }
                 }),
-                feats: props.child?.feats ?? new MinionFeatsModel({
+                feats: props.child?.feats ?? new MinionFeaturesModel({
                     child: { 
                         battlecry: [],
                         feats: [new SpellDamageModel({ state: { offset: 1 }})]

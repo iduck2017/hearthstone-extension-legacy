@@ -10,7 +10,7 @@
  * Collectible
  */
 
-import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, MinionFeatsModel, RarityType, RoleAttackModel, RoleModel, RaceType, ChargeModel, RoleFeatsModel } from "hearthstone-core";
+import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, MinionFeaturesModel, RarityType, RoleAttackModel, RoleModel, RaceType, ChargeModel, RoleFeaturesModel } from "hearthstone-core";
 
 @LibraryUtil.is('wolfrider')
 export class WolfriderModel extends MinionCardModel {
@@ -34,14 +34,14 @@ export class WolfriderModel extends MinionCardModel {
                     child: {
                         attack: new RoleAttackModel({ state: { origin: 3 }}),
                         health: new RoleHealthModel({ state: { origin: 1 }}),
-                        feats: new RoleFeatsModel({
+                        feats: new RoleFeaturesModel({
                             child: {
                                 charge: new ChargeModel({ state: { isActive: true } })
                             }
                         })
                     }
                 }),
-                feats: props.child?.feats ?? new MinionFeatsModel({
+                feats: props.child?.feats ?? new MinionFeaturesModel({
                     child: { 
                         battlecry: []
                     }

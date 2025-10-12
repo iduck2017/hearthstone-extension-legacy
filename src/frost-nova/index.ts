@@ -12,7 +12,7 @@
  * Artist: Josh Tallman
  * Collectible
  */
-import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel, SpellFeatsModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel, SpellFeaturesModel } from "hearthstone-core";
 import { FrostNovaEffectModel } from "./effect";
 
 @LibraryUtil.is('frost-nova')
@@ -34,7 +34,7 @@ export class FrostNovaModel extends SpellCardModel {
             refer: { ...props.refer },
             child: { 
                 cost: props.child?.cost ?? new CostModel({ state: { origin: 3 }}),
-                feats: props.child?.feats ?? new SpellFeatsModel({
+                feats: props.child?.feats ?? new SpellFeaturesModel({
                     child: { effects: [new FrostNovaEffectModel()] }
                 }),
                 ...props.child 

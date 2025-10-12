@@ -12,7 +12,7 @@ Artist: Matt Cavotta
 Collectible
 */
 
-import { MinionCardModel, RoleHealthModel, RoleAttackModel, RoleModel, ClassType, RarityType, RoleFeatsModel, TauntModel } from "hearthstone-core";
+import { MinionCardModel, RoleHealthModel, RoleAttackModel, RoleModel, ClassType, RarityType, RoleFeaturesModel, TauntModel } from "hearthstone-core";
 import { CostModel } from "hearthstone-core";
 import { LibraryUtil } from "hearthstone-core";
 
@@ -38,7 +38,7 @@ export class BootyBayBodyguardModel extends MinionCardModel {
                     child: {
                         attack: new RoleAttackModel({ state: { origin: 5 }}),
                         health: new RoleHealthModel({ state: { origin: 4 }}),
-                        feats: new RoleFeatsModel({
+                        feats: new RoleFeaturesModel({
                             child: {
                                 taunt: new TauntModel()
                             }

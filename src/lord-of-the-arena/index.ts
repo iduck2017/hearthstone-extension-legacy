@@ -1,4 +1,4 @@
-import { MinionCardModel, RarityType, ClassType, RoleAttackModel, RoleHealthModel, RoleModel, RoleFeatsModel, TauntModel, MinionFeatsModel, CostModel, LibraryUtil } from "hearthstone-core";
+import { MinionCardModel, RarityType, ClassType, RoleAttackModel, RoleHealthModel, RoleModel, RoleFeaturesModel, TauntModel, MinionFeaturesModel, CostModel, LibraryUtil } from "hearthstone-core";
 
 @LibraryUtil.is('lord-of-the-arena')
 export class LordOfTheArenaModel extends MinionCardModel {
@@ -22,14 +22,14 @@ export class LordOfTheArenaModel extends MinionCardModel {
                     child: {
                         attack: new RoleAttackModel({ state: { origin: 6 }}),
                         health: new RoleHealthModel({ state: { origin: 5 }}),
-                        feats: new RoleFeatsModel({
+                        feats: new RoleFeaturesModel({
                             child: {
                                 taunt: new TauntModel()
                             }
                         })
                     }
                 }),
-                feats: props.child?.feats ?? new MinionFeatsModel({
+                feats: props.child?.feats ?? new MinionFeaturesModel({
                     child: {
                         battlecry: []
                     }

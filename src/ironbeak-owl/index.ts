@@ -13,7 +13,7 @@
  * Collectible
  */
 
-import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, MinionFeatsModel, RarityType, RoleAttackModel, RoleModel, RaceType } from "hearthstone-core";
+import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, MinionFeaturesModel, RarityType, RoleAttackModel, RoleModel, RaceType } from "hearthstone-core";
 import { IronbeakOwlBattlecryModel } from "./battlecry";
 
 @LibraryUtil.is('ironbeak-owl')
@@ -40,7 +40,7 @@ export class IronbeakOwlModel extends MinionCardModel {
                         health: new RoleHealthModel({ state: { origin: 1 }}),
                     }
                 }),
-                feats: props.child?.feats ?? new MinionFeatsModel({
+                feats: props.child?.feats ?? new MinionFeaturesModel({
                     child: { 
                         battlecry: [new IronbeakOwlBattlecryModel()]
                     }

@@ -13,7 +13,7 @@
  * Charge
  */
 
-import { ChargeModel, RoleHealthModel, RoleAttackModel, MinionCardModel, RaceType, RoleModel, RoleFeatsModel, ClassType, RarityType } from "hearthstone-core";
+import { ChargeModel, RoleHealthModel, RoleAttackModel, MinionCardModel, RaceType, RoleModel, RoleFeaturesModel, ClassType, RarityType } from "hearthstone-core";
 import { CostModel } from "hearthstone-core";
 import { LibraryUtil } from "hearthstone-core";
 
@@ -39,7 +39,7 @@ export class BluegillWarriorModel extends MinionCardModel {
                     child: {
                         attack: new RoleAttackModel({ state: { origin: 2 }}),
                         health: new RoleHealthModel({ state: { origin: 1 }}),
-                        feats: new RoleFeatsModel({
+                        feats: new RoleFeaturesModel({
                             child: {
                                 charge: new ChargeModel({ state: { isActive: true } })
                             }

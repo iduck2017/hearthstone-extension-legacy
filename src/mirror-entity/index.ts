@@ -15,7 +15,7 @@
  * Collectible
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SecretCardModel, SpellFeatsModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SecretCardModel, SpellFeaturesModel } from "hearthstone-core";
 import { MirrorEntityFeatureModel } from "./feature";
 
 @LibraryUtil.is('mirror-entity')
@@ -37,7 +37,7 @@ export class MirrorEntityModel extends SecretCardModel {
             refer: { ...props.refer },
             child: { 
                 cost: props.child?.cost ?? new CostModel({ state: { origin: 3 }}),
-                feats: new SpellFeatsModel({
+                feats: new SpellFeaturesModel({
                     child: {
                         feats: [new MirrorEntityFeatureModel()]
                     }

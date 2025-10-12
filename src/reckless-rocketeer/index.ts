@@ -10,7 +10,7 @@
  * Collectible
  */
 
-import { ChargeModel, RoleHealthModel, RoleAttackModel, MinionCardModel, RoleModel, RoleFeatsModel, ClassType, RarityType, CostModel, LibraryUtil } from "hearthstone-core";
+import { ChargeModel, RoleHealthModel, RoleAttackModel, MinionCardModel, RoleModel, RoleFeaturesModel, ClassType, RarityType, CostModel, LibraryUtil } from "hearthstone-core";
 
 @LibraryUtil.is('reckless-rocketeer')
 export class RecklessRocketeerModel extends MinionCardModel {
@@ -34,7 +34,7 @@ export class RecklessRocketeerModel extends MinionCardModel {
                     child: {
                         attack: new RoleAttackModel({ state: { origin: 5 }}),
                         health: new RoleHealthModel({ state: { origin: 2 }}),
-                        feats: new RoleFeatsModel({
+                        feats: new RoleFeaturesModel({
                             child: {
                                 charge: new ChargeModel({ state: { isActive: true } })
                             }

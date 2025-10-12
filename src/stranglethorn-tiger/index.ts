@@ -13,7 +13,7 @@
  * Collectible
  */
 
-import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, MinionFeatsModel, RarityType, RoleAttackModel, RoleModel, RaceType, StealthModel, RoleFeatsModel } from "hearthstone-core";
+import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, MinionFeaturesModel, RarityType, RoleAttackModel, RoleModel, RaceType, StealthModel, RoleFeaturesModel } from "hearthstone-core";
 
 @LibraryUtil.is('stranglethorn-tiger')
 export class StranglethornTigerModel extends MinionCardModel {
@@ -37,7 +37,7 @@ export class StranglethornTigerModel extends MinionCardModel {
                     child: {
                         attack: new RoleAttackModel({ state: { origin: 5 }}),
                         health: new RoleHealthModel({ state: { origin: 5 }}),
-                        feats: new RoleFeatsModel({
+                        feats: new RoleFeaturesModel({
                             child: { stealth: new StealthModel() }
                         })
                     }

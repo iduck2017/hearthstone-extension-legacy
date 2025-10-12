@@ -11,7 +11,7 @@
  * Collectible: No
  */
 
-import { ClassType, RoleHealthModel, MinionCardModel, MinionFeatsModel, RaceType, RarityType, RoleAttackModel, RoleModel, CostModel, LibraryUtil } from "hearthstone-core";
+import { ClassType, RoleHealthModel, MinionCardModel, MinionFeaturesModel, RaceType, RarityType, RoleAttackModel, RoleModel, CostModel, LibraryUtil } from "hearthstone-core";
 
 @LibraryUtil.is('murloc-scout')
 export class MurlocScoutModel extends MinionCardModel {
@@ -37,7 +37,7 @@ export class MurlocScoutModel extends MinionCardModel {
                         health: new RoleHealthModel({ state: { origin: 1 }}),
                     }
                 }),
-                feats: props.child?.feats ?? new MinionFeatsModel({
+                feats: props.child?.feats ?? new MinionFeaturesModel({
                     child: { battlecry: [] }
                 }),
                 ...props.child

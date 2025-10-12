@@ -13,7 +13,7 @@
  * Artist: Michael Komarck
  * Collectible
  */
-import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, MinionFeatsModel, RarityType, RoleAttackModel, RoleModel } from "hearthstone-core";
+import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, MinionFeaturesModel, RarityType, RoleAttackModel, RoleModel } from "hearthstone-core";
 import { EtherealArcanistFeatureModel } from "./end-turn";
 
 @LibraryUtil.is('ethereal-arcanist')
@@ -40,7 +40,7 @@ export class EtherealArcanistModel extends MinionCardModel {
                         health: new RoleHealthModel({ state: { origin: 3 }}),
                     }
                 }),
-                feats: props.child?.feats ?? new MinionFeatsModel({
+                feats: props.child?.feats ?? new MinionFeaturesModel({
                     child: { endTurn: [new EtherealArcanistFeatureModel()] }
                 }),
                 ...props.child,

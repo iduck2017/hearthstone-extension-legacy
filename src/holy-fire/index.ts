@@ -1,4 +1,4 @@
-import { SpellCardModel, RarityType, ClassType, SchoolType, CostModel, SpellFeatsModel } from "hearthstone-core";
+import { SpellCardModel, RarityType, ClassType, SchoolType, CostModel, SpellFeaturesModel } from "hearthstone-core";
 import { TemplUtil } from "set-piece";
 import { HolyFireEffectModel } from "./effect";
 
@@ -20,7 +20,7 @@ export class HolyFireModel extends SpellCardModel {
             },
             child: {
                 cost: props.child?.cost ??  new CostModel({ state: { origin: 6 }}),
-                feats: props.child?.feats ?? new SpellFeatsModel({
+                feats: props.child?.feats ?? new SpellFeaturesModel({
                     child: { effects: [new HolyFireEffectModel()] }
                 }),
                 ...props.child
