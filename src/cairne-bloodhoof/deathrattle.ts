@@ -25,7 +25,6 @@ export class CairneBloodhoofDeathrattleModel extends DeathrattleModel {
         
         // Summon Baine Bloodhoof
         const target = new BaineBloodhoofModel();
-        const deploy = target.child.deploy;
-        deploy.run(board);
+        target.deploy(board);
     }
 }

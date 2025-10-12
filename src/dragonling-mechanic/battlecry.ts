@@ -34,6 +34,6 @@ export class DragonlingMechanicBattlecryModel extends MinionBattlecryModel<[]> {
         
         // Summon a Mechanical Dragonling
         const target = new MechanicalDragonlingModel();
-        target.child.deploy.run(board, to);
+        target.deploy(board, to);
     }
 }

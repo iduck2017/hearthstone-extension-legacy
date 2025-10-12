@@ -29,7 +29,7 @@ export class SilverHandKnightBattlecryModel extends MinionBattlecryModel<[]> {
         const board = player.child.board;
         
         // Create a new Squire
-        const card = new SquireModel();
-        card.child.deploy.run(board, to);
+        const target = new SquireModel();
+        target.deploy(board, to);
     }
 }

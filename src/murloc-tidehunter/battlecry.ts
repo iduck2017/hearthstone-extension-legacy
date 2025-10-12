@@ -26,6 +26,6 @@ export class MurlocTidehunterBattlecryModel extends MinionBattlecryModel<[]> {
         const board = player.child.board;
         const target = new MurlocScoutModel();
         // summon
-        target.child.deploy.run(board, to);
+        target.deploy(board, to);
     }
 }

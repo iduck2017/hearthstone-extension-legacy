@@ -26,8 +26,7 @@ export class HoggerEndTurnModel extends EndTurnHookModel {
         const board = player.child.board;
         
         // Summon a 2/2 Gnoll with Taunt
-        const gnoll = new GnollModel();
-        const deploy = gnoll.child.deploy;
-        deploy.run(board);
+        const target = new GnollModel();
+        target.deploy(board);
     }
 }

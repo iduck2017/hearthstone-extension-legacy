@@ -39,7 +39,7 @@ export class KirinTorMageContextModel extends FeatureModel {
 
     @EventUtil.on(self => self.handleCast)
     private listenCast() {
-        return this.route.player?.proxy.child.mana.event?.onUse
+        return this.route.player?.proxy.child.mana.event?.onConsume
     }
     private handleCast(that: ManaModel, event: Event<{ reason?: Model, value: number }>) {
         const player = this.route.player;

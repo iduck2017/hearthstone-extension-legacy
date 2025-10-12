@@ -1,4 +1,4 @@
-import { MinionCardModel, RoleModel, SecretFeatureModel, SpellCardModel, SpellHooksOptions, SpellCastEvent, SpellPerformModel } from "hearthstone-core";
+import { MinionCardModel, RoleModel, SecretFeatureModel, SpellCardModel, SpellHooksOptions, SpellCastEvent } from "hearthstone-core";
 import { Event, EventUtil } from "set-piece";
 import { SpellbenderMinionModel } from "./minion";
 
@@ -20,10 +20,10 @@ export class SpellbenderFeatureModel extends SecretFeatureModel {
 
     @EventUtil.on(self => self.handleCast)
     private listenCast() {
-        return this.route.game?.proxy.any(SpellPerformModel).event?.toRun
+        return this.route.game?.proxy.any(SpellCardModel).event?.toCast
     }
     @SecretFeatureModel.span()
-    private handleCast(that: SpellPerformModel, event: SpellCastEvent) {
+    private handleCast(that: SpellCardModel, event: SpellCastEvent) {
         const board = this.route.board;
         if (!board) return;
 
@@ -43,8 +43,7 @@ export class SpellbenderFeatureModel extends SecretFeatureModel {
         // deploy
         const card = new SpellbenderMinionModel();
         const role = card.child.role;
-        const deploy = card.child.deploy;
-        deploy.run(board);
+        card.deploy(board);
 
         // replace the minion card with the spellbender minion
         event.redirect(role);

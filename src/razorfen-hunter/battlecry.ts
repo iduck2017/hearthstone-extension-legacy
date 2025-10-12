@@ -34,6 +34,6 @@ export class RazorfenHunterBattlecryModel extends MinionBattlecryModel<[]> {
         
         // Summon a Boar
         const target = new BoarModel();
-        target.child.deploy.run(board, to);
+        target.deploy(board, to);
     }
 }

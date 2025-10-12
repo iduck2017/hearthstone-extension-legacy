@@ -47,8 +47,7 @@ export class MirrorImageEffectModel extends SpellEffectModel<[]> {
         // Summon two 0/2 minions with Taunt
         for (let i = 0; i < 2; i++) {
             const minion = new MirrorImageMinionModel();
-            const deploy = minion.child.deploy;
-            deploy.run(board);
+            minion.deploy(board);
         }
     }
 } 

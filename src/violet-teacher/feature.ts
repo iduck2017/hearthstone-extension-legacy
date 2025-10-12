@@ -26,7 +26,7 @@ export class VioletTeacherFeatureModel extends CardFeatureModel {
     private handleCast(that: SpellCardModel, event: Event) {
         const card = this.route.card;
         if (!card) return;
-        
+
         const player = this.route.player;
         if (!player) return;
         
@@ -37,6 +37,6 @@ export class VioletTeacherFeatureModel extends CardFeatureModel {
         // Summon a Violet Apprentice
         const index = board.refer.queue.indexOf(card);
         const target = new VioletApprenticeModel();
-        target.child.deploy.run(board, index === -1 ? -1 : index + 1);
+        target.deploy(board, index === -1 ? -1 : index + 1);
     }
 }

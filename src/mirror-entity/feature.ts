@@ -34,9 +34,8 @@ export class MirrorEntityFeatureModel extends SecretFeatureModel {
         // Create a copy of the minion
         const copy = TemplUtil.copy(that);
         if (!copy) return;
-        const deploy = copy.child.deploy;
         const board = playerA.child.board;
-        deploy.run(board);
+        copy.deploy(board);
         return true;
     }
 }

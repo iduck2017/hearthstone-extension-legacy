@@ -24,7 +24,7 @@ export class HarvestGolemDeathrattleModel extends DeathrattleModel {
         const board = player.child.board;
         
         // Create a new Damaged Golem
-        const card = new DamagedGolemModel();
-        card.child.deploy.run(board, 0);
+        const target = new DamagedGolemModel();
+        target.deploy(board);
     }
 }

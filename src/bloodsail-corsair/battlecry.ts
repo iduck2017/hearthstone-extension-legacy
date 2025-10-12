@@ -29,6 +29,6 @@ export class BloodsailCorsairBattlecryModel extends MinionBattlecryModel<[]> {
         const weapon = opponent.child.board.child.weapon;
         if (!weapon) return;
         // Remove 1 durability
-        weapon.child.action.use();
+        weapon.child.action.consume();
     }
 } 
