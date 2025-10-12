@@ -6,7 +6,7 @@
  * 
  * 1. river-crocolisk-play: Player A plays River Crocolisk.
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, TimeUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, AnimeUtil } from "hearthstone-core";
 import { RiverCrocoliskModel } from "./index";
 import { boot } from "../boot";
 

@@ -6,7 +6,7 @@
  * 
  * 1. power-infusion-cast: Player A casts Power Infusion on a minion, giving it +2/+6.
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, TimeUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, AnimeUtil } from "hearthstone-core";
 import { PowerInfusionModel } from "./index";
 import { WispModel } from "../wisp";
 import { boot } from "../boot";
@@ -73,7 +73,7 @@ describe('power-infusion', () => {
 
         // Cast Power Infusion on Wisp
         let promise = cardC.play();
-        await TimeUtil.sleep();
+        await AnimeUtil.sleep();
         expect(SelectUtil.current?.options).toContain(roleD);
         SelectUtil.set(roleD);
         await promise;

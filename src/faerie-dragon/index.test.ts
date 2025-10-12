@@ -7,7 +7,7 @@
  * 1. faerie-dragon-play: Player A plays Faerie Dragon.
  * 2. faerie-dragon-attack: Player A's Faerie Dragon attacks Player B's hero.
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, TimeUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, AnimeUtil } from "hearthstone-core";
 import { FaerieDragonModel } from "./index";
 import { FireballModel } from "../fireball";
 import { boot } from "../boot";

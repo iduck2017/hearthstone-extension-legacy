@@ -7,7 +7,7 @@
  * 1. ironfur-grizzly-play: Player A plays Ironfur Grizzly.
  * 2. taunt-test: Player B's Wisp must attack Ironfur Grizzly due to Taunt.
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, TimeUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, AnimeUtil } from "hearthstone-core";
 import { IronfurGrizzlyModel } from "./index";
 import { WispModel } from "../wisp";
 import { boot } from "../boot";

@@ -7,7 +7,7 @@
  * 1. abomination-play: Player A plays Abomination.
  * 2. abomination-death: Player B's Stranglethorn Tiger attacks Abomination, triggering deathrattle.
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, TimeUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, AnimeUtil } from "hearthstone-core";
 import { AbominationModel } from "./index";
 import { StranglethornTigerModel } from "../stranglethorn-tiger";
 import { boot } from "../boot";

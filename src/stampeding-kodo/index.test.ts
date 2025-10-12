@@ -6,7 +6,7 @@
  * 
  * 1. stampeding-kodo-play: Player A plays Stampeding Kodo, destroying the Wisp.
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, TimeUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, AnimeUtil } from "hearthstone-core";
 import { StampedingKodoModel } from "./index";
 import { WispModel } from "../wisp";
 import { ChillwindYetiModel } from "../chillwind-yeti";

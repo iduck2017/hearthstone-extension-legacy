@@ -7,7 +7,7 @@
  * 1. harvest-golem-play: Player A plays Harvest Golem.
  * 2. harvest-golem-death: Player B's Stranglethorn Tiger attacks Harvest Golem, triggering deathrattle.
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, TimeUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, AnimeUtil } from "hearthstone-core";
 import { HarvestGolemModel } from "./index";
 import { DamagedGolemModel } from "../damaged-golem";
 import { StranglethornTigerModel } from "../stranglethorn-tiger";

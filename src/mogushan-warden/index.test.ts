@@ -7,7 +7,7 @@
  * 1. mogushan-warden-play: Player A plays Mogu'shan Warden.
  * 2. taunt-test: Player B's Wisp must attack Mogu'shan Warden due to Taunt.
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, TimeUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, AnimeUtil } from "hearthstone-core";
 import { MogushanWardenModel } from "./index";
 import { WispModel } from "../wisp";
 import { boot } from "../boot";

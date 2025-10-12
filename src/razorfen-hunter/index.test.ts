@@ -6,7 +6,7 @@
  * 
  * 1. razorfen-hunter-play: Player A plays Razorfen Hunter, summoning a Boar.
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, TimeUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, AnimeUtil } from "hearthstone-core";
 import { RazorfenHunterModel } from "./index";
 import { BoarModel } from "../boar";
 import { boot } from "../boot";

@@ -7,7 +7,7 @@
  * 1. flame-imp-play: Player A plays Flame Imp, dealing 3 damage to himself.
  * 2. flame-imp-attack: Player A's Flame Imp attacks Player B's hero.
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, TimeUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, AnimeUtil } from "hearthstone-core";
 import { FlameImpModel } from "./index";
 import { boot } from "../boot";
 

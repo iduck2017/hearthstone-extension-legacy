@@ -6,7 +6,7 @@
  * 
  * 1. young-dragonhawk-windfury: Player A's Young Dragonhawk attacks Player B's Shieldbearer twice.
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, TimeUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, AnimeUtil } from "hearthstone-core";
 import { YoungDragonhawkModel } from "./index";
 import { ShieldbearerModel } from "../shieldbearer";
 import { boot } from "../boot";
@@ -78,7 +78,7 @@ describe('young-dragonhawk', () => {
         
         // First attack
         let promise = roleC.child.action.run();
-        await TimeUtil.sleep();
+        await AnimeUtil.sleep();
         expect(SelectUtil.current?.options).toContain(roleD); // Can target Shieldbearer
         expect(SelectUtil.current?.options.length).toBe(1);
         SelectUtil.set(roleD); // Target Shieldbearer
@@ -91,7 +91,7 @@ describe('young-dragonhawk', () => {
         
         // Second attack
         promise = roleC.child.action.run();
-        await TimeUtil.sleep();
+        await AnimeUtil.sleep();
         expect(SelectUtil.current?.options).toContain(roleD); // Can target Shieldbearer
         expect(SelectUtil.current?.options).not.toContain(roleB); // Cannot target Player B's hero
         expect(SelectUtil.current?.options.length).toBe(1);

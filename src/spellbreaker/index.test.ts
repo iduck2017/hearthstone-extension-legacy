@@ -7,7 +7,7 @@
  * 1. spellbreaker-play: Player A plays Spellbreaker, silencing Player B's Silvermoon Guardian.
  * 2. silvermoon-attack: Next turn, Player B's Silvermoon Guardian attacks Spellbreaker, both die.
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, TimeUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, AnimeUtil } from "hearthstone-core";
 import { SpellbreakerModel } from "./index";
 import { SilvermoonGuardianModel } from "../silvermoon-guardian";
 import { boot } from "../boot";
@@ -82,7 +82,7 @@ describe('spellbreaker', () => {
         // Play Spellbreaker
         let promise = cardC.play();
         SelectUtil.set(0); // Select position 0
-        await TimeUtil.sleep();
+        await AnimeUtil.sleep();
         
         // Choose target for battlecry
         expect(SelectUtil.current?.options).toContain(roleD); // Can target Silvermoon Guardian

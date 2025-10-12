@@ -6,7 +6,7 @@
  * 
  * 1. chillwind-yeti-play: Player A plays Chillwind Yeti.
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, TimeUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, AnimeUtil } from "hearthstone-core";
 import { ChillwindYetiModel } from "./index";
 import { boot } from "../boot";
 

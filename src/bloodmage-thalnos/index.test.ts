@@ -3,7 +3,7 @@
  * 1. Player A uses Bloodmage Thalnos to attack wisp, both die, Player A draws a card
  */
 
-import { GameModel, BoardModel, DeckModel, HandModel, MageModel, PlayerModel, TimeUtil, SelectUtil, ManaModel } from "hearthstone-core";
+import { GameModel, BoardModel, DeckModel, HandModel, MageModel, PlayerModel, AnimeUtil, SelectUtil, ManaModel } from "hearthstone-core";
 import { BloodmageThalnosModel } from ".";
 import { FireballModel } from "../fireball";
 import { WispModel } from "../wisp";
@@ -78,7 +78,7 @@ describe('bloodmage-thalnos', () => {
         
         // Player A uses Bloodmage Thalnos to attack wisp
         let promise = roleC.child.action.run();
-        await TimeUtil.sleep();
+        await AnimeUtil.sleep();
         expect(SelectUtil.current?.options).toContain(roleD);
         SelectUtil.set(roleD);
         await promise;

@@ -3,7 +3,7 @@
  * 1. angry-chicken-attack: Player A's chicken attacks Player B's chicken, both die and A's chicken gains +5 attack from enrage
  */
 
-import { GameModel, BoardModel, PlayerModel, MageModel, SelectUtil, TimeUtil, ManaModel, HandModel, DeckModel } from "hearthstone-core";
+import { GameModel, BoardModel, PlayerModel, MageModel, SelectUtil, AnimeUtil, ManaModel, HandModel, DeckModel } from "hearthstone-core";
 import { AngryChickenModel } from ".";
 import { PowerWordShieldModel } from "../power-word-shield";
 import { WispModel } from "../wisp";
@@ -75,7 +75,7 @@ describe('angry-chicken', () => {
         expect(roleD.child.health.state.current).toBe(1);
 
         const promise = roleC.child.action.run();
-        await TimeUtil.sleep();
+        await AnimeUtil.sleep();
         expect(SelectUtil.current).toBeDefined();
         expect(SelectUtil.current?.options).toContain(roleD);
         SelectUtil.set(roleD);

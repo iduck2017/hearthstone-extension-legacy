@@ -7,7 +7,7 @@
  * 1. silvermoon-guardian-play: Player A plays Silvermoon Guardian.
  * 2. wisp-attack: Player B's Wisp attacks Silvermoon Guardian, breaking the Divine Shield.
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, TimeUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, AnimeUtil } from "hearthstone-core";
 import { SilvermoonGuardianModel } from "./index";
 import { WispModel } from "../wisp";
 import { boot } from "../boot";

@@ -5,7 +5,7 @@
  * 
  * 1. core-hound-play: Player A plays Core Hound.
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, TimeUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, AnimeUtil } from "hearthstone-core";
 import { CoreHoundModel } from "./index";
 import { boot } from "../boot";
 

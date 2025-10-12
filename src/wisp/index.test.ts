@@ -1,4 +1,4 @@
-import { GameModel, MageModel, PlayerModel, SelectUtil, TimeUtil } from "hearthstone-core";
+import { GameModel, MageModel, PlayerModel, SelectUtil, AnimeUtil } from "hearthstone-core";
 import { boot } from "../boot";
 import { HandModel } from "hearthstone-core";
 import { DeckModel } from "hearthstone-core";
@@ -64,7 +64,7 @@ describe('role', () => {
 
     test('wisp-attack', async () => {
         const promise = roleC.child.action.run();
-        await TimeUtil.sleep();
+        await AnimeUtil.sleep();
         const selector = SelectUtil.current;
         expect(selector).toBeDefined();
         if (!selector) return;
@@ -87,7 +87,7 @@ describe('role', () => {
         turn.next();
 
         const promise = roleD.child.action.run();
-        await TimeUtil.sleep();
+        await AnimeUtil.sleep();
         const selector = SelectUtil.current;
         expect(selector).toBeDefined();
         if (!selector) return;

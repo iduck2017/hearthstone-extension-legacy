@@ -7,7 +7,7 @@
  * 1. ironbeak-owl-play: Player A plays Ironbeak Owl, silencing Ancient Watcher.
  * 2. ancient-watcher-attack: Ancient Watcher can now attack (silence removed the restriction).
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, TimeUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, AnimeUtil } from "hearthstone-core";
 import { IronbeakOwlModel } from "./index";
 import { AncientWatcherModel } from "../ancient-watcher";
 import { boot } from "../boot";
@@ -84,7 +84,7 @@ describe('ironbeak-owl', () => {
         // Play Ironbeak Owl
         let promise = cardC.play();
         SelectUtil.set(0); // Select position 0
-        await TimeUtil.sleep();
+        await AnimeUtil.sleep();
         // Choose target for battlecry (silence Ancient Watcher)
         expect(SelectUtil.current?.options).toContain(roleD); // Can target Ancient Watcher
         expect(SelectUtil.current?.options).not.toContain(roleA); // Cannot target heroes

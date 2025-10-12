@@ -7,7 +7,7 @@
  * 1. ogre-magi-play: Player A plays Ogre Magi.
  * 2. fireball-cast: Player A casts Fireball with Ogre Magi on board, dealing 6+1=7 damage to Player B's hero.
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, TimeUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, AnimeUtil } from "hearthstone-core";
 import { OgreMagiModel } from "./index";
 import { FireballModel } from "../fireball";
 import { boot } from "../boot";

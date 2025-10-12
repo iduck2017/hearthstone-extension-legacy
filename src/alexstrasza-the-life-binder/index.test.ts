@@ -6,7 +6,7 @@
  * 1. alexstrasza-the-life-binder-damage: Player A plays Alexstrasza and targets Player B's hero for damage.
  * 2. alexstrasza-the-life-binder-heal: Player B plays Alexstrasza and targets Player A's hero for healing.
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, TimeUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, AnimeUtil } from "hearthstone-core";
 import { AlexstraszaTheLifeBinderModel } from "./index";
 import { boot } from "../boot";
 
@@ -82,7 +82,7 @@ describe('alexstrasza-the-life-binder', () => {
         // Play Alexstrasza the Life-Binder
         let promise = cardC.play();
         SelectUtil.set(0); // Select position 0
-        await TimeUtil.sleep();
+        await AnimeUtil.sleep();
         
         // Choose target for battlecry
         expect(SelectUtil.current?.options).toContain(roleA); // Can target friendly hero
@@ -112,7 +112,7 @@ describe('alexstrasza-the-life-binder', () => {
         // Play Alexstrasza the Life-Binder
         let promise = cardD.play();
         SelectUtil.set(0); // Select position 0
-        await TimeUtil.sleep();
+        await AnimeUtil.sleep();
         
         // Choose target for battlecry
         expect(SelectUtil.current?.options).toContain(roleA); // Can target enemy hero

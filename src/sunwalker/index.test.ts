@@ -8,7 +8,7 @@
  * 2. wisp-attack: Player B's Wisp cannot attack Player A's hero due to Sunwalker's Taunt.
  * 3. divine-shield-test: Sunwalker's Divine Shield blocks damage.
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, TimeUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, AnimeUtil } from "hearthstone-core";
 import { SunwalkerModel } from "./index";
 import { WispModel } from "../wisp";
 import { boot } from "../boot";

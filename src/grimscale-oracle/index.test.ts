@@ -4,7 +4,7 @@
  * 1. grimscale-oracle-buff: Player A plays Grimscale Oracle, Player A's Murloc gains +1 Attack
  * 2. murloc-raider-attack: Player B's Murloc attacks Player A's Oracle, both die
  */
-import { GameModel, PlayerModel, HandModel, BoardModel, MageModel, TimeUtil, SelectUtil, ManaModel } from "hearthstone-core";
+import { GameModel, PlayerModel, HandModel, BoardModel, MageModel, AnimeUtil, SelectUtil, ManaModel } from "hearthstone-core";
 import { GrimscaleOracleModel } from ".";
 import { MurlocRaiderModel } from "../murloc-raider";
 import { WispModel } from "../wisp";
@@ -63,7 +63,7 @@ describe('grimscale-oracle', () => {
 
     test('grimscale-oracle-buff', async () => {
         const promise = cardC.play();
-        await TimeUtil.sleep();
+        await AnimeUtil.sleep();
         expect(SelectUtil.current).toBeDefined();
         expect(SelectUtil.current?.options.length).toBe(3);
         SelectUtil.set(0);
@@ -87,7 +87,7 @@ describe('grimscale-oracle', () => {
 
         // Murloc Raider attacks Grimscale Oracle
         const promise = roleF.child.action.run();
-        await TimeUtil.sleep();
+        await AnimeUtil.sleep();
         expect(SelectUtil.current).toBeDefined();
         expect(SelectUtil.current?.options.length).toBe(4);
         expect(SelectUtil.current?.options).toContain(roleE);

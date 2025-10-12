@@ -7,7 +7,7 @@
  * 1. stranglethorn-tiger-play: Player A plays Stranglethorn Tiger.
  * 2. wisp-attack: Player B's Wisp attacks, can only target Player A's hero (Stranglethorn Tiger has Stealth).
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, TimeUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, AnimeUtil } from "hearthstone-core";
 import { StranglethornTigerModel } from "./index";
 import { WispModel } from "../wisp";
 import { boot } from "../boot";

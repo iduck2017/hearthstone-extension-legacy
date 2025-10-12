@@ -7,7 +7,7 @@
  * 1. magma-rager-play: Player A plays Magma Rager.
  * 2. magma-rager-attack: Player A's Magma Rager attacks Player B's hero.
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, TimeUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, AnimeUtil } from "hearthstone-core";
 import { MagmaRagerModel } from "./index";
 import { boot } from "../boot";
 

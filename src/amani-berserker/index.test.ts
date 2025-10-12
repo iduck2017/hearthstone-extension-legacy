@@ -7,7 +7,7 @@
  * 3. Player A plays woodoo to heal Berserker, Berserker loses attack power gain
  */
 
-import { GameModel, BoardModel, HandModel, MageModel, PlayerModel, TimeUtil, SelectUtil, ManaModel } from "hearthstone-core";
+import { GameModel, BoardModel, HandModel, MageModel, PlayerModel, AnimeUtil, SelectUtil, ManaModel } from "hearthstone-core";
 import { AmaniBerserkerModel } from ".";
 import { StonetuskBoarModel } from "../stonetusk-boar";
 import { VoodooDoctorModel } from "../voodoo-doctor";
@@ -62,7 +62,7 @@ describe('amani-berserker', () => {
     test('amani-berserker-attack', async () => {
         // Player A uses Berserker to attack wisp
         let promise = roleC.child.action.run();
-        await TimeUtil.sleep();
+        await AnimeUtil.sleep();
         expect(SelectUtil.current?.options).toContain(roleD);
         SelectUtil.set(roleD);
         await promise;
@@ -84,7 +84,7 @@ describe('amani-berserker', () => {
 
         // Player B uses second wisp to attack Berserker
         let promise = roleF.child.action.run();
-        await TimeUtil.sleep();
+        await AnimeUtil.sleep();
         expect(SelectUtil.current?.options).toContain(roleC);
         SelectUtil.set(roleC); 
         await promise;
@@ -105,10 +105,10 @@ describe('amani-berserker', () => {
         
         // Player A plays woodoo to heal Berserker
         let promise = cardE.play();
-        await TimeUtil.sleep();
+        await AnimeUtil.sleep();
         expect(SelectUtil.current?.options).toContain(0);
         SelectUtil.set(0);
-        await TimeUtil.sleep();
+        await AnimeUtil.sleep();
         expect(SelectUtil.current?.options).toContain(roleC);
         SelectUtil.set(roleC);
         await promise;

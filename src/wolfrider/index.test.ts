@@ -7,7 +7,7 @@
  * 1. wolfrider-play: Player A plays Wolfrider.
  * 2. wolfrider-attack: Player A's Wolfrider attacks Player B's Wisp immediately (Charge).
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, TimeUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, AnimeUtil } from "hearthstone-core";
 import { WolfriderModel } from "./index";
 import { WispModel } from "../wisp";
 import { boot } from "../boot";

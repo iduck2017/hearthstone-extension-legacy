@@ -6,7 +6,7 @@
  * 1. arcane-missiles-cast: Player A casts Arcane Missiles with Malygos on board, dealing 1+5=6 damage to Player B's hero.
  * 2. fireball-cast: Player A casts Fireball with Malygos on board, dealing 6+5=11 damage to Player B's hero.
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, TimeUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, AnimeUtil } from "hearthstone-core";
 import { MalygosModel } from "./index";
 import { ArcaneMissilesModel } from "../arcane-missiles";
 import { FireballModel } from "../fireball";

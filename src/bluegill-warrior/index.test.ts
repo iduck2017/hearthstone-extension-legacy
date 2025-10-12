@@ -7,7 +7,7 @@
  * 1. bluegill-warrior-play: Player A plays Bluegill Warrior.
  * 2. bluegill-warrior-charge: Player A's Bluegill Warrior immediately attacks Player B's hero.
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, TimeUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, AnimeUtil } from "hearthstone-core";
 import { BluegillWarriorModel } from "./index";
 import { WispModel } from "../wisp";
 import { boot } from "../boot";

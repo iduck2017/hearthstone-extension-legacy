@@ -6,7 +6,7 @@
  * 1. fireball-cast: Player A uses Fireball on self to damage hero.
  * 2. priestess-play: Player A plays Priestess of Elune, restoring 4 Health to hero.
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, TimeUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, AnimeUtil } from "hearthstone-core";
 import { PriestessOfEluneModel } from "./index";
 import { FireballModel } from "../fireball";
 import { boot } from "../boot";

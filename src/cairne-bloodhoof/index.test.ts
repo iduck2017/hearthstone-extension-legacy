@@ -7,7 +7,7 @@
  * 1. fireball-cast: Player A uses Fireball to kill Cairne Bloodhoof, summoning Baine Bloodhoof.
  * 2. wisp-attack: Player A's Wisp cannot attack Player B's hero due to Baine Bloodhoof's Taunt.
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, TimeUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, AnimeUtil } from "hearthstone-core";
 import { CairneBloodhoofModel } from "./index";
 import { BaineBloodhoofModel } from "../baine-bloodhoof";
 import { FireballModel } from "../fireball";

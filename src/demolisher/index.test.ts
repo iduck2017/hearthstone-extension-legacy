@@ -6,7 +6,7 @@
  * 
  * 1. demolisher-hook: Turn ends, Demolisher triggers, Player A health becomes 28.
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, TimeUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, AnimeUtil } from "hearthstone-core";
 import { DemolisherModel } from "./index";
 import { boot } from "../boot";
 
@@ -76,7 +76,7 @@ describe('demolisher', () => {
         
         // End turn to trigger Demolisher's start turn effect
         game.child.turn.next();
-        await TimeUtil.sleep();
+        await AnimeUtil.sleep();
         
         // Check that Player A's health is reduced by 2
         expect(roleA.child.health.state.current).toBe(28); // Player A hero: 30 - 2 = 28

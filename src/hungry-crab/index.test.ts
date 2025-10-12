@@ -5,7 +5,7 @@
  * 2. hungry-crab-battlecry: Player B plays Murloc Raider, then Hungry Crab, battlecry triggers and Hungry Crab becomes 3/4
  */
 
-import { GameModel, BoardModel, HandModel, MageModel, PlayerModel, TimeUtil, SelectUtil, ManaModel } from "hearthstone-core";
+import { GameModel, BoardModel, HandModel, MageModel, PlayerModel, AnimeUtil, SelectUtil, ManaModel } from "hearthstone-core";
 import { HungryCrabModel } from ".";
 import { WispModel } from "../wisp";
 import { MurlocRaiderModel } from "../murloc-raider";
@@ -61,10 +61,10 @@ describe('hungry-crab', () => {
         expect(boardA.child.minions.length).toBe(1);
 
         let promise = cardC.play();
-        await TimeUtil.sleep();
+        await AnimeUtil.sleep();
         expect(SelectUtil.current?.options).toContain(0);
         SelectUtil.set(0);
-        await TimeUtil.sleep();
+        await AnimeUtil.sleep();
         expect(SelectUtil.current).toBeUndefined();
         await promise;
 
@@ -86,7 +86,7 @@ describe('hungry-crab', () => {
         
         // Play Murloc Raider first
         let promise = cardF.play();
-        await TimeUtil.sleep();
+        await AnimeUtil.sleep();
         expect(SelectUtil.current?.options).toContain(0);
         SelectUtil.set(0);
         await promise;
@@ -94,10 +94,10 @@ describe('hungry-crab', () => {
 
         // Play Hungry Crab and trigger battlecry
         promise = cardE.play();
-        await TimeUtil.sleep();
+        await AnimeUtil.sleep();
         expect(SelectUtil.current?.options).toContain(0);
         SelectUtil.set(0);
-        await TimeUtil.sleep();
+        await AnimeUtil.sleep();
         expect(SelectUtil.current?.options).toContain(roleF);
         expect(SelectUtil.current?.options.length).toBe(1);
         SelectUtil.set(roleF);

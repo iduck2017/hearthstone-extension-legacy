@@ -6,7 +6,7 @@
  * 
  * 1. frost-elemental-play: Player A plays Frost Elemental, freezing a target.
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, TimeUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, AnimeUtil } from "hearthstone-core";
 import { FrostElementalModel } from "./index";
 import { WispModel } from "../wisp";
 import { boot } from "../boot";
@@ -78,7 +78,7 @@ describe('frost-elemental', () => {
         // Play Frost Elemental
         let promise = cardC.play();
         SelectUtil.set(0); // Select position 0
-        await TimeUtil.sleep();
+        await AnimeUtil.sleep();
         expect(SelectUtil.current?.options).toContain(roleA); // Can target friendly hero
         expect(SelectUtil.current?.options).toContain(roleB); // Can target enemy hero
         expect(SelectUtil.current?.options).toContain(roleD); // Can target enemy minion

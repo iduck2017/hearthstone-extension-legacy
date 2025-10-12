@@ -5,7 +5,7 @@
  * 2. voodoo-doctor-battlecry: Player A plays Voodoo Doctor and heals Player B's hero
  */
 
-import { GameModel, BoardModel, HandModel, MageModel, PlayerModel, TimeUtil, SelectUtil, ManaModel } from "hearthstone-core";
+import { GameModel, BoardModel, HandModel, MageModel, PlayerModel, AnimeUtil, SelectUtil, ManaModel } from "hearthstone-core";
 
 import { boot } from "../boot";
 import { WispModel } from "../wisp";
@@ -54,7 +54,7 @@ describe('voodoo-doctor', () => {
         
         // Wisp attacks Shieldbearer
         let promise = roleC.child.action.run();
-        await TimeUtil.sleep();
+        await AnimeUtil.sleep();
         expect(SelectUtil.current).toBeDefined();
         expect(SelectUtil.current?.options).toContain(roleB);
         expect(SelectUtil.current?.options.length).toBe(1);
@@ -68,10 +68,10 @@ describe('voodoo-doctor', () => {
     test('voodoo-doctor-battlecry', async () => {
         // Play Voodoo Doctor
         let promise = cardD.play();
-        await TimeUtil.sleep();
+        await AnimeUtil.sleep();
         expect(SelectUtil.current?.options).toContain(0);
         SelectUtil.set(0);
-        await TimeUtil.sleep();
+        await AnimeUtil.sleep();
         
         expect(SelectUtil.current?.options).toContain(roleA);
         expect(SelectUtil.current?.options).toContain(roleB);

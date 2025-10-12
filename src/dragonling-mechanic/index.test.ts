@@ -6,7 +6,7 @@
  * 
  * 1. dragonling-mechanic-play: Player A plays Dragonling Mechanic, summoning a Mechanical Dragonling.
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, TimeUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, AnimeUtil } from "hearthstone-core";
 import { DragonlingMechanicModel } from "./index";
 import { MechanicalDragonlingModel } from "../mechanical-dragonling";
 import { boot } from "../boot";

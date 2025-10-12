@@ -7,7 +7,7 @@
  * 1. fireball-cast: Player A's Arcane Devourer gains +2/+2 when Player A casts a spell.
  * 2. frostbolt-cast: Player B's spell does not trigger Player A's Arcane Devourer.
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, TimeUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, AnimeUtil } from "hearthstone-core";
 import { ArcaneDevourerModel } from "./index";
 import { FireballModel } from "../fireball";
 import { boot } from "../boot";

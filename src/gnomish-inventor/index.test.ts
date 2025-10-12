@@ -6,7 +6,7 @@
  * 
  * 1. gnomish-inventor-play: Player A plays Gnomish Inventor, drawing a card.
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, TimeUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, AnimeUtil } from "hearthstone-core";
 import { GnomishInventorModel } from "./index";
 import { WispModel } from "../wisp";
 import { boot } from "../boot";

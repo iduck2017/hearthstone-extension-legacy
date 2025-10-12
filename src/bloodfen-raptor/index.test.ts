@@ -5,7 +5,7 @@
  * 2. bloodfen-raptor-stats: Verify the minion has correct attack and health
  */
 
-import { BoardModel, GameModel, HandModel, MageModel, ManaModel, PlayerModel, TimeUtil, RaceType, ClassType, SelectUtil } from "hearthstone-core";
+import { BoardModel, GameModel, HandModel, MageModel, ManaModel, PlayerModel, AnimeUtil, RaceType, ClassType, SelectUtil } from "hearthstone-core";
 import { BloodfenRaptorModel } from ".";
 import { boot } from "../boot";
 
@@ -45,7 +45,7 @@ describe('bloodfen-raptor', () => {
         expect(handA.child.minions.length).toBe(1);
 
         const promise = card?.play();
-        await TimeUtil.sleep();
+        await AnimeUtil.sleep();
         SelectUtil.set(0);
         await promise;
 

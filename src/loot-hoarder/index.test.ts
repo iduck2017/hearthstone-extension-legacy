@@ -7,7 +7,7 @@
  * 1. loot-hoarder-play: Player A plays Loot Hoarder.
  * 2. loot-hoarder-death: Player B's Stranglethorn Tiger attacks Loot Hoarder, triggering deathrattle.
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, TimeUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, AnimeUtil } from "hearthstone-core";
 import { LootHoarderModel } from "./index";
 import { StranglethornTigerModel } from "../stranglethorn-tiger";
 import { boot } from "../boot";

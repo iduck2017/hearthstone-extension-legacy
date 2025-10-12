@@ -7,7 +7,7 @@
  * 1. emperor-cobra-play: Player A plays Emperor Cobra.
  * 2. poisonous-test: Emperor Cobra attacks Player B's Mogu'shan Warden, killing it with Poisonous.
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, TimeUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, AnimeUtil } from "hearthstone-core";
 import { EmperorCobraModel } from "./index";
 import { MogushanWardenModel } from "../mogushan-warden";
 import { boot } from "../boot";

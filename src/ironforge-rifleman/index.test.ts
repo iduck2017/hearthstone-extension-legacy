@@ -6,7 +6,7 @@
  * 
  * 1. ironforge-rifleman-play: Player A plays Ironforge Rifleman, dealing 1 damage to Player B's hero.
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, TimeUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, AnimeUtil } from "hearthstone-core";
 import { IronforgeRiflemanModel } from "./index";
 import { boot } from "../boot";
 
@@ -77,7 +77,7 @@ describe('ironforge-rifleman', () => {
         // Play Ironforge Rifleman
         let promise = cardC.play();
         SelectUtil.set(0); // Select position 0
-        await TimeUtil.sleep();
+        await AnimeUtil.sleep();
         
         // Choose target for battlecry
         expect(SelectUtil.current?.options).toContain(roleA); // Can target friendly hero

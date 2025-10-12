@@ -7,7 +7,7 @@
  * 
  * 1. shadow-word-ruin-cast: Player A casts Shadow Word: Ruin, destroying all minions with 5 or more Attack.
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, TimeUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, AnimeUtil } from "hearthstone-core";
 import { ShadowWordRuinModel } from "./index";
 import { WispModel } from "../wisp";
 import { WaterElementalModel } from "../water-elemental";

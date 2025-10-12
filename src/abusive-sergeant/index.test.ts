@@ -6,7 +6,7 @@
  * 3. abusive-sergeant-buff-expire: Buff expires at turn end
  */
 
-import { BoardModel, GameModel, HandModel, MageModel, ManaModel, PlayerModel, SelectUtil, TimeUtil } from "hearthstone-core";
+import { BoardModel, GameModel, HandModel, MageModel, ManaModel, PlayerModel, SelectUtil, AnimeUtil } from "hearthstone-core";
 import { AbusiveSergeantModel } from ".";
 import { boot } from "../boot";
 import { WispModel } from "../wisp";
@@ -66,18 +66,18 @@ describe('abusive-sergeant', () => {
         expect(boardA.child.minions.length).toBe(0);
 
         let promise = cardC.play();
-        await TimeUtil.sleep();
+        await AnimeUtil.sleep();
         expect(SelectUtil.current).toBeDefined();
         expect(SelectUtil.current?.options).toContain(0);
         SelectUtil.set(0);
         await promise;
-        await TimeUtil.sleep();
+        await AnimeUtil.sleep();
         expect(SelectUtil.current).toBeUndefined();
 
         // Play both cards without battlecry effect
         expect(boardA.child.minions.length).toBe(1);
         promise = cardD.play();
-        await TimeUtil.sleep();
+        await AnimeUtil.sleep();
         expect(SelectUtil.current).toBeDefined();
         expect(SelectUtil.current?.options).toContain(1);
         SelectUtil.set(1);
@@ -93,7 +93,7 @@ describe('abusive-sergeant', () => {
     test('abusive-sergeant-battlecry', async () => {
         turn.next();
         let promise = cardE.play();
-        await TimeUtil.sleep();
+        await AnimeUtil.sleep();
         expect(SelectUtil.current).toBeDefined();
         expect(SelectUtil.current?.options).toContain(0);
         SelectUtil.set(0);
@@ -102,12 +102,12 @@ describe('abusive-sergeant', () => {
 
         // Play Abusive Sergeant with battlecry effect
         promise = cardF.play();
-        await TimeUtil.sleep();
+        await AnimeUtil.sleep();
         expect(SelectUtil.current).toBeDefined();
         expect(SelectUtil.current?.options).toContain(0);
         expect(SelectUtil.current?.options.length).toBe(2);
         SelectUtil.set(0);
-        await TimeUtil.sleep();
+        await AnimeUtil.sleep();
         expect(SelectUtil.current).toBeDefined();
         expect(SelectUtil.current?.options).toContain(roleD);
         expect(SelectUtil.current?.options).toContain(roleE);
@@ -115,7 +115,7 @@ describe('abusive-sergeant', () => {
         expect(SelectUtil.current?.options.length).toBe(3);
         SelectUtil.set(roleD);
         await promise;
-        await TimeUtil.sleep();
+        await AnimeUtil.sleep();
 
         expect(boardA.child.minions.length).toBe(2);
         expect(boardB.child.minions.length).toBe(2);

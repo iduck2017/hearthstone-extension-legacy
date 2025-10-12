@@ -7,7 +7,7 @@
  * 1. frostwolf-grunt-play: Player A plays Frostwolf Grunt.
  * 2. wisp-attack: Player B's Wisp attacks, can only target Frostwolf Grunt (Taunt forces this).
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, TimeUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, AnimeUtil } from "hearthstone-core";
 import { FrostwolfGruntModel } from "./index";
 import { WispModel } from "../wisp";
 import { boot } from "../boot";

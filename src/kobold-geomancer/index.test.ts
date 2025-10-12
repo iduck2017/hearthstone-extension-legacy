@@ -7,7 +7,7 @@
  * 1. kobold-geomancer-play: Player A plays Kobold Geomancer.
  * 2. fireball-cast: Player A casts Fireball with Spell Damage +1.
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, TimeUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, AnimeUtil } from "hearthstone-core";
 import { KoboldGeomancerModel } from "./index";
 import { FireballModel } from "../fireball";
 import { boot } from "../boot";

@@ -7,7 +7,7 @@
  * 4. wisp-attack: Player B plays a wisp, it can attack immediately
  */
 
-import { GameModel, PlayerModel, MageModel, HandModel, BoardModel, SelectUtil, TimeUtil, ManaModel } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, HandModel, BoardModel, SelectUtil, AnimeUtil, ManaModel } from "hearthstone-core";
 import { EmeraldSkytalonModel } from "./index";
 import { WispModel } from "../wisp";
 import { boot } from "../boot";
@@ -56,7 +56,7 @@ describe('emerald-skytalon', () => {
 
     test('emerald-skytalon-rush', async () => {
         let promise = cardC.play()
-        await TimeUtil.sleep();
+        await AnimeUtil.sleep();
         expect(SelectUtil.current?.options).toContain(0);
         SelectUtil.set(0);
         await promise;
@@ -69,7 +69,7 @@ describe('emerald-skytalon', () => {
         expect(roleC.child.sleep.state.isActive).toBe(true);
         expect(roleC.child.feats.child.rush.state.isActive).toBe(true)
         promise = roleC.child.action.run()
-        await TimeUtil.sleep();
+        await AnimeUtil.sleep();
 
         expect(SelectUtil.current?.options).toContain(roleE);
         expect(SelectUtil.current?.options).not.toContain(roleB);
@@ -81,7 +81,7 @@ describe('emerald-skytalon', () => {
 
     test('wisp-play', async () => {
         let promise = cardD.play();
-        await TimeUtil.sleep();
+        await AnimeUtil.sleep();
         expect(SelectUtil.current?.options).toContain(1);
         SelectUtil.set(1);
         await promise;
@@ -93,7 +93,7 @@ describe('emerald-skytalon', () => {
 
         // Wisp can not attack immediately
         promise = roleD.child.action.run();
-        await TimeUtil.sleep();
+        await AnimeUtil.sleep();
         expect(SelectUtil.current).toBeUndefined();
     })
 
@@ -116,7 +116,7 @@ describe('emerald-skytalon', () => {
         expect(roleD.child.feats.child.rush.state.isActive).toBe(false);
 
         let promise = roleC.child.action.run();
-        await TimeUtil.sleep();
+        await AnimeUtil.sleep();
         expect(SelectUtil.current?.options).toContain(roleE);
         expect(SelectUtil.current?.options).toContain(roleB);
         SelectUtil.set(roleB);
@@ -129,7 +129,7 @@ describe('emerald-skytalon', () => {
     test('wisp-attack', async () => {
         // Wisp attack
         const promise = roleD.child.action.run();
-        await TimeUtil.sleep();
+        await AnimeUtil.sleep();
         expect(SelectUtil.current?.options).toContain(roleE);
         expect(SelectUtil.current?.options).toContain(roleB);
         SelectUtil.set(roleB);

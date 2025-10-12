@@ -7,7 +7,7 @@
  * 1. silver-hand-knight-play: Player A plays Silver Hand Knight, summoning a Squire.
  * 2. squire-attack: Player A's Squire attacks Player B's hero.
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, TimeUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, AnimeUtil } from "hearthstone-core";
 import { SilverHandKnightModel } from "./index";
 import { SquireModel } from "../squire";
 import { boot } from "../boot";

@@ -6,7 +6,7 @@
  * 1. azure-drake-play: Player A plays Azure Drake, drawing Fireball.
  * 2. fireball-cast: Player A uses Fireball with Spell Damage +1.
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, TimeUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, AnimeUtil } from "hearthstone-core";
 import { AzureDrakeModel } from "./index";
 import { FireballModel } from "../fireball";
 import { boot } from "../boot";

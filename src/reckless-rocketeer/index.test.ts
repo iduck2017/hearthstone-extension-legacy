@@ -7,7 +7,7 @@
  * 1. reckless-rocketeer-play: Player A plays Reckless Rocketeer.
  * 2. reckless-rocketeer-charge: Player A's Reckless Rocketeer immediately attacks Player B's hero.
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, TimeUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, AnimeUtil } from "hearthstone-core";
 import { RecklessRocketeerModel } from "./index";
 import { WispModel } from "../wisp";
 import { boot } from "../boot";

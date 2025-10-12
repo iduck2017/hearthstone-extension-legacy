@@ -7,7 +7,7 @@
  * 1. gruul-play: Player A plays Gruul.
  * 2. gruul-growth: End of turn, Gruul gains +1/+1.
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, TimeUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, AnimeUtil } from "hearthstone-core";
 import { GruulModel } from "./index";
 import { boot } from "../boot";
 

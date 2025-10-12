@@ -6,7 +6,7 @@
  * 
  * 1. novice-engineer-play: Player A plays Novice Engineer, drawing a card.
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, TimeUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, AnimeUtil } from "hearthstone-core";
 import { NoviceEngineerModel } from "./index";
 import { WispModel } from "../wisp";
 import { boot } from "../boot";

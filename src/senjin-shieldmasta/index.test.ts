@@ -7,7 +7,7 @@
  * 1. senjin-shieldmasta-play: Player A plays Sen'jin Shieldmasta.
  * 2. taunt-test: Player B's Wisp must attack Sen'jin Shieldmasta due to Taunt.
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, TimeUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, AnimeUtil } from "hearthstone-core";
 import { SenjinShieldmastaModel } from "./index";
 import { WispModel } from "../wisp";
 import { boot } from "../boot";

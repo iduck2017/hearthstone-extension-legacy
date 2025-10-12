@@ -7,7 +7,7 @@
  * 1. lord-arena-play: Player A plays Lord of the Arena.
  * 2. wisp-attack: Player B's Wisp cannot attack Player A's hero due to Lord of the Arena's Taunt.
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, TimeUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, AnimeUtil } from "hearthstone-core";
 import { LordOfTheArenaModel } from "./index";
 import { WispModel } from "../wisp";
 import { boot } from "../boot";

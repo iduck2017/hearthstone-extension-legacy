@@ -7,7 +7,7 @@
  * 1. violet-teacher-play: Player A plays Violet Teacher.
  * 2. spell-cast: Player A casts Fireball, summoning a Violet Apprentice.
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, TimeUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, AnimeUtil } from "hearthstone-core";
 import { VioletTeacherModel } from "./index";
 import { VioletApprenticeModel } from "../violet-apprentice";
 import { FireballModel } from "../fireball";

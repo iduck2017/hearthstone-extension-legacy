@@ -4,7 +4,7 @@
  * 1. stonetusk-boar-charge: Player A plays Stonetusk Boar and immediately attacks enemy hero
  */
 
-import { GameModel, BoardModel, HandModel, MageModel, PlayerModel, TimeUtil, SelectUtil, ManaModel } from "hearthstone-core";
+import { GameModel, BoardModel, HandModel, MageModel, PlayerModel, AnimeUtil, SelectUtil, ManaModel } from "hearthstone-core";
 import { StonetuskBoarModel } from "./index";
 import { WispModel } from "../wisp";
 import { boot } from "../boot";
@@ -59,7 +59,7 @@ describe('stonetusk-boar', () => {
         
         // Play Stonetusk Boar
         let promise = cardC.play();
-        await TimeUtil.sleep();
+        await AnimeUtil.sleep();
         expect(SelectUtil.current?.options).toContain(0);
         SelectUtil.set(0);
         await promise;
@@ -71,7 +71,7 @@ describe('stonetusk-boar', () => {
         
         // Boar directly attacks enemy hero
         promise = roleC.child.action.run();
-        await TimeUtil.sleep();
+        await AnimeUtil.sleep();
         expect(SelectUtil.current?.options).toContain(roleB);
         expect(SelectUtil.current?.options.length).toBe(2);
         SelectUtil.set(roleB);

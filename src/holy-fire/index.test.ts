@@ -7,7 +7,7 @@
  * 1. water-element-attack: Water Elemental attacks Player B's hero.
  * 2. holy-fire-cast: Player B casts Holy Fire, dealing 5 damage to a target and restoring 5 Health to Player B's hero.
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, TimeUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, AnimeUtil } from "hearthstone-core";
 import { HolyFireModel } from "./index";
 import { WaterElementalModel } from "../water-elemental";
 import { boot } from "../boot";

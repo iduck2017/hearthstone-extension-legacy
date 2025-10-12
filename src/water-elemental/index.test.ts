@@ -5,7 +5,7 @@
  * 2. water-elemental-hero-attack: Player A's Water Elemental attacks enemy hero, freezes it
  */
 
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, TimeUtil, SelectUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, AnimeUtil, SelectUtil } from "hearthstone-core";
 import { WaterElementalModel } from "./index";
 import { WispModel } from "../wisp";
 import { boot } from "../boot";
@@ -62,7 +62,7 @@ describe('water-elemental', () => {
         expect(roleD.child.feats.child.frozen.state.isActive).toBe(false);
 
         const promise = roleC.child.action.run();
-        await TimeUtil.sleep();
+        await AnimeUtil.sleep();
         expect(SelectUtil.current?.options).toContain(roleD);
         SelectUtil.set(roleD);
         await promise;

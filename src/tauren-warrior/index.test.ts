@@ -8,7 +8,7 @@
  * 2. tauren-warrior-attack: Player A's Tauren Warrior attacks Player B's Wisp, gaining +3 Attack.
  * 3. wisp-attack: Player B's Wisp attacks Tauren Warrior, can only target Tauren Warrior (Taunt).
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, TimeUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, AnimeUtil } from "hearthstone-core";
 import { TaurenWarriorModel } from "./index";
 import { WispModel } from "../wisp";
 import { boot } from "../boot";

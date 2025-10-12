@@ -1,4 +1,4 @@
-import { MinionBattlecryModel, DeployModel } from "hearthstone-core";
+import { MinionBattlecryModel } from "hearthstone-core";
 import { TemplUtil } from "set-piece";
 import { MechanicalDragonlingModel } from "../mechanical-dragonling";
 

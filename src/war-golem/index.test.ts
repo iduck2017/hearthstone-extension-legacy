@@ -7,7 +7,7 @@
  * 1. war-golem-play: Player A plays War Golem.
  * 2. war-golem-attack: Player A's War Golem attacks Player B's hero.
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, TimeUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, AnimeUtil } from "hearthstone-core";
 import { WarGolemModel } from "./index";
 import { boot } from "../boot";
 

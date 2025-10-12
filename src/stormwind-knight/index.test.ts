@@ -7,7 +7,7 @@
  * 1. stormwind-knight-play: Player A plays Stormwind Knight.
  * 2. stormwind-knight-attack: Player A's Stormwind Knight attacks Player B's Wisp immediately (Charge).
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, TimeUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, AnimeUtil } from "hearthstone-core";
 import { StormwindKnightModel } from "./index";
 import { WispModel } from "../wisp";
 import { boot } from "../boot";
