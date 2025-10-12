@@ -1,4 +1,4 @@
-import { FeatureModel, RoleAttackModel, RoleAttackDecor, OperatorType, RoleModel, RoleHealthModel } from "hearthstone-core";
+import { FeatureModel, RoleAttackModel, RoleAttackDecor, OperatorType, RoleModel, RoleHealthModel, RoleFeatureModel } from "hearthstone-core";
 import { EventUtil, TemplUtil, StateUtil, TranxUtil, Frame, Event } from "set-piece";
 
 export namespace TaurenWarriorFeatureModel {
@@ -9,7 +9,7 @@ export namespace TaurenWarriorFeatureModel {
 }
 
 @TemplUtil.is('tauren-warrior-feature')
-export class TaurenWarriorFeatureModel extends FeatureModel<
+export class TaurenWarriorFeatureModel extends RoleFeatureModel<
     TaurenWarriorFeatureModel.E,
     TaurenWarriorFeatureModel.S,
     TaurenWarriorFeatureModel.C,
@@ -29,7 +29,6 @@ export class TaurenWarriorFeatureModel extends FeatureModel<
         super({
             uuid: props.uuid,
             state: {
-                isBoard: false,
                 name: "Tauren Warrior's Buff",
                 desc: "Has +3 Attack while damaged.",
                 offset: 3,

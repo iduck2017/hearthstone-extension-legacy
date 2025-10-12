@@ -1,23 +1,13 @@
-import { DamageEvent, DamageModel, FeatureModel, MinionCardModel } from "hearthstone-core";
+import { CardFeatureModel, DamageEvent, DamageModel, FeatureModel, MinionCardModel } from "hearthstone-core";
 import { Event, EventUtil, TemplUtil } from "set-piece";
 
 @TemplUtil.is('water-elemental-feature')
-export class WaterElementalFeatureModel extends FeatureModel {
-    public get route() {
-        const result = super.route;
-        const minion: MinionCardModel | undefined = result.list.find(item => item instanceof MinionCardModel);
-        return {
-            ...result,
-            minion
-        };
-    }
-
+export class WaterElementalFeatureModel extends CardFeatureModel {
     constructor(props?: WaterElementalFeatureModel['props']) {
         props = props ?? {};
         super({
             uuid: props.uuid,
             state: { 
-                isBoard: true,
                 name: "Water Elemental's feature",
                 desc: "Freeze any character damaged by this minion.",
                 isActive: true,
@@ -31,11 +21,9 @@ export class WaterElementalFeatureModel extends FeatureModel {
 
     @EventUtil.on(self => self.handleDamage)
     private listenDamage() {
-        return this.route.minion?.proxy.child.damage.event?.onDeal
+        return this.route.card?.proxy.child.damage.event?.onDeal
     }
     private handleDamage(that: DamageModel, event: DamageEvent) {
-        const minion = this.route.minion;
-        if (!minion) return;
         const target = event.detail.target;
         const feats = target.child.feats;
         const frozen = feats.child.frozen;

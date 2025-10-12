@@ -3,12 +3,13 @@ import { Event, EventUtil, Model, StateUtil, TemplUtil } from "set-piece";
 
 @TemplUtil.is('kirin-tor-mage-feature')
 export class KirinTorMageContextModel extends FeatureModel {
+    public get status() { return true; }
+
     constructor(props?: KirinTorMageContextModel['props']) {
         props = props ?? {};
         super({
             uuid: props.uuid,
             state: {
-                isBoard: false,
                 name: "Kirin Tor Mage's feature",
                 desc: "The next Secret you play this turn costs (0).",
                 isActive: true,

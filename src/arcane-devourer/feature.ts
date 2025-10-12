@@ -1,24 +1,15 @@
-import { FeatureModel, MinionCardModel, SpellCardModel } from "hearthstone-core";
+import { CardFeatureModel, FeatureModel, MinionCardModel, RoleFeatureModel, SpellCardModel } from "hearthstone-core";
 import { ArcaneDevourerBuffModel } from "./buff";
 import { Event, EventUtil, TemplUtil } from "set-piece";
 
 @TemplUtil.is('arcane-devourer-feature')
-export class ArcaneDevourerFeatureModel extends FeatureModel {
-    public get route() {
-        const result = super.route;
-        const minion: MinionCardModel | undefined = result.list.find(item => item instanceof MinionCardModel);
-        return {
-            ...result,
-            minion
-        };
-    }
+export class ArcaneDevourerFeatureModel extends RoleFeatureModel {
 
     constructor(props?: ArcaneDevourerFeatureModel['props']) {
         props = props ?? {};
         super({
             uuid: props.uuid,
             state: { 
-                isBoard: true,
                 name: "Arcane Devourer's feature",
                 desc: "Whenever you cast a spell, gain +2/+2.",
                 isActive: true,

@@ -4,6 +4,10 @@ import { AegwynnTheGuardianDeathrattleModel } from "./deathrattle";
 
 @TemplUtil.is('aegwynn-the-guardian-context')
 export class AegwynnTheGuardianContextModel extends FeatureModel {
+    public get status() {
+        return true;
+    }
+
     constructor(props?: AegwynnTheGuardianContextModel['props']) {
         props = props ?? {};
         super({
@@ -11,7 +15,6 @@ export class AegwynnTheGuardianContextModel extends FeatureModel {
             state: {
                 name: 'Aegwynn The Guardian\'s feature',
                 desc: 'The next minion you draw inherits Spell Damage +2.',
-                isBoard: false,
                 isActive: true,
                 ...props.state,
             },
@@ -32,6 +35,4 @@ export class AegwynnTheGuardianContextModel extends FeatureModel {
         that.child.feats.add(new AegwynnTheGuardianDeathrattleModel());
         player.del(this);
     }
-
-    
 }

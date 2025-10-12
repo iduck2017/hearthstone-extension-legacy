@@ -1,4 +1,4 @@
-import { RoleAttackModel, FeatureModel, MinionCardModel, RaceType, RoleModel, OperatorType, RoleAttackDecor } from "hearthstone-core";
+import { RoleAttackModel, FeatureModel, MinionCardModel, RaceType, RoleModel, OperatorType, RoleAttackDecor, CardFeatureModel, RoleFeatureModel } from "hearthstone-core";
 import { DebugUtil, StateUtil, TemplUtil, TranxUtil, Decor } from "set-piece";
 
 export namespace GrimscaleOracleFeatureModel {
@@ -9,27 +9,17 @@ export namespace GrimscaleOracleFeatureModel {
 }
 
 @TemplUtil.is('grimscale-oracle-feature')
-export class GrimscaleOracleFeatureModel extends FeatureModel<
+export class GrimscaleOracleFeatureModel extends RoleFeatureModel<
     GrimscaleOracleFeatureModel.E,
     GrimscaleOracleFeatureModel.S,
     GrimscaleOracleFeatureModel.C,
     GrimscaleOracleFeatureModel.R
 > {
-    public get route() {
-        const result = super.route;
-        const role = result.list.find(item => item instanceof RoleModel);
-        return {
-            ...result,
-            role
-        };
-    }
-
     constructor(props?: GrimscaleOracleFeatureModel['props']) {
         props = props ?? {};
         super({
             uuid: props.uuid,
             state: {
-                isBoard: true,
                 name: 'Grimscale Oracle\'s Aura',
                 desc: 'Your other Murlocs have +1 Attack.',
                 offset: 1,

@@ -1,24 +1,14 @@
-import { FeatureModel, RoleActionDecor, RoleActionModel, RoleModel } from "hearthstone-core";
+import { CardFeatureModel, FeatureModel, RoleActionDecor, RoleActionModel, RoleFeatureModel, RoleModel } from "hearthstone-core";
 import { StateUtil, TemplUtil } from "set-piece";
 
 
 @TemplUtil.is('ragnaros-feature')
-export class RagnarosFeatureModel extends FeatureModel {
-    public get route() {
-        const result = super.route;
-        const role: RoleModel | undefined = result.list.find(item => item instanceof RoleModel);
-        return {
-            ...result,
-            role
-        };
-    }
-
+export class RagnarosFeatureModel extends RoleFeatureModel {
     constructor(props?: RagnarosFeatureModel['props']) {
         props = props ?? {};
         super({
             uuid: props.uuid,
             state: {
-                isBoard: true,
                 name: 'Ragnaros\'s Restriction',
                 desc: 'Can\'t attack.',
                 isActive: true,

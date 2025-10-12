@@ -5,14 +5,6 @@ import { TemplUtil } from "set-piece";
 
 @TemplUtil.is('abomination-deathrattle')
 export class AbominationDeathrattleModel extends DeathrattleModel {
-    public get route() {
-        const result = super.route;
-        const minion: MinionCardModel | undefined = result.list.find(item => item instanceof MinionCardModel)
-        return {
-            ...result,
-            minion
-        };
-    }
 
     constructor(props?: AbominationDeathrattleModel['props']) {
         props = props ?? {};
@@ -29,8 +21,8 @@ export class AbominationDeathrattleModel extends DeathrattleModel {
     }
 
     public async doRun() {
-        const minion = this.route.minion;
-        if (!minion) return;
+        const card = this.route.card;
+        if (!card) return;
 
         const game = this.route.game;
         if (!game) return;
@@ -42,7 +34,7 @@ export class AbominationDeathrattleModel extends DeathrattleModel {
         const damageEvents = roles.map(character => 
             new DamageEvent({
                 type: DamageType.SPELL,
-                source: minion,
+                source: card,
                 method: this,
                 target: character,
                 origin: 2,

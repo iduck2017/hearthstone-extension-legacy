@@ -1,14 +1,13 @@
-import { FeatureModel, RestoreEvent, RoleHealthModel, RoleModel } from "hearthstone-core";
+import { CardFeatureModel, FeatureModel, RestoreEvent, RoleHealthModel, RoleModel } from "hearthstone-core";
 import { Event, EventUtil, TemplUtil } from "set-piece";
 
 @TemplUtil.is('northshire-cleric-feature')
-export class NorthshireClericFeatureModel extends FeatureModel {
+export class NorthshireClericFeatureModel extends CardFeatureModel {
     constructor(props?: NorthshireClericFeatureModel['props']) {
         props = props ?? {};
         super({
             uuid: props.uuid,
             state: {
-                isBoard: true,
                 name: 'Northshire Cleric\'s feature',
                 desc: 'Whenever a minion is healed, draw a card.',
                 isActive: true,

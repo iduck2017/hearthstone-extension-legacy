@@ -123,6 +123,6 @@ describe('loot-hoarder', () => {
         
         // Deathrattle should draw a card
         expect(handA.refer.queue.length).toBe(1); // Drew a card from deathrattle
-        expect(handA.refer.queue.[0]).toBe(cardE);
+        expect(handA.refer.queue[0]).toBe(cardE);
     });
 });

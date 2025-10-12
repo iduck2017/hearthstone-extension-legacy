@@ -24,8 +24,6 @@ export class CounterspellFeatureModel extends SecretFeatureModel {
     }
     @SecretFeatureModel.span()
     private handleCast(that: SpellPerformModel, event: SpellCastEvent) {
-        const board = this.route.board;
-        if (!board) return;
         const player = this.route.player;
         if (!player) return;
         const opponent = player.refer.opponent;

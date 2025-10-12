@@ -1,4 +1,4 @@
-import { RoleAttackModel, FeatureModel, RoleHealthModel, RoleAttackDecor, OperatorType, RoleModel } from "hearthstone-core";
+import { RoleAttackModel, FeatureModel, RoleHealthModel, RoleAttackDecor, OperatorType, RoleModel, RoleFeatureModel } from "hearthstone-core";
 import { Event, EventUtil, StateUtil, TemplUtil, TranxUtil, Decor, Frame } from "set-piece";
 import { DeepReadonly } from "utility-types";
 
@@ -10,28 +10,17 @@ export namespace AngryChickenFeatureModel {
 }
 
 @TemplUtil.is('angry-chicken-feature')
-export class AngryChickenFeatureModel extends FeatureModel<
+export class AngryChickenFeatureModel extends RoleFeatureModel<
     AngryChickenFeatureModel.E,
     AngryChickenFeatureModel.S,
     AngryChickenFeatureModel.C,
     AngryChickenFeatureModel.R
 > {
-    public get route() {
-        const result = super.route;
-        const role: RoleModel | undefined = result.list.find(item => item instanceof RoleModel);
-        return {
-            ...result,
-            role
-        };
-    }
-
-
     constructor(props?: AngryChickenFeatureModel['props']) {
         props = props ?? {};
         super({
             uuid: props.uuid,
             state: {
-                isBoard: false,
                 name: 'Angry Chicken\'s Buff',
                 desc: 'Has +5 Attack while damaged.',
                 offset: 5,

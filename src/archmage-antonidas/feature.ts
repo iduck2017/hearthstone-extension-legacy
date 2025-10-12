@@ -1,17 +1,15 @@
-import { FeatureModel, SpellCardModel } from "hearthstone-core";
+import { CardFeatureModel, FeatureModel, SpellCardModel } from "hearthstone-core";
 import { Event, EventUtil, TemplUtil } from "set-piece";
 import { FireballModel } from "../fireball";
 
 
-
 @TemplUtil.is('archmage-antonidas-feature')
-export class ArchmageAntonidasFeatureModel extends FeatureModel {
+export class ArchmageAntonidasFeatureModel extends CardFeatureModel {
     constructor(props?: ArchmageAntonidasFeatureModel['props']) {
         props = props ?? {};
         super({
             uuid: props.uuid,
             state: {
-                isBoard: true,
                 name: "Archmage Antonidas's feature",
                 desc: "Whenever you cast a spell, add a 'Fireball' spell to your hand.",
                 isActive: true,

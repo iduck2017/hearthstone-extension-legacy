@@ -1,4 +1,4 @@
-import { RoleAttackModel, FeatureModel, RoleHealthModel, RoleAttackDecor, OperatorType, RoleModel } from "hearthstone-core";
+import { RoleAttackModel, FeatureModel, RoleHealthModel, RoleAttackDecor, OperatorType, RoleModel, RoleFeatureModel } from "hearthstone-core";
 import { Event, EventUtil, StateUtil, TemplUtil, TranxUtil, Frame } from "set-piece";
 
 export namespace AmaniBerserkerFeatureModel {
@@ -9,27 +9,17 @@ export namespace AmaniBerserkerFeatureModel {
 }
 
 @TemplUtil.is('amani-berserker-feature')
-export class AmaniBerserkerFeatureModel extends FeatureModel<
+export class AmaniBerserkerFeatureModel extends RoleFeatureModel<
     AmaniBerserkerFeatureModel.E,
     AmaniBerserkerFeatureModel.S,
     AmaniBerserkerFeatureModel.C,
     AmaniBerserkerFeatureModel.R
 > {
-    public get route() {
-        const result = super.route;
-        const role = result.list.find(item => item instanceof RoleModel);
-        return {
-            ...result,
-            role
-        };
-    }
-
     constructor(props?: AmaniBerserkerFeatureModel['props']) {
         props = props ?? {};
         super({
             uuid: props.uuid,
             state: {
-                isBoard: false,
                 name: 'Amani Berserker\'s Buff',
                 desc: 'Has +3 Attack while damaged.',
                 offset: 3,
