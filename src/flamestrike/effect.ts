@@ -9,7 +9,7 @@ export class FlamestrikeEffectModel extends SpellEffectModel<[]> {
             uuid: props.uuid,
             state: {
                 name: "Flamestrike's effect",
-                desc: "Deal {{state.damage[0]}} damage to all enemy minions.",
+                desc: "Deal {{spellDamage[0]}} damage to all enemy minions.",
                 damage: [5],
                 ...props.state
             },

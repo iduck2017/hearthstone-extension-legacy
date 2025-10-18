@@ -10,7 +10,7 @@ export class IceLanceEffectModel extends SpellEffectModel<[RoleModel]> {
             uuid: props.uuid,
             state: { 
                 name: "Ice Lance's effect",
-                desc: "Freeze a character. If it was already Frozen, deal {{state.damage[0]}} damage instead.",
+                desc: "Freeze a character. If it was already Frozen, deal {{spellDamage[0]}} damage instead.",
                 damage: [4],
                 ...props.state 
             },

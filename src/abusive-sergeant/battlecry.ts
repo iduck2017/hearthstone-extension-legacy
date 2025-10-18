@@ -18,7 +18,6 @@ export class AbusiveSergeantBattlecryModel extends MinionBattlecryModel<[RoleMod
         });
     }
 
-    @DebugUtil.log()
     public toRun(): [SelectEvent<RoleModel>] | undefined {
         const game = this.route.game;
         if (!game) return;

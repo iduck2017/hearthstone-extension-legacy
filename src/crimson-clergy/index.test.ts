@@ -91,6 +91,7 @@ describe('crimson-clergy', () => {
         await promise;
 
         // Player A should have drawn cards due to overheal (all minions were at full health)
+        console.log(handA.refer.queue.map(item => item.name))
         expect(handA.refer.queue.length).toBe(1); 
         expect(deckA.refer.queue.length).toBe(2); // 3 - 1 = 2 (1 card drawn from deck)
         expect(playerA.child.mana.state.current).toBe(9); // 9 - 0 cost

@@ -10,7 +10,7 @@ export class FrostboltEffectModel extends SpellEffectModel<[RoleModel]> {
             uuid: props.uuid,
             state: { 
                 name: "Frostbolt's effect",
-                desc: "Deal {{state.damage[0]}} damage to a character and Freeze it.",
+                desc: "Deal {{spellDamage[0]}} damage to a character and Freeze it.",
                 damage: [3],
                 ...props.state 
             },

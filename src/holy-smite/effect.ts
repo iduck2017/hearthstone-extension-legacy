@@ -9,7 +9,7 @@ export class HolySmiteEffectModel extends SpellEffectModel<[RoleModel]> {
             uuid: props.uuid,
             state: {
                 name: "Holy Smite's effect",
-                desc: "Deal {{state.damage[0]}} damage to a minion.",
+                desc: "Deal {{spellDamage[0]}} damage to a minion.",
                 damage: [3],
                 ...props.state
             },

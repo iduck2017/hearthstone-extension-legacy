@@ -28,7 +28,7 @@ export class IceBarrierFeatureModel extends SecretFeatureModel {
         if (!player) return;
         // Check if the attack target is the player's hero
         const hero = player.child.hero;
-        hero.child.armor.get(8);
+        hero.child.armor.restore(8);
         return true;
     }
 }

@@ -10,7 +10,7 @@ export class ConeOfColdEffectModel extends SpellEffectModel<[RoleModel]> {
             uuid: props.uuid,
             state: {
                 name: "Cone of Cold's effect",
-                desc: "Freeze a minion and the minions next to it, and deal {{state.damage[0]}} damage to them.",
+                desc: "Freeze a minion and the minions next to it, and deal {{spellDamage[0]}} damage to them.",
                 damage: [1],
                 ...props.state
             },

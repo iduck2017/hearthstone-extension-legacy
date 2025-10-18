@@ -9,7 +9,7 @@ export class PyroblastEffectModel extends SpellEffectModel<[RoleModel]> {
             uuid: props.uuid,
             state: {
                 name: "Pyroblast's effect",
-                desc: "Deal {{state.damage[0]}} damage.",
+                desc: "Deal {{spellDamage[0]}} damage.",
                 damage: [10],
                 ...props.state
             },

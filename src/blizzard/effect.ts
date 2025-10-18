@@ -10,7 +10,7 @@ export class BlizzardEffectModel extends SpellEffectModel<[]> {
             uuid: props.uuid,
             state: {
                 name: "Blizzard's effect",
-                desc: "Deal {{state.damage[0]}} damage to all enemy minions and Freeze them.",
+                desc: "Deal {{spellDamage[0]}} damage to all enemy minions and Freeze them.",
                 damage: [2],
                 ...props.state
             },

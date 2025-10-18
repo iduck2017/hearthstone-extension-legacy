@@ -10,7 +10,7 @@ export class IcicleEffectModel extends SpellEffectModel<[RoleModel]> {
             uuid: props.uuid,
             state: { 
                 name: "Icicle's effect",
-                desc: "Deal {{state.damage[0]}} damage to a minion. If it's Frozen, draw a card.",
+                desc: "Deal {{spellDamage[0]}} damage to a minion. If it's Frozen, draw a card.",
                 damage: [2],
                 ...props.state 
             },
