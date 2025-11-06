@@ -8,7 +8,7 @@
  * 2. tauren-warrior-attack: Player A's Tauren Warrior attacks Player B's Wisp, gaining +3 Attack.
  * 3. wisp-attack: Player B's Wisp attacks Tauren Warrior, can only target Tauren Warrior (Taunt).
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, AnimeUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, AnimeUtil } from "hearthstone-core";
 import { TaurenWarriorModel } from "./index";
 import { WispModel } from "../wisp";
 import { boot } from "../boot";
@@ -81,7 +81,7 @@ describe('tauren-warrior', () => {
 
         // Play Tauren Warrior
         let promise = cardC.play();
-        SelectUtil.set(0); // Select position 0
+        playerA.child.controller.set(0); // Select position 0
         await promise;
 
         // Tauren Warrior should be on board
@@ -103,12 +103,12 @@ describe('tauren-warrior', () => {
         expect(boardA.refer.queue.length).toBe(1); // Tauren Warrior on board
         expect(boardB.refer.queue.length).toBe(1); // Wisp on board
 
-        // Player A's Tauren Warrior attacks Player B's Wisp
+        // Player B's Wisp attacks Player A's Tauren Warrior
         let promise = roleD.child.action.run();
-        expect(SelectUtil.current?.options).toContain(roleC); // Can target Wisp
-        expect(SelectUtil.current?.options).not.toContain(roleA); // Can target Player B's hero
-        expect(SelectUtil.current?.options).not.toContain(roleB); // Cannot target Player A's hero
-        SelectUtil.set(roleC); // Target Wisp
+        expect(playerB.child.controller.current?.options).toContain(roleC); // Can target Tauren Warrior (Taunt)
+        expect(playerB.child.controller.current?.options).not.toContain(roleA); // Cannot target Player A's hero (Taunt blocks)
+        expect(playerB.child.controller.current?.options).not.toContain(roleB); // Cannot target Player B's hero
+        playerB.child.controller.set(roleC); // Target Tauren Warrior
         await promise;
 
         // Wisp should die (2/3 vs 1/1)

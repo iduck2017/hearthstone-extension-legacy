@@ -7,7 +7,7 @@ import { EtherealArcanistBuffModel } from "./buff";
 export class EtherealArcanistFeatureModel extends EndTurnHookModel {
     public get route() {
         const result = super.route;
-        const minion: MinionCardModel | undefined = result.list.find(item => item instanceof MinionCardModel);
+        const minion: MinionCardModel | undefined = result.items.find(item => item instanceof MinionCardModel);
         return {
             ...result,
             minion

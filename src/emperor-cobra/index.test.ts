@@ -7,7 +7,7 @@
  * 1. emperor-cobra-play: Player A plays Emperor Cobra.
  * 2. poisonous-test: Emperor Cobra attacks Player B's Mogu'shan Warden, killing it with Poisonous.
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, AnimeUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, AnimeUtil } from "hearthstone-core";
 import { EmperorCobraModel } from "./index";
 import { MogushanWardenModel } from "../mogushan-warden";
 import { boot } from "../boot";
@@ -80,7 +80,7 @@ describe('emperor-cobra', () => {
 
         // Play Emperor Cobra
         let promise = cardC.play();
-        SelectUtil.set(0); // Select position 0
+        playerA.child.controller.set(0); // Select position 0
         await promise;
 
         // Emperor Cobra should be on board
@@ -105,9 +105,9 @@ describe('emperor-cobra', () => {
 
         // Mogu'shan Warden attacks Emperor Cobra - should die from Poisonous despite high health
         let promise = roleD.child.action.run();
-        expect(SelectUtil.current?.options).toContain(roleC); // Can target Emperor Cobra
-        expect(SelectUtil.current?.options).toContain(roleA); // Can target Player A's hero
-        SelectUtil.set(roleC); // Target Emperor Cobra
+        expect(playerB.child.controller.current?.options).toContain(roleC); // Can target Emperor Cobra
+        expect(playerB.child.controller.current?.options).toContain(roleA); // Can target Player A's hero
+        playerB.child.controller.set(roleC); // Target Emperor Cobra
         await promise;
 
         // Mogu'shan Warden should die from Poisonous (despite having 7 health vs 2 attack)

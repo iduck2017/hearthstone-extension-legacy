@@ -7,7 +7,7 @@
  * 1. mogushan-warden-play: Player A plays Mogu'shan Warden.
  * 2. taunt-test: Player B's Wisp must attack Mogu'shan Warden due to Taunt.
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, AnimeUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, AnimeUtil } from "hearthstone-core";
 import { MogushanWardenModel } from "./index";
 import { WispModel } from "../wisp";
 import { boot } from "../boot";
@@ -80,7 +80,7 @@ describe('mogushan-warden', () => {
 
         // Play Mogu'shan Warden
         let promise = cardC.play();
-        SelectUtil.set(0); // Select position 0
+        playerA.child.controller.set(0); // Select position 0
         await promise;
 
         // Mogu'shan Warden should be on board
@@ -105,9 +105,9 @@ describe('mogushan-warden', () => {
 
         // Player B's Wisp attacks - should be forced to target Mogu'shan Warden due to Taunt
         let promise = roleD.child.action.run();
-        expect(SelectUtil.current?.options).toContain(roleC); // Can target Mogu'shan Warden (Taunt)
-        expect(SelectUtil.current?.options).not.toContain(roleA); // Cannot target Player A's hero (Taunt blocks)
-        SelectUtil.set(roleC); // Target Mogu'shan Warden
+        expect(playerB.child.controller.current?.options).toContain(roleC); // Can target Mogu'shan Warden (Taunt)
+        expect(playerB.child.controller.current?.options).not.toContain(roleA); // Cannot target Player A's hero (Taunt blocks)
+        playerB.child.controller.set(roleC); // Target Mogu'shan Warden
         await promise;
 
         // Both minions should take damage

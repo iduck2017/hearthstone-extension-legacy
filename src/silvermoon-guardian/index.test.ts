@@ -7,7 +7,7 @@
  * 1. silvermoon-guardian-play: Player A plays Silvermoon Guardian.
  * 2. wisp-attack: Player B's Wisp attacks Silvermoon Guardian, breaking the Divine Shield.
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, AnimeUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, AnimeUtil } from "hearthstone-core";
 import { SilvermoonGuardianModel } from "./index";
 import { WispModel } from "../wisp";
 import { boot } from "../boot";
@@ -80,7 +80,7 @@ describe('silvermoon-guardian', () => {
 
         // Play Silvermoon Guardian
         let promise = cardC.play();
-        SelectUtil.set(0); // Select position 0
+        playerA.child.controller.set(0); // Select position 0
         await promise;
 
         // Silvermoon Guardian should be on board
@@ -105,9 +105,9 @@ describe('silvermoon-guardian', () => {
 
         // Player B's Wisp attacks Silvermoon Guardian - should break Divine Shield
         let promise = roleD.child.action.run();
-        expect(SelectUtil.current?.options).toContain(roleC); // Can target Silvermoon Guardian
-        expect(SelectUtil.current?.options).toContain(roleA); // Can target Player A's hero
-        SelectUtil.set(roleC); // Target Silvermoon Guardian
+        expect(playerB.child.controller.current?.options).toContain(roleC); // Can target Silvermoon Guardian
+        expect(playerB.child.controller.current?.options).toContain(roleA); // Can target Player A's hero
+        playerB.child.controller.set(roleC); // Target Silvermoon Guardian
         await promise;
 
         // Divine Shield should be broken, but Silvermoon Guardian takes no damage

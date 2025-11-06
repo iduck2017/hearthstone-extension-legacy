@@ -6,7 +6,7 @@
  * 
  * 1. shadow-word-pain-cast: Player A uses Shadow Word: Pain on Stonetusk Boar, destroys it.
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel } from "hearthstone-core";
 import { ShadowWordPainModel } from "./index";
 import { AegwynnTheGuardianModel } from "../aegwynn-the-guardian";
 import { StonetuskBoarModel } from "../stonetusk-boar";
@@ -71,11 +71,11 @@ describe('shadow-word-pain', () => {
 
         // Player A uses Shadow Word: Pain
         const promise = cardC.play();
-        expect(SelectUtil.current?.options).toContain(cardE.child.role); // Stonetusk Boar (1/1) should be targetable
-        expect(SelectUtil.current?.options).not.toContain(cardD.child.role); // Aegwynn (5/5/5) should not be targetable
-        expect(SelectUtil.current?.options).not.toContain(heroA.child.role);
-        expect(SelectUtil.current?.options).not.toContain(heroB.child.role);
-        SelectUtil.set(cardE.child.role);
+        expect(playerA.child.controller.current?.options).toContain(cardE.child.role); // Stonetusk Boar (1/1) should be targetable
+        expect(playerA.child.controller.current?.options).not.toContain(cardD.child.role); // Aegwynn (5/5/5) should not be targetable
+        expect(playerA.child.controller.current?.options).not.toContain(heroA.child.role);
+        expect(playerA.child.controller.current?.options).not.toContain(heroB.child.role);
+        playerA.child.controller.set(cardE.child.role);
         await promise;
 
         // Stonetusk Boar should be destroyed

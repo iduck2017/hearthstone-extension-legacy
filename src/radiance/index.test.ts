@@ -8,7 +8,7 @@
  * 1. fireball-cast: Player A uses Fireball on Player B's hero, dealing 6 damage.
  * 2. radiance-cast: Player B uses Radiance, restores 5 Health to hero.
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel } from "hearthstone-core";
 import { RadianceModel } from "./index";
 import { FireballModel } from "../fireball";
 import { boot } from "../boot";
@@ -76,8 +76,8 @@ describe('radiance', () => {
 
         // Player A uses Fireball on Player B's hero
         const promise = cardC.play();
-        expect(SelectUtil.current?.options).toContain(heroB.child.role);
-        SelectUtil.set(heroB.child.role);
+        expect(playerA.child.controller.current?.options).toContain(heroB.child.role);
+        playerA.child.controller.set(heroB.child.role);
         await promise;
 
         // Player B's hero should take 6 damage

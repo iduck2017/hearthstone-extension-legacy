@@ -6,7 +6,7 @@
  * 
  * 1. shadow-word-death-cast: Player A uses Shadow Word: Death on Aegwynn, destroys it.
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel } from "hearthstone-core";
 import { ShadowWordDeathModel } from "./index";
 import { StonetuskBoarModel } from "../stonetusk-boar";
 import { boot } from "../boot";
@@ -71,11 +71,11 @@ describe('shadow-word-death', () => {
 
         // Player A uses Shadow Word: Death
         const promise = cardC.play();
-        expect(SelectUtil.current?.options).toContain(cardD.child.role); // Aegwynn (5/5/5) should be targetable
-        expect(SelectUtil.current?.options).not.toContain(cardE.child.role); // Stonetusk Boar (1/1) should not be targetable
-        expect(SelectUtil.current?.options).not.toContain(heroA.child.role);
-        expect(SelectUtil.current?.options).not.toContain(heroB.child.role); 
-        SelectUtil.set(cardD.child.role);
+        expect(playerA.child.controller.current?.options).toContain(cardD.child.role); // Aegwynn (5/5/5) should be targetable
+        expect(playerA.child.controller.current?.options).not.toContain(cardE.child.role); // Stonetusk Boar (1/1) should not be targetable
+        expect(playerA.child.controller.current?.options).not.toContain(heroA.child.role);
+        expect(playerA.child.controller.current?.options).not.toContain(heroB.child.role); 
+        playerA.child.controller.set(cardD.child.role);
         await promise;
 
         // Aegwynn should be destroyed

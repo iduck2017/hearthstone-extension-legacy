@@ -5,7 +5,7 @@
  * 2. water-elemental-play: Player B plays Water Elemental, triggers Mirror Entity, Player A summons a copy
  */
 
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel } from "hearthstone-core";
 import { MirrorEntityModel } from "./index";
 import { WispModel } from "../wisp";
 import { WaterElementalModel } from "../water-elemental";
@@ -77,7 +77,7 @@ describe('mirror-entity', () => {
 
         // Player A plays Wisp (should not trigger Mirror Entity on own minions)
         const promise = cardD.play();
-        SelectUtil.set(0);
+        playerA.child.controller.set(0);
         await promise;
 
         // Check Wisp is deployed but Mirror Entity is not triggered
@@ -100,7 +100,7 @@ describe('mirror-entity', () => {
 
         // Player B plays Water Elemental (should trigger Mirror Entity)
         const promise = cardE.play();
-        SelectUtil.set(0);
+        playerB.child.controller.set(0);
         await promise;
 
         // Check Water Elemental is deployed and Mirror Entity is triggered

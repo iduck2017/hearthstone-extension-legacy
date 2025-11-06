@@ -6,7 +6,7 @@
  * 1. fireball-cast: Player A uses Fireball on self to damage hero.
  * 2. priestess-play: Player A plays Priestess of Elune, restoring 4 Health to hero.
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, AnimeUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, AnimeUtil } from "hearthstone-core";
 import { PriestessOfEluneModel } from "./index";
 import { FireballModel } from "../fireball";
 import { boot } from "../boot";
@@ -72,9 +72,9 @@ describe('priestess-of-elune', () => {
 
         // Cast Fireball targeting Player A's hero
         const promise = cardD.play();
-        expect(SelectUtil.current?.options).toContain(roleA); // Can target friendly hero
-        expect(SelectUtil.current?.options).toContain(roleB); // Can target enemy hero
-        SelectUtil.set(roleA); // Target Player A's hero
+        expect(playerA.child.controller.current?.options).toContain(roleA); // Can target friendly hero
+        expect(playerA.child.controller.current?.options).toContain(roleB); // Can target enemy hero
+        playerA.child.controller.set(roleA); // Target Player A's hero
         await promise;
 
         // Hero should be damaged by 6
@@ -95,7 +95,7 @@ describe('priestess-of-elune', () => {
 
         // Play Priestess of Elune
         let promise = cardC.play();
-        SelectUtil.set(0); // Select position 0
+        playerA.child.controller.set(0); // Select position 0
         await promise;
 
         // Hero should be healed by 4 Health

@@ -7,7 +7,7 @@
  * 1. kobold-geomancer-play: Player A plays Kobold Geomancer.
  * 2. fireball-cast: Player A casts Fireball with Spell Damage +1.
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, AnimeUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, AnimeUtil } from "hearthstone-core";
 import { KoboldGeomancerModel } from "./index";
 import { FireballModel } from "../fireball";
 import { boot } from "../boot";
@@ -78,7 +78,7 @@ describe('kobold-geomancer', () => {
 
         // Play Kobold Geomancer
         let promise = cardC.play();
-        SelectUtil.set(0); // Select position 0
+        playerA.child.controller.set(0); // Select position 0
         await promise;
 
         // Kobold Geomancer should be on board
@@ -96,9 +96,9 @@ describe('kobold-geomancer', () => {
         // Player A casts Fireball
         let promise = cardD.play();
         // Choose target for Fireball (Player B's hero)
-        expect(SelectUtil.current?.options).toContain(roleB); // Can target Player B's hero
-        expect(SelectUtil.current?.options).toContain(roleA); // Can target Player A's hero
-        SelectUtil.set(roleB); // Target Player B's hero
+        expect(playerA.child.controller.current?.options).toContain(roleB); // Can target Player B's hero
+        expect(playerA.child.controller.current?.options).toContain(roleA); // Can target Player A's hero
+        playerA.child.controller.set(roleB); // Target Player B's hero
         await promise;
 
         // Player B's hero should take 7 damage (6 + 1 from Spell Damage +1)

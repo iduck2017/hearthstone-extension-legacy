@@ -8,7 +8,7 @@
  * 2. shattered-sun-cleric-play: Player B plays Shattered Sun Cleric (no targets).
  * 3. wisp-attack: Player A's buffed Wisp attacks Player B's Wisp.
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, AnimeUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, AnimeUtil } from "hearthstone-core";
 import { ShatteredSunClericModel } from "./index";
 import { WispModel } from "../wisp";
 import { boot } from "../boot";
@@ -89,14 +89,14 @@ describe('shattered-sun-cleric', () => {
         // Play Shattered Sun Cleric
         let promise = cardC.play();
         await AnimeUtil.sleep();
-        expect(SelectUtil.current?.options).toContain(0); // Select position 0
-        SelectUtil.set(0);
+        expect(playerA.child.controller.current?.options).toContain(0); // Select position 0
+        playerA.child.controller.set(0);
         await AnimeUtil.sleep();
         
         // Choose target for battlecry (Wisp)
-        expect(SelectUtil.current?.options).toContain(roleD); // Can target Wisp
-        expect(SelectUtil.current?.options.length).toBe(1); // Only Wisp available
-        SelectUtil.set(roleD); // Target Wisp
+        expect(playerA.child.controller.current?.options).toContain(roleD); // Can target Wisp
+        expect(playerA.child.controller.current?.options.length).toBe(1); // Only Wisp available
+        playerA.child.controller.set(roleD); // Target Wisp
         await promise;
         
         // Shattered Sun Cleric should be on board
@@ -122,10 +122,10 @@ describe('shattered-sun-cleric', () => {
         // Play Shattered Sun Cleric (no targets available)
         let promise = cardE.play();
         await AnimeUtil.sleep();
-        expect(SelectUtil.current?.options).toContain(0); // Select position 0
-        SelectUtil.set(0);
+        expect(playerB.child.controller.current?.options).toContain(0); // Select position 0
+        playerB.child.controller.set(0);
         await AnimeUtil.sleep();
-        expect(SelectUtil.current).toBeUndefined(); // No battlecry targets
+        expect(playerB.child.controller.current).toBeUndefined(); // No battlecry targets
         await promise;
         
         // Shattered Sun Cleric should be on board
@@ -135,8 +135,8 @@ describe('shattered-sun-cleric', () => {
         // Play Wisp
         promise = cardF.play();
         await AnimeUtil.sleep();
-        expect(SelectUtil.current?.options).toContain(0); // Select position 0
-        SelectUtil.set(0);
+        expect(playerB.child.controller.current?.options).toContain(0); // Select position 0
+        playerB.child.controller.set(0);
         await promise;
 
         // Both minions should be on board
@@ -162,11 +162,11 @@ describe('shattered-sun-cleric', () => {
         // Player A's buffed Wisp attacks Player B's Wisp
         let promise = roleD.child.action.run();
         await AnimeUtil.sleep();
-        expect(SelectUtil.current?.options).toContain(roleF); // Can target Player B's Wisp
-        expect(SelectUtil.current?.options).toContain(roleB); // Can target Player B's hero
-        expect(SelectUtil.current?.options).toContain(roleE); // Can target Player B's Shattered Sun Cleric
-        expect(SelectUtil.current?.options.length).toBe(3);
-        SelectUtil.set(roleF); // Target Player B's Wisp
+        expect(playerA.child.controller.current?.options).toContain(roleF); // Can target Player B's Wisp
+        expect(playerA.child.controller.current?.options).toContain(roleB); // Can target Player B's hero
+        expect(playerA.child.controller.current?.options).toContain(roleE); // Can target Player B's Shattered Sun Cleric
+        expect(playerA.child.controller.current?.options.length).toBe(3);
+        playerA.child.controller.set(roleF); // Target Player B's Wisp
         await promise;
         
         // Player A's Wisp should survive (2/2 vs 1/1)

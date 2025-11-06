@@ -6,7 +6,7 @@
  * 
  * 1. chillwind-yeti-play: Player A plays Chillwind Yeti.
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, AnimeUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, AnimeUtil } from "hearthstone-core";
 import { ChillwindYetiModel } from "./index";
 import { boot } from "../boot";
 
@@ -75,7 +75,7 @@ describe('chillwind-yeti', () => {
 
         // Play Chillwind Yeti
         let promise = cardC.play();
-        SelectUtil.set(0); // Select position 0
+        playerA.child.controller.set(0); // Select position 0
         await promise;
 
         // Chillwind Yeti should be on board

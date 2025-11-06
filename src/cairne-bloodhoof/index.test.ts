@@ -7,7 +7,7 @@
  * 1. fireball-cast: Player A uses Fireball to kill Cairne Bloodhoof, summoning Baine Bloodhoof.
  * 2. wisp-attack: Player A's Wisp cannot attack Player B's hero due to Baine Bloodhoof's Taunt.
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, AnimeUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, AnimeUtil } from "hearthstone-core";
 import { CairneBloodhoofModel } from "./index";
 import { BaineBloodhoofModel } from "../baine-bloodhoof";
 import { FireballModel } from "../fireball";
@@ -80,10 +80,10 @@ describe('cairne-bloodhoof', () => {
 
         // Cast Fireball targeting Cairne Bloodhoof
         const promise = cardC.play();
-        expect(SelectUtil.current?.options).toContain(roleA); // Can target friendly hero
-        expect(SelectUtil.current?.options).toContain(roleB); // Can target enemy hero
-        expect(SelectUtil.current?.options).toContain(roleE); // Can target enemy minion
-        SelectUtil.set(roleE); // Target Cairne Bloodhoof
+        expect(playerA.child.controller.current?.options).toContain(roleA); // Can target friendly hero
+        expect(playerA.child.controller.current?.options).toContain(roleB); // Can target enemy hero
+        expect(playerA.child.controller.current?.options).toContain(roleE); // Can target enemy minion
+        playerA.child.controller.set(roleE); // Target Cairne Bloodhoof
         await promise;
 
         // Cairne Bloodhoof should be destroyed and Baine Bloodhoof should be summoned
@@ -113,9 +113,9 @@ describe('cairne-bloodhoof', () => {
 
         // Try to attack with Wisp
         const promise = roleD.child.action.run();
-        expect(SelectUtil.current?.options).toContain(roleB); // Can target enemy hero
-        expect(SelectUtil.current?.options).toContain(roleG); 
-        SelectUtil.set(roleG); // Target Baine Bloodhoof
+        expect(playerA.child.controller.current?.options).toContain(roleB); // Can target enemy hero
+        expect(playerA.child.controller.current?.options).toContain(roleG); 
+        playerA.child.controller.set(roleG); // Target Baine Bloodhoof
         await promise;
 
         // Baine Bloodhoof should take 1 damage

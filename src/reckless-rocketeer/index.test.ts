@@ -7,7 +7,7 @@
  * 1. reckless-rocketeer-play: Player A plays Reckless Rocketeer.
  * 2. reckless-rocketeer-charge: Player A's Reckless Rocketeer immediately attacks Player B's hero.
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, AnimeUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, AnimeUtil } from "hearthstone-core";
 import { RecklessRocketeerModel } from "./index";
 import { WispModel } from "../wisp";
 import { boot } from "../boot";
@@ -75,7 +75,7 @@ describe('reckless-rocketeer', () => {
 
         // Play Reckless Rocketeer
         let promise = cardC.play();
-        SelectUtil.set(0); // Select position 0
+        playerA.child.controller.set(0); // Select position 0
         await promise;
 
         // Reckless Rocketeer should be on board
@@ -98,9 +98,9 @@ describe('reckless-rocketeer', () => {
 
         // Reckless Rocketeer attacks Player B's hero
         const promise = roleC.child.action.run();
-        expect(SelectUtil.current?.options).toContain(roleB); // Can target enemy hero
-        expect(SelectUtil.current?.options).toContain(roleD); // Can target enemy minion
-        SelectUtil.set(roleB); // Target Player B's hero
+        expect(playerA.child.controller.current?.options).toContain(roleB); // Can target enemy hero
+        expect(playerA.child.controller.current?.options).toContain(roleD); // Can target enemy minion
+        playerA.child.controller.set(roleB); // Target Player B's hero
         await promise;
 
         // Player B's hero should take 5 damage

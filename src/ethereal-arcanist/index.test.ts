@@ -6,7 +6,7 @@
  * 3. end-turn: Next turn, Arcanist no longer grows (no secret)
  */
 
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel } from "hearthstone-core";
 import { EtherealArcanistModel } from "./index";
 import { IceBarrierModel } from "../ice-barrier";
 import { WispModel } from "../wisp";
@@ -79,8 +79,8 @@ describe('ethereal-arcanist', () => {
 
         // Player B's Wisp attacks Player A's hero
         const promise = roleD.child.action.run();
-        expect(SelectUtil.current?.options).toContain(roleA);
-        SelectUtil.set(roleA);
+        expect(playerB.child.controller.current?.options).toContain(roleA);
+        playerB.child.controller.set(roleA);
         await promise;
 
         // Check Ice Barrier triggered: Player A gains 8 armor

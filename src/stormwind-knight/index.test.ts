@@ -7,7 +7,7 @@
  * 1. stormwind-knight-play: Player A plays Stormwind Knight.
  * 2. stormwind-knight-attack: Player A's Stormwind Knight attacks Player B's Wisp immediately (Charge).
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, AnimeUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, AnimeUtil } from "hearthstone-core";
 import { StormwindKnightModel } from "./index";
 import { WispModel } from "../wisp";
 import { boot } from "../boot";
@@ -80,7 +80,7 @@ describe('stormwind-knight', () => {
 
         // Play Stormwind Knight
         let promise = cardC.play();
-        SelectUtil.set(0); // Select position 0
+        playerA.child.controller.set(0); // Select position 0
         await promise;
 
         // Stormwind Knight should be on board
@@ -101,9 +101,9 @@ describe('stormwind-knight', () => {
 
         // Player A's Stormwind Knight attacks Player B's Wisp immediately (Charge allows immediate attack)
         let promise = roleC.child.action.run();
-        expect(SelectUtil.current?.options).toContain(roleD); // Can target Wisp
-        expect(SelectUtil.current?.options).toContain(roleB); // Can target Player B's hero
-        SelectUtil.set(roleD); // Target Wisp
+        expect(playerA.child.controller.current?.options).toContain(roleD); // Can target Wisp
+        expect(playerA.child.controller.current?.options).toContain(roleB); // Can target Player B's hero
+        playerA.child.controller.set(roleD); // Target Wisp
         await promise;
 
         // Wisp should die (1/1 vs 2/5)

@@ -7,7 +7,7 @@
  * Water Elemental (3/6) dies from 10 damage.
  */
 
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, SelectUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel } from "hearthstone-core";
 import { PyroblastModel } from "./index";
 import { WaterElementalModel } from "../water-elemental";
 import { boot } from "../boot";
@@ -66,9 +66,9 @@ describe('pyroblast', () => {
 
         // Player A uses Pyroblast on Water Elemental
         const promise = cardC.play();
-        expect(SelectUtil.current?.options).toContain(roleD); // Water Elemental can be targeted
-        expect(SelectUtil.current?.options).toContain(roleB); // Hero can also be targeted
-        SelectUtil.set(roleD); // Target Water Elemental
+        expect(playerA.child.controller.current?.options).toContain(roleD); // Water Elemental can be targeted
+        expect(playerA.child.controller.current?.options).toContain(roleB); // Hero can also be targeted
+        playerA.child.controller.set(roleD); // Target Water Elemental
         await promise;
 
         // Water Elemental should die from 10 damage (6 - 10 = -4)

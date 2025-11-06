@@ -7,7 +7,7 @@
  * 1. senjin-shieldmasta-play: Player A plays Sen'jin Shieldmasta.
  * 2. taunt-test: Player B's Wisp must attack Sen'jin Shieldmasta due to Taunt.
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, AnimeUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, AnimeUtil } from "hearthstone-core";
 import { SenjinShieldmastaModel } from "./index";
 import { WispModel } from "../wisp";
 import { boot } from "../boot";
@@ -80,7 +80,7 @@ describe('senjin-shieldmasta', () => {
 
         // Play Sen'jin Shieldmasta
         let promise = cardC.play();
-        SelectUtil.set(0); // Select position 0
+        playerA.child.controller.set(0); // Select position 0
         await promise;
 
         // Sen'jin Shieldmasta should be on board
@@ -105,9 +105,9 @@ describe('senjin-shieldmasta', () => {
 
         // Player B's Wisp attacks - should be forced to target Sen'jin Shieldmasta due to Taunt
         let promise = roleD.child.action.run();
-        expect(SelectUtil.current?.options).toContain(roleC); // Can target Sen'jin Shieldmasta (Taunt)
-        expect(SelectUtil.current?.options).not.toContain(roleA); // Cannot target Player A's hero (Taunt blocks)
-        SelectUtil.set(roleC); // Target Sen'jin Shieldmasta
+        expect(playerB.child.controller.current?.options).toContain(roleC); // Can target Sen'jin Shieldmasta (Taunt)
+        expect(playerB.child.controller.current?.options).not.toContain(roleA); // Cannot target Player A's hero (Taunt blocks)
+        playerB.child.controller.set(roleC); // Target Sen'jin Shieldmasta
         await promise;
 
         // Both minions should take damage

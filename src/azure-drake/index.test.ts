@@ -6,7 +6,7 @@
  * 1. azure-drake-play: Player A plays Azure Drake, drawing Fireball.
  * 2. fireball-cast: Player A uses Fireball with Spell Damage +1.
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, AnimeUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, AnimeUtil } from "hearthstone-core";
 import { AzureDrakeModel } from "./index";
 import { FireballModel } from "../fireball";
 import { boot } from "../boot";
@@ -78,7 +78,7 @@ describe('azure-drake', () => {
 
         // Play Azure Drake
         let promise = cardC.play();
-        SelectUtil.set(0); // Select position 0
+        playerA.child.controller.set(0); // Select position 0
         await promise;
 
         // Azure Drake should be on board and Fireball should be drawn
@@ -91,9 +91,9 @@ describe('azure-drake', () => {
     test('fireball-cast', async () => {
         // Cast Fireball targeting Player B's hero
         const promise = cardD.play();
-        expect(SelectUtil.current?.options).toContain(roleA); // Can target friendly hero
-        expect(SelectUtil.current?.options).toContain(roleB); // Can target enemy hero
-        SelectUtil.set(roleB); // Target Player B's hero
+        expect(playerA.child.controller.current?.options).toContain(roleA); // Can target friendly hero
+        expect(playerA.child.controller.current?.options).toContain(roleB); // Can target enemy hero
+        playerA.child.controller.set(roleB); // Target Player B's hero
         await promise;
 
         // Fireball should deal 7 damage (6 + 1 from Spell Damage +1)

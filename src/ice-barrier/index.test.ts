@@ -4,7 +4,7 @@
  * 1. wisp-attack: Player A uses Wisp to attack Player B, Player B takes damage and becomes 29 health
  * 2. ice-barrier-cast: Player B plays Ice Barrier, Player A attacks again with Wisp, Player B gains 8 armor and takes damage to 7
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel } from "hearthstone-core";
 import { IceBarrierModel } from "./index";
 import { WispModel } from "../wisp";
 import { boot } from "../boot";
@@ -60,8 +60,8 @@ describe('ice-barrier', () => {
 
         // Player A's Wisp attacks Player B's hero
         const promise = roleC.child.action.run();
-        expect(SelectUtil.current?.options).toContain(roleB);
-        SelectUtil.set(roleB);
+        expect(playerA.child.controller.current?.options).toContain(roleB);
+        playerA.child.controller.set(roleB);
         await promise;
 
         // Player B should take 1 damage
@@ -86,8 +86,8 @@ describe('ice-barrier', () => {
 
         // Player A's Wisp attacks Player B's hero again
         const promise = roleC.child.action.run();
-        expect(SelectUtil.current?.options).toContain(roleB);
-        SelectUtil.set(roleB);
+        expect(playerA.child.controller.current?.options).toContain(roleB);
+        playerA.child.controller.set(roleB);
         await promise;
 
         // Player B should gain 8 armor (health increases by 8) and then take 1 damage

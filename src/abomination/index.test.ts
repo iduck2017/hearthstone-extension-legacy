@@ -7,7 +7,7 @@
  * 1. abomination-play: Player A plays Abomination.
  * 2. abomination-death: Player B's Stranglethorn Tiger attacks Abomination, triggering deathrattle.
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, AnimeUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, AnimeUtil } from "hearthstone-core";
 import { AbominationModel } from "./index";
 import { StranglethornTigerModel } from "../stranglethorn-tiger";
 import { boot } from "../boot";
@@ -80,7 +80,7 @@ describe('abomination', () => {
 
         // Play Abomination
         let promise = cardC.play();
-        SelectUtil.set(0); // Select position 0
+        playerA.child.controller.set(0); // Select position 0
         await promise;
 
         // Abomination should be on board
@@ -107,9 +107,9 @@ describe('abomination', () => {
 
         // Player B's Stranglethorn Tiger attacks Abomination
         let promise = roleD.child.action.run();
-        expect(SelectUtil.current?.options).toContain(roleC); // Can target Abomination (Taunt forces this)
-        expect(SelectUtil.current?.options).not.toContain(roleA); // Cannot target Player A's hero (Taunt blocks)
-        SelectUtil.set(roleC); // Target Abomination
+        expect(playerB.child.controller.current?.options).toContain(roleC); // Can target Abomination (Taunt forces this)
+        expect(playerB.child.controller.current?.options).not.toContain(roleA); // Cannot target Player A's hero (Taunt blocks)
+        playerB.child.controller.set(roleC); // Target Abomination
         await promise;
 
         expect(roleD.child.health.state.current).toBe(-1);

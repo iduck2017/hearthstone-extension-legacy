@@ -4,7 +4,7 @@
  * 1. wisp-attack-goldshire-footman: Player A's Wisp can only attack Player B's Goldshire Footman due to taunt
  */
 
-import { GameModel, PlayerModel, MageModel, BoardModel, AnimeUtil, SelectUtil, ManaModel } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, AnimeUtil, ManaModel } from "hearthstone-core";
 import { GoldshireFootmanModel } from ".";
 import { WispModel } from "../wisp";
 import { boot } from "../boot";
@@ -52,9 +52,9 @@ describe('goldshire-footman', () => {
         expect(roleD.child.feats.child.taunt.state.isActive).toBe(true);
         const promise = roleC.child.action.run();
         await AnimeUtil.sleep();
-        expect(SelectUtil.current?.options).toContain(roleD);
-        expect(SelectUtil.current?.options).not.toContain(roleB);
-        SelectUtil.set(roleD);
+        expect(game.child.playerA.child.controller.current?.options).toContain(roleD);
+        expect(game.child.playerA.child.controller.current?.options).not.toContain(roleB);
+        game.child.playerA.child.controller.set(roleD);
         await promise;
         expect(roleD.child.health.state.current).toBe(1);
         expect(roleD.child.health.state.maximum).toBe(2);

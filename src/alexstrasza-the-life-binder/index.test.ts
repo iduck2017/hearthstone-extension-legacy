@@ -6,7 +6,7 @@
  * 1. alexstrasza-the-life-binder-damage: Player A plays Alexstrasza and targets Player B's hero for damage.
  * 2. alexstrasza-the-life-binder-heal: Player B plays Alexstrasza and targets Player A's hero for healing.
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, AnimeUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, AnimeUtil } from "hearthstone-core";
 import { AlexstraszaTheLifeBinderModel } from "./index";
 import { boot } from "../boot";
 
@@ -81,13 +81,13 @@ describe('alexstrasza-the-life-binder', () => {
 
         // Play Alexstrasza the Life-Binder
         let promise = cardC.play();
-        SelectUtil.set(0); // Select position 0
+        playerA.child.controller.set(0); // Select position 0
         await AnimeUtil.sleep();
         
         // Choose target for battlecry
-        expect(SelectUtil.current?.options).toContain(roleA); // Can target friendly hero
-        expect(SelectUtil.current?.options).toContain(roleB); // Can target enemy hero
-        SelectUtil.set(roleB); // Target Player B's hero for damage
+        expect(playerA.child.controller.current?.options).toContain(roleA); // Can target friendly hero
+        expect(playerA.child.controller.current?.options).toContain(roleB); // Can target enemy hero
+        playerA.child.controller.set(roleB); // Target Player B's hero for damage
         await promise;
 
         // Alexstrasza should be on board
@@ -111,13 +111,13 @@ describe('alexstrasza-the-life-binder', () => {
 
         // Play Alexstrasza the Life-Binder
         let promise = cardD.play();
-        SelectUtil.set(0); // Select position 0
+        playerB.child.controller.set(0); // Select position 0
         await AnimeUtil.sleep();
         
         // Choose target for battlecry
-        expect(SelectUtil.current?.options).toContain(roleA); // Can target enemy hero
-        expect(SelectUtil.current?.options).toContain(roleB); // Can target friendly hero
-        SelectUtil.set(roleB); // Target Player B's hero for healing
+        expect(playerB.child.controller.current?.options).toContain(roleA); // Can target enemy hero
+        expect(playerB.child.controller.current?.options).toContain(roleB); // Can target friendly hero
+        playerB.child.controller.set(roleB); // Target Player B's hero for healing
         await promise;
 
         // Alexstrasza should be on board

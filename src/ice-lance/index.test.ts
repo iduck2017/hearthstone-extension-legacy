@@ -5,7 +5,7 @@
  * 2. ice-lance-cast: Player B plays Ice Lance on already frozen target, deals 4 damage
  */
 
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, SelectUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel } from "hearthstone-core";
 import { IceLanceModel } from "./index";
 import { WispModel } from "../wisp";
 import { boot } from "../boot";
@@ -66,10 +66,10 @@ describe('ice-lance', () => {
 
         // Play Ice Lance targeting enemy minion
         let promise = cardD.play();
-        expect(SelectUtil.current?.options).toContain(roleA);
-        expect(SelectUtil.current?.options).toContain(roleB);
-        expect(SelectUtil.current?.options).toContain(roleC);
-        SelectUtil.set(roleC);
+        expect(playerA.child.controller.current?.options).toContain(roleA);
+        expect(playerA.child.controller.current?.options).toContain(roleB);
+        expect(playerA.child.controller.current?.options).toContain(roleC);
+        playerA.child.controller.set(roleC);
         await promise;
         
         // Target should be frozen
@@ -89,10 +89,10 @@ describe('ice-lance', () => {
         expect(roleC.child.feats.child.frozen.state.isActive).toBe(true);
 
         let promise = cardE.play();
-        expect(SelectUtil.current?.options).toContain(roleA);
-        expect(SelectUtil.current?.options).toContain(roleB);
-        expect(SelectUtil.current?.options).toContain(roleC);
-        SelectUtil.set(roleC);
+        expect(playerB.child.controller.current?.options).toContain(roleA);
+        expect(playerB.child.controller.current?.options).toContain(roleB);
+        expect(playerB.child.controller.current?.options).toContain(roleC);
+        playerB.child.controller.set(roleC);
         await promise;
 
         expect(playerB.child.mana.state.current).toBe(9);

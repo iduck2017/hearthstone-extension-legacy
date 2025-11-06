@@ -7,7 +7,7 @@
  * 1. loot-hoarder-play: Player A plays Loot Hoarder.
  * 2. loot-hoarder-death: Player B's Stranglethorn Tiger attacks Loot Hoarder, triggering deathrattle.
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, AnimeUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, AnimeUtil } from "hearthstone-core";
 import { LootHoarderModel } from "./index";
 import { StranglethornTigerModel } from "../stranglethorn-tiger";
 import { boot } from "../boot";
@@ -83,7 +83,7 @@ describe('loot-hoarder', () => {
 
         // Play Loot Hoarder
         let promise = cardC.play();
-        SelectUtil.set(0); // Select position 0
+        playerA.child.controller.set(0); // Select position 0
         await promise;
 
         // Loot Hoarder should be on board
@@ -106,9 +106,9 @@ describe('loot-hoarder', () => {
 
         // Player B's Stranglethorn Tiger attacks Loot Hoarder
         let promise = roleD.child.action.run();
-        expect(SelectUtil.current?.options).toContain(roleC); // Can target Loot Hoarder
-        expect(SelectUtil.current?.options).toContain(roleA); // Cannot target Player A's hero (Stealth)
-        SelectUtil.set(roleC); // Target Loot Hoarder
+        expect(playerB.child.controller.current?.options).toContain(roleC); // Can target Loot Hoarder
+        expect(playerB.child.controller.current?.options).toContain(roleA); // Can target Player A's hero
+        playerB.child.controller.set(roleC); // Target Loot Hoarder
         await promise;
 
         expect(roleC.child.health.state.current).toBe(-4);

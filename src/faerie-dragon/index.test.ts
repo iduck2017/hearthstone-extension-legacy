@@ -7,7 +7,7 @@
  * 1. faerie-dragon-play: Player A plays Faerie Dragon.
  * 2. faerie-dragon-attack: Player A's Faerie Dragon attacks Player B's hero.
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, AnimeUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, AnimeUtil } from "hearthstone-core";
 import { FaerieDragonModel } from "./index";
 import { FireballModel } from "../fireball";
 import { boot } from "../boot";
@@ -78,7 +78,7 @@ describe('faerie-dragon', () => {
         expect(playerA.child.mana.state.current).toBe(10); // Full mana
         // Play Faerie Dragon
         let promise = cardC.play();
-        SelectUtil.set(0); // Select position 0
+        playerA.child.controller.set(0); // Select position 0
         await promise;
 
         // Faerie Dragon should be on board
@@ -104,10 +104,10 @@ describe('faerie-dragon', () => {
         // Player B casts Fireball
         let promise = cardD.play();
         // Choose target for Fireball (cannot target Faerie Dragon due to Elusive)
-        expect(SelectUtil.current?.options).toContain(roleA); // Can target Player A's hero
-        expect(SelectUtil.current?.options).toContain(roleB); // Can target Player B's hero
-        expect(SelectUtil.current?.options).not.toContain(roleC); // Cannot target Faerie Dragon (Elusive)
-        SelectUtil.set(roleA); // Target Player A's hero
+        expect(playerB.child.controller.current?.options).toContain(roleA); // Can target Player A's hero
+        expect(playerB.child.controller.current?.options).toContain(roleB); // Can target Player B's hero
+        expect(playerB.child.controller.current?.options).not.toContain(roleC); // Cannot target Faerie Dragon (Elusive)
+        playerB.child.controller.set(roleA); // Target Player A's hero
         await promise;
 
         // Player A's hero should take 6 damage

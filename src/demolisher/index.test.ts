@@ -6,7 +6,7 @@
  * 
  * 1. demolisher-hook: Turn ends, Demolisher triggers, Player A health becomes 28.
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, AnimeUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, AnimeUtil } from "hearthstone-core";
 import { DemolisherModel } from "./index";
 import { boot } from "../boot";
 

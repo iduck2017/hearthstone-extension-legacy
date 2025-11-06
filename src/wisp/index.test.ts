@@ -1,4 +1,4 @@
-import { GameModel, MageModel, PlayerModel, SelectUtil, AnimeUtil } from "hearthstone-core";
+import { GameModel, MageModel, PlayerModel, AnimeUtil } from "hearthstone-core";
 import { boot } from "../boot";
 import { HandModel } from "hearthstone-core";
 import { DeckModel } from "hearthstone-core";
@@ -65,13 +65,13 @@ describe('role', () => {
     test('wisp-attack', async () => {
         const promise = roleC.child.action.run();
         await AnimeUtil.sleep();
-        const selector = SelectUtil.current;
+        const selector = playerA.child.controller.current;
         expect(selector).toBeDefined();
         if (!selector) return;
         expect(selector.options).toContain(roleB);
         expect(selector?.options).toContain(roleD);
         expect(selector?.options.length).toBe(2);
-        SelectUtil.set(roleB);
+        playerA.child.controller.set(roleB);
         await promise;
 
         expect(roleB.child.health.state.current).toBe(29);
@@ -88,13 +88,13 @@ describe('role', () => {
 
         const promise = roleD.child.action.run();
         await AnimeUtil.sleep();
-        const selector = SelectUtil.current;
+        const selector = playerB.child.controller.current;
         expect(selector).toBeDefined();
         if (!selector) return;
         expect(selector.options).toContain(roleA);
         expect(selector?.options).toContain(roleC);
         expect(selector?.options.length).toBe(2);
-        SelectUtil.set(roleC);
+        playerB.child.controller.set(roleC);
         await promise;
         
         expect(roleC.child.health.state.current).toBe(0);

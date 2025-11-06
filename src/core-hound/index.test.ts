@@ -5,7 +5,7 @@
  * 
  * 1. core-hound-play: Player A plays Core Hound.
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, AnimeUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, AnimeUtil } from "hearthstone-core";
 import { CoreHoundModel } from "./index";
 import { boot } from "../boot";
 
@@ -71,7 +71,7 @@ describe('core-hound', () => {
 
         // Play Core Hound
         let promise = cardC.play();
-        SelectUtil.set(0); // Select position 0
+        playerA.child.controller.set(0); // Select position 0
         await promise;
 
         // Core Hound should be on board

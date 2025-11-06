@@ -6,7 +6,7 @@
  * holy-smite-cast: Player A uses Holy Smite on Player B's Water Elemental.
  * Water Elemental takes 3 damage (from 6 to 3 health).
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, SelectUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel } from "hearthstone-core";
 import { HolySmiteModel } from "./index";
 import { WaterElementalModel } from "../water-elemental";
 import { boot } from "../boot";
@@ -64,8 +64,8 @@ describe('holy-smite', () => {
 
         // Player A uses Holy Smite on Water Elemental
         const promise = cardC.play();
-        expect(SelectUtil.current?.options).toContain(roleD);
-        SelectUtil.set(roleD);
+        expect(playerA.child.controller.current?.options).toContain(roleD);
+        playerA.child.controller.set(roleD);
         await promise;
 
         // Water Elemental should take 3 damage

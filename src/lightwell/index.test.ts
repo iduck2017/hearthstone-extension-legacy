@@ -7,7 +7,7 @@
  * 1. water-element-attack: Player A's Water Elemental attacks Player B's Wisp, both take damage.
  * 2. turn-end: Player A's turn ends, Lightwell restores 3 Health to a damaged character.
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel } from "hearthstone-core";
 import { LightwellModel } from "./index";
 import { WaterElementalModel } from "../water-elemental";
 import { WispModel } from "../wisp";
@@ -77,7 +77,7 @@ describe('lightwell', () => {
         expect(roleE.child.health.state.current).toBe(1);
         // Water Elemental attacks Wisp
         const promise = roleD.child.action.run();
-        SelectUtil.set(roleE);
+        playerA.child.controller.set(roleE);
         await promise;
         // Both should take damage
         expect(roleD.child.health.state.current).toBe(5); // 6 - 1 = 5, but Wisp deals 1 damage

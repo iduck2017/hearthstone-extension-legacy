@@ -6,7 +6,7 @@
  * 
  * 1. divine-spirit-cast: Player A uses Divine Spirit on Water Elemental, doubles its Health.
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel } from "hearthstone-core";
 import { DivineSpiritModel } from "./index";
 import { WaterElementalModel } from "../water-elemental";
 import { boot } from "../boot";
@@ -68,8 +68,8 @@ describe('divine-spirit', () => {
 
         // Player A uses Divine Spirit on Water Elemental
         const promise = cardC.play();
-        expect(SelectUtil.current?.options).toContain(cardD.child.role); // Water Elemental should be targetable
-        SelectUtil.set(cardD.child.role);
+        expect(playerA.child.controller.current?.options).toContain(cardD.child.role); // Water Elemental should be targetable
+        playerA.child.controller.set(cardD.child.role);
         await promise;
 
         // Water Elemental should have doubled Health

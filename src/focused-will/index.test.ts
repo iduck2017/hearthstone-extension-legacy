@@ -6,7 +6,7 @@
  * 1. stonetusk-boar-play: Player A plays Stonetusk Boar, checks it can attack, health 1
  * 2. focused-will-cast: Player A uses Focused Will on Boar, Boar cannot attack (charge silenced), health 4
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, SelectUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel } from "hearthstone-core";
 import { FocusedWillModel } from "./index";
 import { StonetuskBoarModel } from "../stonetusk-boar";
 import { boot } from "../boot";
@@ -64,7 +64,7 @@ describe('focused-will', () => {
 
         // Player A plays Stonetusk Boar
         const promise = cardC.play();
-        SelectUtil.set(0);
+        playerA.child.controller.set(0);
         await promise;
 
         expect(roleC.child.attack.state.current).toBe(1); // Stonetusk Boar: 1/1
@@ -77,8 +77,8 @@ describe('focused-will', () => {
     test('focused-will-cast', async () => {
         // Player A uses Focused Will on Boar
         const promise = cardD.play();
-        expect(SelectUtil.current?.options).toContain(roleC);
-        SelectUtil.set(roleC);
+        expect(playerA.child.controller.current?.options).toContain(roleC);
+        playerA.child.controller.set(roleC);
         await promise;
 
         // Boar should be silenced (cannot attack) and gain +3 Health

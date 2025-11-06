@@ -4,7 +4,7 @@
  * 1. stonetusk-boar-charge: Player A plays Stonetusk Boar and immediately attacks enemy hero
  */
 
-import { GameModel, BoardModel, HandModel, MageModel, PlayerModel, AnimeUtil, SelectUtil, ManaModel } from "hearthstone-core";
+import { GameModel, BoardModel, HandModel, MageModel, PlayerModel, AnimeUtil, ManaModel } from "hearthstone-core";
 import { StonetuskBoarModel } from "./index";
 import { WispModel } from "../wisp";
 import { boot } from "../boot";
@@ -60,8 +60,8 @@ describe('stonetusk-boar', () => {
         // Play Stonetusk Boar
         let promise = cardC.play();
         await AnimeUtil.sleep();
-        expect(SelectUtil.current?.options).toContain(0);
-        SelectUtil.set(0);
+        expect(game.child.playerA.child.controller.current?.options).toContain(0);
+        game.child.playerA.child.controller.set(0);
         await promise;
         expect(boardA.child.minions.length).toBe(1);
         expect(roleC.child.attack.state.current).toBe(1);
@@ -72,9 +72,9 @@ describe('stonetusk-boar', () => {
         // Boar directly attacks enemy hero
         promise = roleC.child.action.run();
         await AnimeUtil.sleep();
-        expect(SelectUtil.current?.options).toContain(roleB);
-        expect(SelectUtil.current?.options.length).toBe(2);
-        SelectUtil.set(roleB);
+        expect(game.child.playerA.child.controller.current?.options).toContain(roleB);
+        expect(game.child.playerA.child.controller.current?.options.length).toBe(2);
+        game.child.playerA.child.controller.set(roleB);
         await promise;
         
         expect(roleC.child.action.state.current).toBe(0);

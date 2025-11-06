@@ -7,7 +7,7 @@
  * 3. Player A plays woodoo to heal Berserker, Berserker loses attack power gain
  */
 
-import { GameModel, BoardModel, HandModel, MageModel, PlayerModel, AnimeUtil, SelectUtil, ManaModel } from "hearthstone-core";
+import { GameModel, BoardModel, HandModel, MageModel, PlayerModel, AnimeUtil, ManaModel } from "hearthstone-core";
 import { AmaniBerserkerModel } from ".";
 import { StonetuskBoarModel } from "../stonetusk-boar";
 import { VoodooDoctorModel } from "../voodoo-doctor";
@@ -63,8 +63,8 @@ describe('amani-berserker', () => {
         // Player A uses Berserker to attack wisp
         let promise = roleC.child.action.run();
         await AnimeUtil.sleep();
-        expect(SelectUtil.current?.options).toContain(roleD);
-        SelectUtil.set(roleD);
+        expect(game.child.playerA.child.controller.current?.options).toContain(roleD);
+        game.child.playerA.child.controller.set(roleD);
         await promise;
         
         // Verify wisp dies with health -1
@@ -85,8 +85,8 @@ describe('amani-berserker', () => {
         // Player B uses second wisp to attack Berserker
         let promise = roleF.child.action.run();
         await AnimeUtil.sleep();
-        expect(SelectUtil.current?.options).toContain(roleC);
-        SelectUtil.set(roleC); 
+        expect(game.child.playerB.child.controller.current?.options).toContain(roleC);
+        game.child.playerB.child.controller.set(roleC); 
         await promise;
         
         // Verify wisp dies with health -4
@@ -106,11 +106,11 @@ describe('amani-berserker', () => {
         // Player A plays woodoo to heal Berserker
         let promise = cardE.play();
         await AnimeUtil.sleep();
-        expect(SelectUtil.current?.options).toContain(0);
-        SelectUtil.set(0);
+        expect(game.child.playerA.child.controller.current?.options).toContain(0);
+        game.child.playerA.child.controller.set(0);
         await AnimeUtil.sleep();
-        expect(SelectUtil.current?.options).toContain(roleC);
-        SelectUtil.set(roleC);
+        expect(game.child.playerA.child.controller.current?.options).toContain(roleC);
+        game.child.playerA.child.controller.set(roleC);
         await promise;
         
         // Verify Berserker is healed and loses attack power gain

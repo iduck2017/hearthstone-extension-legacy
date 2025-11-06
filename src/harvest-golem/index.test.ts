@@ -7,7 +7,7 @@
  * 1. harvest-golem-play: Player A plays Harvest Golem.
  * 2. harvest-golem-death: Player B's Stranglethorn Tiger attacks Harvest Golem, triggering deathrattle.
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, AnimeUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, AnimeUtil } from "hearthstone-core";
 import { HarvestGolemModel } from "./index";
 import { DamagedGolemModel } from "../damaged-golem";
 import { StranglethornTigerModel } from "../stranglethorn-tiger";
@@ -81,7 +81,7 @@ describe('harvest-golem', () => {
 
         // Play Harvest Golem
         let promise = cardC.play();
-        SelectUtil.set(0); // Select position 0
+        playerA.child.controller.set(0); // Select position 0
         await promise;
 
         // Harvest Golem should be on board
@@ -103,9 +103,9 @@ describe('harvest-golem', () => {
 
         // Player B's Stranglethorn Tiger attacks Harvest Golem
         let promise = roleD.child.action.run();
-        expect(SelectUtil.current?.options).toContain(roleC); // Can target Harvest Golem
-        expect(SelectUtil.current?.options).toContain(roleA); // Cannot target Player A's hero (Stealth)
-        SelectUtil.set(roleC); // Target Harvest Golem
+        expect(playerB.child.controller.current?.options).toContain(roleC); // Can target Harvest Golem
+        expect(playerB.child.controller.current?.options).toContain(roleA); // Can target Player A's hero
+        playerB.child.controller.set(roleC); // Target Harvest Golem
         await promise;
 
         // Harvest Golem should die (2/3 vs 5/5)

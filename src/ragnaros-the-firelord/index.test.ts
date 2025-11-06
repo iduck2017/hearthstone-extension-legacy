@@ -7,7 +7,7 @@
  * 1. ragnaros-the-firelord-play: Player A plays Ragnaros the Firelord.
  * 2. turn-end: At the end of Player A's turn, Ragnaros deals 8 damage to Player B's hero.
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, AnimeUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, AnimeUtil } from "hearthstone-core";
 import { RagnarosTheFirelordModel } from "./index";
 import { boot } from "../boot";
 
@@ -79,7 +79,7 @@ describe('ragnaros-the-firelord', () => {
 
         // Play Ragnaros the Firelord
         let promise = cardC.play();
-        SelectUtil.set(0); // Select position 0
+        playerA.child.controller.set(0); // Select position 0
         await promise;
 
         // Ragnaros should be on board

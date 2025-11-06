@@ -9,7 +9,7 @@
  * 4. fireball-cast: Player A uses the generated Fireball on Wisp
  */
 
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel } from "hearthstone-core";
 import { ArchmageAntonidasModel } from "./index";
 import { FrostboltModel } from "../frostbolt";
 import { ArcaneIntellectModel } from "../arcane-intellect";
@@ -75,8 +75,8 @@ describe('archmage-antonidas', () => {
 
         // Player A uses Frostbolt on Wisp
         const promise = cardD.play();
-        expect(SelectUtil.current?.options).toContain(roleF);
-        SelectUtil.set(roleF);
+        expect(playerA.child.controller.current?.options).toContain(roleF);
+        playerA.child.controller.set(roleF);
         await promise;
 
         // Antonidas should add a Fireball to hand
@@ -99,8 +99,8 @@ describe('archmage-antonidas', () => {
         // Player A uses the generated Fireball on Wisp (which should be dead, so target hero)
         const roleB = playerB.child.hero.child.role;
         const promise = cardG.play();
-        expect(SelectUtil.current?.options).toContain(roleB);
-        SelectUtil.set(roleB);
+        expect(playerA.child.controller.current?.options).toContain(roleB);
+        playerA.child.controller.set(roleB);
         await promise;
 
         // Check Fireball was used

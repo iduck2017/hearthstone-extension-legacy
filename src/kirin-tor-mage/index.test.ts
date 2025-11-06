@@ -6,7 +6,7 @@
  * 3. second-secret-normal-cost: Player A plays second secret with normal cost
  */
 
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel } from "hearthstone-core";
 import { KirinTorMageModel } from "./index";
 import { IceBarrierModel } from "../ice-barrier";
 import { CounterspellModel } from "../counterspell";
@@ -70,7 +70,7 @@ describe('kirin-tor-mage', () => {
 
         // Play Kirin Tor Mage
         const promise = cardC.play();
-        SelectUtil.set(0);
+        playerA.child.controller.set(0);
         await promise;
 
         // Check deployment and mana consumption

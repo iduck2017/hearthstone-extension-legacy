@@ -6,7 +6,7 @@
  * 1. arcane-missiles-cast: Player A casts Arcane Missiles with Malygos on board, dealing 1+5=6 damage to Player B's hero.
  * 2. fireball-cast: Player A casts Fireball with Malygos on board, dealing 6+5=11 damage to Player B's hero.
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, AnimeUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, AnimeUtil } from "hearthstone-core";
 import { MalygosModel } from "./index";
 import { ArcaneMissilesModel } from "../arcane-missiles";
 import { FireballModel } from "../fireball";
@@ -95,9 +95,9 @@ describe('malygos', () => {
 
         // Player A casts Fireball with Malygos on board
         const promise = cardD.play();
-        expect(SelectUtil.current?.options).toContain(roleA); // Can target friendly hero
-        expect(SelectUtil.current?.options).toContain(roleB); // Can target enemy hero
-        SelectUtil.set(roleB); // Target Player B's hero
+        expect(playerA.child.controller.current?.options).toContain(roleA); // Can target friendly hero
+        expect(playerA.child.controller.current?.options).toContain(roleB); // Can target enemy hero
+        playerA.child.controller.set(roleB); // Target Player B's hero
         await promise;
 
         // Fireball should deal 6+5=11 damage (6 base + 5 from Malygos)

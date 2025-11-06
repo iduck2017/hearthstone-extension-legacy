@@ -7,7 +7,7 @@
  * 1. spellbreaker-play: Player A plays Spellbreaker, silencing Player B's Silvermoon Guardian.
  * 2. silvermoon-attack: Next turn, Player B's Silvermoon Guardian attacks Spellbreaker, both die.
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, AnimeUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, AnimeUtil } from "hearthstone-core";
 import { SpellbreakerModel } from "./index";
 import { SilvermoonGuardianModel } from "../silvermoon-guardian";
 import { boot } from "../boot";
@@ -81,14 +81,14 @@ describe('spellbreaker', () => {
 
         // Play Spellbreaker
         let promise = cardC.play();
-        SelectUtil.set(0); // Select position 0
+        playerA.child.controller.set(0); // Select position 0
         await AnimeUtil.sleep();
         
         // Choose target for battlecry
-        expect(SelectUtil.current?.options).toContain(roleD); // Can target Silvermoon Guardian
-        expect(SelectUtil.current?.options).not.toContain(roleA); // Cannot target heroes
-        expect(SelectUtil.current?.options).not.toContain(roleB); // Cannot target heroes
-        SelectUtil.set(roleD); // Target Silvermoon Guardian for silence
+        expect(playerA.child.controller.current?.options).toContain(roleD); // Can target Silvermoon Guardian
+        expect(playerA.child.controller.current?.options).not.toContain(roleA); // Cannot target heroes
+        expect(playerA.child.controller.current?.options).not.toContain(roleB); // Cannot target heroes
+        playerA.child.controller.set(roleD); // Target Silvermoon Guardian for silence
         await promise;
 
         // Spellbreaker should be on board
@@ -113,9 +113,9 @@ describe('spellbreaker', () => {
 
         // Player B's Silvermoon Guardian attacks Spellbreaker
         let promise = roleD.child.action.run();
-        expect(SelectUtil.current?.options).toContain(roleC); // Can target Spellbreaker
-        expect(SelectUtil.current?.options).toContain(roleA); // Can target Player A's hero
-        SelectUtil.set(roleC); // Target Spellbreaker
+        expect(playerB.child.controller.current?.options).toContain(roleC); // Can target Spellbreaker
+        expect(playerB.child.controller.current?.options).toContain(roleA); // Can target Player A's hero
+        playerB.child.controller.set(roleC); // Target Spellbreaker
         await promise;
 
         // Both minions should die (3/3 vs 4/3)

@@ -7,7 +7,7 @@
  * 1. flame-imp-play: Player A plays Flame Imp, dealing 3 damage to himself.
  * 2. flame-imp-attack: Player A's Flame Imp attacks Player B's hero.
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, AnimeUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, AnimeUtil } from "hearthstone-core";
 import { FlameImpModel } from "./index";
 import { boot } from "../boot";
 
@@ -77,7 +77,7 @@ describe('flame-imp', () => {
 
         // Play Flame Imp
         let promise = cardC.play();
-        SelectUtil.set(0); // Select position 0
+        playerA.child.controller.set(0); // Select position 0
         await promise;
 
         // Flame Imp should be on board

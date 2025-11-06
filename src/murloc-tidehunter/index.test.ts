@@ -4,7 +4,7 @@
  * 1. murloc-tidehunter-battlecry: Player A plays Murloc Tidehunter, summons a 1/1 Murloc Scout
  */
 
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, SelectUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel } from "hearthstone-core";
 import { MurlocTidehunterModel } from "./index";
 import { MurlocScoutModel } from "../murloc-scout";
 import { WispModel } from "../wisp";
@@ -55,8 +55,8 @@ describe('murloc-tidehunter', () => {
         
         // Play Murloc Tidehunter to the left of Wisp
         let promise = cardA.play();
-        expect(SelectUtil.current?.options).toContain(0);
-        SelectUtil.set(0);
+        expect(game.child.playerA.child.controller.current?.options).toContain(0);
+        game.child.playerA.child.controller.set(0);
         await promise;
 
         expect(boardA.child.minions.length).toBe(3);

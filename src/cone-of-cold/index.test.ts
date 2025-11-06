@@ -5,7 +5,7 @@
  * 2. turn-next: After turn passes, frozen Footman cannot attack
  */
 
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel } from "hearthstone-core";
 import { ConeOfColdModel } from "./index";
 import { WispModel } from "../wisp";
 import { GoldshireFootmanModel } from "../goldshire-footman";
@@ -79,11 +79,11 @@ describe('cone-of-cold', () => {
 
         // Player A uses Cone of Cold on Player B's Wisp (leftmost minion)
         const promise = cardC.play();
-        expect(SelectUtil.current?.options).toContain(roleD);
-        expect(SelectUtil.current?.options).toContain(roleE);
-        expect(SelectUtil.current?.options).not.toContain(roleB);
+        expect(playerA.child.controller.current?.options).toContain(roleD);
+        expect(playerA.child.controller.current?.options).toContain(roleE);
+        expect(playerA.child.controller.current?.options).not.toContain(roleB);
         // choose Wisp
-        SelectUtil.set(roleD);
+        playerA.child.controller.set(roleD);
         await promise;
 
         // Wisp should die (1 - 1 = 0), Footman should take 1 damage (2 - 1 = 1)

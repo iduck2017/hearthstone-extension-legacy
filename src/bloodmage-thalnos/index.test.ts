@@ -3,7 +3,7 @@
  * 1. Player A uses Bloodmage Thalnos to attack wisp, both die, Player A draws a card
  */
 
-import { GameModel, BoardModel, DeckModel, HandModel, MageModel, PlayerModel, AnimeUtil, SelectUtil, ManaModel } from "hearthstone-core";
+import { GameModel, BoardModel, DeckModel, HandModel, MageModel, PlayerModel, AnimeUtil, ManaModel } from "hearthstone-core";
 import { BloodmageThalnosModel } from ".";
 import { FireballModel } from "../fireball";
 import { WispModel } from "../wisp";
@@ -56,10 +56,10 @@ describe('bloodmage-thalnos', () => {
 
     test('fireball-cast', async () => {
         const promise = cardE.play();
-        expect(SelectUtil.current?.options).toContain(roleB);
-        expect(SelectUtil.current?.options).toContain(roleD);
-        expect(SelectUtil.current?.options).toContain(roleC);
-        SelectUtil.set(roleB);
+        expect(playerA.child.controller.current?.options).toContain(roleB);
+        expect(playerA.child.controller.current?.options).toContain(roleD);
+        expect(playerA.child.controller.current?.options).toContain(roleC);
+        playerA.child.controller.set(roleB);
         await promise;
         expect(roleB.child.health.state.current).toBe(23)
         expect(roleB.child.health.state.damage).toBe(7)
@@ -79,8 +79,8 @@ describe('bloodmage-thalnos', () => {
         // Player A uses Bloodmage Thalnos to attack wisp
         let promise = roleC.child.action.run();
         await AnimeUtil.sleep();
-        expect(SelectUtil.current?.options).toContain(roleD);
-        SelectUtil.set(roleD);
+        expect(playerA.child.controller.current?.options).toContain(roleD);
+        playerA.child.controller.set(roleD);
         await promise;
         
         // Verify both minions die

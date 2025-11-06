@@ -6,7 +6,7 @@
  * 
  * 1. razorfen-hunter-play: Player A plays Razorfen Hunter, summoning a Boar.
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, AnimeUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, AnimeUtil } from "hearthstone-core";
 import { RazorfenHunterModel } from "./index";
 import { BoarModel } from "../boar";
 import { boot } from "../boot";
@@ -76,7 +76,7 @@ describe('razorfen-hunter', () => {
 
         // Play Razorfen Hunter
         let promise = cardC.play();
-        SelectUtil.set(0); // Select position 0
+        playerA.child.controller.set(0); // Select position 0
         await promise;
 
         // Razorfen Hunter should be on board

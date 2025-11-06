@@ -5,7 +5,7 @@
  * 
  * 1. oasis-snapjaw-play: Player A plays Oasis Snapjaw.
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, AnimeUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, AnimeUtil } from "hearthstone-core";
 import { OasisSnapjawModel } from "./index";
 import { boot } from "../boot";
 
@@ -76,7 +76,7 @@ describe('oasis-snapjaw', () => {
 
         // Play Oasis Snapjaw
         let promise = cardC.play();
-        SelectUtil.set(0); // Select position 0
+        playerA.child.controller.set(0); // Select position 0
         await promise;
 
         // Oasis Snapjaw should be on board
@@ -96,9 +96,9 @@ describe('oasis-snapjaw', () => {
         expect(roleD.child.health.state.current).toBe(7);
 
         let promise = roleD.child.action.run();
-        expect(SelectUtil.current?.options).toContain(roleC);
-        expect(SelectUtil.current?.options).toContain(roleA);
-        SelectUtil.set(roleC);
+        expect(playerB.child.controller.current?.options).toContain(roleC);
+        expect(playerB.child.controller.current?.options).toContain(roleA);
+        playerB.child.controller.set(roleC);
         await promise;
 
         expect(roleC.child.health.state.current).toBe(5); // Oasis Snapjaw: 2/7

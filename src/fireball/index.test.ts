@@ -5,7 +5,7 @@
  * 2. fireball-minion: Player A plays Fireball and deals 6 damage to a minion
  */
 
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, SelectUtil, ManaModel } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel } from "hearthstone-core";
 import { FireballModel } from "./index";
 import { WispModel } from "../wisp";
 import { boot } from "../boot";
@@ -58,10 +58,10 @@ describe('fireball', () => {
         
         // Play Fireball targeting enemy hero
         let promise = cardD.play();
-        expect(SelectUtil.current?.options).toContain(roleA);
-        expect(SelectUtil.current?.options).toContain(roleB);
-        expect(SelectUtil.current?.options).toContain(roleC);
-        SelectUtil.set(roleC);
+        expect(game.child.playerA.child.controller.current?.options).toContain(roleA);
+        expect(game.child.playerA.child.controller.current?.options).toContain(roleB);
+        expect(game.child.playerA.child.controller.current?.options).toContain(roleC);
+        game.child.playerA.child.controller.set(roleC);
         await promise;
         
         // Hero should take 6 damage

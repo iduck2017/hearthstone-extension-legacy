@@ -7,7 +7,7 @@
  * 1. violet-teacher-play: Player A plays Violet Teacher.
  * 2. spell-cast: Player A casts Fireball, summoning a Violet Apprentice.
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, AnimeUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, AnimeUtil } from "hearthstone-core";
 import { VioletTeacherModel } from "./index";
 import { VioletApprenticeModel } from "../violet-apprentice";
 import { FireballModel } from "../fireball";
@@ -80,9 +80,9 @@ describe('violet-teacher', () => {
 
         // Cast Frostbolt
         let promise = cardE.play();
-        expect(SelectUtil.current?.options).toContain(roleA); // Can target friendly hero
-        expect(SelectUtil.current?.options).toContain(roleB); // Can target enemy hero
-        SelectUtil.set(roleB); // Target Player B's hero
+        expect(playerA.child.controller.current?.options).toContain(roleA); // Can target friendly hero
+        expect(playerA.child.controller.current?.options).toContain(roleB); // Can target enemy hero
+        playerA.child.controller.set(roleB); // Target Player B's hero
         await promise;
 
         // No minions should be summoned (Violet Teacher not on board yet)
@@ -101,7 +101,7 @@ describe('violet-teacher', () => {
 
         // Play Violet Teacher
         let promise = cardC.play();
-        SelectUtil.set(0); // Select position 0
+        playerA.child.controller.set(0); // Select position 0
         await promise;
 
         // Violet Teacher should be on board
@@ -118,9 +118,9 @@ describe('violet-teacher', () => {
 
         // Cast Fireball
         let promise = cardD.play();
-        expect(SelectUtil.current?.options).toContain(roleA); // Can target friendly hero
-        expect(SelectUtil.current?.options).toContain(roleB); // Can target enemy hero
-        SelectUtil.set(roleB); // Target Player B's hero
+        expect(playerA.child.controller.current?.options).toContain(roleA); // Can target friendly hero
+        expect(playerA.child.controller.current?.options).toContain(roleB); // Can target enemy hero
+        playerA.child.controller.set(roleB); // Target Player B's hero
         await promise;
 
         // Violet Apprentice should be summoned

@@ -7,7 +7,7 @@
  * 4. frostbolt-cost: Player B casts Frostbolt with normal cost (2)
  */
 
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel } from "hearthstone-core";
 import { SorcerersApprenticeModel } from "./index";
 import { FrostboltModel } from "../frostbolt";
 import { IceLanceModel } from "../ice-lance";
@@ -79,7 +79,7 @@ describe('sorcerers-apprentice', () => {
 
         // Deploy Sorcerer's Apprentice
         const promise = cardC.play();
-        SelectUtil.set(0);
+        playerA.child.controller.set(0);
         await promise;
 
         expect(cardD.child.cost.state.current).toBe(1);
@@ -100,7 +100,7 @@ describe('sorcerers-apprentice', () => {
         expect(cardD.child.cost.state.current).toBe(1);
         
         const promise = cardD.play();
-        SelectUtil.set(roleB);
+        playerA.child.controller.set(roleB);
         await promise;
         
         expect(playerA.child.mana.state.current).toBe(7); // 8 - 1 = 7
@@ -112,7 +112,7 @@ describe('sorcerers-apprentice', () => {
         expect(cardE.child.cost.state.current).toBe(1);
         
         const promise = cardE.play();
-        SelectUtil.set(roleB);
+        playerA.child.controller.set(roleB);
         await promise;
         
         expect(playerA.child.mana.state.current).toBe(6); // 7 - 1 = 6
@@ -126,7 +126,7 @@ describe('sorcerers-apprentice', () => {
         expect(cardF.child.cost.state.current).toBe(2);
         
         const promise = cardF.play();
-        SelectUtil.set(roleA);
+        playerB.child.controller.set(roleA);
         await promise;
         
         expect(playerB.child.mana.state.current).toBe(8); // 10 - 2 = 8

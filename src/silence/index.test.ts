@@ -7,7 +7,7 @@
  * 2. silence-cast: Player A uses Silence on Mana Wyrm, Mana Wyrm returns to 1/3 and is no longer frozen
  * 3. mana-wyrm-attack: Mana Wyrm attacks Player B, Player B loses 1 health
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, SelectUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel } from "hearthstone-core";
 import { SilenceModel } from "./index";
 import { ManaWyrmModel } from "../mana-wyrm";
 import { IceLanceModel } from "../ice-lance";
@@ -67,8 +67,8 @@ describe('silence', () => {
 
         // Player A uses Ice Lance on Mana Wyrm
         const promise = cardD.play();
-        expect(SelectUtil.current?.options).toContain(roleC);
-        SelectUtil.set(roleC);
+        expect(playerA.child.controller.current?.options).toContain(roleC);
+        playerA.child.controller.set(roleC);
         await promise;
 
         // Mana Wyrm should gain +1 attack and be frozen
@@ -88,8 +88,8 @@ describe('silence', () => {
 
         // Player A uses Silence on Mana Wyrm
         const promise = cardE.play();
-        expect(SelectUtil.current?.options).toContain(roleC);
-        SelectUtil.set(roleC);
+        expect(playerA.child.controller.current?.options).toContain(roleC);
+        playerA.child.controller.set(roleC);
         await promise;
 
         // Mana Wyrm should return to original stats and be unfrozen
@@ -108,8 +108,8 @@ describe('silence', () => {
 
         // Mana Wyrm attacks Player B hero
         const promise = roleC.child.action.run();
-        expect(SelectUtil.current?.options).toContain(roleB);
-        SelectUtil.set(roleB);
+        expect(playerA.child.controller.current?.options).toContain(roleB);
+        playerA.child.controller.set(roleB);
         await promise;
 
         // Player B should take 1 damage

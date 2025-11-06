@@ -7,7 +7,7 @@
  * 1. lord-arena-play: Player A plays Lord of the Arena.
  * 2. wisp-attack: Player B's Wisp cannot attack Player A's hero due to Lord of the Arena's Taunt.
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, AnimeUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, AnimeUtil } from "hearthstone-core";
 import { LordOfTheArenaModel } from "./index";
 import { WispModel } from "../wisp";
 import { boot } from "../boot";
@@ -77,7 +77,7 @@ describe('lord-of-the-arena', () => {
 
         // Play Lord of the Arena
         let promise = cardC.play();
-        SelectUtil.set(0); // Select position 0
+        playerA.child.controller.set(0); // Select position 0
         await promise;
 
         // Lord of the Arena should be on board
@@ -99,9 +99,9 @@ describe('lord-of-the-arena', () => {
 
         // Try to attack with Wisp
         const promise = roleD.child.action.run();
-        expect(SelectUtil.current?.options).not.toContain(roleA); // Can target enemy hero
-        expect(SelectUtil.current?.options).toContain(roleC); // Must target Lord of the Arena due to Taunt
-        SelectUtil.set(roleC); // Target Lord of the Arena
+        expect(playerB.child.controller.current?.options).not.toContain(roleA); // Cannot target enemy hero (Taunt blocks)
+        expect(playerB.child.controller.current?.options).toContain(roleC); // Must target Lord of the Arena due to Taunt
+        playerB.child.controller.set(roleC); // Target Lord of the Arena
         await promise;
 
         // Lord of the Arena should take 1 damage

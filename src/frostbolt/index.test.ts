@@ -4,7 +4,7 @@
  * 1. frostbolt-cast: Player A plays Frostbolt on target, deals 3 damage and freezes it
  */
 
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, SelectUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel } from "hearthstone-core";
 import { FrostboltModel } from "./index";
 import { WispModel } from "../wisp";
 import { boot } from "../boot";
@@ -64,10 +64,10 @@ describe('frostbolt', () => {
 
         // Play Frostbolt targeting enemy minion
         let promise = cardD.play();
-        expect(SelectUtil.current?.options).toContain(roleA);
-        expect(SelectUtil.current?.options).toContain(roleB);
-        expect(SelectUtil.current?.options).toContain(roleC);
-        SelectUtil.set(roleC);
+        expect(playerA.child.controller.current?.options).toContain(roleA);
+        expect(playerA.child.controller.current?.options).toContain(roleB);
+        expect(playerA.child.controller.current?.options).toContain(roleC);
+        playerA.child.controller.set(roleC);
         await promise;
         
         // Target should take 3 damage and be frozen

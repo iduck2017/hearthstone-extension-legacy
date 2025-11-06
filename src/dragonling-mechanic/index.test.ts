@@ -6,7 +6,7 @@
  * 
  * 1. dragonling-mechanic-play: Player A plays Dragonling Mechanic, summoning a Mechanical Dragonling.
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, AnimeUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, AnimeUtil } from "hearthstone-core";
 import { DragonlingMechanicModel } from "./index";
 import { MechanicalDragonlingModel } from "../mechanical-dragonling";
 import { boot } from "../boot";
@@ -76,7 +76,7 @@ describe('dragonling-mechanic', () => {
 
         // Play Dragonling Mechanic
         let promise = cardC.play();
-        SelectUtil.set(0); // Select position 0
+        playerA.child.controller.set(0); // Select position 0
         await promise;
 
         // Dragonling Mechanic should be on board

@@ -4,7 +4,7 @@
  * 1. grimscale-oracle-buff: Player A plays Grimscale Oracle, Player A's Murloc gains +1 Attack
  * 2. murloc-raider-attack: Player B's Murloc attacks Player A's Oracle, both die
  */
-import { GameModel, PlayerModel, HandModel, BoardModel, MageModel, AnimeUtil, SelectUtil, ManaModel } from "hearthstone-core";
+import { GameModel, PlayerModel, HandModel, BoardModel, MageModel, AnimeUtil, ManaModel } from "hearthstone-core";
 import { GrimscaleOracleModel } from ".";
 import { MurlocRaiderModel } from "../murloc-raider";
 import { WispModel } from "../wisp";
@@ -64,9 +64,9 @@ describe('grimscale-oracle', () => {
     test('grimscale-oracle-buff', async () => {
         const promise = cardC.play();
         await AnimeUtil.sleep();
-        expect(SelectUtil.current).toBeDefined();
-        expect(SelectUtil.current?.options.length).toBe(3);
-        SelectUtil.set(0);
+        expect(game.child.playerA.child.controller.current).toBeDefined();
+        expect(game.child.playerA.child.controller.current?.options.length).toBe(3);
+        game.child.playerA.child.controller.set(0);
         await promise;
 
         expect(boardA.child.minions.length).toBe(3);
@@ -88,13 +88,13 @@ describe('grimscale-oracle', () => {
         // Murloc Raider attacks Grimscale Oracle
         const promise = roleF.child.action.run();
         await AnimeUtil.sleep();
-        expect(SelectUtil.current).toBeDefined();
-        expect(SelectUtil.current?.options.length).toBe(4);
-        expect(SelectUtil.current?.options).toContain(roleE);
-        expect(SelectUtil.current?.options).toContain(roleC);
-        expect(SelectUtil.current?.options).toContain(roleD);
-        expect(SelectUtil.current?.options).toContain(game.child.playerA.child.hero.child.role); 
-        SelectUtil.set(roleC);
+        expect(game.child.playerB.child.controller.current).toBeDefined();
+        expect(game.child.playerB.child.controller.current?.options.length).toBe(4);
+        expect(game.child.playerB.child.controller.current?.options).toContain(roleE);
+        expect(game.child.playerB.child.controller.current?.options).toContain(roleC);
+        expect(game.child.playerB.child.controller.current?.options).toContain(roleD);
+        expect(game.child.playerB.child.controller.current?.options).toContain(game.child.playerA.child.hero.child.role); 
+        game.child.playerB.child.controller.set(roleC);
         await promise;
 
         expect(roleF.child.action.state.current).toBe(0); // Murloc Raider

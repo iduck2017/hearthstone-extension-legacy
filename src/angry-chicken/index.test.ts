@@ -3,7 +3,7 @@
  * 1. angry-chicken-attack: Player A's chicken attacks Player B's chicken, both die and A's chicken gains +5 attack from enrage
  */
 
-import { GameModel, BoardModel, PlayerModel, MageModel, SelectUtil, AnimeUtil, ManaModel, HandModel, DeckModel } from "hearthstone-core";
+import { GameModel, BoardModel, PlayerModel, MageModel, AnimeUtil, ManaModel, HandModel, DeckModel } from "hearthstone-core";
 import { AngryChickenModel } from ".";
 import { PowerWordShieldModel } from "../power-word-shield";
 import { WispModel } from "../wisp";
@@ -57,8 +57,8 @@ describe('angry-chicken', () => {
     test('power-word-shield-cast', async () => {
         // Cast Power Word: Shield on Angry Chicken to give it +2 Health
         let promise = cardE.play();
-        expect(SelectUtil.current?.options).toContain(roleC);
-        SelectUtil.set(roleC);
+        expect(game.child.playerA.child.controller.current?.options).toContain(roleC);
+        game.child.playerA.child.controller.set(roleC);
         await promise;
 
         // Check that Power Word: Shield was applied
@@ -76,9 +76,9 @@ describe('angry-chicken', () => {
 
         const promise = roleC.child.action.run();
         await AnimeUtil.sleep();
-        expect(SelectUtil.current).toBeDefined();
-        expect(SelectUtil.current?.options).toContain(roleD);
-        SelectUtil.set(roleD);
+        expect(game.child.playerA.child.controller.current).toBeDefined();
+        expect(game.child.playerA.child.controller.current?.options).toContain(roleD);
+        game.child.playerA.child.controller.set(roleD);
         await promise;
         // After attack: A's chicken (3 health) vs B's chicken (1 health)
         // Both take 1 damage: A's chicken becomes 2 health, B's chicken becomes 0 health

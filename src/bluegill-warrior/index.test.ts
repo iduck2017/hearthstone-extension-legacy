@@ -7,7 +7,7 @@
  * 1. bluegill-warrior-play: Player A plays Bluegill Warrior.
  * 2. bluegill-warrior-charge: Player A's Bluegill Warrior immediately attacks Player B's hero.
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, AnimeUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, AnimeUtil } from "hearthstone-core";
 import { BluegillWarriorModel } from "./index";
 import { WispModel } from "../wisp";
 import { boot } from "../boot";
@@ -77,7 +77,7 @@ describe('bluegill-warrior', () => {
 
         // Play Bluegill Warrior
         let promise = cardC.play();
-        SelectUtil.set(0); // Select position 0
+        playerA.child.controller.set(0); // Select position 0
         await promise;
 
         // Bluegill Warrior should be on board
@@ -100,9 +100,9 @@ describe('bluegill-warrior', () => {
 
         // Bluegill Warrior attacks Player B's hero
         const promise = roleC.child.action.run();
-        expect(SelectUtil.current?.options).toContain(roleB); // Can target enemy hero
-        expect(SelectUtil.current?.options).toContain(roleD); // Can target enemy minion
-        SelectUtil.set(roleB); // Target Player B's hero
+        expect(playerA.child.controller.current?.options).toContain(roleB); // Can target enemy hero
+        expect(playerA.child.controller.current?.options).toContain(roleD); // Can target enemy minion
+        playerA.child.controller.set(roleB); // Target Player B's hero
         await promise;
 
         // Player B's hero should take 2 damage

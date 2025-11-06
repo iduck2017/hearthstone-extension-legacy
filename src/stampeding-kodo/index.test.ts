@@ -6,7 +6,7 @@
  * 
  * 1. stampeding-kodo-play: Player A plays Stampeding Kodo, destroying the Wisp.
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, AnimeUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, AnimeUtil } from "hearthstone-core";
 import { StampedingKodoModel } from "./index";
 import { WispModel } from "../wisp";
 import { ChillwindYetiModel } from "../chillwind-yeti";
@@ -87,7 +87,7 @@ describe('stampeding-kodo', () => {
 
         // Play Stampeding Kodo
         let promise = cardC.play();
-        SelectUtil.set(0); // Select position 0
+        playerA.child.controller.set(0); // Select position 0
         await promise;
 
         // Stampeding Kodo should be on board

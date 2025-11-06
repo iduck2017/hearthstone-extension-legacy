@@ -7,7 +7,7 @@
  * 1. magma-rager-play: Player A plays Magma Rager.
  * 2. magma-rager-attack: Player A's Magma Rager attacks Player B's hero.
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, AnimeUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, AnimeUtil } from "hearthstone-core";
 import { MagmaRagerModel } from "./index";
 import { boot } from "../boot";
 
@@ -76,7 +76,7 @@ describe('magma-rager', () => {
 
         // Play Magma Rager
         let promise = cardC.play();
-        SelectUtil.set(0); // Select position 0
+        playerA.child.controller.set(0); // Select position 0
         await promise;
 
         // Magma Rager should be on board

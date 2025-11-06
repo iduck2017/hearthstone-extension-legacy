@@ -7,7 +7,7 @@
  * 1. wolfrider-play: Player A plays Wolfrider.
  * 2. wolfrider-attack: Player A's Wolfrider attacks Player B's Wisp immediately (Charge).
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, AnimeUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, AnimeUtil } from "hearthstone-core";
 import { WolfriderModel } from "./index";
 import { WispModel } from "../wisp";
 import { boot } from "../boot";
@@ -80,7 +80,7 @@ describe('wolfrider', () => {
 
         // Play Wolfrider
         let promise = cardC.play();
-        SelectUtil.set(0); // Select position 0
+        playerA.child.controller.set(0); // Select position 0
         await promise;
 
         // Wolfrider should be on board
@@ -101,9 +101,9 @@ describe('wolfrider', () => {
 
         // Player A's Wolfrider attacks Player B's Wisp immediately (Charge allows immediate attack)
         let promise = roleC.child.action.run();
-        expect(SelectUtil.current?.options).toContain(roleD); // Can target Wisp
-        expect(SelectUtil.current?.options).toContain(roleB); // Can target Player B's hero
-        SelectUtil.set(roleD); // Target Wisp
+        expect(playerA.child.controller.current?.options).toContain(roleD); // Can target Wisp
+        expect(playerA.child.controller.current?.options).toContain(roleB); // Can target Player B's hero
+        playerA.child.controller.set(roleD); // Target Wisp
         await promise;
 
         // Wisp should die (1/1 vs 3/1)

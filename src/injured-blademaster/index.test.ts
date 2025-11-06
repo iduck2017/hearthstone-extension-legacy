@@ -7,7 +7,7 @@
  * 1. injured-blademaster-play: Player A plays Injured Blademaster, dealing 4 damage to himself.
  * 2. earthen-ring-farseer-heal: Player A plays Earthen Ring Farseer to heal Injured Blademaster.
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, AnimeUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, AnimeUtil } from "hearthstone-core";
 import { InjuredBlademasterModel } from "./index";
 import { EarthenRingFarseerModel } from "../earthen-ring-farseer";
 import { boot } from "../boot";
@@ -75,7 +75,7 @@ describe('injured-blademaster', () => {
 
         // Play Injured Blademaster
         let promise = cardC.play();
-        SelectUtil.set(0); // Select position 0
+        playerA.child.controller.set(0); // Select position 0
         await promise;
 
         // Injured Blademaster should be on board
@@ -99,13 +99,13 @@ describe('injured-blademaster', () => {
 
         // Play Earthen Ring Farseer
         let promise = cardD.play();
-        SelectUtil.set(0); // Select position 0
+        playerA.child.controller.set(0); // Select position 0
         await AnimeUtil.sleep();
         // Choose target for battlecry (heal Injured Blademaster)
-        expect(SelectUtil.current?.options).toContain(roleC); // Can target Injured Blademaster
-        expect(SelectUtil.current?.options).toContain(roleA); // Can target Player A's hero
-        expect(SelectUtil.current?.options).toContain(roleB); // Can target Player B's hero
-        SelectUtil.set(roleC); // Target Injured Blademaster
+        expect(playerA.child.controller.current?.options).toContain(roleC); // Can target Injured Blademaster
+        expect(playerA.child.controller.current?.options).toContain(roleA); // Can target Player A's hero
+        expect(playerA.child.controller.current?.options).toContain(roleB); // Can target Player B's hero
+        playerA.child.controller.set(roleC); // Target Injured Blademaster
         await promise;
 
         // Earthen Ring Farseer should be on board

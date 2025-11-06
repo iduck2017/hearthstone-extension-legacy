@@ -7,7 +7,7 @@
  * 1. silver-hand-knight-play: Player A plays Silver Hand Knight, summoning a Squire.
  * 2. squire-attack: Player A's Squire attacks Player B's hero.
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, AnimeUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, AnimeUtil } from "hearthstone-core";
 import { SilverHandKnightModel } from "./index";
 import { SquireModel } from "../squire";
 import { boot } from "../boot";
@@ -77,7 +77,7 @@ describe('silver-hand-knight', () => {
 
         // Play Silver Hand Knight
         let promise = cardC.play();
-        SelectUtil.set(0); // Select position 0
+        playerA.child.controller.set(0); // Select position 0
         await promise;
 
         // Silver Hand Knight should be on board

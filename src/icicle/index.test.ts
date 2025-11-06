@@ -5,7 +5,7 @@
  * 2. icicle-cast: Player A uses Icicle on frozen Water Elemental, deals damage and draws a card
  */
 
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel } from "hearthstone-core";
 import { IcicleModel } from "./index";
 import { WaterElementalModel } from "../water-elemental";
 import { IceLanceModel } from "../ice-lance";
@@ -71,8 +71,8 @@ describe('icicle', () => {
 
         // Step 1: Player A uses Ice Lance on own Water Elemental to freeze it
         let promise = cardC.play();
-        expect(SelectUtil.current?.options).toContain(roleE);
-        SelectUtil.set(roleE);
+        expect(playerA.child.controller.current?.options).toContain(roleE);
+        playerA.child.controller.set(roleE);
         await promise;
 
         // Water Elemental should be frozen and cannot attack
@@ -87,8 +87,8 @@ describe('icicle', () => {
 
         // Step 2: Player A uses Icicle on frozen Water Elemental
         const promise = cardD.play();
-        expect(SelectUtil.current?.options).toContain(roleE);
-        SelectUtil.set(roleE);
+        expect(playerA.child.controller.current?.options).toContain(roleE);
+        playerA.child.controller.set(roleE);
         await promise;
 
         // Water Elemental should take 2 damage and Player A should draw a card (because it was frozen)

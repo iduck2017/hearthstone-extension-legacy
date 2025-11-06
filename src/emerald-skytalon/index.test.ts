@@ -7,7 +7,7 @@
  * 4. wisp-attack: Player B plays a wisp, it can attack immediately
  */
 
-import { GameModel, PlayerModel, MageModel, HandModel, BoardModel, SelectUtil, AnimeUtil, ManaModel } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, HandModel, BoardModel, AnimeUtil, ManaModel } from "hearthstone-core";
 import { EmeraldSkytalonModel } from "./index";
 import { WispModel } from "../wisp";
 import { boot } from "../boot";
@@ -57,8 +57,8 @@ describe('emerald-skytalon', () => {
     test('emerald-skytalon-rush', async () => {
         let promise = cardC.play()
         await AnimeUtil.sleep();
-        expect(SelectUtil.current?.options).toContain(0);
-        SelectUtil.set(0);
+        expect(playerA.child.controller.current?.options).toContain(0);
+        playerA.child.controller.set(0);
         await promise;
 
         expect(boardA.child.minions.length).toBe(1);
@@ -71,9 +71,9 @@ describe('emerald-skytalon', () => {
         promise = roleC.child.action.run()
         await AnimeUtil.sleep();
 
-        expect(SelectUtil.current?.options).toContain(roleE);
-        expect(SelectUtil.current?.options).not.toContain(roleB);
-        SelectUtil.set(undefined);
+        expect(playerA.child.controller.current?.options).toContain(roleE);
+        expect(playerA.child.controller.current?.options).not.toContain(roleB);
+        playerA.child.controller.set(undefined);
         await promise;
         expect(roleC.child.action.state.current).toBe(1);        
     })
@@ -82,8 +82,8 @@ describe('emerald-skytalon', () => {
     test('wisp-play', async () => {
         let promise = cardD.play();
         await AnimeUtil.sleep();
-        expect(SelectUtil.current?.options).toContain(1);
-        SelectUtil.set(1);
+        expect(playerA.child.controller.current?.options).toContain(1);
+        playerA.child.controller.set(1);
         await promise;
 
         expect(boardA.child.minions.length).toBe(2);
@@ -94,7 +94,7 @@ describe('emerald-skytalon', () => {
         // Wisp can not attack immediately
         promise = roleD.child.action.run();
         await AnimeUtil.sleep();
-        expect(SelectUtil.current).toBeUndefined();
+        expect(playerA.child.controller.current).toBeUndefined();
     })
 
 
@@ -117,9 +117,9 @@ describe('emerald-skytalon', () => {
 
         let promise = roleC.child.action.run();
         await AnimeUtil.sleep();
-        expect(SelectUtil.current?.options).toContain(roleE);
-        expect(SelectUtil.current?.options).toContain(roleB);
-        SelectUtil.set(roleB);
+        expect(playerA.child.controller.current?.options).toContain(roleE);
+        expect(playerA.child.controller.current?.options).toContain(roleB);
+        playerA.child.controller.set(roleB);
         await promise;
 
         expect(roleB.child.health.state.current).toBe(28);
@@ -130,9 +130,9 @@ describe('emerald-skytalon', () => {
         // Wisp attack
         const promise = roleD.child.action.run();
         await AnimeUtil.sleep();
-        expect(SelectUtil.current?.options).toContain(roleE);
-        expect(SelectUtil.current?.options).toContain(roleB);
-        SelectUtil.set(roleB);
+        expect(playerA.child.controller.current?.options).toContain(roleE);
+        expect(playerA.child.controller.current?.options).toContain(roleB);
+        playerA.child.controller.set(roleB);
         await promise;
 
         expect(roleB.child.health.state.current).toBe(27);

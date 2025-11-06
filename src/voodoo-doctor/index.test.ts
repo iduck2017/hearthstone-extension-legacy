@@ -5,7 +5,7 @@
  * 2. voodoo-doctor-battlecry: Player A plays Voodoo Doctor and heals Player B's hero
  */
 
-import { GameModel, BoardModel, HandModel, MageModel, PlayerModel, AnimeUtil, SelectUtil, ManaModel } from "hearthstone-core";
+import { GameModel, BoardModel, HandModel, MageModel, PlayerModel, AnimeUtil, ManaModel } from "hearthstone-core";
 
 import { boot } from "../boot";
 import { WispModel } from "../wisp";
@@ -55,10 +55,10 @@ describe('voodoo-doctor', () => {
         // Wisp attacks Shieldbearer
         let promise = roleC.child.action.run();
         await AnimeUtil.sleep();
-        expect(SelectUtil.current).toBeDefined();
-        expect(SelectUtil.current?.options).toContain(roleB);
-        expect(SelectUtil.current?.options.length).toBe(1);
-        SelectUtil.set(roleB);
+        expect(playerA.child.controller.current).toBeDefined();
+        expect(playerA.child.controller.current?.options).toContain(roleB);
+        expect(playerA.child.controller.current?.options.length).toBe(1);
+        playerA.child.controller.set(roleB);
         await promise;
         
         expect(roleB.child.health.state.current).toBe(29);
@@ -69,15 +69,15 @@ describe('voodoo-doctor', () => {
         // Play Voodoo Doctor
         let promise = cardD.play();
         await AnimeUtil.sleep();
-        expect(SelectUtil.current?.options).toContain(0);
-        SelectUtil.set(0);
+        expect(playerA.child.controller.current?.options).toContain(0);
+        playerA.child.controller.set(0);
         await AnimeUtil.sleep();
         
-        expect(SelectUtil.current?.options).toContain(roleA);
-        expect(SelectUtil.current?.options).toContain(roleB);
-        expect(SelectUtil.current?.options).toContain(roleC);
-        expect(SelectUtil.current?.options.length).toBe(3);
-        SelectUtil.set(roleB);
+        expect(playerA.child.controller.current?.options).toContain(roleA);
+        expect(playerA.child.controller.current?.options).toContain(roleB);
+        expect(playerA.child.controller.current?.options).toContain(roleC);
+        expect(playerA.child.controller.current?.options.length).toBe(3);
+        playerA.child.controller.set(roleB);
         await promise;
         
         expect(roleB.child.health.state.current).toBe(30);

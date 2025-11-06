@@ -11,7 +11,7 @@
  * 6. arcane-missiles: Player B plays Arcane Missiles, deals 3+2=5 damage, Player A health becomes 25
  */
 
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel } from "hearthstone-core";
 import { AegwynnTheGuardianModel } from "./index";
 import { FireballModel } from "../fireball";
 import { ArcaneIntellectModel } from "../arcane-intellect";
@@ -93,8 +93,8 @@ describe('aegwynn-the-guardian', () => {
 
         // Player A uses Fireball on Aegwynn
         const promise = cardC.play();
-        expect(SelectUtil.current?.options).toContain(roleD);
-        SelectUtil.set(roleD);
+        expect(playerA.child.controller.current?.options).toContain(roleD);
+        playerA.child.controller.set(roleD);
         await promise;
 
         // Aegwynn should die (5 - 6 = -1)
@@ -114,7 +114,7 @@ describe('aegwynn-the-guardian', () => {
 
         // Play Wisp
         const promise = cardH.play();
-        SelectUtil.set(0); // Select position 0
+        playerB.child.controller.set(0); // Select position 0
         await promise;
 
         // Check Wisp is played
@@ -131,8 +131,8 @@ describe('aegwynn-the-guardian', () => {
 
         // Player B uses Frostbolt on Wisp (with +2 spell damage from Aegwynn's deathrattle)
         const promise = cardE.play();
-        expect(SelectUtil.current?.options).toContain(roleH);
-        SelectUtil.set(roleH);
+        expect(playerB.child.controller.current?.options).toContain(roleH);
+        playerB.child.controller.set(roleH);
         await promise;
 
         // Wisp should die (1 - 5 = -4) due to 3 + 2 = 5 damage
@@ -166,12 +166,12 @@ describe('aegwynn-the-guardian', () => {
 
         // Player B plays Stonetusk Boar
         let promise = cardI.play();
-        SelectUtil.set(0); // Select position 0
+        playerB.child.controller.set(0); // Select position 0
         await promise;
 
         // Player B plays Mana Wyrm
         promise = cardJ.play();
-        SelectUtil.set(0); // Select position 0
+        playerB.child.controller.set(0); // Select position 0
         await promise;
 
         // Check both minions are played

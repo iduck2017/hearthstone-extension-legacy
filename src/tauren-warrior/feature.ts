@@ -17,7 +17,7 @@ export class TaurenWarriorFeatureModel extends RoleFeatureModel<
 > {
     public get route() {
         const result = super.route;
-        const role: RoleModel | undefined = result.list.find(item => item instanceof RoleModel);
+        const role: RoleModel | undefined = result.items.find(item => item instanceof RoleModel);
         return {
             ...result,
             role

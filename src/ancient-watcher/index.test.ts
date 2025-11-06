@@ -4,7 +4,7 @@
  * 1. ancient-watcher-cannot-attack: Player A plays Ancient Watcher, it cannot attack
  * 2. ancient-watcher-cannot-attack-2: Ancient Watcher still cannot attack after turn changes
  */
-import { GameModel, BoardModel, HandModel, MageModel, PlayerModel, AnimeUtil, SelectUtil, ManaModel } from "hearthstone-core";
+import { GameModel, BoardModel, HandModel, MageModel, PlayerModel, AnimeUtil, ManaModel } from "hearthstone-core";
 import { AncientWatcherModel } from ".";
 import { WispModel } from "../wisp";
 import { boot } from "../boot";
@@ -47,8 +47,8 @@ describe('ancient-watcher', () => {
         // Player A plays Watcher
         let promise = cardA.play();
         await AnimeUtil.sleep();
-        expect(SelectUtil.current?.options).toContain(0);
-        SelectUtil.set(0);
+        expect(game.child.playerA.child.controller.current?.options).toContain(0);
+        game.child.playerA.child.controller.set(0);
         await promise;
         
         expect(boardA.child.minions.length).toBe(1);
@@ -63,7 +63,7 @@ describe('ancient-watcher', () => {
         // Try to attack and verify no options are available
         promise = roleA.child.action.run();
         await AnimeUtil.sleep();
-        expect(SelectUtil.current).toBeUndefined();
+        expect(game.child.playerA.child.controller.current).toBeUndefined();
         await promise;
     });
 

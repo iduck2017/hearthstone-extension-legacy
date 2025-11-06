@@ -7,7 +7,7 @@
  * 1. ogre-magi-play: Player A plays Ogre Magi.
  * 2. fireball-cast: Player A casts Fireball with Ogre Magi on board, dealing 6+1=7 damage to Player B's hero.
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, AnimeUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, AnimeUtil } from "hearthstone-core";
 import { OgreMagiModel } from "./index";
 import { FireballModel } from "../fireball";
 import { boot } from "../boot";
@@ -78,7 +78,7 @@ describe('ogre-magi', () => {
 
         // Play Ogre Magi
         let promise = cardC.play();
-        SelectUtil.set(0); // Select position 0
+        playerA.child.controller.set(0); // Select position 0
         await promise;
 
         // Ogre Magi should be on board
@@ -95,9 +95,9 @@ describe('ogre-magi', () => {
 
         // Player A casts Fireball with Ogre Magi on board
         const promise = cardD.play();
-        expect(SelectUtil.current?.options).toContain(roleA); // Can target friendly hero
-        expect(SelectUtil.current?.options).toContain(roleB); // Can target enemy hero
-        SelectUtil.set(roleB); // Target Player B's hero
+        expect(playerA.child.controller.current?.options).toContain(roleA); // Can target friendly hero
+        expect(playerA.child.controller.current?.options).toContain(roleB); // Can target enemy hero
+        playerA.child.controller.set(roleB); // Target Player B's hero
         await promise;
 
         // Fireball should deal 6+1=7 damage (6 base + 1 from Ogre Magi)

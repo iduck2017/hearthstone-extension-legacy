@@ -6,7 +6,7 @@
  * 3. abusive-sergeant-buff-expire: Buff expires at turn end
  */
 
-import { BoardModel, GameModel, HandModel, MageModel, ManaModel, PlayerModel, SelectUtil, AnimeUtil } from "hearthstone-core";
+import { BoardModel, GameModel, HandModel, MageModel, ManaModel, PlayerModel, AnimeUtil } from "hearthstone-core";
 import { AbusiveSergeantModel } from ".";
 import { boot } from "../boot";
 import { WispModel } from "../wisp";
@@ -67,20 +67,20 @@ describe('abusive-sergeant', () => {
 
         let promise = cardC.play();
         await AnimeUtil.sleep();
-        expect(SelectUtil.current).toBeDefined();
-        expect(SelectUtil.current?.options).toContain(0);
-        SelectUtil.set(0);
+        expect(game.child.playerA.child.controller.current).toBeDefined();
+        expect(game.child.playerA.child.controller.current?.options).toContain(0);
+        game.child.playerA.child.controller.set(0);
         await promise;
         await AnimeUtil.sleep();
-        expect(SelectUtil.current).toBeUndefined();
+        expect(game.child.playerA.child.controller.current).toBeUndefined();
 
         // Play both cards without battlecry effect
         expect(boardA.child.minions.length).toBe(1);
         promise = cardD.play();
         await AnimeUtil.sleep();
-        expect(SelectUtil.current).toBeDefined();
-        expect(SelectUtil.current?.options).toContain(1);
-        SelectUtil.set(1);
+        expect(game.child.playerA.child.controller.current).toBeDefined();
+        expect(game.child.playerA.child.controller.current?.options).toContain(1);
+        game.child.playerA.child.controller.set(1);
         await promise;
         
         expect(boardA.child.minions.length).toBe(2);
@@ -94,26 +94,26 @@ describe('abusive-sergeant', () => {
         turn.next();
         let promise = cardE.play();
         await AnimeUtil.sleep();
-        expect(SelectUtil.current).toBeDefined();
-        expect(SelectUtil.current?.options).toContain(0);
-        SelectUtil.set(0);
+        expect(game.child.playerB.child.controller.current).toBeDefined();
+        expect(game.child.playerB.child.controller.current?.options).toContain(0);
+        game.child.playerB.child.controller.set(0);
         await promise;
         expect(boardB.child.minions.length).toBe(1);
 
         // Play Abusive Sergeant with battlecry effect
         promise = cardF.play();
         await AnimeUtil.sleep();
-        expect(SelectUtil.current).toBeDefined();
-        expect(SelectUtil.current?.options).toContain(0);
-        expect(SelectUtil.current?.options.length).toBe(2);
-        SelectUtil.set(0);
+        expect(game.child.playerB.child.controller.current).toBeDefined();
+        expect(game.child.playerB.child.controller.current?.options).toContain(0);
+        expect(game.child.playerB.child.controller.current?.options.length).toBe(2);
+        game.child.playerB.child.controller.set(0);
         await AnimeUtil.sleep();
-        expect(SelectUtil.current).toBeDefined();
-        expect(SelectUtil.current?.options).toContain(roleD);
-        expect(SelectUtil.current?.options).toContain(roleE);
-        expect(SelectUtil.current?.options).toContain(roleC);
-        expect(SelectUtil.current?.options.length).toBe(3);
-        SelectUtil.set(roleD);
+        expect(game.child.playerB.child.controller.current).toBeDefined();
+        expect(game.child.playerB.child.controller.current?.options).toContain(roleD);
+        expect(game.child.playerB.child.controller.current?.options).toContain(roleE);
+        expect(game.child.playerB.child.controller.current?.options).toContain(roleC);
+        expect(game.child.playerB.child.controller.current?.options.length).toBe(3);
+        game.child.playerB.child.controller.set(roleD);
         await promise;
         await AnimeUtil.sleep();
 

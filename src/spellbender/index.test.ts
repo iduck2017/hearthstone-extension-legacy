@@ -5,7 +5,7 @@
  * 2. ice-lance-cast: Player A casts Ice Lance targeting Wisp, triggers Spellbender, Spellbender minion gets frozen instead
  */
 
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel } from "hearthstone-core";
 import { SpellbenderModel } from "./index";
 import { SpellbenderMinionModel } from "./minion";
 import { FrostNovaModel } from "../frost-nova";
@@ -92,8 +92,8 @@ describe('spellbender', () => {
 
         // Player A casts Ice Lance targeting Wisp (should trigger Spellbender)
         const promise = cardD.play();
-        expect(SelectUtil.current?.options).toContain(roleF);
-        SelectUtil.set(roleF);
+        expect(playerA.child.controller.current?.options).toContain(roleF);
+        playerA.child.controller.set(roleF);
         await promise;
 
         // Check Spellbender triggered: secret should be consumed

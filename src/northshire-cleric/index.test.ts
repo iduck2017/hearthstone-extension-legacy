@@ -7,7 +7,7 @@
  * 1. northshire-cleric-attack: Northshire Cleric attacks Mana Wyrm, both get damaged
  * 2. circle-of-healing-cast: Player A uses Circle of Healing, heals all minions, draws 2 cards
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel } from "hearthstone-core";
 import { NorthshireClericModel } from "./index";
 import { CircleOfHealingModel } from "../circle-of-healing";
 import { ManaWyrmModel } from "../mana-wyrm";
@@ -84,8 +84,8 @@ describe('northshire-cleric', () => {
 
         // Northshire Cleric attacks first Mana Wyrm
         const promise = roleC.child.action.run();
-        expect(SelectUtil.current?.options).toContain(roleE);
-        SelectUtil.set(roleE);
+        expect(playerA.child.controller.current?.options).toContain(roleE);
+        playerA.child.controller.set(roleE);
         await promise;
 
         // Both should be damaged

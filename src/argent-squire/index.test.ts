@@ -5,7 +5,7 @@
  * 2. argent-squire-die: Player B's Argent Squire attacks Player A's Argent Squire, both squires die.
  */
 
-import { GameModel, PlayerModel, MageModel, BoardModel, SelectUtil, ManaModel } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, ManaModel } from "hearthstone-core";
 import { ArgentSquireModel } from "./index";
 import { boot } from "../boot";
 
@@ -53,8 +53,8 @@ describe('argent-squire', () => {
         expect(roleC.child.feats.child.divineShield.state.isActive).toBe(true);
         expect(roleD.child.feats.child.divineShield.state.isActive).toBe(true);
         const promise = roleC.child.action.run();
-        expect(SelectUtil.current?.options).toContain(roleD);
-        SelectUtil.set(roleD);
+        expect(game.child.playerA.child.controller.current?.options).toContain(roleD);
+        game.child.playerA.child.controller.set(roleD);
         await promise;
         expect(roleC.child.health.state.current).toBe(1);
         expect(roleD.child.health.state.current).toBe(1);
@@ -68,8 +68,8 @@ describe('argent-squire', () => {
         turn.next();
         
         const promise = roleD.child.action.run();
-        expect(SelectUtil.current?.options).toContain(roleC);
-        SelectUtil.set(roleC);
+        expect(game.child.playerB.child.controller.current?.options).toContain(roleC);
+        game.child.playerB.child.controller.set(roleC);
         await promise;
 
         expect(roleC.child.health.state.current).toBe(0);

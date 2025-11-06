@@ -5,7 +5,7 @@
  * 2. hungry-crab-battlecry: Player B plays Murloc Raider, then Hungry Crab, battlecry triggers and Hungry Crab becomes 3/4
  */
 
-import { GameModel, BoardModel, HandModel, MageModel, PlayerModel, AnimeUtil, SelectUtil, ManaModel } from "hearthstone-core";
+import { GameModel, BoardModel, HandModel, MageModel, PlayerModel, AnimeUtil, ManaModel } from "hearthstone-core";
 import { HungryCrabModel } from ".";
 import { WispModel } from "../wisp";
 import { MurlocRaiderModel } from "../murloc-raider";
@@ -62,10 +62,10 @@ describe('hungry-crab', () => {
 
         let promise = cardC.play();
         await AnimeUtil.sleep();
-        expect(SelectUtil.current?.options).toContain(0);
-        SelectUtil.set(0);
+        expect(game.child.playerA.child.controller.current?.options).toContain(0);
+        game.child.playerA.child.controller.set(0);
         await AnimeUtil.sleep();
-        expect(SelectUtil.current).toBeUndefined();
+        expect(game.child.playerA.child.controller.current).toBeUndefined();
         await promise;
 
         expect(boardA.child.minions.length).toBe(2);
@@ -87,20 +87,20 @@ describe('hungry-crab', () => {
         // Play Murloc Raider first
         let promise = cardF.play();
         await AnimeUtil.sleep();
-        expect(SelectUtil.current?.options).toContain(0);
-        SelectUtil.set(0);
+        expect(game.child.playerB.child.controller.current?.options).toContain(0);
+        game.child.playerB.child.controller.set(0);
         await promise;
         expect(boardB.child.minions.length).toBe(1);
 
         // Play Hungry Crab and trigger battlecry
         promise = cardE.play();
         await AnimeUtil.sleep();
-        expect(SelectUtil.current?.options).toContain(0);
-        SelectUtil.set(0);
+        expect(game.child.playerB.child.controller.current?.options).toContain(0);
+        game.child.playerB.child.controller.set(0);
         await AnimeUtil.sleep();
-        expect(SelectUtil.current?.options).toContain(roleF);
-        expect(SelectUtil.current?.options.length).toBe(1);
-        SelectUtil.set(roleF);
+        expect(game.child.playerB.child.controller.current?.options).toContain(roleF);
+        expect(game.child.playerB.child.controller.current?.options.length).toBe(1);
+        game.child.playerB.child.controller.set(roleF);
         await promise;
 
         expect(cardF.child.dispose.status).toBe(true); // Murloc Raider destroyed

@@ -7,7 +7,7 @@
  * 1. ironbeak-owl-play: Player A plays Ironbeak Owl, silencing Ancient Watcher.
  * 2. ancient-watcher-attack: Ancient Watcher can now attack (silence removed the restriction).
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, AnimeUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, AnimeUtil } from "hearthstone-core";
 import { IronbeakOwlModel } from "./index";
 import { AncientWatcherModel } from "../ancient-watcher";
 import { boot } from "../boot";
@@ -83,13 +83,13 @@ describe('ironbeak-owl', () => {
 
         // Play Ironbeak Owl
         let promise = cardC.play();
-        SelectUtil.set(0); // Select position 0
+        playerA.child.controller.set(0); // Select position 0
         await AnimeUtil.sleep();
         // Choose target for battlecry (silence Ancient Watcher)
-        expect(SelectUtil.current?.options).toContain(roleD); // Can target Ancient Watcher
-        expect(SelectUtil.current?.options).not.toContain(roleA); // Cannot target heroes
-        expect(SelectUtil.current?.options).not.toContain(roleB); // Cannot target heroes
-        SelectUtil.set(roleD); // Target Ancient Watcher for silence
+        expect(playerA.child.controller.current?.options).toContain(roleD); // Can target Ancient Watcher
+        expect(playerA.child.controller.current?.options).not.toContain(roleA); // Cannot target heroes
+        expect(playerA.child.controller.current?.options).not.toContain(roleB); // Cannot target heroes
+        playerA.child.controller.set(roleD); // Target Ancient Watcher for silence
         await promise;
 
         // Ironbeak Owl should be on board
@@ -110,8 +110,8 @@ describe('ironbeak-owl', () => {
 
         // Ancient Watcher attacks Player B's hero
         let promise = roleD.child.action.run();
-        expect(SelectUtil.current?.options).toContain(roleB); // Can target Player B's hero
-        SelectUtil.set(roleB); // Target Player B's hero
+        expect(playerA.child.controller.current?.options).toContain(roleB); // Can target Player B's hero
+        playerA.child.controller.set(roleB); // Target Player B's hero
         await promise;
 
         // Player B's hero should take 4 damage

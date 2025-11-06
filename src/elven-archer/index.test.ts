@@ -3,7 +3,7 @@
  * 
  * 1. elven-archer-battlecry: Player A plays Elven Archer and use battlecry, Player B's Wisp dies.
  */
-import { BoardModel, DamageModel, GameModel, HandModel, MageModel, ManaModel, PlayerModel, SelectUtil, AnimeUtil } from "hearthstone-core";
+import { BoardModel, DamageModel, GameModel, HandModel, MageModel, ManaModel, PlayerModel, AnimeUtil } from "hearthstone-core";
 import { boot } from "../boot";
 import { ElvenArcherModel } from ".";
 import { WispModel } from "../wisp";
@@ -52,13 +52,13 @@ describe('battlecry', () => {
 
         // play elven archer
         const promise = cardC.play();
-        expect(SelectUtil.current?.options).toContain(0);
-        SelectUtil.set(0);
+        expect(playerA.child.controller.current?.options).toContain(0);
+        playerA.child.controller.set(0);
         await AnimeUtil.sleep()
-        expect(SelectUtil.current?.options).toContain(roleD);
-        expect(SelectUtil.current?.options).toContain(roleA);
-        expect(SelectUtil.current?.options).toContain(roleB);
-        SelectUtil.set(roleD);
+        expect(playerA.child.controller.current?.options).toContain(roleD);
+        expect(playerA.child.controller.current?.options).toContain(roleA);
+        expect(playerA.child.controller.current?.options).toContain(roleB);
+        playerA.child.controller.set(roleD);
         await promise;
 
         expect(roleD.child.health.state.current).toBe(0);

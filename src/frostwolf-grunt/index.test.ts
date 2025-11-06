@@ -7,7 +7,7 @@
  * 1. frostwolf-grunt-play: Player A plays Frostwolf Grunt.
  * 2. wisp-attack: Player B's Wisp attacks, can only target Frostwolf Grunt (Taunt forces this).
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, AnimeUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, AnimeUtil } from "hearthstone-core";
 import { FrostwolfGruntModel } from "./index";
 import { WispModel } from "../wisp";
 import { boot } from "../boot";
@@ -80,7 +80,7 @@ describe('frostwolf-grunt', () => {
 
         // Play Frostwolf Grunt
         let promise = cardC.play();
-        SelectUtil.set(0); // Select position 0
+        playerA.child.controller.set(0); // Select position 0
         await promise;
 
         // Frostwolf Grunt should be on board
@@ -105,10 +105,10 @@ describe('frostwolf-grunt', () => {
 
         // Player B's Wisp attacks, can only target Frostwolf Grunt (Taunt forces this)
         let promise = roleD.child.action.run();
-        expect(SelectUtil.current?.options).toContain(roleC); // Can target Frostwolf Grunt (Taunt forces this)
-        expect(SelectUtil.current?.options).not.toContain(roleA); // Cannot target Player A's hero (Taunt blocks)
-        expect(SelectUtil.current?.options).not.toContain(roleB); // Cannot target Player B's hero
-        SelectUtil.set(roleC); // Target Frostwolf Grunt
+        expect(playerB.child.controller.current?.options).toContain(roleC); // Can target Frostwolf Grunt (Taunt forces this)
+        expect(playerB.child.controller.current?.options).not.toContain(roleA); // Cannot target Player A's hero (Taunt blocks)
+        expect(playerB.child.controller.current?.options).not.toContain(roleB); // Cannot target Player B's hero
+        playerB.child.controller.set(roleC); // Target Frostwolf Grunt
         await promise;
 
         expect(roleC.child.health.state.current).toBe(1);

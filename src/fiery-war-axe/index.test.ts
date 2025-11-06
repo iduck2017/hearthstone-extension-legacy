@@ -1,4 +1,4 @@
-import { BoardModel, GameModel, HandModel, MageModel, ManaModel, PlayerModel, SelectUtil, WarriorModel } from "hearthstone-core";
+import { BoardModel, GameModel, HandModel, MageModel, ManaModel, PlayerModel, WarriorModel } from "hearthstone-core";
 import { boot } from "../boot";
 import { WispModel } from "../wisp";
 import { FieryWarAxeModel } from ".";
@@ -61,10 +61,10 @@ describe('firey-war-axe', () => {
 
     test('warrior-attack', async () => {
         const promise = roleA.child.action.run();
-        expect(SelectUtil.current).toBeDefined();
-        expect(SelectUtil.current?.options).toContain(roleC);
-        expect(SelectUtil.current?.options).toContain(roleB);
-        SelectUtil.set(roleC);
+        expect(playerA.child.controller.current).toBeDefined();
+        expect(playerA.child.controller.current?.options).toContain(roleC);
+        expect(playerA.child.controller.current?.options).toContain(roleB);
+        playerA.child.controller.set(roleC);
         await promise;
 
         expect(cardC.child.dispose.status).toBe(true);
@@ -97,9 +97,9 @@ describe('firey-war-axe', () => {
         expect(roleA.child.action.status).toBe(true);
 
         const promise = roleA.child.action.run();
-        expect(SelectUtil.current).toBeDefined();
-        expect(SelectUtil.current?.options).toContain(roleB);
-        SelectUtil.set(roleB);
+        expect(playerA.child.controller.current).toBeDefined();
+        expect(playerA.child.controller.current?.options).toContain(roleB);
+        playerA.child.controller.set(roleB);
         await promise;
 
         expect(roleB.child.health.state.current).toBe(27);

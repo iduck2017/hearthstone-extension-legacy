@@ -6,7 +6,7 @@
  * 
  * 1. power-word-shield-cast: Player A uses Power Word: Shield on Stonetusk Boar, gives it +2 Health and draws a card.
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel } from "hearthstone-core";
 import { PowerWordShieldModel } from "./index";
 import { StonetuskBoarModel } from "../stonetusk-boar";
 import { WispModel } from "../wisp";
@@ -74,8 +74,8 @@ describe('power-word-shield', () => {
 
         // Player A uses Power Word: Shield on Stonetusk Boar
         const promise = cardC.play();
-        expect(SelectUtil.current?.options).toContain(roleD);
-        SelectUtil.set(roleD);
+        expect(playerA.child.controller.current?.options).toContain(roleD);
+        playerA.child.controller.set(roleD);
         await promise;
 
         // Stonetusk Boar should gain +2 Health

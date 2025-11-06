@@ -7,7 +7,7 @@
  * 1. war-golem-play: Player A plays War Golem.
  * 2. war-golem-attack: Player A's War Golem attacks Player B's hero.
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, AnimeUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, AnimeUtil } from "hearthstone-core";
 import { WarGolemModel } from "./index";
 import { boot } from "../boot";
 
@@ -76,7 +76,7 @@ describe('war-golem', () => {
 
         // Play War Golem
         let promise = cardC.play();
-        SelectUtil.set(0); // Select position 0
+        playerA.child.controller.set(0); // Select position 0
         await promise;
 
         // War Golem should be on board
@@ -97,8 +97,8 @@ describe('war-golem', () => {
 
         // Player A's War Golem attacks Player B's hero
         let promise = roleC.child.action.run();
-        expect(SelectUtil.current?.options).toContain(roleB); // Can target Player B's hero
-        SelectUtil.set(roleB); // Target Player B's hero
+        expect(playerA.child.controller.current?.options).toContain(roleB); // Can target Player B's hero
+        playerA.child.controller.set(roleB); // Target Player B's hero
         await promise;
 
         // Player B's hero should take 7 damage

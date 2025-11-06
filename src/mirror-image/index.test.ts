@@ -4,7 +4,7 @@
  * 1. mirror-image-cast: Player A plays Mirror Image, summons two 0/2 minions with Taunt
  * 2. mirror-image-taunt: Player B's Wisp cannot attack Player A's hero due to Taunt
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, SelectUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel } from "hearthstone-core";
 import { MirrorImageModel } from "./index";
 import { MirrorImageMinionModel } from "./minion";
 import { WispModel } from "../wisp";
@@ -96,11 +96,11 @@ describe('mirror-image', () => {
 
         // Try to attack A's hero - should fail due to Taunt
         const promise = roleC.child.action.run();
-        expect(SelectUtil.current?.options.length).toBe(2);
-        expect(SelectUtil.current?.options).not.toContain(roleA);
-        expect(SelectUtil.current?.options).toContain(roleD);
-        expect(SelectUtil.current?.options).toContain(roleE);
-        SelectUtil.set(roleD);
+        expect(playerB.child.controller.current?.options.length).toBe(2);
+        expect(playerB.child.controller.current?.options).not.toContain(roleA);
+        expect(playerB.child.controller.current?.options).toContain(roleD);
+        expect(playerB.child.controller.current?.options).toContain(roleE);
+        playerB.child.controller.set(roleD);
         await promise;
         
         // Wisp should not have attacked (due to Taunt blocking)

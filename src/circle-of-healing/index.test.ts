@@ -8,7 +8,7 @@
  * 3. circle-of-healing-cast: Player A plays Circle of Healing, heals all minions but not heroes
  */
 
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, AnimeUtil, SelectUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, AnimeUtil } from "hearthstone-core";
 import { CircleOfHealingModel } from "./index";
 import { FrostboltModel } from "../frostbolt";
 import { WaterElementalModel } from "../water-elemental";
@@ -75,8 +75,8 @@ describe('circle-of-healing', () => {
         // Player A's Water Elemental attacks Player B's Water Elemental
         const promise = roleC.child.action.run();
         await AnimeUtil.sleep();
-        expect(SelectUtil.current?.options).toContain(roleD);
-        SelectUtil.set(roleD);
+        expect(playerA.child.controller.current?.options).toContain(roleD);
+        playerA.child.controller.set(roleD);
         await promise;
 
         // Both Water Elementals should take 3 damage
@@ -93,8 +93,8 @@ describe('circle-of-healing', () => {
 
         // Player A uses Frostbolt on Player B's hero
         const promise = cardE.play();
-        expect(SelectUtil.current?.options).toContain(roleB);
-        SelectUtil.set(roleB);
+        expect(playerA.child.controller.current?.options).toContain(roleB);
+        playerA.child.controller.set(roleB);
         await promise;
 
         // Player B's hero should take 3 damage

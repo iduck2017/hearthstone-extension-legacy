@@ -6,7 +6,7 @@
  * 1. crimson-clergy-play: Player A plays Crimson Clergy on board.
  * 2. circle-of-healing-cast: Player A uses Circle of Healing on full health minion, triggers overheal, draws card.
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel } from "hearthstone-core";
 import { CrimsonClergyModel } from "./index";
 import { CircleOfHealingModel } from "../circle-of-healing";
 import { WispModel } from "../wisp";
@@ -69,7 +69,7 @@ describe('crimson-clergy', () => {
 
         // Player A plays Crimson Clergy
         const promise = cardC.play();
-        SelectUtil.set(0);
+        playerA.child.controller.set(0);
         await promise;
 
         // Check that Crimson Clergy is on board

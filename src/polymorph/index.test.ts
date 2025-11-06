@@ -5,7 +5,7 @@
  * polymorph-cast: Player A uses Polymorph on Water Elemental, transforms it into Sheep, positioned to the left of Wisp
  */
 
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, SelectUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel } from "hearthstone-core";
 import { PolymorphModel } from "./index";
 import { WaterElementalModel } from "../water-elemental";
 import { WispModel } from "../wisp";
@@ -75,10 +75,10 @@ describe('polymorph', () => {
 
         // Player A uses Polymorph on Water Elemental
         const promise = cardC.play();
-        expect(SelectUtil.current?.options).toContain(roleD); // Water Elemental can be targeted
-        expect(SelectUtil.current?.options).toContain(roleE); // Wisp can be targeted
-        expect(SelectUtil.current?.options).not.toContain(roleB); // Hero cannot be targeted
-        SelectUtil.set(roleD); // Target Water Elemental
+        expect(playerA.child.controller.current?.options).toContain(roleD); // Water Elemental can be targeted
+        expect(playerA.child.controller.current?.options).toContain(roleE); // Wisp can be targeted
+        expect(playerA.child.controller.current?.options).not.toContain(roleB); // Hero cannot be targeted
+        playerA.child.controller.set(roleD); // Target Water Elemental
         await promise;
 
         // Check transformation results

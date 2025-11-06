@@ -6,7 +6,7 @@
  * 
  * 1. temple-enforcer-play: Player A plays Temple Enforcer, giving a friendly minion +3 Health.
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, AnimeUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, AnimeUtil } from "hearthstone-core";
 import { TempleEnforcerModel } from "./index";
 import { WispModel } from "../wisp";
 import { boot } from "../boot";
@@ -77,10 +77,10 @@ describe('temple-enforcer', () => {
 
         // Play Temple Enforcer
         let promise = cardC.play();
-        SelectUtil.set(0); // Select position 0
+        playerA.child.controller.set(0); // Select position 0
         await AnimeUtil.sleep();
-        expect(SelectUtil.current?.options).toContain(roleD);
-        SelectUtil.set(roleD);
+        expect(playerA.child.controller.current?.options).toContain(roleD);
+        playerA.child.controller.set(roleD);
         await promise;
 
         // Wisp should have +3 Health buff

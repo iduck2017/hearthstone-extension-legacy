@@ -5,7 +5,7 @@
  * 2. voodoo-doctor-attack: Player A's Voodoo Doctor attacks Player B's hero (should trigger Vaporize)
  */
 
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel } from "hearthstone-core";
 import { VaporizeModel } from "./index";
 import { WispModel } from "../wisp";
 import { VoodooDoctorModel } from "../voodoo-doctor";
@@ -74,8 +74,8 @@ describe('vaporize', () => {
 
         // Player A's Wisp attacks Player B's Stonetusk Boar
         const promise = roleC.child.action.run();
-        expect(SelectUtil.current?.options).toContain(roleE);
-        SelectUtil.set(roleE);
+        expect(playerA.child.controller.current?.options).toContain(roleE);
+        playerA.child.controller.set(roleE);
         await promise;
 
         // Check that both minions die (1/1 vs 1/1)
@@ -103,8 +103,8 @@ describe('vaporize', () => {
 
         // Player A's Voodoo Doctor attacks Player B's hero
         const promise = roleD.child.action.run();
-        expect(SelectUtil.current?.options).toContain(roleB);
-        SelectUtil.set(roleB);
+        expect(playerA.child.controller.current?.options).toContain(roleB);
+        playerA.child.controller.set(roleB);
         await promise;
 
         // Check Vaporize triggered: Voodoo Doctor should be destroyed

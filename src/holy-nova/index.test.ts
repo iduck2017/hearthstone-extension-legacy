@@ -7,7 +7,7 @@
  * 1. water-element-attack: Player A's Water Elemental attacks Player B's Water Elemental.
  * 2. holy-nova-cast: Player A casts Holy Nova, dealing 2 damage to enemy minions and restoring 2 health to friendly characters.
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, AnimeUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, AnimeUtil } from "hearthstone-core";
 import { HolyNovaModel } from "./index";
 import { WaterElementalModel } from "../water-elemental";
 import { boot } from "../boot";
@@ -78,8 +78,8 @@ describe('holy-nova', () => {
         // Player A's Water Elemental attacks Player B's Water Elemental
         let promise = roleD.child.action.run();
         await AnimeUtil.sleep();
-        expect(SelectUtil.current?.options).toContain(roleE);
-        SelectUtil.set(roleE);
+        expect(playerA.child.controller.current?.options).toContain(roleE);
+        playerA.child.controller.set(roleE);
         await promise;
 
         // Both Water Elementals should take 3 damage

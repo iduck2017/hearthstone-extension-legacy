@@ -7,7 +7,7 @@
  * 1. water-element-attack: Water Elemental attacks Player B's hero.
  * 2. holy-fire-cast: Player B casts Holy Fire, dealing 5 damage to a target and restoring 5 Health to Player B's hero.
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, AnimeUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, AnimeUtil } from "hearthstone-core";
 import { HolyFireModel } from "./index";
 import { WaterElementalModel } from "../water-elemental";
 import { boot } from "../boot";
@@ -78,8 +78,8 @@ describe('holy-fire', () => {
 
         // Water Elemental attacks Player B's hero
         const promise = roleC.child.action.run();
-        expect(SelectUtil.current?.options).toContain(roleB);
-        SelectUtil.set(roleB);
+        expect(playerA.child.controller.current?.options).toContain(roleB);
+        playerA.child.controller.set(roleB);
         await promise;
 
         // Player B's hero should be damaged and frozen
@@ -101,10 +101,10 @@ describe('holy-fire', () => {
 
         // Cast Holy Fire targeting Water Elemental
         const promise = cardD.play();
-        expect(SelectUtil.current?.options).toContain(roleA); // Can target enemy hero
-        expect(SelectUtil.current?.options).toContain(roleB); // Can target friendly hero
-        expect(SelectUtil.current?.options).toContain(roleC); // Can target enemy minion
-        SelectUtil.set(roleC); // Target Water Elemental
+        expect(playerB.child.controller.current?.options).toContain(roleA); // Can target enemy hero
+        expect(playerB.child.controller.current?.options).toContain(roleB); // Can target friendly hero
+        expect(playerB.child.controller.current?.options).toContain(roleC); // Can target enemy minion
+        playerB.child.controller.set(roleC); // Target Water Elemental
         await promise;
 
         // Water Elemental should survive (6 health - 5 damage = 1 health)

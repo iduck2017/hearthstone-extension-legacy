@@ -6,7 +6,7 @@
  * 
  * 1. psychic-conjurer-play: Player A plays Psychic Conjurer, copies a random card from Player B's deck.
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel } from "hearthstone-core";
 import { PsychicConjurerModel } from "./index";
 import { WispModel } from "../wisp";
 import { boot } from "../boot";
@@ -73,7 +73,7 @@ describe('psychic-conjurer', () => {
 
         // Player A plays Psychic Conjurer
         const promise = cardC.play();
-        SelectUtil.set(0);
+        playerA.child.controller.set(0);
         await promise;
 
         // Check that Psychic Conjurer is on board

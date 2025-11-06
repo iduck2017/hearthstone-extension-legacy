@@ -8,7 +8,7 @@
  * 2. water-element-attack: Player B uses Water Elemental to attack Player A's hero.
  * 3. turn-start: Player A's turn starts, Water Elemental's debuff expires.
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, AnimeUtil, WarriorModel } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, AnimeUtil, WarriorModel } from "hearthstone-core";
 import { ScarletSubjugatorModel } from "./index";
 import { WaterElementalModel } from "../water-elemental";
 import { boot } from "../boot";
@@ -73,10 +73,10 @@ describe('scarlet-subjugator', () => {
 
         // Player A plays Scarlet Subjugator
         const promise = cardC.play();
-        SelectUtil.set(0);
+        playerA.child.controller.set(0);
         await AnimeUtil.sleep();
-        expect(SelectUtil.current?.options).toContain(cardD.child.role); // Water Elemental should be targetable
-        SelectUtil.set(cardD.child.role);
+        expect(playerA.child.controller.current?.options).toContain(cardD.child.role); // Water Elemental should be targetable
+        playerA.child.controller.set(cardD.child.role);
         await promise;
 
         // Check that Scarlet Subjugator is on board
@@ -108,7 +108,7 @@ describe('scarlet-subjugator', () => {
         
         // Water Elemental attacks hero
         const promise = roleD.child.action.run();
-        SelectUtil.set(roleA);
+        playerB.child.controller.set(roleA);
         await promise;
         
         // Hero should take 1 damage (reduced attack)

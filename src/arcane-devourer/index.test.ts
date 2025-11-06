@@ -7,7 +7,7 @@
  * 1. fireball-cast: Player A's Arcane Devourer gains +2/+2 when Player A casts a spell.
  * 2. frostbolt-cast: Player B's spell does not trigger Player A's Arcane Devourer.
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, AnimeUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, AnimeUtil } from "hearthstone-core";
 import { ArcaneDevourerModel } from "./index";
 import { FireballModel } from "../fireball";
 import { boot } from "../boot";
@@ -80,9 +80,9 @@ describe('arcane-devourer', () => {
 
         // Player A casts Fireball
         const promise = cardC.play();
-        expect(SelectUtil.current?.options).toContain(roleA); // Can target friendly hero
-        expect(SelectUtil.current?.options).toContain(roleB); // Can target enemy hero
-        SelectUtil.set(roleB); // Target Player B's hero
+        expect(playerA.child.controller.current?.options).toContain(roleA); // Can target friendly hero
+        expect(playerA.child.controller.current?.options).toContain(roleB); // Can target enemy hero
+        playerA.child.controller.set(roleB); // Target Player B's hero
         await promise;
 
         // Arcane Devourer should gain +2/+2
@@ -105,9 +105,9 @@ describe('arcane-devourer', () => {
 
         // Player B casts Frostbolt
         const promise = cardD.play();
-        expect(SelectUtil.current?.options).toContain(roleA); // Can target friendly hero
-        expect(SelectUtil.current?.options).toContain(roleB); // Can target enemy hero
-        SelectUtil.set(roleA); // Target Player A's hero
+        expect(playerB.child.controller.current?.options).toContain(roleA); // Can target friendly hero
+        expect(playerB.child.controller.current?.options).toContain(roleB); // Can target enemy hero
+        playerB.child.controller.set(roleA); // Target Player A's hero
         await promise;
 
         // Arcane Devourer should NOT gain stats (enemy spell)

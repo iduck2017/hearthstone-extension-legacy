@@ -4,7 +4,7 @@
  * 1. fireball-damage: Player A plays Fireball and deals 6 damage to Player B's hero
  * 2. fireball-minion: Player A plays Fireball and deals 6 damage to a minion
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, SelectUtil, ManaModel } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel } from "hearthstone-core";
 import { WispModel } from "../wisp";
 import { boot } from "../boot";
 
@@ -67,9 +67,9 @@ describe('fireball', () => {
     test('counterspell-trigger', async () => {
         turn.next();
         let promise = spellD.play();
-        expect(SelectUtil.current?.options).toContain(roleA);
-        expect(SelectUtil.current?.options).toContain(roleB);
-        SelectUtil.set(roleA);
+        expect(playerB.child.controller.current?.options).toContain(roleA);
+        expect(playerB.child.controller.current?.options).toContain(roleB);
+        playerB.child.controller.set(roleA);
         await promise;
         expect(handB.child.spells.length).toBe(0);
         expect(playerB.child.mana.state.current).toBe(6);

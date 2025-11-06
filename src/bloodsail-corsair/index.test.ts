@@ -3,7 +3,7 @@
  * 1. bloodsail-corsair-battlecry: Player A plays Bloodsail Corsair, removes 1 durability from Player B's weapon
  */
 
-import { GameModel, HandModel, MageModel, PlayerModel, AnimeUtil, SelectUtil, ManaModel, WarriorModel, BoardModel } from "hearthstone-core";
+import { GameModel, HandModel, MageModel, PlayerModel, AnimeUtil, ManaModel, WarriorModel, BoardModel } from "hearthstone-core";
 import { BloodsailCorsairModel } from ".";
 import { boot } from "../boot";
 import { FieryWarAxeModel } from "../fiery-war-axe";
@@ -51,8 +51,8 @@ describe('bloodsail-corsair', () => {
         // Player A plays Bloodsail Corsair
         let promise = cardC.play();
         await AnimeUtil.sleep();
-        expect(SelectUtil.current?.options).toContain(0);
-        SelectUtil.set(0);
+        expect(playerA.child.controller.current?.options).toContain(0);
+        playerA.child.controller.set(0);
         await promise;
         
         // Verify minion is played

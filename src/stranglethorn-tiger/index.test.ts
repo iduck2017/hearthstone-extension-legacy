@@ -7,7 +7,7 @@
  * 1. stranglethorn-tiger-play: Player A plays Stranglethorn Tiger.
  * 2. wisp-attack: Player B's Wisp attacks, can only target Player A's hero (Stranglethorn Tiger has Stealth).
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, SelectUtil, AnimeUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, AnimeUtil } from "hearthstone-core";
 import { StranglethornTigerModel } from "./index";
 import { WispModel } from "../wisp";
 import { boot } from "../boot";
@@ -80,7 +80,7 @@ describe('stranglethorn-tiger', () => {
 
         // Play Stranglethorn Tiger
         let promise = cardC.play();
-        SelectUtil.set(0); // Select position 0
+        playerA.child.controller.set(0); // Select position 0
         await promise;
 
         // Stranglethorn Tiger should be on board
@@ -105,10 +105,10 @@ describe('stranglethorn-tiger', () => {
 
         // Player B's Wisp attacks, can only target Player A's hero (Stranglethorn Tiger has Stealth)
         let promise = roleD.child.action.run();
-        expect(SelectUtil.current?.options).toContain(roleA); // Can target Player A's hero
-        expect(SelectUtil.current?.options).not.toContain(roleC); // Cannot target Stranglethorn Tiger (Stealth)
-        expect(SelectUtil.current?.options).not.toContain(roleB); // Cannot target Player B's hero
-        SelectUtil.set(roleA); // Target Player A's hero
+        expect(playerB.child.controller.current?.options).toContain(roleA); // Can target Player A's hero
+        expect(playerB.child.controller.current?.options).not.toContain(roleC); // Cannot target Stranglethorn Tiger (Stealth)
+        expect(playerB.child.controller.current?.options).not.toContain(roleB); // Cannot target Player B's hero
+        playerB.child.controller.set(roleA); // Target Player A's hero
         await promise;
 
         // Player A's hero should take 1 damage
