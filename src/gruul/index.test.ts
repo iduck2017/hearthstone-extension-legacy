@@ -21,17 +21,16 @@ describe('gruul', () => {
                     hero: new MageModel(),
                     board: new BoardModel({
                         child: { 
-                            minions: []
+                            cards: []
                         }
                     }),
                     hand: new HandModel({
                         child: { 
-                            minions: [new GruulModel()],
-                            spells: []
+                            cards: [new GruulModel()]
                         }
                     }),
                     deck: new DeckModel({
-                        child: { minions: [] }
+                        child: { cards: [] }
                     })
                 }
             }),
@@ -41,13 +40,12 @@ describe('gruul', () => {
                     hero: new MageModel(),
                     board: new BoardModel({
                         child: { 
-                            minions: []
+                            cards: []
                         }
                     }),
                     hand: new HandModel({
                         child: { 
-                            minions: [],
-                            spells: []
+                            cards: []
                         }
                     })
                 }
@@ -60,7 +58,7 @@ describe('gruul', () => {
     const playerB = game.child.playerB;
     const boardA = playerA.child.board;
     const handA = playerA.child.hand;
-    const cardC = handA.refer.queue.find(item => item instanceof GruulModel);
+    const cardC = handA.child.cards.find(item => item instanceof GruulModel);
     if (!cardC) throw new Error();
     const roleA = playerA.child.hero.child.role;
     const roleB = playerB.child.hero.child.role;
@@ -70,8 +68,8 @@ describe('gruul', () => {
         // Check initial state
         expect(roleC.child.attack.state.current).toBe(7); // Gruul: 7/7
         expect(roleC.child.health.state.current).toBe(7);
-        expect(handA.refer.queue.length).toBe(1); // Gruul in hand
-        expect(boardA.refer.queue.length).toBe(0); // No minions on board
+        expect(handA.child.cards.length).toBe(1); // Gruul in hand
+        expect(boardA.child.cards.length).toBe(0); // No minions on board
         expect(playerA.child.mana.state.current).toBe(10); // Full mana
 
         // Play Gruul
@@ -80,8 +78,8 @@ describe('gruul', () => {
         await promise;
 
         // Gruul should be on board
-        expect(boardA.refer.queue.length).toBe(1); // Gruul on board
-        expect(handA.refer.queue.length).toBe(0); // Gruul moved to board
+        expect(boardA.child.cards.length).toBe(1); // Gruul on board
+        expect(handA.child.cards.length).toBe(0); // Gruul moved to board
         expect(playerA.child.mana.state.current).toBe(2); // 10 - 8 = 2
     });
 
@@ -89,7 +87,7 @@ describe('gruul', () => {
         // Check initial state
         expect(roleC.child.attack.state.current).toBe(7); // Gruul: 7/7
         expect(roleC.child.health.state.current).toBe(7);
-        expect(boardA.refer.queue.length).toBe(1); // Gruul on board
+        expect(boardA.child.cards.length).toBe(1); // Gruul on board
 
         // End Player A's turn
         game.child.turn.next();
@@ -103,7 +101,7 @@ describe('gruul', () => {
         // Check initial state
         expect(roleC.child.attack.state.current).toBe(8); // Gruul: 8/8
         expect(roleC.child.health.state.current).toBe(8);
-        expect(boardA.refer.queue.length).toBe(1); // Gruul on board
+        expect(boardA.child.cards.length).toBe(1); // Gruul on board
 
         // End Player B's turn
         game.child.turn.next();

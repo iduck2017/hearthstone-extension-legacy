@@ -33,7 +33,7 @@ export class GrimscaleOracleFeatureModel extends RoleFeatureModel<
 
     @StateUtil.on(self => self.modifyAttack)
     private listenAttack() {
-        return this.route.player?.proxy.child.board.child.minions.child.role.child.attack.decor
+        return this.route.player?.proxy.child.board.any(MinionCardModel).child.role.child.attack.decor
     }
     private modifyAttack(that: RoleAttackModel, decor: RoleAttackDecor) {
         if (!this.state.isActive) return;

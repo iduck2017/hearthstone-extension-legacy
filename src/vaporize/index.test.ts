@@ -22,11 +22,11 @@ describe('vaporize', () => {
                     hero: new MageModel(),
                     board: new BoardModel({
                         child: { 
-                            minions: [new WispModel(), new VoodooDoctorModel()]
+                            cards: [new WispModel(), new VoodooDoctorModel()]
                         }
                     }),
                     hand: new HandModel({
-                        child: { spells: [] }
+                        child: { cards: [] }
                     })
                 }
             }),
@@ -36,12 +36,12 @@ describe('vaporize', () => {
                     hero: new MageModel(),
                     board: new BoardModel({
                         child: { 
-                            minions: [new StonetuskBoarModel()],
+                            cards: [new StonetuskBoarModel()],
                             secrets: [new VaporizeModel()]
                         }
                     }),
                     hand: new HandModel({
-                        child: { spells: [] }
+                        child: { cards: [] }
                     })
                 }
             })
@@ -53,9 +53,9 @@ describe('vaporize', () => {
     const playerB = game.child.playerB;
     const boardA = playerA.child.board;
     const boardB = playerB.child.board;
-    const cardC = boardA.child.minions.find(item => item instanceof WispModel);
-    const cardD = boardA.child.minions.find(item => item instanceof VoodooDoctorModel);
-    const cardE = boardB.child.minions.find(item => item instanceof StonetuskBoarModel);
+    const cardC = boardA.child.cards.find(item => item instanceof WispModel);
+    const cardD = boardA.child.cards.find(item => item instanceof VoodooDoctorModel);
+    const cardE = boardB.child.cards.find(item => item instanceof StonetuskBoarModel);
     const cardF = boardB.child.secrets.find(item => item instanceof VaporizeModel);
     const roleC = cardC?.child.role;
     const roleD = cardD?.child.role;
@@ -65,8 +65,8 @@ describe('vaporize', () => {
 
     test('wisp-attack', async () => {
         // Check initial stats
-        expect(boardA.child.minions.length).toBe(2);
-        expect(boardB.child.minions.length).toBe(1);
+        expect(boardA.child.cards.length).toBe(2);
+        expect(boardB.child.cards.length).toBe(1);
         expect(boardB.child.secrets.length).toBe(1);
         expect(roleC.child.health.state.current).toBe(1); // Wisp: 1/1
         expect(roleE.child.health.state.current).toBe(1); // Stonetusk Boar: 1/1
@@ -89,14 +89,14 @@ describe('vaporize', () => {
         expect(roleB.child.health.state.current).toBe(30); // Hero health unchanged
         
         // Check board state
-        expect(boardA.child.minions.length).toBe(1); // Only Voodoo Doctor left
-        expect(boardB.child.minions.length).toBe(0); // No minions left
+        expect(boardA.child.cards.length).toBe(1); // Only Voodoo Doctor left
+        expect(boardB.child.cards.length).toBe(0); // No minions left
     });
 
     test('voodoo-doctor-attack', async () => {
         // Check initial stats
-        expect(boardA.child.minions.length).toBe(1); // Only Voodoo Doctor
-        expect(boardB.child.minions.length).toBe(0); // No minions
+        expect(boardA.child.cards.length).toBe(1); // Only Voodoo Doctor
+        expect(boardB.child.cards.length).toBe(0); // No minions
         expect(boardB.child.secrets.length).toBe(1); // Vaporize still active
         expect(roleD.child.health.state.current).toBe(1); // Voodoo Doctor: 2/1
         expect(roleB.child.health.state.current).toBe(30); // Player B hero: 30 health
@@ -120,7 +120,7 @@ describe('vaporize', () => {
         expect(roleB.child.health.state.current).toBe(30); // Hero health unchanged
         
         // Check board state
-        expect(boardA.child.minions.length).toBe(0); // No minions left
-        expect(boardB.child.minions.length).toBe(0); // No minions
+        expect(boardA.child.cards.length).toBe(0); // No minions left
+        expect(boardB.child.cards.length).toBe(0); // No minions
     });
 });

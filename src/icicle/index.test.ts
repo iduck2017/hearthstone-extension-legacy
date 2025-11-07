@@ -21,14 +21,14 @@ describe('icicle', () => {
                     mana: new ManaModel({ state: { origin: 10 }}),
                     hero: new MageModel(),
                     board: new BoardModel({
-                        child: { minions: [new WaterElementalModel()] }
+                        child: { cards: [new WaterElementalModel()] }
                     }),
                     hand: new HandModel({
-                        child: { spells: [new IceLanceModel(), new IcicleModel()] }
+                        child: { cards: [new IceLanceModel(), new IcicleModel()] }
                     }),
                     deck: new DeckModel({
                         child: { 
-                            minions: [new WispModel()] 
+                            cards: [new WispModel()] 
                         }
                     })
                 }
@@ -38,10 +38,10 @@ describe('icicle', () => {
                     mana: new ManaModel({ state: { origin: 10 }}),
                     hero: new MageModel(),
                     board: new BoardModel({
-                        child: { minions: [] }
+                        child: { cards: [] }
                     }),
                     hand: new HandModel({
-                        child: { spells: [] }
+                        child: { cards: [] }
                     })
                 }
             })
@@ -53,9 +53,9 @@ describe('icicle', () => {
     const handA = playerA.child.hand;
     const boardA = playerA.child.board;
     const deckA = playerA.child.deck;
-    const cardC = handA.child.spells.find(item => item instanceof IceLanceModel);
-    const cardD = handA.child.spells.find(item => item instanceof IcicleModel);
-    const cardE = boardA.child.minions.find(item => item instanceof WaterElementalModel);
+    const cardC = handA.child.cards.find(item => item instanceof IceLanceModel);
+    const cardD = handA.child.cards.find(item => item instanceof IcicleModel);
+    const cardE = boardA.child.cards.find(item => item instanceof WaterElementalModel);
     const roleE = cardE?.child.role;
     if (!cardC || !cardD || !roleE) throw new Error();
 
@@ -66,8 +66,8 @@ describe('icicle', () => {
         expect(roleE.child.feats.child.frozen.state.isActive).toBe(false);
         expect(roleE.child.action.status).toBe(true); // Can attack initially
         expect(playerA.child.mana.state.current).toBe(10);
-        expect(handA.child.spells.length).toBe(2);
-        expect(deckA.child.minions.length).toBe(1);
+        expect(handA.child.cards.length).toBe(2);
+        expect(deckA.child.cards.length).toBe(1);
 
         // Step 1: Player A uses Ice Lance on own Water Elemental to freeze it
         let promise = cardC.play();
@@ -79,7 +79,7 @@ describe('icicle', () => {
         expect(roleE.child.feats.child.frozen.state.isActive).toBe(true);
         expect(roleE.child.action.status).toBe(false); // Cannot attack when frozen
         expect(playerA.child.mana.state.current).toBe(9); // 10 - 1 cost
-        expect(handA.child.spells.length).toBe(1); // Ice Lance consumed
+        expect(handA.child.cards.length).toBe(1); // Ice Lance consumed
     })
 
     test('icicle-cast', async () => {
@@ -95,8 +95,7 @@ describe('icicle', () => {
         expect(roleE.child.health.state.current).toBe(4); // 6 - 2 = 4
         expect(roleE.child.health.state.damage).toBe(2);
         expect(playerA.child.mana.state.current).toBe(7); // 9 - 2 cost
-        expect(handA.child.spells.length).toBe(0); // Icicle consumed
-        expect(deckA.child.minions.length).toBe(0); // Card drawn
-        expect(handA.child.minions.length).toBe(1); // Wisp drawn to hand
+        expect(handA.child.cards.length).toBe(1); // Icicle consumed, Wisp drawn
+        expect(deckA.child.cards.length).toBe(0); // Card drawn
     })
 })

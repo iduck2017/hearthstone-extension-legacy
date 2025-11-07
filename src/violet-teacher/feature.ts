@@ -35,7 +35,7 @@ export class VioletTeacherFeatureModel extends CardFeatureModel {
         const board = player.child.board;
         
         // Summon a Violet Apprentice
-        const index = board.refer.queue.indexOf(card);
+        const index = board.child.cards.indexOf(card);
         const target = new VioletApprenticeModel();
         target.deploy(board, index === -1 ? -1 : index + 1);
     }

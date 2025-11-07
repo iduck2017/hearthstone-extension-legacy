@@ -20,16 +20,15 @@ describe('psychic-conjurer', () => {
                     mana: new ManaModel({ state: { origin: 10 }}),
                     hero: new MageModel(),
                     board: new BoardModel({
-                        child: { minions: [] }
+                        child: { cards: [] }
                     }),
                     hand: new HandModel({
                         child: { 
-                            minions: [new PsychicConjurerModel()],
-                            spells: []
+                            cards: [new PsychicConjurerModel()]
                         }
                     }),
                     deck: new DeckModel({
-                        child: { minions: [] }
+                        child: { cards: [] }
                     })
                 }
             }),
@@ -38,14 +37,14 @@ describe('psychic-conjurer', () => {
                     mana: new ManaModel({ state: { origin: 10 }}),
                     hero: new MageModel(),
                     board: new BoardModel({
-                        child: { minions: [] }
+                        child: { cards: [] }
                     }),
                     hand: new HandModel({
-                        child: { spells: [] }
+                        child: { cards: [] }
                     }),
                     deck: new DeckModel({
                         child: { 
-                            minions: [new WispModel()]
+                            cards: [new WispModel()]
                         }
                     })
                 }
@@ -59,17 +58,17 @@ describe('psychic-conjurer', () => {
     const boardA = playerA.child.board;
     const handA = playerA.child.hand;
     const deckB = playerB.child.deck;
-    const cardC = handA.child.minions.find(item => item instanceof PsychicConjurerModel);
-    const cardE = deckB.child.minions.find(item => item instanceof WispModel);
+    const cardC = handA.child.cards.find(item => item instanceof PsychicConjurerModel);
+    const cardE = deckB.child.cards.find(item => item instanceof WispModel);
     if (!cardC) throw new Error();
     const roleC = cardC.child.role;
 
     test('psychic-conjurer-play', async () => {
         // Check initial state
         expect(playerA.child.mana.state.current).toBe(10);
-        expect(boardA.child.minions.length).toBe(0);
-        expect(handA.refer.queue.length).toBe(1);
-        expect(deckB.refer.queue.length).toBe(1);
+        expect(boardA.child.cards.length).toBe(0);
+        expect(handA.child.cards.length).toBe(1);
+        expect(deckB.child.cards.length).toBe(1);
 
         // Player A plays Psychic Conjurer
         const promise = cardC.play();
@@ -77,12 +76,12 @@ describe('psychic-conjurer', () => {
         await promise;
 
         // Check that Psychic Conjurer is on board
-        expect(boardA.child.minions.length).toBe(1);
+        expect(boardA.child.cards.length).toBe(1);
         expect(playerA.child.mana.state.current).toBe(9); // 10 - 1 cost
         expect(roleC.child.attack.state.current).toBe(1); // Psychic Conjurer: 1/2
         expect(roleC.child.health.state.current).toBe(2);
 
-        const cardD = handA.child.minions.find(item => item instanceof WispModel);
+        const cardD = handA.child.cards.find(item => item instanceof WispModel);
         if (!cardD) throw new Error();
         expect(cardD).toBeDefined();
         
@@ -90,9 +89,9 @@ describe('psychic-conjurer', () => {
         expect(cardD.refer.creator).toBe(cardE);
 
         // Player A should have copied a card from Player B's deck
-        expect(handA.refer.queue.length).toBe(1); // Psychic Conjurer consumed, 1 card copied
+        expect(handA.child.cards.length).toBe(1); // Psychic Conjurer consumed, 1 card copied
         // Player B's deck should be unchanged
-        expect(deckB.child.minions.length).toBe(1); // Original deck unchanged
+        expect(deckB.child.cards.length).toBe(1); // Original deck unchanged
 
     });
 });

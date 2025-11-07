@@ -23,17 +23,16 @@ describe('lightwell', () => {
                     hero: new MageModel(),
                     board: new BoardModel({
                         child: { 
-                            minions: [new WaterElementalModel(), new LightwellModel()]
+                            cards: [new WaterElementalModel(), new LightwellModel()]
                         }
                     }),
                     hand: new HandModel({
                         child: { 
-                            minions: [],
-                            spells: []
+                            cards: []
                         }
                     }),
                     deck: new DeckModel({
-                        child: { minions: [] }
+                        child: { cards: [] }
                     })
                 }
             }),
@@ -43,11 +42,11 @@ describe('lightwell', () => {
                     hero: new MageModel(),
                     board: new BoardModel({
                         child: { 
-                            minions: [new WispModel()]
+                            cards: [new WispModel()]
                         }
                     }),
                     hand: new HandModel({
-                        child: { spells: [] }
+                        child: { cards: [] }
                     })
                 }
             })
@@ -59,9 +58,9 @@ describe('lightwell', () => {
     const playerB = game.child.playerB;
     const boardA = playerA.child.board;
     const boardB = playerB.child.board;
-    const cardC = boardA.child.minions.find(item => item instanceof LightwellModel);
-    const cardD = boardA.child.minions.find(item => item instanceof WaterElementalModel);
-    const cardE = boardB.child.minions.find(item => item instanceof WispModel);
+    const cardC = boardA.child.cards.find(item => item instanceof LightwellModel);
+    const cardD = boardA.child.cards.find(item => item instanceof WaterElementalModel);
+    const cardE = boardB.child.cards.find(item => item instanceof WispModel);
     if (!cardC || !cardD || !cardE) throw new Error();
     const roleC = cardC.child.role;
     const roleD = cardD.child.role;

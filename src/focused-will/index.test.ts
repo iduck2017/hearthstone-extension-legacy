@@ -20,12 +20,11 @@ describe('focused-will', () => {
                     mana: new ManaModel({ state: { origin: 10 }}),
                     hero: new MageModel(),
                     board: new BoardModel({
-                        child: { minions: [] }
+                        child: { cards: [] }
                     }),
                     hand: new HandModel({
                         child: { 
-                            minions: [new StonetuskBoarModel()],
-                            spells: [new FocusedWillModel()]
+                            cards: [new StonetuskBoarModel(), new FocusedWillModel()]
                         }
                     })
                 }
@@ -35,10 +34,10 @@ describe('focused-will', () => {
                     mana: new ManaModel({ state: { origin: 10 }}),
                     hero: new MageModel(),
                     board: new BoardModel({
-                        child: { minions: [] }
+                        child: { cards: [] }
                     }),
                     hand: new HandModel({
-                        child: { spells: [] }
+                        child: { cards: [] }
                     })
                 }
             })
@@ -50,8 +49,8 @@ describe('focused-will', () => {
     const playerB = game.child.playerB;
     const boardA = playerA.child.board;
     const handA = playerA.child.hand;
-    const cardC = handA.child.minions.find(item => item instanceof StonetuskBoarModel);
-    const cardD = handA.child.spells.find(item => item instanceof FocusedWillModel);
+    const cardC = handA.child.cards.find(item => item instanceof StonetuskBoarModel);
+    const cardD = handA.child.cards.find(item => item instanceof FocusedWillModel);
     if (!cardC || !cardD) throw new Error();
     const roleC = cardC.child.role;
 
@@ -59,8 +58,8 @@ describe('focused-will', () => {
     test('stonetusk-boar-play', async () => {
         // Check initial state
         expect(playerA.child.mana.state.current).toBe(10);
-        expect(handA.child.minions.length).toBe(1);
-        expect(boardA.child.minions.length).toBe(0);
+        expect(handA.child.cards.length).toBe(2);
+        expect(boardA.child.cards.length).toBe(0);
 
         // Player A plays Stonetusk Boar
         const promise = cardC.play();
@@ -71,7 +70,7 @@ describe('focused-will', () => {
         expect(roleC.child.health.state.current).toBe(1);
         expect(roleC.child.action.status).toBe(true); // Can attack (charge)
         expect(playerA.child.mana.state.current).toBe(9); // 10 - 1 cost
-        expect(handA.child.minions.length).toBe(0); // Boar consumed
+        expect(handA.child.cards.length).toBe(1); // Boar consumed
     });
 
     test('focused-will-cast', async () => {
@@ -86,7 +85,7 @@ describe('focused-will', () => {
         expect(roleC.child.health.state.current).toBe(4); // 1 + 3 Health buff
         expect(roleC.child.action.status).toBe(false); // Cannot attack (charge silenced)
         expect(playerA.child.mana.state.current).toBe(8); // 9 - 1 cost
-        expect(handA.child.spells.length).toBe(0); // Focused Will consumed
-        expect(boardA.child.minions.length).toBe(1); // Minion still on board
+        expect(handA.child.cards.length).toBe(0); // Focused Will consumed
+        expect(boardA.child.cards.length).toBe(1); // Minion still on board
     });
 });

@@ -21,16 +21,15 @@ describe('shadow-word-death', () => {
                     mana: new ManaModel({ state: { origin: 10 }}),
                     hero: new MageModel(),
                     board: new BoardModel({
-                        child: { minions: [] }
+                        child: { cards: [] }
                     }),
                     hand: new HandModel({
                         child: { 
-                            minions: [],
-                            spells: [new ShadowWordDeathModel()]
+                            cards: [new ShadowWordDeathModel()]
                         }
                     }),
                     deck: new DeckModel({
-                        child: { minions: [] }
+                        child: { cards: [] }
                     })
                 }
             }),
@@ -40,11 +39,11 @@ describe('shadow-word-death', () => {
                     hero: new MageModel(),
                     board: new BoardModel({
                         child: { 
-                            minions: [new AegwynnTheGuardianModel(), new StonetuskBoarModel()]
+                            cards: [new AegwynnTheGuardianModel(), new StonetuskBoarModel()]
                         }
                     }),
                     hand: new HandModel({
-                        child: { spells: [] }
+                        child: { cards: [] }
                     })
                 }
             })
@@ -58,16 +57,16 @@ describe('shadow-word-death', () => {
     const heroA = playerA.child.hero;
     const heroB = playerB.child.hero;
     const handA = playerA.child.hand;
-    const cardC = handA.child.spells.find(item => item instanceof ShadowWordDeathModel);
-    const cardD = boardB.child.minions.find(item => item instanceof AegwynnTheGuardianModel);
-    const cardE = boardB.child.minions.find(item => item instanceof StonetuskBoarModel);
+    const cardC = handA.child.cards.find(item => item instanceof ShadowWordDeathModel);
+    const cardD = boardB.child.cards.find(item => item instanceof AegwynnTheGuardianModel);
+    const cardE = boardB.child.cards.find(item => item instanceof StonetuskBoarModel);
     if (!cardC || !cardD || !cardE) throw new Error();
 
     test('shadow-word-death-cast', async () => {
         // Check initial state
-        expect(boardB.child.minions.length).toBe(2);
+        expect(boardB.child.cards.length).toBe(2);
         expect(playerA.child.mana.state.current).toBe(10);
-        expect(handA.refer.queue.length).toBe(1);
+        expect(handA.child.cards.length).toBe(1);
 
         // Player A uses Shadow Word: Death
         const promise = cardC.play();
@@ -79,13 +78,13 @@ describe('shadow-word-death', () => {
         await promise;
 
         // Aegwynn should be destroyed
-        expect(boardB.child.minions.length).toBe(1); // Only Stonetusk Boar remains
+        expect(boardB.child.cards.length).toBe(1); // Only Stonetusk Boar remains
         expect(cardD.child.dispose.status).toBe(true);
         expect(cardE.child.dispose.status).toBe(false);
-        expect(boardB.child.minions[0]).toBe(cardE);
+        expect(boardB.child.cards[0]).toBe(cardE);
 
         // Shadow Word: Death should be consumed
-        expect(handA.refer.queue.length).toBe(0); // Shadow Word: Death consumed
+        expect(handA.child.cards.length).toBe(0); // Shadow Word: Death consumed
         expect(playerA.child.mana.state.current).toBe(8); // 10 - 2 cost
     });
 });

@@ -31,7 +31,7 @@ export class TwilightDrakeBattlecryModel extends MinionBattlecryModel<[]> {
         if (!player) return;
 
         const hand = player.child.hand;
-        const count = hand.refer.queue.length;
+        const count = hand.child.cards.length;
         if (!count) return;
 
         // Apply health buff based on hand size

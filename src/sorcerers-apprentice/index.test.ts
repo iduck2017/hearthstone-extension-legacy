@@ -22,17 +22,16 @@ describe('sorcerers-apprentice', () => {
                     mana: new ManaModel({ state: { origin: 10 }}),
                     hero: new MageModel(),
                     board: new BoardModel({
-                        child: { minions: [] }
+                        child: { cards: [] }
                     }),
                     hand: new HandModel({
                         child: { 
-                            minions: [new SorcerersApprenticeModel()],
-                            spells: [new FrostboltModel(), new IceLanceModel()]
+                            cards: [new SorcerersApprenticeModel(), new FrostboltModel(), new IceLanceModel()]
                         }
                     }),
                     deck: new DeckModel({
                         child: { 
-                            minions: [] 
+                            cards: [] 
                         }
                     })
                 }
@@ -42,10 +41,10 @@ describe('sorcerers-apprentice', () => {
                     mana: new ManaModel({ state: { origin: 10 }}),
                     hero: new MageModel(),
                     board: new BoardModel({
-                        child: { minions: [] }
+                        child: { cards: [] }
                     }),
                     hand: new HandModel({
-                        child: { spells: [new FrostboltModel()] }
+                        child: { cards: [new FrostboltModel()] }
                     })
                 }
             })
@@ -58,10 +57,10 @@ describe('sorcerers-apprentice', () => {
     const handA = playerA.child.hand;
     const handB = playerB.child.hand;
     const boardA = playerA.child.board;
-    const cardC = handA.child.minions.find(item => item instanceof SorcerersApprenticeModel);
-    const cardD = handA.child.spells.find(item => item instanceof FrostboltModel);
-    const cardE = handA.child.spells.find(item => item instanceof IceLanceModel);
-    const cardF = handB.child.spells.find(item => item instanceof FrostboltModel);
+    const cardC = handA.child.cards.find(item => item instanceof SorcerersApprenticeModel);
+    const cardD = handA.child.cards.find(item => item instanceof FrostboltModel);
+    const cardE = handA.child.cards.find(item => item instanceof IceLanceModel);
+    const cardF = handB.child.cards.find(item => item instanceof FrostboltModel);
     const roleA = playerA.child.hero.child.role;
     const roleB = playerB.child.hero.child.role;
     if (!cardC || !cardD || !cardE || !cardF) throw new Error();
@@ -69,8 +68,8 @@ describe('sorcerers-apprentice', () => {
     test('sorcerers-apprentice-play', async () => {
         // Check initial stats
         expect(playerA.child.mana.state.current).toBe(10);
-        expect(handA.child.minions.length).toBe(1);
-        expect(boardA.child.minions.length).toBe(0);
+        expect(handA.child.cards.length).toBe(3);
+        expect(boardA.child.cards.length).toBe(0);
         expect(cardD.child.cost.state.current).toBe(2);
 
         expect(cardD.child.cost.state.current).toBe(2);
@@ -88,9 +87,9 @@ describe('sorcerers-apprentice', () => {
         
         // Check deployment and cost reduction
         expect(playerA.child.mana.state.current).toBe(8); // 10 - 2 cost
-        expect(handA.child.minions.length).toBe(0);
-        expect(boardA.child.minions.length).toBe(1);
-        expect(boardA.child.minions[0]).toBe(cardC);
+        expect(handA.child.cards.length).toBe(2);
+        expect(boardA.child.cards.length).toBe(1);
+        expect(boardA.child.cards[0]).toBe(cardC);
         expect(cardD.child.cost.state.current).toBe(1); // Frostbolt cost reduced
     })
 

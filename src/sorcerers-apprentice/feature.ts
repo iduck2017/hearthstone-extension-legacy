@@ -20,7 +20,7 @@ export class SorcerersApprenticeFeatureModel extends CardFeatureModel {
 
     @StateUtil.on(self => self.modifyCost)
     private listenCost() {
-        return this.route.player?.proxy.child.hand.child.spells.child.cost.decor
+        return this.route.player?.proxy.child.hand.any(SpellCardModel).child.cost.decor
     }
     private modifyCost(that: CostModel, decor: CostDecor) {
         const card = that.route.card;

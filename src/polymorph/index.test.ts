@@ -21,10 +21,10 @@ describe('polymorph', () => {
                     mana: new ManaModel({ state: { origin: 10 }}),
                     hero: new MageModel(),
                     board: new BoardModel({
-                        child: { minions: [] }
+                        child: { cards: [] }
                     }),
                     hand: new HandModel({
-                        child: { spells: [new PolymorphModel()] }
+                        child: { cards: [new PolymorphModel()] }
                     })
                 }
             }),
@@ -34,14 +34,14 @@ describe('polymorph', () => {
                     hero: new MageModel(),
                     board: new BoardModel({
                         child: { 
-                            minions: [
+                            cards: [
                                 new WaterElementalModel(), // Position 0 (left)
                                 new WispModel()            // Position 1 (right)
                             ]
                         }
                     }),
                     hand: new HandModel({
-                        child: { spells: [] }
+                        child: { cards: [] }
                     })
                 }
             })
@@ -53,9 +53,9 @@ describe('polymorph', () => {
     const playerB = game.child.playerB;
     const handA = playerA.child.hand;
     const boardB = playerB.child.board;
-    const cardC = handA.child.spells.find(item => item instanceof PolymorphModel);
-    const cardD = boardB.child.minions.find(item => item instanceof WaterElementalModel);
-    const cardE = boardB.child.minions.find(item => item instanceof WispModel);
+    const cardC = handA.child.cards.find(item => item instanceof PolymorphModel);
+    const cardD = boardB.child.cards.find(item => item instanceof WaterElementalModel);
+    const cardE = boardB.child.cards.find(item => item instanceof WispModel);
     const roleD = cardD?.child.role;
     const roleE = cardE?.child.role;
     const roleB = playerB.child.hero.child.role;
@@ -63,15 +63,15 @@ describe('polymorph', () => {
 
     test('polymorph-cast', async () => {
         // Check initial stats
-        expect(boardB.child.minions.length).toBe(2);
-        expect(boardB.child.minions[0]).toBe(cardD); // Water Elemental at position 0
-        expect(boardB.child.minions[1]).toBe(cardE); // Wisp at position 1
+        expect(boardB.child.cards.length).toBe(2);
+        expect(boardB.child.cards[0]).toBe(cardD); // Water Elemental at position 0
+        expect(boardB.child.cards[1]).toBe(cardE); // Wisp at position 1
         expect(roleD.child.attack.state.current).toBe(3); // Water Elemental: 3/6
         expect(roleD.child.health.state.current).toBe(6);
         expect(roleE.child.attack.state.current).toBe(1); // Wisp: 1/1
         expect(roleE.child.health.state.current).toBe(1);
         expect(playerA.child.mana.state.current).toBe(10);
-        expect(handA.child.spells.length).toBe(1);
+        expect(handA.child.cards.length).toBe(1);
 
         // Player A uses Polymorph on Water Elemental
         const promise = cardC.play();
@@ -83,11 +83,11 @@ describe('polymorph', () => {
 
         // Check transformation results
         expect(playerA.child.mana.state.current).toBe(6); // 10 - 4 cost
-        expect(handA.child.spells.length).toBe(0); // Polymorph consumed
-        expect(boardB.child.minions.length).toBe(2); // Still 2 minions
+        expect(handA.child.cards.length).toBe(0); // Polymorph consumed
+        expect(boardB.child.cards.length).toBe(2); // Still 2 minions
 
         // Check that Water Elemental was transformed into Sheep
-        const cardF = boardB.child.minions.find(item => item instanceof SheepModel);
+        const cardF = boardB.child.cards.find(item => item instanceof SheepModel);
         expect(cardF).toBeDefined();
         if (!cardF) throw new Error();
         const roleF = cardF.child.role;
@@ -95,8 +95,8 @@ describe('polymorph', () => {
         expect(roleF.child.health.state.current).toBe(1);
 
         // Check that Wisp is still at position 1
-        expect(boardB.refer.queue[0]).toBe(cardF); // Sheep at position 0
-        expect(boardB.refer.queue[1]).toBe(cardE); // Wisp still at position 1
+        expect(boardB.child.cards[0]).toBe(cardF); // Sheep at position 0
+        expect(boardB.child.cards[1]).toBe(cardE); // Wisp still at position 1
 
         expect(roleD.route.board).toBeUndefined();
     });

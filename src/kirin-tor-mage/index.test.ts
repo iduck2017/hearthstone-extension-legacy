@@ -21,17 +21,16 @@ describe('kirin-tor-mage', () => {
                     mana: new ManaModel({ state: { origin: 10 }}),
                     hero: new MageModel(),
                     board: new BoardModel({
-                        child: { minions: [] }
+                        child: { cards: [] }
                     }),
                     hand: new HandModel({
                         child: {
-                            minions: [new KirinTorMageModel()],
-                            spells: [new IceBarrierModel(), new CounterspellModel()]
+                            cards: [new KirinTorMageModel(), new IceBarrierModel(), new CounterspellModel()]
                         }
                     }),
                     deck: new DeckModel({
                         child: {
-                            minions: []
+                            cards: []
                         }
                     })
                 }
@@ -41,10 +40,10 @@ describe('kirin-tor-mage', () => {
                     mana: new ManaModel({ state: { origin: 10 }}),
                     hero: new MageModel(),
                     board: new BoardModel({
-                        child: { minions: [] }
+                        child: { cards: [] }
                     }),
                     hand: new HandModel({
-                        child: { spells: [] }
+                        child: { cards: [] }
                     })
                 }
             })
@@ -55,16 +54,16 @@ describe('kirin-tor-mage', () => {
     const playerA = game.child.playerA;
     const handA = playerA.child.hand;
     const boardA = playerA.child.board;
-    const cardC = handA.child.minions.find(item => item instanceof KirinTorMageModel);
-    const cardD = handA.child.spells.find(item => item instanceof IceBarrierModel);
-    const cardE = handA.child.spells.find(item => item instanceof CounterspellModel);
+    const cardC = handA.child.cards.find(item => item instanceof KirinTorMageModel);
+    const cardD = handA.child.cards.find(item => item instanceof IceBarrierModel);
+    const cardE = handA.child.cards.find(item => item instanceof CounterspellModel);
     if (!cardC || !cardD || !cardE) throw new Error();
 
     test('kirin-tor-mage-play', async () => {
         // Check initial stats
         expect(playerA.child.mana.state.current).toBe(10);
-        expect(handA.child.minions.length).toBe(1);
-        expect(boardA.child.minions.length).toBe(0);
+        expect(handA.child.cards.length).toBe(3);
+        expect(boardA.child.cards.length).toBe(0);
         expect(cardD.child.cost.state.current).toBe(3); // Ice Barrier normal cost
         expect(cardE.child.cost.state.current).toBe(3); // Counterspell normal cost
 
@@ -75,9 +74,9 @@ describe('kirin-tor-mage', () => {
 
         // Check deployment and mana consumption
         expect(playerA.child.mana.state.current).toBe(7); // 10 - 3 cost
-        expect(handA.child.minions.length).toBe(0);
-        expect(boardA.child.minions.length).toBe(1);
-        expect(boardA.child.minions[0]).toBe(cardC);
+        expect(handA.child.cards.length).toBe(2);
+        expect(boardA.child.cards.length).toBe(1);
+        expect(boardA.child.cards[0]).toBe(cardC);
     })
 
     test('ice-barrier-cast', async () => {
@@ -89,7 +88,7 @@ describe('kirin-tor-mage', () => {
         await cardD.play();
 
         expect(playerA.child.mana.state.current).toBe(7); // Mana unchanged (0 cost)
-        expect(handA.child.spells.length).toBe(1); // Only Counterspell left
+        expect(handA.child.cards.length).toBe(1); // Only Counterspell left
     })
 
     test('second-secret-normal-cost', async () => {
@@ -100,7 +99,7 @@ describe('kirin-tor-mage', () => {
         await cardE.play();
 
         expect(playerA.child.mana.state.current).toBe(4); // 7 - 3 = 4
-        expect(handA.child.spells.length).toBe(0); // No spells left
+        expect(handA.child.cards.length).toBe(0); // No cards left
         expect(boardA.child.secrets.length).toBe(2)
     })
 })

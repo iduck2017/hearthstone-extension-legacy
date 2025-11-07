@@ -20,12 +20,11 @@ describe('mirror-entity', () => {
                     mana: new ManaModel({ state: { origin: 10 }}),
                     hero: new MageModel(),
                     board: new BoardModel({
-                        child: { minions: [] }
+                        child: { cards: [] }
                     }),
                     hand: new HandModel({
                         child: {
-                            spells: [new MirrorEntityModel()],
-                            minions: [new WispModel()]
+                            cards: [new MirrorEntityModel(), new WispModel()]
                         }
                     }),
                 }
@@ -35,11 +34,11 @@ describe('mirror-entity', () => {
                     mana: new ManaModel({ state: { origin: 10 }}),
                     hero: new MageModel(),
                     board: new BoardModel({
-                        child: { minions: [] }
+                        child: { cards: [] }
                     }),
                     hand: new HandModel({
                         child: {
-                            minions: [new WaterElementalModel()]
+                            cards: [new WaterElementalModel()]
                         }
                     })
                 }
@@ -54,15 +53,15 @@ describe('mirror-entity', () => {
     const handB = playerB.child.hand;
     const boardA = playerA.child.board;
     const boardB = playerB.child.board;
-    const cardC = handA.child.spells.find(item => item instanceof MirrorEntityModel);
-    const cardD = handA.child.minions.find(item => item instanceof WispModel);
-    const cardE = handB.child.minions.find(item => item instanceof WaterElementalModel);
+    const cardC = handA.child.cards.find(item => item instanceof MirrorEntityModel);
+    const cardD = handA.child.cards.find(item => item instanceof WispModel);
+    const cardE = handB.child.cards.find(item => item instanceof WaterElementalModel);
     if (!cardC || !cardD || !cardE) throw new Error();
 
     test('mirror-entity-cast', async () => {
         // Check initial stats
         expect(playerA.child.mana.state.current).toBe(10);
-        expect(handA.child.spells.length).toBe(1);
+        expect(handA.child.cards.length).toBe(2);
         expect(boardA.child.secrets.length).toBe(0);
         expect(boardA.child.minions.length).toBe(0);
 
@@ -71,9 +70,9 @@ describe('mirror-entity', () => {
 
         // Check secret is deployed
         expect(playerA.child.mana.state.current).toBe(7); // 10 - 3 cost
-        expect(handA.child.spells.length).toBe(0);
+        expect(handA.child.cards.length).toBe(1);
         expect(boardA.child.secrets.length).toBe(1);
-        expect(boardA.child.minions.length).toBe(0);
+        expect(boardA.child.cards.length).toBe(0);
 
         // Player A plays Wisp (should not trigger Mirror Entity on own minions)
         const promise = cardD.play();
@@ -82,8 +81,8 @@ describe('mirror-entity', () => {
 
         // Check Wisp is deployed but Mirror Entity is not triggered
         expect(playerA.child.mana.state.current).toBe(7); // 7 - 1 cost
-        expect(handA.child.minions.length).toBe(0);
-        expect(boardA.child.minions.length).toBe(1);
+        expect(handA.child.cards.length).toBe(0);
+        expect(boardA.child.cards.length).toBe(1);
         expect(boardA.child.secrets.length).toBe(1); // Secret still active
     });
 
@@ -94,8 +93,8 @@ describe('mirror-entity', () => {
 
         // Check initial stats
         expect(playerB.child.mana.state.current).toBe(10);
-        expect(handB.child.minions.length).toBe(1);
-        expect(boardB.child.minions.length).toBe(0);
+        expect(handB.child.cards.length).toBe(1);
+        expect(boardB.child.cards.length).toBe(0);
         expect(boardA.child.secrets.length).toBe(1); // Mirror Entity still active
 
         // Player B plays Water Elemental (should trigger Mirror Entity)
@@ -105,15 +104,15 @@ describe('mirror-entity', () => {
 
         // Check Water Elemental is deployed and Mirror Entity is triggered
         expect(playerB.child.mana.state.current).toBe(6); // 10 - 4 cost
-        expect(handB.child.minions.length).toBe(0);
-        expect(boardB.child.minions.length).toBe(1);
+        expect(handB.child.cards.length).toBe(0);
+        expect(boardB.child.cards.length).toBe(1);
 
         // Check Mirror Entity triggered: Player A should have a copy of Water Elemental
         expect(boardA.child.secrets.length).toBe(0); // Secret consumed
-        expect(boardA.child.minions.length).toBe(2); // Original Wisp + copied Water Elemental
+        expect(boardA.child.cards.length).toBe(2); // Original Wisp + copied Water Elemental
         
         // Verify the copied Water Elemental has correct stats
-        const cardG = boardA.child.minions.find(minion => minion instanceof WaterElementalModel);
+        const cardG = boardA.child.cards.find(minion => minion instanceof WaterElementalModel);
         expect(cardG).toBeDefined();
     });
 });

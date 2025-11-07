@@ -20,10 +20,10 @@ describe('frostbolt', () => {
                     mana: new ManaModel({ state: { origin: 10 }}),
                     hero: new MageModel(),
                     board: new BoardModel({
-                        child: { minions: [] }
+                        child: { cards: [] }
                     }),
                     hand: new HandModel({
-                        child: { spells: [new FrostboltModel()] }
+                        child: { cards: [new FrostboltModel()] }
                     })
                 }
             }),
@@ -32,10 +32,10 @@ describe('frostbolt', () => {
                     mana: new ManaModel({ state: { origin: 10 }}),
                     hero: new MageModel(),
                     board: new BoardModel({
-                        child: { minions: [new WispModel()] }
+                        child: { cards: [new WispModel()] }
                     }),
                     hand: new HandModel({
-                        child: { spells: [] }
+                        child: { cards: [] }
                     })
                 }
             })
@@ -47,8 +47,8 @@ describe('frostbolt', () => {
     const playerB = game.child.playerB;
     const handA = playerA.child.hand;
     const boardB = playerB.child.board;
-    const cardC = boardB.child.minions.find(item => item instanceof WispModel);
-    const cardD = handA.child.spells.find(item => item instanceof FrostboltModel);
+    const cardC = boardB.child.cards.find(item => item instanceof WispModel);
+    const cardD = handA.child.cards.find(item => item instanceof FrostboltModel);
     const roleA = playerA.child.hero.child.role;
     const roleB = playerB.child.hero.child.role;
     const roleC = cardC?.child.role;
@@ -58,7 +58,7 @@ describe('frostbolt', () => {
     test('frostbolt-cast', async () => {
         // Target is not frozen initially and has full health
         expect(playerA.child.mana.state.current).toBe(10);
-        expect(handA.child.spells.length).toBe(1);
+        expect(handA.child.cards.length).toBe(1);
         expect(roleC.child.feats.child.frozen.state.isActive).toBeFalsy();
         expect(roleC.child.health.state.current).toBe(1);
 
@@ -75,7 +75,7 @@ describe('frostbolt', () => {
         expect(roleC.child.health.state.current).toBe(-2);
         expect(roleC.child.health.state.damage).toBe(3);
         expect(roleC.child.feats.child.frozen.state.isActive).toBe(true);
-        expect(handA.child.spells.length).toBe(0);
+        expect(handA.child.cards.length).toBe(0);
         
         // Check turn progression and frozen state persists
         turn.next();

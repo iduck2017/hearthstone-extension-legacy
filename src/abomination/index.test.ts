@@ -21,18 +21,13 @@ describe('abomination', () => {
                     mana: new ManaModel({ state: { origin: 10 }}),
                     hero: new MageModel(),
                     board: new BoardModel({
-                        child: { 
-                            minions: []
-                        }
+                        child: { cards: [] }
                     }),
                     hand: new HandModel({
-                        child: { 
-                            minions: [new AbominationModel()],
-                            spells: []
-                        }
+                        child: { cards: [new AbominationModel()]}
                     }),
                     deck: new DeckModel({
-                        child: { minions: [] }
+                        child: { cards: [] }
                     })
                 }
             }),
@@ -41,15 +36,10 @@ describe('abomination', () => {
                     mana: new ManaModel({ state: { origin: 10 }}),
                     hero: new MageModel(),
                     board: new BoardModel({
-                        child: { 
-                            minions: [new StranglethornTigerModel()]
-                        }
+                        child: { cards: [new StranglethornTigerModel()]}
                     }),
                     hand: new HandModel({
-                        child: { 
-                            minions: [],
-                            spells: []
-                        }
+                        child: { cards: []}
                     })
                 }
             })
@@ -62,8 +52,8 @@ describe('abomination', () => {
     const boardA = playerA.child.board;
     const boardB = playerB.child.board;
     const handA = playerA.child.hand;
-    const cardC = handA.refer.queue.find(item => item instanceof AbominationModel);
-    const cardD = boardB.refer.queue.find(item => item instanceof StranglethornTigerModel);
+    const cardC = handA.child.cards.find(item => item instanceof AbominationModel);
+    const cardD = boardB.child.cards.find(item => item instanceof StranglethornTigerModel);
     if (!cardC || !cardD) throw new Error();
     const roleA = playerA.child.hero.child.role;
     const roleB = playerB.child.hero.child.role;
@@ -74,8 +64,8 @@ describe('abomination', () => {
         // Check initial state
         expect(roleC.child.attack.state.current).toBe(4); // Abomination: 4/4
         expect(roleC.child.health.state.current).toBe(4);
-        expect(handA.refer.queue.length).toBe(1); // Abomination in hand
-        expect(boardA.refer.queue.length).toBe(0); // No minions on board
+        expect(handA.child.cards.length).toBe(1); // Abomination in hand
+        expect(boardA.child.cards.length).toBe(0); // No minions on board
         expect(playerA.child.mana.state.current).toBe(10); // Full mana
 
         // Play Abomination
@@ -84,8 +74,8 @@ describe('abomination', () => {
         await promise;
 
         // Abomination should be on board
-        expect(boardA.refer.queue.length).toBe(1); // Abomination on board
-        expect(handA.refer.queue.length).toBe(0); // Abomination moved to board
+        expect(boardA.child.cards.length).toBe(1); // Abomination on board
+        expect(handA.child.cards.length).toBe(0); // Abomination moved to board
         expect(playerA.child.mana.state.current).toBe(4); // 10 - 6 = 4
 
         // Check that Abomination has Taunt
@@ -102,8 +92,8 @@ describe('abomination', () => {
         expect(roleD.child.health.state.current).toBe(5); // Stranglethorn Tiger: 5/5
         expect(roleA.child.health.state.current).toBe(30); // Player A hero: 30 health
         expect(roleB.child.health.state.current).toBe(30); // Player B hero: 30 health
-        expect(boardA.refer.queue.length).toBe(1); // Abomination on board
-        expect(boardB.refer.queue.length).toBe(1); // Stranglethorn Tiger on board
+        expect(boardA.child.cards.length).toBe(1); // Abomination on board
+        expect(boardB.child.cards.length).toBe(1); // Stranglethorn Tiger on board
 
         // Player B's Stranglethorn Tiger attacks Abomination
         let promise = roleD.child.action.run();
@@ -118,8 +108,8 @@ describe('abomination', () => {
         expect(cardC.child.dispose.status).toBe(true);
 
         // Both minions should die (5/5 vs 4/4)
-        expect(boardA.refer.queue.length).toBe(0); // Abomination dies
-        expect(boardB.refer.queue.length).toBe(0); // Stranglethorn Tiger dies
+        expect(boardA.child.cards.length).toBe(0); // Abomination dies
+        expect(boardB.child.cards.length).toBe(0); // Stranglethorn Tiger dies
 
         // Deathrattle should deal 2 damage to both heroes
         expect(roleA.child.health.state.current).toBe(28); // Player A hero: 30 - 2 = 28

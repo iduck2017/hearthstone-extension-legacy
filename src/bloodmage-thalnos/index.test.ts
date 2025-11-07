@@ -18,13 +18,13 @@ describe('bloodmage-thalnos', () => {
                     mana: new ManaModel({ state: { origin: 10 }}),
                     hero: new MageModel(),
                     hand: new HandModel({
-                        child: { spells: [new FireballModel()] }
+                        child: { cards: [new FireballModel()] }
                     }),
                     board: new BoardModel({
-                        child: { minions: [new BloodmageThalnosModel()] }
+                        child: { cards: [new BloodmageThalnosModel()] }
                     }),
                     deck: new DeckModel({
-                        child: { minions: [new WispModel()] }
+                        child: { cards: [new WispModel()] }
                     }),
                 }
             }),
@@ -33,7 +33,7 @@ describe('bloodmage-thalnos', () => {
                     mana: new ManaModel({ state: { origin: 10 }}),
                     hero: new MageModel(),
                     board: new BoardModel({
-                        child: { minions: [new WispModel()] }
+                        child: { cards: [new WispModel()] }
                     })
                 }
             })
@@ -46,9 +46,9 @@ describe('bloodmage-thalnos', () => {
     const boardB = playerB.child.board;
     const deckA = playerA.child.deck;
     const handA = playerA.child.hand;
-    const cardC = boardA.child.minions.find(item => item instanceof BloodmageThalnosModel);
-    const cardD = boardB.child.minions.find(item => item instanceof WispModel);
-    const cardE = handA.child.spells.find(item => item instanceof FireballModel);
+    const cardC = boardA.child.cards.find(item => item instanceof BloodmageThalnosModel);
+    const cardD = boardB.child.cards.find(item => item instanceof WispModel);
+    const cardE = handA.child.cards.find(item => item instanceof FireballModel);
     const roleC = cardC?.child.role;
     const roleD = cardD?.child.role;
     const roleB = playerB.child.hero.child.role;
@@ -67,10 +67,10 @@ describe('bloodmage-thalnos', () => {
 
     test('bloodmage-thalnos-attack', async () => {
         // Verify initial state
-        expect(boardA.child.minions.length).toBe(1);
-        expect(boardB.child.minions.length).toBe(1);
-        expect(deckA.child.minions.length).toBe(1);
-        expect(handA.child.minions.length).toBe(0);
+        expect(boardA.child.cards.length).toBe(1);
+        expect(boardB.child.cards.length).toBe(1);
+        expect(deckA.child.cards.length).toBe(1);
+        expect(handA.child.cards.length).toBe(0);
         expect(roleC.child.attack.state.current).toBe(1);
         expect(roleC.child.health.state.current).toBe(1);
         expect(roleD.child.attack.state.current).toBe(1);
@@ -86,11 +86,11 @@ describe('bloodmage-thalnos', () => {
         // Verify both minions die
         expect(cardC.child.dispose.status).toBe(true);
         expect(cardD.child.dispose.status).toBe(true);
-        expect(boardA.child.minions.length).toBe(0);
-        expect(boardB.child.minions.length).toBe(0);
+        expect(boardA.child.cards.length).toBe(0);
+        expect(boardB.child.cards.length).toBe(0);
         
         // Verify deathrattle triggers and draws a card
-        expect(deckA.child.minions.length).toBe(0);
-        expect(handA.child.minions.length).toBe(1);
+        expect(deckA.child.cards.length).toBe(0);
+        expect(handA.child.cards.length).toBe(1);
     });
 }); 

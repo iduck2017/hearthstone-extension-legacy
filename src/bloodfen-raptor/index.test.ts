@@ -18,7 +18,7 @@ describe('bloodfen-raptor', () => {
                     hero: new MageModel(),
                     hand: new HandModel({
                         child: { 
-                            minions: [
+                            cards: [
                                 new BloodfenRaptorModel()
                             ] 
                         }
@@ -37,20 +37,20 @@ describe('bloodfen-raptor', () => {
 
     const boardA = game.child.playerA.child.board;
     const handA = game.child.playerA.child.hand;
-    const card = handA.child.minions.find((item: any) => item instanceof BloodfenRaptorModel);
+    const card = handA.child.cards.find((item: any) => item instanceof BloodfenRaptorModel);
     const role = card?.child.role;
 
     test('bloodfen-raptor-play', async () => {
-        expect(boardA.child.minions.length).toBe(0);
-        expect(handA.child.minions.length).toBe(1);
+        expect(boardA.child.cards.length).toBe(0);
+        expect(handA.child.cards.length).toBe(1);
 
         const promise = card?.play();
         await AnimeUtil.sleep();
         game.child.playerA.child.controller.set(0);
         await promise;
 
-        expect(boardA.child.minions.length).toBe(1);
-        expect(handA.child.minions.length).toBe(0);
+        expect(boardA.child.cards.length).toBe(1);
+        expect(handA.child.cards.length).toBe(0);
     });
 
     test('bloodfen-raptor-stats', async () => {

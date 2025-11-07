@@ -22,17 +22,16 @@ describe('holy-nova', () => {
                     hero: new MageModel(),
                     board: new BoardModel({
                         child: { 
-                            minions: [new WaterElementalModel()]
+                            cards: [new WaterElementalModel()]
                         }
                     }),
                     hand: new HandModel({
                         child: { 
-                            minions: [],
-                            spells: [new HolyNovaModel()]
+                            cards: [new HolyNovaModel()]
                         }
                     }),
                     deck: new DeckModel({
-                        child: { minions: [] }
+                        child: { cards: [] }
                     })
                 }
             }),
@@ -42,11 +41,11 @@ describe('holy-nova', () => {
                     hero: new MageModel(),
                     board: new BoardModel({
                         child: { 
-                            minions: [new WaterElementalModel()]
+                            cards: [new WaterElementalModel()]
                         }
                     }),
                     hand: new HandModel({
-                        child: { spells: [] }
+                        child: { cards: [] }
                     })
                 }
             })
@@ -59,9 +58,9 @@ describe('holy-nova', () => {
     const boardA = playerA.child.board;
     const boardB = playerB.child.board;
     const handA = playerA.child.hand;
-    const cardC = handA.child.spells.find(item => item instanceof HolyNovaModel);
-    const cardD = boardA.child.minions.find(item => item instanceof WaterElementalModel);
-    const cardE = boardB.child.minions.find(item => item instanceof WaterElementalModel);
+    const cardC = handA.child.cards.find(item => item instanceof HolyNovaModel);
+    const cardD = boardA.child.cards.find(item => item instanceof WaterElementalModel);
+    const cardE = boardB.child.cards.find(item => item instanceof WaterElementalModel);
     if (!cardC || !cardD || !cardE) throw new Error();
     const roleA = playerA.child.hero.child.role;
     const roleB = playerB.child.hero.child.role;

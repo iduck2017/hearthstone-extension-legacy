@@ -19,10 +19,10 @@ describe('hungry-crab', () => {
                     mana: new ManaModel({ state: { origin: 10 }}),
                     hero: new MageModel(),
                     board: new BoardModel({
-                        child: { minions: [new WispModel()] }
+                        child: { cards: [new WispModel()] }
                     }),
                     hand: new HandModel({
-                        child: { minions: [new HungryCrabModel()] }
+                        child: { cards: [new HungryCrabModel()] }
                     })
                 }
             }),
@@ -31,7 +31,7 @@ describe('hungry-crab', () => {
                     mana: new ManaModel({ state: { origin: 10 }}),
                     hero: new MageModel(),
                     hand: new HandModel({
-                        child: { minions: [
+                        child: { cards: [
                             new HungryCrabModel(),
                             new MurlocRaiderModel()
                         ]}
@@ -45,10 +45,10 @@ describe('hungry-crab', () => {
     const boardA = game.child.playerA.child.board;
     const handB = game.child.playerB.child.hand;
     const boardB = game.child.playerB.child.board;
-    const cardC = handA.child.minions.find((item: any) => item instanceof HungryCrabModel);
-    const cardD = boardA.child.minions.find((item: any) => item instanceof WispModel);
-    const cardE = handB.child.minions.find((item: any) => item instanceof HungryCrabModel);
-    const cardF = handB.child.minions.find((item: any) => item instanceof MurlocRaiderModel);
+    const cardC = handA.child.cards.find((item: any) => item instanceof HungryCrabModel);
+    const cardD = boardA.child.cards.find((item: any) => item instanceof WispModel);
+    const cardE = handB.child.cards.find((item: any) => item instanceof HungryCrabModel);
+    const cardF = handB.child.cards.find((item: any) => item instanceof MurlocRaiderModel);
     const roleC = cardC?.child.role;
     const roleD = cardD?.child.role;
     const roleE = cardE?.child.role;
@@ -58,7 +58,7 @@ describe('hungry-crab', () => {
 
     test('hungry-crab-play', async () => {
 
-        expect(boardA.child.minions.length).toBe(1);
+        expect(boardA.child.cards.length).toBe(1);
 
         let promise = cardC.play();
         await AnimeUtil.sleep();
@@ -68,7 +68,7 @@ describe('hungry-crab', () => {
         expect(game.child.playerA.child.controller.current).toBeUndefined();
         await promise;
 
-        expect(boardA.child.minions.length).toBe(2);
+        expect(boardA.child.cards.length).toBe(2);
         expect(roleC.child.attack.state.current).toBe(1); // Hungry Crab
         expect(roleC.child.attack.state.origin).toBe(1);
         expect(roleC.child.attack.state.current).toBe(1);
@@ -81,7 +81,7 @@ describe('hungry-crab', () => {
     })
 
     test('hungry-crab-battlecry', async () => {
-        expect(boardB.child.minions.length).toBe(0);
+        expect(boardB.child.cards.length).toBe(0);
         turn.next();
         
         // Play Murloc Raider first
@@ -90,7 +90,7 @@ describe('hungry-crab', () => {
         expect(game.child.playerB.child.controller.current?.options).toContain(0);
         game.child.playerB.child.controller.set(0);
         await promise;
-        expect(boardB.child.minions.length).toBe(1);
+        expect(boardB.child.cards.length).toBe(1);
 
         // Play Hungry Crab and trigger battlecry
         promise = cardE.play();
@@ -106,7 +106,7 @@ describe('hungry-crab', () => {
         expect(cardF.child.dispose.status).toBe(true); // Murloc Raider destroyed
         expect(cardF.child.dispose.state.isLock).toBe(true);
 
-        expect(boardB.child.minions.length).toBe(1); 
+        expect(boardB.child.cards.length).toBe(1); 
 
         expect(roleE.child.attack.state.current).toBe(3); // Hungry Crab +2/+2
         expect(roleE.child.attack.state.origin).toBe(1);

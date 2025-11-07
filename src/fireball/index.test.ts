@@ -21,10 +21,10 @@ describe('fireball', () => {
                     mana: new ManaModel({ state: { origin: 10 }}),
                     hero: new MageModel(),
                     board: new BoardModel({
-                        child: { minions: [] }
+                        child: { cards: [] }
                     }),
                     hand: new HandModel({
-                        child: { spells: [new FireballModel()] }
+                        child: { cards: [new FireballModel()] }
                     })
                 }
             }),
@@ -33,10 +33,10 @@ describe('fireball', () => {
                     mana: new ManaModel({ state: { origin: 10 }}),
                     hero: new MageModel(),
                     board: new BoardModel({
-                        child: { minions: [new WispModel()] }
+                        child: { cards: [new WispModel()] }
                     }),
                     hand: new HandModel({
-                        child: { spells: [] }
+                        child: { cards: [] }
                     })
                 }
             })
@@ -46,8 +46,8 @@ describe('fireball', () => {
     
     const handA = game.child.playerA.child.hand;
     const boardB = game.child.playerB.child.board;
-    const cardD = handA.child.spells.find(item => item instanceof FireballModel);
-    const cardC = boardB.child.minions.find(item => item instanceof WispModel);
+    const cardD = handA.child.cards.find(item => item instanceof FireballModel);
+    const cardC = boardB.child.cards.find(item => item instanceof WispModel);
     const roleA = game.child.playerA.child.hero.child.role;
     const roleB = game.child.playerB.child.hero.child.role;
     const roleC = cardC?.child.role;

@@ -29,7 +29,7 @@ export class PsychicConjurerBattlecryModel extends MinionBattlecryModel<[]> {
         if (!opponent) return;
         
         const deck = opponent.child.deck;
-        const cards = deck.refer.queue;
+        const cards = deck.child.cards;
         
         // If opponent has no cards in deck, do nothing
         if (cards.length === 0) return;
@@ -41,7 +41,7 @@ export class PsychicConjurerBattlecryModel extends MinionBattlecryModel<[]> {
         
         // Create a copy of the random card
         const hand = player.child.hand;
-        hand.copy(card);
+        hand.add(card, undefined, { isClone: true });
     }
 
 }

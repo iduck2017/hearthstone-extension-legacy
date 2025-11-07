@@ -1,4 +1,4 @@
-import { CostDecor, CostModel, FeatureModel, ManaModel, OperatorType, SecretCardModel, TurnModel } from "hearthstone-core";
+import { CostDecor, CostModel, FeatureModel, ManaModel, OperatorType, SecretCardModel, SpellCardModel, TurnModel } from "hearthstone-core";
 import { Event, EventUtil, Model, StateUtil, TemplUtil } from "set-piece";
 
 @TemplUtil.is('kirin-tor-mage-feature')
@@ -22,7 +22,7 @@ export class KirinTorMageContextModel extends FeatureModel {
 
     @StateUtil.on(self => self.modifyCost)
     private listenCost() {
-        return this.route.player?.proxy.child.hand.child.spells.child.cost.decor
+        return this.route.player?.proxy.child.hand.any(SpellCardModel).child.cost.decor
     }
     private modifyCost(that: CostModel, decor: CostDecor) {
         if (!this.state.isActive) return;

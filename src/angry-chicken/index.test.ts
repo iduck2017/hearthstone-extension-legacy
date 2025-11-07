@@ -17,17 +17,16 @@ describe('angry-chicken', () => {
                     mana: new ManaModel({ state: { origin: 10 }}),
                     hero: new MageModel(),
                     board: new BoardModel({
-                        child: { minions: [new AngryChickenModel()] }
+                        child: { cards: [new AngryChickenModel()] }
                     }),
                     hand: new HandModel({
                         child: { 
-                            minions: [],
-                            spells: [new PowerWordShieldModel()]
+                            cards: [new PowerWordShieldModel()]
                         }
                     }),
                     deck: new DeckModel({
                         child: { 
-                            minions: [new WispModel()]
+                            cards: [new WispModel()]
                         }
                     })
                 }
@@ -37,7 +36,7 @@ describe('angry-chicken', () => {
                     mana: new ManaModel({ state: { origin: 10 }}),
                     hero: new MageModel(),
                     board: new BoardModel({
-                        child: { minions: [new AngryChickenModel()] }
+                        child: { cards: [new AngryChickenModel()] }
                     })
                 }
             })
@@ -47,9 +46,9 @@ describe('angry-chicken', () => {
     const boardA = game.child.playerA.child.board;
     const boardB = game.child.playerB.child.board;
     const handA = game.child.playerA.child.hand;
-    const cardC = boardA.child.minions.find((item: any) => item instanceof AngryChickenModel);
-    const cardD = boardB.child.minions.find((item: any) => item instanceof AngryChickenModel);
-    const cardE = handA.child.spells.find((item: any) => item instanceof PowerWordShieldModel);
+    const cardC = boardA.child.cards.find((item: any) => item instanceof AngryChickenModel);
+    const cardD = boardB.child.cards.find((item: any) => item instanceof AngryChickenModel);
+    const cardE = handA.child.cards.find((item: any) => item instanceof PowerWordShieldModel);
     const roleC = cardC?.child.role;
     const roleD = cardD?.child.role;
     if (!roleC || !roleD || !cardE) throw new Error();
@@ -64,7 +63,7 @@ describe('angry-chicken', () => {
         // Check that Power Word: Shield was applied
         expect(roleC.child.health.state.current).toBe(3); // 1 + 2 = 3
         expect(roleC.child.attack.state.current).toBe(1); // Attack unchanged
-        expect(handA.child.minions.length).toBe(1); // Drew a Wisp
+        expect(handA.child.cards.length).toBe(1); // Drew a Wisp
     })
 
     test('angry-chicken-attack', async () => {

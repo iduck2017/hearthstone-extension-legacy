@@ -32,16 +32,16 @@ export class MindVisionEffectModel extends SpellEffectModel<[]> {
         
         const handB = opponent.child.hand;
         // If opponent has no cards, do nothing
-        if (handB.refer.queue.length === 0) return;
+        if (handB.child.cards.length === 0) return;
         
         // Select a random card from opponent's hand
-        const index = Math.floor(Math.random() * handB.refer.queue.length);
-        const card = handB.refer.queue[index];
+        const index = Math.floor(Math.random() * handB.child.cards.length);
+        const card = handB.child.cards[index];
         if (!card) return;
         
         // Create a copy of the random card
         const hand = player.child.hand;
-        hand.copy(card);
+        hand.add(card, undefined, { isClone: true });
     }
 
 }

@@ -22,10 +22,10 @@ describe('amani-berserker', () => {
                     mana: new ManaModel({ state: { origin: 10 }}),
                     hero: new MageModel(),
                     board: new BoardModel({
-                        child: { minions: [new AmaniBerserkerModel()] }
+                        child: { cards: [new AmaniBerserkerModel()] }
                     }),
                     hand: new HandModel({
-                        child: { minions: [new VoodooDoctorModel()] }
+                        child: { cards: [new VoodooDoctorModel()] }
                     })
                 }
             }),
@@ -34,7 +34,7 @@ describe('amani-berserker', () => {
                     mana: new ManaModel({ state: { origin: 10 }}),
                     hero: new MageModel(),
                     board: new BoardModel({
-                        child: { minions: [
+                        child: { cards: [
                             new WispModel(),
                             new StonetuskBoarModel()
                         ]}
@@ -49,10 +49,10 @@ describe('amani-berserker', () => {
     const handA = game.child.playerA.child.hand;
     const handB = game.child.playerB.child.hand;
     const turn = game.child.turn;
-    const cardC = boardA.child.minions.find((item: any) => item instanceof AmaniBerserkerModel);
-    const cardD = boardB.child.minions.find((item: any) => item instanceof WispModel);
-    const cardF = boardB.child.minions.find((item: any) => item instanceof StonetuskBoarModel);
-    const cardE = handA.child.minions.find((item: any) => item instanceof VoodooDoctorModel);
+    const cardC = boardA.child.cards.find((item: any) => item instanceof AmaniBerserkerModel);
+    const cardD = boardB.child.cards.find((item: any) => item instanceof WispModel);
+    const cardF = boardB.child.cards.find((item: any) => item instanceof StonetuskBoarModel);
+    const cardE = handA.child.cards.find((item: any) => item instanceof VoodooDoctorModel);
     const roleC = cardC?.child.role;
     const roleD = cardD?.child.role;
     const roleE = cardE?.child.role;
@@ -70,7 +70,7 @@ describe('amani-berserker', () => {
         // Verify wisp dies with health -1
         expect(roleD.child.health.state.current).toBe(-1);
         expect(cardD.child.dispose.status).toBe(true);
-        expect(boardB.child.minions.length).toBe(1);
+        expect(boardB.child.cards.length).toBe(1);
         
         // Verify Berserker gains attack power and has health 2
         expect(roleC.child.attack.state.current).toBe(5); // 2 base + 3 from enrage
@@ -92,7 +92,7 @@ describe('amani-berserker', () => {
         // Verify wisp dies with health -4
         expect(roleF.child.health.state.current).toBe(-4);
         expect(cardF.child.dispose.status).toBe(true);
-        expect(boardB.child.minions.length).toBe(0);
+        expect(boardB.child.cards.length).toBe(0);
         
         // Verify Berserker has health 1 and maintains attack power
         expect(roleC.child.attack.state.current).toBe(5); // Still has +3 attack from being damaged

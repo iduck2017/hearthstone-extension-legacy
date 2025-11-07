@@ -25,7 +25,7 @@ export class AegwynnTheGuardianContextModel extends FeatureModel {
 
     @EventUtil.on(self => self.handleDraw)
     private listenDraw() {
-        return this.route.player?.proxy.child.hand.child.minions.event?.onDraw
+        return this.route.player?.proxy.child.hand.any(MinionCardModel).event?.onDraw
     }
     private handleDraw(that: MinionCardModel, event: Event) {
         const player = this.route.player;

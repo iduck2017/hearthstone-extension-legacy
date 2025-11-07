@@ -13,7 +13,7 @@ describe('firey-war-axe', () => {
                     mana: new ManaModel({ state: { origin: 10 }}),
                     hero: new WarriorModel(),
                     hand: new HandModel({
-                        child: { weapons: [new FieryWarAxeModel()] }
+                        child: { cards: [new FieryWarAxeModel()] }
                     }),
                 }
             }),
@@ -22,7 +22,7 @@ describe('firey-war-axe', () => {
                     mana: new ManaModel({ state: { origin: 10 }}),
                     hero: new MageModel(),
                     board: new BoardModel({
-                        child: { minions: [new WispModel()] }
+                        child: { cards: [new WispModel()] }
                     }),
                 }
             }),
@@ -35,23 +35,23 @@ describe('firey-war-axe', () => {
     const handA = playerA.child.hand;
     const boardA = playerA.child.board;
     const boardB = playerB.child.board;
-    const cardC = boardB.child.minions.find(item => item instanceof WispModel);
+    const cardC = boardB.child.cards.find(item => item instanceof WispModel);
     const roleC = cardC?.child.role;
     const roleA = charA.child.role;
     const roleB = charB.child.role;
     if (!roleC) throw new Error();
     const turn = game.child.turn;
 
-    const weapon = handA.child.weapons.find(item => item instanceof FieryWarAxeModel);
+    const weapon = handA.child.cards.find(item => item instanceof FieryWarAxeModel);
     expect(weapon).toBeDefined();
     if (!weapon) throw new Error();
 
     test('fiery-war-axe-equip', async () => {
         expect(roleA.child.attack.state.current).toBe(0);
-        expect(handA.child.weapons.length).toBe(1);
+        expect(handA.child.cards.length).toBe(1);
         expect(boardA.child.weapon).toBeUndefined();
         await weapon.play();
-        expect(handA.child.weapons.length).toBe(0);
+        expect(handA.child.cards.length).toBe(0);
         expect(boardA.child.weapon).toBeDefined();
         expect(roleA.child.attack.state.current).toBe(3);
         expect(weapon?.child.attack.state.current).toBe(3);
@@ -78,8 +78,7 @@ describe('firey-war-axe', () => {
         expect(weapon.child.action.state.consume).toBe(1);
         expect(weapon.child.action.state.origin).toBe(2);
 
-        expect(boardB.child.minions.length).toBe(0);
-        expect(boardB.refer.queue.length).toBe(0);
+        expect(boardB.child.cards.length).toBe(0);
     })
 
     test('fiery-war-axe-deactive', () => {

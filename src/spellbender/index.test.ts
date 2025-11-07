@@ -22,16 +22,16 @@ describe('spellbender', () => {
                     mana: new ManaModel({ state: { origin: 10 }}),
                     hero: new MageModel(),
                     board: new BoardModel({
-                        child: { minions: [] }
+                        child: { cards: [] }
                     }),
                     hand: new HandModel({
                         child: {
-                            spells: [new FrostNovaModel(), new IceLanceModel()]
+                            cards: [new FrostNovaModel(), new IceLanceModel()]
                         }
                     }),
                     deck: new DeckModel({
                         child: {
-                            minions: []
+                            cards: []
                         }
                     })
                 }
@@ -42,7 +42,7 @@ describe('spellbender', () => {
                     hero: new MageModel(),
                     board: new BoardModel({
                         child: { 
-                            minions: [new WispModel()],
+                            cards: [new WispModel()],
                             secrets: [new SpellbenderModel()]
                         }
                     }),
@@ -56,17 +56,17 @@ describe('spellbender', () => {
     const playerB = game.child.playerB;
     const handA = playerA.child.hand;
     const boardB = playerB.child.board;
-    const cardC = handA.child.spells.find(item => item instanceof FrostNovaModel);
-    const cardD = handA.child.spells.find(item => item instanceof IceLanceModel);
-    const cardF = boardB.child.minions.find(item => item instanceof WispModel);
+    const cardC = handA.child.cards.find(item => item instanceof FrostNovaModel);
+    const cardD = handA.child.cards.find(item => item instanceof IceLanceModel);
+    const cardF = boardB.child.cards.find(item => item instanceof WispModel);
     const roleF = cardF?.child.role;
     if (!cardC || !cardD || !roleF) throw new Error();
 
     test('frost-nova-cast', async () => {
         // Check initial stats
         expect(playerA.child.mana.state.current).toBe(10);
-        expect(handA.child.spells.length).toBe(2);
-        expect(boardB.child.minions.length).toBe(1); // Only Wisp
+        expect(handA.child.cards.length).toBe(2);
+        expect(boardB.child.cards.length).toBe(1); // Only Wisp
         expect(boardB.child.secrets.length).toBe(1);
         expect(roleF.child.feats.child.frozen.state.isActive).toBe(false);
 
@@ -79,15 +79,15 @@ describe('spellbender', () => {
         // Spellbender should still be active (not triggered)
         expect(boardB.child.secrets.length).toBe(1);
         expect(playerA.child.mana.state.current).toBe(7); // 10 - 3 cost
-        expect(handA.child.spells.length).toBe(1); // Only Ice Lance left
+        expect(handA.child.cards.length).toBe(1); // Only Ice Lance left
     });
 
     test('ice-lance-cast', async () => {
         // Check initial stats
         expect(playerA.child.mana.state.current).toBe(7);
-        expect(handA.child.spells.length).toBe(1);
+        expect(handA.child.cards.length).toBe(1);
         expect(boardB.child.secrets.length).toBe(1);
-        expect(boardB.child.minions.length).toBe(1); // Only Wisp
+        expect(boardB.child.cards.length).toBe(1); // Only Wisp
         expect(roleF.child.feats.child.frozen.state.isActive).toBe(true);
 
         // Player A casts Ice Lance targeting Wisp (should trigger Spellbender)
@@ -100,8 +100,8 @@ describe('spellbender', () => {
         expect(boardB.child.secrets.length).toBe(0);
         
         // Check that Spellbender minion was summoned and gets frozen instead of Wisp
-        expect(boardB.child.minions.length).toBe(2); // Wisp + summoned Spellbender
-        const cardE = boardB.child.minions.find(item => item instanceof SpellbenderMinionModel);
+        expect(boardB.child.cards.length).toBe(2); // Wisp + summoned Spellbender
+        const cardE = boardB.child.cards.find(item => item instanceof SpellbenderMinionModel);
         expect(cardE).toBeDefined();
         if (!cardE) throw new Error();
 
@@ -112,6 +112,6 @@ describe('spellbender', () => {
         
         // Check mana and hand
         expect(playerA.child.mana.state.current).toBe(6); // 7 - 1 cost
-        expect(handA.child.spells.length).toBe(0);
+        expect(handA.child.cards.length).toBe(0);
     });
 });

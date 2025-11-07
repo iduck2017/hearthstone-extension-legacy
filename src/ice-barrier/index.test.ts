@@ -18,11 +18,11 @@ describe('ice-barrier', () => {
                     mana: new ManaModel({ state: { origin: 10 }}),
                     hero: new MageModel(),
                     board: new BoardModel({
-                        child: { minions: [new WispModel()] }
+                        child: { cards: [new WispModel()] }
                     }),
                     deck: new DeckModel({
                         child: {
-                            minions: []
+                            cards: []
                         }
                     })
                 }
@@ -32,7 +32,7 @@ describe('ice-barrier', () => {
                     mana: new ManaModel({ state: { origin: 10 }}),
                     hero: new MageModel(),
                     hand: new HandModel({
-                        child: { spells: [new IceBarrierModel()] }
+                        child: { cards: [new IceBarrierModel()] }
                     }),
                 }
             })
@@ -45,8 +45,8 @@ describe('ice-barrier', () => {
     const boardA = playerA.child.board;
     const boardB = playerB.child.board;
     const handB = playerB.child.hand;
-    const cardC = boardA.child.minions.find(item => item instanceof WispModel);
-    const cardD = handB.child.spells.find(item => item instanceof IceBarrierModel);
+    const cardC = boardA.child.cards.find(item => item instanceof WispModel);
+    const cardD = handB.child.cards.find(item => item instanceof IceBarrierModel);
     const roleC = cardC?.child.role;
     const heroB = playerB.child.hero;
     const roleB = heroB.child.role;
@@ -75,10 +75,10 @@ describe('ice-barrier', () => {
 
         // Player B plays Ice Barrier
         expect(boardB.child.secrets.length).toBe(0);
-        expect(handB.child.spells.length).toBe(1);
+        expect(handB.child.cards.length).toBe(1);
         await cardD.play();
         expect(boardB.child.secrets.length).toBe(1);
-        expect(handB.child.spells.length).toBe(0);
+        expect(handB.child.cards.length).toBe(0);
 
         // Turn passes to Player A
         game.child.turn.next();

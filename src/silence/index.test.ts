@@ -22,10 +22,10 @@ describe('silence', () => {
                     mana: new ManaModel({ state: { origin: 10 }}),
                     hero: new MageModel(),
                     board: new BoardModel({
-                        child: { minions: [new ManaWyrmModel()] }
+                        child: { cards: [new ManaWyrmModel()] }
                     }),
                     hand: new HandModel({
-                        child: { spells: [new IceLanceModel(), new SilenceModel()] }
+                        child: { cards: [new IceLanceModel(), new SilenceModel()] }
                     })
                 }
             }),
@@ -34,10 +34,10 @@ describe('silence', () => {
                     mana: new ManaModel({ state: { origin: 10 }}),
                     hero: new MageModel(),
                     board: new BoardModel({
-                        child: { minions: [] }
+                        child: { cards: [] }
                     }),
                     hand: new HandModel({
-                        child: { spells: [] }
+                        child: { cards: [] }
                     })
                 }
             })
@@ -50,9 +50,9 @@ describe('silence', () => {
     const boardA = playerA.child.board;
     const handA = playerA.child.hand;
     const heroB = playerB.child.hero;
-    const cardC = boardA.child.minions.find(item => item instanceof ManaWyrmModel);
-    const cardD = handA.child.spells.find(item => item instanceof IceLanceModel);
-    const cardE = handA.child.spells.find(item => item instanceof SilenceModel);
+    const cardC = boardA.child.cards.find(item => item instanceof ManaWyrmModel);
+    const cardD = handA.child.cards.find(item => item instanceof IceLanceModel);
+    const cardE = handA.child.cards.find(item => item instanceof SilenceModel);
     const roleC = cardC?.child.role;
     const roleB = heroB.child.role;
     if (!cardC || !cardD || !cardE || !roleC || !roleB) throw new Error();
@@ -63,7 +63,7 @@ describe('silence', () => {
         expect(roleC.child.health.state.current).toBe(3);
         expect(roleC.child.feats.child.frozen.state.isActive).toBe(false);
         expect(playerA.child.mana.state.current).toBe(10);
-        expect(handA.child.spells.length).toBe(2);
+        expect(handA.child.cards.length).toBe(2);
 
         // Player A uses Ice Lance on Mana Wyrm
         const promise = cardD.play();
@@ -77,7 +77,7 @@ describe('silence', () => {
         expect(roleC.child.feats.child.frozen.state.isActive).toBe(true);
         expect(roleC.child.action.status).toBe(false);
         expect(playerA.child.mana.state.current).toBe(9); // 10 - 1 cost
-        expect(handA.child.spells.length).toBe(1); // Ice Lance consumed
+        expect(handA.child.cards.length).toBe(1); // Ice Lance consumed
     });
 
     test('silence-cast', async () => {
@@ -97,7 +97,7 @@ describe('silence', () => {
         expect(roleC.child.health.state.current).toBe(3);
         expect(roleC.child.feats.child.frozen.state.isActive).toBe(false);
         expect(playerA.child.mana.state.current).toBe(9); // 9 - 0 cost
-        expect(handA.child.spells.length).toBe(0); // Silence consumed
+        expect(handA.child.cards.length).toBe(0); // Silence consumed
     });
 
     test('mana-wyrm-attack', async () => {

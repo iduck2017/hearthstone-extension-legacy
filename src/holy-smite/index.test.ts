@@ -20,10 +20,10 @@ describe('holy-smite', () => {
                     mana: new ManaModel({ state: { origin: 10 }}),
                     hero: new MageModel(),
                     board: new BoardModel({
-                        child: { minions: [] }
+                        child: { cards: [] }
                     }),
                     hand: new HandModel({
-                        child: { spells: [new HolySmiteModel()] }
+                        child: { cards: [new HolySmiteModel()] }
                     })
                 }
             }),
@@ -33,11 +33,11 @@ describe('holy-smite', () => {
                     hero: new MageModel(),
                     board: new BoardModel({
                         child: { 
-                            minions: [new WaterElementalModel()]
+                            cards: [new WaterElementalModel()]
                         }
                     }),
                     hand: new HandModel({
-                        child: { spells: [] }
+                        child: { cards: [] }
                     })
                 }
             })
@@ -49,8 +49,8 @@ describe('holy-smite', () => {
     const playerB = game.child.playerB;
     const handA = playerA.child.hand;
     const boardB = playerB.child.board;
-    const cardC = handA.child.spells.find(item => item instanceof HolySmiteModel);
-    const cardD = boardB.child.minions.find(item => item instanceof WaterElementalModel);
+    const cardC = handA.child.cards.find(item => item instanceof HolySmiteModel);
+    const cardD = boardB.child.cards.find(item => item instanceof WaterElementalModel);
     const roleD = cardD?.child.role;
     if (!cardC || !roleD) throw new Error();
 
@@ -59,8 +59,8 @@ describe('holy-smite', () => {
         expect(roleD.child.attack.state.current).toBe(3); // Water Elemental: 3/6
         expect(roleD.child.health.state.current).toBe(6);
         expect(playerA.child.mana.state.current).toBe(10);
-        expect(handA.child.spells.length).toBe(1);
-        expect(boardB.child.minions.length).toBe(1);
+        expect(handA.child.cards.length).toBe(1);
+        expect(boardB.child.cards.length).toBe(1);
 
         // Player A uses Holy Smite on Water Elemental
         const promise = cardC.play();
@@ -72,7 +72,7 @@ describe('holy-smite', () => {
         expect(roleD.child.attack.state.current).toBe(3); // Attack unchanged
         expect(roleD.child.health.state.current).toBe(3); // 6 - 3 damage
         expect(playerA.child.mana.state.current).toBe(9); // 10 - 1 cost
-        expect(handA.child.spells.length).toBe(0); // Holy Smite consumed
-        expect(boardB.child.minions.length).toBe(1); // Minion still on board
+        expect(handA.child.cards.length).toBe(0); // Holy Smite consumed
+        expect(boardB.child.cards.length).toBe(1); // Minion still on board
     });
 });

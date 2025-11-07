@@ -21,10 +21,10 @@ describe('murloc-tidehunter', () => {
                     mana: new ManaModel({ state: { origin: 10 }}),
                     hero: new MageModel(),
                     board: new BoardModel({
-                        child: { minions: [new WispModel()] }
+                        child: { cards: [new WispModel()] }
                     }),
                     hand: new HandModel({
-                        child: { minions: [new MurlocTidehunterModel()] }
+                        child: { cards: [new MurlocTidehunterModel()] }
                     })
                 }
             }),
@@ -33,10 +33,10 @@ describe('murloc-tidehunter', () => {
                     mana: new ManaModel({ state: { origin: 10 }}),
                     hero: new MageModel(),
                     board: new BoardModel({
-                        child: { minions: [] }
+                        child: { cards: [] }
                     }),
                     hand: new HandModel({
-                        child: { minions: [] }
+                        child: { cards: [] }
                     })
                 }
             })
@@ -46,12 +46,12 @@ describe('murloc-tidehunter', () => {
     
     const boardA = game.child.playerA.child.board;
     const handA = game.child.playerA.child.hand;
-    const cardA = handA.child.minions.find(item => item instanceof MurlocTidehunterModel);
+    const cardA = handA.child.cards.find(item => item instanceof MurlocTidehunterModel);
     if (!cardA) throw new Error();
 
     test('murloc-tidehunter-battlecry', async () => {
-        expect(boardA.child.minions.length).toBe(1);
-        expect(boardA.child.minions[0] instanceof WispModel).toBe(true);
+        expect(boardA.child.cards.length).toBe(1);
+        expect(boardA.child.cards[0] instanceof WispModel).toBe(true);
         
         // Play Murloc Tidehunter to the left of Wisp
         let promise = cardA.play();
@@ -59,10 +59,9 @@ describe('murloc-tidehunter', () => {
         game.child.playerA.child.controller.set(0);
         await promise;
 
-        expect(boardA.child.minions.length).toBe(3);
-        expect(boardA.refer.queue.length).toBe(3);
-        expect(boardA.refer.queue[0] instanceof MurlocTidehunterModel).toBe(true);
-        expect(boardA.refer.queue[1] instanceof MurlocScoutModel).toBe(true);
-        expect(boardA.refer.queue[2] instanceof WispModel).toBe(true);
+        expect(boardA.child.cards.length).toBe(3);
+        expect(boardA.child.cards[0] instanceof MurlocTidehunterModel).toBe(true);
+        expect(boardA.child.cards[1] instanceof MurlocScoutModel).toBe(true);
+        expect(boardA.child.cards[2] instanceof WispModel).toBe(true);
     })
 }) 

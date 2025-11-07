@@ -21,14 +21,14 @@ describe('cone-of-cold', () => {
                     mana: new ManaModel({ state: { origin: 10 }}),
                     hero: new MageModel(),
                     board: new BoardModel({
-                        child: { minions: [] }
+                        child: { cards: [] }
                     }),
                     hand: new HandModel({
-                        child: { spells: [new ConeOfColdModel()] }
+                        child: { cards: [new ConeOfColdModel()] }
                     }),
                     deck: new DeckModel({
                         child: { 
-                            minions: [] 
+                            cards: [] 
                         }
                     })
                 }
@@ -38,14 +38,14 @@ describe('cone-of-cold', () => {
                     mana: new ManaModel({ state: { origin: 10 }}),
                     hero: new MageModel(),
                     board: new BoardModel({
-                        child: { minions: [
+                        child: { cards: [
                             new WispModel(), 
                             new GoldshireFootmanModel(), 
                             new ManaWyrmModel()
                         ] }
                     }),
                     hand: new HandModel({
-                        child: { spells: [] }
+                        child: { cards: [] }
                     })
                 }
             })
@@ -57,10 +57,10 @@ describe('cone-of-cold', () => {
     const playerB = game.child.playerB;
     const handA = playerA.child.hand;
     const boardB = playerB.child.board;
-    const cardC = handA.child.spells.find(item => item instanceof ConeOfColdModel);
-    const cardD = boardB.child.minions.find(item => item instanceof WispModel);
-    const cardE = boardB.child.minions.find(item => item instanceof GoldshireFootmanModel);
-    const cardF = boardB.child.minions.find(item => item instanceof ManaWyrmModel);
+    const cardC = handA.child.cards.find(item => item instanceof ConeOfColdModel);
+    const cardD = boardB.child.cards.find(item => item instanceof WispModel);
+    const cardE = boardB.child.cards.find(item => item instanceof GoldshireFootmanModel);
+    const cardF = boardB.child.cards.find(item => item instanceof ManaWyrmModel);
     const roleD = cardD?.child.role;
     const roleE = cardE?.child.role;
     const roleF = cardF?.child.role;
@@ -74,8 +74,8 @@ describe('cone-of-cold', () => {
         expect(roleD.child.feats.child.frozen.state.isActive).toBe(false);
         expect(roleE.child.feats.child.frozen.state.isActive).toBe(false);
         expect(playerA.child.mana.state.current).toBe(10);
-        expect(handA.child.spells.length).toBe(1);
-        expect(boardB.child.minions.length).toBe(3);
+        expect(handA.child.cards.length).toBe(1);
+        expect(boardB.child.cards.length).toBe(3);
 
         // Player A uses Cone of Cold on Player B's Wisp (leftmost minion)
         const promise = cardC.play();
@@ -98,10 +98,10 @@ describe('cone-of-cold', () => {
         expect(roleF.child.feats.child.frozen.state.isActive).toBe(false);
         
         expect(playerA.child.mana.state.current).toBe(7); // 10 - 3 cost
-        expect(handA.child.spells.length).toBe(0);
+        expect(handA.child.cards.length).toBe(0);
 
         // Dead Wisp should be removed from board, Footman remains
-        expect(boardB.child.minions.length).toBe(2);
+        expect(boardB.child.cards.length).toBe(2);
     })
 
     test('turn-next', async () => {

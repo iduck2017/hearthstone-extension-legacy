@@ -19,7 +19,7 @@ describe('argent-squire', () => {
                     mana: new ManaModel({ state: { origin: 10 }}),
                     hero: new MageModel(),
                     board: new BoardModel({
-                        child: { minions: [new ArgentSquireModel()] }
+                        child: { cards: [new ArgentSquireModel()] }
                     }),
                 }
             }),
@@ -28,7 +28,7 @@ describe('argent-squire', () => {
                     mana: new ManaModel({ state: { origin: 10 }}),
                     hero: new MageModel(),
                     board: new BoardModel({
-                        child: { minions: [new ArgentSquireModel()] }
+                        child: { cards: [new ArgentSquireModel()] }
                     })
                 }
             })
@@ -38,8 +38,8 @@ describe('argent-squire', () => {
     
     const boardA = game.child.playerA.child.board;
     const boardB = game.child.playerB.child.board;
-    const cardC = boardA.child.minions.find(item => item instanceof ArgentSquireModel);
-    const cardD = boardB.child.minions.find(item => item instanceof ArgentSquireModel);
+    const cardC = boardA.child.cards.find(item => item instanceof ArgentSquireModel);
+    const cardD = boardB.child.cards.find(item => item instanceof ArgentSquireModel);
     const roleC = cardC?.child.role;
     const roleD = cardD?.child.role;
     if (!roleC || !roleD) throw new Error();
@@ -77,7 +77,7 @@ describe('argent-squire', () => {
         expect(cardC.child.dispose.status).toBe(true);
         expect(cardD.child.dispose.status).toBe(true);
 
-        expect(boardA.child.minions.length).toBe(0);
-        expect(boardB.child.minions.length).toBe(0);
+        expect(boardA.child.cards.length).toBe(0);
+        expect(boardB.child.cards.length).toBe(0);
     })
 })

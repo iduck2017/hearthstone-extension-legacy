@@ -23,17 +23,16 @@ describe('northshire-cleric', () => {
                     mana: new ManaModel({ state: { origin: 10 }}),
                     hero: new MageModel(),
                     board: new BoardModel({
-                        child: { minions: [new NorthshireClericModel()] }
+                        child: { cards: [new NorthshireClericModel()] }
                     }),
                     hand: new HandModel({
                         child: { 
-                            minions: [],
-                            spells: [new CircleOfHealingModel()]
+                            cards: [new CircleOfHealingModel()]
                         }
                     }),
                     deck: new DeckModel({
                         child: { 
-                            minions: [
+                            cards: [
                                 new WispModel(), 
                                 new WispModel(), 
                                 new WispModel(),
@@ -50,11 +49,11 @@ describe('northshire-cleric', () => {
                     hero: new MageModel(),
                     board: new BoardModel({
                         child: { 
-                            minions: [new ManaWyrmModel(), new ManaWyrmModel()]
+                            cards: [new ManaWyrmModel(), new ManaWyrmModel()]
                         }
                     }),
                     hand: new HandModel({
-                        child: { spells: [] }
+                        child: { cards: [] }
                     })
                 }
             })
@@ -68,9 +67,9 @@ describe('northshire-cleric', () => {
     const boardB = playerB.child.board;
     const handA = playerA.child.hand;
     const deckA = playerA.child.deck;
-    const cardC = boardA.child.minions.find(item => item instanceof NorthshireClericModel);
-    const cardE = boardB.child.minions.find(item => item instanceof ManaWyrmModel);
-    const cardD = handA.child.spells.find(item => item instanceof CircleOfHealingModel);
+    const cardC = boardA.child.cards.find(item => item instanceof NorthshireClericModel);
+    const cardE = boardB.child.cards.find(item => item instanceof ManaWyrmModel);
+    const cardD = handA.child.cards.find(item => item instanceof CircleOfHealingModel);
     const roleC = cardC?.child.role;
     const roleE = cardE?.child.role;
     if (!roleC || !roleE || !cardD) throw new Error();
@@ -99,8 +98,8 @@ describe('northshire-cleric', () => {
         expect(roleE.child.health.state.current).toBe(2); // Damaged
 
         // Check initial hand and deck size
-        expect(handA.refer.queue.length).toBe(1); // Only Circle of Healing
-        expect(deckA.refer.queue.length).toBe(5); // 5 Wisps
+        expect(handA.child.cards.length).toBe(1); // Only Circle of Healing
+        expect(deckA.child.cards.length).toBe(5); // 5 Wisps
 
         // Player A uses Circle of Healing
         const promise = cardD.play();
@@ -111,8 +110,8 @@ describe('northshire-cleric', () => {
         expect(roleE.child.health.state.current).toBe(3); // 2 + 4 = 3 (capped at max)
 
         // Player A should have drawn 2 cards (one for each minion healed)
-        expect(handA.refer.queue.length).toBe(2); 
-        expect(deckA.refer.queue.length).toBe(3); // 5 - 2 = 3 (2 cards drawn from deck)
+        expect(handA.child.cards.length).toBe(2); 
+        expect(deckA.child.cards.length).toBe(3); // 5 - 2 = 3 (2 cards drawn from deck)
 
         expect(playerA.child.mana.state.current).toBe(10); // 10 - 0 cost
     });

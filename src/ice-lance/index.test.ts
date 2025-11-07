@@ -21,10 +21,10 @@ describe('ice-lance', () => {
                     mana: new ManaModel({ state: { origin: 10 }}),
                     hero: new MageModel(),
                     board: new BoardModel({
-                        child: { minions: [] }
+                        child: { cards: [] }
                     }),
                     hand: new HandModel({
-                        child: { spells: [new IceLanceModel()] }
+                        child: { cards: [new IceLanceModel()] }
                     })
                 }
             }),
@@ -33,10 +33,10 @@ describe('ice-lance', () => {
                     mana: new ManaModel({ state: { origin: 10 }}),
                     hero: new MageModel(),
                     board: new BoardModel({
-                        child: { minions: [new WispModel()] }
+                        child: { cards: [new WispModel()] }
                     }),
                     hand: new HandModel({
-                        child: { spells: [new IceLanceModel()] }
+                        child: { cards: [new IceLanceModel()] }
                     })
                 }
             })
@@ -49,9 +49,9 @@ describe('ice-lance', () => {
     const handA = playerA.child.hand;
     const handB = playerB.child.hand;
     const boardB = playerB.child.board;
-    const cardC = boardB.child.minions.find(item => item instanceof WispModel);
-    const cardD = handA.child.spells.find(item => item instanceof IceLanceModel);
-    const cardE = handB.child.spells.find(item => item instanceof IceLanceModel);
+    const cardC = boardB.child.cards.find(item => item instanceof WispModel);
+    const cardD = handA.child.cards.find(item => item instanceof IceLanceModel);
+    const cardE = handB.child.cards.find(item => item instanceof IceLanceModel);
     const roleA = playerA.child.hero.child.role;
     const roleB = playerB.child.hero.child.role;
     const roleC = cardC?.child.role;
@@ -61,7 +61,7 @@ describe('ice-lance', () => {
     test('ice-lance-cast', async () => {
         // Target is not frozen initially
         expect(playerA.child.mana.state.current).toBe(10);
-        expect(handA.child.spells.length).toBe(1);
+        expect(handA.child.cards.length).toBe(1);
         expect(roleC.child.feats.child.frozen.state.isActive).toBeFalsy();
 
         // Play Ice Lance targeting enemy minion
@@ -79,13 +79,13 @@ describe('ice-lance', () => {
         expect(turn.refer.current).toBe(playerB);
         expect(roleC.child.feats.child.frozen.state.isActive).toBe(true);
         
-        expect(handA.child.spells.length).toBe(0);
+        expect(handA.child.cards.length).toBe(0);
         expect(roleC.child.action.status).toBeFalsy();
     })
 
     test('ice-lance-cast', async () => {
         expect(playerB.child.mana.state.current).toBe(10);
-        expect(handB.child.spells.length).toBe(1);
+        expect(handB.child.cards.length).toBe(1);
         expect(roleC.child.feats.child.frozen.state.isActive).toBe(true);
 
         let promise = cardE.play();
@@ -96,7 +96,7 @@ describe('ice-lance', () => {
         await promise;
 
         expect(playerB.child.mana.state.current).toBe(9);
-        expect(handA.child.spells.length).toBe(0);
+        expect(handA.child.cards.length).toBe(0);
         expect(roleC.child.action.status).toBeFalsy();
         expect(roleC.child.health.state.current).toBe(-3);
         expect(cardC.child.dispose.status).toBe(true);

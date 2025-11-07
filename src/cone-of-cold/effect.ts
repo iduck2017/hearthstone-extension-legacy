@@ -38,8 +38,8 @@ export class ConeOfColdEffectModel extends SpellEffectModel<[RoleModel]> {
         // Get the board that contains the target minion
         const board = target.route.board;
         if (!board) return;
-        const index = board.refer.queue.indexOf(target.route.card);
-        const cards = board.refer.queue.slice(Math.max(0, index - 1), index + 2);
+        const index = board.child.cards.indexOf(target.route.card);
+        const cards = board.child.cards.slice(Math.max(0, index - 1), index + 2);
         const minions: MinionCardModel[] = [];
         cards.forEach((item) => {
             if (item instanceof MinionCardModel) minions.push(item);

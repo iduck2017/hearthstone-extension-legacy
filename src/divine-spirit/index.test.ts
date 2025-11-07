@@ -21,17 +21,16 @@ describe('divine-spirit', () => {
                     hero: new MageModel(),
                     board: new BoardModel({
                         child: { 
-                            minions: [new WaterElementalModel()]
+                            cards: [new WaterElementalModel()]
                         }
                     }),
                     hand: new HandModel({
                         child: { 
-                            minions: [],
-                            spells: [new DivineSpiritModel()]
+                            cards: [new DivineSpiritModel()]
                         }
                     }),
                     deck: new DeckModel({
-                        child: { minions: [] }
+                        child: { cards: [] }
                     })
                 }
             }),
@@ -40,10 +39,10 @@ describe('divine-spirit', () => {
                     mana: new ManaModel({ state: { origin: 10 }}),
                     hero: new MageModel(),
                     board: new BoardModel({
-                        child: { minions: [] }
+                        child: { cards: [] }
                     }),
                     hand: new HandModel({
-                        child: { spells: [] }
+                        child: { cards: [] }
                     })
                 }
             })
@@ -54,8 +53,8 @@ describe('divine-spirit', () => {
     const playerA = game.child.playerA;
     const boardA = playerA.child.board;
     const handA = playerA.child.hand;
-    const cardC = handA.child.spells.find(item => item instanceof DivineSpiritModel);
-    const cardD = boardA.child.minions.find(item => item instanceof WaterElementalModel);
+    const cardC = handA.child.cards.find(item => item instanceof DivineSpiritModel);
+    const cardD = boardA.child.cards.find(item => item instanceof WaterElementalModel);
     if (!cardC || !cardD) throw new Error();
     const roleD = cardD?.child.role;
 
@@ -64,7 +63,7 @@ describe('divine-spirit', () => {
         expect(roleD.child.attack.state.current).toBe(3); // Water Elemental: 3/6
         expect(roleD.child.health.state.current).toBe(6);
         expect(playerA.child.mana.state.current).toBe(10);
-        expect(handA.refer.queue.length).toBe(1);
+        expect(handA.child.cards.length).toBe(1);
 
         // Player A uses Divine Spirit on Water Elemental
         const promise = cardC.play();
@@ -77,7 +76,7 @@ describe('divine-spirit', () => {
         expect(roleD.child.health.state.current).toBe(12); // 6 + 6 = 12 (doubled)
 
         // Divine Spirit should be consumed
-        expect(handA.refer.queue.length).toBe(0); // Divine Spirit consumed
+        expect(handA.child.cards.length).toBe(0); // Divine Spirit consumed
         expect(playerA.child.mana.state.current).toBe(8); // 10 - 2 cost
     });
 });

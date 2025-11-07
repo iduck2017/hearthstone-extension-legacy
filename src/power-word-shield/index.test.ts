@@ -21,17 +21,16 @@ describe('power-word-shield', () => {
                     mana: new ManaModel({ state: { origin: 10 }}),
                     hero: new MageModel(),
                     board: new BoardModel({
-                        child: { minions: [] }
+                        child: { cards: [] }
                     }),
                     hand: new HandModel({
                         child: { 
-                            minions: [],
-                            spells: [new PowerWordShieldModel()]
+                            cards: [new PowerWordShieldModel()]
                         }
                     }),
                     deck: new DeckModel({
                         child: { 
-                            minions: [new WispModel(), new WispModel(), new WispModel()]
+                            cards: [new WispModel(), new WispModel(), new WispModel()]
                         }
                     })
                 }
@@ -42,11 +41,11 @@ describe('power-word-shield', () => {
                     hero: new MageModel(),
                     board: new BoardModel({
                         child: { 
-                            minions: [new StonetuskBoarModel()]
+                            cards: [new StonetuskBoarModel()]
                         }
                     }),
                     hand: new HandModel({
-                        child: { spells: [] }
+                        child: { cards: [] }
                     })
                 }
             })
@@ -59,8 +58,8 @@ describe('power-word-shield', () => {
     const boardB = playerB.child.board;
     const handA = playerA.child.hand;
     const deckA = playerA.child.deck;
-    const cardC = handA.child.spells.find(item => item instanceof PowerWordShieldModel);
-    const cardD = boardB.child.minions.find(item => item instanceof StonetuskBoarModel);
+    const cardC = handA.child.cards.find(item => item instanceof PowerWordShieldModel);
+    const cardD = boardB.child.cards.find(item => item instanceof StonetuskBoarModel);
     const roleD = cardD?.child.role;
     if (!cardC || !roleD) throw new Error();
 
@@ -69,8 +68,8 @@ describe('power-word-shield', () => {
         expect(roleD.child.attack.state.current).toBe(1); // Stonetusk Boar: 1/1
         expect(roleD.child.health.state.current).toBe(1);
         expect(playerA.child.mana.state.current).toBe(10);
-        expect(handA.refer.queue.length).toBe(1);
-        expect(deckA.refer.queue.length).toBe(3);
+        expect(handA.child.cards.length).toBe(1);
+        expect(deckA.child.cards.length).toBe(3);
 
         // Player A uses Power Word: Shield on Stonetusk Boar
         const promise = cardC.play();
@@ -84,8 +83,8 @@ describe('power-word-shield', () => {
 
         
         // Player A should have drawn a card
-        expect(handA.refer.queue.length).toBe(1); // Power Word: Shield consumed, 1 card drawn
-        expect(deckA.refer.queue.length).toBe(2); // 3 - 1 = 2 (1 card drawn from deck)
+        expect(handA.child.cards.length).toBe(1); // Power Word: Shield consumed, 1 card drawn
+        expect(deckA.child.cards.length).toBe(2); // 3 - 1 = 2 (1 card drawn from deck)
 
         expect(playerA.child.mana.state.current).toBe(9); // 10 - 1 cost
     });
