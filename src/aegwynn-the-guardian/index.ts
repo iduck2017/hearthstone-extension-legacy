@@ -33,7 +33,7 @@ export class AegwynnTheGuardianModel extends MinionCardModel {
                 ...props.state,
             },
             child: {
-                cost: props.child?.cost ??  new CostModel({ state: { origin: 5 }}),
+                cost: props.child?.cost ?? new CostModel({ state: { origin: 5 }}),
                 role: props.child?.role ?? new RoleModel({
                     child: {
                         attack: new RoleAttackModel({ state: { origin: 5 }}),

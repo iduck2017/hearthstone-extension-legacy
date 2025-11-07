@@ -24,7 +24,6 @@ import { boot } from "../boot";
 
 describe('aegwynn-the-guardian', () => {
     const game = new GameModel({
-        state: { debug: { isDrawDisabled: true }},
         child: {
             playerA: new PlayerModel({
                 child: {
@@ -90,7 +89,7 @@ describe('aegwynn-the-guardian', () => {
         expect(roleD.child.health.state.current).toBe(5); // Aegwynn: 5/5
         expect(roleD.child.attack.state.current).toBe(5);
         expect(playerA.child.mana.state.current).toBe(10);
-        expect(handA.child.cards.length).toBe(1); // Fireball only (draw disabled)
+        expect(handA.child.cards.length).toBe(2); 
 
         // Player A uses Fireball on Aegwynn
         const promise = cardC.play();
@@ -102,7 +101,7 @@ describe('aegwynn-the-guardian', () => {
         expect(roleD.child.health.state.current).toBe(-1);
         expect(cardD.child.dispose.status).toBe(true);
         expect(playerA.child.mana.state.current).toBe(6); // 10 - 4 cost
-        expect(handA.child.cards.length).toBe(0);
+        expect(handA.child.cards.length).toBe(1); // wisp
     });
 
     test('wisp-play', async () => {
@@ -110,7 +109,7 @@ describe('aegwynn-the-guardian', () => {
         game.child.turn.next();
         // Check initial stats
         expect(playerB.child.mana.state.current).toBe(10);
-        expect(handB.child.cards.length).toBe(3); // 3 spells (draw disabled)
+        expect(handB.child.cards.length).toBe(4);
         expect(deckB.child.cards.length).toBe(2);
 
         // Play Wisp
@@ -121,36 +120,33 @@ describe('aegwynn-the-guardian', () => {
         // Check Wisp is played
         expect(playerB.child.mana.state.current).toBe(10); // 10 - 0 cost
         expect(handB.child.cards.length).toBe(3); // 3 spells remaining
-        expect(boardB.child.cards.length).toBe(2); // Aegwynn + Wisp
+        expect(boardB.child.cards.length).toBe(1); // Wisp
     });
 
     test('frostbolt-cast', async () => {
         // Find Wisp on board (it was played in previous test)
-        const wispOnBoard = boardB.child.cards.find(item => item instanceof WispModel);
-        const roleHOnBoard = wispOnBoard?.child.role;
-        if (!roleHOnBoard) throw new Error('Wisp not found on board');
         
         // Check initial stats
-        expect(roleHOnBoard.child.health.state.current).toBe(1); // Wisp: 1/1
+        expect(roleH.child.health.state.current).toBe(1); // Wisp: 1/1
         expect(playerB.child.mana.state.current).toBe(10);
         expect(handB.child.cards.length).toBe(3);
 
         // Player B uses Frostbolt on Wisp (with +2 spell damage from Aegwynn's deathrattle)
         const promise = cardE.play();
-        expect(playerB.child.controller.current?.options).toContain(roleHOnBoard);
-        playerB.child.controller.set(roleHOnBoard);
+        expect(playerB.child.controller.current?.options).toContain(roleH);
+        playerB.child.controller.set(roleH);
         await promise;
 
         // Wisp should die (1 - 5 = -4) due to 3 + 2 = 5 damage
-        expect(roleHOnBoard.child.health.state.current).toBe(-4);
-        expect(wispOnBoard.child.dispose.status).toBe(true);
+        expect(roleH.child.health.state.current).toBe(-4);
+        expect(cardH.child.dispose.status).toBe(true);
         expect(playerB.child.mana.state.current).toBe(8); // 10 - 2 cost
         expect(handB.child.cards.length).toBe(2);
     });
 
     test('arcane-intellect-cast', async () => {
         // Check initial stats
-        expect(playerB.child.mana.state.current).toBe(10); // Reset to 10 (new turn)
+        expect(playerB.child.mana.state.current).toBe(8); // Reset to 10 (new turn)
         expect(handB.child.cards.length).toBe(2); // 2 spells
         expect(deckB.child.cards.length).toBe(2);
 
@@ -165,7 +161,7 @@ describe('aegwynn-the-guardian', () => {
 
     test('stonetusk-boar-play', async () => {
         // Check initial stats
-        expect(playerB.child.mana.state.current).toBe(10); // Reset to 10 (new turn)
+        expect(playerB.child.mana.state.current).toBe(5); 
         expect(handB.child.cards.length).toBe(3); // 2 minions + 1 spell
         expect(boardB.child.cards.length).toBe(0); // Board cleared between tests
 
@@ -180,21 +176,21 @@ describe('aegwynn-the-guardian', () => {
         await promise;
 
         // Check both minions are played
-        expect(playerB.child.mana.state.current).toBe(10); // Reset to 10 (new turn)
+        expect(playerB.child.mana.state.current).toBe(3); // Reset to 10 (new turn)
         expect(handB.child.cards.length).toBe(1); // 1 spell remaining
         expect(boardB.child.cards.length).toBe(2);
     });
 
     test('arcane-missiles', async () => {
         // Check initial stats
-        expect(playerB.child.mana.state.current).toBe(10); // Reset to 10 (new turn)
+        expect(playerB.child.mana.state.current).toBe(3); 
         expect(roleA.child.health.state.current).toBe(30); // Player A hero: 30 health
 
         // Player B uses Arcane Missiles (with +2 spell damage from inherited powers)
         await cardG.play();
 
         // Should deal 3 + 2 = 5 damage to Player A (but may be 3 if spell damage not applied)
-        expect(roleA.child.health.state.current).toBe(27); // 30 - 3 = 27 (actual damage)
-        expect(handB.child.cards.length).toBe(1); // Arcane Missiles consumed, but may have other cards
+        expect(roleA.child.health.state.current).toBe(25); // 30 - 5 = 25 (actual damage)
+        expect(handB.child.cards.length).toBe(0);
     });
 });
