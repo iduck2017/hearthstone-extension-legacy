@@ -19,10 +19,10 @@ describe('arcane-explosion', () => {
                     mana: new ManaModel({ state: { origin: 10 }}),
                     hero: new MageModel(),
                     board: new BoardModel({
-                        child: { minions: [] }
+                        child: { cards: [] }
                     }),
                     hand: new HandModel({
-                        child: { spells: [new ArcaneExplosionModel()] }
+                        child: { cards: [new ArcaneExplosionModel()] }
                     })
                 }
             }),
@@ -31,10 +31,10 @@ describe('arcane-explosion', () => {
                     mana: new ManaModel({ state: { origin: 10 }}),
                     hero: new MageModel(),
                     board: new BoardModel({
-                        child: { minions: [new WispModel(), new GoldshireFootmanModel()] }
+                        child: { cards: [new WispModel(), new GoldshireFootmanModel()] }
                     }),
                     hand: new HandModel({
-                        child: { spells: [] }
+                        child: { cards: [] }
                     })
                 }
             })
@@ -46,33 +46,33 @@ describe('arcane-explosion', () => {
     const playerB = game.child.playerB;
     const handA = playerA.child.hand;
     const boardB = playerB.child.board;
-    const cardD = handA.child.spells.find(item => item instanceof ArcaneExplosionModel);
-    const cardE = boardB.child.minions.find(item => item instanceof WispModel);
-    const cardF = boardB.child.minions.find(item => item instanceof GoldshireFootmanModel);
+    const cardD = handA.child.cards.find(item => item instanceof ArcaneExplosionModel);
+    const cardE = boardB.child.cards.find(item => item instanceof WispModel);
+    const cardF = boardB.child.cards.find(item => item instanceof GoldshireFootmanModel);
     const roleE = cardE?.child.role;
     const roleF = cardF?.child.role;
     if (!cardD || !roleE || !roleF) throw new Error();
 
     test('arcane-explosion-cast', async () => {
         expect(playerA.child.mana.state.current).toBe(10);
-        expect(handA.child.spells.length).toBe(1);
+        expect(handA.child.cards.length).toBe(1);
         expect(roleE.child.health.state.current).toBe(1); // Wisp: 1 health
         expect(roleF.child.health.state.current).toBe(2); // Goldshire Footman: 2 health
-        expect(boardB.child.minions.length).toBe(2);
+        expect(boardB.child.cards.length).toBe(2);
 
         // Play Arcane Explosion - no target selection needed
         await cardD.play();
 
         expect(playerA.child.mana.state.current).toBe(8); // 10 - 2 cost
-        expect(handA.child.spells.length).toBe(0);
+        expect(handA.child.cards.length).toBe(0);
         
         // All enemy minions should take 1 damage
         expect(roleE.child.health.state.current).toBe(0); // Wisp: 1 -> 0 (dies)
         expect(roleF.child.health.state.current).toBe(1); // Goldshire Footman: 2 -> 1
 
         // Dead minion should be removed from board
-        expect(boardB.child.minions.length).toBe(1);
-        expect(boardB.child.minions[0]).toBe(cardF);
+        expect(boardB.child.cards.length).toBe(1);
+        expect(boardB.child.cards[0]).toBe(cardF);
     })
 
 })

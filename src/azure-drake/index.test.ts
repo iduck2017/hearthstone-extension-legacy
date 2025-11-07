@@ -21,19 +21,17 @@ describe('azure-drake', () => {
                     hero: new MageModel(),
                     board: new BoardModel({
                         child: { 
-                            minions: []
+                            cards: []
                         }
                     }),
                     hand: new HandModel({
                         child: { 
-                            minions: [new AzureDrakeModel()],
-                            spells: []
+                            cards: [new AzureDrakeModel()]
                         }
                     }),
                     deck: new DeckModel({
                         child: { 
-                            minions: [],
-                            spells: [new FireballModel()]
+                            cards: [new FireballModel()]
                         }
                     })
                 }
@@ -44,11 +42,11 @@ describe('azure-drake', () => {
                     hero: new MageModel(),
                     board: new BoardModel({
                         child: { 
-                            minions: []
+                            cards: []
                         }
                     }),
                     hand: new HandModel({
-                        child: { spells: [] }
+                        child: { cards: [] }
                     })
                 }
             })
@@ -61,8 +59,8 @@ describe('azure-drake', () => {
     const boardA = playerA.child.board;
     const handA = playerA.child.hand;
     const deckA = playerA.child.deck;
-    const cardC = handA.refer.queue.find(item => item instanceof AzureDrakeModel);
-    const cardD = deckA.refer.queue.find(item => item instanceof FireballModel);
+    const cardC = handA.child.cards.find(item => item instanceof AzureDrakeModel);
+    const cardD = deckA.child.cards.find(item => item instanceof FireballModel);
     if (!cardC || !cardD) throw new Error();
     const roleA = playerA.child.hero.child.role;
     const roleB = playerB.child.hero.child.role;
@@ -72,8 +70,8 @@ describe('azure-drake', () => {
         // Check initial state
         expect(roleC.child.attack.state.current).toBe(4); // Azure Drake: 4/4
         expect(roleC.child.health.state.current).toBe(4);
-        expect(handA.refer.queue.length).toBe(1); // Azure Drake in hand
-        expect(deckA.refer.queue.length).toBe(1); // Fireball in deck
+        expect(handA.child.cards.length).toBe(1); // Azure Drake in hand
+        expect(deckA.child.cards.length).toBe(1); // Fireball in deck
         expect(playerA.child.mana.state.current).toBe(10); // Full mana
 
         // Play Azure Drake
@@ -82,9 +80,9 @@ describe('azure-drake', () => {
         await promise;
 
         // Azure Drake should be on board and Fireball should be drawn
-        expect(boardA.refer.queue.length).toBe(1); // Azure Drake on board
-        expect(handA.refer.queue.length).toBe(1); // Fireball drawn to hand
-        expect(deckA.refer.queue.length).toBe(0); // Fireball moved from deck
+        expect(boardA.child.cards.length).toBe(1); // Azure Drake on board
+        expect(handA.child.cards.length).toBe(1); // Fireball drawn to hand
+        expect(deckA.child.cards.length).toBe(0); // Fireball moved from deck
         expect(playerA.child.mana.state.current).toBe(5); // 10 - 5 = 5
     });
 
@@ -100,7 +98,7 @@ describe('azure-drake', () => {
         expect(roleB.child.health.state.current).toBe(23); // 30 - 7 = 23
 
         // Fireball should be consumed
-        expect(handA.refer.queue.filter(item => item instanceof FireballModel).length).toBe(0); // Fireball consumed
+        expect(handA.child.cards.filter(item => item instanceof FireballModel).length).toBe(0); // Fireball consumed
         expect(playerA.child.mana.state.current).toBe(1); // 5 - 4 = 1
     });
 });

@@ -21,17 +21,16 @@ describe('frost-elemental', () => {
                     hero: new MageModel(),
                     board: new BoardModel({
                         child: { 
-                            minions: []
+                            cards: []
                         }
                     }),
                     hand: new HandModel({
                         child: { 
-                            minions: [new FrostElementalModel()],
-                            spells: []
+                            cards: [new FrostElementalModel()]
                         }
                     }),
                     deck: new DeckModel({
-                        child: { minions: [] }
+                        child: { cards: [] }
                     })
                 }
             }),
@@ -41,11 +40,11 @@ describe('frost-elemental', () => {
                     hero: new MageModel(),
                     board: new BoardModel({
                         child: { 
-                            minions: [new WispModel()]
+                            cards: [new WispModel()]
                         }
                     }),
                     hand: new HandModel({
-                        child: { spells: [] }
+                        child: { cards: [] }
                     })
                 }
             })
@@ -58,8 +57,8 @@ describe('frost-elemental', () => {
     const boardA = playerA.child.board;
     const boardB = playerB.child.board;
     const handA = playerA.child.hand;
-    const cardC = handA.child.minions.find(item => item instanceof FrostElementalModel);
-    const cardD = boardB.child.minions.find(item => item instanceof WispModel);
+    const cardC = handA.child.cards.find(item => item instanceof FrostElementalModel);
+    const cardD = boardB.child.cards.find(item => item instanceof WispModel);
     if (!cardC || !cardD) throw new Error();
     const roleA = playerA.child.hero.child.role;
     const roleB = playerB.child.hero.child.role;
@@ -72,7 +71,7 @@ describe('frost-elemental', () => {
         expect(roleC.child.health.state.current).toBe(5);
         expect(roleD.child.attack.state.current).toBe(1); // Wisp: 1/1
         expect(roleD.child.health.state.current).toBe(1);
-        expect(handA.child.minions.length).toBe(1); // Frost Elemental in hand
+        expect(handA.child.cards.length).toBe(1); // Frost Elemental in hand
         expect(playerA.child.mana.state.current).toBe(10); // Full mana
 
         // Play Frost Elemental
@@ -89,8 +88,8 @@ describe('frost-elemental', () => {
         expect(roleD.child.feats.child.frozen.state.isActive).toBe(true);
 
         // Frost Elemental should be on board
-        expect(boardA.child.minions.length).toBe(1); // Frost Elemental on board
-        expect(handA.child.minions.length).toBe(0); // Frost Elemental moved to board
+        expect(boardA.child.cards.length).toBe(1); // Frost Elemental on board
+        expect(handA.child.cards.length).toBe(0); // Frost Elemental moved to board
         expect(playerA.child.mana.state.current).toBe(4); // 10 - 6 = 4
     });
 });

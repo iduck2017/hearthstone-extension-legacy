@@ -20,10 +20,10 @@ describe('voodoo-doctor', () => {
                     hero: new MageModel(),
                     mana: new ManaModel({ state: { origin: 10 }}),
                     board: new BoardModel({
-                        child: { minions: [new WispModel()] }
+                        child: { cards: [new WispModel()] }
                     }),
                     hand: new HandModel({
-                        child: { minions: [new VoodooDoctorModel()] }
+                        child: { cards: [new VoodooDoctorModel()] }
                     })
                 }
             }),
@@ -39,8 +39,8 @@ describe('voodoo-doctor', () => {
     const turn = game.child.turn;
     const boardA = game.child.playerA.child.board;
     const handA = game.child.playerA.child.hand;
-    const cardC = boardA.child.minions.find(item => item instanceof WispModel);
-    const cardD = handA.child.minions.find(item => item instanceof VoodooDoctorModel);
+    const cardC = boardA.child.cards.find(item => item instanceof WispModel);
+    const cardD = handA.child.cards.find(item => item instanceof VoodooDoctorModel);
     const roleC = cardC?.child.role;
     const roleD = cardD?.child.role;
     const playerB = game.child.playerB;
@@ -50,7 +50,7 @@ describe('voodoo-doctor', () => {
     if (!roleC || !roleD) throw new Error();
 
     test('wisp-attack-shieldbearer', async () => {
-        expect(boardA.child.minions.length).toBe(1);
+        expect(boardA.child.cards.length).toBe(1);
         
         // Wisp attacks Shieldbearer
         let promise = roleC.child.action.run();

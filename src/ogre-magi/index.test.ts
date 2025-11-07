@@ -22,17 +22,16 @@ describe('ogre-magi', () => {
                     hero: new MageModel(),
                     board: new BoardModel({
                         child: { 
-                            minions: []
+                            cards: []
                         }
                     }),
                     hand: new HandModel({
                         child: { 
-                            minions: [new OgreMagiModel()],
-                            spells: [new FireballModel()]
+                            cards: [new OgreMagiModel(), new FireballModel()]
                         }
                     }),
                     deck: new DeckModel({
-                        child: { minions: [] }
+                        child: { cards: [] }
                     })
                 }
             }),
@@ -42,13 +41,12 @@ describe('ogre-magi', () => {
                     hero: new MageModel(),
                     board: new BoardModel({
                         child: { 
-                            minions: []
+                            cards: []
                         }
                     }),
                     hand: new HandModel({
                         child: { 
-                            minions: [],
-                            spells: []
+                            cards: []
                         }
                     })
                 }
@@ -61,8 +59,8 @@ describe('ogre-magi', () => {
     const playerB = game.child.playerB;
     const boardA = playerA.child.board;
     const handA = playerA.child.hand;
-    const cardC = handA.refer.queue.find(item => item instanceof OgreMagiModel);
-    const cardD = handA.refer.queue.find(item => item instanceof FireballModel);
+    const cardC = handA.child.cards.find(item => item instanceof OgreMagiModel);
+    const cardD = handA.child.cards.find(item => item instanceof FireballModel);
     if (!cardC || !cardD) throw new Error();
     const roleA = playerA.child.hero.child.role;
     const roleB = playerB.child.hero.child.role;
@@ -72,8 +70,8 @@ describe('ogre-magi', () => {
         // Check initial state
         expect(roleC.child.attack.state.current).toBe(4); // Ogre Magi: 4/4
         expect(roleC.child.health.state.current).toBe(4);
-        expect(handA.refer.queue.length).toBe(2); // Ogre Magi and Fireball in hand
-        expect(boardA.refer.queue.length).toBe(0); // No minions on board
+        expect(handA.child.cards.length).toBe(2); // Ogre Magi and Fireball in hand
+        expect(boardA.child.cards.length).toBe(0); // No minions on board
         expect(playerA.child.mana.state.current).toBe(10); // Full mana
 
         // Play Ogre Magi
@@ -82,15 +80,15 @@ describe('ogre-magi', () => {
         await promise;
 
         // Ogre Magi should be on board
-        expect(boardA.refer.queue.length).toBe(1); // Ogre Magi on board
-        expect(handA.refer.queue.length).toBe(1); // Fireball still in hand
+        expect(boardA.child.cards.length).toBe(1); // Ogre Magi on board
+        expect(handA.child.cards.length).toBe(1); // Fireball still in hand
         expect(playerA.child.mana.state.current).toBe(6); // 10 - 4 = 6
     });
 
     test('fireball-cast', async () => {
         // Check initial state
         expect(roleB.child.health.state.current).toBe(30); // Player B hero: 30 health
-        expect(handA.refer.queue.filter(item => item instanceof FireballModel).length).toBe(1);
+        expect(handA.child.cards.filter(item => item instanceof FireballModel).length).toBe(1);
         expect(playerA.child.mana.state.current).toBe(6);
 
         // Player A casts Fireball with Ogre Magi on board
@@ -103,6 +101,6 @@ describe('ogre-magi', () => {
         // Fireball should deal 6+1=7 damage (6 base + 1 from Ogre Magi)
         expect(roleB.child.health.state.current).toBe(23); // 30 - 7 = 23
         expect(playerA.child.mana.state.current).toBe(2); // 6 - 4 cost (Fireball costs 4)
-        expect(handA.refer.queue.filter(item => item instanceof FireballModel).length).toBe(0);
+        expect(handA.child.cards.filter(item => item instanceof FireballModel).length).toBe(0);
     });
 });

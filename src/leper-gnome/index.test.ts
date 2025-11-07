@@ -20,7 +20,7 @@ describe('leper-gnome', () => {
                     hero: new MageModel(),
                     board: new BoardModel({
                         child: { 
-                            minions: [new LeperGnomeModel()] 
+                            cards: [new LeperGnomeModel()] 
                         }
                     }),
                 }
@@ -30,7 +30,7 @@ describe('leper-gnome', () => {
                     mana: new ManaModel({ state: { origin: 10 }}),
                     hero: new MageModel(),
                     board: new BoardModel({
-                        child: { minions: [new WispModel()] }
+                        child: { cards: [new WispModel()] }
                     }),
                 }
             }),
@@ -40,16 +40,16 @@ describe('leper-gnome', () => {
     const playerB = game.child.playerB;
     const boardA = playerA.child.board;
     const boardB = playerB.child.board;
-    const cardC = boardA.child.minions.find(item => item instanceof LeperGnomeModel);
-    const cardD = boardB.child.minions.find(item => item instanceof WispModel);
+    const cardC = boardA.child.cards.find(item => item instanceof LeperGnomeModel);
+    const cardD = boardB.child.cards.find(item => item instanceof WispModel);
     const roleC = cardC?.child.role;
     const roleD = cardD?.child.role;
     const roleB = playerB.child.hero.child.role;
     if (!roleC || !roleD) throw new Error();
 
     test('leper-gnome-deathrattle', async () => {
-        expect(boardA.child.minions.length).toBe(1);
-        expect(boardB.child.minions.length).toBe(1);
+        expect(boardA.child.cards.length).toBe(1);
+        expect(boardB.child.cards.length).toBe(1);
         expect(roleC.child.attack.state.current).toBe(2);
         expect(roleC.child.health.state.current).toBe(1);
         expect(roleD.child.attack.state.current).toBe(1);
@@ -64,8 +64,8 @@ describe('leper-gnome', () => {
         playerA.child.controller.set(roleD);
         await promise;
         
-        expect(boardA.child.minions.length).toBe(0);
-        expect(boardB.child.minions.length).toBe(0);
+        expect(boardA.child.cards.length).toBe(0);
+        expect(boardB.child.cards.length).toBe(0);
         expect(roleB.child.health.state.current).toBe(28);
         expect(roleB.child.health.state.damage).toBe(2);
     })

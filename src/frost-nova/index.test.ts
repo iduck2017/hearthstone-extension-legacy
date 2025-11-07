@@ -20,14 +20,14 @@ describe('frost-nova', () => {
                     mana: new ManaModel({ state: { origin: 10 }}),
                     hero: new MageModel(),
                     board: new BoardModel({
-                        child: { minions: [] }
+                        child: { cards: [] }
                     }),
                     hand: new HandModel({
-                        child: { spells: [new FrostNovaModel()] }
+                        child: { cards: [new FrostNovaModel()] }
                     }),
                     deck: new DeckModel({
                         child: { 
-                            minions: [] 
+                            cards: [] 
                         }
                     })
                 }
@@ -37,10 +37,10 @@ describe('frost-nova', () => {
                     mana: new ManaModel({ state: { origin: 10 }}),
                     hero: new MageModel(),
                     board: new BoardModel({
-                        child: { minions: [new WispModel(), new GoldshireFootmanModel()] }
+                        child: { cards: [new WispModel(), new GoldshireFootmanModel()] }
                     }),
                     hand: new HandModel({
-                        child: { spells: [] }
+                        child: { cards: [] }
                     })
                 }
             })
@@ -52,9 +52,9 @@ describe('frost-nova', () => {
     const playerB = game.child.playerB;
     const handA = playerA.child.hand;
     const boardB = playerB.child.board;
-    const cardC = handA.child.spells.find(item => item instanceof FrostNovaModel);
-    const cardD = boardB.child.minions.find(item => item instanceof WispModel);
-    const cardE = boardB.child.minions.find(item => item instanceof GoldshireFootmanModel);
+    const cardC = handA.child.cards.find(item => item instanceof FrostNovaModel);
+    const cardD = boardB.child.cards.find(item => item instanceof WispModel);
+    const cardE = boardB.child.cards.find(item => item instanceof GoldshireFootmanModel);
     const roleD = cardD?.child.role;
     const roleE = cardE?.child.role;
     if (!cardC || !roleD || !roleE) throw new Error();
@@ -66,8 +66,8 @@ describe('frost-nova', () => {
         expect(roleD.child.feats.child.frozen.state.isActive).toBe(false);
         expect(roleE.child.feats.child.frozen.state.isActive).toBe(false);
         expect(playerA.child.mana.state.current).toBe(10);
-        expect(handA.child.spells.length).toBe(1);
-        expect(boardB.child.minions.length).toBe(2);
+        expect(handA.child.cards.length).toBe(1);
+        expect(boardB.child.cards.length).toBe(2);
 
         // Player A uses Frost Nova - no target selection needed
         await cardC.play();
@@ -78,10 +78,10 @@ describe('frost-nova', () => {
         expect(roleD.child.feats.child.frozen.state.isActive).toBe(true);
         expect(roleE.child.feats.child.frozen.state.isActive).toBe(true);
         expect(playerA.child.mana.state.current).toBe(7); // 10 - 3 cost
-        expect(handA.child.spells.length).toBe(0);
+        expect(handA.child.cards.length).toBe(0);
 
         // All minions should remain on board (no damage, just frozen)
-        expect(boardB.child.minions.length).toBe(2);
+        expect(boardB.child.cards.length).toBe(2);
     })
 
     test('turn-next', async () => {

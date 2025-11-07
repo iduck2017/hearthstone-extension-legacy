@@ -63,7 +63,7 @@ describe('mirror-entity', () => {
         expect(playerA.child.mana.state.current).toBe(10);
         expect(handA.child.cards.length).toBe(2);
         expect(boardA.child.secrets.length).toBe(0);
-        expect(boardA.child.minions.length).toBe(0);
+        expect(boardA.child.cards.length).toBe(0);
 
         // Player A plays Mirror Entity
         await cardC.play();

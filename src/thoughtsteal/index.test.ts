@@ -21,16 +21,15 @@ describe('thoughtsteal', () => {
                     mana: new ManaModel({ state: { origin: 10 }}),
                     hero: new MageModel(),
                     board: new BoardModel({
-                        child: { minions: [] }
+                        child: { cards: [] }
                     }),
                     hand: new HandModel({
                         child: { 
-                            minions: [],
-                            spells: [new ThoughtstealModel()]
+                            cards: [new ThoughtstealModel()]
                         }
                     }),
                     deck: new DeckModel({
-                        child: { minions: [] }
+                        child: { cards: [] }
                     })
                 }
             }),
@@ -39,14 +38,14 @@ describe('thoughtsteal', () => {
                     mana: new ManaModel({ state: { origin: 10 }}),
                     hero: new MageModel(),
                     board: new BoardModel({
-                        child: { minions: [] }
+                        child: { cards: [] }
                     }),
                     hand: new HandModel({
-                        child: { spells: [] }
+                        child: { cards: [] }
                     }),
                     deck: new DeckModel({
                         child: { 
-                            minions: [new WispModel(), new StonetuskBoarModel()]
+                            cards: [new WispModel(), new StonetuskBoarModel()]
                         }
                     })
                 }
@@ -59,33 +58,32 @@ describe('thoughtsteal', () => {
     const playerB = game.child.playerB;
     const handA = playerA.child.hand;
     const deckB = playerB.child.deck;
-    const cardC = handA.child.spells.find(item => item instanceof ThoughtstealModel);
-    const cardD = deckB.child.minions.find(item => item instanceof WispModel);
-    const cardE = deckB.child.minions.find(item => item instanceof StonetuskBoarModel);
+    const cardC = handA.child.cards.find(item => item instanceof ThoughtstealModel);
+    const cardD = deckB.child.cards.find(item => item instanceof WispModel);
+    const cardE = deckB.child.cards.find(item => item instanceof StonetuskBoarModel);
     if (!cardC) throw new Error();
 
     test('thoughtsteal-cast', async () => {
         // Check initial state
         expect(playerA.child.mana.state.current).toBe(10);
-        expect(handA.refer.queue.length).toBe(1);
-        expect(deckB.refer.queue.length).toBe(2);
+        expect(handA.child.cards.length).toBe(1);
+        expect(deckB.child.cards.length).toBe(2);
 
         // Player A uses Thoughtsteal
         const promise = cardC.play();
         await promise;
 
         // Player A should have copied 2 cards from Player B's deck
-        expect(handA.refer.queue.length).toBe(2); // Thoughtsteal consumed, 2 cards copied
-        expect(handA.child.minions.length).toBe(2); // Should be 2 copies (1 Wisp + 1 Stonetusk Boar)
+        expect(handA.child.cards.length).toBe(2); // Thoughtsteal consumed, 2 cards copied
 
-        const cardF = handA.child.minions.find(item => item instanceof WispModel);
-        const cardG = handA.child.minions.find(item => item instanceof StonetuskBoarModel);
+        const cardF = handA.child.cards.find(item => item instanceof WispModel);
+        const cardG = handA.child.cards.find(item => item instanceof StonetuskBoarModel);
         if (!cardF || !cardG) throw new Error();
         expect(cardF.refer.creator).toBe(cardD);
         expect(cardG.refer.creator).toBe(cardE);
 
         // Player B's deck should be unchanged
-        expect(deckB.child.minions.length).toBe(2); // Original deck unchanged
+        expect(deckB.child.cards.length).toBe(2); // Original deck unchanged
         expect(playerA.child.mana.state.current).toBe(8); // 10 - 2 cost
     });
 });

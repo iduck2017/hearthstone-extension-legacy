@@ -24,12 +24,12 @@ describe('circle-of-healing', () => {
                     hero: new MageModel(),
                     board: new BoardModel({
                         child: { 
-                            minions: [new WaterElementalModel()]
+                            cards: [new WaterElementalModel()]
                         }
                     }),
                     hand: new HandModel({
                         child: { 
-                            spells: [new CircleOfHealingModel(), new FrostboltModel()]
+                            cards: [new CircleOfHealingModel(), new FrostboltModel()]
                         }
                     })
                 }
@@ -40,11 +40,11 @@ describe('circle-of-healing', () => {
                     hero: new MageModel(),
                     board: new BoardModel({
                         child: { 
-                            minions: [new WaterElementalModel()]
+                            cards: [new WaterElementalModel()]
                         }
                     }),
                     hand: new HandModel({
-                        child: { spells: [] }
+                        child: { cards: [] }
                     })
                 }
             })
@@ -57,10 +57,10 @@ describe('circle-of-healing', () => {
     const handA = playerA.child.hand;
     const boardA = playerA.child.board;
     const boardB = playerB.child.board;
-    const cardC = boardA.child.minions.find(item => item instanceof WaterElementalModel);
-    const cardD = boardB.child.minions.find(item => item instanceof WaterElementalModel);
-    const cardE = handA.child.spells.find(item => item instanceof FrostboltModel);
-    const cardF = handA.child.spells.find(item => item instanceof CircleOfHealingModel);
+    const cardC = boardA.child.cards.find(item => item instanceof WaterElementalModel);
+    const cardD = boardB.child.cards.find(item => item instanceof WaterElementalModel);
+    const cardE = handA.child.cards.find(item => item instanceof FrostboltModel);
+    const cardF = handA.child.cards.find(item => item instanceof CircleOfHealingModel);
     const roleC = cardC?.child.role;
     const roleD = cardD?.child.role;
     const roleB = playerB.child.hero.child.role;
@@ -89,7 +89,7 @@ describe('circle-of-healing', () => {
         // Check current stats
         expect(roleB.child.health.state.current).toBe(30); // Player B hero: 30 health
         expect(playerA.child.mana.state.current).toBe(10);
-        expect(handA.child.spells.length).toBe(2);
+        expect(handA.child.cards.length).toBe(2);
 
         // Player A uses Frostbolt on Player B's hero
         const promise = cardE.play();
@@ -100,7 +100,7 @@ describe('circle-of-healing', () => {
         // Player B's hero should take 3 damage
         expect(roleB.child.health.state.current).toBe(27); // 30 - 3 = 27
         expect(playerA.child.mana.state.current).toBe(8); // 10 - 2 cost
-        expect(handA.child.spells.length).toBe(1); // Frostbolt consumed
+        expect(handA.child.cards.length).toBe(1); // Frostbolt consumed
     });
 
     test('circle-of-healing-cast', async () => {
@@ -109,7 +109,7 @@ describe('circle-of-healing', () => {
         expect(roleD.child.health.state.current).toBe(3); // Player B's Water Elemental: 3/6, damaged
         expect(roleB.child.health.state.current).toBe(27); // Player B hero: 27 health, damaged
         expect(playerA.child.mana.state.current).toBe(8);
-        expect(handA.child.spells.length).toBe(1);
+        expect(handA.child.cards.length).toBe(1);
 
         // Player A plays Circle of Healing - no target selection needed
         await cardF.play();
@@ -120,6 +120,6 @@ describe('circle-of-healing', () => {
         expect(roleB.child.health.state.current).toBe(27); // Player B hero: 27 health (unchanged - heroes not affected)
 
         expect(playerA.child.mana.state.current).toBe(8); // 8 - 0 cost
-        expect(handA.child.spells.length).toBe(0); // Circle of Healing consumed
+        expect(handA.child.cards.length).toBe(0); // Circle of Healing consumed
     });
 });

@@ -20,17 +20,16 @@ describe('alexstrasza-the-life-binder', () => {
                     hero: new MageModel(),
                     board: new BoardModel({
                         child: { 
-                            minions: []
+                            cards: []
                         }
                     }),
                     hand: new HandModel({
                         child: { 
-                            minions: [new AlexstraszaTheLifeBinderModel()],
-                            spells: []
+                            cards: [new AlexstraszaTheLifeBinderModel()]
                         }
                     }),
                     deck: new DeckModel({
-                        child: { minions: [] }
+                        child: { cards: [] }
                     })
                 }
             }),
@@ -40,17 +39,16 @@ describe('alexstrasza-the-life-binder', () => {
                     hero: new MageModel(),
                     board: new BoardModel({
                         child: { 
-                            minions: []
+                            cards: []
                         }
                     }),
                     hand: new HandModel({
                         child: { 
-                            minions: [new AlexstraszaTheLifeBinderModel()],
-                            spells: []
+                            cards: [new AlexstraszaTheLifeBinderModel()]
                         }
                     }),
                     deck: new DeckModel({
-                        child: { minions: [] }
+                        child: { cards: [] }
                     })
                 }
             })
@@ -63,8 +61,8 @@ describe('alexstrasza-the-life-binder', () => {
     const boardA = playerA.child.board;
     const handA = playerA.child.hand;
     const handB = playerB.child.hand;
-    const cardC = handA.refer.queue.find(item => item instanceof AlexstraszaTheLifeBinderModel);
-    const cardD = handB.refer.queue.find(item => item instanceof AlexstraszaTheLifeBinderModel);
+    const cardC = handA.child.cards.find(item => item instanceof AlexstraszaTheLifeBinderModel);
+    const cardD = handB.child.cards.find(item => item instanceof AlexstraszaTheLifeBinderModel);
     if (!cardC || !cardD) throw new Error();
     const roleA = playerA.child.hero.child.role;
     const roleB = playerB.child.hero.child.role;
@@ -75,8 +73,8 @@ describe('alexstrasza-the-life-binder', () => {
         expect(roleC.child.attack.state.current).toBe(8); // Alexstrasza: 8/8
         expect(roleC.child.health.state.current).toBe(8);
         expect(roleB.child.health.state.current).toBe(30); // Player B hero: 30 health
-        expect(handA.refer.queue.length).toBe(1); // Alexstrasza in hand
-        expect(boardA.refer.queue.length).toBe(0); // No minions on board
+        expect(handA.child.cards.length).toBe(1); // Alexstrasza in hand
+        expect(boardA.child.cards.length).toBe(0); // No minions on board
         expect(playerA.child.mana.state.current).toBe(10); // Full mana
 
         // Play Alexstrasza the Life-Binder
@@ -91,8 +89,8 @@ describe('alexstrasza-the-life-binder', () => {
         await promise;
 
         // Alexstrasza should be on board
-        expect(boardA.refer.queue.length).toBe(1); // Alexstrasza on board
-        expect(handA.refer.queue.length).toBe(0); // Alexstrasza moved to board
+        expect(boardA.child.cards.length).toBe(1); // Alexstrasza on board
+        expect(handA.child.cards.length).toBe(0); // Alexstrasza moved to board
         expect(playerA.child.mana.state.current).toBe(1); // 10 - 9 = 1
 
         // Player B's hero should take 8 damage (enemy target)
@@ -106,7 +104,7 @@ describe('alexstrasza-the-life-binder', () => {
 
         // Check initial state
         expect(roleA.child.health.state.current).toBe(30); // Player A hero: 30 health
-        expect(handB.refer.queue.length).toBe(1); // Alexstrasza in hand
+        expect(handB.child.cards.length).toBe(1); // Alexstrasza in hand
         expect(playerB.child.mana.state.current).toBe(10); // Full mana
 
         // Play Alexstrasza the Life-Binder
@@ -121,8 +119,8 @@ describe('alexstrasza-the-life-binder', () => {
         await promise;
 
         // Alexstrasza should be on board
-        expect(playerB.child.board.refer.queue.length).toBe(1); // Alexstrasza on board
-        expect(handB.refer.queue.length).toBe(0); // Alexstrasza moved to board
+        expect(playerB.child.board.child.cards.length).toBe(1); // Alexstrasza on board
+        expect(handB.child.cards.length).toBe(0); // Alexstrasza moved to board
         expect(playerB.child.mana.state.current).toBe(1); // 10 - 9 = 1
 
         // Player B's hero should be healed by 8 (friendly target from Player B's perspective)

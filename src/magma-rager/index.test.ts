@@ -21,17 +21,16 @@ describe('magma-rager', () => {
                     hero: new MageModel(),
                     board: new BoardModel({
                         child: { 
-                            minions: []
+                            cards: []
                         }
                     }),
                     hand: new HandModel({
                         child: { 
-                            minions: [new MagmaRagerModel()],
-                            spells: []
+                            cards: [new MagmaRagerModel()]
                         }
                     }),
                     deck: new DeckModel({
-                        child: { minions: [] }
+                        child: { cards: [] }
                     })
                 }
             }),
@@ -41,13 +40,12 @@ describe('magma-rager', () => {
                     hero: new MageModel(),
                     board: new BoardModel({
                         child: { 
-                            minions: []
+                            cards: []
                         }
                     }),
                     hand: new HandModel({
                         child: { 
-                            minions: [],
-                            spells: []
+                            cards: []
                         }
                     })
                 }
@@ -60,7 +58,7 @@ describe('magma-rager', () => {
     const playerB = game.child.playerB;
     const boardA = playerA.child.board;
     const handA = playerA.child.hand;
-    const cardC = handA.refer.queue.find(item => item instanceof MagmaRagerModel);
+    const cardC = handA.child.cards.find(item => item instanceof MagmaRagerModel);
     if (!cardC) throw new Error();
     const roleA = playerA.child.hero.child.role;
     const roleB = playerB.child.hero.child.role;
@@ -70,8 +68,8 @@ describe('magma-rager', () => {
         // Check initial state
         expect(roleC.child.attack.state.current).toBe(5); // Magma Rager: 5/1
         expect(roleC.child.health.state.current).toBe(1);
-        expect(handA.refer.queue.length).toBe(1); // Magma Rager in hand
-        expect(boardA.refer.queue.length).toBe(0); // No minions on board
+        expect(handA.child.cards.length).toBe(1); // Magma Rager in hand
+        expect(boardA.child.cards.length).toBe(0); // No minions on board
         expect(playerA.child.mana.state.current).toBe(10); // Full mana
 
         // Play Magma Rager
@@ -80,8 +78,8 @@ describe('magma-rager', () => {
         await promise;
 
         // Magma Rager should be on board
-        expect(boardA.refer.queue.length).toBe(1); // Magma Rager on board
-        expect(handA.refer.queue.length).toBe(0); // Magma Rager moved to board
+        expect(boardA.child.cards.length).toBe(1); // Magma Rager on board
+        expect(handA.child.cards.length).toBe(0); // Magma Rager moved to board
         expect(playerA.child.mana.state.current).toBe(7); // 10 - 3 = 7
     });
 });

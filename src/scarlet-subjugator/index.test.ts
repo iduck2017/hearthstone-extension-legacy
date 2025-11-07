@@ -22,16 +22,15 @@ describe('scarlet-subjugator', () => {
                     mana: new ManaModel({ state: { origin: 10 }}),
                     hero: new WarriorModel(),
                     board: new BoardModel({
-                        child: { minions: [] }
+                        child: { cards: [] }
                     }),
                     hand: new HandModel({
                         child: { 
-                            minions: [new ScarletSubjugatorModel()],
-                            spells: []
+                            cards: [new ScarletSubjugatorModel()]
                         }
                     }),
                     deck: new DeckModel({
-                        child: { minions: [] }
+                        child: { cards: [] }
                     })
                 }
             }),
@@ -41,11 +40,11 @@ describe('scarlet-subjugator', () => {
                     hero: new MageModel(),
                     board: new BoardModel({
                         child: { 
-                            minions: [new WaterElementalModel()]
+                            cards: [new WaterElementalModel()]
                         }
                     }),
                     hand: new HandModel({
-                        child: { spells: [] }
+                        child: { cards: [] }
                     })
                 }
             })
@@ -58,8 +57,8 @@ describe('scarlet-subjugator', () => {
     const boardA = playerA.child.board;
     const boardB = playerB.child.board;
     const handA = playerA.child.hand;
-    const cardC = handA.child.minions.find(item => item instanceof ScarletSubjugatorModel);
-    const cardD = boardB.child.minions.find(item => item instanceof WaterElementalModel);
+    const cardC = handA.child.cards.find(item => item instanceof ScarletSubjugatorModel);
+    const cardD = boardB.child.cards.find(item => item instanceof WaterElementalModel);
     if (!cardC || !cardD) throw new Error();
     const roleC = cardC?.child.role;
     const roleD = cardD?.child.role;
@@ -68,8 +67,8 @@ describe('scarlet-subjugator', () => {
         // Check initial state
         expect(cardD.child.role.child.attack.state.current).toBe(3); // Water Elemental: 3/6
         expect(playerA.child.mana.state.current).toBe(10);
-        expect(boardA.child.minions.length).toBe(0);
-        expect(handA.refer.queue.length).toBe(1);
+        expect(boardA.child.cards.length).toBe(0);
+        expect(handA.child.cards.length).toBe(1);
 
         // Player A plays Scarlet Subjugator
         const promise = cardC.play();
@@ -80,7 +79,7 @@ describe('scarlet-subjugator', () => {
         await promise;
 
         // Check that Scarlet Subjugator is on board
-        expect(boardA.child.minions.length).toBe(1);
+        expect(boardA.child.cards.length).toBe(1);
 
         expect(roleC.child.attack.state.current).toBe(2); // Scarlet Subjugator: 2/1
         expect(roleC.child.health.state.current).toBe(1);
@@ -90,7 +89,7 @@ describe('scarlet-subjugator', () => {
         expect(roleD.child.health.state.current).toBe(6); // Health unchanged
       
         // Scarlet Subjugator should be consumed
-        expect(handA.refer.queue.length).toBe(0); // Scarlet Subjugator consumed
+        expect(handA.child.cards.length).toBe(0); // Scarlet Subjugator consumed
         expect(playerA.child.mana.state.current).toBe(9); // 10 - 1 cost
     });
 

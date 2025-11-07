@@ -19,10 +19,10 @@ describe('arcane-missiles', () => {
                     mana: new ManaModel({ state: { origin: 10 }}),
                     hero: new MageModel(),
                     board: new BoardModel({
-                        child: { minions: [] }
+                        child: { cards: [] }
                     }),
                     hand: new HandModel({
-                        child: { spells: [new ArcaneMissilesModel()] }
+                        child: { cards: [new ArcaneMissilesModel()] }
                     })
                 }
             }),
@@ -31,10 +31,10 @@ describe('arcane-missiles', () => {
                     mana: new ManaModel({ state: { origin: 10 }}),
                     hero: new MageModel(),
                     board: new BoardModel({
-                        child: { minions: [] }
+                        child: { cards: [] }
                     }),
                     hand: new HandModel({
-                        child: { spells: [] }
+                        child: { cards: [] }
                     })
                 }
             })
@@ -46,7 +46,7 @@ describe('arcane-missiles', () => {
     const playerB = game.child.playerB;
     const handA = playerA.child.hand;
     const roleB = playerB.child.hero.child.role;
-    const cardD = handA.child.spells.find(item => item instanceof ArcaneMissilesModel);
+    const cardD = handA.child.cards.find(item => item instanceof ArcaneMissilesModel);
     if (!cardD) throw new Error();
 
     test('arcane-missiles-cast', async () => {

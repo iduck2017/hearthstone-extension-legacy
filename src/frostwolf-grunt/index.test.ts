@@ -22,17 +22,16 @@ describe('frostwolf-grunt', () => {
                     hero: new MageModel(),
                     board: new BoardModel({
                         child: { 
-                            minions: []
+                            cards: []
                         }
                     }),
                     hand: new HandModel({
                         child: { 
-                            minions: [new FrostwolfGruntModel()],
-                            spells: []
+                            cards: [new FrostwolfGruntModel()]
                         }
                     }),
                     deck: new DeckModel({
-                        child: { minions: [] }
+                        child: { cards: [] }
                     })
                 }
             }),
@@ -42,13 +41,12 @@ describe('frostwolf-grunt', () => {
                     hero: new MageModel(),
                     board: new BoardModel({
                         child: { 
-                            minions: [new WispModel()]
+                            cards: [new WispModel()]
                         }
                     }),
                     hand: new HandModel({
                         child: { 
-                            minions: [],
-                            spells: []
+                            cards: []
                         }
                     })
                 }
@@ -62,8 +60,8 @@ describe('frostwolf-grunt', () => {
     const boardA = playerA.child.board;
     const boardB = playerB.child.board;
     const handA = playerA.child.hand;
-    const cardC = handA.refer.queue.find(item => item instanceof FrostwolfGruntModel);
-    const cardD = boardB.refer.queue.find(item => item instanceof WispModel);
+    const cardC = handA.child.cards.find(item => item instanceof FrostwolfGruntModel);
+    const cardD = boardB.child.cards.find(item => item instanceof WispModel);
     if (!cardC || !cardD) throw new Error();
     const roleA = playerA.child.hero.child.role;
     const roleB = playerB.child.hero.child.role;
@@ -74,8 +72,8 @@ describe('frostwolf-grunt', () => {
         // Check initial state
         expect(roleC.child.attack.state.current).toBe(2); // Frostwolf Grunt: 2/2
         expect(roleC.child.health.state.current).toBe(2);
-        expect(handA.refer.queue.length).toBe(1); // Frostwolf Grunt in hand
-        expect(boardA.refer.queue.length).toBe(0); // No minions on board
+        expect(handA.child.cards.length).toBe(1); // Frostwolf Grunt in hand
+        expect(boardA.child.cards.length).toBe(0); // No minions on board
         expect(playerA.child.mana.state.current).toBe(10); // Full mana
 
         // Play Frostwolf Grunt
@@ -84,8 +82,8 @@ describe('frostwolf-grunt', () => {
         await promise;
 
         // Frostwolf Grunt should be on board
-        expect(boardA.refer.queue.length).toBe(1); // Frostwolf Grunt on board
-        expect(handA.refer.queue.length).toBe(0); // Frostwolf Grunt moved to board
+        expect(boardA.child.cards.length).toBe(1); // Frostwolf Grunt on board
+        expect(handA.child.cards.length).toBe(0); // Frostwolf Grunt moved to board
         expect(playerA.child.mana.state.current).toBe(8); // 10 - 2 = 8
 
         // Check that Frostwolf Grunt has Taunt
@@ -100,8 +98,8 @@ describe('frostwolf-grunt', () => {
         // Check initial state
         expect(roleC.child.health.state.current).toBe(2); // Frostwolf Grunt: 2/2
         expect(roleD.child.health.state.current).toBe(1); // Wisp: 1/1
-        expect(boardA.refer.queue.length).toBe(1); // Frostwolf Grunt on board
-        expect(boardB.refer.queue.length).toBe(1); // Wisp on board
+        expect(boardA.child.cards.length).toBe(1); // Frostwolf Grunt on board
+        expect(boardB.child.cards.length).toBe(1); // Wisp on board
 
         // Player B's Wisp attacks, can only target Frostwolf Grunt (Taunt forces this)
         let promise = roleD.child.action.run();
@@ -120,7 +118,7 @@ describe('frostwolf-grunt', () => {
         expect(cardD.child.dispose.status).toBe(true);
 
         // Both minions should die (1/1 vs 2/2)
-        expect(boardA.refer.queue.length).toBe(1); 
-        expect(boardB.refer.queue.length).toBe(0); // Wisp dies
+        expect(boardA.child.cards.length).toBe(1); 
+        expect(boardB.child.cards.length).toBe(0); // Wisp dies
     });
 });

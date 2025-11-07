@@ -21,17 +21,16 @@ describe('temple-enforcer', () => {
                     hero: new MageModel(),
                     board: new BoardModel({
                         child: { 
-                            minions: [new WispModel()]
+                            cards: [new WispModel()]
                         }
                     }),
                     hand: new HandModel({
                         child: { 
-                            minions: [new TempleEnforcerModel()],
-                            spells: []
+                            cards: [new TempleEnforcerModel()]
                         }
                     }),
                     deck: new DeckModel({
-                        child: { minions: [] }
+                        child: { cards: [] }
                     })
                 }
             }),
@@ -41,11 +40,11 @@ describe('temple-enforcer', () => {
                     hero: new MageModel(),
                     board: new BoardModel({
                         child: { 
-                            minions: []
+                            cards: []
                         }
                     }),
                     hand: new HandModel({
-                        child: { spells: [] }
+                        child: { cards: [] }
                     })
                 }
             })
@@ -57,8 +56,8 @@ describe('temple-enforcer', () => {
     const playerB = game.child.playerB;
     const boardA = playerA.child.board;
     const handA = playerA.child.hand;
-    const cardC = handA.child.minions.find(item => item instanceof TempleEnforcerModel);
-    const cardD = boardA.child.minions.find(item => item instanceof WispModel);
+    const cardC = handA.child.cards.find(item => item instanceof TempleEnforcerModel);
+    const cardD = boardA.child.cards.find(item => item instanceof WispModel);
     if (!cardC || !cardD) throw new Error();
     const roleA = playerA.child.hero.child.role;
     const roleB = playerB.child.hero.child.role;
@@ -71,8 +70,8 @@ describe('temple-enforcer', () => {
         expect(roleC.child.health.state.current).toBe(6);
         expect(roleD.child.attack.state.current).toBe(1); // Wisp: 1/1
         expect(roleD.child.health.state.current).toBe(1);
-        expect(handA.child.minions.length).toBe(1); // Temple Enforcer in hand
-        expect(boardA.child.minions.length).toBe(1); // Only Wisp on board
+        expect(handA.child.cards.length).toBe(1); // Temple Enforcer in hand
+        expect(boardA.child.cards.length).toBe(1); // Only Wisp on board
         expect(playerA.child.mana.state.current).toBe(10); // Full mana
 
         // Play Temple Enforcer
@@ -88,8 +87,8 @@ describe('temple-enforcer', () => {
         expect(roleD.child.health.state.current).toBe(4); // 1 + 3 = 4
 
         // Temple Enforcer should be on board
-        expect(boardA.child.minions.length).toBe(2); // Temple Enforcer and Wisp on board
-        expect(handA.child.minions.length).toBe(0); // Temple Enforcer moved to board
+        expect(boardA.child.cards.length).toBe(2); // Temple Enforcer and Wisp on board
+        expect(handA.child.cards.length).toBe(0); // Temple Enforcer moved to board
         expect(playerA.child.mana.state.current).toBe(5); // 10 - 5 = 5
     });
 });

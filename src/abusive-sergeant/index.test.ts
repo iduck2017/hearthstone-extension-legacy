@@ -20,7 +20,7 @@ describe('abusive-sergeant', () => {
                     hero: new MageModel(),
                     hand: new HandModel({
                         child: { 
-                            minions: [
+                            cards: [
                                 new AbusiveSergeantModel(),
                                 new WispModel()
                             ] 
@@ -34,7 +34,7 @@ describe('abusive-sergeant', () => {
                     hero: new MageModel(),
                     hand: new HandModel({
                         child: { 
-                            minions: [
+                            cards: [
                                 new AbusiveSergeantModel(),
                                 new WispModel()
                             ] 
@@ -51,10 +51,10 @@ describe('abusive-sergeant', () => {
     const boardB = game.child.playerB.child.board;
     const handA = game.child.playerA.child.hand;
     const handB = game.child.playerB.child.hand;
-    const cardC = handA.child.minions.find((item: any) => item instanceof AbusiveSergeantModel);
-    const cardD = handA.child.minions.find((item: any) => item instanceof WispModel);
-    const cardE = handB.child.minions.find((item: any) => item instanceof WispModel);
-    const cardF = handB.child.minions.find((item: any) => item instanceof AbusiveSergeantModel);
+    const cardC = handA.child.cards.find((item: any) => item instanceof AbusiveSergeantModel);
+    const cardD = handA.child.cards.find((item: any) => item instanceof WispModel);
+    const cardE = handB.child.cards.find((item: any) => item instanceof WispModel);
+    const cardF = handB.child.cards.find((item: any) => item instanceof AbusiveSergeantModel);
     const roleC = cardC?.child.role;
     const roleD = cardD?.child.role;
     const roleE = cardE?.child.role;
@@ -62,8 +62,8 @@ describe('abusive-sergeant', () => {
     if (!roleC || !roleD || !roleE || !roleF) throw new Error();
 
     test('abusive-sergeant-play', async () => {
-        expect(boardB.child.minions.length).toBe(0);
-        expect(boardA.child.minions.length).toBe(0);
+        expect(boardB.child.cards.length).toBe(0);
+        expect(boardA.child.cards.length).toBe(0);
 
         let promise = cardC.play();
         await AnimeUtil.sleep();
@@ -75,7 +75,7 @@ describe('abusive-sergeant', () => {
         expect(game.child.playerA.child.controller.current).toBeUndefined();
 
         // Play both cards without battlecry effect
-        expect(boardA.child.minions.length).toBe(1);
+        expect(boardA.child.cards.length).toBe(1);
         promise = cardD.play();
         await AnimeUtil.sleep();
         expect(game.child.playerA.child.controller.current).toBeDefined();
@@ -83,7 +83,7 @@ describe('abusive-sergeant', () => {
         game.child.playerA.child.controller.set(1);
         await promise;
         
-        expect(boardA.child.minions.length).toBe(2);
+        expect(boardA.child.cards.length).toBe(2);
         expect(roleC.child.attack.state.current).toBe(2);
         expect(roleD.child.attack.state.current).toBe(1);
         expect(roleC.child.attack.state.origin).toBe(2);
@@ -98,7 +98,7 @@ describe('abusive-sergeant', () => {
         expect(game.child.playerB.child.controller.current?.options).toContain(0);
         game.child.playerB.child.controller.set(0);
         await promise;
-        expect(boardB.child.minions.length).toBe(1);
+        expect(boardB.child.cards.length).toBe(1);
 
         // Play Abusive Sergeant with battlecry effect
         promise = cardF.play();
@@ -117,8 +117,8 @@ describe('abusive-sergeant', () => {
         await promise;
         await AnimeUtil.sleep();
 
-        expect(boardA.child.minions.length).toBe(2);
-        expect(boardB.child.minions.length).toBe(2);
+        expect(boardA.child.cards.length).toBe(2);
+        expect(boardB.child.cards.length).toBe(2);
         expect(roleD.child.attack.state.current).toBe(3);
         expect(roleD.child.attack.state.origin).toBe(1);
         expect(roleE.child.attack.state.current).toBe(1);

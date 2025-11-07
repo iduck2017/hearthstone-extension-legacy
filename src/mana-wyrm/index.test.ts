@@ -21,10 +21,10 @@ describe('mana-wyrm', () => {
                     mana: new ManaModel({ state: { origin: 10 }}),
                     hero: new MageModel(),
                     board: new BoardModel({
-                        child: { minions: [new ManaWyrmModel()] }
+                        child: { cards: [new ManaWyrmModel()] }
                     }),
                     hand: new HandModel({
-                        child: { spells: [new ArcaneExplosionModel()] }
+                        child: { cards: [new ArcaneExplosionModel()] }
                     })
                 }
             }),
@@ -33,10 +33,10 @@ describe('mana-wyrm', () => {
                     mana: new ManaModel({ state: { origin: 10 }}),
                     hero: new MageModel(),
                     board: new BoardModel({
-                        child: { minions: [] }
+                        child: { cards: [] }
                     }),
                     hand: new HandModel({
-                        child: { spells: [new ArcaneExplosionModel()] }
+                        child: { cards: [new ArcaneExplosionModel()] }
                     })
                 }
             })
@@ -49,9 +49,9 @@ describe('mana-wyrm', () => {
     const handA = playerA.child.hand;
     const handB = playerB.child.hand;
     const boardA = playerA.child.board;
-    const cardC = handA.child.spells.find(item => item instanceof ArcaneExplosionModel);
-    const cardD = handB.child.spells.find(item => item instanceof ArcaneExplosionModel);
-    const cardE = boardA.child.minions.find(item => item instanceof ManaWyrmModel);
+    const cardC = handA.child.cards.find(item => item instanceof ArcaneExplosionModel);
+    const cardD = handB.child.cards.find(item => item instanceof ArcaneExplosionModel);
+    const cardE = boardA.child.cards.find(item => item instanceof ManaWyrmModel);
     const roleE = cardE?.child.role;
     if (!cardC || !cardD || !roleE) throw new Error();
 
@@ -60,7 +60,7 @@ describe('mana-wyrm', () => {
         expect(roleE.child.attack.state.current).toBe(1);
         expect(roleE.child.health.state.current).toBe(3);
         expect(playerA.child.mana.state.current).toBe(10);
-        expect(handA.child.spells.length).toBe(1);
+        expect(handA.child.cards.length).toBe(1);
 
         // Player A casts a spell
         await cardC.play();
@@ -69,7 +69,7 @@ describe('mana-wyrm', () => {
         expect(roleE.child.attack.state.current).toBe(2); // 1 + 1
         expect(roleE.child.health.state.current).toBe(3); // unchanged
         expect(playerA.child.mana.state.current).toBe(8); // 10 - 2 cost
-        expect(handA.child.spells.length).toBe(0);
+        expect(handA.child.cards.length).toBe(0);
     })
 
     test('arcane-explosion-cast', async () => {
@@ -79,7 +79,7 @@ describe('mana-wyrm', () => {
         // Check initial stats
         expect(roleE.child.attack.state.current).toBe(2);
         expect(playerB.child.mana.state.current).toBe(10);
-        expect(handB.child.spells.length).toBe(1);
+        expect(handB.child.cards.length).toBe(1);
 
         // Player B casts a spell
         await cardD.play();
@@ -90,6 +90,6 @@ describe('mana-wyrm', () => {
         expect(roleE.child.health.state.damage).toBe(1);
         expect(roleE.child.health.state.maximum).toBe(3);
         expect(playerB.child.mana.state.current).toBe(8); // 10 - 2 cost
-        expect(handB.child.spells.length).toBe(0);
+        expect(handB.child.cards.length).toBe(0);
     })
 })

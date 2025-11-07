@@ -22,17 +22,16 @@ describe('holy-fire', () => {
                     hero: new MageModel(),
                     board: new BoardModel({
                         child: { 
-                            minions: [new WaterElementalModel()]
+                            cards: [new WaterElementalModel()]
                         }
                     }),
                     hand: new HandModel({
                         child: { 
-                            minions: [],
-                            spells: []
+                            cards: []
                         }
                     }),
                     deck: new DeckModel({
-                        child: { minions: [] }
+                        child: { cards: [] }
                     })
                 }
             }),
@@ -42,13 +41,12 @@ describe('holy-fire', () => {
                     hero: new MageModel(),
                     board: new BoardModel({
                         child: { 
-                            minions: []
+                            cards: []
                         }
                     }),
                     hand: new HandModel({
                         child: { 
-                            minions: [],
-                            spells: [new HolyFireModel()]
+                            cards: [new HolyFireModel()]
                         }
                     })
                 }
@@ -61,8 +59,8 @@ describe('holy-fire', () => {
     const playerB = game.child.playerB;
     const boardA = playerA.child.board;
     const handB = playerB.child.hand;
-    const cardC = boardA.child.minions.find(item => item instanceof WaterElementalModel);
-    const cardD = handB.child.spells.find(item => item instanceof HolyFireModel);
+    const cardC = boardA.child.cards.find(item => item instanceof WaterElementalModel);
+    const cardD = handB.child.cards.find(item => item instanceof HolyFireModel);
     if (!cardC || !cardD) throw new Error();
     const roleA = playerA.child.hero.child.role;
     const roleB = playerB.child.hero.child.role;
@@ -74,7 +72,7 @@ describe('holy-fire', () => {
         expect(roleB.child.health.state.current).toBe(30); // Player B hero: 30 health
         expect(roleC.child.attack.state.current).toBe(3); // Water Elemental: 3/6
         expect(roleC.child.health.state.current).toBe(6);
-        expect(boardA.child.minions.length).toBe(1); // Water Elemental on board
+        expect(boardA.child.cards.length).toBe(1); // Water Elemental on board
 
         // Water Elemental attacks Player B's hero
         const promise = roleC.child.action.run();
@@ -96,7 +94,7 @@ describe('holy-fire', () => {
         expect(roleB.child.health.state.current).toBe(27); // Player B hero: 27 health (damaged)
         expect(roleC.child.attack.state.current).toBe(3); // Water Elemental: 3/6
         expect(roleC.child.health.state.current).toBe(6);
-        expect(handB.child.spells.length).toBe(1); // Holy Fire in hand
+        expect(handB.child.cards.length).toBe(1); // Holy Fire in hand
         expect(playerB.child.mana.state.current).toBe(10); // Full mana
 
         // Cast Holy Fire targeting Water Elemental
@@ -108,14 +106,14 @@ describe('holy-fire', () => {
         await promise;
 
         // Water Elemental should survive (6 health - 5 damage = 1 health)
-        expect(boardA.child.minions.length).toBe(1); // Water Elemental still on board
+        expect(boardA.child.cards.length).toBe(1); // Water Elemental still on board
         expect(roleC.child.health.state.current).toBe(1); // 6 - 5 = 1
 
         // Player B's hero should be healed by 5 (27 + 5 = 32, but max is 30)
         expect(roleB.child.health.state.current).toBe(30); // Healed to max health
 
         // Holy Fire should be consumed
-        expect(handB.child.spells.length).toBe(0); // Holy Fire consumed
+        expect(handB.child.cards.length).toBe(0); // Holy Fire consumed
         expect(playerB.child.mana.state.current).toBe(4); // 10 - 6 = 4
     });
 });

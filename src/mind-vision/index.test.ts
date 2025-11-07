@@ -17,12 +17,11 @@ describe('mind-vision', () => {
                     mana: new ManaModel({ state: { origin: 10 }}),
                     hero: new MageModel(),
                     board: new BoardModel({
-                        child: { minions: [] }
+                        child: { cards: [] }
                     }),
                     hand: new HandModel({
                         child: { 
-                            minions: [],
-                            spells: [new MindVisionModel()]
+                            cards: [new MindVisionModel()]
                         }
                     })
                 }
@@ -32,12 +31,11 @@ describe('mind-vision', () => {
                     mana: new ManaModel({ state: { origin: 10 }}),
                     hero: new MageModel(),
                     board: new BoardModel({
-                        child: { minions: [] }
+                        child: { cards: [] }
                     }),
                     hand: new HandModel({
                         child: { 
-                            minions: [new WaterElementalModel()],
-                            spells: []
+                            cards: [new WaterElementalModel()]
                         }
                     })
                 }
@@ -50,33 +48,29 @@ describe('mind-vision', () => {
     const playerB = game.child.playerB;
     const handA = playerA.child.hand;
     const handB = playerB.child.hand;
-    const cardC = handA.child.spells.find(item => item instanceof MindVisionModel);
-    const cardD = handB.child.minions.find(item => item instanceof WaterElementalModel);
+    const cardC = handA.child.cards.find(item => item instanceof MindVisionModel);
+    const cardD = handB.child.cards.find(item => item instanceof WaterElementalModel);
     if (!cardC || !cardD) throw new Error();
 
     test('mind-vision-cast', async () => {
         // Check initial state
         expect(playerA.child.mana.state.current).toBe(10);
-        expect(handA.child.minions.length).toBe(0);
-        expect(handA.child.spells.length).toBe(1);
-        expect(handB.child.minions.length).toBe(1);
-        expect(handB.child.spells.length).toBe(0);
+        expect(handA.child.cards.length).toBe(1);
+        expect(handB.child.cards.length).toBe(1);
 
         // Player A uses Mind Vision
         const promise = cardC.play();
         await promise;
 
         // Player A should have copied Water Elemental in hand
-        const cardE = handA.child.minions.find(item => item instanceof WaterElementalModel);
+        const cardE = handA.child.cards.find(item => item instanceof WaterElementalModel);
         if (!cardE) throw new Error();
-        expect(handA.child.minions.length).toBe(1);
+        expect(handA.child.cards.length).toBe(1);
         expect(cardE).not.toBe(cardD); // Mind Vision should copy a different card
         expect(cardE.refer.creator).toBe(cardD); // Mind Vision should copy the correct card
-        expect(handA.child.spells.length).toBe(0); // Mind Vision consumed
         
         // Player B's hand should be unchanged
-        expect(handB.child.minions.length).toBe(1);
-        expect(handB.child.spells.length).toBe(0);
+        expect(handB.child.cards.length).toBe(1);
         
         // Check mana cost
         expect(playerA.child.mana.state.current).toBe(9); // 10 - 1 cost

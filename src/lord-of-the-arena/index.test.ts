@@ -22,17 +22,16 @@ describe('lord-of-the-arena', () => {
                     hero: new MageModel(),
                     board: new BoardModel({
                         child: { 
-                            minions: []
+                            cards: []
                         }
                     }),
                     hand: new HandModel({
                         child: { 
-                            minions: [new LordOfTheArenaModel()],
-                            spells: []
+                            cards: [new LordOfTheArenaModel()]
                         }
                     }),
                     deck: new DeckModel({
-                        child: { minions: [] }
+                        child: { cards: [] }
                     })
                 }
             }),
@@ -42,11 +41,11 @@ describe('lord-of-the-arena', () => {
                     hero: new MageModel(),
                     board: new BoardModel({
                         child: { 
-                            minions: [new WispModel()]
+                            cards: [new WispModel()]
                         }
                     }),
                     hand: new HandModel({
-                        child: { spells: [] }
+                        child: { cards: [] }
                     })
                 }
             })
@@ -59,8 +58,8 @@ describe('lord-of-the-arena', () => {
     const boardA = playerA.child.board;
     const boardB = playerB.child.board;
     const handA = playerA.child.hand;
-    const cardC = handA.child.minions.find(item => item instanceof LordOfTheArenaModel);
-    const cardD = boardB.child.minions.find(item => item instanceof WispModel);
+    const cardC = handA.child.cards.find(item => item instanceof LordOfTheArenaModel);
+    const cardD = boardB.child.cards.find(item => item instanceof WispModel);
     if (!cardC || !cardD) throw new Error();
     const roleA = playerA.child.hero.child.role;
     const roleB = playerB.child.hero.child.role;
@@ -71,8 +70,8 @@ describe('lord-of-the-arena', () => {
         // Check initial state
         expect(roleC.child.attack.state.current).toBe(6); // Lord of the Arena: 6/5
         expect(roleC.child.health.state.current).toBe(5);
-        expect(handA.child.minions.length).toBe(1); // Lord of the Arena in hand
-        expect(boardA.child.minions.length).toBe(0); // No minions on board
+        expect(handA.child.cards.length).toBe(1); // Lord of the Arena in hand
+        expect(boardA.child.cards.length).toBe(0); // No minions on board
         expect(playerA.child.mana.state.current).toBe(10); // Full mana
 
         // Play Lord of the Arena
@@ -81,8 +80,8 @@ describe('lord-of-the-arena', () => {
         await promise;
 
         // Lord of the Arena should be on board
-        expect(boardA.child.minions.length).toBe(1); // Lord of the Arena on board
-        expect(handA.child.minions.length).toBe(0); // Lord of the Arena moved to board
+        expect(boardA.child.cards.length).toBe(1); // Lord of the Arena on board
+        expect(handA.child.cards.length).toBe(0); // Lord of the Arena moved to board
         expect(playerA.child.mana.state.current).toBe(4); // 10 - 6 = 4
     });
 
@@ -92,8 +91,8 @@ describe('lord-of-the-arena', () => {
         expect(turn.refer.current).toBe(playerB);
 
         // Check that Wisp cannot attack hero due to Lord of the Arena's Taunt
-        expect(boardA.child.minions.length).toBe(1); // Lord of the Arena on board
-        expect(boardB.child.minions.length).toBe(1); // Wisp on board
+        expect(boardA.child.cards.length).toBe(1); // Lord of the Arena on board
+        expect(boardB.child.cards.length).toBe(1); // Wisp on board
         expect(roleD.child.attack.state.current).toBe(1); // Wisp: 1/1
         expect(roleD.child.health.state.current).toBe(1);
 

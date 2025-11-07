@@ -20,7 +20,7 @@ describe('goldshire-footman', () => {
                     mana: new ManaModel({ state: { origin: 10 }}),
                     hero: new MageModel(),
                     board: new BoardModel({
-                        child: { minions: [new WispModel()] }
+                        child: { cards: [new WispModel()] }
                     })
                 }
             }),
@@ -29,7 +29,7 @@ describe('goldshire-footman', () => {
                     mana: new ManaModel({ state: { origin: 10 }}),
                     hero: new MageModel(),
                     board: new BoardModel({
-                        child: { minions: [new GoldshireFootmanModel()] }
+                        child: { cards: [new GoldshireFootmanModel()] }
                     })
                 }
             })
@@ -39,8 +39,8 @@ describe('goldshire-footman', () => {
     const boardA = game.child.playerA.child.board;
     const boardB = game.child.playerB.child.board;
     const playerB = game.child.playerB;
-    const cardC = boardA.child.minions.find((item: any) => item instanceof WispModel);
-    const cardD = boardB.child.minions.find((item: any) => item instanceof GoldshireFootmanModel);
+    const cardC = boardA.child.cards.find((item: any) => item instanceof WispModel);
+    const cardD = boardB.child.cards.find((item: any) => item instanceof GoldshireFootmanModel);
     const roleC = cardC?.child.role;
     const roleD = cardD?.child.role;
     const roleB = playerB.child.hero.child.role;

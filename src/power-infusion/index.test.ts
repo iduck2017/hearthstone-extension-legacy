@@ -21,17 +21,16 @@ describe('power-infusion', () => {
                     hero: new MageModel(),
                     board: new BoardModel({
                         child: { 
-                            minions: [new WispModel()]
+                            cards: [new WispModel()]
                         }
                     }),
                     hand: new HandModel({
                         child: { 
-                            minions: [],
-                            spells: [new PowerInfusionModel()]
+                            cards: [new PowerInfusionModel()]
                         }
                     }),
                     deck: new DeckModel({
-                        child: { minions: [] }
+                        child: { cards: [] }
                     })
                 }
             }),
@@ -41,11 +40,11 @@ describe('power-infusion', () => {
                     hero: new MageModel(),
                     board: new BoardModel({
                         child: { 
-                            minions: []
+                            cards: []
                         }
                     }),
                     hand: new HandModel({
-                        child: { spells: [] }
+                        child: { cards: [] }
                     })
                 }
             })
@@ -57,8 +56,8 @@ describe('power-infusion', () => {
     const playerB = game.child.playerB;
     const boardA = playerA.child.board;
     const handA = playerA.child.hand;
-    const cardC = handA.child.spells.find(item => item instanceof PowerInfusionModel);
-    const cardD = boardA.child.minions.find(item => item instanceof WispModel);
+    const cardC = handA.child.cards.find(item => item instanceof PowerInfusionModel);
+    const cardD = boardA.child.cards.find(item => item instanceof WispModel);
     if (!cardC || !cardD) throw new Error();
     const roleA = playerA.child.hero.child.role;
     const roleB = playerB.child.hero.child.role;
@@ -68,7 +67,7 @@ describe('power-infusion', () => {
         // Check initial state
         expect(roleD.child.attack.state.current).toBe(1); // Wisp: 1/1
         expect(roleD.child.health.state.current).toBe(1);
-        expect(handA.child.spells.length).toBe(1); // Power Infusion in hand
+        expect(handA.child.cards.length).toBe(1); // Power Infusion in hand
         expect(playerA.child.mana.state.current).toBe(10); // Full mana
 
         // Cast Power Infusion on Wisp
@@ -83,7 +82,7 @@ describe('power-infusion', () => {
         expect(roleD.child.health.state.current).toBe(7); // 1 + 6 = 7
 
         // Power Infusion should be consumed
-        expect(handA.child.spells.length).toBe(0); // Power Infusion consumed
+        expect(handA.child.cards.length).toBe(0); // Power Infusion consumed
         expect(playerA.child.mana.state.current).toBe(6); // 10 - 4 = 6
     });
 });

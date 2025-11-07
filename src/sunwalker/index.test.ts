@@ -23,17 +23,16 @@ describe('sunwalker', () => {
                     hero: new MageModel(),
                     board: new BoardModel({
                         child: { 
-                            minions: []
+                            cards: []
                         }
                     }),
                     hand: new HandModel({
                         child: { 
-                            minions: [new SunwalkerModel()],
-                            spells: []
+                            cards: [new SunwalkerModel()]
                         }
                     }),
                     deck: new DeckModel({
-                        child: { minions: [] }
+                        child: { cards: [] }
                     })
                 }
             }),
@@ -43,11 +42,11 @@ describe('sunwalker', () => {
                     hero: new MageModel(),
                     board: new BoardModel({
                         child: { 
-                            minions: [new WispModel()]
+                            cards: [new WispModel()]
                         }
                     }),
                     hand: new HandModel({
-                        child: { spells: [] }
+                        child: { cards: [] }
                     })
                 }
             })
@@ -60,8 +59,8 @@ describe('sunwalker', () => {
     const boardA = playerA.child.board;
     const boardB = playerB.child.board;
     const handA = playerA.child.hand;
-    const cardC = handA.refer.queue.find(item => item instanceof SunwalkerModel);
-    const cardD = boardB.refer.queue.find(item => item instanceof WispModel);
+    const cardC = handA.child.cards.find(item => item instanceof SunwalkerModel);
+    const cardD = boardB.child.cards.find(item => item instanceof WispModel);
     if (!cardC || !cardD) throw new Error();
     const roleA = playerA.child.hero.child.role;
     const roleB = playerB.child.hero.child.role;
@@ -72,8 +71,8 @@ describe('sunwalker', () => {
         // Check initial state
         expect(roleC.child.attack.state.current).toBe(4); // Sunwalker: 4/5
         expect(roleC.child.health.state.current).toBe(5);
-        expect(handA.refer.queue.length).toBe(1); // Sunwalker in hand
-        expect(boardA.refer.queue.length).toBe(0); // No minions on board
+        expect(handA.child.cards.length).toBe(1); // Sunwalker in hand
+        expect(boardA.child.cards.length).toBe(0); // No minions on board
         expect(playerA.child.mana.state.current).toBe(10); // Full mana
 
         // Play Sunwalker
@@ -82,8 +81,8 @@ describe('sunwalker', () => {
         await promise;
 
         // Sunwalker should be on board
-        expect(boardA.refer.queue.length).toBe(1); // Sunwalker on board
-        expect(handA.refer.queue.length).toBe(0); // Sunwalker moved to board
+        expect(boardA.child.cards.length).toBe(1); // Sunwalker on board
+        expect(handA.child.cards.length).toBe(0); // Sunwalker moved to board
         expect(playerA.child.mana.state.current).toBe(4); // 10 - 6 = 4
 
         // Check that Sunwalker has Taunt and Divine Shield
@@ -97,8 +96,8 @@ describe('sunwalker', () => {
         expect(game.child.turn.refer.current).toBe(playerB);
 
         // Check that Wisp cannot attack hero due to Sunwalker's Taunt
-        expect(boardA.refer.queue.length).toBe(1); // Sunwalker on board
-        expect(boardB.refer.queue.length).toBe(1); // Wisp on board
+        expect(boardA.child.cards.length).toBe(1); // Sunwalker on board
+        expect(boardB.child.cards.length).toBe(1); // Wisp on board
         expect(roleD.child.attack.state.current).toBe(1); // Wisp: 1/1
         expect(roleD.child.health.state.current).toBe(1);
 

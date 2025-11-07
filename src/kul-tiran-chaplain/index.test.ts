@@ -21,17 +21,16 @@ describe('kul-tiran-chaplain', () => {
                     hero: new MageModel(),
                     board: new BoardModel({
                         child: { 
-                            minions: [new WaterElementalModel()]
+                            cards: [new WaterElementalModel()]
                         }
                     }),
                     hand: new HandModel({
                         child: { 
-                            minions: [new KulTiranChaplainModel()],
-                            spells: []
+                            cards: [new KulTiranChaplainModel()]
                         }
                     }),
                     deck: new DeckModel({
-                        child: { minions: [] }
+                        child: { cards: [] }
                     })
                 }
             }),
@@ -40,10 +39,10 @@ describe('kul-tiran-chaplain', () => {
                     mana: new ManaModel({ state: { origin: 10 }}),
                     hero: new MageModel(),
                     board: new BoardModel({
-                        child: { minions: [] }
+                        child: { cards: [] }
                     }),
                     hand: new HandModel({
-                        child: { spells: [] }
+                        child: { cards: [] }
                     })
                 }
             })
@@ -54,8 +53,8 @@ describe('kul-tiran-chaplain', () => {
     const playerA = game.child.playerA;
     const boardA = playerA.child.board;
     const handA = playerA.child.hand;
-    const cardC = handA.child.minions.find(item => item instanceof KulTiranChaplainModel);
-    const cardD = boardA.child.minions.find(item => item instanceof WaterElementalModel);
+    const cardC = handA.child.cards.find(item => item instanceof KulTiranChaplainModel);
+    const cardD = boardA.child.cards.find(item => item instanceof WaterElementalModel);
     if (!cardC || !cardD) throw new Error();
     const roleC = cardC?.child.role;
     const roleD = cardD?.child.role;
@@ -65,8 +64,8 @@ describe('kul-tiran-chaplain', () => {
         expect(roleD.child.attack.state.current).toBe(3); // Water Elemental: 3/6
         expect(roleD.child.health.state.current).toBe(6);
         expect(playerA.child.mana.state.current).toBe(10);
-        expect(boardA.child.minions.length).toBe(1);
-        expect(handA.refer.queue.length).toBe(1);
+        expect(boardA.child.cards.length).toBe(1);
+        expect(handA.child.cards.length).toBe(1);
 
         // Player A plays Kul Tiran Chaplain
         const promise = cardC.play();
@@ -77,7 +76,7 @@ describe('kul-tiran-chaplain', () => {
         await promise;
 
         // Check that Kul Tiran Chaplain is on board
-        expect(boardA.child.minions.length).toBe(2);
+        expect(boardA.child.cards.length).toBe(2);
         expect(roleC.child.attack.state.current).toBe(2); // Kul Tiran Chaplain: 3/2
         expect(roleC.child.health.state.current).toBe(3);
 
@@ -86,7 +85,7 @@ describe('kul-tiran-chaplain', () => {
         expect(roleD.child.health.state.current).toBe(8); // 6 + 2 = 8
 
         // Kul Tiran Chaplain should be consumed
-        expect(handA.refer.queue.length).toBe(0); // Kul Tiran Chaplain consumed
+        expect(handA.child.cards.length).toBe(0); // Kul Tiran Chaplain consumed
         expect(playerA.child.mana.state.current).toBe(8); // 10 - 2 cost
     });
 });

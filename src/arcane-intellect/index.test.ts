@@ -18,14 +18,14 @@ describe('arcane-intellect', () => {
                     mana: new ManaModel({ state: { origin: 10 }}),
                     hero: new MageModel(),
                     board: new BoardModel({
-                        child: { minions: [] }
+                        child: { cards: [] }
                     }),
                     hand: new HandModel({
-                        child: { spells: [new ArcaneIntellectModel()] }
+                        child: { cards: [new ArcaneIntellectModel()] }
                     }),
                     deck: new DeckModel({
                         child: { 
-                            minions: [
+                            cards: [
                                 new WispModel(), 
                                 new WispModel()
                             ] 
@@ -38,10 +38,10 @@ describe('arcane-intellect', () => {
                     mana: new ManaModel({ state: { origin: 10 }}),
                     hero: new MageModel(),
                     board: new BoardModel({
-                        child: { minions: [] }
+                        child: { cards: [] }
                     }),
                     hand: new HandModel({
-                        child: { spells: [] }
+                        child: { cards: [] }
                     })
                 }
             })
@@ -52,23 +52,21 @@ describe('arcane-intellect', () => {
     const playerA = game.child.playerA;
     const handA = playerA.child.hand;
     const deckA = playerA.child.deck;
-    const cardC = handA.child.spells.find(item => item instanceof ArcaneIntellectModel);
+    const cardC = handA.child.cards.find(item => item instanceof ArcaneIntellectModel);
     if (!cardC) throw new Error();
 
     test('arcane-intellect-cast', async () => {
         // Check initial stats
         expect(playerA.child.mana.state.current).toBe(10);
-        expect(handA.child.spells.length).toBe(1);
-        expect(deckA.child.minions.length).toBe(2);
-        expect(handA.child.minions.length).toBe(0);
+        expect(handA.child.cards.length).toBe(1);
+        expect(deckA.child.cards.length).toBe(2);
 
         // Play Arcane Intellect
         await cardC.play();
 
         // Should draw 2 cards
         expect(playerA.child.mana.state.current).toBe(7); // 10 - 3 cost
-        expect(handA.child.spells.length).toBe(0); // Arcane Intellect consumed
-        expect(deckA.child.minions.length).toBe(0); // 3 - 2 = 1
-        expect(handA.child.minions.length).toBe(2); // 2 cards drawn to hand
+        expect(handA.child.cards.length).toBe(2); // Arcane Intellect consumed, 2 cards drawn
+        expect(deckA.child.cards.length).toBe(0); // All cards drawn
     })
 })

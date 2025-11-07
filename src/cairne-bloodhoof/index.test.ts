@@ -24,17 +24,16 @@ describe('cairne-bloodhoof', () => {
                     hero: new MageModel(),
                     board: new BoardModel({
                         child: { 
-                            minions: [new WispModel()]
+                            cards: [new WispModel()]
                         }
                     }),
                     hand: new HandModel({
                         child: { 
-                            minions: [],
-                            spells: [new FireballModel()]
+                            cards: [new FireballModel()]
                         }
                     }),
                     deck: new DeckModel({
-                        child: { minions: [] }
+                        child: { cards: [] }
                     })
                 }
             }),
@@ -44,11 +43,11 @@ describe('cairne-bloodhoof', () => {
                     hero: new MageModel(),
                     board: new BoardModel({
                         child: { 
-                            minions: [new CairneBloodhoofModel()]
+                            cards: [new CairneBloodhoofModel()]
                         }
                     }),
                     hand: new HandModel({
-                        child: { spells: [] }
+                        child: { cards: [] }
                     })
                 }
             })
@@ -61,9 +60,9 @@ describe('cairne-bloodhoof', () => {
     const boardA = playerA.child.board;
     const boardB = playerB.child.board;
     const handA = playerA.child.hand;
-    const cardC = handA.child.spells.find(item => item instanceof FireballModel);
-    const cardD = boardA.child.minions.find(item => item instanceof WispModel);
-    const cardE = boardB.child.minions.find(item => item instanceof CairneBloodhoofModel);
+    const cardC = handA.child.cards.find(item => item instanceof FireballModel);
+    const cardD = boardA.child.cards.find(item => item instanceof WispModel);
+    const cardE = boardB.child.cards.find(item => item instanceof CairneBloodhoofModel);
     if (!cardC || !cardD || !cardE) throw new Error();
     const roleA = playerA.child.hero.child.role;
     const roleB = playerB.child.hero.child.role;
@@ -74,8 +73,8 @@ describe('cairne-bloodhoof', () => {
         // Check initial state
         expect(roleE.child.attack.state.current).toBe(5); // Cairne Bloodhoof: 5/5
         expect(roleE.child.health.state.current).toBe(5);
-        expect(boardB.child.minions.length).toBe(1); // Only Cairne Bloodhoof on board
-        expect(handA.child.spells.length).toBe(1); // Fireball in hand
+        expect(boardB.child.cards.length).toBe(1); // Only Cairne Bloodhoof on board
+        expect(handA.child.cards.length).toBe(1); // Fireball in hand
         expect(playerA.child.mana.state.current).toBe(10); // Full mana
 
         // Cast Fireball targeting Cairne Bloodhoof
@@ -87,39 +86,40 @@ describe('cairne-bloodhoof', () => {
         await promise;
 
         // Cairne Bloodhoof should be destroyed and Baine Bloodhoof should be summoned
-        expect(boardB.child.minions.length).toBe(1); // Baine Bloodhoof summoned
-        const roleG = boardB.child.minions.find(item => item instanceof BaineBloodhoofModel);
-        expect(roleG).toBeDefined();
-        if (!roleG) throw new Error();
-        expect(roleG.child.role.child.attack.state.current).toBe(5); // Baine: 5/5
-        expect(roleG.child.role.child.health.state.current).toBe(5);
+        expect(boardB.child.cards.length).toBe(1); // Baine Bloodhoof summoned
+        const cardG = boardB.child.cards.find(item => item instanceof BaineBloodhoofModel);
+        expect(cardG).toBeDefined();
+        if (!cardG) throw new Error();
+        const roleG = cardG.child.role;
+        expect(roleG.child.attack.state.current).toBe(5); // Baine: 5/5
+        expect(roleG.child.health.state.current).toBe(5);
 
         // Fireball should be consumed
-        expect(handA.child.spells.length).toBe(0); // Fireball consumed
+        expect(handA.child.cards.length).toBe(0); // Fireball consumed
         expect(playerA.child.mana.state.current).toBe(6); // 10 - 4 = 6
     });
 
     test('wisp-attack', async () => {
         // Check that Wisp cannot attack hero due to Baine Bloodhoof's Taunt
-        expect(boardA.child.minions.length).toBe(1); // Wisp on board
-        expect(boardB.child.minions.length).toBe(1); // Baine Bloodhoof on board
+        expect(boardA.child.cards.length).toBe(1); // Wisp on board
+        expect(boardB.child.cards.length).toBe(1); // Baine Bloodhoof on board
         expect(roleD.child.attack.state.current).toBe(1); // Wisp: 1/1
         expect(roleD.child.health.state.current).toBe(1);
 
 
-        const cardG = boardB.child.minions.find(item => item instanceof BaineBloodhoofModel);
-        if (!cardG) throw new Error();
-        const roleG = cardG.child.role;
+        const cardG2 = boardB.child.cards.find(item => item instanceof BaineBloodhoofModel);
+        if (!cardG2) throw new Error();
+        const roleG2 = cardG2.child.role;
 
         // Try to attack with Wisp
         const promise = roleD.child.action.run();
         expect(playerA.child.controller.current?.options).toContain(roleB); // Can target enemy hero
-        expect(playerA.child.controller.current?.options).toContain(roleG); 
-        playerA.child.controller.set(roleG); // Target Baine Bloodhoof
+        expect(playerA.child.controller.current?.options).toContain(roleG2);
+        playerA.child.controller.set(roleG2); // Target Baine Bloodhoof
         await promise;
 
         // Baine Bloodhoof should take 1 damage
-        expect(cardG.child.role.child.health.state.current).toBe(4); // 5 - 1 = 4
+        expect(roleG2.child.health.state.current).toBe(4); // 5 - 1 = 4
         expect(cardD.child.dispose.status).toBe(true);
     });
 });

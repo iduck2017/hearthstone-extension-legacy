@@ -24,17 +24,16 @@ describe('shadow-word-ruin', () => {
                     hero: new MageModel(),
                     board: new BoardModel({
                         child: { 
-                            minions: [new WispModel(), new WaterElementalModel(), new AegwynnTheGuardianModel()]
+                            cards: [new WispModel(), new WaterElementalModel(), new AegwynnTheGuardianModel()]
                         }
                     }),
                     hand: new HandModel({
                         child: { 
-                            minions: [],
-                            spells: [new ShadowWordRuinModel()]
+                            cards: [new ShadowWordRuinModel()]
                         }
                     }),
                     deck: new DeckModel({
-                        child: { minions: [] }
+                        child: { cards: [] }
                     })
                 }
             }),
@@ -44,11 +43,11 @@ describe('shadow-word-ruin', () => {
                     hero: new MageModel(),
                     board: new BoardModel({
                         child: { 
-                            minions: [new WispModel(), new WaterElementalModel()]
+                            cards: [new WispModel(), new WaterElementalModel()]
                         }
                     }),
                     hand: new HandModel({
-                        child: { spells: [] }
+                        child: { cards: [] }
                     })
                 }
             })
@@ -61,12 +60,12 @@ describe('shadow-word-ruin', () => {
     const boardA = playerA.child.board;
     const boardB = playerB.child.board;
     const handA = playerA.child.hand;
-    const cardC = handA.child.spells.find(item => item instanceof ShadowWordRuinModel);
-    const cardD = boardA.child.minions.find(item => item instanceof WispModel);
-    const cardE = boardA.child.minions.find(item => item instanceof WaterElementalModel);
-    const cardF = boardA.child.minions.find(item => item instanceof AegwynnTheGuardianModel);
-    const cardG = boardB.child.minions.find(item => item instanceof WispModel);
-    const cardH = boardB.child.minions.find(item => item instanceof WaterElementalModel);
+    const cardC = handA.child.cards.find(item => item instanceof ShadowWordRuinModel);
+    const cardD = boardA.child.cards.find(item => item instanceof WispModel);
+    const cardE = boardA.child.cards.find(item => item instanceof WaterElementalModel);
+    const cardF = boardA.child.cards.find(item => item instanceof AegwynnTheGuardianModel);
+    const cardG = boardB.child.cards.find(item => item instanceof WispModel);
+    const cardH = boardB.child.cards.find(item => item instanceof WaterElementalModel);
     if (!cardC || !cardD || !cardE || !cardF || !cardG || !cardH) throw new Error();
     const roleA = playerA.child.hero.child.role;
     const roleB = playerB.child.hero.child.role;
@@ -90,8 +89,8 @@ describe('shadow-word-ruin', () => {
         expect(roleH.child.health.state.current).toBe(6);
 
         // Check initial board state
-        expect(boardA.child.minions.length).toBe(3);
-        expect(boardB.child.minions.length).toBe(2);
+        expect(boardA.child.cards.length).toBe(3);
+        expect(boardB.child.cards.length).toBe(2);
 
         // Cast Shadow Word: Ruin
         let promise = cardC.play();
@@ -105,11 +104,11 @@ describe('shadow-word-ruin', () => {
         expect(cardH.child.dispose.status).toBe(false); // Enemy Water Elemental survives
 
         // Check final board state
-        expect(boardA.child.minions.length).toBe(2); // Wisp and Water Elemental remain
-        expect(boardB.child.minions.length).toBe(2); // Both enemy minions remain
+        expect(boardA.child.cards.length).toBe(2); // Wisp and Water Elemental remain
+        expect(boardB.child.cards.length).toBe(2); // Both enemy minions remain
 
         // Shadow Word: Ruin should be consumed
-        expect(handA.child.spells.length).toBe(0); // Shadow Word: Ruin consumed
+        expect(handA.child.cards.length).toBe(0); // Shadow Word: Ruin consumed
         expect(playerA.child.mana.state.current).toBe(6); // 10 - 4 = 6
     });
 });

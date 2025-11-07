@@ -21,17 +21,16 @@ describe('novice-engineer', () => {
                     hero: new MageModel(),
                     board: new BoardModel({
                         child: { 
-                            minions: []
+                            cards: []
                         }
                     }),
                     hand: new HandModel({
                         child: { 
-                            minions: [new NoviceEngineerModel()],
-                            spells: []
+                            cards: [new NoviceEngineerModel()]
                         }
                     }),
                     deck: new DeckModel({
-                        child: { minions: [new WispModel(), new WispModel()] }
+                        child: { cards: [new WispModel(), new WispModel()] }
                     })
                 }
             }),
@@ -41,13 +40,12 @@ describe('novice-engineer', () => {
                     hero: new MageModel(),
                     board: new BoardModel({
                         child: { 
-                            minions: []
+                            cards: []
                         }
                     }),
                     hand: new HandModel({
                         child: { 
-                            minions: [],
-                            spells: []
+                            cards: []
                         }
                     })
                 }
@@ -61,7 +59,7 @@ describe('novice-engineer', () => {
     const boardA = playerA.child.board;
     const handA = playerA.child.hand;
     const deckA = playerA.child.deck;
-    const cardC = handA.refer.queue.find(item => item instanceof NoviceEngineerModel);
+    const cardC = handA.child.cards.find(item => item instanceof NoviceEngineerModel);
     if (!cardC) throw new Error();
     const roleA = playerA.child.hero.child.role;
     const roleB = playerB.child.hero.child.role;
@@ -71,9 +69,9 @@ describe('novice-engineer', () => {
         // Check initial state
         expect(roleC.child.attack.state.current).toBe(1); // Novice Engineer: 1/1
         expect(roleC.child.health.state.current).toBe(1);
-        expect(boardA.refer.queue.length).toBe(0); // No minions on board
-        expect(handA.refer.queue.length).toBe(1); // Novice Engineer in hand
-        expect(deckA.refer.queue.length).toBe(2); // 2 Wisp in deck
+        expect(boardA.child.cards.length).toBe(0); // No minions on board
+        expect(handA.child.cards.length).toBe(1); // Novice Engineer in hand
+        expect(deckA.child.cards.length).toBe(2); // 2 Wisp in deck
         expect(playerA.child.mana.state.current).toBe(10); // Full mana
 
         // Play Novice Engineer
@@ -82,9 +80,9 @@ describe('novice-engineer', () => {
         await promise;
 
         // Novice Engineer should be on board
-        expect(boardA.refer.queue.length).toBe(1); // Novice Engineer on board
-        expect(handA.refer.queue.length).toBe(1); // 1 card drawn from deck (2 - 1 = 1)
-        expect(deckA.refer.queue.length).toBe(1); // 1 Wisp remaining in deck
+        expect(boardA.child.cards.length).toBe(1); // Novice Engineer on board
+        expect(handA.child.cards.length).toBe(1); // 1 card drawn from deck (2 - 1 = 1)
+        expect(deckA.child.cards.length).toBe(1); // 1 Wisp remaining in deck
         expect(playerA.child.mana.state.current).toBe(8); // 10 - 2 = 8
     });
 });

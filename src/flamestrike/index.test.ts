@@ -22,10 +22,10 @@ describe('flamestrike', () => {
                     mana: new ManaModel({ state: { origin: 10 }}),
                     hero: new MageModel(),
                     board: new BoardModel({
-                        child: { minions: [] }
+                        child: { cards: [] }
                     }),
                     hand: new HandModel({
-                        child: { spells: [new FlamestrikeModel()] }
+                        child: { cards: [new FlamestrikeModel()] }
                     })
                 }
             }),
@@ -35,11 +35,11 @@ describe('flamestrike', () => {
                     hero: new MageModel(),
                     board: new BoardModel({
                         child: { 
-                            minions: [new WispModel(), new WaterElementalModel()]
+                            cards: [new WispModel(), new WaterElementalModel()]
                         }
                     }),
                     hand: new HandModel({
-                        child: { spells: [] }
+                        child: { cards: [] }
                     })
                 }
             })
@@ -51,9 +51,9 @@ describe('flamestrike', () => {
     const playerB = game.child.playerB;
     const handA = playerA.child.hand;
     const boardB = playerB.child.board;
-    const cardC = handA.child.spells.find(item => item instanceof FlamestrikeModel);
-    const cardD = boardB.child.minions.find(item => item instanceof WispModel);
-    const cardE = boardB.child.minions.find(item => item instanceof WaterElementalModel);
+    const cardC = handA.child.cards.find(item => item instanceof FlamestrikeModel);
+    const cardD = boardB.child.cards.find(item => item instanceof WispModel);
+    const cardE = boardB.child.cards.find(item => item instanceof WaterElementalModel);
     const roleD = cardD?.child.role;
     const roleE = cardE?.child.role;
     const roleB = playerB.child.hero.child.role;
@@ -65,8 +65,8 @@ describe('flamestrike', () => {
         expect(roleE.child.health.state.current).toBe(6); // Water Elemental: 3/6
         expect(roleB.child.health.state.current).toBe(30); // Player B hero: 30 health
         expect(playerA.child.mana.state.current).toBe(10);
-        expect(handA.child.spells.length).toBe(1);
-        expect(boardB.child.minions.length).toBe(2);
+        expect(handA.child.cards.length).toBe(1);
+        expect(boardB.child.cards.length).toBe(2);
 
         // Player A plays Flamestrike - no target selection needed
         await cardC.play();
@@ -82,9 +82,9 @@ describe('flamestrike', () => {
         expect(roleB.child.health.state.current).toBe(30); // Hero should not be affected
 
         expect(playerA.child.mana.state.current).toBe(3); // 10 - 7 cost
-        expect(handA.child.spells.length).toBe(0); // Flamestrike consumed
+        expect(handA.child.cards.length).toBe(0); // Flamestrike consumed
 
         // Only dead minion (Wisp) should be removed from board
-        expect(boardB.child.minions.length).toBe(1);
+        expect(boardB.child.cards.length).toBe(1);
     });
 });

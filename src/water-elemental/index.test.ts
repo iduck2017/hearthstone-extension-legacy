@@ -21,10 +21,10 @@ describe('water-elemental', () => {
                     mana: new ManaModel({ state: { origin: 10 }}),
                     hero: new MageModel(),
                     board: new BoardModel({
-                        child: { minions: [new WaterElementalModel()] }
+                        child: { cards: [new WaterElementalModel()] }
                     }),
                     hand: new HandModel({
-                        child: { spells: [] }
+                        child: { cards: [] }
                     })
                 }
             }),
@@ -33,10 +33,10 @@ describe('water-elemental', () => {
                     mana: new ManaModel({ state: { origin: 10 }}),
                     hero: new MageModel(),
                     board: new BoardModel({
-                        child: { minions: [new WaterElementalModel()] }
+                        child: { cards: [new WaterElementalModel()] }
                     }),
                     hand: new HandModel({
-                        child: { spells: [] }
+                        child: { cards: [] }
                     })
                 }
             })
@@ -48,8 +48,8 @@ describe('water-elemental', () => {
     const playerB = game.child.playerB;
     const boardA = playerA.child.board;
     const boardB = playerB.child.board;
-    const cardC = boardA.child.minions.find(item => item instanceof WaterElementalModel);
-    const cardD = boardB.child.minions.find(item => item instanceof WaterElementalModel);
+    const cardC = boardA.child.cards.find(item => item instanceof WaterElementalModel);
+    const cardD = boardB.child.cards.find(item => item instanceof WaterElementalModel);
     const roleC = cardC?.child.role;
     const roleD = cardD?.child.role;
     const roleB = playerB.child.hero.child.role;

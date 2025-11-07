@@ -19,14 +19,14 @@ describe('blizzard', () => {
                     mana: new ManaModel({ state: { origin: 10 }}),
                     hero: new MageModel(),
                     board: new BoardModel({
-                        child: { minions: [] }
+                        child: { cards: [] }
                     }),
                     hand: new HandModel({
-                        child: { spells: [new BlizzardModel()] }
+                        child: { cards: [new BlizzardModel()] }
                     }),
                     deck: new DeckModel({
                         child: { 
-                            minions: [] 
+                            cards: [] 
                         }
                     })
                 }
@@ -36,10 +36,10 @@ describe('blizzard', () => {
                     mana: new ManaModel({ state: { origin: 10 }}),
                     hero: new MageModel(),
                     board: new BoardModel({
-                        child: { minions: [new WispModel(), new WaterElementalModel()] }
+                        child: { cards: [new WispModel(), new WaterElementalModel()] }
                     }),
                     hand: new HandModel({
-                        child: { spells: [] }
+                        child: { cards: [] }
                     })
                 }
             })
@@ -51,9 +51,9 @@ describe('blizzard', () => {
     const playerB = game.child.playerB;
     const handA = playerA.child.hand;
     const boardB = playerB.child.board;
-    const cardC = handA.child.spells.find(item => item instanceof BlizzardModel);
-    const cardD = boardB.child.minions.find(item => item instanceof WispModel);
-    const cardE = boardB.child.minions.find(item => item instanceof WaterElementalModel);
+    const cardC = handA.child.cards.find(item => item instanceof BlizzardModel);
+    const cardD = boardB.child.cards.find(item => item instanceof WispModel);
+    const cardE = boardB.child.cards.find(item => item instanceof WaterElementalModel);
     const roleD = cardD?.child.role;
     const roleE = cardE?.child.role;
     const roleB = playerB.child.hero.child.role;
@@ -66,8 +66,8 @@ describe('blizzard', () => {
         expect(roleD.child.feats.child.frozen.state.isActive).toBe(false);
         expect(roleE.child.feats.child.frozen.state.isActive).toBe(false);
         expect(playerA.child.mana.state.current).toBe(10);
-        expect(handA.child.spells.length).toBe(1);
-        expect(boardB.child.minions.length).toBe(2);
+        expect(handA.child.cards.length).toBe(1);
+        expect(boardB.child.cards.length).toBe(2);
 
         // Play Blizzard - no target selection needed
         await cardC.play();
@@ -83,9 +83,9 @@ describe('blizzard', () => {
         expect(roleB.child.health.state.current).toBe(30);
 
         expect(playerA.child.mana.state.current).toBe(4); // 10 - 6 cost
-        expect(handA.child.spells.length).toBe(0);
+        expect(handA.child.cards.length).toBe(0);
 
         // Only dead minion (Wisp) should be removed from board
-        expect(boardB.child.minions.length).toBe(1);
+        expect(boardB.child.cards.length).toBe(1);
     })
 })

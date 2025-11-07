@@ -21,17 +21,16 @@ describe('young-dragonhawk', () => {
                     hero: new MageModel(),
                     board: new BoardModel({
                         child: { 
-                            minions: [new YoungDragonhawkModel()]
+                            cards: [new YoungDragonhawkModel()]
                         }
                     }),
                     hand: new HandModel({
                         child: { 
-                            minions: [],
-                            spells: []
+                            cards: []
                         }
                     }),
                     deck: new DeckModel({
-                        child: { minions: [] }
+                        child: { cards: [] }
                     })
                 }
             }),
@@ -41,13 +40,12 @@ describe('young-dragonhawk', () => {
                     hero: new MageModel(),
                     board: new BoardModel({
                         child: { 
-                            minions: [new ShieldbearerModel()]
+                            cards: [new ShieldbearerModel()]
                         }
                     }),
                     hand: new HandModel({
                         child: { 
-                            minions: [],
-                            spells: []
+                            cards: []
                         }
                     })
                 }
@@ -60,8 +58,8 @@ describe('young-dragonhawk', () => {
     const playerB = game.child.playerB;
     const boardA = playerA.child.board;
     const boardB = playerB.child.board;
-    const cardC = boardA.refer.queue.find(item => item instanceof YoungDragonhawkModel);
-    const cardD = boardB.refer.queue.find(item => item instanceof ShieldbearerModel);
+    const cardC = boardA.child.cards.find(item => item instanceof YoungDragonhawkModel);
+    const cardD = boardB.child.cards.find(item => item instanceof ShieldbearerModel);
     if (!cardC || !cardD) throw new Error();
     const roleA = playerA.child.hero.child.role;
     const roleB = playerB.child.hero.child.role;
@@ -70,8 +68,8 @@ describe('young-dragonhawk', () => {
 
     test('young-dragonhawk-windfury', async () => {
         // Check initial state
-        expect(boardA.refer.queue.length).toBe(1); // Young Dragonhawk on board
-        expect(boardB.refer.queue.length).toBe(1); // Shieldbearer on board
+        expect(boardA.child.cards.length).toBe(1); // Young Dragonhawk on board
+        expect(boardB.child.cards.length).toBe(1); // Shieldbearer on board
         expect(roleC.child.action.state.origin).toBe(2); // Windfury: 2 attacks
         expect(roleC.child.action.state.current).toBe(2);
         expect(roleD.child.health.state.current).toBe(4); // Shieldbearer: 4 health

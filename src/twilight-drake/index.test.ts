@@ -21,21 +21,20 @@ describe('twilight-drake', () => {
                     hero: new MageModel(),
                     board: new BoardModel({
                         child: { 
-                            minions: []
+                            cards: []
                         }
                     }),
                     hand: new HandModel({
                         child: { 
-                            minions: [
+                            cards: [
                                 new TwilightDrakeModel(), 
                                 new WispModel(), 
                                 new WispModel(),
-                            ],
-                            spells: []
+                            ]
                         }
                     }),
                     deck: new DeckModel({
-                        child: { minions: [] }
+                        child: { cards: [] }
                     })
                 }
             }),
@@ -45,13 +44,12 @@ describe('twilight-drake', () => {
                     hero: new MageModel(),
                     board: new BoardModel({
                         child: { 
-                            minions: []
+                            cards: []
                         }
                     }),
                     hand: new HandModel({
                         child: { 
-                            minions: [],
-                            spells: []
+                            cards: []
                         }
                     })
                 }
@@ -64,7 +62,7 @@ describe('twilight-drake', () => {
     const playerB = game.child.playerB;
     const boardA = playerA.child.board;
     const handA = playerA.child.hand;
-    const cardC = handA.refer.queue.find(item => item instanceof TwilightDrakeModel);
+    const cardC = handA.child.cards.find(item => item instanceof TwilightDrakeModel);
     if (!cardC) throw new Error();
     const roleA = playerA.child.hero.child.role;
     const roleB = playerB.child.hero.child.role;
@@ -74,8 +72,8 @@ describe('twilight-drake', () => {
         // Check initial state
         expect(roleC.child.attack.state.current).toBe(4); // Twilight Drake: 4/1
         expect(roleC.child.health.state.current).toBe(1);
-        expect(handA.refer.queue.length).toBe(3); // Twilight Drake + 2 Wisp in hand
-        expect(boardA.refer.queue.length).toBe(0); // No minions on board
+        expect(handA.child.cards.length).toBe(3); // Twilight Drake + 2 Wisp in hand
+        expect(boardA.child.cards.length).toBe(0); // No minions on board
         expect(playerA.child.mana.state.current).toBe(10); // Full mana
 
         // Play Twilight Drake
@@ -84,8 +82,8 @@ describe('twilight-drake', () => {
         await promise;
 
         // Twilight Drake should be on board
-        expect(boardA.refer.queue.length).toBe(1); // Twilight Drake on board
-        expect(handA.refer.queue.length).toBe(2); // 2 Wisp remaining in hand
+        expect(boardA.child.cards.length).toBe(1); // Twilight Drake on board
+        expect(handA.child.cards.length).toBe(2); // 2 Wisp remaining in hand
         expect(playerA.child.mana.state.current).toBe(6); // 10 - 4 = 6
 
         // Twilight Drake should gain +2 Health (2 cards in hand when played)

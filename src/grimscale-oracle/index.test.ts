@@ -19,13 +19,13 @@ describe('grimscale-oracle', () => {
                     mana: new ManaModel({ state: { origin: 10 }}),
                     hero: new MageModel(),
                     board: new BoardModel({
-                        child: { minions: [
+                        child: { cards: [
                             new MurlocRaiderModel(),
                             new WispModel()
                         ]}
                     }),
                     hand: new HandModel({
-                        child: { minions: [new GrimscaleOracleModel()] }
+                        child: { cards: [new GrimscaleOracleModel()] }
                     })
                 }
             }),
@@ -34,7 +34,7 @@ describe('grimscale-oracle', () => {
                     mana: new ManaModel({ state: { origin: 10 }}),
                     hero: new MageModel(),
                     board: new BoardModel({
-                        child: { minions: [new MurlocRaiderModel()] }
+                        child: { cards: [new MurlocRaiderModel()] }
                     })
                 }
             })
@@ -44,10 +44,10 @@ describe('grimscale-oracle', () => {
     const boardA = game.child.playerA.child.board;
     const boardB = game.child.playerB.child.board;
     const handA = game.child.playerA.child.hand;
-    const cardC = handA.child.minions.find((item: any) => item instanceof GrimscaleOracleModel);
-    const cardD = boardA.child.minions.find((item: any) => item instanceof WispModel);
-    const cardE = boardA.child.minions.find((item: any) => item instanceof MurlocRaiderModel);
-    const cardF = boardB.child.minions.find((item: any) => item instanceof MurlocRaiderModel);
+    const cardC = handA.child.cards.find((item: any) => item instanceof GrimscaleOracleModel);
+    const cardD = boardA.child.cards.find((item: any) => item instanceof WispModel);
+    const cardE = boardA.child.cards.find((item: any) => item instanceof MurlocRaiderModel);
+    const cardF = boardB.child.cards.find((item: any) => item instanceof MurlocRaiderModel);
     const roleC = cardC?.child.role;
     const roleD = cardD?.child.role;
     const roleE = cardE?.child.role;
@@ -69,8 +69,8 @@ describe('grimscale-oracle', () => {
         game.child.playerA.child.controller.set(0);
         await promise;
 
-        expect(boardA.child.minions.length).toBe(3);
-        expect(boardB.child.minions.length).toBe(1);
+        expect(boardA.child.cards.length).toBe(3);
+        expect(boardB.child.cards.length).toBe(1);
 
         expect(roleE.child.attack.state.current).toBe(3); // Ally's Murloc
         expect(roleE.child.attack.state.origin).toBe(2); // Original attack
@@ -104,8 +104,8 @@ describe('grimscale-oracle', () => {
         expect(roleC.child.health.state.current).toBe(-1); // Grimscale Oracle
         expect(cardC.child.dispose.status).toBe(true);
 
-        expect(boardB.child.minions.length).toBe(0);
-        expect(boardA.child.minions.length).toBe(2);
+        expect(boardB.child.cards.length).toBe(0);
+        expect(boardA.child.cards.length).toBe(2);
 
         expect(roleE.child.attack.state.current).toBe(2); // Ally's Murloc
         expect(roleD.child.attack.state.current).toBe(1); // Wisp

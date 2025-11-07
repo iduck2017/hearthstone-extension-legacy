@@ -17,7 +17,7 @@ describe('ancient-watcher', () => {
                     mana: new ManaModel({ state: { origin: 10 }}),
                     hero: new MageModel(),
                     hand: new HandModel({
-                        child: { minions: [new AncientWatcherModel()] }
+                        child: { cards: [new AncientWatcherModel()] }
                     })
                 }
             }),
@@ -26,7 +26,7 @@ describe('ancient-watcher', () => {
                     mana: new ManaModel({ state: { origin: 10 }}),
                     hero: new MageModel(),
                     board: new BoardModel({
-                        child: { minions: [new WispModel()] }
+                        child: { cards: [new WispModel()] }
                     })
                 }
             })
@@ -36,8 +36,8 @@ describe('ancient-watcher', () => {
     const handA = game.child.playerA.child.hand;
     const boardA = game.child.playerA.child.board;
     const boardB = game.child.playerB.child.board;
-    const cardA = handA.child.minions.find((item: any) => item instanceof AncientWatcherModel);
-    const cardB = boardB.child.minions.find((item: any) => item instanceof WispModel);
+    const cardA = handA.child.cards.find((item: any) => item instanceof AncientWatcherModel);
+    const cardB = boardB.child.cards.find((item: any) => item instanceof WispModel);
     const roleA = cardA?.child.role;
     const roleB = cardB?.child.role;
     if (!roleA || !roleB) throw new Error();
@@ -51,7 +51,7 @@ describe('ancient-watcher', () => {
         game.child.playerA.child.controller.set(0);
         await promise;
         
-        expect(boardA.child.minions.length).toBe(1);
+        expect(boardA.child.cards.length).toBe(1);
         expect(roleA.child.attack.state.current).toBe(4);
         expect(roleA.child.health.state.current).toBe(5);
         expect(roleA.child.action.state.current).toBe(1);

@@ -22,7 +22,7 @@ describe('emerald-skytalon', () => {
                     mana: new ManaModel({ state: { origin: 10 }}),
                     hero: new MageModel(),
                     hand: new HandModel({
-                        child: { minions: [new EmeraldSkytalonModel(), new WispModel()] }
+                        child: { cards: [new EmeraldSkytalonModel(), new WispModel()] }
                     }),
                 }
             }),
@@ -31,7 +31,7 @@ describe('emerald-skytalon', () => {
                     mana: new ManaModel({ state: { origin: 10 }}),
                     hero: new MageModel(),
                     board: new BoardModel({
-                        child: { minions: [new WispModel()]}
+                        child: { cards: [new WispModel()]}
                     }),
                 }
             })
@@ -42,9 +42,9 @@ describe('emerald-skytalon', () => {
     const handA = game.child.playerA.child.hand;
     const boardA = game.child.playerA.child.board;
     const boardB = game.child.playerB.child.board;
-    const cardC = handA.child.minions.find(item => item instanceof EmeraldSkytalonModel);
-    const cardD = handA.child.minions.find(item => item instanceof WispModel);
-    const cardE = boardB.child.minions.find(item => item instanceof WispModel);
+    const cardC = handA.child.cards.find(item => item instanceof EmeraldSkytalonModel);
+    const cardD = handA.child.cards.find(item => item instanceof WispModel);
+    const cardE = boardB.child.cards.find(item => item instanceof WispModel);
     const playerA = game.child.playerA;
     const playerB = game.child.playerB;
     const roleB = playerB.child.hero.child.role;
@@ -61,7 +61,7 @@ describe('emerald-skytalon', () => {
         playerA.child.controller.set(0);
         await promise;
 
-        expect(boardA.child.minions.length).toBe(1);
+        expect(boardA.child.cards.length).toBe(1);
         expect(turn.refer.current).toBe(playerA);
         expect(roleC.child.attack.state.current).toBe(2);
         expect(roleC.child.health.state.current).toBe(1);
@@ -86,7 +86,7 @@ describe('emerald-skytalon', () => {
         playerA.child.controller.set(1);
         await promise;
 
-        expect(boardA.child.minions.length).toBe(2);
+        expect(boardA.child.cards.length).toBe(2);
         expect(roleD.child.action.state.current).toBe(1);
         expect(roleD.child.sleep.state.isActive).toBe(true);
         expect(roleD.child.feats.child.rush.state.isActive).toBe(false);

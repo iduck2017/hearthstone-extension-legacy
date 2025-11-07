@@ -23,7 +23,7 @@ describe('ethereal-arcanist', () => {
                     hero: new MageModel(),
                     board: new BoardModel({
                         child: { 
-                            minions: [new EtherealArcanistModel()],
+                            cards: [new EtherealArcanistModel()],
                             secrets: [new IceBarrierModel()]
                         }
                     }),
@@ -35,7 +35,7 @@ describe('ethereal-arcanist', () => {
                     hero: new MageModel(),
                     board: new BoardModel({
                         child: { 
-                            minions: [new WispModel()]
+                            cards: [new WispModel()]
                         }
                     }),
                 }
@@ -48,8 +48,8 @@ describe('ethereal-arcanist', () => {
     const playerB = game.child.playerB;
     const boardA = playerA.child.board;
     const boardB = playerB.child.board;
-    const cardC = boardA.child.minions.find(item => item instanceof EtherealArcanistModel);
-    const cardD = boardB.child.minions.find(item => item instanceof WispModel);
+    const cardC = boardA.child.cards.find(item => item instanceof EtherealArcanistModel);
+    const cardD = boardB.child.cards.find(item => item instanceof WispModel);
     const roleC = cardC?.child.role;
     const roleD = cardD?.child.role;
     const heroA = playerA.child.hero;
@@ -58,7 +58,7 @@ describe('ethereal-arcanist', () => {
 
     test('end-turn', async () => {
         // Check initial stats
-        expect(boardA.child.minions.length).toBe(1);
+        expect(boardA.child.cards.length).toBe(1);
         expect(boardA.child.secrets.length).toBe(1);
         expect(roleC.child.attack.state.current).toBe(3); // Arcanist: 3/3
         expect(roleC.child.health.state.current).toBe(3);

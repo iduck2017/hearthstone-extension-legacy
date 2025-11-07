@@ -22,17 +22,16 @@ describe('spellbreaker', () => {
                     hero: new MageModel(),
                     board: new BoardModel({
                         child: { 
-                            minions: []
+                            cards: []
                         }
                     }),
                     hand: new HandModel({
                         child: { 
-                            minions: [new SpellbreakerModel()],
-                            spells: []
+                            cards: [new SpellbreakerModel()]
                         }
                     }),
                     deck: new DeckModel({
-                        child: { minions: [] }
+                        child: { cards: [] }
                     })
                 }
             }),
@@ -42,13 +41,12 @@ describe('spellbreaker', () => {
                     hero: new MageModel(),
                     board: new BoardModel({
                         child: { 
-                            minions: [new SilvermoonGuardianModel()]
+                            cards: [new SilvermoonGuardianModel()]
                         }
                     }),
                     hand: new HandModel({
                         child: { 
-                            minions: [],
-                            spells: []
+                            cards: []
                         }
                     })
                 }
@@ -62,8 +60,8 @@ describe('spellbreaker', () => {
     const boardA = playerA.child.board;
     const boardB = playerB.child.board;
     const handA = playerA.child.hand;
-    const cardC = handA.refer.queue.find(item => item instanceof SpellbreakerModel);
-    const cardD = boardB.refer.queue.find(item => item instanceof SilvermoonGuardianModel);
+    const cardC = handA.child.cards.find(item => item instanceof SpellbreakerModel);
+    const cardD = boardB.child.cards.find(item => item instanceof SilvermoonGuardianModel);
     if (!cardC || !cardD) throw new Error();
     const roleA = playerA.child.hero.child.role;
     const roleB = playerB.child.hero.child.role;
@@ -74,8 +72,8 @@ describe('spellbreaker', () => {
         // Check initial state
         expect(roleC.child.attack.state.current).toBe(4); // Spellbreaker: 4/3
         expect(roleC.child.health.state.current).toBe(3);
-        expect(handA.refer.queue.length).toBe(1); // Spellbreaker in hand
-        expect(boardA.refer.queue.length).toBe(0); // No minions on board
+        expect(handA.child.cards.length).toBe(1); // Spellbreaker in hand
+        expect(boardA.child.cards.length).toBe(0); // No minions on board
         expect(playerA.child.mana.state.current).toBe(10); // Full mana
         expect(roleD.child.feats.child.divineShield).toBeDefined(); // Silvermoon Guardian has Divine Shield
 
@@ -92,8 +90,8 @@ describe('spellbreaker', () => {
         await promise;
 
         // Spellbreaker should be on board
-        expect(boardA.refer.queue.length).toBe(1); // Spellbreaker on board
-        expect(handA.refer.queue.length).toBe(0); // Spellbreaker moved to board
+        expect(boardA.child.cards.length).toBe(1); // Spellbreaker on board
+        expect(handA.child.cards.length).toBe(0); // Spellbreaker moved to board
         expect(playerA.child.mana.state.current).toBe(6); // 10 - 4 = 6
 
         // Silvermoon Guardian should be silenced (Divine Shield removed)
@@ -108,8 +106,8 @@ describe('spellbreaker', () => {
         // Check initial state
         expect(roleC.child.health.state.current).toBe(3); // Spellbreaker: 4/3
         expect(roleD.child.health.state.current).toBe(3); // Silvermoon Guardian: 3/3 (silenced, no Divine Shield)
-        expect(boardA.refer.queue.length).toBe(1); // Spellbreaker on board
-        expect(boardB.refer.queue.length).toBe(1); // Silvermoon Guardian on board
+        expect(boardA.child.cards.length).toBe(1); // Spellbreaker on board
+        expect(boardB.child.cards.length).toBe(1); // Silvermoon Guardian on board
 
         // Player B's Silvermoon Guardian attacks Spellbreaker
         let promise = roleD.child.action.run();
@@ -119,7 +117,7 @@ describe('spellbreaker', () => {
         await promise;
 
         // Both minions should die (3/3 vs 4/3)
-        expect(boardA.refer.queue.length).toBe(0); // Spellbreaker dies
-        expect(boardB.refer.queue.length).toBe(0); // Silvermoon Guardian dies
+        expect(boardA.child.cards.length).toBe(0); // Spellbreaker dies
+        expect(boardB.child.cards.length).toBe(0); // Silvermoon Guardian dies
     });
 });

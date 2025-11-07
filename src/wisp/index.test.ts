@@ -16,7 +16,7 @@ describe('role', () => {
                     deck: new DeckModel(),
                     board: new BoardModel({
                         child: { 
-                            minions: [new WispModel()]
+                            cards: [new WispModel()]
                         }
                     }),
                 }
@@ -28,7 +28,7 @@ describe('role', () => {
                     deck: new DeckModel(),
                     board: new BoardModel({
                         child: { 
-                            minions: [new WispModel()]
+                            cards: [new WispModel()]
                         }
                     }),
                 }
@@ -40,8 +40,8 @@ describe('role', () => {
     const playerB = game.child.playerB;
     const boardA = playerA.child.board;
     const boardB = playerB.child.board;
-    const cardC = boardA.child.minions.find(item => item instanceof WispModel);
-    const cardD = boardB.child.minions.find(item => item instanceof WispModel);
+    const cardC = boardA.child.cards.find(item => item instanceof WispModel);
+    const cardD = boardB.child.cards.find(item => item instanceof WispModel);
     const roleC = cardC?.child.role;
     const roleD = cardD?.child.role;
     const roleA = playerA.child.hero.child.role;
@@ -108,8 +108,8 @@ describe('role', () => {
         expect(cardD.child.dispose.status).toBe(true);
         expect(roleD.child.action.state.current).toBe(0);
 
-        expect(boardA.child.minions.length).toBe(0);
-        expect(boardB.child.minions.length).toBe(0);
+        expect(boardA.child.cards.length).toBe(0);
+        expect(boardB.child.cards.length).toBe(0);
         expect(cardC.child.dispose.refer.source).toBe(cardD);
         expect(cardD.child.dispose.refer.source).toBe(cardC);
     })

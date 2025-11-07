@@ -21,17 +21,16 @@ describe('flame-imp', () => {
                     hero: new MageModel(),
                     board: new BoardModel({
                         child: { 
-                            minions: []
+                            cards: []
                         }
                     }),
                     hand: new HandModel({
                         child: { 
-                            minions: [new FlameImpModel()],
-                            spells: []
+                            cards: [new FlameImpModel()]
                         }
                     }),
                     deck: new DeckModel({
-                        child: { minions: [] }
+                        child: { cards: [] }
                     })
                 }
             }),
@@ -41,13 +40,12 @@ describe('flame-imp', () => {
                     hero: new MageModel(),
                     board: new BoardModel({
                         child: { 
-                            minions: []
+                            cards: []
                         }
                     }),
                     hand: new HandModel({
                         child: { 
-                            minions: [],
-                            spells: []
+                            cards: []
                         }
                     })
                 }
@@ -60,7 +58,7 @@ describe('flame-imp', () => {
     const playerB = game.child.playerB;
     const boardA = playerA.child.board;
     const handA = playerA.child.hand;
-    const cardC = handA.refer.queue.find(item => item instanceof FlameImpModel);
+    const cardC = handA.child.cards.find(item => item instanceof FlameImpModel);
     if (!cardC) throw new Error();
     const roleA = playerA.child.hero.child.role;
     const roleB = playerB.child.hero.child.role;
@@ -70,8 +68,8 @@ describe('flame-imp', () => {
         // Check initial state
         expect(roleC.child.attack.state.current).toBe(3); // Flame Imp: 3/2
         expect(roleC.child.health.state.current).toBe(2);
-        expect(handA.refer.queue.length).toBe(1); // Flame Imp in hand
-        expect(boardA.refer.queue.length).toBe(0); // No minions on board
+        expect(handA.child.cards.length).toBe(1); // Flame Imp in hand
+        expect(boardA.child.cards.length).toBe(0); // No minions on board
         expect(playerA.child.mana.state.current).toBe(10); // Full mana
         expect(roleA.child.health.state.current).toBe(30); // Player A hero: 30 health
 
@@ -81,8 +79,8 @@ describe('flame-imp', () => {
         await promise;
 
         // Flame Imp should be on board
-        expect(boardA.refer.queue.length).toBe(1); // Flame Imp on board
-        expect(handA.refer.queue.length).toBe(0); // Flame Imp moved to board
+        expect(boardA.child.cards.length).toBe(1); // Flame Imp on board
+        expect(handA.child.cards.length).toBe(0); // Flame Imp moved to board
         expect(playerA.child.mana.state.current).toBe(9); // 10 - 1 = 9
 
         // Player A's hero should take 3 damage from battlecry

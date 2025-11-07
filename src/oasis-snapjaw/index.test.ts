@@ -19,17 +19,16 @@ describe('oasis-snapjaw', () => {
                     hero: new MageModel(),
                     board: new BoardModel({
                         child: { 
-                            minions: []
+                            cards: []
                         }
                     }),
                     hand: new HandModel({
                         child: { 
-                            minions: [new OasisSnapjawModel()],
-                            spells: []
+                            cards: [new OasisSnapjawModel()]
                         }
                     }),
                     deck: new DeckModel({
-                        child: { minions: [] }
+                        child: { cards: [] }
                     })
                 }
             }),
@@ -39,13 +38,12 @@ describe('oasis-snapjaw', () => {
                     hero: new MageModel(),
                     board: new BoardModel({
                         child: { 
-                            minions: [new OasisSnapjawModel()]
+                            cards: [new OasisSnapjawModel()]
                         }
                     }),
                     hand: new HandModel({
                         child: { 
-                            minions: [],
-                            spells: []
+                            cards: []
                         }
                     })
                 }
@@ -59,8 +57,8 @@ describe('oasis-snapjaw', () => {
     const boardA = playerA.child.board;
     const boardB = playerB.child.board;
     const handA = playerA.child.hand;
-    const cardC = handA.refer.queue.find(item => item instanceof OasisSnapjawModel);
-    const cardD = boardB.refer.queue.find(item => item instanceof OasisSnapjawModel);
+    const cardC = handA.child.cards.find(item => item instanceof OasisSnapjawModel);
+    const cardD = boardB.child.cards.find(item => item instanceof OasisSnapjawModel);
     if (!cardC || !cardD) throw new Error();
     const roleC = cardC.child.role;
     const roleD = cardD.child.role;
@@ -70,8 +68,8 @@ describe('oasis-snapjaw', () => {
         // Check initial state
         expect(roleC.child.attack.state.current).toBe(2); // Oasis Snapjaw: 2/7
         expect(roleC.child.health.state.current).toBe(7);
-        expect(handA.refer.queue.length).toBe(1); // Oasis Snapjaw in hand
-        expect(boardA.refer.queue.length).toBe(0); // No minions on board
+        expect(handA.child.cards.length).toBe(1); // Oasis Snapjaw in hand
+        expect(boardA.child.cards.length).toBe(0); // No minions on board
         expect(playerA.child.mana.state.current).toBe(10); // Full mana
 
         // Play Oasis Snapjaw
@@ -80,8 +78,8 @@ describe('oasis-snapjaw', () => {
         await promise;
 
         // Oasis Snapjaw should be on board
-        expect(boardA.refer.queue.length).toBe(1); // Oasis Snapjaw on board
-        expect(handA.refer.queue.length).toBe(0); // Oasis Snapjaw moved to board
+        expect(boardA.child.cards.length).toBe(1); // Oasis Snapjaw on board
+        expect(handA.child.cards.length).toBe(0); // Oasis Snapjaw moved to board
         expect(playerA.child.mana.state.current).toBe(6); // 10 - 4 = 6
 
         // Check that Oasis Snapjaw has no special abilities
@@ -114,7 +112,7 @@ describe('oasis-snapjaw', () => {
         expect(roleD.child.health.state.damage).toBe(2);
         expect(cardD.child.dispose.status).toBe(false);
         
-        expect(boardA.refer.queue.length).toBe(1); // Oasis Snapjaw on board
-        expect(boardB.refer.queue.length).toBe(1); // Oasis Snapjaw on board
+        expect(boardA.child.cards.length).toBe(1); // Oasis Snapjaw on board
+        expect(boardB.child.cards.length).toBe(1); // Oasis Snapjaw on board
     });
 });

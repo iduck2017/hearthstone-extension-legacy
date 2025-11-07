@@ -21,17 +21,16 @@ describe('priestess-of-elune', () => {
                     hero: new MageModel(),
                     board: new BoardModel({
                         child: { 
-                            minions: []
+                            cards: []
                         }
                     }),
                     hand: new HandModel({
                         child: { 
-                            minions: [new PriestessOfEluneModel()],
-                            spells: [new FireballModel()]
+                            cards: [new PriestessOfEluneModel(), new FireballModel()]
                         }
                     }),
                     deck: new DeckModel({
-                        child: { minions: [] }
+                        child: { cards: [] }
                     })
                 }
             }),
@@ -41,11 +40,11 @@ describe('priestess-of-elune', () => {
                     hero: new MageModel(),
                     board: new BoardModel({
                         child: { 
-                            minions: []
+                            cards: []
                         }
                     }),
                     hand: new HandModel({
-                        child: { spells: [] }
+                        child: { cards: [] }
                     })
                 }
             })
@@ -57,8 +56,8 @@ describe('priestess-of-elune', () => {
     const playerB = game.child.playerB;
     const boardA = playerA.child.board;
     const handA = playerA.child.hand;
-    const cardC = handA.child.minions.find(item => item instanceof PriestessOfEluneModel);
-    const cardD = handA.child.spells.find(item => item instanceof FireballModel);
+    const cardC = handA.child.cards.find(item => item instanceof PriestessOfEluneModel);
+    const cardD = handA.child.cards.find(item => item instanceof FireballModel);
     if (!cardC || !cardD) throw new Error();
     const roleA = playerA.child.hero.child.role;
     const roleB = playerB.child.hero.child.role;
@@ -67,7 +66,7 @@ describe('priestess-of-elune', () => {
     test('fireball-cast', async () => {
         // Check initial state
         expect(roleA.child.health.state.current).toBe(30); // Full health
-        expect(handA.child.spells.length).toBe(1); // Fireball in hand
+        expect(handA.child.cards.length).toBe(2); // Fireball and Priestess of Elune in hand
         expect(playerA.child.mana.state.current).toBe(10); // Full mana
 
         // Cast Fireball targeting Player A's hero
@@ -81,7 +80,7 @@ describe('priestess-of-elune', () => {
         expect(roleA.child.health.state.current).toBe(24); // 30 - 6 = 24
 
         // Fireball should be consumed
-        expect(handA.child.spells.length).toBe(0); // Fireball consumed
+        expect(handA.child.cards.length).toBe(1); // Fireball consumed, Priestess of Elune remains
         expect(playerA.child.mana.state.current).toBe(6);
     });
 
@@ -90,7 +89,7 @@ describe('priestess-of-elune', () => {
         expect(roleC.child.attack.state.current).toBe(5); // Priestess of Elune: 5/4
         expect(roleC.child.health.state.current).toBe(4);
         expect(roleA.child.health.state.current).toBe(24); // Damaged hero from fireball
-        expect(handA.child.minions.length).toBe(1); // Priestess of Elune in hand
+        expect(handA.child.cards.length).toBe(1); // Priestess of Elune in hand
         expect(playerA.child.mana.state.current).toBe(6);
 
         // Play Priestess of Elune
@@ -102,8 +101,8 @@ describe('priestess-of-elune', () => {
         expect(roleA.child.health.state.current).toBe(28); // 24 + 4 = 28
 
         // Priestess of Elune should be on board
-        expect(boardA.child.minions.length).toBe(1); // Priestess of Elune on board
-        expect(handA.child.minions.length).toBe(0); // Priestess of Elune moved to board
+        expect(boardA.child.cards.length).toBe(1); // Priestess of Elune on board
+        expect(handA.child.cards.length).toBe(0); // Priestess of Elune moved to board
         expect(playerA.child.mana.state.current).toBe(0); 
     });
 });

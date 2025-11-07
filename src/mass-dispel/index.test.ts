@@ -22,17 +22,16 @@ describe('mass-dispel', () => {
                     hero: new MageModel(),
                     board: new BoardModel({
                         child: { 
-                            minions: []
+                            cards: []
                         }
                     }),
                     hand: new HandModel({
                         child: { 
-                            minions: [],
-                            spells: [new MassDispelModel()]
+                            cards: [new MassDispelModel()]
                         }
                     }),
                     deck: new DeckModel({
-                        child: { minions: [new WispModel()] }
+                        child: { cards: [new WispModel()] }
                     })
                 }
             }),
@@ -42,11 +41,11 @@ describe('mass-dispel', () => {
                     hero: new MageModel(),
                     board: new BoardModel({
                         child: { 
-                            minions: [new WaterElementalModel()]
+                            cards: [new WaterElementalModel()]
                         }
                     }),
                     hand: new HandModel({
-                        child: { spells: [] }
+                        child: { cards: [] }
                     })
                 }
             })
@@ -60,8 +59,8 @@ describe('mass-dispel', () => {
     const boardB = playerB.child.board;
     const handA = playerA.child.hand;
     const deckA = playerA.child.deck;
-    const cardC = handA.child.spells.find(item => item instanceof MassDispelModel);
-    const cardD = boardB.child.minions.find(item => item instanceof WaterElementalModel);
+    const cardC = handA.child.cards.find(item => item instanceof MassDispelModel);
+    const cardD = boardB.child.cards.find(item => item instanceof WaterElementalModel);
     if (!cardC || !cardD) throw new Error();
     const roleA = playerA.child.hero.child.role;
     const roleB = playerB.child.hero.child.role;
@@ -77,11 +76,8 @@ describe('mass-dispel', () => {
         expect(roleD.child.health.state.current).toBe(6);
 
         // Player A should draw a card
-        expect(deckA.refer.queue.length).toBe(0); // Deck is empty
-        expect(handA.refer.queue.length).toBe(1); // Wisp drawn to hand
-
-        // Mass Dispel should be consumed
-        expect(handA.child.spells.length).toBe(0); // Mass Dispel consumed
+        expect(deckA.child.cards.length).toBe(0); // Deck is empty
+        expect(handA.child.cards.length).toBe(1); // Wisp drawn to hand (Mass Dispel consumed, Wisp drawn)
         expect(playerA.child.mana.state.current).toBe(6); // 10 - 4 = 6
     });
 

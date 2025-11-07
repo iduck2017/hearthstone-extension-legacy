@@ -22,17 +22,16 @@ describe('ironfur-grizzly', () => {
                     hero: new MageModel(),
                     board: new BoardModel({
                         child: { 
-                            minions: []
+                            cards: []
                         }
                     }),
                     hand: new HandModel({
                         child: { 
-                            minions: [new IronfurGrizzlyModel()],
-                            spells: []
+                            cards: [new IronfurGrizzlyModel()]
                         }
                     }),
                     deck: new DeckModel({
-                        child: { minions: [] }
+                        child: { cards: [] }
                     })
                 }
             }),
@@ -42,13 +41,12 @@ describe('ironfur-grizzly', () => {
                     hero: new MageModel(),
                     board: new BoardModel({
                         child: { 
-                            minions: [new WispModel()]
+                            cards: [new WispModel()]
                         }
                     }),
                     hand: new HandModel({
                         child: { 
-                            minions: [],
-                            spells: []
+                            cards: []
                         }
                     })
                 }
@@ -62,8 +60,8 @@ describe('ironfur-grizzly', () => {
     const boardA = playerA.child.board;
     const boardB = playerB.child.board;
     const handA = playerA.child.hand;
-    const cardC = handA.refer.queue.find(item => item instanceof IronfurGrizzlyModel);
-    const cardD = boardB.refer.queue.find(item => item instanceof WispModel);
+    const cardC = handA.child.cards.find(item => item instanceof IronfurGrizzlyModel);
+    const cardD = boardB.child.cards.find(item => item instanceof WispModel);
     if (!cardC || !cardD) throw new Error();
     const roleA = playerA.child.hero.child.role;
     const roleB = playerB.child.hero.child.role;
@@ -74,8 +72,8 @@ describe('ironfur-grizzly', () => {
         // Check initial state
         expect(roleC.child.attack.state.current).toBe(3); // Ironfur Grizzly: 3/3
         expect(roleC.child.health.state.current).toBe(3);
-        expect(handA.refer.queue.length).toBe(1); // Ironfur Grizzly in hand
-        expect(boardA.refer.queue.length).toBe(0); // No minions on board
+        expect(handA.child.cards.length).toBe(1); // Ironfur Grizzly in hand
+        expect(boardA.child.cards.length).toBe(0); // No minions on board
         expect(playerA.child.mana.state.current).toBe(10); // Full mana
 
         // Play Ironfur Grizzly
@@ -84,8 +82,8 @@ describe('ironfur-grizzly', () => {
         await promise;
 
         // Ironfur Grizzly should be on board
-        expect(boardA.refer.queue.length).toBe(1); // Ironfur Grizzly on board
-        expect(handA.refer.queue.length).toBe(0); // Ironfur Grizzly moved to board
+        expect(boardA.child.cards.length).toBe(1); // Ironfur Grizzly on board
+        expect(handA.child.cards.length).toBe(0); // Ironfur Grizzly moved to board
         expect(playerA.child.mana.state.current).toBe(7); // 10 - 3 = 7
 
         // Check that Ironfur Grizzly has Taunt
@@ -100,8 +98,8 @@ describe('ironfur-grizzly', () => {
         // Check initial state
         expect(roleC.child.health.state.current).toBe(3); // Ironfur Grizzly: 3/3
         expect(roleD.child.health.state.current).toBe(1); // Wisp: 1/1
-        expect(boardA.refer.queue.length).toBe(1); // Ironfur Grizzly on board
-        expect(boardB.refer.queue.length).toBe(1); // Wisp on board
+        expect(boardA.child.cards.length).toBe(1); // Ironfur Grizzly on board
+        expect(boardB.child.cards.length).toBe(1); // Wisp on board
 
         // Player B's Wisp attacks - should be forced to target Ironfur Grizzly due to Taunt
         let promise = roleD.child.action.run();
@@ -113,6 +111,6 @@ describe('ironfur-grizzly', () => {
         // Both minions should take damage
         expect(roleC.child.health.state.current).toBe(2); // Ironfur Grizzly: 3 - 1 = 2
         expect(roleD.child.health.state.current).toBe(-2); // Wisp: 1 - 3 = -2 (dies)
-        expect(boardB.refer.queue.length).toBe(0); // Wisp dies
+        expect(boardB.child.cards.length).toBe(0); // Wisp dies
     });
 });

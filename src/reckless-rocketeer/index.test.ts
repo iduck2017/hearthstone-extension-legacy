@@ -22,17 +22,16 @@ describe('reckless-rocketeer', () => {
                     hero: new MageModel(),
                     board: new BoardModel({
                         child: { 
-                            minions: []
+                            cards: []
                         }
                     }),
                     hand: new HandModel({
                         child: { 
-                            minions: [new RecklessRocketeerModel()],
-                            spells: []
+                            cards: [new RecklessRocketeerModel()]
                         }
                     }),
                     deck: new DeckModel({
-                        child: { minions: [] }
+                        child: { cards: [] }
                     })
                 }
             }),
@@ -41,10 +40,10 @@ describe('reckless-rocketeer', () => {
                     mana: new ManaModel({ state: { origin: 10 }}),
                     hero: new MageModel(),
                     board: new BoardModel({
-                        child: { minions: [new WispModel()]}
+                        child: { cards: [new WispModel()]}
                     }),
                     hand: new HandModel({
-                        child: { spells: [] }
+                        child: { cards: [] }
                     })
                 }
             })
@@ -57,8 +56,8 @@ describe('reckless-rocketeer', () => {
     const boardA = playerA.child.board;
     const boardB = playerB.child.board;
     const handA = playerA.child.hand;
-    const cardC = handA.refer.queue.find(item => item instanceof RecklessRocketeerModel);
-    const cardD = boardB.refer.queue.find(item => item instanceof WispModel);
+    const cardC = handA.child.cards.find(item => item instanceof RecklessRocketeerModel);
+    const cardD = boardB.child.cards.find(item => item instanceof WispModel);
     if (!cardC || !cardD) throw new Error();
     const roleA = playerA.child.hero.child.role;
     const roleB = playerB.child.hero.child.role;
@@ -69,8 +68,8 @@ describe('reckless-rocketeer', () => {
         // Check initial state
         expect(roleC.child.attack.state.current).toBe(5); // Reckless Rocketeer: 5/2
         expect(roleC.child.health.state.current).toBe(2);
-        expect(handA.refer.queue.length).toBe(1); // Reckless Rocketeer in hand
-        expect(boardA.refer.queue.length).toBe(0); // No minions on board
+        expect(handA.child.cards.length).toBe(1); // Reckless Rocketeer in hand
+        expect(boardA.child.cards.length).toBe(0); // No minions on board
         expect(playerA.child.mana.state.current).toBe(10); // Full mana
 
         // Play Reckless Rocketeer
@@ -79,8 +78,8 @@ describe('reckless-rocketeer', () => {
         await promise;
 
         // Reckless Rocketeer should be on board
-        expect(boardA.refer.queue.length).toBe(1); // Reckless Rocketeer on board
-        expect(handA.refer.queue.length).toBe(0); // Reckless Rocketeer moved to board
+        expect(boardA.child.cards.length).toBe(1); // Reckless Rocketeer on board
+        expect(handA.child.cards.length).toBe(0); // Reckless Rocketeer moved to board
         expect(playerA.child.mana.state.current).toBe(4); // 10 - 6 = 4
 
         // Check that Reckless Rocketeer has Charge (can attack immediately)
