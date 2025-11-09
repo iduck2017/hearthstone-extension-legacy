@@ -1,4 +1,4 @@
-import { EffectModel, SelectEvent, RoleModel, DamageModel, DamageEvent, DamageType, CardModel, SecretFeatureModel, AbortEvent, SpellCastEvent, SpellCardModel } from "hearthstone-core";
+import { EffectModel, Selector, RoleModel, DamageModel, DamageEvent, DamageType, CardModel, SecretFeatureModel, AbortEvent, SpellCastEvent, SpellCardModel } from "hearthstone-core";
 import { DebugUtil, Event, EventUtil, Model, TemplUtil } from "set-piece";
 
 @TemplUtil.is('counterspell-effect')

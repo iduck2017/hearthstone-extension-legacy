@@ -1,4 +1,4 @@
-import { MinionBattlecryModel, SelectEvent, RoleModel, DamageModel, DamageEvent, RestoreModel, RestoreEvent, DamageType } from "hearthstone-core";
+import { MinionBattlecryModel, Selector, RoleModel, DamageModel, DamageEvent, RestoreModel, RestoreEvent, DamageType } from "hearthstone-core";
 import { TemplUtil } from "set-piece";
 
 @TemplUtil.is('alexstrasza-battlecry')
@@ -17,11 +17,11 @@ export class AlexstraszaBattlecryModel extends MinionBattlecryModel<[RoleModel]>
         });
     }
 
-    public toRun(): [SelectEvent<RoleModel>] | undefined {
+    public toRun(): [Selector<RoleModel>] | undefined {
         const games = this.route.game;
         if (!games) return;
         const roles = games.query(); // Can target any character
-        return [new SelectEvent(roles, { hint: "Choose a character" })];
+        return [new Selector(roles, { hint: "Choose a character" })];
     }
 
     public async doRun(from: number, to: number, target: RoleModel) {

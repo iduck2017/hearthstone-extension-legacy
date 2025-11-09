@@ -1,4 +1,4 @@
-import { MinionBattlecryModel, SelectEvent, RoleModel } from "hearthstone-core";
+import { MinionBattlecryModel, Selector, RoleModel } from "hearthstone-core";
 import { TemplUtil } from "set-piece";
 
 @TemplUtil.is('ironbeak-owl-battlecry')
@@ -17,11 +17,11 @@ export class IronbeakOwlBattlecryModel extends MinionBattlecryModel<[RoleModel]>
         });
     }
 
-    public toRun(): [SelectEvent<RoleModel>] | undefined {
+    public toRun(): [Selector<RoleModel>] | undefined {
         const games = this.route.game;
         if (!games) return;
         const roles = games.query(true); // Can only target minions
-        return [new SelectEvent(roles, { hint: "Choose a minion to silence" })];
+        return [new Selector(roles, { hint: "Choose a minion to silence" })];
     }
 
     public async doRun(from: number, to: number, target: RoleModel) {

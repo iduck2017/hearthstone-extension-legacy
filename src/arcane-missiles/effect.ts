@@ -1,4 +1,4 @@
-import { DamageEvent, DamageModel, DamageType, EffectModel, SelectEvent, SpellEffectModel } from "hearthstone-core";
+import { DamageEvent, DamageModel, DamageType, EffectModel, Selector, SpellEffectModel } from "hearthstone-core";
 import { Model, TemplUtil } from "set-piece";
 
 

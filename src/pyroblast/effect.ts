@@ -1,4 +1,4 @@
-import { EffectModel, SelectEvent, RoleModel, DamageModel, DamageEvent, DamageType, SpellEffectModel } from "hearthstone-core";
+import { EffectModel, Selector, RoleModel, DamageModel, DamageEvent, DamageType, SpellEffectModel } from "hearthstone-core";
 import { TemplUtil } from "set-piece";
 
 @TemplUtil.is('pyroblast-effect')
@@ -18,11 +18,11 @@ export class PyroblastEffectModel extends SpellEffectModel<[RoleModel]> {
         });
     }
 
-    toRun(): [SelectEvent<RoleModel>] | undefined {
+    toRun(): [Selector<RoleModel>] | undefined {
         const games = this.route.game;
         if (!games) return;
         const roles = games.query(); // Can target any character
-        return [new SelectEvent(roles, { hint: "Choose a target" })];
+        return [new Selector(roles, { hint: "Choose a target" })];
     }
 
     protected async doRun(target: RoleModel) {

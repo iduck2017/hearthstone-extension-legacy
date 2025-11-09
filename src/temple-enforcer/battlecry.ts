@@ -1,4 +1,4 @@
-import { MinionBattlecryModel, SelectEvent, RoleModel } from "hearthstone-core";
+import { MinionBattlecryModel, Selector, RoleModel } from "hearthstone-core";
 import { TemplUtil } from "set-piece";
 import { TempleEnforcerBuffModel } from "./buff";
 
@@ -18,7 +18,7 @@ export class TempleEnforcerBattlecryModel extends MinionBattlecryModel<[RoleMode
         });
     }
 
-    public toRun(): [SelectEvent<RoleModel>] | undefined {
+    public toRun(): [Selector<RoleModel>] | undefined {
         const player = this.route.player;
         if (!player) return;
         
@@ -26,7 +26,7 @@ export class TempleEnforcerBattlecryModel extends MinionBattlecryModel<[RoleMode
         const roles = player.query(true);
         if (roles.length === 0) return; // No valid targets
         
-        return [new SelectEvent(roles, { hint: "Choose a friendly minion" })];
+        return [new Selector(roles, { hint: "Choose a friendly minion" })];
     }
 
     public async doRun(from: number, to: number, target: RoleModel) {

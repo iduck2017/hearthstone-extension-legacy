@@ -1,4 +1,4 @@
-import { SelectEvent, RoleModel, DamageModel, DamageEvent, DamageType, SpellEffectModel } from "hearthstone-core";
+import { Selector, RoleModel, DamageModel, DamageEvent, DamageType, SpellEffectModel } from "hearthstone-core";
 import { TemplUtil } from "set-piece";
 
 
@@ -19,11 +19,11 @@ export class IcicleEffectModel extends SpellEffectModel<[RoleModel]> {
         });
     }
 
-    toRun(): [SelectEvent<RoleModel>] | undefined {
+    toRun(): [Selector<RoleModel>] | undefined {
         const games = this.route.game;
         if (!games) return;
         const roles = games.query(true);
-        return [new SelectEvent(roles, { hint: "Choose a minion" })]
+        return [new Selector(roles, { hint: "Choose a minion" })]
     }
 
     protected async doRun(target: RoleModel) {

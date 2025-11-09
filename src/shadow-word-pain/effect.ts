@@ -1,4 +1,4 @@
-import { EffectModel, SpellEffectModel, SelectEvent, RoleModel } from "hearthstone-core";
+import { EffectModel, SpellEffectModel, Selector, RoleModel } from "hearthstone-core";
 import { TemplUtil } from "set-piece";
 
 @TemplUtil.is('shadow-word-pain-effect')
@@ -18,7 +18,7 @@ export class ShadowWordPainEffectModel extends SpellEffectModel<[RoleModel]> {
         });
     }
 
-    toRun(): [SelectEvent<RoleModel>] | undefined {
+    toRun(): [Selector<RoleModel>] | undefined {
         const games = this.route.game;
         if (!games) return;
         
@@ -26,7 +26,7 @@ export class ShadowWordPainEffectModel extends SpellEffectModel<[RoleModel]> {
         const roles = games.query(true).filter(role => role.child.attack.state.current <= 3);
         if (roles.length === 0) return; // No valid targets
         
-        return [new SelectEvent(roles, { hint: "Choose a minion with 3 or less Attack" })];
+        return [new Selector(roles, { hint: "Choose a minion with 3 or less Attack" })];
     }
 
     protected async doRun(target: RoleModel) {

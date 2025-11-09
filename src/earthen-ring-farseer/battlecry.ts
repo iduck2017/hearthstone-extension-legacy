@@ -1,4 +1,4 @@
-import { MinionBattlecryModel, SelectEvent, RoleModel, RestoreModel, RestoreEvent } from "hearthstone-core";
+import { MinionBattlecryModel, Selector, RoleModel, RestoreModel, RestoreEvent } from "hearthstone-core";
 import { TemplUtil } from "set-piece";
 
 @TemplUtil.is('earthen-ring-farseer-battlecry')
@@ -17,11 +17,11 @@ export class EarthenRingFarseerBattlecryModel extends MinionBattlecryModel<[Role
         });
     }
 
-    public toRun(): [SelectEvent<RoleModel>] | undefined {
+    public toRun(): [Selector<RoleModel>] | undefined {
         const games = this.route.game;
         if (!games) return;
         const roles = games.query(); // All characters
-        return [new SelectEvent(roles, { hint: "Choose a target to restore 3 health" })];
+        return [new Selector(roles, { hint: "Choose a target to restore 3 health" })];
     }
 
     public async doRun(from: number, to: number, target: RoleModel) {

@@ -1,4 +1,4 @@
-import { EffectModel, SpellEffectModel, SelectEvent, RoleModel } from "hearthstone-core";
+import { EffectModel, SpellEffectModel, Selector, RoleModel } from "hearthstone-core";
 import { TemplUtil } from "set-piece";
 import { DivineSpiritBuffModel } from "./buff";
 
@@ -19,7 +19,7 @@ export class DivineSpiritEffectModel extends SpellEffectModel<[RoleModel]> {
         });
     }
 
-    toRun(): [SelectEvent<RoleModel>] | undefined {
+    toRun(): [Selector<RoleModel>] | undefined {
         const games = this.route.game;
         if (!games) return;
         
@@ -27,7 +27,7 @@ export class DivineSpiritEffectModel extends SpellEffectModel<[RoleModel]> {
         const roles = games.query(true);
         if (roles.length === 0) return; // No valid targets
         
-        return [new SelectEvent(roles, { hint: "Choose a minion" })];
+        return [new Selector(roles, { hint: "Choose a minion" })];
     }
 
     protected async doRun(target: RoleModel) {

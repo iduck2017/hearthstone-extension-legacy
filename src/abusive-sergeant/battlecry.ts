@@ -1,4 +1,4 @@
-import { MinionCardModel, MinionBattlecryModel, RoleModel, SelectEvent } from "hearthstone-core";
+import { MinionCardModel, MinionBattlecryModel, RoleModel, Selector } from "hearthstone-core";
 import { AbusiveSergeantBuffModel } from "./buff";
 import { DebugUtil, TemplUtil } from "set-piece";
 
@@ -18,12 +18,12 @@ export class AbusiveSergeantBattlecryModel extends MinionBattlecryModel<[RoleMod
         });
     }
 
-    public toRun(): [SelectEvent<RoleModel>] | undefined {
+    public toRun(): [Selector<RoleModel>] | undefined {
         const game = this.route.game;
         if (!game) return;
         const options = game.query(true);
         if (!options.length) return;
-        return [new SelectEvent(options, { hint: 'Choose a minion' })];
+        return [new Selector(options, { hint: 'Choose a minion' })];
     }
 
     public async doRun(from: number, to: number, target: RoleModel) {

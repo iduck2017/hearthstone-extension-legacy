@@ -1,4 +1,4 @@
-import { EffectModel, SelectEvent, RoleModel, MinionCardModel, SpellEffectModel } from "hearthstone-core";
+import { EffectModel, Selector, RoleModel, MinionCardModel, SpellEffectModel } from "hearthstone-core";
 import { TemplUtil } from "set-piece";
 import { SheepModel } from "./minion";
 
@@ -19,11 +19,11 @@ export class PolymorphEffectModel extends SpellEffectModel<[RoleModel]> {
         });
     }
 
-    toRun(): [SelectEvent<RoleModel>] | undefined {
+    toRun(): [Selector<RoleModel>] | undefined {
         const games = this.route.game;
         if (!games) return;
         const roles = games.query(true); // Only minions can be targeted
-        return [new SelectEvent(roles, { hint: "Choose a minion" })]
+        return [new Selector(roles, { hint: "Choose a minion" })]
     }
 
     protected async doRun(target: RoleModel) {

@@ -1,4 +1,4 @@
-import { RaceType, MinionBattlecryModel, RoleModel, SelectEvent } from "hearthstone-core";
+import { RaceType, MinionBattlecryModel, RoleModel, Selector } from "hearthstone-core";
 import { HungryCrabBuffModel } from "./buff";
 import { TemplUtil, DebugUtil } from "set-piece";
 
@@ -18,13 +18,13 @@ export class HungryCrabBattlecryModel extends MinionBattlecryModel<[RoleModel]> 
         });
     }
 
-    public toRun(): [SelectEvent<RoleModel>] | undefined {
+    public toRun(): [Selector<RoleModel>] | undefined {
         const game = this.route.game;
         if (!game) return;
         const options = game.query(true).filter(item => (
             item.route.minion?.state.races.includes(RaceType.MURLOC)
         ));
-        return [new SelectEvent(options, { hint: 'Select a Murloc' })];
+        return [new Selector(options, { hint: 'Select a Murloc' })];
     }
 
     public async doRun(from: number, to: number, target: RoleModel) {

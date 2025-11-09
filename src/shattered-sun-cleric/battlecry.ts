@@ -1,4 +1,4 @@
-import { MinionBattlecryModel, SelectEvent, RoleModel, RoleBuffModel } from "hearthstone-core";
+import { MinionBattlecryModel, Selector, RoleModel, RoleBuffModel } from "hearthstone-core";
 import { TemplUtil } from "set-piece";
 
 @TemplUtil.is('shattered-sun-cleric-battlecry')
@@ -17,14 +17,14 @@ export class ShatteredSunClericBattlecryModel extends MinionBattlecryModel<[Role
         });
     }
 
-    public toRun(): [SelectEvent<RoleModel>] | undefined {
+    public toRun(): [Selector<RoleModel>] | undefined {
         const games = this.route.game;
         if (!games) return;
         const player = this.route.player;
         if (!player) return;
         const minions = player.query(true); // Friendly minions
         if (minions.length === 0) return;
-        return [new SelectEvent(minions, { hint: "Choose a friendly minion" })];
+        return [new Selector(minions, { hint: "Choose a friendly minion" })];
     }
 
     public async doRun(from: number, to: number, target: RoleModel) {

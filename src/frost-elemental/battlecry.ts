@@ -1,4 +1,4 @@
-import { MinionBattlecryModel, SelectEvent, RoleModel } from "hearthstone-core";
+import { MinionBattlecryModel, Selector, RoleModel } from "hearthstone-core";
 import { TemplUtil } from "set-piece";
 
 @TemplUtil.is('frost-elemental-battlecry')
@@ -17,13 +17,13 @@ export class FrostElementalBattlecryModel extends MinionBattlecryModel<[RoleMode
         });
     }
 
-    public toRun(): [SelectEvent<RoleModel>] | undefined {
+    public toRun(): [Selector<RoleModel>] | undefined {
         const games = this.route.game;
         if (!games) return;
         
         // Can target any character
         const roles = games.query();
-        return [new SelectEvent(roles, { hint: "Choose a character" })];
+        return [new Selector(roles, { hint: "Choose a character" })];
     }
 
     public async doRun(from: number, to: number, target: RoleModel) {

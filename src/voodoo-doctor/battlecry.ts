@@ -1,4 +1,4 @@
-import { MinionBattlecryModel, RestoreEvent, RestoreModel, RoleModel, SelectEvent } from "hearthstone-core";
+import { MinionBattlecryModel, RestoreEvent, RestoreModel, RoleModel, Selector } from "hearthstone-core";
 import { TemplUtil } from "set-piece";
 
 @TemplUtil.is('voodoo-doctor-battlecry')
@@ -17,11 +17,11 @@ export class VoodooDoctorMinionBattlecryModel extends MinionBattlecryModel<[Role
         });
     }
 
-    public toRun(): [SelectEvent<RoleModel>] | undefined {
+    public toRun(): [Selector<RoleModel>] | undefined {
         const game = this.route.game;
         if (!game) return;
         const roles = game.query();
-        return [new SelectEvent(roles, { hint: 'Choose a target' })];
+        return [new Selector(roles, { hint: 'Choose a target' })];
     }
 
     public async doRun(from: number, to: number, target: RoleModel) {

@@ -1,4 +1,4 @@
-import { MinionBattlecryModel, DamageEvent, DamageModel, DamageType, RoleModel, SelectEvent } from "hearthstone-core";
+import { MinionBattlecryModel, DamageEvent, DamageModel, DamageType, RoleModel, Selector } from "hearthstone-core";
 import { TemplUtil } from "set-piece";
 
 @TemplUtil.is('elven-archer-battlecry')
@@ -17,13 +17,13 @@ export class ElvenArcherMinionBattlecryModel extends MinionBattlecryModel<[RoleM
         });
     }
 
-    public toRun(): [SelectEvent<RoleModel>] | undefined {
+    public toRun(): [Selector<RoleModel>] | undefined {
         const player = this.route.player;
         const game = this.route.game;
         if (!game) return;
         if (!player) return;
         const roles = game.query();
-        return [new SelectEvent(roles, { hint: 'Choose a target' })]
+        return [new Selector(roles, { hint: 'Choose a target' })]
     }
 
     protected async doRun(from: number, to: number, target: RoleModel) {

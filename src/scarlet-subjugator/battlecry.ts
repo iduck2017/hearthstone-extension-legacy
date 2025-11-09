@@ -1,4 +1,4 @@
-import { MinionBattlecryModel, SelectEvent, RoleModel } from "hearthstone-core";
+import { MinionBattlecryModel, Selector, RoleModel } from "hearthstone-core";
 import { TemplUtil, TranxUtil } from "set-piece";
 import { ScarletSubjugatorDebuffModel } from "./debuff";
 
@@ -18,7 +18,7 @@ export class ScarletSubjugatorBattlecryModel extends MinionBattlecryModel<[RoleM
         });
     }
 
-    public toRun(): [SelectEvent<RoleModel>] | undefined {
+    public toRun(): [Selector<RoleModel>] | undefined {
         const player = this.route.player;
         const opponent = player?.refer.opponent;
         if (!opponent) return;
@@ -27,7 +27,7 @@ export class ScarletSubjugatorBattlecryModel extends MinionBattlecryModel<[RoleM
         const roles = opponent.query(true)
         if (roles.length === 0) return; // No valid targets
         
-        return [new SelectEvent(roles, { hint: "Choose an enemy minion" })];
+        return [new Selector(roles, { hint: "Choose an enemy minion" })];
     }
 
     public async doRun(from: number, to: number, target: RoleModel) {
