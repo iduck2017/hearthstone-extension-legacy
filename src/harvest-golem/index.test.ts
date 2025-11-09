@@ -64,15 +64,12 @@ describe('harvest-golem', () => {
     const cardC = handA.child.cards.find(item => item instanceof HarvestGolemModel);
     const cardD = boardB.child.cards.find(item => item instanceof StranglethornTigerModel);
     if (!cardC || !cardD) throw new Error();
-    const roleA = playerA.child.hero.child.role;
-    const roleB = playerB.child.hero.child.role;
-    const roleC = cardC.child.role;
-    const roleD = cardD.child.role;
+    const heroA = playerA.child.hero;
 
     test('harvest-golem-play', async () => {
         // Check initial state
-        expect(roleC.child.attack.state.current).toBe(2); // Harvest Golem: 2/3
-        expect(roleC.child.health.state.current).toBe(3);
+        expect(cardC.child.attack.state.current).toBe(2); // Harvest Golem: 2/3
+        expect(cardC.child.health.state.current).toBe(3);
         expect(handA.child.cards.length).toBe(1); // Harvest Golem in hand
         expect(boardA.child.cards.length).toBe(0); // No minions on board
         expect(playerA.child.mana.state.current).toBe(10); // Full mana
@@ -94,16 +91,16 @@ describe('harvest-golem', () => {
         expect(game.child.turn.refer.current).toBe(playerB);
 
         // Check initial state
-        expect(roleC.child.health.state.current).toBe(3); // Harvest Golem: 2/3
-        expect(roleD.child.health.state.current).toBe(5); // Stranglethorn Tiger: 5/5
+        expect(cardC.child.health.state.current).toBe(3); // Harvest Golem: 2/3
+        expect(cardD.child.health.state.current).toBe(5); // Stranglethorn Tiger: 5/5
         expect(boardA.child.cards.length).toBe(1); // Harvest Golem on board
         expect(boardB.child.cards.length).toBe(1); // Stranglethorn Tiger on board
 
         // Player B's Stranglethorn Tiger attacks Harvest Golem
-        let promise = roleD.child.action.run();
-        expect(playerB.child.controller.current?.options).toContain(roleC); // Can target Harvest Golem
-        expect(playerB.child.controller.current?.options).toContain(roleA); // Can target Player A's hero
-        playerB.child.controller.set(roleC); // Target Harvest Golem
+        let promise = cardD.child.action.run();
+        expect(playerB.child.controller.current?.options).toContain(cardC); // Can target Harvest Golem
+        expect(playerB.child.controller.current?.options).toContain(heroA); // Can target Player A's hero
+        playerB.child.controller.set(cardC); // Target Harvest Golem
         await promise;
 
         // Harvest Golem should die (2/3 vs 5/5)
@@ -114,8 +111,8 @@ describe('harvest-golem', () => {
         const cardE = boardA.child.cards.find(item => item instanceof DamagedGolemModel);
         expect(cardE).toBeDefined();
         if (cardE) {
-            expect(cardE.child.role.child.attack.state.current).toBe(2); // Damaged Golem: 2/1
-            expect(cardE.child.role.child.health.state.current).toBe(1);
+            expect(cardE.child.attack.state.current).toBe(2); // Damaged Golem: 2/1
+            expect(cardE.child.health.state.current).toBe(1);
         }
     });
 });

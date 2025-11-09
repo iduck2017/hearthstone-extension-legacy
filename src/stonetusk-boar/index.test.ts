@@ -47,15 +47,13 @@ describe('stonetusk-boar', () => {
     const handA = game.child.playerA.child.hand;
     const cardC = handA.child.cards.find(item => item instanceof StonetuskBoarModel);
     const cardD = boardB.child.cards.find(item => item instanceof WispModel);
-    const roleC = cardC?.child.role;
-    const roleD = cardD?.child.role;
-    const roleB = game.child.playerB.child.hero.child.role;
-    if (!roleC || !roleD) throw new Error();
+    const heroB = game.child.playerB.child.hero;
+    if (!cardC || !cardD) throw new Error();
 
     test('stonetusk-boar-charge', async () => {
         expect(boardA.child.cards.length).toBe(0);
         expect(boardB.child.cards.length).toBe(1);
-        expect(roleB.child.health.state.current).toBe(30);
+        expect(heroB.child.health.state.current).toBe(30);
         
         // Play Stonetusk Boar
         let promise = cardC.play();
@@ -64,21 +62,21 @@ describe('stonetusk-boar', () => {
         game.child.playerA.child.controller.set(0);
         await promise;
         expect(boardA.child.cards.length).toBe(1);
-        expect(roleC.child.attack.state.current).toBe(1);
-        expect(roleC.child.health.state.current).toBe(1);
-        expect(roleC.child.action.state.current).toBe(1);
-        expect(roleC.child.action.status).toBe(true);
+        expect(cardC.child.attack.state.current).toBe(1);
+        expect(cardC.child.health.state.current).toBe(1);
+        expect(cardC.child.action.state.current).toBe(1);
+        expect(cardC.child.action.status).toBe(true);
         
         // Boar directly attacks enemy hero
-        promise = roleC.child.action.run();
+        promise = cardC.child.action.run();
         await AnimeUtil.sleep();
-        expect(game.child.playerA.child.controller.current?.options).toContain(roleB);
+        expect(game.child.playerA.child.controller.current?.options).toContain(heroB);
         expect(game.child.playerA.child.controller.current?.options.length).toBe(2);
-        game.child.playerA.child.controller.set(roleB);
+        game.child.playerA.child.controller.set(heroB);
         await promise;
         
-        expect(roleC.child.action.state.current).toBe(0);
-        expect(roleB.child.health.state.current).toBe(29);
-        expect(roleB.child.health.state.damage).toBe(1);
+        expect(cardC.child.action.state.current).toBe(0);
+        expect(heroB.child.health.state.current).toBe(29);
+        expect(heroB.child.health.state.damage).toBe(1);
     })
 }) 

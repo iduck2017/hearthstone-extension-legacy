@@ -64,25 +64,23 @@ describe('cairne-bloodhoof', () => {
     const cardD = boardA.child.cards.find(item => item instanceof WispModel);
     const cardE = boardB.child.cards.find(item => item instanceof CairneBloodhoofModel);
     if (!cardC || !cardD || !cardE) throw new Error();
-    const roleA = playerA.child.hero.child.role;
-    const roleB = playerB.child.hero.child.role;
-    const roleD = cardD.child.role;
-    const roleE = cardE.child.role;
+    const heroA = playerA.child.hero;
+    const heroB = playerB.child.hero;
 
     test('fireball-cast', async () => {
         // Check initial state
-        expect(roleE.child.attack.state.current).toBe(5); // Cairne Bloodhoof: 5/5
-        expect(roleE.child.health.state.current).toBe(5);
+        expect(cardE.child.attack.state.current).toBe(5); // Cairne Bloodhoof: 5/5
+        expect(cardE.child.health.state.current).toBe(5);
         expect(boardB.child.cards.length).toBe(1); // Only Cairne Bloodhoof on board
         expect(handA.child.cards.length).toBe(1); // Fireball in hand
         expect(playerA.child.mana.state.current).toBe(10); // Full mana
 
         // Cast Fireball targeting Cairne Bloodhoof
         const promise = cardC.play();
-        expect(playerA.child.controller.current?.options).toContain(roleA); // Can target friendly hero
-        expect(playerA.child.controller.current?.options).toContain(roleB); // Can target enemy hero
-        expect(playerA.child.controller.current?.options).toContain(roleE); // Can target enemy minion
-        playerA.child.controller.set(roleE); // Target Cairne Bloodhoof
+        expect(playerA.child.controller.current?.options).toContain(heroA); // Can target friendly hero
+        expect(playerA.child.controller.current?.options).toContain(heroB); // Can target enemy hero
+        expect(playerA.child.controller.current?.options).toContain(cardE); // Can target enemy minion
+        playerA.child.controller.set(cardE); // Target Cairne Bloodhoof
         await promise;
 
         // Cairne Bloodhoof should be destroyed and Baine Bloodhoof should be summoned
@@ -90,9 +88,8 @@ describe('cairne-bloodhoof', () => {
         const cardG = boardB.child.cards.find(item => item instanceof BaineBloodhoofModel);
         expect(cardG).toBeDefined();
         if (!cardG) throw new Error();
-        const roleG = cardG.child.role;
-        expect(roleG.child.attack.state.current).toBe(5); // Baine: 5/5
-        expect(roleG.child.health.state.current).toBe(5);
+        expect(cardG.child.attack.state.current).toBe(5); // Baine: 5/5
+        expect(cardG.child.health.state.current).toBe(5);
 
         // Fireball should be consumed
         expect(handA.child.cards.length).toBe(0); // Fireball consumed
@@ -103,23 +100,22 @@ describe('cairne-bloodhoof', () => {
         // Check that Wisp cannot attack hero due to Baine Bloodhoof's Taunt
         expect(boardA.child.cards.length).toBe(1); // Wisp on board
         expect(boardB.child.cards.length).toBe(1); // Baine Bloodhoof on board
-        expect(roleD.child.attack.state.current).toBe(1); // Wisp: 1/1
-        expect(roleD.child.health.state.current).toBe(1);
+        expect(cardD.child.attack.state.current).toBe(1); // Wisp: 1/1
+        expect(cardD.child.health.state.current).toBe(1);
 
 
         const cardG2 = boardB.child.cards.find(item => item instanceof BaineBloodhoofModel);
         if (!cardG2) throw new Error();
-        const roleG2 = cardG2.child.role;
 
         // Try to attack with Wisp
-        const promise = roleD.child.action.run();
-        expect(playerA.child.controller.current?.options).toContain(roleB); // Can target enemy hero
-        expect(playerA.child.controller.current?.options).toContain(roleG2);
-        playerA.child.controller.set(roleG2); // Target Baine Bloodhoof
+        const promise = cardD.child.action.run();
+        expect(playerA.child.controller.current?.options).toContain(heroB); // Can target enemy hero
+        expect(playerA.child.controller.current?.options).toContain(cardG2);
+        playerA.child.controller.set(cardG2); // Target Baine Bloodhoof
         await promise;
 
         // Baine Bloodhoof should take 1 damage
-        expect(roleG2.child.health.state.current).toBe(4); // 5 - 1 = 4
+        expect(cardG2.child.health.state.current).toBe(4); // 5 - 1 = 4
         expect(cardD.child.dispose.status).toBe(true);
     });
 });

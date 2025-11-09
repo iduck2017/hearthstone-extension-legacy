@@ -77,28 +77,24 @@ describe('aegwynn-the-guardian', () => {
     const cardH = deckB.child.cards.find(item => item instanceof WispModel);
     const cardI = deckB.child.cards.find(item => item instanceof StonetuskBoarModel);
     const cardJ = deckB.child.cards.find(item => item instanceof ManaWyrmModel);
-    const roleD = cardD?.child.role;
-    const roleA = playerA.child.hero.child.role;
-    if (!cardC || !roleD || !cardH || !cardI || !cardJ || !cardE || !cardF || !cardG) throw new Error();
-    const roleH = cardH?.child.role;
-    const roleI = cardI?.child.role;
-    const roleJ = cardJ?.child.role;
+    const heroA = playerA.child.hero;
+    if (!cardC || !cardD || !cardH || !cardI || !cardJ || !cardE || !cardF || !cardG) throw new Error();
     
     test('fireball-cast', async () => {
         // Check initial stats
-        expect(roleD.child.health.state.current).toBe(5); // Aegwynn: 5/5
-        expect(roleD.child.attack.state.current).toBe(5);
+        expect(cardD.child.health.state.current).toBe(5); // Aegwynn: 5/5
+        expect(cardD.child.attack.state.current).toBe(5);
         expect(playerA.child.mana.state.current).toBe(10);
         expect(handA.child.cards.length).toBe(2); 
 
         // Player A uses Fireball on Aegwynn
         const promise = cardC.play();
-        expect(playerA.child.controller.current?.options).toContain(roleD);
-        playerA.child.controller.set(roleD);
+        expect(playerA.child.controller.current?.options).toContain(cardD);
+        playerA.child.controller.set(cardD);
         await promise;
 
         // Aegwynn should die (5 - 6 = -1)
-        expect(roleD.child.health.state.current).toBe(-1);
+        expect(cardD.child.health.state.current).toBe(-1);
         expect(cardD.child.dispose.status).toBe(true);
         expect(playerA.child.mana.state.current).toBe(6); // 10 - 4 cost
         expect(handA.child.cards.length).toBe(1); // wisp
@@ -125,21 +121,23 @@ describe('aegwynn-the-guardian', () => {
 
     test('frostbolt-cast', async () => {
         // Find Wisp on board (it was played in previous test)
+        const wispOnBoard = boardB.child.cards.find(item => item instanceof WispModel);
+        if (!wispOnBoard) throw new Error();
         
         // Check initial stats
-        expect(roleH.child.health.state.current).toBe(1); // Wisp: 1/1
+        expect(wispOnBoard.child.health.state.current).toBe(1); // Wisp: 1/1
         expect(playerB.child.mana.state.current).toBe(10);
         expect(handB.child.cards.length).toBe(3);
 
         // Player B uses Frostbolt on Wisp (with +2 spell damage from Aegwynn's deathrattle)
         const promise = cardE.play();
-        expect(playerB.child.controller.current?.options).toContain(roleH);
-        playerB.child.controller.set(roleH);
+        expect(playerB.child.controller.current?.options).toContain(wispOnBoard);
+        playerB.child.controller.set(wispOnBoard);
         await promise;
 
         // Wisp should die (1 - 5 = -4) due to 3 + 2 = 5 damage
-        expect(roleH.child.health.state.current).toBe(-4);
-        expect(cardH.child.dispose.status).toBe(true);
+        expect(wispOnBoard.child.health.state.current).toBe(-4);
+        expect(wispOnBoard.child.dispose.status).toBe(true);
         expect(playerB.child.mana.state.current).toBe(8); // 10 - 2 cost
         expect(handB.child.cards.length).toBe(2);
     });
@@ -184,13 +182,13 @@ describe('aegwynn-the-guardian', () => {
     test('arcane-missiles', async () => {
         // Check initial stats
         expect(playerB.child.mana.state.current).toBe(3); 
-        expect(roleA.child.health.state.current).toBe(30); // Player A hero: 30 health
+        expect(heroA.child.health.state.current).toBe(30); // Player A hero: 30 health
 
         // Player B uses Arcane Missiles (with +2 spell damage from inherited powers)
         await cardG.play();
 
         // Should deal 3 + 2 = 5 damage to Player A (but may be 3 if spell damage not applied)
-        expect(roleA.child.health.state.current).toBe(25); // 30 - 5 = 25 (actual damage)
+        expect(heroA.child.health.state.current).toBe(25); // 30 - 5 = 25 (actual damage)
         expect(handB.child.cards.length).toBe(0);
     });
 });

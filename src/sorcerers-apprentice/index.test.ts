@@ -61,9 +61,9 @@ describe('sorcerers-apprentice', () => {
     const cardD = handA.child.cards.find(item => item instanceof FrostboltModel);
     const cardE = handA.child.cards.find(item => item instanceof IceLanceModel);
     const cardF = handB.child.cards.find(item => item instanceof FrostboltModel);
-    const roleA = playerA.child.hero.child.role;
-    const roleB = playerB.child.hero.child.role;
     if (!cardC || !cardD || !cardE || !cardF) throw new Error();
+    const heroA = playerA.child.hero;
+    const heroB = playerB.child.hero;
 
     test('sorcerers-apprentice-play', async () => {
         // Check initial stats
@@ -99,7 +99,7 @@ describe('sorcerers-apprentice', () => {
         expect(cardD.child.cost.state.current).toBe(1);
         
         const promise = cardD.play();
-        playerA.child.controller.set(roleB);
+        playerA.child.controller.set(heroB);
         await promise;
         
         expect(playerA.child.mana.state.current).toBe(7); // 8 - 1 = 7
@@ -111,7 +111,7 @@ describe('sorcerers-apprentice', () => {
         expect(cardE.child.cost.state.current).toBe(1);
         
         const promise = cardE.play();
-        playerA.child.controller.set(roleB);
+        playerA.child.controller.set(heroB);
         await promise;
         
         expect(playerA.child.mana.state.current).toBe(6); // 7 - 1 = 6
@@ -125,7 +125,7 @@ describe('sorcerers-apprentice', () => {
         expect(cardF.child.cost.state.current).toBe(2);
         
         const promise = cardF.play();
-        playerB.child.controller.set(roleA);
+        playerB.child.controller.set(heroA);
         await promise;
         
         expect(playerB.child.mana.state.current).toBe(8); // 10 - 2 = 8

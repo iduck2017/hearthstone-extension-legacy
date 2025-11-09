@@ -62,22 +62,20 @@ describe('demolisher', () => {
     const boardB = playerB.child.board;
     const cardC = boardB.child.cards.find(item => item instanceof DemolisherModel);
     if (!cardC) throw new Error();
-    const roleA = playerA.child.hero.child.role;
-    const roleB = playerB.child.hero.child.role;
-    const roleC = cardC.child.role;
+    const heroA = playerA.child.hero;
 
     test('demolisher-hook', async () => {
         // Check initial state
         expect(boardA.child.cards.length).toBe(0); // Player A has empty board
         expect(boardB.child.cards.length).toBe(1); // Player B has Demolisher on board
-        expect(roleA.child.health.state.current).toBe(30); // Player A hero: 30 health
+        expect(heroA.child.health.state.current).toBe(30); // Player A hero: 30 health
         
         // End turn to trigger Demolisher's start turn effect
         game.child.turn.next();
         await AnimeUtil.sleep();
         
         // Check that Player A's health is reduced by 2
-        expect(roleA.child.health.state.current).toBe(28); // Player A hero: 30 - 2 = 28
-        expect(roleA.child.health.state.damage).toBe(2);
+        expect(heroA.child.health.state.current).toBe(28); // Player A hero: 30 - 2 = 28
+        expect(heroA.child.health.state.damage).toBe(2);
     });
 }) 

@@ -36,10 +36,9 @@ describe('bloodsail-corsair', () => {
     const playerB = game.child.playerB;
     const handA = playerA.child.hand;
     const cardC = handA.child.cards.find((item: any) => item instanceof BloodsailCorsairModel);
-    const roleC = cardC?.child.role;
     const heroB = playerB.child.hero;
     const cardD = playerB.child.board.child.weapon;
-    if (!roleC || !cardD) throw new Error();
+    if (!cardC || !cardD) throw new Error();
 
     test('bloodsail-corsair-battlecry', async () => {
         // Verify initial weapon durability
@@ -56,8 +55,8 @@ describe('bloodsail-corsair', () => {
         await promise;
         
         // Verify minion is played
-        expect(roleC.child.attack.state.current).toBe(1);
-        expect(roleC.child.health.state.current).toBe(2);
+        expect(cardC.child.attack.state.current).toBe(1);
+        expect(cardC.child.health.state.current).toBe(2);
         
         // Verify weapon durability is reduced by 1
         expect(cardD.child.action.state.origin).toBe(2);

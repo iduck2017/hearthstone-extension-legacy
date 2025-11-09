@@ -54,16 +54,13 @@ describe('flamestrike', () => {
     const cardC = handA.child.cards.find(item => item instanceof FlamestrikeModel);
     const cardD = boardB.child.cards.find(item => item instanceof WispModel);
     const cardE = boardB.child.cards.find(item => item instanceof WaterElementalModel);
-    const roleD = cardD?.child.role;
-    const roleE = cardE?.child.role;
-    const roleB = playerB.child.hero.child.role;
-    if (!cardC || !roleD || !roleE) throw new Error();
+    if (!cardC || !cardD || !cardE) throw new Error();
 
     test('flamestrike-cast', async () => {
         // Check initial stats
-        expect(roleD.child.health.state.current).toBe(1); // Wisp: 1/1
-        expect(roleE.child.health.state.current).toBe(6); // Water Elemental: 3/6
-        expect(roleB.child.health.state.current).toBe(30); // Player B hero: 30 health
+        expect(cardD.child.health.state.current).toBe(1); // Wisp: 1/1
+        expect(cardE.child.health.state.current).toBe(6); // Water Elemental: 3/6
+        expect(playerB.child.hero.child.health.state.current).toBe(30); // Player B hero: 30 health
         expect(playerA.child.mana.state.current).toBe(10);
         expect(handA.child.cards.length).toBe(1);
         expect(boardB.child.cards.length).toBe(2);
@@ -72,14 +69,14 @@ describe('flamestrike', () => {
         await cardC.play();
 
         // Check damage results
-        expect(roleD.child.health.state.current).toBe(-4); // Wisp: 1 - 5 = -4 (dies)
+        expect(cardD.child.health.state.current).toBe(-4); // Wisp: 1 - 5 = -4 (dies)
         expect(cardD.child.dispose.status).toBe(true); // Wisp dies
 
-        expect(roleE.child.health.state.current).toBe(1); // Water Elemental: 6 - 5 = 1 (survives)
-        expect(roleE.child.health.state.damage).toBe(5);
+        expect(cardE.child.health.state.current).toBe(1); // Water Elemental: 6 - 5 = 1 (survives)
+        expect(cardE.child.health.state.damage).toBe(5);
         expect(cardE.child.dispose.status).toBe(false); // Water Elemental survives
 
-        expect(roleB.child.health.state.current).toBe(30); // Hero should not be affected
+        expect(playerB.child.hero.child.health.state.current).toBe(30); // Hero should not be affected
 
         expect(playerA.child.mana.state.current).toBe(3); // 10 - 7 cost
         expect(handA.child.cards.length).toBe(0); // Flamestrike consumed

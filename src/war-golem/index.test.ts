@@ -60,14 +60,12 @@ describe('war-golem', () => {
     const handA = playerA.child.hand;
     const cardC = handA.child.cards.find(item => item instanceof WarGolemModel);
     if (!cardC) throw new Error();
-    const roleA = playerA.child.hero.child.role;
-    const roleB = playerB.child.hero.child.role;
-    const roleC = cardC.child.role;
+    const heroB = playerB.child.hero;
 
     test('war-golem-play', async () => {
         // Check initial state
-        expect(roleC.child.attack.state.current).toBe(7); // War Golem: 7/7
-        expect(roleC.child.health.state.current).toBe(7);
+        expect(cardC.child.attack.state.current).toBe(7); // War Golem: 7/7
+        expect(cardC.child.health.state.current).toBe(7);
         expect(handA.child.cards.length).toBe(1); // War Golem in hand
         expect(boardA.child.cards.length).toBe(0); // No minions on board
         expect(playerA.child.mana.state.current).toBe(10); // Full mana
@@ -89,18 +87,18 @@ describe('war-golem', () => {
         expect(game.child.turn.refer.current).toBe(playerA);
 
         // Check initial state
-        expect(roleC.child.health.state.current).toBe(7); // War Golem: 7/7
-        expect(roleB.child.health.state.current).toBe(30); // Player B hero: 30 health
+        expect(cardC.child.health.state.current).toBe(7); // War Golem: 7/7
+        expect(heroB.child.health.state.current).toBe(30); // Player B hero: 30 health
         expect(boardA.child.cards.length).toBe(1); // War Golem on board
 
         // Player A's War Golem attacks Player B's hero
-        let promise = roleC.child.action.run();
-        expect(playerA.child.controller.current?.options).toContain(roleB); // Can target Player B's hero
-        playerA.child.controller.set(roleB); // Target Player B's hero
+        let promise = cardC.child.action.run();
+        expect(playerA.child.controller.current?.options).toContain(heroB); // Can target Player B's hero
+        playerA.child.controller.set(heroB); // Target Player B's hero
         await promise;
 
         // Player B's hero should take 7 damage
-        expect(roleB.child.health.state.current).toBe(23); // Player B hero: 30 - 7 = 23
-        expect(roleC.child.health.state.current).toBe(7); // War Golem: 7/7 (no damage)
+        expect(heroB.child.health.state.current).toBe(23); // Player B hero: 30 - 7 = 23
+        expect(cardC.child.health.state.current).toBe(7); // War Golem: 7/7 (no damage)
     });
 });

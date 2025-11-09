@@ -51,10 +51,9 @@ describe('mirror-image', () => {
     const handA = playerA.child.hand;
     const cardA = handA.child.cards.find(item => item instanceof MirrorImageModel);
     const wispB = boardB.child.cards.find(item => item instanceof WispModel);
-    const roleA = playerA.child.hero.child.role;
-    const roleB = playerB.child.hero.child.role;
-    const roleC = wispB?.child.role;
-    if (!cardA || !roleC) throw new Error();
+    const heroA = playerA.child.hero;
+    const heroB = playerB.child.hero;
+    if (!cardA || !wispB) throw new Error();
 
     test('mirror-image-cast', async () => {
         expect(boardA.child.cards.length).toBe(0);
@@ -71,13 +70,11 @@ describe('mirror-image', () => {
         const cardD = boardA.child.cards.find(item => item instanceof MirrorImageMinionModel);
         const cardE = boardA.child.cards.filter(item => item instanceof MirrorImageMinionModel)[1];
         if (!cardD || !cardE) throw new Error();
-        const roleD = cardD.child.role;
-        const roleE = cardE.child.role;
         
-        expect(roleD.child.attack.state.current).toBe(0);
-        expect(roleD.child.health.state.current).toBe(2);
-        expect(roleE.child.attack.state.current).toBe(0);
-        expect(roleE.child.health.state.current).toBe(2);
+        expect(cardD.child.attack.state.current).toBe(0);
+        expect(cardD.child.health.state.current).toBe(2);
+        expect(cardE.child.attack.state.current).toBe(0);
+        expect(cardE.child.health.state.current).toBe(2);
     })
 
     test('mirror-image-taunt', async () => {
@@ -86,24 +83,22 @@ describe('mirror-image', () => {
         expect(turn.refer.current).toBe(playerB);
         
         // B's Wisp should not be able to attack A's hero due to Taunt
-        expect(roleC.child.action.status).toBe(true);
+        expect(wispB.child.action.status).toBe(true);
         
         const cardD = boardA.child.cards.find(item => item instanceof MirrorImageMinionModel);
         const cardE = boardA.child.cards.filter(item => item instanceof MirrorImageMinionModel)[1];
         if (!cardD || !cardE) throw new Error();
-        const roleD = cardD.child.role;
-        const roleE = cardE.child.role;
 
         // Try to attack A's hero - should fail due to Taunt
-        const promise = roleC.child.action.run();
+        const promise = wispB.child.action.run();
         expect(playerB.child.controller.current?.options.length).toBe(2);
-        expect(playerB.child.controller.current?.options).not.toContain(roleA);
-        expect(playerB.child.controller.current?.options).toContain(roleD);
-        expect(playerB.child.controller.current?.options).toContain(roleE);
-        playerB.child.controller.set(roleD);
+        expect(playerB.child.controller.current?.options).not.toContain(heroA);
+        expect(playerB.child.controller.current?.options).toContain(cardD);
+        expect(playerB.child.controller.current?.options).toContain(cardE);
+        playerB.child.controller.set(cardD);
         await promise;
         
         // Wisp should not have attacked (due to Taunt blocking)
-        expect(roleD.child.health.state.current).toBe(1);
+        expect(cardD.child.health.state.current).toBe(1);
     })
 }) 

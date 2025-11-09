@@ -55,16 +55,14 @@ describe('frost-nova', () => {
     const cardC = handA.child.cards.find(item => item instanceof FrostNovaModel);
     const cardD = boardB.child.cards.find(item => item instanceof WispModel);
     const cardE = boardB.child.cards.find(item => item instanceof GoldshireFootmanModel);
-    const roleD = cardD?.child.role;
-    const roleE = cardE?.child.role;
-    if (!cardC || !roleD || !roleE) throw new Error();
+    if (!cardC || !cardD || !cardE) throw new Error();
 
     test('frost-nova-cast', async () => {
         // Check initial stats
-        expect(roleD.child.health.state.current).toBe(1); // Wisp: 1 health
-        expect(roleE.child.health.state.current).toBe(2); // Goldshire Footman: 2 health
-        expect(roleD.child.feats.child.frozen.state.isActive).toBe(false);
-        expect(roleE.child.feats.child.frozen.state.isActive).toBe(false);
+        expect(cardD.child.health.state.current).toBe(1); // Wisp: 1 health
+        expect(cardE.child.health.state.current).toBe(2); // Goldshire Footman: 2 health
+        expect(cardD.child.feats.child.frozen.state.isActive).toBe(false);
+        expect(cardE.child.feats.child.frozen.state.isActive).toBe(false);
         expect(playerA.child.mana.state.current).toBe(10);
         expect(handA.child.cards.length).toBe(1);
         expect(boardB.child.cards.length).toBe(2);
@@ -73,10 +71,10 @@ describe('frost-nova', () => {
         await cardC.play();
 
         // All enemy minions should be frozen, but no damage dealt
-        expect(roleD.child.health.state.current).toBe(1); // Wisp: no damage
-        expect(roleE.child.health.state.current).toBe(2); // Goldshire Footman: no damage
-        expect(roleD.child.feats.child.frozen.state.isActive).toBe(true);
-        expect(roleE.child.feats.child.frozen.state.isActive).toBe(true);
+        expect(cardD.child.health.state.current).toBe(1); // Wisp: no damage
+        expect(cardE.child.health.state.current).toBe(2); // Goldshire Footman: no damage
+        expect(cardD.child.feats.child.frozen.state.isActive).toBe(true);
+        expect(cardE.child.feats.child.frozen.state.isActive).toBe(true);
         expect(playerA.child.mana.state.current).toBe(7); // 10 - 3 cost
         expect(handA.child.cards.length).toBe(0);
 
@@ -92,9 +90,9 @@ describe('frost-nova', () => {
         expect(turn.refer.current).toBe(playerB);
 
         // Check that frozen minions cannot attack
-        expect(roleD.child.action.status).toBe(false); // Wisp cannot attack
-        expect(roleE.child.action.status).toBe(false); // Goldshire Footman cannot attack
-        expect(roleD.child.feats.child.frozen.state.isActive).toBe(true);
-        expect(roleE.child.feats.child.frozen.state.isActive).toBe(true);
+        expect(cardD.child.action.status).toBe(false); // Wisp cannot attack
+        expect(cardE.child.action.status).toBe(false); // Goldshire Footman cannot attack
+        expect(cardD.child.feats.child.frozen.state.isActive).toBe(true);
+        expect(cardE.child.feats.child.frozen.state.isActive).toBe(true);
     })
 })

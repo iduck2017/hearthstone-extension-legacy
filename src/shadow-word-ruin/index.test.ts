@@ -67,26 +67,19 @@ describe('shadow-word-ruin', () => {
     const cardG = boardB.child.cards.find(item => item instanceof WispModel);
     const cardH = boardB.child.cards.find(item => item instanceof WaterElementalModel);
     if (!cardC || !cardD || !cardE || !cardF || !cardG || !cardH) throw new Error();
-    const roleA = playerA.child.hero.child.role;
-    const roleB = playerB.child.hero.child.role;
-    const roleD = cardD.child.role;
-    const roleE = cardE.child.role;
-    const roleF = cardF.child.role;
-    const roleG = cardG.child.role;
-    const roleH = cardH.child.role;
 
     test('shadow-word-ruin-cast', async () => {
         // Check initial state
-        expect(roleD.child.attack.state.current).toBe(1); // Wisp: 1/1 (should survive)
-        expect(roleD.child.health.state.current).toBe(1);
-        expect(roleE.child.attack.state.current).toBe(3); // Water Elemental: 3/6 (should survive)
-        expect(roleE.child.health.state.current).toBe(6);
-        expect(roleF.child.attack.state.current).toBe(5); // Aegwynn: 5/5 (should be destroyed)
-        expect(roleF.child.health.state.current).toBe(5);
-        expect(roleG.child.attack.state.current).toBe(1); // Enemy Wisp: 1/1 (should survive)
-        expect(roleG.child.health.state.current).toBe(1);
-        expect(roleH.child.attack.state.current).toBe(3); // Enemy Water Elemental: 3/6 (should survive)
-        expect(roleH.child.health.state.current).toBe(6);
+        expect(cardD.child.attack.state.current).toBe(1); // Wisp: 1/1 (should survive)
+        expect(cardD.child.health.state.current).toBe(1);
+        expect(cardE.child.attack.state.current).toBe(3); // Water Elemental: 3/6 (should survive)
+        expect(cardE.child.health.state.current).toBe(6);
+        expect(cardF.child.attack.state.current).toBe(5); // Aegwynn: 5/5 (should be destroyed)
+        expect(cardF.child.health.state.current).toBe(5);
+        expect(cardG.child.attack.state.current).toBe(1); // Enemy Wisp: 1/1 (should survive)
+        expect(cardG.child.health.state.current).toBe(1);
+        expect(cardH.child.attack.state.current).toBe(3); // Enemy Water Elemental: 3/6 (should survive)
+        expect(cardH.child.health.state.current).toBe(6);
 
         // Check initial board state
         expect(boardA.child.cards.length).toBe(3);

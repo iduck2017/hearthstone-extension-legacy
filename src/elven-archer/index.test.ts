@@ -41,31 +41,29 @@ describe('battlecry', () => {
     const board = game.child.playerB.child.board;
     const cardC = hand.child.cards.find(item => item instanceof ElvenArcherModel);
     const cardD = board.child.cards.find(item => item instanceof WispModel);
-    const roleC = cardC?.child.role;
-    const roleD = cardD?.child.role;
-    const roleA = playerA.child.hero.child.role;
-    const roleB = playerB.child.hero.child.role;
-    if (!roleC || !roleD) throw new Error();
+    const heroA = playerA.child.hero;
+    const heroB = playerB.child.hero;
+    if (!cardC || !cardD) throw new Error();
 
     test('elven-archer-battlecry', async () => {
-        expect(roleD.child.health.state.current).toBe(1);
+        expect(cardD.child.health.state.current).toBe(1);
 
         // play elven archer
         const promise = cardC.play();
         expect(playerA.child.controller.current?.options).toContain(0);
         playerA.child.controller.set(0);
         await AnimeUtil.sleep()
-        expect(playerA.child.controller.current?.options).toContain(roleD);
-        expect(playerA.child.controller.current?.options).toContain(roleA);
-        expect(playerA.child.controller.current?.options).toContain(roleB);
-        playerA.child.controller.set(roleD);
+        expect(playerA.child.controller.current?.options).toContain(cardD);
+        expect(playerA.child.controller.current?.options).toContain(heroA);
+        expect(playerA.child.controller.current?.options).toContain(heroB);
+        playerA.child.controller.set(cardD);
         await promise;
 
-        expect(roleD.child.health.state.current).toBe(0);
-        expect(roleD.child.health.state.damage).toBe(1);
-        expect(roleD.child.health.state.maximum).toBe(1);
-        expect(roleD.child.health.state.current).toBe(0);
-        expect(roleD.child.health.state.maximum).toBe(1);
+        expect(cardD.child.health.state.current).toBe(0);
+        expect(cardD.child.health.state.damage).toBe(1);
+        expect(cardD.child.health.state.maximum).toBe(1);
+        expect(cardD.child.health.state.current).toBe(0);
+        expect(cardD.child.health.state.maximum).toBe(1);
         expect(cardD.child.dispose.status).toBe(true);
 
         const source = cardD.child.dispose.refer.source;

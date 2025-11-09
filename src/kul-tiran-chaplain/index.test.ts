@@ -56,13 +56,11 @@ describe('kul-tiran-chaplain', () => {
     const cardC = handA.child.cards.find(item => item instanceof KulTiranChaplainModel);
     const cardD = boardA.child.cards.find(item => item instanceof WaterElementalModel);
     if (!cardC || !cardD) throw new Error();
-    const roleC = cardC?.child.role;
-    const roleD = cardD?.child.role;
 
     test('kul-tiran-chaplain-play', async () => {
         // Check initial state
-        expect(roleD.child.attack.state.current).toBe(3); // Water Elemental: 3/6
-        expect(roleD.child.health.state.current).toBe(6);
+        expect(cardD.child.attack.state.current).toBe(3); // Water Elemental: 3/6
+        expect(cardD.child.health.state.current).toBe(6);
         expect(playerA.child.mana.state.current).toBe(10);
         expect(boardA.child.cards.length).toBe(1);
         expect(handA.child.cards.length).toBe(1);
@@ -71,18 +69,18 @@ describe('kul-tiran-chaplain', () => {
         const promise = cardC.play();
         playerA.child.controller.set(0);
         await AnimeUtil.sleep();
-        expect(playerA.child.controller.current?.options).toContain(cardD.child.role); // Water Elemental should be targetable
-        playerA.child.controller.set(cardD.child.role);
+        expect(playerA.child.controller.current?.options).toContain(cardD); // Water Elemental should be targetable
+        playerA.child.controller.set(cardD);
         await promise;
 
         // Check that Kul Tiran Chaplain is on board
         expect(boardA.child.cards.length).toBe(2);
-        expect(roleC.child.attack.state.current).toBe(2); // Kul Tiran Chaplain: 3/2
-        expect(roleC.child.health.state.current).toBe(3);
+        expect(cardC.child.attack.state.current).toBe(2); // Kul Tiran Chaplain: 3/2
+        expect(cardC.child.health.state.current).toBe(3);
 
         // Water Elemental should have +2 Health
-        expect(roleD.child.attack.state.current).toBe(3); // Attack unchanged
-        expect(roleD.child.health.state.current).toBe(8); // 6 + 2 = 8
+        expect(cardD.child.attack.state.current).toBe(3); // Attack unchanged
+        expect(cardD.child.health.state.current).toBe(8); // 6 + 2 = 8
 
         // Kul Tiran Chaplain should be consumed
         expect(handA.child.cards.length).toBe(0); // Kul Tiran Chaplain consumed

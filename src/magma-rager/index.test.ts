@@ -60,14 +60,11 @@ describe('magma-rager', () => {
     const handA = playerA.child.hand;
     const cardC = handA.child.cards.find(item => item instanceof MagmaRagerModel);
     if (!cardC) throw new Error();
-    const roleA = playerA.child.hero.child.role;
-    const roleB = playerB.child.hero.child.role;
-    const roleC = cardC.child.role;
 
     test('magma-rager-play', async () => {
         // Check initial state
-        expect(roleC.child.attack.state.current).toBe(5); // Magma Rager: 5/1
-        expect(roleC.child.health.state.current).toBe(1);
+        expect(cardC.child.attack.state.current).toBe(5); // Magma Rager: 5/1
+        expect(cardC.child.health.state.current).toBe(1);
         expect(handA.child.cards.length).toBe(1); // Magma Rager in hand
         expect(boardA.child.cards.length).toBe(0); // No minions on board
         expect(playerA.child.mana.state.current).toBe(10); // Full mana

@@ -52,7 +52,6 @@ describe('focused-will', () => {
     const cardC = handA.child.cards.find(item => item instanceof StonetuskBoarModel);
     const cardD = handA.child.cards.find(item => item instanceof FocusedWillModel);
     if (!cardC || !cardD) throw new Error();
-    const roleC = cardC.child.role;
 
 
     test('stonetusk-boar-play', async () => {
@@ -66,9 +65,9 @@ describe('focused-will', () => {
         playerA.child.controller.set(0);
         await promise;
 
-        expect(roleC.child.attack.state.current).toBe(1); // Stonetusk Boar: 1/1
-        expect(roleC.child.health.state.current).toBe(1);
-        expect(roleC.child.action.status).toBe(true); // Can attack (charge)
+        expect(cardC.child.attack.state.current).toBe(1); // Stonetusk Boar: 1/1
+        expect(cardC.child.health.state.current).toBe(1);
+        expect(cardC.child.action.status).toBe(true); // Can attack (charge)
         expect(playerA.child.mana.state.current).toBe(9); // 10 - 1 cost
         expect(handA.child.cards.length).toBe(1); // Boar consumed
     });
@@ -76,14 +75,14 @@ describe('focused-will', () => {
     test('focused-will-cast', async () => {
         // Player A uses Focused Will on Boar
         const promise = cardD.play();
-        expect(playerA.child.controller.current?.options).toContain(roleC);
-        playerA.child.controller.set(roleC);
+        expect(playerA.child.controller.current?.options).toContain(cardC);
+        playerA.child.controller.set(cardC);
         await promise;
 
         // Boar should be silenced (cannot attack) and gain +3 Health
-        expect(roleC.child.attack.state.current).toBe(1); // Attack unchanged
-        expect(roleC.child.health.state.current).toBe(4); // 1 + 3 Health buff
-        expect(roleC.child.action.status).toBe(false); // Cannot attack (charge silenced)
+        expect(cardC.child.attack.state.current).toBe(1); // Attack unchanged
+        expect(cardC.child.health.state.current).toBe(4); // 1 + 3 Health buff
+        expect(cardC.child.action.status).toBe(false); // Cannot attack (charge silenced)
         expect(playerA.child.mana.state.current).toBe(8); // 9 - 1 cost
         expect(handA.child.cards.length).toBe(0); // Focused Will consumed
         expect(boardA.child.cards.length).toBe(1); // Minion still on board

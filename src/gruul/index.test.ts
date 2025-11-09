@@ -60,14 +60,11 @@ describe('gruul', () => {
     const handA = playerA.child.hand;
     const cardC = handA.child.cards.find(item => item instanceof GruulModel);
     if (!cardC) throw new Error();
-    const roleA = playerA.child.hero.child.role;
-    const roleB = playerB.child.hero.child.role;
-    const roleC = cardC.child.role;
 
     test('gruul-play', async () => {
         // Check initial state
-        expect(roleC.child.attack.state.current).toBe(7); // Gruul: 7/7
-        expect(roleC.child.health.state.current).toBe(7);
+        expect(cardC.child.attack.state.current).toBe(7); // Gruul: 7/7
+        expect(cardC.child.health.state.current).toBe(7);
         expect(handA.child.cards.length).toBe(1); // Gruul in hand
         expect(boardA.child.cards.length).toBe(0); // No minions on board
         expect(playerA.child.mana.state.current).toBe(10); // Full mana
@@ -84,31 +81,39 @@ describe('gruul', () => {
     });
 
     test('turn-end', async () => {
+        // Get Gruul from board
+        const gruulOnBoard = boardA.child.cards.find(item => item instanceof GruulModel);
+        if (!gruulOnBoard) throw new Error();
+        
         // Check initial state
-        expect(roleC.child.attack.state.current).toBe(7); // Gruul: 7/7
-        expect(roleC.child.health.state.current).toBe(7);
+        expect(gruulOnBoard.child.attack.state.current).toBe(7); // Gruul: 7/7
+        expect(gruulOnBoard.child.health.state.current).toBe(7);
         expect(boardA.child.cards.length).toBe(1); // Gruul on board
 
         // End Player A's turn
         game.child.turn.next();
 
         // Gruul should have grown by +1/+1
-        expect(roleC.child.attack.state.current).toBe(8); // Gruul: 8/8
-        expect(roleC.child.health.state.current).toBe(8);
+        expect(gruulOnBoard.child.attack.state.current).toBe(8); // Gruul: 8/8
+        expect(gruulOnBoard.child.health.state.current).toBe(8);
     });
 
     test('turn-end', async () => {
+        // Get Gruul from board
+        const gruulOnBoard = boardA.child.cards.find(item => item instanceof GruulModel);
+        if (!gruulOnBoard) throw new Error();
+        
         // Check initial state
-        expect(roleC.child.attack.state.current).toBe(8); // Gruul: 8/8
-        expect(roleC.child.health.state.current).toBe(8);
+        expect(gruulOnBoard.child.attack.state.current).toBe(8); // Gruul: 8/8
+        expect(gruulOnBoard.child.health.state.current).toBe(8);
         expect(boardA.child.cards.length).toBe(1); // Gruul on board
 
         // End Player B's turn
         game.child.turn.next();
 
         // Gruul should have grown by +1/+1 again
-        expect(roleC.child.attack.state.current).toBe(9); // Gruul: 9/9
-        expect(roleC.child.health.state.current).toBe(9);
+        expect(gruulOnBoard.child.attack.state.current).toBe(9); // Gruul: 9/9
+        expect(gruulOnBoard.child.health.state.current).toBe(9);
     });
 
 });

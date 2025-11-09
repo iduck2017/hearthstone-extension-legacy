@@ -40,7 +40,7 @@ export class ArchmageAntonidasModel extends MinionCardModel {
                 feats: props.child?.feats ?? new MinionFeaturesModel({
                     child: {
                         battlecry: [], 
-                        feats: [new ArchmageAntonidasFeatureModel()]
+                        items: [new ArchmageAntonidasFeatureModel()]
                     }
                 }),
                 ...props.child,

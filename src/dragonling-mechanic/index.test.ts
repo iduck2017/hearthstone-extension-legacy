@@ -60,14 +60,11 @@ describe('dragonling-mechanic', () => {
     const handA = playerA.child.hand;
     const cardC = handA.child.cards.find(item => item instanceof DragonlingMechanicModel);
     if (!cardC) throw new Error();
-    const roleA = playerA.child.hero.child.role;
-    const roleB = playerB.child.hero.child.role;
-    const roleC = cardC.child.role;
 
     test('dragonling-mechanic-play', async () => {
         // Check initial state
-        expect(roleC.child.attack.state.current).toBe(2); // Dragonling Mechanic: 2/4
-        expect(roleC.child.health.state.current).toBe(4);
+        expect(cardC.child.attack.state.current).toBe(2); // Dragonling Mechanic: 2/4
+        expect(cardC.child.health.state.current).toBe(4);
         expect(handA.child.cards.length).toBe(1); // Dragonling Mechanic in hand
         expect(boardA.child.cards.length).toBe(0); // No minions on board
         expect(playerA.child.mana.state.current).toBe(10); // Full mana
@@ -85,12 +82,11 @@ describe('dragonling-mechanic', () => {
         // Check that Mechanical Dragonling was summoned
         const cardD = boardA.child.cards.find(item => item instanceof MechanicalDragonlingModel);
         expect(cardD).toBeDefined(); // Should have summoned a Mechanical Dragonling
-        const roleD = cardD?.child.role;
-        if (!roleD) throw new Error();
+        if (!cardD) throw new Error();
 
         expect(boardA.child.cards[1]).toBe(cardD);
         expect(boardA.child.cards[0]).toBe(cardC);
-        expect(roleD.child.attack.state.current).toBe(2); // Mechanical Dragonling: 2/1
-        expect(roleD.child.health.state.current).toBe(1);
+        expect(cardD.child.attack.state.current).toBe(2); // Mechanical Dragonling: 2/1
+        expect(cardD.child.health.state.current).toBe(1);
     });
 });

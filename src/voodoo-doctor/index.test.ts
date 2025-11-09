@@ -41,28 +41,26 @@ describe('voodoo-doctor', () => {
     const handA = game.child.playerA.child.hand;
     const cardC = boardA.child.cards.find(item => item instanceof WispModel);
     const cardD = handA.child.cards.find(item => item instanceof VoodooDoctorModel);
-    const roleC = cardC?.child.role;
-    const roleD = cardD?.child.role;
     const playerB = game.child.playerB;
     const playerA = game.child.playerA;
-    const roleA = playerA.child.hero.child.role;
-    const roleB = playerB.child.hero.child.role;
-    if (!roleC || !roleD) throw new Error();
+    const heroA = playerA.child.hero;
+    const heroB = playerB.child.hero;
+    if (!cardC || !cardD) throw new Error();
 
     test('wisp-attack-shieldbearer', async () => {
         expect(boardA.child.cards.length).toBe(1);
         
         // Wisp attacks Shieldbearer
-        let promise = roleC.child.action.run();
+        let promise = cardC.child.action.run();
         await AnimeUtil.sleep();
         expect(playerA.child.controller.current).toBeDefined();
-        expect(playerA.child.controller.current?.options).toContain(roleB);
+        expect(playerA.child.controller.current?.options).toContain(heroB);
         expect(playerA.child.controller.current?.options.length).toBe(1);
-        playerA.child.controller.set(roleB);
+        playerA.child.controller.set(heroB);
         await promise;
         
-        expect(roleB.child.health.state.current).toBe(29);
-        expect(roleB.child.health.state.damage).toBe(1);
+        expect(heroB.child.health.state.current).toBe(29);
+        expect(heroB.child.health.state.damage).toBe(1);
     })
 
     test('voodoo-doctor-battlecry', async () => {
@@ -73,14 +71,14 @@ describe('voodoo-doctor', () => {
         playerA.child.controller.set(0);
         await AnimeUtil.sleep();
         
-        expect(playerA.child.controller.current?.options).toContain(roleA);
-        expect(playerA.child.controller.current?.options).toContain(roleB);
-        expect(playerA.child.controller.current?.options).toContain(roleC);
+        expect(playerA.child.controller.current?.options).toContain(heroA);
+        expect(playerA.child.controller.current?.options).toContain(heroB);
+        expect(playerA.child.controller.current?.options).toContain(cardC);
         expect(playerA.child.controller.current?.options.length).toBe(3);
-        playerA.child.controller.set(roleB);
+        playerA.child.controller.set(heroB);
         await promise;
         
-        expect(roleB.child.health.state.current).toBe(30);
-        expect(roleB.child.health.state.damage).toBe(0);
+        expect(heroB.child.health.state.current).toBe(30);
+        expect(heroB.child.health.state.damage).toBe(0);
     })
 }) 

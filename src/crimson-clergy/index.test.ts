@@ -58,7 +58,6 @@ describe('crimson-clergy', () => {
     const cardC = handA.child.cards.find(item => item instanceof CrimsonClergyModel);
     const cardD = handA.child.cards.find(item => item instanceof CircleOfHealingModel);
     if (!cardC || !cardD) throw new Error();
-    const roleC = cardC.child.role;
 
     test('crimson-clergy-play', async () => {
         // Check initial state
@@ -73,8 +72,8 @@ describe('crimson-clergy', () => {
 
         // Check that Crimson Clergy is on board
         expect(boardA.child.cards.length).toBe(1);
-        expect(roleC.child.attack.state.current).toBe(1); // Crimson Clergy: 1/3
-        expect(roleC.child.health.state.current).toBe(3);
+        expect(cardC.child.attack.state.current).toBe(1); // Crimson Clergy: 1/3
+        expect(cardC.child.health.state.current).toBe(3);
         expect(playerA.child.mana.state.current).toBe(9); // 10 - 1 cost
         expect(handA.child.cards.length).toBe(1); // Clergy consumed, Circle of Healing remains
     });

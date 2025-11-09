@@ -63,15 +63,13 @@ describe('wolfrider', () => {
     const cardC = handA.child.cards.find(item => item instanceof WolfriderModel);
     const cardD = boardB.child.cards.find(item => item instanceof WispModel);
     if (!cardC || !cardD) throw new Error();
-    const roleA = playerA.child.hero.child.role;
-    const roleB = playerB.child.hero.child.role;
-    const roleC = cardC.child.role;
-    const roleD = cardD.child.role;
+    const heroA = playerA.child.hero;
+    const heroB = playerB.child.hero;
 
     test('wolfrider-play', async () => {
         // Check initial state
-        expect(roleC.child.attack.state.current).toBe(3); // Wolfrider: 3/1
-        expect(roleC.child.health.state.current).toBe(1);
+        expect(cardC.child.attack.state.current).toBe(3); // Wolfrider: 3/1
+        expect(cardC.child.health.state.current).toBe(1);
         expect(handA.child.cards.length).toBe(1); // Wolfrider in hand
         expect(boardA.child.cards.length).toBe(0); // No minions on board
         expect(playerA.child.mana.state.current).toBe(10); // Full mana
@@ -87,30 +85,30 @@ describe('wolfrider', () => {
         expect(playerA.child.mana.state.current).toBe(7); // 10 - 3 = 7
 
         // Check that Wolfrider has Charge
-        expect(cardC.child.role.child.feats.child.charge.state.isActive).toBe(true); // Has Charge
+        expect(cardC.child.feats.child.charge.state.isActive).toBe(true); // Has Charge
     });
 
     test('wolfrider-attack', async () => {
         // Check initial state
-        expect(roleC.child.health.state.current).toBe(1); // Wolfrider: 3/1
-        expect(roleD.child.health.state.current).toBe(1); // Wisp: 1/1
+        expect(cardC.child.health.state.current).toBe(1); // Wolfrider: 3/1
+        expect(cardD.child.health.state.current).toBe(1); // Wisp: 1/1
         expect(boardA.child.cards.length).toBe(1); // Wolfrider on board
         expect(boardB.child.cards.length).toBe(1); // Wisp on board
 
         // Player A's Wolfrider attacks Player B's Wisp immediately (Charge allows immediate attack)
-        let promise = roleC.child.action.run();
-        expect(playerA.child.controller.current?.options).toContain(roleD); // Can target Wisp
-        expect(playerA.child.controller.current?.options).toContain(roleB); // Can target Player B's hero
-        playerA.child.controller.set(roleD); // Target Wisp
+        let promise = cardC.child.action.run();
+        expect(playerA.child.controller.current?.options).toContain(cardD); // Can target Wisp
+        expect(playerA.child.controller.current?.options).toContain(heroB); // Can target Player B's hero
+        playerA.child.controller.set(cardD); // Target Wisp
         await promise;
 
         // Wisp should die (1/1 vs 3/1)
         expect(boardB.child.cards.length).toBe(0); // Wisp dies
-        expect(roleC.child.health.state.current).toBe(0); // Wolfrider: 1 - 1 = 0 (dies)
+        expect(cardC.child.health.state.current).toBe(0); // Wolfrider: 1 - 1 = 0 (dies)
 
         expect(cardD.child.dispose.status).toBe(true);
-        expect(roleD.child.health.state.damage).toBe(3);
-        expect(roleD.child.health.state.current).toBe(-2);
+        expect(cardD.child.health.state.damage).toBe(3);
+        expect(cardD.child.health.state.current).toBe(-2);
 
         expect(boardA.child.cards.length).toBe(0); // Wolfrider dies
     });

@@ -49,11 +49,7 @@ describe('hungry-crab', () => {
     const cardD = boardA.child.cards.find((item: any) => item instanceof WispModel);
     const cardE = handB.child.cards.find((item: any) => item instanceof HungryCrabModel);
     const cardF = handB.child.cards.find((item: any) => item instanceof MurlocRaiderModel);
-    const roleC = cardC?.child.role;
-    const roleD = cardD?.child.role;
-    const roleE = cardE?.child.role;
-    const roleF = cardF?.child.role;
-    if (!roleC || !roleD || !roleE || !roleF) throw new Error();
+    if (!cardC || !cardD || !cardE || !cardF) throw new Error();
     const turn = game.child.turn;
 
     test('hungry-crab-play', async () => {
@@ -68,16 +64,19 @@ describe('hungry-crab', () => {
         expect(game.child.playerA.child.controller.current).toBeUndefined();
         await promise;
 
+        const crabOnBoard = boardA.child.cards.find((item: any) => item instanceof HungryCrabModel);
+        if (!crabOnBoard) throw new Error();
+        
         expect(boardA.child.cards.length).toBe(2);
-        expect(roleC.child.attack.state.current).toBe(1); // Hungry Crab
-        expect(roleC.child.attack.state.origin).toBe(1);
-        expect(roleC.child.attack.state.current).toBe(1);
+        expect(crabOnBoard.child.attack.state.current).toBe(1); // Hungry Crab
+        expect(crabOnBoard.child.attack.state.origin).toBe(1);
+        expect(crabOnBoard.child.attack.state.current).toBe(1);
 
-        expect(roleC.child.health.state.maximum).toBe(2);
-        expect(roleC.child.health.state.origin).toBe(2);
-        expect(roleC.child.health.state.damage).toBe(0);
-        expect(roleC.child.health.state.memory).toBe(2);
-        expect(roleC.child.health.state.current).toBe(2);
+        expect(crabOnBoard.child.health.state.maximum).toBe(2);
+        expect(crabOnBoard.child.health.state.origin).toBe(2);
+        expect(crabOnBoard.child.health.state.damage).toBe(0);
+        expect(crabOnBoard.child.health.state.memory).toBe(2);
+        expect(crabOnBoard.child.health.state.current).toBe(2);
     })
 
     test('hungry-crab-battlecry', async () => {
@@ -98,24 +97,31 @@ describe('hungry-crab', () => {
         expect(game.child.playerB.child.controller.current?.options).toContain(0);
         game.child.playerB.child.controller.set(0);
         await AnimeUtil.sleep();
-        expect(game.child.playerB.child.controller.current?.options).toContain(roleF);
+        
+        const murlocOnBoard = boardB.child.cards.find((item: any) => item instanceof MurlocRaiderModel);
+        if (!murlocOnBoard) throw new Error();
+        
+        expect(game.child.playerB.child.controller.current?.options).toContain(murlocOnBoard);
         expect(game.child.playerB.child.controller.current?.options.length).toBe(1);
-        game.child.playerB.child.controller.set(roleF);
+        game.child.playerB.child.controller.set(murlocOnBoard);
         await promise;
 
-        expect(cardF.child.dispose.status).toBe(true); // Murloc Raider destroyed
-        expect(cardF.child.dispose.state.isLock).toBe(true);
+        expect(murlocOnBoard.child.dispose.status).toBe(true); // Murloc Raider destroyed
+        expect(murlocOnBoard.child.dispose.state.isLock).toBe(true);
 
         expect(boardB.child.cards.length).toBe(1); 
 
-        expect(roleE.child.attack.state.current).toBe(3); // Hungry Crab +2/+2
-        expect(roleE.child.attack.state.origin).toBe(1);
-        expect(roleE.child.attack.state.current).toBe(3);
+        const crabOnBoard = boardB.child.cards.find((item: any) => item instanceof HungryCrabModel);
+        if (!crabOnBoard) throw new Error();
+        
+        expect(crabOnBoard.child.attack.state.current).toBe(3); // Hungry Crab +2/+2
+        expect(crabOnBoard.child.attack.state.origin).toBe(1);
+        expect(crabOnBoard.child.attack.state.current).toBe(3);
 
-        expect(roleE.child.health.state.maximum).toBe(4); 
-        expect(roleE.child.health.state.origin).toBe(2);
-        expect(roleE.child.health.state.damage).toBe(0);
-        expect(roleE.child.health.state.memory).toBe(4);
-        expect(roleE.child.health.state.current).toBe(4);
+        expect(crabOnBoard.child.health.state.maximum).toBe(4); 
+        expect(crabOnBoard.child.health.state.origin).toBe(2);
+        expect(crabOnBoard.child.health.state.damage).toBe(0);
+        expect(crabOnBoard.child.health.state.memory).toBe(4);
+        expect(crabOnBoard.child.health.state.current).toBe(4);
     })
 })

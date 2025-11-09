@@ -48,25 +48,24 @@ describe('fireball', () => {
     const boardB = game.child.playerB.child.board;
     const cardD = handA.child.cards.find(item => item instanceof FireballModel);
     const cardC = boardB.child.cards.find(item => item instanceof WispModel);
-    const roleA = game.child.playerA.child.hero.child.role;
-    const roleB = game.child.playerB.child.hero.child.role;
-    const roleC = cardC?.child.role;
-    if (!cardD || !roleC) throw new Error();
+    if (!cardD || !cardC) throw new Error();
+    const heroA = game.child.playerA.child.hero;
+    const heroB = game.child.playerB.child.hero;
 
     test('fireball-cast', async () => {
-        expect(roleC.child.health.state.current).toBe(1);
+        expect(cardC.child.health.state.current).toBe(1);
         
         // Play Fireball targeting enemy hero
         let promise = cardD.play();
-        expect(game.child.playerA.child.controller.current?.options).toContain(roleA);
-        expect(game.child.playerA.child.controller.current?.options).toContain(roleB);
-        expect(game.child.playerA.child.controller.current?.options).toContain(roleC);
-        game.child.playerA.child.controller.set(roleC);
+        expect(game.child.playerA.child.controller.current?.options).toContain(heroA);
+        expect(game.child.playerA.child.controller.current?.options).toContain(heroB);
+        expect(game.child.playerA.child.controller.current?.options).toContain(cardC);
+        game.child.playerA.child.controller.set(cardC);
         await promise;
         
         // Hero should take 6 damage
-        expect(roleC.child.health.state.current).toBe(-5);
-        expect(roleC.child.health.state.damage).toBe(6);
+        expect(cardC.child.health.state.current).toBe(-5);
+        expect(cardC.child.health.state.damage).toBe(6);
         expect(cardC.child.dispose.status).toBe(true);
         expect(cardC.child.dispose.refer.source).toBe(cardD);
     })

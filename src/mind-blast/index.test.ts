@@ -52,12 +52,11 @@ describe('mind-blast', () => {
     const heroB = playerB.child.hero;
     const handA = playerA.child.hand;
     const cardC = handA.child.cards.find(item => item instanceof MindBlastModel);
-    const roleB = heroB.child.role;
     if (!cardC) throw new Error();
 
     test('mind-blast-cast', async () => {
         // Check initial state
-        expect(roleB.child.health.state.current).toBe(30); // Full health
+        expect(heroB.child.health.state.current).toBe(30); // Full health
         expect(playerA.child.mana.state.current).toBe(10);
         expect(handA.child.cards.length).toBe(1);
 
@@ -66,7 +65,7 @@ describe('mind-blast', () => {
         await promise;
 
         // Player B's hero should take 5 damage
-        expect(roleB.child.health.state.current).toBe(25); // 30 - 5 = 25
+        expect(heroB.child.health.state.current).toBe(25); // 30 - 5 = 25
 
         // Mind Blast should be consumed
         expect(handA.child.cards.length).toBe(0); // Mind Blast consumed

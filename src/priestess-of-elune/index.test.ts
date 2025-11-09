@@ -59,25 +59,24 @@ describe('priestess-of-elune', () => {
     const cardC = handA.child.cards.find(item => item instanceof PriestessOfEluneModel);
     const cardD = handA.child.cards.find(item => item instanceof FireballModel);
     if (!cardC || !cardD) throw new Error();
-    const roleA = playerA.child.hero.child.role;
-    const roleB = playerB.child.hero.child.role;
-    const roleC = cardC.child.role;
+    const heroA = playerA.child.hero;
+    const heroB = playerB.child.hero;
 
     test('fireball-cast', async () => {
         // Check initial state
-        expect(roleA.child.health.state.current).toBe(30); // Full health
+        expect(heroA.child.health.state.current).toBe(30); // Full health
         expect(handA.child.cards.length).toBe(2); // Fireball and Priestess of Elune in hand
         expect(playerA.child.mana.state.current).toBe(10); // Full mana
 
         // Cast Fireball targeting Player A's hero
         const promise = cardD.play();
-        expect(playerA.child.controller.current?.options).toContain(roleA); // Can target friendly hero
-        expect(playerA.child.controller.current?.options).toContain(roleB); // Can target enemy hero
-        playerA.child.controller.set(roleA); // Target Player A's hero
+        expect(playerA.child.controller.current?.options).toContain(heroA); // Can target friendly hero
+        expect(playerA.child.controller.current?.options).toContain(heroB); // Can target enemy hero
+        playerA.child.controller.set(heroA); // Target Player A's hero
         await promise;
 
         // Hero should be damaged by 6
-        expect(roleA.child.health.state.current).toBe(24); // 30 - 6 = 24
+        expect(heroA.child.health.state.current).toBe(24); // 30 - 6 = 24
 
         // Fireball should be consumed
         expect(handA.child.cards.length).toBe(1); // Fireball consumed, Priestess of Elune remains
@@ -86,9 +85,9 @@ describe('priestess-of-elune', () => {
 
     test('priestess-play', async () => {
         // Check initial state
-        expect(roleC.child.attack.state.current).toBe(5); // Priestess of Elune: 5/4
-        expect(roleC.child.health.state.current).toBe(4);
-        expect(roleA.child.health.state.current).toBe(24); // Damaged hero from fireball
+        expect(cardC.child.attack.state.current).toBe(5); // Priestess of Elune: 5/4
+        expect(cardC.child.health.state.current).toBe(4);
+        expect(heroA.child.health.state.current).toBe(24); // Damaged hero from fireball
         expect(handA.child.cards.length).toBe(1); // Priestess of Elune in hand
         expect(playerA.child.mana.state.current).toBe(6);
 
@@ -98,7 +97,7 @@ describe('priestess-of-elune', () => {
         await promise;
 
         // Hero should be healed by 4 Health
-        expect(roleA.child.health.state.current).toBe(28); // 24 + 4 = 28
+        expect(heroA.child.health.state.current).toBe(28); // 24 + 4 = 28
 
         // Priestess of Elune should be on board
         expect(boardA.child.cards.length).toBe(1); // Priestess of Elune on board

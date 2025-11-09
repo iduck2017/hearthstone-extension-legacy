@@ -63,43 +63,42 @@ describe('malygos', () => {
     const cardD = handA.child.cards.find(item => item instanceof FireballModel);
     const cardE = boardA.child.cards.find(item => item instanceof MalygosModel);
     if (!cardC || !cardD || !cardE) throw new Error();
-    const roleA = playerA.child.hero.child.role;
-    const roleB = playerB.child.hero.child.role;
-    const roleE = cardE.child.role;
+    const heroA = playerA.child.hero;
+    const heroB = playerB.child.hero;
 
     test('arcane-missiles-cast', async () => {
         // Check initial state
-        expect(roleE.child.attack.state.current).toBe(4); // Malygos: 4/12
-        expect(roleE.child.health.state.current).toBe(12);
+        expect(cardE.child.attack.state.current).toBe(4); // Malygos: 4/12
+        expect(cardE.child.health.state.current).toBe(12);
         expect(boardA.child.cards.length).toBe(1); // Malygos on board
         expect(handA.child.cards.filter(item => item instanceof ArcaneMissilesModel).length).toBe(1);
         expect(playerA.child.mana.state.current).toBe(10);
-        expect(roleB.child.health.state.current).toBe(30); // Player B hero: 30 health
+        expect(heroB.child.health.state.current).toBe(30); // Player B hero: 30 health
 
         // Player A casts Arcane Missiles with Malygos on board
         await cardC.play(); // Arcane Missiles doesn't require target selection
 
         // Arcane Missiles should deal 3+5=8 damage (3 base + 5 from Malygos)
-        expect(roleB.child.health.state.current).toBe(22); // 30 - 8 = 22
+        expect(heroB.child.health.state.current).toBe(22); // 30 - 8 = 22
         expect(playerA.child.mana.state.current).toBe(9); // 10 - 1 cost (Arcane Missiles costs 1)
         expect(handA.child.cards.filter(item => item instanceof ArcaneMissilesModel).length).toBe(0);
     });
 
     test('fireball-cast', async () => {
         // Check initial state
-        expect(roleB.child.health.state.current).toBe(22); // Player B hero: 22 health (from previous test)
+        expect(heroB.child.health.state.current).toBe(22); // Player B hero: 22 health (from previous test)
         expect(handA.child.cards.filter(item => item instanceof FireballModel).length).toBe(1);
         expect(playerA.child.mana.state.current).toBe(9);
 
         // Player A casts Fireball with Malygos on board
         const promise = cardD.play();
-        expect(playerA.child.controller.current?.options).toContain(roleA); // Can target friendly hero
-        expect(playerA.child.controller.current?.options).toContain(roleB); // Can target enemy hero
-        playerA.child.controller.set(roleB); // Target Player B's hero
+        expect(playerA.child.controller.current?.options).toContain(heroA); // Can target friendly hero
+        expect(playerA.child.controller.current?.options).toContain(heroB); // Can target enemy hero
+        playerA.child.controller.set(heroB); // Target Player B's hero
         await promise;
 
         // Fireball should deal 6+5=11 damage (6 base + 5 from Malygos)
-        expect(roleB.child.health.state.current).toBe(11); // 22 - 11 = 11
+        expect(heroB.child.health.state.current).toBe(11); // 22 - 11 = 11
         expect(playerA.child.mana.state.current).toBe(5); // 9 - 4 cost (Fireball costs 4)
         expect(handA.child.cards.filter(item => item instanceof FireballModel).length).toBe(0);
     });

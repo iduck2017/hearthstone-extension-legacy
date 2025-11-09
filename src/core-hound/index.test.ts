@@ -56,14 +56,11 @@ describe('core-hound', () => {
     const handA = playerA.child.hand;
     const cardC = handA.child.cards.find(item => item instanceof CoreHoundModel);
     if (!cardC) throw new Error();
-    const roleA = playerA.child.hero.child.role;
-    const roleB = playerB.child.hero.child.role;
-    const roleC = cardC.child.role;
 
     test('core-hound-play', async () => {
         // Check initial state
-        expect(roleC.child.attack.state.current).toBe(9); // Core Hound: 9/5
-        expect(roleC.child.health.state.current).toBe(5);
+        expect(cardC.child.attack.state.current).toBe(9); // Core Hound: 9/5
+        expect(cardC.child.health.state.current).toBe(5);
         expect(handA.child.cards.length).toBe(1); // Core Hound in hand
         expect(boardA.child.cards.length).toBe(0); // No minions on board
         expect(playerA.child.mana.state.current).toBe(10); // Full mana

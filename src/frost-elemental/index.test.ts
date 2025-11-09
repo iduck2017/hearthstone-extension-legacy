@@ -60,17 +60,15 @@ describe('frost-elemental', () => {
     const cardC = handA.child.cards.find(item => item instanceof FrostElementalModel);
     const cardD = boardB.child.cards.find(item => item instanceof WispModel);
     if (!cardC || !cardD) throw new Error();
-    const roleA = playerA.child.hero.child.role;
-    const roleB = playerB.child.hero.child.role;
-    const roleC = cardC.child.role;
-    const roleD = cardD.child.role;
+    const heroA = playerA.child.hero;
+    const heroB = playerB.child.hero;
 
     test('frost-elemental-play', async () => {
         // Check initial state
-        expect(roleC.child.attack.state.current).toBe(5); // Frost Elemental: 5/5
-        expect(roleC.child.health.state.current).toBe(5);
-        expect(roleD.child.attack.state.current).toBe(1); // Wisp: 1/1
-        expect(roleD.child.health.state.current).toBe(1);
+        expect(cardC.child.attack.state.current).toBe(5); // Frost Elemental: 5/5
+        expect(cardC.child.health.state.current).toBe(5);
+        expect(cardD.child.attack.state.current).toBe(1); // Wisp: 1/1
+        expect(cardD.child.health.state.current).toBe(1);
         expect(handA.child.cards.length).toBe(1); // Frost Elemental in hand
         expect(playerA.child.mana.state.current).toBe(10); // Full mana
 
@@ -78,14 +76,14 @@ describe('frost-elemental', () => {
         let promise = cardC.play();
         playerA.child.controller.set(0); // Select position 0
         await AnimeUtil.sleep();
-        expect(playerA.child.controller.current?.options).toContain(roleA); // Can target friendly hero
-        expect(playerA.child.controller.current?.options).toContain(roleB); // Can target enemy hero
-        expect(playerA.child.controller.current?.options).toContain(roleD); // Can target enemy minion
-        playerA.child.controller.set(roleD); // Target Wisp
+        expect(playerA.child.controller.current?.options).toContain(heroA); // Can target friendly hero
+        expect(playerA.child.controller.current?.options).toContain(heroB); // Can target enemy hero
+        expect(playerA.child.controller.current?.options).toContain(cardD); // Can target enemy minion
+        playerA.child.controller.set(cardD); // Target Wisp
         await promise;
 
         // Wisp should be frozen
-        expect(roleD.child.feats.child.frozen.state.isActive).toBe(true);
+        expect(cardD.child.feats.child.frozen.state.isActive).toBe(true);
 
         // Frost Elemental should be on board
         expect(boardA.child.cards.length).toBe(1); // Frost Elemental on board

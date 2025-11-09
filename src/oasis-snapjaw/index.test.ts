@@ -60,14 +60,12 @@ describe('oasis-snapjaw', () => {
     const cardC = handA.child.cards.find(item => item instanceof OasisSnapjawModel);
     const cardD = boardB.child.cards.find(item => item instanceof OasisSnapjawModel);
     if (!cardC || !cardD) throw new Error();
-    const roleC = cardC.child.role;
-    const roleD = cardD.child.role;
-    const roleA = playerA.child.hero.child.role;
+    const heroA = playerA.child.hero;
 
     test('oasis-snapjaw-play', async () => {
         // Check initial state
-        expect(roleC.child.attack.state.current).toBe(2); // Oasis Snapjaw: 2/7
-        expect(roleC.child.health.state.current).toBe(7);
+        expect(cardC.child.attack.state.current).toBe(2); // Oasis Snapjaw: 2/7
+        expect(cardC.child.health.state.current).toBe(7);
         expect(handA.child.cards.length).toBe(1); // Oasis Snapjaw in hand
         expect(boardA.child.cards.length).toBe(0); // No minions on board
         expect(playerA.child.mana.state.current).toBe(10); // Full mana
@@ -90,26 +88,26 @@ describe('oasis-snapjaw', () => {
         game.child.turn.next();
         expect(game.child.turn.refer.current).toBe(playerB);
 
-        expect(roleD.child.attack.state.current).toBe(2); // Oasis Snapjaw: 2/7
-        expect(roleD.child.health.state.current).toBe(7);
+        expect(cardD.child.attack.state.current).toBe(2); // Oasis Snapjaw: 2/7
+        expect(cardD.child.health.state.current).toBe(7);
 
-        let promise = roleD.child.action.run();
-        expect(playerB.child.controller.current?.options).toContain(roleC);
-        expect(playerB.child.controller.current?.options).toContain(roleA);
-        playerB.child.controller.set(roleC);
+        let promise = cardD.child.action.run();
+        expect(playerB.child.controller.current?.options).toContain(cardC);
+        expect(playerB.child.controller.current?.options).toContain(heroA);
+        playerB.child.controller.set(cardC);
         await promise;
 
-        expect(roleC.child.health.state.current).toBe(5); // Oasis Snapjaw: 2/7
-        expect(roleC.child.health.state.damage).toBe(2);
+        expect(cardC.child.health.state.current).toBe(5); // Oasis Snapjaw: 2/7
+        expect(cardC.child.health.state.damage).toBe(2);
 
         // Check initial state
-        expect(roleC.child.attack.state.current).toBe(2); // Oasis Snapjaw: 2/7
-        expect(roleC.child.health.state.current).toBe(5);
+        expect(cardC.child.attack.state.current).toBe(2); // Oasis Snapjaw: 2/7
+        expect(cardC.child.health.state.current).toBe(5);
         expect(cardC.child.dispose.status).toBe(false);
 
-        expect(roleD.child.attack.state.current).toBe(2);
-        expect(roleD.child.health.state.current).toBe(5);
-        expect(roleD.child.health.state.damage).toBe(2);
+        expect(cardD.child.attack.state.current).toBe(2);
+        expect(cardD.child.health.state.current).toBe(5);
+        expect(cardD.child.health.state.damage).toBe(2);
         expect(cardD.child.dispose.status).toBe(false);
         
         expect(boardA.child.cards.length).toBe(1); // Oasis Snapjaw on board

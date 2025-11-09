@@ -38,7 +38,7 @@ export class TaurenWarriorModel extends MinionCardModel {
                 feats: props.child?.feats ?? new MinionFeaturesModel({
                     child: {
                         taunt: new TauntModel(),
-                        feats: [new TaurenWarriorFeatureModel()],
+                        items: [new TaurenWarriorFeatureModel()],
                         battlecry: []
                     }
                 }),

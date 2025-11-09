@@ -62,9 +62,7 @@ describe('mass-dispel', () => {
     const cardC = handA.child.cards.find(item => item instanceof MassDispelModel);
     const cardD = boardB.child.cards.find(item => item instanceof WaterElementalModel);
     if (!cardC || !cardD) throw new Error();
-    const roleA = playerA.child.hero.child.role;
-    const roleB = playerB.child.hero.child.role;
-    const roleD = cardD.child.role;
+    const heroA = playerA.child.hero;
 
     test('mass-dispel-cast', async () => {
         // Cast Mass Dispel
@@ -72,8 +70,8 @@ describe('mass-dispel', () => {
         await promise;
 
         // All enemy minions should be silenced
-        expect(roleD.child.attack.state.current).toBe(3); // Still 3/6
-        expect(roleD.child.health.state.current).toBe(6);
+        expect(cardD.child.attack.state.current).toBe(3); // Still 3/6
+        expect(cardD.child.health.state.current).toBe(6);
 
         // Player A should draw a card
         expect(deckA.child.cards.length).toBe(0); // Deck is empty
@@ -85,15 +83,15 @@ describe('mass-dispel', () => {
         game.child.turn.next();
         
         // Water Elemental attacks Player A hero again
-        let promise = roleD.child.action.run();
+        let promise = cardD.child.action.run();
         await AnimeUtil.sleep();
-        expect(playerB.child.controller.current?.options).toContain(roleA);
-        playerB.child.controller.set(roleA);
+        expect(playerB.child.controller.current?.options).toContain(heroA);
+        playerB.child.controller.set(heroA);
         await promise;
 
         // Player A should take 3 damage but NOT be frozen (silenced Water Elemental lost freeze ability)
-        expect(roleA.child.health.state.current).toBe(27); 
-        expect(roleA.child.feats.child.frozen.state.isActive).toBe(false); // Should NOT be frozen
+        expect(heroA.child.health.state.current).toBe(27); 
+        expect(heroA.child.feats.child.frozen.state.isActive).toBe(false); // Should NOT be frozen
     });
     
 });

@@ -61,7 +61,6 @@ describe('psychic-conjurer', () => {
     const cardC = handA.child.cards.find(item => item instanceof PsychicConjurerModel);
     const cardE = deckB.child.cards.find(item => item instanceof WispModel);
     if (!cardC) throw new Error();
-    const roleC = cardC.child.role;
 
     test('psychic-conjurer-play', async () => {
         // Check initial state
@@ -78,8 +77,8 @@ describe('psychic-conjurer', () => {
         // Check that Psychic Conjurer is on board
         expect(boardA.child.cards.length).toBe(1);
         expect(playerA.child.mana.state.current).toBe(9); // 10 - 1 cost
-        expect(roleC.child.attack.state.current).toBe(1); // Psychic Conjurer: 1/2
-        expect(roleC.child.health.state.current).toBe(2);
+        expect(cardC.child.attack.state.current).toBe(1); // Psychic Conjurer: 1/2
+        expect(cardC.child.health.state.current).toBe(2);
 
         const cardD = handA.child.cards.find(item => item instanceof WispModel);
         if (!cardD) throw new Error();

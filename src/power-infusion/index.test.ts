@@ -59,27 +59,24 @@ describe('power-infusion', () => {
     const cardC = handA.child.cards.find(item => item instanceof PowerInfusionModel);
     const cardD = boardA.child.cards.find(item => item instanceof WispModel);
     if (!cardC || !cardD) throw new Error();
-    const roleA = playerA.child.hero.child.role;
-    const roleB = playerB.child.hero.child.role;
-    const roleD = cardD.child.role;
 
     test('power-infusion-cast', async () => {
         // Check initial state
-        expect(roleD.child.attack.state.current).toBe(1); // Wisp: 1/1
-        expect(roleD.child.health.state.current).toBe(1);
+        expect(cardD.child.attack.state.current).toBe(1); // Wisp: 1/1
+        expect(cardD.child.health.state.current).toBe(1);
         expect(handA.child.cards.length).toBe(1); // Power Infusion in hand
         expect(playerA.child.mana.state.current).toBe(10); // Full mana
 
         // Cast Power Infusion on Wisp
         let promise = cardC.play();
         await AnimeUtil.sleep();
-        expect(playerA.child.controller.current?.options).toContain(roleD);
-        playerA.child.controller.set(roleD);
+        expect(playerA.child.controller.current?.options).toContain(cardD);
+        playerA.child.controller.set(cardD);
         await promise;
 
         // Wisp should have +2/+6 buff
-        expect(roleD.child.attack.state.current).toBe(3); // 1 + 2 = 3
-        expect(roleD.child.health.state.current).toBe(7); // 1 + 6 = 7
+        expect(cardD.child.attack.state.current).toBe(3); // 1 + 2 = 3
+        expect(cardD.child.health.state.current).toBe(7); // 1 + 6 = 7
 
         // Power Infusion should be consumed
         expect(handA.child.cards.length).toBe(0); // Power Infusion consumed

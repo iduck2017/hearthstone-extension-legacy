@@ -65,16 +65,13 @@ describe('loot-hoarder', () => {
     const cardC = handA.child.cards.find(item => item instanceof LootHoarderModel);
     const cardD = boardB.child.cards.find(item => item instanceof StranglethornTigerModel);
     const cardE = deckA.child.cards.find(item => item instanceof WispModel);
+    const heroA = playerA.child.hero;
     if (!cardC || !cardD) throw new Error();
-    const roleA = playerA.child.hero.child.role;
-    const roleB = playerB.child.hero.child.role;
-    const roleC = cardC.child.role;
-    const roleD = cardD.child.role;
 
     test('loot-hoarder-play', async () => {
         // Check initial state
-        expect(roleC.child.attack.state.current).toBe(2); // Loot Hoarder: 2/1
-        expect(roleC.child.health.state.current).toBe(1);
+        expect(cardC.child.attack.state.current).toBe(2); // Loot Hoarder: 2/1
+        expect(cardC.child.health.state.current).toBe(1);
         expect(handA.child.cards.length).toBe(1); // Loot Hoarder in hand
         expect(boardA.child.cards.length).toBe(0); // No minions on board
         expect(playerA.child.mana.state.current).toBe(10); // Full mana
@@ -95,29 +92,33 @@ describe('loot-hoarder', () => {
         game.child.turn.next();
         expect(game.child.turn.refer.current).toBe(playerB);
 
+        // Get Loot Hoarder from board
+        const lootHoarderOnBoard = boardA.child.cards.find(item => item instanceof LootHoarderModel);
+        if (!lootHoarderOnBoard) throw new Error();
+
         // Check initial state
-        expect(roleC.child.health.state.current).toBe(1); // Loot Hoarder: 2/1
-        expect(roleD.child.health.state.current).toBe(5); // Stranglethorn Tiger: 5/5
+        expect(lootHoarderOnBoard.child.health.state.current).toBe(1); // Loot Hoarder: 2/1
+        expect(cardD.child.health.state.current).toBe(5); // Stranglethorn Tiger: 5/5
         expect(boardA.child.cards.length).toBe(1); // Loot Hoarder on board
         expect(boardB.child.cards.length).toBe(1); // Stranglethorn Tiger on board
         expect(handA.child.cards.length).toBe(0); // No cards in hand initially
 
         // Player B's Stranglethorn Tiger attacks Loot Hoarder
-        let promise = roleD.child.action.run();
-        expect(playerB.child.controller.current?.options).toContain(roleC); // Can target Loot Hoarder
-        expect(playerB.child.controller.current?.options).toContain(roleA); // Can target Player A's hero
-        playerB.child.controller.set(roleC); // Target Loot Hoarder
+        let promise = cardD.child.action.run();
+        expect(playerB.child.controller.current?.options).toContain(lootHoarderOnBoard); // Can target Loot Hoarder
+        expect(playerB.child.controller.current?.options).toContain(heroA); // Can target Player A's hero
+        playerB.child.controller.set(lootHoarderOnBoard); // Target Loot Hoarder
         await promise;
 
-        expect(roleC.child.health.state.current).toBe(-4);
-        expect(roleC.child.health.state.damage).toBe(5);
+        expect(lootHoarderOnBoard.child.health.state.current).toBe(-4);
+        expect(lootHoarderOnBoard.child.health.state.damage).toBe(5);
 
-        expect(roleD.child.health.state.current).toBe(3);
-        expect(roleD.child.health.state.damage).toBe(2);
+        expect(cardD.child.health.state.current).toBe(3);
+        expect(cardD.child.health.state.damage).toBe(2);
 
         // Loot Hoarder should die (2/1 vs 5/5)
         expect(boardA.child.cards.length).toBe(0); // Loot Hoarder dies
-        expect(cardC.child.dispose.status).toBe(true);
+        expect(lootHoarderOnBoard.child.dispose.status).toBe(true);
         
         // Deathrattle should draw a card
         expect(handA.child.cards.length).toBe(1); // Drew a card from deathrattle

@@ -60,18 +60,16 @@ describe('flame-imp', () => {
     const handA = playerA.child.hand;
     const cardC = handA.child.cards.find(item => item instanceof FlameImpModel);
     if (!cardC) throw new Error();
-    const roleA = playerA.child.hero.child.role;
-    const roleB = playerB.child.hero.child.role;
-    const roleC = cardC.child.role;
+    const heroA = playerA.child.hero;
 
     test('flame-imp-play', async () => {
         // Check initial state
-        expect(roleC.child.attack.state.current).toBe(3); // Flame Imp: 3/2
-        expect(roleC.child.health.state.current).toBe(2);
+        expect(cardC.child.attack.state.current).toBe(3); // Flame Imp: 3/2
+        expect(cardC.child.health.state.current).toBe(2);
         expect(handA.child.cards.length).toBe(1); // Flame Imp in hand
         expect(boardA.child.cards.length).toBe(0); // No minions on board
         expect(playerA.child.mana.state.current).toBe(10); // Full mana
-        expect(roleA.child.health.state.current).toBe(30); // Player A hero: 30 health
+        expect(heroA.child.health.state.current).toBe(30); // Player A hero: 30 health
 
         // Play Flame Imp
         let promise = cardC.play();
@@ -84,7 +82,7 @@ describe('flame-imp', () => {
         expect(playerA.child.mana.state.current).toBe(9); // 10 - 1 = 9
 
         // Player A's hero should take 3 damage from battlecry
-        expect(roleA.child.health.state.current).toBe(27); // Player A hero: 30 - 3 = 27
-        expect(roleA.child.health.state.damage).toBe(3);
+        expect(heroA.child.health.state.current).toBe(27); // Player A hero: 30 - 3 = 27
+        expect(heroA.child.health.state.damage).toBe(3);
     });
 });

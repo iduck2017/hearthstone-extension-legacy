@@ -60,14 +60,11 @@ describe('razorfen-hunter', () => {
     const handA = playerA.child.hand;
     const cardC = handA.child.cards.find(item => item instanceof RazorfenHunterModel);
     if (!cardC) throw new Error();
-    const roleA = playerA.child.hero.child.role;
-    const roleB = playerB.child.hero.child.role;
-    const roleC = cardC.child.role;
 
     test('razorfen-hunter-play', async () => {
         // Check initial state
-        expect(roleC.child.attack.state.current).toBe(2); // Razorfen Hunter: 2/3
-        expect(roleC.child.health.state.current).toBe(3);
+        expect(cardC.child.attack.state.current).toBe(2); // Razorfen Hunter: 2/3
+        expect(cardC.child.health.state.current).toBe(3);
         expect(handA.child.cards.length).toBe(1); // Razorfen Hunter in hand
         expect(boardA.child.cards.length).toBe(0); // No minions on board
         expect(playerA.child.mana.state.current).toBe(10); // Full mana
@@ -85,8 +82,8 @@ describe('razorfen-hunter', () => {
         // Check that a Boar was summoned
         const cardD = boardA.child.cards.find(item => item instanceof BoarModel);
         expect(cardD).toBeDefined(); // Boar was summoned
-        expect(cardD?.child.role.child.attack.state.current).toBe(1); // Boar: 1/1
-        expect(cardD?.child.role.child.health.state.current).toBe(1);
+        expect(cardD?.child.attack.state.current).toBe(1); // Boar: 1/1
+        expect(cardD?.child.health.state.current).toBe(1);
 
         expect(boardA.child.cards[0]).toBe(cardC);
         expect(boardA.child.cards[1]).toBe(cardD);

@@ -54,17 +54,14 @@ describe('blizzard', () => {
     const cardC = handA.child.cards.find(item => item instanceof BlizzardModel);
     const cardD = boardB.child.cards.find(item => item instanceof WispModel);
     const cardE = boardB.child.cards.find(item => item instanceof WaterElementalModel);
-    const roleD = cardD?.child.role;
-    const roleE = cardE?.child.role;
-    const roleB = playerB.child.hero.child.role;
-    if (!cardC || !roleD || !roleE) throw new Error();
+    if (!cardC || !cardD || !cardE) throw new Error();
 
     test('blizzard-cast', async () => {
         // Check initial stats
-        expect(roleD.child.health.state.current).toBe(1); // Wisp: 1 health
-        expect(roleE.child.health.state.current).toBe(6); // Water Elemental: 6 health
-        expect(roleD.child.feats.child.frozen.state.isActive).toBe(false);
-        expect(roleE.child.feats.child.frozen.state.isActive).toBe(false);
+        expect(cardD.child.health.state.current).toBe(1); // Wisp: 1 health
+        expect(cardE.child.health.state.current).toBe(6); // Water Elemental: 6 health
+        expect(cardD.child.feats.child.frozen.state.isActive).toBe(false);
+        expect(cardE.child.feats.child.frozen.state.isActive).toBe(false);
         expect(playerA.child.mana.state.current).toBe(10);
         expect(handA.child.cards.length).toBe(1);
         expect(boardB.child.cards.length).toBe(2);
@@ -73,14 +70,14 @@ describe('blizzard', () => {
         await cardC.play();
 
         // All enemy minions should take 2 damage and be frozen
-        expect(roleD.child.health.state.current).toBe(-1); // Wisp: 1 - 2 = -1 (dies)
-        expect(roleD.child.feats.child.frozen.state.isActive).toBe(true);
+        expect(cardD.child.health.state.current).toBe(-1); // Wisp: 1 - 2 = -1 (dies)
+        expect(cardD.child.feats.child.frozen.state.isActive).toBe(true);
         expect(cardD.child.dispose.status).toBe(true);
 
-        expect(roleE.child.health.state.current).toBe(4); // Water Elemental: 6 - 2 = 4 (survives)
-        expect(roleE.child.feats.child.frozen.state.isActive).toBe(true);
+        expect(cardE.child.health.state.current).toBe(4); // Water Elemental: 6 - 2 = 4 (survives)
+        expect(cardE.child.feats.child.frozen.state.isActive).toBe(true);
         
-        expect(roleB.child.health.state.current).toBe(30);
+        expect(playerB.child.hero.child.health.state.current).toBe(30);
 
         expect(playerA.child.mana.state.current).toBe(4); // 10 - 6 cost
         expect(handA.child.cards.length).toBe(0);

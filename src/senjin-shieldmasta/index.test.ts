@@ -63,15 +63,12 @@ describe('senjin-shieldmasta', () => {
     const cardC = handA.child.cards.find(item => item instanceof SenjinShieldmastaModel);
     const cardD = boardB.child.cards.find(item => item instanceof WispModel);
     if (!cardC || !cardD) throw new Error();
-    const roleA = playerA.child.hero.child.role;
-    const roleB = playerB.child.hero.child.role;
-    const roleC = cardC.child.role;
-    const roleD = cardD.child.role;
+    const heroA = playerA.child.hero;
 
     test('senjin-shieldmasta-play', async () => {
         // Check initial state
-        expect(roleC.child.attack.state.current).toBe(3); // Sen'jin Shieldmasta: 3/5
-        expect(roleC.child.health.state.current).toBe(5);
+        expect(cardC.child.attack.state.current).toBe(3); // Sen'jin Shieldmasta: 3/5
+        expect(cardC.child.health.state.current).toBe(5);
         expect(handA.child.cards.length).toBe(1); // Sen'jin Shieldmasta in hand
         expect(boardA.child.cards.length).toBe(0); // No minions on board
         expect(playerA.child.mana.state.current).toBe(10); // Full mana
@@ -87,7 +84,7 @@ describe('senjin-shieldmasta', () => {
         expect(playerA.child.mana.state.current).toBe(6); // 10 - 4 = 6
 
         // Check that Sen'jin Shieldmasta has Taunt
-        expect(roleC.child.feats.child.taunt).toBeDefined(); // Has Taunt
+        expect(cardC.child.feats.child.taunt).toBeDefined(); // Has Taunt
     });
 
     test('taunt-test', async () => {
@@ -96,21 +93,21 @@ describe('senjin-shieldmasta', () => {
         expect(game.child.turn.refer.current).toBe(playerB);
 
         // Check initial state
-        expect(roleC.child.health.state.current).toBe(5); // Sen'jin Shieldmasta: 3/5
-        expect(roleD.child.health.state.current).toBe(1); // Wisp: 1/1
+        expect(cardC.child.health.state.current).toBe(5); // Sen'jin Shieldmasta: 3/5
+        expect(cardD.child.health.state.current).toBe(1); // Wisp: 1/1
         expect(boardA.child.cards.length).toBe(1); // Sen'jin Shieldmasta on board
         expect(boardB.child.cards.length).toBe(1); // Wisp on board
 
         // Player B's Wisp attacks - should be forced to target Sen'jin Shieldmasta due to Taunt
-        let promise = roleD.child.action.run();
-        expect(playerB.child.controller.current?.options).toContain(roleC); // Can target Sen'jin Shieldmasta (Taunt)
-        expect(playerB.child.controller.current?.options).not.toContain(roleA); // Cannot target Player A's hero (Taunt blocks)
-        playerB.child.controller.set(roleC); // Target Sen'jin Shieldmasta
+        let promise = cardD.child.action.run();
+        expect(playerB.child.controller.current?.options).toContain(cardC); // Can target Sen'jin Shieldmasta (Taunt)
+        expect(playerB.child.controller.current?.options).not.toContain(heroA); // Cannot target Player A's hero (Taunt blocks)
+        playerB.child.controller.set(cardC); // Target Sen'jin Shieldmasta
         await promise;
 
         // Both minions should take damage
-        expect(roleC.child.health.state.current).toBe(4); // Sen'jin Shieldmasta: 5 - 1 = 4
-        expect(roleD.child.health.state.current).toBe(-2); // Wisp: 1 - 3 = 0 (dies)
+        expect(cardC.child.health.state.current).toBe(4); // Sen'jin Shieldmasta: 5 - 1 = 4
+        expect(cardD.child.health.state.current).toBe(-2); // Wisp: 1 - 3 = 0 (dies)
         expect(boardB.child.cards.length).toBe(0); // Wisp dies
     });
 });

@@ -42,31 +42,29 @@ describe('leper-gnome', () => {
     const boardB = playerB.child.board;
     const cardC = boardA.child.cards.find(item => item instanceof LeperGnomeModel);
     const cardD = boardB.child.cards.find(item => item instanceof WispModel);
-    const roleC = cardC?.child.role;
-    const roleD = cardD?.child.role;
-    const roleB = playerB.child.hero.child.role;
-    if (!roleC || !roleD) throw new Error();
+    const heroB = playerB.child.hero;
+    if (!cardC || !cardD) throw new Error();
 
     test('leper-gnome-deathrattle', async () => {
         expect(boardA.child.cards.length).toBe(1);
         expect(boardB.child.cards.length).toBe(1);
-        expect(roleC.child.attack.state.current).toBe(2);
-        expect(roleC.child.health.state.current).toBe(1);
-        expect(roleD.child.attack.state.current).toBe(1);
-        expect(roleD.child.health.state.current).toBe(1);
-        expect(roleB.child.health.state.current).toBe(30);
+        expect(cardC.child.attack.state.current).toBe(2);
+        expect(cardC.child.health.state.current).toBe(1);
+        expect(cardD.child.attack.state.current).toBe(1);
+        expect(cardD.child.health.state.current).toBe(1);
+        expect(heroB.child.health.state.current).toBe(30);
         
         // attack
-        let promise = roleC.child.action.run();
+        let promise = cardC.child.action.run();
         await AnimeUtil.sleep();
-        expect(playerA.child.controller.current?.options).toContain(roleD);
+        expect(playerA.child.controller.current?.options).toContain(cardD);
         expect(playerA.child.controller.current?.options.length).toBe(2);
-        playerA.child.controller.set(roleD);
+        playerA.child.controller.set(cardD);
         await promise;
         
         expect(boardA.child.cards.length).toBe(0);
         expect(boardB.child.cards.length).toBe(0);
-        expect(roleB.child.health.state.current).toBe(28);
-        expect(roleB.child.health.state.damage).toBe(2);
+        expect(heroB.child.health.state.current).toBe(28);
+        expect(heroB.child.health.state.damage).toBe(2);
     })
 })

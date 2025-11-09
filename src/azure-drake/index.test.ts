@@ -62,14 +62,13 @@ describe('azure-drake', () => {
     const cardC = handA.child.cards.find(item => item instanceof AzureDrakeModel);
     const cardD = deckA.child.cards.find(item => item instanceof FireballModel);
     if (!cardC || !cardD) throw new Error();
-    const roleA = playerA.child.hero.child.role;
-    const roleB = playerB.child.hero.child.role;
-    const roleC = cardC.child.role;
+    const heroA = playerA.child.hero;
+    const heroB = playerB.child.hero;
 
     test('azure-drake-play', async () => {
         // Check initial state
-        expect(roleC.child.attack.state.current).toBe(4); // Azure Drake: 4/4
-        expect(roleC.child.health.state.current).toBe(4);
+        expect(cardC.child.attack.state.current).toBe(4); // Azure Drake: 4/4
+        expect(cardC.child.health.state.current).toBe(4);
         expect(handA.child.cards.length).toBe(1); // Azure Drake in hand
         expect(deckA.child.cards.length).toBe(1); // Fireball in deck
         expect(playerA.child.mana.state.current).toBe(10); // Full mana
@@ -89,13 +88,13 @@ describe('azure-drake', () => {
     test('fireball-cast', async () => {
         // Cast Fireball targeting Player B's hero
         const promise = cardD.play();
-        expect(playerA.child.controller.current?.options).toContain(roleA); // Can target friendly hero
-        expect(playerA.child.controller.current?.options).toContain(roleB); // Can target enemy hero
-        playerA.child.controller.set(roleB); // Target Player B's hero
+        expect(playerA.child.controller.current?.options).toContain(heroA); // Can target friendly hero
+        expect(playerA.child.controller.current?.options).toContain(heroB); // Can target enemy hero
+        playerA.child.controller.set(heroB); // Target Player B's hero
         await promise;
 
         // Fireball should deal 7 damage (6 + 1 from Spell Damage +1)
-        expect(roleB.child.health.state.current).toBe(23); // 30 - 7 = 23
+        expect(heroB.child.health.state.current).toBe(23); // 30 - 7 = 23
 
         // Fireball should be consumed
         expect(handA.child.cards.filter(item => item instanceof FireballModel).length).toBe(0); // Fireball consumed

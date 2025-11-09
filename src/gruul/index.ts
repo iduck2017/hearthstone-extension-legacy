@@ -38,7 +38,7 @@ export class GruulModel extends MinionCardModel {
                 feats: props.child?.feats ?? new MinionFeaturesModel({
                     child: { 
                         battlecry: [],
-                        feats: [new GruulFeatureModel()]
+                        items: [new GruulFeatureModel()]
                     }
                 }),
                 ...props.child

@@ -49,20 +49,18 @@ describe('bloodmage-thalnos', () => {
     const cardC = boardA.child.cards.find(item => item instanceof BloodmageThalnosModel);
     const cardD = boardB.child.cards.find(item => item instanceof WispModel);
     const cardE = handA.child.cards.find(item => item instanceof FireballModel);
-    const roleC = cardC?.child.role;
-    const roleD = cardD?.child.role;
-    const roleB = playerB.child.hero.child.role;
-    if (!roleC || !roleD || !cardE) throw new Error();
+    const heroB = playerB.child.hero;
+    if (!cardC || !cardD || !cardE) throw new Error();
 
     test('fireball-cast', async () => {
         const promise = cardE.play();
-        expect(playerA.child.controller.current?.options).toContain(roleB);
-        expect(playerA.child.controller.current?.options).toContain(roleD);
-        expect(playerA.child.controller.current?.options).toContain(roleC);
-        playerA.child.controller.set(roleB);
+        expect(playerA.child.controller.current?.options).toContain(heroB);
+        expect(playerA.child.controller.current?.options).toContain(cardD);
+        expect(playerA.child.controller.current?.options).toContain(cardC);
+        playerA.child.controller.set(heroB);
         await promise;
-        expect(roleB.child.health.state.current).toBe(23)
-        expect(roleB.child.health.state.damage).toBe(7)
+        expect(heroB.child.health.state.current).toBe(23)
+        expect(heroB.child.health.state.damage).toBe(7)
     })
 
     test('bloodmage-thalnos-attack', async () => {
@@ -71,16 +69,16 @@ describe('bloodmage-thalnos', () => {
         expect(boardB.child.cards.length).toBe(1);
         expect(deckA.child.cards.length).toBe(1);
         expect(handA.child.cards.length).toBe(0);
-        expect(roleC.child.attack.state.current).toBe(1);
-        expect(roleC.child.health.state.current).toBe(1);
-        expect(roleD.child.attack.state.current).toBe(1);
-        expect(roleD.child.health.state.current).toBe(1);
+        expect(cardC.child.attack.state.current).toBe(1);
+        expect(cardC.child.health.state.current).toBe(1);
+        expect(cardD.child.attack.state.current).toBe(1);
+        expect(cardD.child.health.state.current).toBe(1);
         
         // Player A uses Bloodmage Thalnos to attack wisp
-        let promise = roleC.child.action.run();
+        let promise = cardC.child.action.run();
         await AnimeUtil.sleep();
-        expect(playerA.child.controller.current?.options).toContain(roleD);
-        playerA.child.controller.set(roleD);
+        expect(playerA.child.controller.current?.options).toContain(cardD);
+        playerA.child.controller.set(cardD);
         await promise;
         
         // Verify both minions die

@@ -64,15 +64,14 @@ describe('alexstrasza-the-life-binder', () => {
     const cardC = handA.child.cards.find(item => item instanceof AlexstraszaTheLifeBinderModel);
     const cardD = handB.child.cards.find(item => item instanceof AlexstraszaTheLifeBinderModel);
     if (!cardC || !cardD) throw new Error();
-    const roleA = playerA.child.hero.child.role;
-    const roleB = playerB.child.hero.child.role;
-    const roleC = cardC.child.role;
+    const heroA = playerA.child.hero;
+    const heroB = playerB.child.hero;
 
     test('alexstrasza-the-life-binder-damage', async () => {
         // Check initial state
-        expect(roleC.child.attack.state.current).toBe(8); // Alexstrasza: 8/8
-        expect(roleC.child.health.state.current).toBe(8);
-        expect(roleB.child.health.state.current).toBe(30); // Player B hero: 30 health
+        expect(cardC.child.attack.state.current).toBe(8); // Alexstrasza: 8/8
+        expect(cardC.child.health.state.current).toBe(8);
+        expect(heroB.child.health.state.current).toBe(30); // Player B hero: 30 health
         expect(handA.child.cards.length).toBe(1); // Alexstrasza in hand
         expect(boardA.child.cards.length).toBe(0); // No minions on board
         expect(playerA.child.mana.state.current).toBe(10); // Full mana
@@ -83,9 +82,9 @@ describe('alexstrasza-the-life-binder', () => {
         await AnimeUtil.sleep();
         
         // Choose target for battlecry
-        expect(playerA.child.controller.current?.options).toContain(roleA); // Can target friendly hero
-        expect(playerA.child.controller.current?.options).toContain(roleB); // Can target enemy hero
-        playerA.child.controller.set(roleB); // Target Player B's hero for damage
+        expect(playerA.child.controller.current?.options).toContain(heroA); // Can target friendly hero
+        expect(playerA.child.controller.current?.options).toContain(heroB); // Can target enemy hero
+        playerA.child.controller.set(heroB); // Target Player B's hero for damage
         await promise;
 
         // Alexstrasza should be on board
@@ -94,7 +93,7 @@ describe('alexstrasza-the-life-binder', () => {
         expect(playerA.child.mana.state.current).toBe(1); // 10 - 9 = 1
 
         // Player B's hero should take 8 damage (enemy target)
-        expect(roleB.child.health.state.current).toBe(22); // 30 - 8 = 22
+        expect(heroB.child.health.state.current).toBe(22); // 30 - 8 = 22
     });
 
     test('alexstrasza-the-life-binder-heal', async () => {
@@ -103,7 +102,7 @@ describe('alexstrasza-the-life-binder', () => {
         expect(game.child.turn.refer.current).toBe(playerB);
 
         // Check initial state
-        expect(roleA.child.health.state.current).toBe(30); // Player A hero: 30 health
+        expect(heroA.child.health.state.current).toBe(30); // Player A hero: 30 health
         expect(handB.child.cards.length).toBe(1); // Alexstrasza in hand
         expect(playerB.child.mana.state.current).toBe(10); // Full mana
 
@@ -113,9 +112,9 @@ describe('alexstrasza-the-life-binder', () => {
         await AnimeUtil.sleep();
         
         // Choose target for battlecry
-        expect(playerB.child.controller.current?.options).toContain(roleA); // Can target enemy hero
-        expect(playerB.child.controller.current?.options).toContain(roleB); // Can target friendly hero
-        playerB.child.controller.set(roleB); // Target Player B's hero for healing
+        expect(playerB.child.controller.current?.options).toContain(heroA); // Can target enemy hero
+        expect(playerB.child.controller.current?.options).toContain(heroB); // Can target friendly hero
+        playerB.child.controller.set(heroB); // Target Player B's hero for healing
         await promise;
 
         // Alexstrasza should be on board
@@ -124,6 +123,6 @@ describe('alexstrasza-the-life-binder', () => {
         expect(playerB.child.mana.state.current).toBe(1); // 10 - 9 = 1
 
         // Player B's hero should be healed by 8 (friendly target from Player B's perspective)
-        expect(roleB.child.health.state.current).toBe(30); // Healed back to max health (22 + 8 = 30)
+        expect(heroB.child.health.state.current).toBe(30); // Healed back to max health (22 + 8 = 30)
     });
 });

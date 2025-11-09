@@ -58,15 +58,13 @@ describe('injured-blademaster', () => {
     const cardC = handA.child.cards.find(item => item instanceof InjuredBlademasterModel);
     const cardD = handA.child.cards.find(item => item instanceof EarthenRingFarseerModel);
     if (!cardC || !cardD) throw new Error();
-    const roleA = playerA.child.hero.child.role;
-    const roleB = playerB.child.hero.child.role;
-    const roleC = cardC.child.role;
-    const roleD = cardD.child.role;
+    const heroA = playerA.child.hero;
+    const heroB = playerB.child.hero;
 
     test('injured-blademaster-play', async () => {
         // Check initial state
-        expect(roleC.child.attack.state.current).toBe(4); // Injured Blademaster: 4/7
-        expect(roleC.child.health.state.current).toBe(7);
+        expect(cardC.child.attack.state.current).toBe(4); // Injured Blademaster: 4/7
+        expect(cardC.child.health.state.current).toBe(7);
         expect(handA.child.cards.length).toBe(2); // Injured Blademaster in hand
         expect(boardA.child.cards.length).toBe(0); // No minions on board
         expect(playerA.child.mana.state.current).toBe(10); // Full mana
@@ -82,15 +80,15 @@ describe('injured-blademaster', () => {
         expect(playerA.child.mana.state.current).toBe(7); // 10 - 3 = 7
 
         // Injured Blademaster should have taken 4 damage (7 - 4 = 3)
-        expect(roleC.child.health.state.current).toBe(3); // Injured Blademaster: 4/3 (damaged)
-        expect(roleC.child.health.state.damage).toBe(4);
-        expect(roleC.child.health.state.origin).toBe(7);
-        expect(roleC.child.health.state.maximum).toBe(7);
+        expect(cardC.child.health.state.current).toBe(3); // Injured Blademaster: 4/3 (damaged)
+        expect(cardC.child.health.state.damage).toBe(4);
+        expect(cardC.child.health.state.origin).toBe(7);
+        expect(cardC.child.health.state.maximum).toBe(7);
     });
 
     test('earthen-ring-farseer-heal', async () => {
         // Check initial state
-        expect(roleC.child.health.state.current).toBe(3); // Injured Blademaster: 4/3 (damaged)
+        expect(cardC.child.health.state.current).toBe(3); // Injured Blademaster: 4/3 (damaged)
         expect(handA.child.cards.length).toBe(1); // Earthen Ring Farseer in hand
         expect(boardA.child.cards.length).toBe(1); // Injured Blademaster on board
         expect(playerA.child.mana.state.current).toBe(7); // 7 mana
@@ -100,10 +98,10 @@ describe('injured-blademaster', () => {
         playerA.child.controller.set(0); // Select position 0
         await AnimeUtil.sleep();
         // Choose target for battlecry (heal Injured Blademaster)
-        expect(playerA.child.controller.current?.options).toContain(roleC); // Can target Injured Blademaster
-        expect(playerA.child.controller.current?.options).toContain(roleA); // Can target Player A's hero
-        expect(playerA.child.controller.current?.options).toContain(roleB); // Can target Player B's hero
-        playerA.child.controller.set(roleC); // Target Injured Blademaster
+        expect(playerA.child.controller.current?.options).toContain(cardC); // Can target Injured Blademaster
+        expect(playerA.child.controller.current?.options).toContain(heroA); // Can target Player A's hero
+        expect(playerA.child.controller.current?.options).toContain(heroB); // Can target Player B's hero
+        playerA.child.controller.set(cardC); // Target Injured Blademaster
         await promise;
 
         // Earthen Ring Farseer should be on board
@@ -112,7 +110,7 @@ describe('injured-blademaster', () => {
         expect(playerA.child.mana.state.current).toBe(4); // 7 - 3 = 4
 
         // Injured Blademaster should be healed (3 + 3 = 6)
-        expect(roleC.child.health.state.current).toBe(6); // Injured Blademaster: 4/6 (healed)
-        expect(roleC.child.health.state.damage).toBe(1); // 7 - 6 = 1 damage remaining
+        expect(cardC.child.health.state.current).toBe(6); // Injured Blademaster: 4/6 (healed)
+        expect(cardC.child.health.state.damage).toBe(1); // 7 - 6 = 1 damage remaining
     });
 });

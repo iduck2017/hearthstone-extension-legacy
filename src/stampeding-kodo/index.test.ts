@@ -64,24 +64,19 @@ describe('stampeding-kodo', () => {
     const cardD = boardB.child.cards.find(item => item instanceof WispModel);
     const cardE = boardB.child.cards.find(item => item instanceof ChillwindYetiModel);
     if (!cardC || !cardD || !cardE) throw new Error();
-    const roleA = playerA.child.hero.child.role;
-    const roleB = playerB.child.hero.child.role;
-    const roleC = cardC.child.role;
-    const roleD = cardD.child.role;
-    const roleE = cardE.child.role;
 
     test('stampeding-kodo-play', async () => {
         // Check initial state
-        expect(roleC.child.attack.state.current).toBe(3); // Stampeding Kodo: 3/5
-        expect(roleC.child.health.state.current).toBe(5);
+        expect(cardC.child.attack.state.current).toBe(3); // Stampeding Kodo: 3/5
+        expect(cardC.child.health.state.current).toBe(5);
         expect(handA.child.cards.length).toBe(1); // Stampeding Kodo in hand
         expect(boardA.child.cards.length).toBe(0); // No minions on board
         expect(boardB.child.cards.length).toBe(2); // Wisp and Chillwind Yeti on board
         expect(playerA.child.mana.state.current).toBe(10); // Full mana
 
         // Check enemy minions
-        expect(roleD.child.attack.state.current).toBe(1); // Wisp: 1/1 (valid target)
-        expect(roleE.child.attack.state.current).toBe(4); // Chillwind Yeti: 4/5 (invalid target)
+        expect(cardD.child.attack.state.current).toBe(1); // Wisp: 1/1 (valid target)
+        expect(cardE.child.attack.state.current).toBe(4); // Chillwind Yeti: 4/5 (invalid target)
 
         // Play Stampeding Kodo
         let promise = cardC.play();

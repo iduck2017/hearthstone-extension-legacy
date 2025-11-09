@@ -61,14 +61,11 @@ describe('gnomish-inventor', () => {
     const deckA = playerA.child.deck;
     const cardC = handA.child.cards.find(item => item instanceof GnomishInventorModel);
     if (!cardC) throw new Error();
-    const roleA = playerA.child.hero.child.role;
-    const roleB = playerB.child.hero.child.role;
-    const roleC = cardC.child.role;
 
     test('gnomish-inventor-play', async () => {
         // Check initial state
-        expect(roleC.child.attack.state.current).toBe(2); // Gnomish Inventor: 2/4
-        expect(roleC.child.health.state.current).toBe(4);
+        expect(cardC.child.attack.state.current).toBe(2); // Gnomish Inventor: 2/4
+        expect(cardC.child.health.state.current).toBe(4);
         expect(handA.child.cards.length).toBe(1); // Gnomish Inventor in hand
         expect(deckA.child.cards.length).toBe(2); // 2 Wisp in deck
         expect(boardA.child.cards.length).toBe(0); // No minions on board

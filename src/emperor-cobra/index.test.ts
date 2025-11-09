@@ -63,15 +63,12 @@ describe('emperor-cobra', () => {
     const cardC = handA.child.cards.find(item => item instanceof EmperorCobraModel);
     const cardD = boardB.child.cards.find(item => item instanceof MogushanWardenModel);
     if (!cardC || !cardD) throw new Error();
-    const roleA = playerA.child.hero.child.role;
-    const roleB = playerB.child.hero.child.role;
-    const roleC = cardC.child.role;
-    const roleD = cardD.child.role;
+    const heroA = playerA.child.hero;
 
     test('emperor-cobra-play', async () => {
         // Check initial state
-        expect(roleC.child.attack.state.current).toBe(2); // Emperor Cobra: 2/3
-        expect(roleC.child.health.state.current).toBe(3);
+        expect(cardC.child.attack.state.current).toBe(2); // Emperor Cobra: 2/3
+        expect(cardC.child.health.state.current).toBe(3);
         expect(handA.child.cards.length).toBe(1); // Emperor Cobra in hand
         expect(boardA.child.cards.length).toBe(0); // No minions on board
         expect(playerA.child.mana.state.current).toBe(10); // Full mana
@@ -96,27 +93,27 @@ describe('emperor-cobra', () => {
         expect(game.child.turn.refer.current).toBe(playerB);
 
         // Check initial state
-        expect(roleC.child.health.state.current).toBe(3); // Emperor Cobra: 2/3
-        expect(roleD.child.health.state.current).toBe(7); // Mogu'shan Warden: 1/7
+        expect(cardC.child.health.state.current).toBe(3); // Emperor Cobra: 2/3
+        expect(cardD.child.health.state.current).toBe(7); // Mogu'shan Warden: 1/7
         expect(boardA.child.cards.length).toBe(1); // Emperor Cobra on board
         expect(boardB.child.cards.length).toBe(1); // Mogu'shan Warden on board
 
         // Mogu'shan Warden attacks Emperor Cobra - should die from Poisonous despite high health
-        let promise = roleD.child.action.run();
-        expect(playerB.child.controller.current?.options).toContain(roleC); // Can target Emperor Cobra
-        expect(playerB.child.controller.current?.options).toContain(roleA); // Can target Player A's hero
-        playerB.child.controller.set(roleC); // Target Emperor Cobra
+        let promise = cardD.child.action.run();
+        expect(playerB.child.controller.current?.options).toContain(cardC); // Can target Emperor Cobra
+        expect(playerB.child.controller.current?.options).toContain(heroA); // Can target Player A's hero
+        playerB.child.controller.set(cardC); // Target Emperor Cobra
         await promise;
 
         // Mogu'shan Warden should die from Poisonous (despite having 7 health vs 2 attack)
-        expect(roleD.child.health.state.current).toBe(5); // Mogu'shan Warden dies from Poisonous
-        expect(roleD.child.health.state.damage).toBe(2);
+        expect(cardD.child.health.state.current).toBe(5); // Mogu'shan Warden dies from Poisonous
+        expect(cardD.child.health.state.damage).toBe(2);
         expect(cardD.child.dispose.status).toBe(true);
         expect(cardD.child.dispose.refer.source).toBe(cardC);
         expect(cardD.child.dispose.state.isLock).toBe(true);
         
         expect(boardB.child.cards.length).toBe(0); // Mogu'shan Warden dies
         // Emperor Cobra should also take damage from the attack
-        expect(roleC.child.health.state.current).toBe(2); // Emperor Cobra: 3 - 1 = 2
+        expect(cardC.child.health.state.current).toBe(2); // Emperor Cobra: 3 - 1 = 2
     });
 });

@@ -59,17 +59,13 @@ describe('temple-enforcer', () => {
     const cardC = handA.child.cards.find(item => item instanceof TempleEnforcerModel);
     const cardD = boardA.child.cards.find(item => item instanceof WispModel);
     if (!cardC || !cardD) throw new Error();
-    const roleA = playerA.child.hero.child.role;
-    const roleB = playerB.child.hero.child.role;
-    const roleC = cardC.child.role;
-    const roleD = cardD.child.role;
 
     test('temple-enforcer-play', async () => {
         // Check initial state
-        expect(roleC.child.attack.state.current).toBe(5); // Temple Enforcer: 5/6
-        expect(roleC.child.health.state.current).toBe(6);
-        expect(roleD.child.attack.state.current).toBe(1); // Wisp: 1/1
-        expect(roleD.child.health.state.current).toBe(1);
+        expect(cardC.child.attack.state.current).toBe(5); // Temple Enforcer: 5/6
+        expect(cardC.child.health.state.current).toBe(6);
+        expect(cardD.child.attack.state.current).toBe(1); // Wisp: 1/1
+        expect(cardD.child.health.state.current).toBe(1);
         expect(handA.child.cards.length).toBe(1); // Temple Enforcer in hand
         expect(boardA.child.cards.length).toBe(1); // Only Wisp on board
         expect(playerA.child.mana.state.current).toBe(10); // Full mana
@@ -78,13 +74,13 @@ describe('temple-enforcer', () => {
         let promise = cardC.play();
         playerA.child.controller.set(0); // Select position 0
         await AnimeUtil.sleep();
-        expect(playerA.child.controller.current?.options).toContain(roleD);
-        playerA.child.controller.set(roleD);
+        expect(playerA.child.controller.current?.options).toContain(cardD);
+        playerA.child.controller.set(cardD);
         await promise;
 
         // Wisp should have +3 Health buff
-        expect(roleD.child.attack.state.current).toBe(1); // Attack unchanged
-        expect(roleD.child.health.state.current).toBe(4); // 1 + 3 = 4
+        expect(cardD.child.attack.state.current).toBe(1); // Attack unchanged
+        expect(cardD.child.health.state.current).toBe(4); // 1 + 3 = 4
 
         // Temple Enforcer should be on board
         expect(boardA.child.cards.length).toBe(2); // Temple Enforcer and Wisp on board

@@ -64,10 +64,9 @@ describe('violet-teacher', () => {
     const cardC = handA.child.cards.find(item => item instanceof VioletTeacherModel);
     const cardD = handA.child.cards.find(item => item instanceof FireballModel);
     const cardE = handA.child.cards.find(item => item instanceof FrostboltModel);
+    const heroA = playerA.child.hero;
+    const heroB = playerB.child.hero;
     if (!cardC || !cardD || !cardE) throw new Error();
-    const roleA = playerA.child.hero.child.role;
-    const roleB = playerB.child.hero.child.role;
-    const roleC = cardC.child.role;
 
 
     test('frostbolt-play', async () => {
@@ -78,9 +77,9 @@ describe('violet-teacher', () => {
 
         // Cast Frostbolt
         let promise = cardE.play();
-        expect(playerA.child.controller.current?.options).toContain(roleA); // Can target friendly hero
-        expect(playerA.child.controller.current?.options).toContain(roleB); // Can target enemy hero
-        playerA.child.controller.set(roleB); // Target Player B's hero
+        expect(playerA.child.controller.current?.options).toContain(heroA); // Can target friendly hero
+        expect(playerA.child.controller.current?.options).toContain(heroB); // Can target enemy hero
+        playerA.child.controller.set(heroB); // Target Player B's hero
         await promise;
 
         // No minions should be summoned (Violet Teacher not on board yet)
@@ -91,8 +90,8 @@ describe('violet-teacher', () => {
 
     test('violet-teacher-play', async () => {
         // Check state after frostbolt-play (Frostbolt was used, mana = 8)
-        expect(roleC.child.attack.state.current).toBe(3); // Violet Teacher: 3/5
-        expect(roleC.child.health.state.current).toBe(5);
+        expect(cardC.child.attack.state.current).toBe(3); // Violet Teacher: 3/5
+        expect(cardC.child.health.state.current).toBe(5);
         expect(handA.child.cards.length).toBe(2); // Violet Teacher + Fireball in hand (Frostbolt was used)
         expect(boardA.child.cards.length).toBe(0); // No minions on board
         expect(playerA.child.mana.state.current).toBe(8); // 10 - 2 = 8 (after Frostbolt)
@@ -116,9 +115,9 @@ describe('violet-teacher', () => {
 
         // Cast Fireball
         let promise = cardD.play();
-        expect(playerA.child.controller.current?.options).toContain(roleA); // Can target friendly hero
-        expect(playerA.child.controller.current?.options).toContain(roleB); // Can target enemy hero
-        playerA.child.controller.set(roleB); // Target Player B's hero
+        expect(playerA.child.controller.current?.options).toContain(heroA); // Can target friendly hero
+        expect(playerA.child.controller.current?.options).toContain(heroB); // Can target enemy hero
+        playerA.child.controller.set(heroB); // Target Player B's hero
         await promise;
 
         // Violet Apprentice should be summoned
@@ -129,10 +128,9 @@ describe('violet-teacher', () => {
         // Check that Violet Apprentice was summoned
         const cardF = boardA.child.cards.find(item => item instanceof VioletApprenticeModel);
         expect(cardF).toBeDefined(); // Should have summoned a Violet Apprentice
-        const roleF = cardF?.child.role;
-        if (!roleF) throw new Error();
-        expect(roleF.child.attack.state.current).toBe(1); // Violet Apprentice: 1/1
-        expect(roleF.child.health.state.current).toBe(1);
+        if (!cardF) throw new Error();
+        expect(cardF.child.attack.state.current).toBe(1); // Violet Apprentice: 1/1
+        expect(cardF.child.health.state.current).toBe(1);
 
         expect(boardA.child.cards[0]).toBe(cardC);
         expect(boardA.child.cards[1]).toBe(cardF);

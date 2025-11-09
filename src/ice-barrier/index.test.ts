@@ -47,25 +47,23 @@ describe('ice-barrier', () => {
     const handB = playerB.child.hand;
     const cardC = boardA.child.cards.find(item => item instanceof WispModel);
     const cardD = handB.child.cards.find(item => item instanceof IceBarrierModel);
-    const roleC = cardC?.child.role;
+    if (!cardC || !cardD) throw new Error();
     const heroB = playerB.child.hero;
-    const roleB = heroB.child.role;
-    if (!roleC || !cardD || !heroB) throw new Error();
 
     test('wisp-attack', async () => {
         // Check initial stats
-        expect(roleB.child.health.state.current).toBe(30); // Player B initial health
-        expect(roleC.child.health.state.current).toBe(1); // Wisp health
-        expect(roleC.child.attack.state.current).toBe(1); // Wisp attack
+        expect(heroB.child.health.state.current).toBe(30); // Player B initial health
+        expect(cardC.child.health.state.current).toBe(1); // Wisp health
+        expect(cardC.child.attack.state.current).toBe(1); // Wisp attack
 
         // Player A's Wisp attacks Player B's hero
-        const promise = roleC.child.action.run();
-        expect(playerA.child.controller.current?.options).toContain(roleB);
-        playerA.child.controller.set(roleB);
+        const promise = cardC.child.action.run();
+        expect(playerA.child.controller.current?.options).toContain(heroB);
+        playerA.child.controller.set(heroB);
         await promise;
 
         // Player B should take 1 damage
-        expect(roleB.child.health.state.current).toBe(29); // 30 - 1 = 29
+        expect(heroB.child.health.state.current).toBe(29); // 30 - 1 = 29
     })
 
     test('ice-barrier-cast', async () => {
@@ -85,13 +83,13 @@ describe('ice-barrier', () => {
         expect(game.child.turn.refer.current).toBe(playerA);
 
         // Player A's Wisp attacks Player B's hero again
-        const promise = roleC.child.action.run();
-        expect(playerA.child.controller.current?.options).toContain(roleB);
-        playerA.child.controller.set(roleB);
+        const promise = cardC.child.action.run();
+        expect(playerA.child.controller.current?.options).toContain(heroB);
+        playerA.child.controller.set(heroB);
         await promise;
 
         // Player B should gain 8 armor (health increases by 8) and then take 1 damage
-        expect(roleB.child.health.state.current).toBe(29); 
+        expect(heroB.child.health.state.current).toBe(29); 
         expect(heroB.child.armor.state.current).toBe(7);
         expect(boardB.child.secrets.length).toBe(0);
     })

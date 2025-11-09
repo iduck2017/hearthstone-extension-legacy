@@ -48,17 +48,14 @@ describe('grimscale-oracle', () => {
     const cardD = boardA.child.cards.find((item: any) => item instanceof WispModel);
     const cardE = boardA.child.cards.find((item: any) => item instanceof MurlocRaiderModel);
     const cardF = boardB.child.cards.find((item: any) => item instanceof MurlocRaiderModel);
-    const roleC = cardC?.child.role;
-    const roleD = cardD?.child.role;
-    const roleE = cardE?.child.role;
-    const roleF = cardF?.child.role;
-    if (!roleE || !roleF || !roleC || !roleD) throw new Error();
+    if (!cardC || !cardD || !cardE || !cardF) throw new Error();
     const turn = game.child.turn;
+    const heroA = game.child.playerA.child.hero;
 
     test('minions-initial-state', async () => {
-        expect(roleE.child.attack.state.current).toBe(2);
-        expect(roleF.child.attack.state.current).toBe(2);
-        expect(roleD.child.attack.state.current).toBe(1);
+        expect(cardE.child.attack.state.current).toBe(2);
+        expect(cardF.child.attack.state.current).toBe(2);
+        expect(cardD.child.attack.state.current).toBe(1);
     })
 
     test('grimscale-oracle-buff', async () => {
@@ -72,42 +69,42 @@ describe('grimscale-oracle', () => {
         expect(boardA.child.cards.length).toBe(3);
         expect(boardB.child.cards.length).toBe(1);
 
-        expect(roleE.child.attack.state.current).toBe(3); // Ally's Murloc
-        expect(roleE.child.attack.state.origin).toBe(2); // Original attack
+        expect(cardE.child.attack.state.current).toBe(3); // Ally's Murloc
+        expect(cardE.child.attack.state.origin).toBe(2); // Original attack
         
-        expect(roleF.child.attack.state.current).toBe(2); // Opponent's Murloc
-        expect(roleD.child.attack.state.current).toBe(1); // Wisp 
-        expect(roleC.child.attack.state.current).toBe(1); // Grimscale Oracle self
+        expect(cardF.child.attack.state.current).toBe(2); // Opponent's Murloc
+        expect(cardD.child.attack.state.current).toBe(1); // Wisp 
+        expect(cardC.child.attack.state.current).toBe(1); // Grimscale Oracle self
     })
 
     test('murloc-raider-attack-grimscale-oracle', async () => {
         turn.next();
         expect(game.child.turn.refer.current).toBe(game.child.playerB);
-        expect(roleF.child.action.state.current).toBe(1);
+        expect(cardF.child.action.state.current).toBe(1);
 
         // Murloc Raider attacks Grimscale Oracle
-        const promise = roleF.child.action.run();
+        const promise = cardF.child.action.run();
         await AnimeUtil.sleep();
         expect(game.child.playerB.child.controller.current).toBeDefined();
         expect(game.child.playerB.child.controller.current?.options.length).toBe(4);
-        expect(game.child.playerB.child.controller.current?.options).toContain(roleE);
-        expect(game.child.playerB.child.controller.current?.options).toContain(roleC);
-        expect(game.child.playerB.child.controller.current?.options).toContain(roleD);
-        expect(game.child.playerB.child.controller.current?.options).toContain(game.child.playerA.child.hero.child.role); 
-        game.child.playerB.child.controller.set(roleC);
+        expect(game.child.playerB.child.controller.current?.options).toContain(cardE);
+        expect(game.child.playerB.child.controller.current?.options).toContain(cardC);
+        expect(game.child.playerB.child.controller.current?.options).toContain(cardD);
+        expect(game.child.playerB.child.controller.current?.options).toContain(heroA); 
+        game.child.playerB.child.controller.set(cardC);
         await promise;
 
-        expect(roleF.child.action.state.current).toBe(0); // Murloc Raider
-        expect(roleF.child.health.state.current).toBe(0); // Murloc Raider
+        expect(cardF.child.action.state.current).toBe(0); // Murloc Raider
+        expect(cardF.child.health.state.current).toBe(0); // Murloc Raider
         expect(cardF.child.dispose.status).toBe(true); // Murloc Raider
 
-        expect(roleC.child.health.state.current).toBe(-1); // Grimscale Oracle
+        expect(cardC.child.health.state.current).toBe(-1); // Grimscale Oracle
         expect(cardC.child.dispose.status).toBe(true);
 
         expect(boardB.child.cards.length).toBe(0);
         expect(boardA.child.cards.length).toBe(2);
 
-        expect(roleE.child.attack.state.current).toBe(2); // Ally's Murloc
-        expect(roleD.child.attack.state.current).toBe(1); // Wisp
+        expect(cardE.child.attack.state.current).toBe(2); // Ally's Murloc
+        expect(cardD.child.attack.state.current).toBe(1); // Wisp
     })
 }) 

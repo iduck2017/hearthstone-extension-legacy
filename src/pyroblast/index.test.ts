@@ -52,27 +52,26 @@ describe('pyroblast', () => {
     const boardB = playerB.child.board;
     const cardC = handA.child.cards.find(item => item instanceof PyroblastModel);
     const cardD = boardB.child.cards.find(item => item instanceof WaterElementalModel);
-    const roleD = cardD?.child.role;
-    const roleB = playerB.child.hero.child.role;
-    if (!cardC || !roleD) throw new Error();
+    if (!cardC || !cardD) throw new Error();
+    const heroB = playerB.child.hero;
 
     test('pyroblast-cast', async () => {
         // Check initial stats
-        expect(roleD.child.health.state.current).toBe(6); // Water Elemental: 3/6
-        expect(roleB.child.health.state.current).toBe(30); // Player B hero: 30 health
+        expect(cardD.child.health.state.current).toBe(6); // Water Elemental: 3/6
+        expect(heroB.child.health.state.current).toBe(30); // Player B hero: 30 health
         expect(playerA.child.mana.state.current).toBe(10);
         expect(handA.child.cards.length).toBe(1);
         expect(boardB.child.cards.length).toBe(1);
 
         // Player A uses Pyroblast on Water Elemental
         const promise = cardC.play();
-        expect(playerA.child.controller.current?.options).toContain(roleD); // Water Elemental can be targeted
-        expect(playerA.child.controller.current?.options).toContain(roleB); // Hero can also be targeted
-        playerA.child.controller.set(roleD); // Target Water Elemental
+        expect(playerA.child.controller.current?.options).toContain(cardD); // Water Elemental can be targeted
+        expect(playerA.child.controller.current?.options).toContain(heroB); // Hero can also be targeted
+        playerA.child.controller.set(cardD); // Target Water Elemental
         await promise;
 
         // Water Elemental should die from 10 damage (6 - 10 = -4)
-        expect(roleD.child.health.state.current).toBe(-4);
+        expect(cardD.child.health.state.current).toBe(-4);
         expect(cardD.child.dispose.status).toBe(true); // Water Elemental dies
 
         expect(playerA.child.mana.state.current).toBe(0); // 10 - 10 cost

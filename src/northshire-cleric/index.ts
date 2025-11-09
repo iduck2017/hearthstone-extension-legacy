@@ -43,7 +43,7 @@ export class NorthshireClericModel extends MinionCardModel {
                 feats: props.child?.feats ?? new MinionFeaturesModel({
                     child: { 
                         battlecry: [], 
-                        feats: [new NorthshireClericFeatureModel()]
+                        items: [new NorthshireClericFeatureModel()]
                     }
                 }),
                 ...props.child

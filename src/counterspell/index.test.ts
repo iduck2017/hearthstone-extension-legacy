@@ -50,8 +50,6 @@ describe('fireball', () => {
     const handB = playerB.child.hand;
     const heroA = playerA.child.hero;
     const heroB = playerB.child.hero;
-    const roleA = heroA.child.role;
-    const roleB = heroB.child.role;
     const spellC = handA.child.cards.find(item => item instanceof CounterspellModel);
     const spellD = handB.child.cards.find(item => item instanceof FireballModel);
     if (!spellC || !spellD) throw new Error();
@@ -67,13 +65,13 @@ describe('fireball', () => {
     test('counterspell-trigger', async () => {
         turn.next();
         let promise = spellD.play();
-        expect(playerB.child.controller.current?.options).toContain(roleA);
-        expect(playerB.child.controller.current?.options).toContain(roleB);
-        playerB.child.controller.set(roleA);
+        expect(playerB.child.controller.current?.options).toContain(heroA);
+        expect(playerB.child.controller.current?.options).toContain(heroB);
+        playerB.child.controller.set(heroA);
         await promise;
         expect(handB.child.cards.length).toBe(0);
         expect(playerB.child.mana.state.current).toBe(6);
-        expect(roleA.child.health.state.current).toBe(30);
+        expect(heroA.child.health.state.current).toBe(30);
         expect(boardA.child.secrets.length).toBe(0);
     })
 

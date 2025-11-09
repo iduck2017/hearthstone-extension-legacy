@@ -60,26 +60,25 @@ describe('power-word-shield', () => {
     const deckA = playerA.child.deck;
     const cardC = handA.child.cards.find(item => item instanceof PowerWordShieldModel);
     const cardD = boardB.child.cards.find(item => item instanceof StonetuskBoarModel);
-    const roleD = cardD?.child.role;
-    if (!cardC || !roleD) throw new Error();
+    if (!cardC || !cardD) throw new Error();
 
     test('power-word-shield-cast', async () => {
         // Check initial stats
-        expect(roleD.child.attack.state.current).toBe(1); // Stonetusk Boar: 1/1
-        expect(roleD.child.health.state.current).toBe(1);
+        expect(cardD.child.attack.state.current).toBe(1); // Stonetusk Boar: 1/1
+        expect(cardD.child.health.state.current).toBe(1);
         expect(playerA.child.mana.state.current).toBe(10);
         expect(handA.child.cards.length).toBe(1);
         expect(deckA.child.cards.length).toBe(3);
 
         // Player A uses Power Word: Shield on Stonetusk Boar
         const promise = cardC.play();
-        expect(playerA.child.controller.current?.options).toContain(roleD);
-        playerA.child.controller.set(roleD);
+        expect(playerA.child.controller.current?.options).toContain(cardD);
+        playerA.child.controller.set(cardD);
         await promise;
 
         // Stonetusk Boar should gain +2 Health
-        expect(roleD.child.attack.state.current).toBe(1); // Attack unchanged
-        expect(roleD.child.health.state.current).toBe(3); // 1 + 2 Health buff
+        expect(cardD.child.attack.state.current).toBe(1); // Attack unchanged
+        expect(cardD.child.health.state.current).toBe(3); // 1 + 2 Health buff
 
         
         // Player A should have drawn a card

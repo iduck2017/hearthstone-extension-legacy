@@ -50,45 +50,42 @@ describe('water-elemental', () => {
     const boardB = playerB.child.board;
     const cardC = boardA.child.cards.find(item => item instanceof WaterElementalModel);
     const cardD = boardB.child.cards.find(item => item instanceof WaterElementalModel);
-    const roleC = cardC?.child.role;
-    const roleD = cardD?.child.role;
-    const roleB = playerB.child.hero.child.role;
-    if (!roleC || !roleD) throw new Error();
+    if (!cardC || !cardD) throw new Error();
 
     test('water-elemental-attack', async () => {
         // Check initial stats
-        expect(roleC.child.attack.state.current).toBe(3);
-        expect(roleC.child.health.state.current).toBe(6);
-        expect(roleD.child.feats.child.frozen.state.isActive).toBe(false);
+        expect(cardC.child.attack.state.current).toBe(3);
+        expect(cardC.child.health.state.current).toBe(6);
+        expect(cardD.child.feats.child.frozen.state.isActive).toBe(false);
 
-        const promise = roleC.child.action.run();
+        const promise = cardC.child.action.run();
         await AnimeUtil.sleep();
-        expect(playerA.child.controller.current?.options).toContain(roleD);
-        playerA.child.controller.set(roleD);
+        expect(playerA.child.controller.current?.options).toContain(cardD);
+        playerA.child.controller.set(cardD);
         await promise;
 
         // Wisp should be damaged and frozen
-        expect(roleD.child.health.state.current).toBe(3);
-        expect(roleD.child.health.state.damage).toBe(3);
-        expect(roleD.child.feats.child.frozen.state.isActive).toBe(true);
+        expect(cardD.child.health.state.current).toBe(3);
+        expect(cardD.child.health.state.damage).toBe(3);
+        expect(cardD.child.feats.child.frozen.state.isActive).toBe(true);
 
-        expect(roleC.child.health.state.current).toBe(3);
-        expect(roleC.child.health.state.damage).toBe(3);
-        expect(roleC.child.feats.child.frozen.state.isActive).toBe(true);
+        expect(cardC.child.health.state.current).toBe(3);
+        expect(cardC.child.health.state.damage).toBe(3);
+        expect(cardC.child.feats.child.frozen.state.isActive).toBe(true);
     })
 
     test('water-elemental-attack', async () => {
         const turn = game.child.turn;
         turn.next();
 
-        expect(roleC.child.feats.child.frozen.state.isActive).toBe(true);
-        expect(roleD.child.feats.child.frozen.state.isActive).toBe(true);
-        expect(roleC.child.action.status).toBe(false);
-        expect(roleD.child.action.status).toBe(false);
+        expect(cardC.child.feats.child.frozen.state.isActive).toBe(true);
+        expect(cardD.child.feats.child.frozen.state.isActive).toBe(true);
+        expect(cardC.child.action.status).toBe(false);
+        expect(cardD.child.action.status).toBe(false);
 
         turn.next();
 
-        expect(roleC.child.feats.child.frozen.state.isActive).toBe(true);
-        expect(roleD.child.feats.child.frozen.state.isActive).toBe(false);
+        expect(cardC.child.feats.child.frozen.state.isActive).toBe(true);
+        expect(cardD.child.feats.child.frozen.state.isActive).toBe(false);
     })
 })

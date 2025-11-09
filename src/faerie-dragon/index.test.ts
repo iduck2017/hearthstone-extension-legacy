@@ -63,14 +63,13 @@ describe('faerie-dragon', () => {
     const cardC = handA.child.cards.find(item => item instanceof FaerieDragonModel);
     const cardD = handB.child.cards.find(item => item instanceof FireballModel);
     if (!cardC || !cardD) throw new Error();
-    const roleA = playerA.child.hero.child.role;
-    const roleB = playerB.child.hero.child.role;
-    const roleC = cardC.child.role;
+    const heroA = playerA.child.hero;
+    const heroB = playerB.child.hero;
 
     test('faerie-dragon-play', async () => {
         // Check initial state
-        expect(roleC.child.attack.state.current).toBe(3); // Faerie Dragon: 3/2
-        expect(roleC.child.health.state.current).toBe(2);
+        expect(cardC.child.attack.state.current).toBe(3); // Faerie Dragon: 3/2
+        expect(cardC.child.health.state.current).toBe(2);
         expect(handA.child.cards.length).toBe(1); // Faerie Dragon in hand
         expect(boardA.child.cards.length).toBe(0); // No minions on board
         expect(playerA.child.mana.state.current).toBe(10); // Full mana
@@ -85,7 +84,7 @@ describe('faerie-dragon', () => {
         expect(playerA.child.mana.state.current).toBe(8); // 10 - 2 = 8
 
         // Check that Faerie Dragon has Elusive
-        expect(roleC.child.feats.child.elusive.state.isActive).toBe(true); // Has Elusive
+        expect(cardC.child.feats.child.elusive.state.isActive).toBe(true); // Has Elusive
     });
 
     test('fireball-cast', async () => {
@@ -94,22 +93,22 @@ describe('faerie-dragon', () => {
         expect(game.child.turn.refer.current).toBe(playerB);
 
         // Check initial state
-        expect(roleA.child.health.state.current).toBe(30); // Player A hero: 30 health
-        expect(roleC.child.health.state.current).toBe(2); // Faerie Dragon: 3/2
+        expect(heroA.child.health.state.current).toBe(30); // Player A hero: 30 health
+        expect(cardC.child.health.state.current).toBe(2); // Faerie Dragon: 3/2
         expect(handB.child.cards.length).toBe(1); // Fireball in hand
         expect(boardA.child.cards.length).toBe(1); // Faerie Dragon on board
 
         // Player B casts Fireball
         let promise = cardD.play();
         // Choose target for Fireball (cannot target Faerie Dragon due to Elusive)
-        expect(playerB.child.controller.current?.options).toContain(roleA); // Can target Player A's hero
-        expect(playerB.child.controller.current?.options).toContain(roleB); // Can target Player B's hero
-        expect(playerB.child.controller.current?.options).not.toContain(roleC); // Cannot target Faerie Dragon (Elusive)
-        playerB.child.controller.set(roleA); // Target Player A's hero
+        expect(playerB.child.controller.current?.options).toContain(heroA); // Can target Player A's hero
+        expect(playerB.child.controller.current?.options).toContain(heroB); // Can target Player B's hero
+        expect(playerB.child.controller.current?.options).not.toContain(cardC); // Cannot target Faerie Dragon (Elusive)
+        playerB.child.controller.set(heroA); // Target Player A's hero
         await promise;
 
         // Player A's hero should take 6 damage
-        expect(roleA.child.health.state.current).toBe(24); // Player A hero: 30 - 6 = 24
-        expect(roleC.child.health.state.current).toBe(2); // Faerie Dragon: 3/2 (no damage, Elusive protected it)
+        expect(heroA.child.health.state.current).toBe(24); // Player A hero: 30 - 6 = 24
+        expect(cardC.child.health.state.current).toBe(2); // Faerie Dragon: 3/2 (no damage, Elusive protected it)
     });
 });

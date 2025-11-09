@@ -36,10 +36,7 @@ describe('firey-war-axe', () => {
     const boardA = playerA.child.board;
     const boardB = playerB.child.board;
     const cardC = boardB.child.cards.find(item => item instanceof WispModel);
-    const roleC = cardC?.child.role;
-    const roleA = charA.child.role;
-    const roleB = charB.child.role;
-    if (!roleC) throw new Error();
+    if (!cardC) throw new Error();
     const turn = game.child.turn;
 
     const weapon = handA.child.cards.find(item => item instanceof FieryWarAxeModel);
@@ -47,32 +44,32 @@ describe('firey-war-axe', () => {
     if (!weapon) throw new Error();
 
     test('fiery-war-axe-equip', async () => {
-        expect(roleA.child.attack.state.current).toBe(0);
+        expect(charA.child.attack.state.current).toBe(0);
         expect(handA.child.cards.length).toBe(1);
         expect(boardA.child.weapon).toBeUndefined();
         await weapon.play();
         expect(handA.child.cards.length).toBe(0);
         expect(boardA.child.weapon).toBeDefined();
-        expect(roleA.child.attack.state.current).toBe(3);
+        expect(charA.child.attack.state.current).toBe(3);
         expect(weapon?.child.attack.state.current).toBe(3);
-        expect(roleA.child.attack.state.current).toBe(3);
+        expect(charA.child.attack.state.current).toBe(3);
     })
 
 
     test('warrior-attack', async () => {
-        const promise = roleA.child.action.run();
+        const promise = charA.child.action.run();
         expect(playerA.child.controller.current).toBeDefined();
-        expect(playerA.child.controller.current?.options).toContain(roleC);
-        expect(playerA.child.controller.current?.options).toContain(roleB);
-        playerA.child.controller.set(roleC);
+        expect(playerA.child.controller.current?.options).toContain(cardC);
+        expect(playerA.child.controller.current?.options).toContain(charB);
+        playerA.child.controller.set(cardC);
         await promise;
 
         expect(cardC.child.dispose.status).toBe(true);
-        expect(roleC.child.health.state.current).toBe(-2);
-        expect(roleC.child.health.state.damage).toBe(3);
+        expect(cardC.child.health.state.current).toBe(-2);
+        expect(cardC.child.health.state.damage).toBe(3);
 
-        expect(roleA.child.health.state.current).toBe(29);
-        expect(roleA.child.health.state.damage).toBe(1);
+        expect(charA.child.health.state.current).toBe(29);
+        expect(charA.child.health.state.damage).toBe(1);
 
         expect(weapon.child.action.state.current).toBe(1);
         expect(weapon.child.action.state.consume).toBe(1);
@@ -83,31 +80,31 @@ describe('firey-war-axe', () => {
 
     test('fiery-war-axe-deactive', () => {
         expect(weapon.child.attack.status).toBe(true);
-        expect(roleA.child.attack.state.current).toBe(3);
+        expect(charA.child.attack.state.current).toBe(3);
         turn.next();
         expect(turn.refer.current).toBe(playerB);
         expect(weapon.child.attack.status).toBe(false);
-        expect(roleA.child.attack.state.current).toBe(0);
+        expect(charA.child.attack.state.current).toBe(0);
     }) 
 
     test('warrior-attack', async () => {
         turn.next();
         expect(weapon.child.attack.status).toBe(true);
-        expect(roleA.child.action.status).toBe(true);
+        expect(charA.child.action.status).toBe(true);
 
-        const promise = roleA.child.action.run();
+        const promise = charA.child.action.run();
         expect(playerA.child.controller.current).toBeDefined();
-        expect(playerA.child.controller.current?.options).toContain(roleB);
-        playerA.child.controller.set(roleB);
+        expect(playerA.child.controller.current?.options).toContain(charB);
+        playerA.child.controller.set(charB);
         await promise;
 
-        expect(roleB.child.health.state.current).toBe(27);
-        expect(roleB.child.health.state.damage).toBe(3);
+        expect(charB.child.health.state.current).toBe(27);
+        expect(charB.child.health.state.damage).toBe(3);
 
         expect(weapon.child.dispose.status).toBe(true);
         expect(weapon.child.action.state.current).toBe(0);
         expect(boardA.child.weapon).toBeUndefined();
         
-        expect(roleA.child.attack.state.current).toBe(0);
+        expect(charA.child.attack.state.current).toBe(0);
     })
 })

@@ -49,15 +49,13 @@ describe('arcane-explosion', () => {
     const cardD = handA.child.cards.find(item => item instanceof ArcaneExplosionModel);
     const cardE = boardB.child.cards.find(item => item instanceof WispModel);
     const cardF = boardB.child.cards.find(item => item instanceof GoldshireFootmanModel);
-    const roleE = cardE?.child.role;
-    const roleF = cardF?.child.role;
-    if (!cardD || !roleE || !roleF) throw new Error();
+    if (!cardD || !cardE || !cardF) throw new Error();
 
     test('arcane-explosion-cast', async () => {
         expect(playerA.child.mana.state.current).toBe(10);
         expect(handA.child.cards.length).toBe(1);
-        expect(roleE.child.health.state.current).toBe(1); // Wisp: 1 health
-        expect(roleF.child.health.state.current).toBe(2); // Goldshire Footman: 2 health
+        expect(cardE.child.health.state.current).toBe(1); // Wisp: 1 health
+        expect(cardF.child.health.state.current).toBe(2); // Goldshire Footman: 2 health
         expect(boardB.child.cards.length).toBe(2);
 
         // Play Arcane Explosion - no target selection needed
@@ -67,8 +65,8 @@ describe('arcane-explosion', () => {
         expect(handA.child.cards.length).toBe(0);
         
         // All enemy minions should take 1 damage
-        expect(roleE.child.health.state.current).toBe(0); // Wisp: 1 -> 0 (dies)
-        expect(roleF.child.health.state.current).toBe(1); // Goldshire Footman: 2 -> 1
+        expect(cardE.child.health.state.current).toBe(0); // Wisp: 1 -> 0 (dies)
+        expect(cardF.child.health.state.current).toBe(1); // Goldshire Footman: 2 -> 1
 
         // Dead minion should be removed from board
         expect(boardB.child.cards.length).toBe(1);

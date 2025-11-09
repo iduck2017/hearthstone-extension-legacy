@@ -61,41 +61,38 @@ describe('cone-of-cold', () => {
     const cardD = boardB.child.cards.find(item => item instanceof WispModel);
     const cardE = boardB.child.cards.find(item => item instanceof GoldshireFootmanModel);
     const cardF = boardB.child.cards.find(item => item instanceof ManaWyrmModel);
-    const roleD = cardD?.child.role;
-    const roleE = cardE?.child.role;
-    const roleF = cardF?.child.role;
-    const roleB = playerB.child.hero.child.role;
-    if (!cardC || !roleD || !roleE || !roleF) throw new Error();
+    if (!cardC || !cardD || !cardE || !cardF) throw new Error();
+    const heroB = playerB.child.hero;
 
     test('cone-of-cold-cast', async () => {
         // Check initial stats
-        expect(roleD.child.health.state.current).toBe(1); // Wisp: 1 health
-        expect(roleE.child.health.state.current).toBe(2); // Goldshire Footman: 2 health
-        expect(roleD.child.feats.child.frozen.state.isActive).toBe(false);
-        expect(roleE.child.feats.child.frozen.state.isActive).toBe(false);
+        expect(cardD.child.health.state.current).toBe(1); // Wisp: 1 health
+        expect(cardE.child.health.state.current).toBe(2); // Goldshire Footman: 2 health
+        expect(cardD.child.feats.child.frozen.state.isActive).toBe(false);
+        expect(cardE.child.feats.child.frozen.state.isActive).toBe(false);
         expect(playerA.child.mana.state.current).toBe(10);
         expect(handA.child.cards.length).toBe(1);
         expect(boardB.child.cards.length).toBe(3);
 
         // Player A uses Cone of Cold on Player B's Wisp (leftmost minion)
         const promise = cardC.play();
-        expect(playerA.child.controller.current?.options).toContain(roleD);
-        expect(playerA.child.controller.current?.options).toContain(roleE);
-        expect(playerA.child.controller.current?.options).not.toContain(roleB);
+        expect(playerA.child.controller.current?.options).toContain(cardD);
+        expect(playerA.child.controller.current?.options).toContain(cardE);
+        expect(playerA.child.controller.current?.options).not.toContain(heroB);
         // choose Wisp
-        playerA.child.controller.set(roleD);
+        playerA.child.controller.set(cardD);
         await promise;
 
         // Wisp should die (1 - 1 = 0), Footman should take 1 damage (2 - 1 = 1)
-        expect(roleD.child.health.state.current).toBe(0); // Wisp dies
+        expect(cardD.child.health.state.current).toBe(0); // Wisp dies
         expect(cardD.child.dispose.status).toBe(true); // Wisp dies
-        expect(roleD.child.feats.child.frozen.state.isActive).toBe(true);
+        expect(cardD.child.feats.child.frozen.state.isActive).toBe(true);
 
-        expect(roleE.child.health.state.current).toBe(1); // Footman: 2 - 1 = 1
-        expect(roleE.child.feats.child.frozen.state.isActive).toBe(true);
+        expect(cardE.child.health.state.current).toBe(1); // Footman: 2 - 1 = 1
+        expect(cardE.child.feats.child.frozen.state.isActive).toBe(true);
 
-        expect(roleF.child.health.state.current).toBe(3); // Mana Wyrm: 3
-        expect(roleF.child.feats.child.frozen.state.isActive).toBe(false);
+        expect(cardF.child.health.state.current).toBe(3); // Mana Wyrm: 3
+        expect(cardF.child.feats.child.frozen.state.isActive).toBe(false);
         
         expect(playerA.child.mana.state.current).toBe(7); // 10 - 3 cost
         expect(handA.child.cards.length).toBe(0);
@@ -112,10 +109,10 @@ describe('cone-of-cold', () => {
         expect(turn.refer.current).toBe(playerB);
 
         // Check that frozen Footman cannot attack
-        expect(roleE.child.action.status).toBe(false); // Goldshire Footman cannot attack
-        expect(roleE.child.feats.child.frozen.state.isActive).toBe(true);
+        expect(cardE.child.action.status).toBe(false); // Goldshire Footman cannot attack
+        expect(cardE.child.feats.child.frozen.state.isActive).toBe(true);
 
-        expect(roleF.child.action.status).toBe(true); // Mana Wyrm can attack
-        expect(roleF.child.feats.child.frozen.state.isActive).toBe(false);
+        expect(cardF.child.action.status).toBe(true); // Mana Wyrm can attack
+        expect(cardF.child.feats.child.frozen.state.isActive).toBe(false);
     })
 })

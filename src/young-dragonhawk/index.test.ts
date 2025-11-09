@@ -61,47 +61,42 @@ describe('young-dragonhawk', () => {
     const cardC = boardA.child.cards.find(item => item instanceof YoungDragonhawkModel);
     const cardD = boardB.child.cards.find(item => item instanceof ShieldbearerModel);
     if (!cardC || !cardD) throw new Error();
-    const roleA = playerA.child.hero.child.role;
-    const roleB = playerB.child.hero.child.role;
-    const roleC = cardC.child.role;
-    const roleD = cardD.child.role;
 
     test('young-dragonhawk-windfury', async () => {
         // Check initial state
         expect(boardA.child.cards.length).toBe(1); // Young Dragonhawk on board
         expect(boardB.child.cards.length).toBe(1); // Shieldbearer on board
-        expect(roleC.child.action.state.origin).toBe(2); // Windfury: 2 attacks
-        expect(roleC.child.action.state.current).toBe(2);
-        expect(roleD.child.health.state.current).toBe(4); // Shieldbearer: 4 health
+        expect(cardC.child.action.state.origin).toBe(2); // Windfury: 2 attacks
+        expect(cardC.child.action.state.current).toBe(2);
+        expect(cardD.child.health.state.current).toBe(4); // Shieldbearer: 4 health
         
         // First attack
-        let promise = roleC.child.action.run();
+        let promise = cardC.child.action.run();
         await AnimeUtil.sleep();
-        expect(playerA.child.controller.current?.options).toContain(roleD); // Can target Shieldbearer
+        expect(playerA.child.controller.current?.options).toContain(cardD); // Can target Shieldbearer
         expect(playerA.child.controller.current?.options.length).toBe(1);
-        playerA.child.controller.set(roleD); // Target Shieldbearer
+        playerA.child.controller.set(cardD); // Target Shieldbearer
         await promise;
         
         // After first attack
-        expect(roleC.child.action.state.origin).toBe(2);
-        expect(roleC.child.action.state.current).toBe(1); // 1 attack remaining
-        expect(roleD.child.health.state.current).toBe(3); // Shieldbearer: 4 - 1 = 3
+        expect(cardC.child.action.state.origin).toBe(2);
+        expect(cardC.child.action.state.current).toBe(1); // 1 attack remaining
+        expect(cardD.child.health.state.current).toBe(3); // Shieldbearer: 4 - 1 = 3
         
         // Second attack
-        promise = roleC.child.action.run();
+        promise = cardC.child.action.run();
         await AnimeUtil.sleep();
-        expect(playerA.child.controller.current?.options).toContain(roleD); // Can target Shieldbearer
-        expect(playerA.child.controller.current?.options).not.toContain(roleB); // Cannot target Player B's hero
+        expect(playerA.child.controller.current?.options).toContain(cardD); // Can target Shieldbearer
         expect(playerA.child.controller.current?.options.length).toBe(1);
-        playerA.child.controller.set(roleD); // Target Shieldbearer
+        playerA.child.controller.set(cardD); // Target Shieldbearer
         await promise;
         
         // After second attack
-        expect(roleC.child.action.state.origin).toBe(2);
-        expect(roleC.child.action.state.current).toBe(0); // No attacks remaining
-        expect(roleD.child.health.state.current).toBe(2); // Shieldbearer: 3 - 1 = 2
+        expect(cardC.child.action.state.origin).toBe(2);
+        expect(cardC.child.action.state.current).toBe(0); // No attacks remaining
+        expect(cardD.child.health.state.current).toBe(2); // Shieldbearer: 3 - 1 = 2
         
         // Cannot attack anymore
-        expect(roleC.child.action.status).toBe(false);
+        expect(cardC.child.action.status).toBe(false);
     });
 }) 

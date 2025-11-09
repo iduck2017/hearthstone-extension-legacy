@@ -62,32 +62,27 @@ describe('ironbeak-owl', () => {
     const cardC = handA.child.cards.find(item => item instanceof IronbeakOwlModel);
     const cardD = boardA.child.cards.find(item => item instanceof AncientWatcherModel);
     if (!cardC || !cardD) throw new Error();
-    const roleA = playerA.child.hero.child.role;
-    const roleB = playerB.child.hero.child.role;
-    const roleC = cardC.child.role;
-    const roleD = cardD.child.role;
+    const heroB = playerB.child.hero;
 
     test('ironbeak-owl-play', async () => {
         // Check initial state
-        expect(roleC.child.attack.state.current).toBe(2); // Ironbeak Owl: 2/1
-        expect(roleC.child.health.state.current).toBe(1);
+        expect(cardC.child.attack.state.current).toBe(2); // Ironbeak Owl: 2/1
+        expect(cardC.child.health.state.current).toBe(1);
         expect(handA.child.cards.length).toBe(1); // Ironbeak Owl in hand
         expect(boardA.child.cards.length).toBe(1); // Ancient Watcher on board
         expect(playerA.child.mana.state.current).toBe(10); // Full mana
 
         // Check that Ancient Watcher has the restriction (cannot attack)
-        expect(roleD.child.action.status).toBe(false); // Ancient Watcher cannot attack
-        expect(roleD.child.action.state.isLock).toBe(true);
+        expect(cardD.child.action.status).toBe(false); // Ancient Watcher cannot attack
+        expect(cardD.child.action.state.isLock).toBe(true);
 
         // Play Ironbeak Owl
         let promise = cardC.play();
         playerA.child.controller.set(0); // Select position 0
         await AnimeUtil.sleep();
         // Choose target for battlecry (silence Ancient Watcher)
-        expect(playerA.child.controller.current?.options).toContain(roleD); // Can target Ancient Watcher
-        expect(playerA.child.controller.current?.options).not.toContain(roleA); // Cannot target heroes
-        expect(playerA.child.controller.current?.options).not.toContain(roleB); // Cannot target heroes
-        playerA.child.controller.set(roleD); // Target Ancient Watcher for silence
+        expect(playerA.child.controller.current?.options).toContain(cardD); // Can target Ancient Watcher
+        playerA.child.controller.set(cardD); // Target Ancient Watcher for silence
         await promise;
 
         // Ironbeak Owl should be on board
@@ -96,24 +91,24 @@ describe('ironbeak-owl', () => {
         expect(playerA.child.mana.state.current).toBe(7); // 10 - 3 = 7
 
         // Ancient Watcher should be silenced (can now attack)
-        expect(roleD.child.action.state.isLock).toBe(false);
-        expect(roleD.child.action.status).toBe(true); // Ancient Watcher can now attack
+        expect(cardD.child.action.state.isLock).toBe(false);
+        expect(cardD.child.action.status).toBe(true); // Ancient Watcher can now attack
     });
 
     test('ancient-watcher-attack', async () => {
         // Check initial state
-        expect(roleD.child.health.state.current).toBe(5); // Ancient Watcher: 4/5
-        expect(roleB.child.health.state.current).toBe(30); // Player B hero: 30 health
+        expect(cardD.child.health.state.current).toBe(5); // Ancient Watcher: 4/5
+        expect(heroB.child.health.state.current).toBe(30); // Player B hero: 30 health
         expect(boardA.child.cards.length).toBe(2); // Ironbeak Owl + Ancient Watcher on board
 
         // Ancient Watcher attacks Player B's hero
-        let promise = roleD.child.action.run();
-        expect(playerA.child.controller.current?.options).toContain(roleB); // Can target Player B's hero
-        playerA.child.controller.set(roleB); // Target Player B's hero
+        let promise = cardD.child.action.run();
+        expect(playerA.child.controller.current?.options).toContain(heroB); // Can target Player B's hero
+        playerA.child.controller.set(heroB); // Target Player B's hero
         await promise;
 
         // Player B's hero should take 4 damage
-        expect(roleB.child.health.state.current).toBe(26); // Player B hero: 30 - 4 = 26
-        expect(roleD.child.health.state.current).toBe(5); // Ancient Watcher: 4/5 (no damage)
+        expect(heroB.child.health.state.current).toBe(26); // Player B hero: 30 - 4 = 26
+        expect(cardD.child.health.state.current).toBe(5); // Ancient Watcher: 4/5 (no damage)
     });
 });

@@ -62,14 +62,13 @@ describe('ogre-magi', () => {
     const cardC = handA.child.cards.find(item => item instanceof OgreMagiModel);
     const cardD = handA.child.cards.find(item => item instanceof FireballModel);
     if (!cardC || !cardD) throw new Error();
-    const roleA = playerA.child.hero.child.role;
-    const roleB = playerB.child.hero.child.role;
-    const roleC = cardC.child.role;
+    const heroA = playerA.child.hero;
+    const heroB = playerB.child.hero;
 
     test('ogre-magi-play', async () => {
         // Check initial state
-        expect(roleC.child.attack.state.current).toBe(4); // Ogre Magi: 4/4
-        expect(roleC.child.health.state.current).toBe(4);
+        expect(cardC.child.attack.state.current).toBe(4); // Ogre Magi: 4/4
+        expect(cardC.child.health.state.current).toBe(4);
         expect(handA.child.cards.length).toBe(2); // Ogre Magi and Fireball in hand
         expect(boardA.child.cards.length).toBe(0); // No minions on board
         expect(playerA.child.mana.state.current).toBe(10); // Full mana
@@ -87,19 +86,19 @@ describe('ogre-magi', () => {
 
     test('fireball-cast', async () => {
         // Check initial state
-        expect(roleB.child.health.state.current).toBe(30); // Player B hero: 30 health
+        expect(heroB.child.health.state.current).toBe(30); // Player B hero: 30 health
         expect(handA.child.cards.filter(item => item instanceof FireballModel).length).toBe(1);
         expect(playerA.child.mana.state.current).toBe(6);
 
         // Player A casts Fireball with Ogre Magi on board
         const promise = cardD.play();
-        expect(playerA.child.controller.current?.options).toContain(roleA); // Can target friendly hero
-        expect(playerA.child.controller.current?.options).toContain(roleB); // Can target enemy hero
-        playerA.child.controller.set(roleB); // Target Player B's hero
+        expect(playerA.child.controller.current?.options).toContain(heroA); // Can target friendly hero
+        expect(playerA.child.controller.current?.options).toContain(heroB); // Can target enemy hero
+        playerA.child.controller.set(heroB); // Target Player B's hero
         await promise;
 
         // Fireball should deal 6+1=7 damage (6 base + 1 from Ogre Magi)
-        expect(roleB.child.health.state.current).toBe(23); // 30 - 7 = 23
+        expect(heroB.child.health.state.current).toBe(23); // 30 - 7 = 23
         expect(playerA.child.mana.state.current).toBe(2); // 6 - 4 cost (Fireball costs 4)
         expect(handA.child.cards.filter(item => item instanceof FireballModel).length).toBe(0);
     });

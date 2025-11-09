@@ -63,23 +63,22 @@ describe('radiance', () => {
     const handB = playerB.child.hand;
     const cardC = handA.child.cards.find(item => item instanceof FireballModel);
     const cardD = handB.child.cards.find(item => item instanceof RadianceModel);
-    const roleB = heroB.child.role;
     if (!cardC || !cardD) throw new Error();
 
     test('fireball-cast', async () => {
         // Check initial state
-        expect(heroB.child.role.child.health.state.current).toBe(30); // Full health
+        expect(heroB.child.health.state.current).toBe(30); // Full health
         expect(playerA.child.mana.state.current).toBe(10);
         expect(handA.child.cards.length).toBe(1);
 
         // Player A uses Fireball on Player B's hero
         const promise = cardC.play();
-        expect(playerA.child.controller.current?.options).toContain(heroB.child.role);
-        playerA.child.controller.set(heroB.child.role);
+        expect(playerA.child.controller.current?.options).toContain(heroB);
+        playerA.child.controller.set(heroB);
         await promise;
 
         // Player B's hero should take 6 damage
-        expect(heroB.child.role.child.health.state.current).toBe(24); // 30 - 6 = 24
+        expect(heroB.child.health.state.current).toBe(24); // 30 - 6 = 24
 
         // Fireball should be consumed
         expect(handA.child.cards.length).toBe(0); // Fireball consumed
@@ -90,7 +89,7 @@ describe('radiance', () => {
         game.child.turn.next()
 
         // Check initial state
-        expect(roleB.child.health.state.current).toBe(24); // Damaged hero
+        expect(heroB.child.health.state.current).toBe(24); // Damaged hero
         expect(playerB.child.mana.state.current).toBe(10);
         expect(handB.child.cards.length).toBe(1);
 
@@ -99,7 +98,7 @@ describe('radiance', () => {
         await promise;
 
         // Hero should be healed by 5 Health
-        expect(roleB.child.health.state.current).toBe(29); // 24 + 5 = 29
+        expect(heroB.child.health.state.current).toBe(29); // 24 + 5 = 29
 
         // Radiance should be consumed
         expect(handB.child.cards.length).toBe(0); // Radiance consumed

@@ -60,12 +60,10 @@ describe('scarlet-subjugator', () => {
     const cardC = handA.child.cards.find(item => item instanceof ScarletSubjugatorModel);
     const cardD = boardB.child.cards.find(item => item instanceof WaterElementalModel);
     if (!cardC || !cardD) throw new Error();
-    const roleC = cardC?.child.role;
-    const roleD = cardD?.child.role;
 
     test('scarlet-subjugator-play', async () => {
         // Check initial state
-        expect(cardD.child.role.child.attack.state.current).toBe(3); // Water Elemental: 3/6
+        expect(cardD.child.attack.state.current).toBe(3); // Water Elemental: 3/6
         expect(playerA.child.mana.state.current).toBe(10);
         expect(boardA.child.cards.length).toBe(0);
         expect(handA.child.cards.length).toBe(1);
@@ -74,19 +72,19 @@ describe('scarlet-subjugator', () => {
         const promise = cardC.play();
         playerA.child.controller.set(0);
         await AnimeUtil.sleep();
-        expect(playerA.child.controller.current?.options).toContain(cardD.child.role); // Water Elemental should be targetable
-        playerA.child.controller.set(cardD.child.role);
+        expect(playerA.child.controller.current?.options).toContain(cardD); // Water Elemental should be targetable
+        playerA.child.controller.set(cardD);
         await promise;
 
         // Check that Scarlet Subjugator is on board
         expect(boardA.child.cards.length).toBe(1);
 
-        expect(roleC.child.attack.state.current).toBe(2); // Scarlet Subjugator: 2/1
-        expect(roleC.child.health.state.current).toBe(1);
+        expect(cardC.child.attack.state.current).toBe(2); // Scarlet Subjugator: 2/1
+        expect(cardC.child.health.state.current).toBe(1);
 
         // Water Elemental should have -2 Attack
-        expect(roleD.child.attack.state.current).toBe(1); // 3 - 2 = 1
-        expect(roleD.child.health.state.current).toBe(6); // Health unchanged
+        expect(cardD.child.attack.state.current).toBe(1); // 3 - 2 = 1
+        expect(cardD.child.health.state.current).toBe(6); // Health unchanged
       
         // Scarlet Subjugator should be consumed
         expect(handA.child.cards.length).toBe(0); // Scarlet Subjugator consumed
@@ -99,26 +97,25 @@ describe('scarlet-subjugator', () => {
 
         // Water Elemental attacks Player A's hero with reduced attack
         const heroA = playerA.child.hero;
-        const roleA = heroA.child.role;
         
         // Check that Water Elemental still has -2 Attack
-        expect(roleD.child.attack.state.current).toBe(1); // 3 - 2 = 1
-        expect(roleD.child.health.state.current).toBe(6); // Health unchanged
+        expect(cardD.child.attack.state.current).toBe(1); // 3 - 2 = 1
+        expect(cardD.child.health.state.current).toBe(6); // Health unchanged
         
         // Water Elemental attacks hero
-        const promise = roleD.child.action.run();
-        playerB.child.controller.set(roleA);
+        const promise = cardD.child.action.run();
+        playerB.child.controller.set(heroA);
         await promise;
         
         // Hero should take 1 damage (reduced attack)
-        expect(roleA.child.health.state.current).toBe(29); // 30 - 1 = 29
+        expect(heroA.child.health.state.current).toBe(29); // 30 - 1 = 29
     });
 
     test('turn-start', async () => {
         // Player A's turn starts, Water Elemental's debuff should expire
         game.child.turn.next();
         // Water Elemental should regain full attack
-        expect(roleD.child.attack.state.current).toBe(3); // Back to original 3 attack
-        expect(roleD.child.health.state.current).toBe(6); // Health unchanged
+        expect(cardD.child.attack.state.current).toBe(3); // Back to original 3 attack
+        expect(cardD.child.health.state.current).toBe(6); // Health unchanged
     });
 });

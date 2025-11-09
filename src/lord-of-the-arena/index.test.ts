@@ -61,15 +61,12 @@ describe('lord-of-the-arena', () => {
     const cardC = handA.child.cards.find(item => item instanceof LordOfTheArenaModel);
     const cardD = boardB.child.cards.find(item => item instanceof WispModel);
     if (!cardC || !cardD) throw new Error();
-    const roleA = playerA.child.hero.child.role;
-    const roleB = playerB.child.hero.child.role;
-    const roleC = cardC.child.role;
-    const roleD = cardD.child.role;
+    const heroA = playerA.child.hero;
 
     test('lord-arena-play', async () => {
         // Check initial state
-        expect(roleC.child.attack.state.current).toBe(6); // Lord of the Arena: 6/5
-        expect(roleC.child.health.state.current).toBe(5);
+        expect(cardC.child.attack.state.current).toBe(6); // Lord of the Arena: 6/5
+        expect(cardC.child.health.state.current).toBe(5);
         expect(handA.child.cards.length).toBe(1); // Lord of the Arena in hand
         expect(boardA.child.cards.length).toBe(0); // No minions on board
         expect(playerA.child.mana.state.current).toBe(10); // Full mana
@@ -93,17 +90,17 @@ describe('lord-of-the-arena', () => {
         // Check that Wisp cannot attack hero due to Lord of the Arena's Taunt
         expect(boardA.child.cards.length).toBe(1); // Lord of the Arena on board
         expect(boardB.child.cards.length).toBe(1); // Wisp on board
-        expect(roleD.child.attack.state.current).toBe(1); // Wisp: 1/1
-        expect(roleD.child.health.state.current).toBe(1);
+        expect(cardD.child.attack.state.current).toBe(1); // Wisp: 1/1
+        expect(cardD.child.health.state.current).toBe(1);
 
         // Try to attack with Wisp
-        const promise = roleD.child.action.run();
-        expect(playerB.child.controller.current?.options).not.toContain(roleA); // Cannot target enemy hero (Taunt blocks)
-        expect(playerB.child.controller.current?.options).toContain(roleC); // Must target Lord of the Arena due to Taunt
-        playerB.child.controller.set(roleC); // Target Lord of the Arena
+        const promise = cardD.child.action.run();
+        expect(playerB.child.controller.current?.options).not.toContain(heroA); // Cannot target enemy hero (Taunt blocks)
+        expect(playerB.child.controller.current?.options).toContain(cardC); // Must target Lord of the Arena due to Taunt
+        playerB.child.controller.set(cardC); // Target Lord of the Arena
         await promise;
 
         // Lord of the Arena should take 1 damage
-        expect(roleC.child.health.state.current).toBe(4); // 5 - 1 = 4
+        expect(cardC.child.health.state.current).toBe(4); // 5 - 1 = 4
     });
 });

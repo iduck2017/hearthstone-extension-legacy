@@ -64,8 +64,8 @@ describe('archmage-antonidas', () => {
     const cardC = boardA.child.cards.find(item => item instanceof ArchmageAntonidasModel);
     const cardD = handA.child.cards.find(item => item instanceof FrostboltModel);
     const cardF = boardB.child.cards.find(item => item instanceof WispModel);
-    const roleF = cardF?.child.role;
-    if (!cardC || !cardD || !roleF) throw new Error();
+    const heroB = playerB.child.hero;
+    if (!cardC || !cardD || !cardF) throw new Error();
 
     test('frostbolt-cast', async () => {
         // Check initial stats
@@ -75,15 +75,15 @@ describe('archmage-antonidas', () => {
 
         // Player A uses Frostbolt on Wisp
         const promise = cardD.play();
-        expect(playerA.child.controller.current?.options).toContain(roleF);
-        playerA.child.controller.set(roleF);
+        expect(playerA.child.controller.current?.options).toContain(cardF);
+        playerA.child.controller.set(cardF);
         await promise;
 
         // Antonidas should add a Fireball to hand
         expect(handA.child.cards.length).toBe(1); // generated Fireball
         expect(handA.child.cards.some(card => card instanceof FireballModel)).toBe(true);
         expect(boardB.child.cards.length).toBe(0);
-        expect(roleF.child.health.state.current).toBe(-2); // Wisp: 1 - 3 = -2 (dies)
+        expect(cardF.child.health.state.current).toBe(-2); // Wisp: 1 - 3 = -2 (dies)
         expect(playerA.child.mana.state.current).toBe(8); // 3 - 2 cost
     });
 
@@ -97,15 +97,14 @@ describe('archmage-antonidas', () => {
         expect(handA.child.cards.length).toBe(1);
 
         // Player A uses the generated Fireball on Wisp (which should be dead, so target hero)
-        const roleB = playerB.child.hero.child.role;
         const promise = cardG.play();
-        expect(playerA.child.controller.current?.options).toContain(roleB);
-        playerA.child.controller.set(roleB);
+        expect(playerA.child.controller.current?.options).toContain(heroB);
+        playerA.child.controller.set(heroB);
         await promise;
 
         // Check Fireball was used
         expect(playerA.child.mana.state.current).toBe(4);
         expect(handA.child.cards.length).toBe(1); // Fireball consumed, but may have other cards
-        expect(roleB.child.health.state.current).toBe(24); // 30 - 6 = 24
+        expect(heroB.child.health.state.current).toBe(24); // 30 - 6 = 24
     });
 });

@@ -57,21 +57,19 @@ describe('ragnaros-the-firelord', () => {
     const boardA = playerA.child.board;
     const handA = playerA.child.hand;
     const cardC = handA.child.cards.find(item => item instanceof RagnarosTheFirelordModel);
+    const heroB = playerB.child.hero;
     if (!cardC) throw new Error();
-    const roleA = playerA.child.hero.child.role;
-    const roleB = playerB.child.hero.child.role;
-    const roleC = cardC.child.role;
 
     test('turn-end', async () => {
         game.child.turn.next();
-        expect(roleB.child.health.state.current).toBe(30);
+        expect(heroB.child.health.state.current).toBe(30);
         game.child.turn.next();
     })
 
     test('ragnaros-the-firelord-play', async () => {
         // Check initial state
-        expect(roleC.child.attack.state.current).toBe(8); // Ragnaros: 8/8
-        expect(roleC.child.health.state.current).toBe(8);
+        expect(cardC.child.attack.state.current).toBe(8); // Ragnaros: 8/8
+        expect(cardC.child.health.state.current).toBe(8);
         expect(handA.child.cards.length).toBe(1); // Ragnaros in hand
         expect(boardA.child.cards.length).toBe(0); // No minions on board
         expect(playerA.child.mana.state.current).toBe(10); // Full mana
@@ -86,20 +84,24 @@ describe('ragnaros-the-firelord', () => {
         expect(handA.child.cards.length).toBe(0); // Ragnaros moved to board
         expect(playerA.child.mana.state.current).toBe(2); // 10 - 8 = 2
 
+        // Get Ragnaros from board
+        const ragnarosOnBoard = boardA.child.cards.find(item => item instanceof RagnarosTheFirelordModel);
+        if (!ragnarosOnBoard) throw new Error();
+
         // Check that Ragnaros cannot attack
-        expect(roleC.child.action.state.isLock).toBe(true); // Cannot attack
-        expect(roleC.child.action.status).toBe(false); // Action is disabled
+        expect(ragnarosOnBoard.child.action.state.isLock).toBe(true); // Cannot attack
+        expect(ragnarosOnBoard.child.action.status).toBe(false); // Action is disabled
     });
 
     test('turn-end', async () => {
         // Check initial state
-        expect(roleB.child.health.state.current).toBe(30); // Player B hero: 30 health
+        expect(heroB.child.health.state.current).toBe(30); // Player B hero: 30 health
         expect(boardA.child.cards.length).toBe(1); // Ragnaros on board
 
         // End Player A's turn - Ragnaros should deal 8 damage to Player B's hero
         game.child.turn.next();
 
         // Check that Player B's hero took 8 damage
-        expect(roleB.child.health.state.current).toBe(22); // 30 - 8 = 22
+        expect(heroB.child.health.state.current).toBe(22); // 30 - 8 = 22
     });
 });

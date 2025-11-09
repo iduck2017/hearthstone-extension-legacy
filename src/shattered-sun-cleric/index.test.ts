@@ -70,17 +70,12 @@ describe('shattered-sun-cleric', () => {
     const cardE = handB.child.cards.find(item => item instanceof ShatteredSunClericModel);
     const cardF = handB.child.cards.find(item => item instanceof WispModel);
     if (!cardC || !cardD || !cardE || !cardF) throw new Error();
-    const roleA = playerA.child.hero.child.role;
-    const roleB = playerB.child.hero.child.role;
-    const roleC = cardC.child.role;
-    const roleD = cardD.child.role;
-    const roleE = cardE.child.role;
-    const roleF = cardF.child.role;
+    const heroB = playerB.child.hero;
 
     test('shattered-sun-cleric-battlecry', async () => {
         // Check initial state
-        expect(roleD.child.attack.state.current).toBe(1); // Wisp: 1/1
-        expect(roleD.child.health.state.current).toBe(1);
+        expect(cardD.child.attack.state.current).toBe(1); // Wisp: 1/1
+        expect(cardD.child.health.state.current).toBe(1);
         expect(boardA.child.cards.length).toBe(1); // Wisp on board
         expect(handA.child.cards.length).toBe(1); // Shattered Sun Cleric in hand
 
@@ -92,9 +87,9 @@ describe('shattered-sun-cleric', () => {
         await AnimeUtil.sleep();
         
         // Choose target for battlecry (Wisp)
-        expect(playerA.child.controller.current?.options).toContain(roleD); // Can target Wisp
+        expect(playerA.child.controller.current?.options).toContain(cardD); // Can target Wisp
         expect(playerA.child.controller.current?.options.length).toBe(1); // Only Wisp available
-        playerA.child.controller.set(roleD); // Target Wisp
+        playerA.child.controller.set(cardD); // Target Wisp
         await promise;
         
         // Shattered Sun Cleric should be on board
@@ -102,10 +97,10 @@ describe('shattered-sun-cleric', () => {
         expect(handA.child.cards.length).toBe(0); // Shattered Sun Cleric moved to board
         
         // Wisp should be buffed to 2/2
-        expect(roleD.child.attack.state.current).toBe(2); // Wisp: 2/2 (buffed)
-        expect(roleD.child.health.state.current).toBe(2);
-        expect(roleD.child.attack.state.origin).toBe(1);
-        expect(roleD.child.health.state.origin).toBe(1);
+        expect(cardD.child.attack.state.current).toBe(2); // Wisp: 2/2 (buffed)
+        expect(cardD.child.health.state.current).toBe(2);
+        expect(cardD.child.attack.state.origin).toBe(1);
+        expect(cardD.child.health.state.origin).toBe(1);
     });
 
     test('shattered-sun-cleric-play', async () => {
@@ -140,8 +135,8 @@ describe('shattered-sun-cleric', () => {
         // Both minions should be on board
         expect(boardB.child.cards.length).toBe(2);
         expect(handB.child.cards.length).toBe(0);
-        expect(roleF.child.attack.state.current).toBe(1); // Wisp: 1/1
-        expect(roleF.child.health.state.current).toBe(1);
+        expect(cardF.child.attack.state.current).toBe(1); // Wisp: 1/1
+        expect(cardF.child.health.state.current).toBe(1);
     });
 
     test('wisp-attack', async () => {
@@ -150,32 +145,32 @@ describe('shattered-sun-cleric', () => {
         expect(game.child.turn.refer.current).toBe(playerA);
 
         // Check initial state
-        expect(roleD.child.attack.state.current).toBe(2); // Buffed Wisp: 2/2
-        expect(roleD.child.health.state.current).toBe(2);
-        expect(roleF.child.attack.state.current).toBe(1); // Player B's Wisp: 1/1
-        expect(roleF.child.health.state.current).toBe(1);
+        expect(cardD.child.attack.state.current).toBe(2); // Buffed Wisp: 2/2
+        expect(cardD.child.health.state.current).toBe(2);
+        expect(cardF.child.attack.state.current).toBe(1); // Player B's Wisp: 1/1
+        expect(cardF.child.health.state.current).toBe(1);
         expect(boardA.child.cards.length).toBe(2); // Wisp + Shattered Sun Cleric on board
         expect(boardB.child.cards.length).toBe(2); // Wisp + Shattered Sun Cleric on board
 
         // Player A's buffed Wisp attacks Player B's Wisp
-        let promise = roleD.child.action.run();
+        let promise = cardD.child.action.run();
         await AnimeUtil.sleep();
-        expect(playerA.child.controller.current?.options).toContain(roleF); // Can target Player B's Wisp
-        expect(playerA.child.controller.current?.options).toContain(roleB); // Can target Player B's hero
-        expect(playerA.child.controller.current?.options).toContain(roleE); // Can target Player B's Shattered Sun Cleric
+        expect(playerA.child.controller.current?.options).toContain(cardF); // Can target Player B's Wisp
+        expect(playerA.child.controller.current?.options).toContain(heroB); // Can target Player B's hero
+        expect(playerA.child.controller.current?.options).toContain(cardE); // Can target Player B's Shattered Sun Cleric
         expect(playerA.child.controller.current?.options.length).toBe(3);
-        playerA.child.controller.set(roleF); // Target Player B's Wisp
+        playerA.child.controller.set(cardF); // Target Player B's Wisp
         await promise;
         
         // Player A's Wisp should survive (2/2 vs 1/1)
-        expect(roleD.child.attack.state.current).toBe(2);
-        expect(roleD.child.health.state.current).toBe(1); // 2 - 1 = 1
-        expect(roleD.child.health.state.damage).toBe(1);
+        expect(cardD.child.attack.state.current).toBe(2);
+        expect(cardD.child.health.state.current).toBe(1); // 2 - 1 = 1
+        expect(cardD.child.health.state.damage).toBe(1);
         
         // Player B's Wisp should die (1/1 vs 2/2)
-        expect(roleF.child.attack.state.current).toBe(1);
-        expect(roleF.child.health.state.current).toBe(-1); // 1 - 2 = -1
-        expect(roleF.child.health.state.damage).toBe(2);
+        expect(cardF.child.attack.state.current).toBe(1);
+        expect(cardF.child.health.state.current).toBe(-1); // 1 - 2 = -1
+        expect(cardF.child.health.state.damage).toBe(2);
         expect(cardF.child.dispose.status).toBe(true);
         
         // Board state

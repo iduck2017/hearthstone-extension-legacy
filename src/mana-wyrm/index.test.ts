@@ -52,13 +52,12 @@ describe('mana-wyrm', () => {
     const cardC = handA.child.cards.find(item => item instanceof ArcaneExplosionModel);
     const cardD = handB.child.cards.find(item => item instanceof ArcaneExplosionModel);
     const cardE = boardA.child.cards.find(item => item instanceof ManaWyrmModel);
-    const roleE = cardE?.child.role;
-    if (!cardC || !cardD || !roleE) throw new Error();
+    if (!cardC || !cardD || !cardE) throw new Error();
 
     test('mana-wyrm-trigger', async () => {
         // Check initial stats
-        expect(roleE.child.attack.state.current).toBe(1);
-        expect(roleE.child.health.state.current).toBe(3);
+        expect(cardE.child.attack.state.current).toBe(1);
+        expect(cardE.child.health.state.current).toBe(3);
         expect(playerA.child.mana.state.current).toBe(10);
         expect(handA.child.cards.length).toBe(1);
 
@@ -66,8 +65,8 @@ describe('mana-wyrm', () => {
         await cardC.play();
 
         // Mana Wyrm should gain +1 Attack
-        expect(roleE.child.attack.state.current).toBe(2); // 1 + 1
-        expect(roleE.child.health.state.current).toBe(3); // unchanged
+        expect(cardE.child.attack.state.current).toBe(2); // 1 + 1
+        expect(cardE.child.health.state.current).toBe(3); // unchanged
         expect(playerA.child.mana.state.current).toBe(8); // 10 - 2 cost
         expect(handA.child.cards.length).toBe(0);
     })
@@ -77,7 +76,7 @@ describe('mana-wyrm', () => {
         turn.next();
         
         // Check initial stats
-        expect(roleE.child.attack.state.current).toBe(2);
+        expect(cardE.child.attack.state.current).toBe(2);
         expect(playerB.child.mana.state.current).toBe(10);
         expect(handB.child.cards.length).toBe(1);
 
@@ -85,10 +84,10 @@ describe('mana-wyrm', () => {
         await cardD.play();
 
         // Mana Wyrm should NOT gain Attack (enemy spell)
-        expect(roleE.child.attack.state.current).toBe(2); // unchanged
-        expect(roleE.child.health.state.current).toBe(2); 
-        expect(roleE.child.health.state.damage).toBe(1);
-        expect(roleE.child.health.state.maximum).toBe(3);
+        expect(cardE.child.attack.state.current).toBe(2); // unchanged
+        expect(cardE.child.health.state.current).toBe(2); 
+        expect(cardE.child.health.state.damage).toBe(1);
+        expect(cardE.child.health.state.maximum).toBe(3);
         expect(playerB.child.mana.state.current).toBe(8); // 10 - 2 cost
         expect(handB.child.cards.length).toBe(0);
     })

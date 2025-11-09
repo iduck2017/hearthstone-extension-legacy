@@ -46,11 +46,8 @@ describe('emerald-skytalon', () => {
     const cardE = boardB.child.cards.find(item => item instanceof WispModel);
     const playerA = game.child.playerA;
     const playerB = game.child.playerB;
-    const roleB = playerB.child.hero.child.role;
-    const roleC = cardC?.child.role;
-    const roleD = cardD?.child.role;
-    const roleE = cardE?.child.role;
-    if (!roleC || !roleD || !roleE) throw new Error();
+    const heroB = playerB.child.hero;
+    if (!cardC || !cardD || !cardE) throw new Error();
     const turn = game.child.turn;
 
     test('emerald-skytalon-rush', async () => {
@@ -62,19 +59,19 @@ describe('emerald-skytalon', () => {
 
         expect(boardA.child.cards.length).toBe(1);
         expect(turn.refer.current).toBe(playerA);
-        expect(roleC.child.attack.state.current).toBe(2);
-        expect(roleC.child.health.state.current).toBe(1);
-        expect(roleC.child.action.state.current).toBe(1);
-        expect(roleC.child.sleep.state.isActive).toBe(true);
-        expect(roleC.child.feats.child.rush.state.isActive).toBe(true)
-        promise = roleC.child.action.run()
+        expect(cardC.child.attack.state.current).toBe(2);
+        expect(cardC.child.health.state.current).toBe(1);
+        expect(cardC.child.action.state.current).toBe(1);
+        expect(cardC.child.sleep.state.isActive).toBe(true);
+        expect(cardC.child.feats.child.rush.state.isActive).toBe(true)
+        promise = cardC.child.action.run()
         await AnimeUtil.sleep();
 
-        expect(playerA.child.controller.current?.options).toContain(roleE);
-        expect(playerA.child.controller.current?.options).not.toContain(roleB);
+        expect(playerA.child.controller.current?.options).toContain(cardE);
+        expect(playerA.child.controller.current?.options).not.toContain(heroB);
         playerA.child.controller.set(undefined);
         await promise;
-        expect(roleC.child.action.state.current).toBe(1);        
+        expect(cardC.child.action.state.current).toBe(1);        
     })
 
 
@@ -86,12 +83,12 @@ describe('emerald-skytalon', () => {
         await promise;
 
         expect(boardA.child.cards.length).toBe(2);
-        expect(roleD.child.action.state.current).toBe(1);
-        expect(roleD.child.sleep.state.isActive).toBe(true);
-        expect(roleD.child.feats.child.rush.state.isActive).toBe(false);
+        expect(cardD.child.action.state.current).toBe(1);
+        expect(cardD.child.sleep.state.isActive).toBe(true);
+        expect(cardD.child.feats.child.rush.state.isActive).toBe(false);
 
         // Wisp can not attack immediately
-        promise = roleD.child.action.run();
+        promise = cardD.child.action.run();
         await AnimeUtil.sleep();
         expect(playerA.child.controller.current).toBeUndefined();
     })
@@ -107,34 +104,34 @@ describe('emerald-skytalon', () => {
         await turn.next();
         expect(turn.refer.current).toBe(playerA);
 
-        expect(roleC.child.sleep.state.isActive).toBe(false);
-        expect(roleC.child.action.state.current).toBe(1);
-        expect(roleC.child.feats.child.rush.state.isActive).toBe(true);
-        expect(roleD.child.sleep.state.isActive).toBe(false);
-        expect(roleD.child.action.state.current).toBe(1);
-        expect(roleD.child.feats.child.rush.state.isActive).toBe(false);
+        expect(cardC.child.sleep.state.isActive).toBe(false);
+        expect(cardC.child.action.state.current).toBe(1);
+        expect(cardC.child.feats.child.rush.state.isActive).toBe(true);
+        expect(cardD.child.sleep.state.isActive).toBe(false);
+        expect(cardD.child.action.state.current).toBe(1);
+        expect(cardD.child.feats.child.rush.state.isActive).toBe(false);
 
-        let promise = roleC.child.action.run();
+        let promise = cardC.child.action.run();
         await AnimeUtil.sleep();
-        expect(playerA.child.controller.current?.options).toContain(roleE);
-        expect(playerA.child.controller.current?.options).toContain(roleB);
-        playerA.child.controller.set(roleB);
+        expect(playerA.child.controller.current?.options).toContain(cardE);
+        expect(playerA.child.controller.current?.options).toContain(heroB);
+        playerA.child.controller.set(heroB);
         await promise;
 
-        expect(roleB.child.health.state.current).toBe(28);
-        expect(roleC.child.action.state.current).toBe(0);
+        expect(heroB.child.health.state.current).toBe(28);
+        expect(cardC.child.action.state.current).toBe(0);
     });
 
     test('wisp-attack', async () => {
         // Wisp attack
-        const promise = roleD.child.action.run();
+        const promise = cardD.child.action.run();
         await AnimeUtil.sleep();
-        expect(playerA.child.controller.current?.options).toContain(roleE);
-        expect(playerA.child.controller.current?.options).toContain(roleB);
-        playerA.child.controller.set(roleB);
+        expect(playerA.child.controller.current?.options).toContain(cardE);
+        expect(playerA.child.controller.current?.options).toContain(heroB);
+        playerA.child.controller.set(heroB);
         await promise;
 
-        expect(roleB.child.health.state.current).toBe(27);
-        expect(roleC.child.action.state.current).toBe(0);
+        expect(heroB.child.health.state.current).toBe(27);
+        expect(cardC.child.action.state.current).toBe(0);
     })
 })

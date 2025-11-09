@@ -39,7 +39,7 @@ export class SorcerersApprenticeModel extends MinionCardModel {
                 health: props.child?.health ?? new RoleHealthModel({ state: { origin: 2 }}),
                 feats: props.child?.feats ?? new MinionFeaturesModel({
                     child: {
-                        feats: [new SorcerersApprenticeFeatureModel()]
+                        items: [new SorcerersApprenticeFeatureModel()]
                     }
                 }),
                 ...props.child

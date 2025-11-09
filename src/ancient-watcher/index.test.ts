@@ -38,9 +38,7 @@ describe('ancient-watcher', () => {
     const boardB = game.child.playerB.child.board;
     const cardA = handA.child.cards.find((item: any) => item instanceof AncientWatcherModel);
     const cardB = boardB.child.cards.find((item: any) => item instanceof WispModel);
-    const roleA = cardA?.child.role;
-    const roleB = cardB?.child.role;
-    if (!roleA || !roleB) throw new Error();
+    if (!cardA || !cardB) throw new Error();
 
     test('ancient-watcher-cannot-attack', async () => {
         
@@ -52,16 +50,16 @@ describe('ancient-watcher', () => {
         await promise;
         
         expect(boardA.child.cards.length).toBe(1);
-        expect(roleA.child.attack.state.current).toBe(4);
-        expect(roleA.child.health.state.current).toBe(5);
-        expect(roleA.child.action.state.current).toBe(1);
+        expect(cardA.child.attack.state.current).toBe(4);
+        expect(cardA.child.health.state.current).toBe(5);
+        expect(cardA.child.action.state.current).toBe(1);
         
         // Verify Watcher cannot attack
-        expect(roleA.child.action.state.isLock).toBe(true);
-        expect(roleA.child.action.status).toBe(false);
+        expect(cardA.child.action.state.isLock).toBe(true);
+        expect(cardA.child.action.status).toBe(false);
         
         // Try to attack and verify no options are available
-        promise = roleA.child.action.run();
+        promise = cardA.child.action.run();
         await AnimeUtil.sleep();
         expect(game.child.playerA.child.controller.current).toBeUndefined();
         await promise;
@@ -73,14 +71,14 @@ describe('ancient-watcher', () => {
         turn.next();
         
         // Verify Watcher still cannot attack after turn change
-        expect(roleA.child.action.state.isLock).toBe(true);
-        expect(roleA.child.action.status).toBe(false);
+        expect(cardA.child.action.state.isLock).toBe(true);
+        expect(cardA.child.action.status).toBe(false);
         
         // End second turn
         turn.next();
         
         // Verify Watcher still cannot attack after second turn change
-        expect(roleA.child.action.status).toBe(false);
-        expect(roleA.child.action.state.isLock).toBe(true);
+        expect(cardA.child.action.status).toBe(false);
+        expect(cardA.child.action.state.isLock).toBe(true);
     });
 }); 

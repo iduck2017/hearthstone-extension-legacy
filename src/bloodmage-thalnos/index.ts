@@ -39,7 +39,7 @@ export class BloodmageThalnosModel extends MinionCardModel {
                 feats: props.child?.feats ?? new MinionFeaturesModel({
                     child: {
                         deathrattle: [new BloodmageThalnosDeathrattleModel()],
-                        feats: [new SpellDamageModel({ state: { offset: 1 }})]
+                        items: [new SpellDamageModel({ state: { offset: 1 }})]
                     }
                 }),
                 ...props.child,

@@ -63,15 +63,12 @@ describe('frostwolf-grunt', () => {
     const cardC = handA.child.cards.find(item => item instanceof FrostwolfGruntModel);
     const cardD = boardB.child.cards.find(item => item instanceof WispModel);
     if (!cardC || !cardD) throw new Error();
-    const roleA = playerA.child.hero.child.role;
-    const roleB = playerB.child.hero.child.role;
-    const roleC = cardC.child.role;
-    const roleD = cardD.child.role;
+    const heroA = playerA.child.hero;
 
     test('frostwolf-grunt-play', async () => {
         // Check initial state
-        expect(roleC.child.attack.state.current).toBe(2); // Frostwolf Grunt: 2/2
-        expect(roleC.child.health.state.current).toBe(2);
+        expect(cardC.child.attack.state.current).toBe(2); // Frostwolf Grunt: 2/2
+        expect(cardC.child.health.state.current).toBe(2);
         expect(handA.child.cards.length).toBe(1); // Frostwolf Grunt in hand
         expect(boardA.child.cards.length).toBe(0); // No minions on board
         expect(playerA.child.mana.state.current).toBe(10); // Full mana
@@ -87,7 +84,7 @@ describe('frostwolf-grunt', () => {
         expect(playerA.child.mana.state.current).toBe(8); // 10 - 2 = 8
 
         // Check that Frostwolf Grunt has Taunt
-        expect(roleC.child.feats.child.taunt).toBeDefined(); // Has Taunt
+        expect(cardC.child.feats.child.taunt).toBeDefined(); // Has Taunt
     });
 
     test('wisp-attack', async () => {
@@ -96,25 +93,24 @@ describe('frostwolf-grunt', () => {
         expect(game.child.turn.refer.current).toBe(playerB);
 
         // Check initial state
-        expect(roleC.child.health.state.current).toBe(2); // Frostwolf Grunt: 2/2
-        expect(roleD.child.health.state.current).toBe(1); // Wisp: 1/1
+        expect(cardC.child.health.state.current).toBe(2); // Frostwolf Grunt: 2/2
+        expect(cardD.child.health.state.current).toBe(1); // Wisp: 1/1
         expect(boardA.child.cards.length).toBe(1); // Frostwolf Grunt on board
         expect(boardB.child.cards.length).toBe(1); // Wisp on board
 
         // Player B's Wisp attacks, can only target Frostwolf Grunt (Taunt forces this)
-        let promise = roleD.child.action.run();
-        expect(playerB.child.controller.current?.options).toContain(roleC); // Can target Frostwolf Grunt (Taunt forces this)
-        expect(playerB.child.controller.current?.options).not.toContain(roleA); // Cannot target Player A's hero (Taunt blocks)
-        expect(playerB.child.controller.current?.options).not.toContain(roleB); // Cannot target Player B's hero
-        playerB.child.controller.set(roleC); // Target Frostwolf Grunt
+        let promise = cardD.child.action.run();
+        expect(playerB.child.controller.current?.options).toContain(cardC); // Can target Frostwolf Grunt (Taunt forces this)
+        expect(playerB.child.controller.current?.options).not.toContain(heroA); // Cannot target Player A's hero (Taunt blocks)
+        playerB.child.controller.set(cardC); // Target Frostwolf Grunt
         await promise;
 
-        expect(roleC.child.health.state.current).toBe(1);
-        expect(roleC.child.health.state.damage).toBe(1);
-        expect(roleC.child.health.state.maximum).toBe(2);
+        expect(cardC.child.health.state.current).toBe(1);
+        expect(cardC.child.health.state.damage).toBe(1);
+        expect(cardC.child.health.state.maximum).toBe(2);
         expect(cardC.child.dispose.status).toBe(false);
 
-        expect(roleD.child.health.state.current).toBe(-1);
+        expect(cardD.child.health.state.current).toBe(-1);
         expect(cardD.child.dispose.status).toBe(true);
 
         // Both minions should die (1/1 vs 2/2)

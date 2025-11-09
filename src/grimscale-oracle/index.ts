@@ -40,7 +40,7 @@ export class GrimscaleOracleModel extends MinionCardModel {
                 health: props.child?.health ?? new RoleHealthModel({ state: { origin: 1 }}),
                 feats: props.child?.feats ?? new MinionFeaturesModel({
                     child: {
-                        feats: [new GrimscaleOracleFeatureModel()]
+                        items: [new GrimscaleOracleFeatureModel()]
                     }
                 }),
                 ...props.child,

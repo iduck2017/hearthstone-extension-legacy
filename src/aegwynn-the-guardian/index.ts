@@ -38,7 +38,7 @@ export class AegwynnTheGuardianModel extends MinionCardModel {
                 health: props.child?.health ?? new RoleHealthModel({ state: { origin: 5 }}),
                 feats: props.child?.feats ?? new MinionFeaturesModel({
                     child: {
-                        feats: [new SpellDamageModel({ state: { offset: 2 }})],
+                        items: [new SpellDamageModel({ state: { offset: 2 }})],
                         deathrattle: [new AegwynnTheGuardianDeathrattleModel()]
                     }
                 }),

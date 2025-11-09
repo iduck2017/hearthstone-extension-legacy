@@ -56,24 +56,23 @@ describe('divine-spirit', () => {
     const cardC = handA.child.cards.find(item => item instanceof DivineSpiritModel);
     const cardD = boardA.child.cards.find(item => item instanceof WaterElementalModel);
     if (!cardC || !cardD) throw new Error();
-    const roleD = cardD?.child.role;
 
     test('divine-spirit-cast', async () => {
         // Check initial state
-        expect(roleD.child.attack.state.current).toBe(3); // Water Elemental: 3/6
-        expect(roleD.child.health.state.current).toBe(6);
+        expect(cardD.child.attack.state.current).toBe(3); // Water Elemental: 3/6
+        expect(cardD.child.health.state.current).toBe(6);
         expect(playerA.child.mana.state.current).toBe(10);
         expect(handA.child.cards.length).toBe(1);
 
         // Player A uses Divine Spirit on Water Elemental
         const promise = cardC.play();
-        expect(playerA.child.controller.current?.options).toContain(cardD.child.role); // Water Elemental should be targetable
-        playerA.child.controller.set(cardD.child.role);
+        expect(playerA.child.controller.current?.options).toContain(cardD); // Water Elemental should be targetable
+        playerA.child.controller.set(cardD);
         await promise;
 
         // Water Elemental should have doubled Health
-        expect(roleD.child.attack.state.current).toBe(3); // Attack unchanged
-        expect(roleD.child.health.state.current).toBe(12); // 6 + 6 = 12 (doubled)
+        expect(cardD.child.attack.state.current).toBe(3); // Attack unchanged
+        expect(cardD.child.health.state.current).toBe(12); // 6 + 6 = 12 (doubled)
 
         // Divine Spirit should be consumed
         expect(handA.child.cards.length).toBe(0); // Divine Spirit consumed

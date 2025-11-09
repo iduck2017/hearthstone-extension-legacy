@@ -64,14 +64,11 @@ describe('twilight-drake', () => {
     const handA = playerA.child.hand;
     const cardC = handA.child.cards.find(item => item instanceof TwilightDrakeModel);
     if (!cardC) throw new Error();
-    const roleA = playerA.child.hero.child.role;
-    const roleB = playerB.child.hero.child.role;
-    const roleC = cardC.child.role;
 
     test('twilight-drake-play', async () => {
         // Check initial state
-        expect(roleC.child.attack.state.current).toBe(4); // Twilight Drake: 4/1
-        expect(roleC.child.health.state.current).toBe(1);
+        expect(cardC.child.attack.state.current).toBe(4); // Twilight Drake: 4/1
+        expect(cardC.child.health.state.current).toBe(1);
         expect(handA.child.cards.length).toBe(3); // Twilight Drake + 2 Wisp in hand
         expect(boardA.child.cards.length).toBe(0); // No minions on board
         expect(playerA.child.mana.state.current).toBe(10); // Full mana
@@ -87,8 +84,8 @@ describe('twilight-drake', () => {
         expect(playerA.child.mana.state.current).toBe(6); // 10 - 4 = 6
 
         // Twilight Drake should gain +2 Health (2 cards in hand when played)
-        expect(roleC.child.health.state.current).toBe(3); // 1 base + 2 from hand size = 3
-        expect(roleC.child.health.state.origin).toBe(1);
-        expect(roleC.child.attack.state.current).toBe(4); // Attack remains 4
+        expect(cardC.child.health.state.current).toBe(3); // 1 base + 2 from hand size = 3
+        expect(cardC.child.health.state.origin).toBe(1);
+        expect(cardC.child.attack.state.current).toBe(4); // Attack remains 4
     });
 });

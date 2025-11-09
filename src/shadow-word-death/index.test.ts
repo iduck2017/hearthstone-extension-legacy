@@ -70,11 +70,11 @@ describe('shadow-word-death', () => {
 
         // Player A uses Shadow Word: Death
         const promise = cardC.play();
-        expect(playerA.child.controller.current?.options).toContain(cardD.child.role); // Aegwynn (5/5/5) should be targetable
-        expect(playerA.child.controller.current?.options).not.toContain(cardE.child.role); // Stonetusk Boar (1/1) should not be targetable
-        expect(playerA.child.controller.current?.options).not.toContain(heroA.child.role);
-        expect(playerA.child.controller.current?.options).not.toContain(heroB.child.role); 
-        playerA.child.controller.set(cardD.child.role);
+        expect(playerA.child.controller.current?.options).toContain(cardD); // Aegwynn (5/5/5) should be targetable
+        expect(playerA.child.controller.current?.options).not.toContain(cardE); // Stonetusk Boar (1/1) should not be targetable
+        expect(playerA.child.controller.current?.options).not.toContain(heroA);
+        expect(playerA.child.controller.current?.options).not.toContain(heroB); 
+        playerA.child.controller.set(cardD);
         await promise;
 
         // Aegwynn should be destroyed

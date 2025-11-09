@@ -61,14 +61,11 @@ describe('novice-engineer', () => {
     const deckA = playerA.child.deck;
     const cardC = handA.child.cards.find(item => item instanceof NoviceEngineerModel);
     if (!cardC) throw new Error();
-    const roleA = playerA.child.hero.child.role;
-    const roleB = playerB.child.hero.child.role;
-    const roleC = cardC.child.role;
 
     test('novice-engineer-play', async () => {
         // Check initial state
-        expect(roleC.child.attack.state.current).toBe(1); // Novice Engineer: 1/1
-        expect(roleC.child.health.state.current).toBe(1);
+        expect(cardC.child.attack.state.current).toBe(1); // Novice Engineer: 1/1
+        expect(cardC.child.health.state.current).toBe(1);
         expect(boardA.child.cards.length).toBe(0); // No minions on board
         expect(handA.child.cards.length).toBe(1); // Novice Engineer in hand
         expect(deckA.child.cards.length).toBe(2); // 2 Wisp in deck

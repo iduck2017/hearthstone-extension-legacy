@@ -70,32 +70,30 @@ describe('northshire-cleric', () => {
     const cardC = boardA.child.cards.find(item => item instanceof NorthshireClericModel);
     const cardE = boardB.child.cards.find(item => item instanceof ManaWyrmModel);
     const cardD = handA.child.cards.find(item => item instanceof CircleOfHealingModel);
-    const roleC = cardC?.child.role;
-    const roleE = cardE?.child.role;
-    if (!roleC || !roleE || !cardD) throw new Error();
+    if (!cardC || !cardE || !cardD) throw new Error();
 
     test('northshire-cleric-attack', async () => {
         // Check initial stats
-        expect(roleC.child.attack.state.current).toBe(1); // Cleric: 1/3
-        expect(roleC.child.health.state.current).toBe(3);
-        expect(roleE.child.attack.state.current).toBe(1); // Mana Wyrm: 1/3
-        expect(roleE.child.health.state.current).toBe(3);
+        expect(cardC.child.attack.state.current).toBe(1); // Cleric: 1/3
+        expect(cardC.child.health.state.current).toBe(3);
+        expect(cardE.child.attack.state.current).toBe(1); // Mana Wyrm: 1/3
+        expect(cardE.child.health.state.current).toBe(3);
 
         // Northshire Cleric attacks first Mana Wyrm
-        const promise = roleC.child.action.run();
-        expect(playerA.child.controller.current?.options).toContain(roleE);
-        playerA.child.controller.set(roleE);
+        const promise = cardC.child.action.run();
+        expect(playerA.child.controller.current?.options).toContain(cardE);
+        playerA.child.controller.set(cardE);
         await promise;
 
         // Both should be damaged
-        expect(roleC.child.health.state.current).toBe(2); // 3 - 1 damage
-        expect(roleE.child.health.state.current).toBe(2); // 3 - 1 damage
+        expect(cardC.child.health.state.current).toBe(2); // 3 - 1 damage
+        expect(cardE.child.health.state.current).toBe(2); // 3 - 1 damage
     });
 
     test('circle-of-healing-cast', async () => {
         // Check stats after attack
-        expect(roleC.child.health.state.current).toBe(2); // Damaged
-        expect(roleE.child.health.state.current).toBe(2); // Damaged
+        expect(cardC.child.health.state.current).toBe(2); // Damaged
+        expect(cardE.child.health.state.current).toBe(2); // Damaged
 
         // Check initial hand and deck size
         expect(handA.child.cards.length).toBe(1); // Only Circle of Healing
@@ -106,8 +104,8 @@ describe('northshire-cleric', () => {
         await promise;
 
         // All minions should be healed
-        expect(roleC.child.health.state.current).toBe(3); // 2 + 4 = 3 (capped at max)
-        expect(roleE.child.health.state.current).toBe(3); // 2 + 4 = 3 (capped at max)
+        expect(cardC.child.health.state.current).toBe(3); // 2 + 4 = 3 (capped at max)
+        expect(cardE.child.health.state.current).toBe(3); // 2 + 4 = 3 (capped at max)
 
         // Player A should have drawn 2 cards (one for each minion healed)
         expect(handA.child.cards.length).toBe(2); 

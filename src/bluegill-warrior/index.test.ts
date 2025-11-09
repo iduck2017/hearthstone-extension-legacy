@@ -61,15 +61,12 @@ describe('bluegill-warrior', () => {
     const cardC = handA.child.cards.find(item => item instanceof BluegillWarriorModel);
     const cardD = boardB.child.cards.find(item => item instanceof WispModel);
     if (!cardC || !cardD) throw new Error();
-    const roleA = playerA.child.hero.child.role;
-    const roleB = playerB.child.hero.child.role;
-    const roleC = cardC.child.role;
-    const roleD = cardD.child.role;
+    const heroB = playerB.child.hero;
 
     test('bluegill-warrior-play', async () => {
         // Check initial state
-        expect(roleC.child.attack.state.current).toBe(2); // Bluegill Warrior: 2/1
-        expect(roleC.child.health.state.current).toBe(1);
+        expect(cardC.child.attack.state.current).toBe(2); // Bluegill Warrior: 2/1
+        expect(cardC.child.health.state.current).toBe(1);
         expect(handA.child.cards.length).toBe(1); // Bluegill Warrior in hand
         expect(boardA.child.cards.length).toBe(0); // No minions on board
         expect(playerA.child.mana.state.current).toBe(10); // Full mana
@@ -85,30 +82,30 @@ describe('bluegill-warrior', () => {
         expect(playerA.child.mana.state.current).toBe(8); // 10 - 2 = 8
 
         // Check that Bluegill Warrior has Charge (can attack immediately)
-        expect(roleC.child.action.state.current).toBe(1); // Can attack
-        expect(roleC.child.action.status).toBe(true); // Action is available
+        expect(cardC.child.action.state.current).toBe(1); // Can attack
+        expect(cardC.child.action.status).toBe(true); // Action is available
     });
 
     test('bluegill-warrior-charge', async () => {
         // Check initial state
-        expect(roleB.child.health.state.current).toBe(30); // Player B hero: 30 health
-        expect(roleC.child.attack.state.current).toBe(2); // Bluegill Warrior: 2/1
-        expect(roleC.child.health.state.current).toBe(1);
-        expect(roleC.child.action.state.current).toBe(1); // Can attack
-        expect(roleC.child.action.status).toBe(true); // Action is available
+        expect(heroB.child.health.state.current).toBe(30); // Player B hero: 30 health
+        expect(cardC.child.attack.state.current).toBe(2); // Bluegill Warrior: 2/1
+        expect(cardC.child.health.state.current).toBe(1);
+        expect(cardC.child.action.state.current).toBe(1); // Can attack
+        expect(cardC.child.action.status).toBe(true); // Action is available
 
         // Bluegill Warrior attacks Player B's hero
-        const promise = roleC.child.action.run();
-        expect(playerA.child.controller.current?.options).toContain(roleB); // Can target enemy hero
-        expect(playerA.child.controller.current?.options).toContain(roleD); // Can target enemy minion
-        playerA.child.controller.set(roleB); // Target Player B's hero
+        const promise = cardC.child.action.run();
+        expect(playerA.child.controller.current?.options).toContain(heroB); // Can target enemy hero
+        expect(playerA.child.controller.current?.options).toContain(cardD); // Can target enemy minion
+        playerA.child.controller.set(heroB); // Target Player B's hero
         await promise;
 
         // Player B's hero should take 2 damage
-        expect(roleB.child.health.state.current).toBe(28); // 30 - 2 = 28
-        expect(roleB.child.health.state.damage).toBe(2);
+        expect(heroB.child.health.state.current).toBe(28); // 30 - 2 = 28
+        expect(heroB.child.health.state.damage).toBe(2);
 
         // Bluegill Warrior should have used its attack
-        expect(roleC.child.action.state.current).toBe(0); // Cannot attack again this turn
+        expect(cardC.child.action.state.current).toBe(0); // Cannot attack again this turn
     });
 });

@@ -49,39 +49,38 @@ describe('frostbolt', () => {
     const boardB = playerB.child.board;
     const cardC = boardB.child.cards.find(item => item instanceof WispModel);
     const cardD = handA.child.cards.find(item => item instanceof FrostboltModel);
-    const roleA = playerA.child.hero.child.role;
-    const roleB = playerB.child.hero.child.role;
-    const roleC = cardC?.child.role;
-    if (!cardD || !roleC) throw new Error();
+    if (!cardD || !cardC) throw new Error();
+    const heroA = playerA.child.hero;
+    const heroB = playerB.child.hero;
     const turn = game.child.turn;
 
     test('frostbolt-cast', async () => {
         // Target is not frozen initially and has full health
         expect(playerA.child.mana.state.current).toBe(10);
         expect(handA.child.cards.length).toBe(1);
-        expect(roleC.child.feats.child.frozen.state.isActive).toBeFalsy();
-        expect(roleC.child.health.state.current).toBe(1);
+        expect(cardC.child.feats.child.frozen.state.isActive).toBeFalsy();
+        expect(cardC.child.health.state.current).toBe(1);
 
         // Play Frostbolt targeting enemy minion
         let promise = cardD.play();
-        expect(playerA.child.controller.current?.options).toContain(roleA);
-        expect(playerA.child.controller.current?.options).toContain(roleB);
-        expect(playerA.child.controller.current?.options).toContain(roleC);
-        playerA.child.controller.set(roleC);
+        expect(playerA.child.controller.current?.options).toContain(heroA);
+        expect(playerA.child.controller.current?.options).toContain(heroB);
+        expect(playerA.child.controller.current?.options).toContain(cardC);
+        playerA.child.controller.set(cardC);
         await promise;
         
         // Target should take 3 damage and be frozen
         expect(playerA.child.mana.state.current).toBe(8);
-        expect(roleC.child.health.state.current).toBe(-2);
-        expect(roleC.child.health.state.damage).toBe(3);
-        expect(roleC.child.feats.child.frozen.state.isActive).toBe(true);
+        expect(cardC.child.health.state.current).toBe(-2);
+        expect(cardC.child.health.state.damage).toBe(3);
+        expect(cardC.child.feats.child.frozen.state.isActive).toBe(true);
         expect(handA.child.cards.length).toBe(0);
         
         // Check turn progression and frozen state persists
         turn.next();
         expect(turn.refer.current).toBe(playerB);
-        expect(roleC.child.feats.child.frozen.state.isActive).toBe(true);
-        expect(roleC.child.action.status).toBe(false);
+        expect(cardC.child.feats.child.frozen.state.isActive).toBe(true);
+        expect(cardC.child.action.status).toBe(false);
         
     })
 }) 

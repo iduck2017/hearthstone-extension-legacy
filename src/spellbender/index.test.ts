@@ -59,8 +59,7 @@ describe('spellbender', () => {
     const cardC = handA.child.cards.find(item => item instanceof FrostNovaModel);
     const cardD = handA.child.cards.find(item => item instanceof IceLanceModel);
     const cardF = boardB.child.cards.find(item => item instanceof WispModel);
-    const roleF = cardF?.child.role;
-    if (!cardC || !cardD || !roleF) throw new Error();
+    if (!cardC || !cardD || !cardF) throw new Error();
 
     test('frost-nova-cast', async () => {
         // Check initial stats
@@ -68,13 +67,13 @@ describe('spellbender', () => {
         expect(handA.child.cards.length).toBe(2);
         expect(boardB.child.cards.length).toBe(1); // Only Wisp
         expect(boardB.child.secrets.length).toBe(1);
-        expect(roleF.child.feats.child.frozen.state.isActive).toBe(false);
+        expect(cardF.child.feats.child.frozen.state.isActive).toBe(false);
 
         // Player A casts Frost Nova (should not trigger Spellbender on non-targeted spells)
         await cardC.play();
 
         // Check Frost Nova effect: all enemy minions should be frozen
-        expect(roleF.child.feats.child.frozen.state.isActive).toBe(true);
+        expect(cardF.child.feats.child.frozen.state.isActive).toBe(true);
         
         // Spellbender should still be active (not triggered)
         expect(boardB.child.secrets.length).toBe(1);
@@ -88,12 +87,12 @@ describe('spellbender', () => {
         expect(handA.child.cards.length).toBe(1);
         expect(boardB.child.secrets.length).toBe(1);
         expect(boardB.child.cards.length).toBe(1); // Only Wisp
-        expect(roleF.child.feats.child.frozen.state.isActive).toBe(true);
+        expect(cardF.child.feats.child.frozen.state.isActive).toBe(true);
 
         // Player A casts Ice Lance targeting Wisp (should trigger Spellbender)
         const promise = cardD.play();
-        expect(playerA.child.controller.current?.options).toContain(roleF);
-        playerA.child.controller.set(roleF);
+        expect(playerA.child.controller.current?.options).toContain(cardF);
+        playerA.child.controller.set(cardF);
         await promise;
 
         // Check Spellbender triggered: secret should be consumed
@@ -105,10 +104,9 @@ describe('spellbender', () => {
         expect(cardE).toBeDefined();
         if (!cardE) throw new Error();
 
-        const roleE = cardE.child.role;
-        expect(roleE.child.feats.child.frozen.state.isActive).toBe(true); // Spellbender gets frozen
+        expect(cardE.child.feats.child.frozen.state.isActive).toBe(true); // Spellbender gets frozen
         expect(cardF.child.dispose.status).toBe(false); // Wisp is alive
-        expect(roleF.child.health.state.current).toBe(1); // Wisp is alive
+        expect(cardF.child.health.state.current).toBe(1); // Wisp is alive
         
         // Check mana and hand
         expect(playerA.child.mana.state.current).toBe(6); // 7 - 1 cost

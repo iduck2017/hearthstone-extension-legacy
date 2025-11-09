@@ -59,14 +59,11 @@ describe('river-crocolisk', () => {
     const handA = playerA.child.hand;
     const cardC = handA.child.cards.find(item => item instanceof RiverCrocoliskModel);
     if (!cardC) throw new Error();
-    const roleA = playerA.child.hero.child.role;
-    const roleB = playerB.child.hero.child.role;
-    const roleC = cardC.child.role;
 
     test('river-crocolisk-play', async () => {
         // Check initial state
-        expect(roleC.child.attack.state.current).toBe(2); // River Crocolisk: 2/3
-        expect(roleC.child.health.state.current).toBe(3);
+        expect(cardC.child.attack.state.current).toBe(2); // River Crocolisk: 2/3
+        expect(cardC.child.health.state.current).toBe(3);
         expect(handA.child.cards.length).toBe(1); // River Crocolisk in hand
         expect(boardA.child.cards.length).toBe(0); // No minions on board
         expect(playerA.child.mana.state.current).toBe(10); // Full mana

@@ -55,11 +55,7 @@ describe('abusive-sergeant', () => {
     const cardD = handA.child.cards.find((item: any) => item instanceof WispModel);
     const cardE = handB.child.cards.find((item: any) => item instanceof WispModel);
     const cardF = handB.child.cards.find((item: any) => item instanceof AbusiveSergeantModel);
-    const roleC = cardC?.child.role;
-    const roleD = cardD?.child.role;
-    const roleE = cardE?.child.role;
-    const roleF = cardF?.child.role;
-    if (!roleC || !roleD || !roleE || !roleF) throw new Error();
+    if (!cardC || !cardD || !cardE || !cardF) throw new Error();
 
     test('abusive-sergeant-play', async () => {
         expect(boardB.child.cards.length).toBe(0);
@@ -84,10 +80,10 @@ describe('abusive-sergeant', () => {
         await promise;
         
         expect(boardA.child.cards.length).toBe(2);
-        expect(roleC.child.attack.state.current).toBe(2);
-        expect(roleD.child.attack.state.current).toBe(1);
-        expect(roleC.child.attack.state.origin).toBe(2);
-        expect(roleD.child.attack.state.origin).toBe(1);
+        expect(cardC.child.attack.state.current).toBe(2);
+        expect(cardD.child.attack.state.current).toBe(1);
+        expect(cardC.child.attack.state.origin).toBe(2);
+        expect(cardD.child.attack.state.origin).toBe(1);
     })
 
     test('abusive-sergeant-battlecry', async () => {
@@ -109,26 +105,26 @@ describe('abusive-sergeant', () => {
         game.child.playerB.child.controller.set(0);
         await AnimeUtil.sleep();
         expect(game.child.playerB.child.controller.current).toBeDefined();
-        expect(game.child.playerB.child.controller.current?.options).toContain(roleD);
-        expect(game.child.playerB.child.controller.current?.options).toContain(roleE);
-        expect(game.child.playerB.child.controller.current?.options).toContain(roleC);
+        expect(game.child.playerB.child.controller.current?.options).toContain(cardD);
+        expect(game.child.playerB.child.controller.current?.options).toContain(cardE);
+        expect(game.child.playerB.child.controller.current?.options).toContain(cardC);
         expect(game.child.playerB.child.controller.current?.options.length).toBe(3);
-        game.child.playerB.child.controller.set(roleD);
+        game.child.playerB.child.controller.set(cardD);
         await promise;
         await AnimeUtil.sleep();
 
         expect(boardA.child.cards.length).toBe(2);
         expect(boardB.child.cards.length).toBe(2);
-        expect(roleD.child.attack.state.current).toBe(3);
-        expect(roleD.child.attack.state.origin).toBe(1);
-        expect(roleE.child.attack.state.current).toBe(1);
+        expect(cardD.child.attack.state.current).toBe(3);
+        expect(cardD.child.attack.state.origin).toBe(1);
+        expect(cardE.child.attack.state.current).toBe(1);
     })
 
     test('abusive-sergeant-buff-expire', async () => {
-        expect(roleD.child.attack.state.current).toBe(3);
+        expect(cardD.child.attack.state.current).toBe(3);
         
         turn.next();
-        expect(roleD.child.attack.state.current).toBe(1);
-        expect(roleD.child.attack.state.origin).toBe(1);
+        expect(cardD.child.attack.state.current).toBe(1);
+        expect(cardD.child.attack.state.origin).toBe(1);
     })
 })

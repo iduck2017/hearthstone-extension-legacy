@@ -41,24 +41,22 @@ describe('goldshire-footman', () => {
     const playerB = game.child.playerB;
     const cardC = boardA.child.cards.find((item: any) => item instanceof WispModel);
     const cardD = boardB.child.cards.find((item: any) => item instanceof GoldshireFootmanModel);
-    const roleC = cardC?.child.role;
-    const roleD = cardD?.child.role;
-    const roleB = playerB.child.hero.child.role;
-    if (!roleC || !roleD) throw new Error();
+    const heroB = playerB.child.hero;
+    if (!cardC || !cardD) throw new Error();
 
     test('wisp-attack-goldshire-footman', async () => {
         // Initial state verification
-        expect(roleC.child.action.state.current).toBe(1); // Wisp has action point
-        expect(roleD.child.feats.child.taunt.state.isActive).toBe(true);
-        const promise = roleC.child.action.run();
+        expect(cardC.child.action.state.current).toBe(1); // Wisp has action point
+        expect(cardD.child.feats.child.taunt.state.isActive).toBe(true);
+        const promise = cardC.child.action.run();
         await AnimeUtil.sleep();
-        expect(game.child.playerA.child.controller.current?.options).toContain(roleD);
-        expect(game.child.playerA.child.controller.current?.options).not.toContain(roleB);
-        game.child.playerA.child.controller.set(roleD);
+        expect(game.child.playerA.child.controller.current?.options).toContain(cardD);
+        expect(game.child.playerA.child.controller.current?.options).not.toContain(heroB);
+        game.child.playerA.child.controller.set(cardD);
         await promise;
-        expect(roleD.child.health.state.current).toBe(1);
-        expect(roleD.child.health.state.maximum).toBe(2);
-        expect(roleD.child.health.state.damage).toBe(1);
-        expect(roleD.child.health.state.maximum).toBe(2);
+        expect(cardD.child.health.state.current).toBe(1);
+        expect(cardD.child.health.state.maximum).toBe(2);
+        expect(cardD.child.health.state.damage).toBe(1);
+        expect(cardD.child.health.state.maximum).toBe(2);
     })
 }) 

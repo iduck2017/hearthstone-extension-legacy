@@ -61,14 +61,11 @@ describe('silver-hand-knight', () => {
     const handA = playerA.child.hand;
     const cardC = handA.child.cards.find(item => item instanceof SilverHandKnightModel);
     if (!cardC) throw new Error();
-    const roleA = playerA.child.hero.child.role;
-    const roleB = playerB.child.hero.child.role;
-    const roleC = cardC.child.role;
 
     test('silver-hand-knight-play', async () => {
         // Check initial state
-        expect(roleC.child.attack.state.current).toBe(4); // Silver Hand Knight: 4/4
-        expect(roleC.child.health.state.current).toBe(4);
+        expect(cardC.child.attack.state.current).toBe(4); // Silver Hand Knight: 4/4
+        expect(cardC.child.health.state.current).toBe(4);
         expect(handA.child.cards.length).toBe(1); // Silver Hand Knight in hand
         expect(boardA.child.cards.length).toBe(0); // No minions on board
         expect(playerA.child.mana.state.current).toBe(10); // Full mana
@@ -87,8 +84,8 @@ describe('silver-hand-knight', () => {
         const cardD = boardA.child.cards.find(item => item instanceof SquireModel);
         expect(cardD).toBeDefined();
         if (cardD) {
-            expect(cardD.child.role.child.attack.state.current).toBe(2); // Squire: 2/2
-            expect(cardD.child.role.child.health.state.current).toBe(2);
+            expect(cardD.child.attack.state.current).toBe(2); // Squire: 2/2
+            expect(cardD.child.health.state.current).toBe(2);
         }
     });
 });

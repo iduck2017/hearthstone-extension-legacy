@@ -40,26 +40,24 @@ describe('argent-squire', () => {
     const boardB = game.child.playerB.child.board;
     const cardC = boardA.child.cards.find(item => item instanceof ArgentSquireModel);
     const cardD = boardB.child.cards.find(item => item instanceof ArgentSquireModel);
-    const roleC = cardC?.child.role;
-    const roleD = cardD?.child.role;
-    if (!roleC || !roleD) throw new Error();
+    if (!cardC || !cardD) throw new Error();
     const turn = game.child.turn;
 
     test('argent-squire-attack', async () => {
         // First attack: both squires attack each other
         // Divine Shield blocks the damage, so no health is lost
-        expect(roleC.child.health.state.current).toBe(1);
-        expect(roleD.child.health.state.current).toBe(1);
-        expect(roleC.child.feats.child.divineShield.state.isActive).toBe(true);
-        expect(roleD.child.feats.child.divineShield.state.isActive).toBe(true);
-        const promise = roleC.child.action.run();
-        expect(game.child.playerA.child.controller.current?.options).toContain(roleD);
-        game.child.playerA.child.controller.set(roleD);
+        expect(cardC.child.health.state.current).toBe(1);
+        expect(cardD.child.health.state.current).toBe(1);
+        expect(cardC.child.feats.child.divineShield.state.isActive).toBe(true);
+        expect(cardD.child.feats.child.divineShield.state.isActive).toBe(true);
+        const promise = cardC.child.action.run();
+        expect(game.child.playerA.child.controller.current?.options).toContain(cardD);
+        game.child.playerA.child.controller.set(cardD);
         await promise;
-        expect(roleC.child.health.state.current).toBe(1);
-        expect(roleD.child.health.state.current).toBe(1);
-        expect(roleC.child.feats.child.divineShield.state.isActive).toBe(false);
-        expect(roleD.child.feats.child.divineShield.state.isActive).toBe(false);
+        expect(cardC.child.health.state.current).toBe(1);
+        expect(cardD.child.health.state.current).toBe(1);
+        expect(cardC.child.feats.child.divineShield.state.isActive).toBe(false);
+        expect(cardD.child.feats.child.divineShield.state.isActive).toBe(false);
         expect(cardC.child.dispose.status).toBe(false);
         expect(cardD.child.dispose.status).toBe(false);
     })
@@ -67,13 +65,13 @@ describe('argent-squire', () => {
     test('argent-squire-die', async () => {
         turn.next();
         
-        const promise = roleD.child.action.run();
-        expect(game.child.playerB.child.controller.current?.options).toContain(roleC);
-        game.child.playerB.child.controller.set(roleC);
+        const promise = cardD.child.action.run();
+        expect(game.child.playerB.child.controller.current?.options).toContain(cardC);
+        game.child.playerB.child.controller.set(cardC);
         await promise;
 
-        expect(roleC.child.health.state.current).toBe(0);
-        expect(roleD.child.health.state.current).toBe(0);
+        expect(cardC.child.health.state.current).toBe(0);
+        expect(cardD.child.health.state.current).toBe(0);
         expect(cardC.child.dispose.status).toBe(true);
         expect(cardD.child.dispose.status).toBe(true);
 

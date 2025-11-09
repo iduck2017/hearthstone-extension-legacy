@@ -44,13 +44,13 @@ describe('arcane-missiles', () => {
     
     const playerA = game.child.playerA;
     const playerB = game.child.playerB;
+    const heroB = playerB.child.hero;
     const handA = playerA.child.hand;
-    const roleB = playerB.child.hero.child.role;
     const cardD = handA.child.cards.find(item => item instanceof ArcaneMissilesModel);
     if (!cardD) throw new Error();
 
     test('arcane-missiles-cast', async () => {
-        expect(roleB.child.health.state.current).toBe(30);
+        expect(heroB.child.health.state.current).toBe(30);
         expect(playerA.child.mana.state.current).toBe(10);
         
         // Play Arcane Missiles - no target selection needed
@@ -58,7 +58,7 @@ describe('arcane-missiles', () => {
 
         expect(playerA.child.mana.state.current).toBe(9);
         // Hero should take exactly 3 damage (since no other enemies)
-        expect(roleB.child.health.state.current).toBe(27);
-        expect(roleB.child.health.state.damage).toBe(3);
+        expect(heroB.child.health.state.current).toBe(27);
+        expect(heroB.child.health.state.damage).toBe(3);
     })
 })

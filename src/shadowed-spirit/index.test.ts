@@ -59,24 +59,21 @@ describe('shadowed-spirit', () => {
     const cardC = boardA.child.cards.find(item => item instanceof ShadowedSpiritModel);
     const cardD = boardB.child.cards.find(item => item instanceof WaterElementalModel);
     if (!cardC || !cardD) throw new Error();
-    const roleC = cardC.child.role;
-    const roleD = cardD.child.role;
     const heroB = playerB.child.hero;
-    const roleB = heroB.child.role;
 
     test('shadowed-spirit-death', async () => {
         // Check initial state
-        expect(roleC.child.attack.state.current).toBe(4); // Shadowed Spirit: 3/4
-        expect(roleC.child.health.state.current).toBe(3);
-        expect(roleD.child.attack.state.current).toBe(3); // Water Elemental: 3/6
-        expect(roleD.child.health.state.current).toBe(6);
-        expect(roleB.child.health.state.current).toBe(30); // Full health
+        expect(cardC.child.attack.state.current).toBe(4); // Shadowed Spirit: 3/4
+        expect(cardC.child.health.state.current).toBe(3);
+        expect(cardD.child.attack.state.current).toBe(3); // Water Elemental: 3/6
+        expect(cardD.child.health.state.current).toBe(6);
+        expect(heroB.child.health.state.current).toBe(30); // Full health
 
         // Shadowed Spirit attacks Water Elemental, Shadowed Spirit dies
-        let promise = roleC.child.action.run();
+        let promise = cardC.child.action.run();
         await AnimeUtil.sleep();
-        expect(playerA.child.controller.current?.options).toContain(roleD);
-        playerA.child.controller.set(roleD);
+        expect(playerA.child.controller.current?.options).toContain(cardD);
+        playerA.child.controller.set(cardD);
         await promise;
 
         // Shadowed Spirit should die, Water Elemental should survive
@@ -86,6 +83,6 @@ describe('shadowed-spirit', () => {
         expect(boardB.child.cards.length).toBe(1);
 
         // Enemy hero should take 3 damage from Shadowed Spirit's deathrattle
-        expect(roleB.child.health.state.current).toBe(27); // 30 - 3 = 27
+        expect(heroB.child.health.state.current).toBe(27); // 30 - 3 = 27
     });
 });

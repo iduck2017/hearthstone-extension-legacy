@@ -62,31 +62,28 @@ describe('lightwell', () => {
     const cardD = boardA.child.cards.find(item => item instanceof WaterElementalModel);
     const cardE = boardB.child.cards.find(item => item instanceof WispModel);
     if (!cardC || !cardD || !cardE) throw new Error();
-    const roleC = cardC.child.role;
-    const roleD = cardD.child.role;
-    const roleE = cardE.child.role;
 
     test('water-element-attack', async () => {
         // Check initial state
-        expect(roleC.child.attack.state.current).toBe(0); // Lightwell: 0/5
-        expect(roleC.child.health.state.current).toBe(5);
-        expect(roleD.child.attack.state.current).toBe(3); // Water Elemental: 3/6
-        expect(roleD.child.health.state.current).toBe(6);
-        expect(roleE.child.attack.state.current).toBe(1); // Wisp: 1/1
-        expect(roleE.child.health.state.current).toBe(1);
+        expect(cardC.child.attack.state.current).toBe(0); // Lightwell: 0/5
+        expect(cardC.child.health.state.current).toBe(5);
+        expect(cardD.child.attack.state.current).toBe(3); // Water Elemental: 3/6
+        expect(cardD.child.health.state.current).toBe(6);
+        expect(cardE.child.attack.state.current).toBe(1); // Wisp: 1/1
+        expect(cardE.child.health.state.current).toBe(1);
         // Water Elemental attacks Wisp
-        const promise = roleD.child.action.run();
-        playerA.child.controller.set(roleE);
+        const promise = cardD.child.action.run();
+        playerA.child.controller.set(cardE);
         await promise;
         // Both should take damage
-        expect(roleD.child.health.state.current).toBe(5); // 6 - 1 = 5, but Wisp deals 1 damage
-        expect(roleE.child.health.state.current).toBe(-2); // 1 - 3 = -2, but minions die at 0
+        expect(cardD.child.health.state.current).toBe(5); // 6 - 1 = 5, but Wisp deals 1 damage
+        expect(cardE.child.health.state.current).toBe(-2); // 1 - 3 = -2, but minions die at 0
     });
 
     test('turn-end', async () => {
         // Player A's turn ends, Lightwell should restore 3 Health to a damaged character
         game.child.turn.next();
         // Water Elemental should be healed (it's the only damaged friendly character)
-        expect(roleD.child.health.state.current).toBe(6); // 3 + 3 = 6 (back to full health)
+        expect(cardD.child.health.state.current).toBe(6); // 3 + 3 = 6 (back to full health)
     });
 });

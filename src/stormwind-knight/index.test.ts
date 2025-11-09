@@ -63,15 +63,12 @@ describe('stormwind-knight', () => {
     const cardC = handA.child.cards.find(item => item instanceof StormwindKnightModel);
     const cardD = boardB.child.cards.find(item => item instanceof WispModel);
     if (!cardC || !cardD) throw new Error();
-    const roleA = playerA.child.hero.child.role;
-    const roleB = playerB.child.hero.child.role;
-    const roleC = cardC.child.role;
-    const roleD = cardD.child.role;
+    const heroB = playerB.child.hero;
 
     test('stormwind-knight-play', async () => {
         // Check initial state
-        expect(roleC.child.attack.state.current).toBe(2); // Stormwind Knight: 2/5
-        expect(roleC.child.health.state.current).toBe(5);
+        expect(cardC.child.attack.state.current).toBe(2); // Stormwind Knight: 2/5
+        expect(cardC.child.health.state.current).toBe(5);
         expect(handA.child.cards.length).toBe(1); // Stormwind Knight in hand
         expect(boardA.child.cards.length).toBe(0); // No minions on board
         expect(playerA.child.mana.state.current).toBe(10); // Full mana
@@ -87,21 +84,21 @@ describe('stormwind-knight', () => {
         expect(playerA.child.mana.state.current).toBe(6); // 10 - 4 = 6
 
         // Check that Stormwind Knight has Charge
-        expect(roleC.child.feats.child.charge.state.isActive).toBe(true); // Has Charge
+        expect(cardC.child.feats.child.charge.state.isActive).toBe(true); // Has Charge
     });
 
     test('stormwind-knight-attack', async () => {
         // Check initial state
-        expect(roleC.child.health.state.current).toBe(5); // Stormwind Knight: 2/5
-        expect(roleD.child.health.state.current).toBe(1); // Wisp: 1/1
+        expect(cardC.child.health.state.current).toBe(5); // Stormwind Knight: 2/5
+        expect(cardD.child.health.state.current).toBe(1); // Wisp: 1/1
         expect(boardA.child.cards.length).toBe(1); // Stormwind Knight on board
         expect(boardB.child.cards.length).toBe(1); // Wisp on board
 
         // Player A's Stormwind Knight attacks Player B's Wisp immediately (Charge allows immediate attack)
-        let promise = roleC.child.action.run();
-        expect(playerA.child.controller.current?.options).toContain(roleD); // Can target Wisp
-        expect(playerA.child.controller.current?.options).toContain(roleB); // Can target Player B's hero
-        playerA.child.controller.set(roleD); // Target Wisp
+        let promise = cardC.child.action.run();
+        expect(playerA.child.controller.current?.options).toContain(cardD); // Can target Wisp
+        expect(playerA.child.controller.current?.options).toContain(heroB); // Can target Player B's hero
+        playerA.child.controller.set(cardD); // Target Wisp
         await promise;
 
         // Wisp should die (1/1 vs 2/5)
@@ -109,6 +106,6 @@ describe('stormwind-knight', () => {
         expect(cardD.child.dispose.refer.source).toBe(cardC);
         expect(cardD.child.dispose.status).toBe(true);
         
-        expect(roleC.child.health.state.current).toBe(4); // Stormwind Knight: 5 - 1 = 4
+        expect(cardC.child.health.state.current).toBe(4); // Stormwind Knight: 5 - 1 = 4
     });
 });

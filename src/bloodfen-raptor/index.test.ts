@@ -38,7 +38,6 @@ describe('bloodfen-raptor', () => {
     const boardA = game.child.playerA.child.board;
     const handA = game.child.playerA.child.hand;
     const card = handA.child.cards.find((item: any) => item instanceof BloodfenRaptorModel);
-    const role = card?.child.role;
 
     test('bloodfen-raptor-play', async () => {
         expect(boardA.child.cards.length).toBe(0);
@@ -54,17 +53,17 @@ describe('bloodfen-raptor', () => {
     });
 
     test('bloodfen-raptor-stats', async () => {
-        if (!role) throw new Error('Role not found');
+        if (!card) throw new Error('Card not found');
         
         // Verify the minion has correct attack and health
-        expect(role.child.attack.state.current).toBe(3);
-        expect(role.child.attack.state.origin).toBe(3);
-        expect(role.child.health.state.current).toBe(2);
-        expect(role.child.health.state.origin).toBe(2);
+        expect(card.child.attack.state.current).toBe(3);
+        expect(card.child.attack.state.origin).toBe(3);
+        expect(card.child.health.state.current).toBe(2);
+        expect(card.child.health.state.origin).toBe(2);
         
         
         // Verify cost
-        expect(card?.child.cost.state.current).toBe(2);
-        expect(card?.child.cost.state.origin).toBe(2);
+        expect(card.child.cost.state.current).toBe(2);
+        expect(card.child.cost.state.origin).toBe(2);
     });
 });

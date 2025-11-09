@@ -59,18 +59,17 @@ describe('ironforge-rifleman', () => {
     const handA = playerA.child.hand;
     const cardC = handA.child.cards.find(item => item instanceof IronforgeRiflemanModel);
     if (!cardC) throw new Error();
-    const roleA = playerA.child.hero.child.role;
-    const roleB = playerB.child.hero.child.role;
-    const roleC = cardC.child.role;
+    const heroA = playerA.child.hero;
+    const heroB = playerB.child.hero;
 
     test('ironforge-rifleman-play', async () => {
         // Check initial state
-        expect(roleC.child.attack.state.current).toBe(2); // Ironforge Rifleman: 2/2
-        expect(roleC.child.health.state.current).toBe(2);
+        expect(cardC.child.attack.state.current).toBe(2); // Ironforge Rifleman: 2/2
+        expect(cardC.child.health.state.current).toBe(2);
         expect(handA.child.cards.length).toBe(1); // Ironforge Rifleman in hand
         expect(boardA.child.cards.length).toBe(0); // No minions on board
         expect(playerA.child.mana.state.current).toBe(10); // Full mana
-        expect(roleB.child.health.state.current).toBe(30); // Player B hero: 30 health
+        expect(heroB.child.health.state.current).toBe(30); // Player B hero: 30 health
 
         // Play Ironforge Rifleman
         let promise = cardC.play();
@@ -78,9 +77,9 @@ describe('ironforge-rifleman', () => {
         await AnimeUtil.sleep();
         
         // Choose target for battlecry
-        expect(playerA.child.controller.current?.options).toContain(roleA); // Can target friendly hero
-        expect(playerA.child.controller.current?.options).toContain(roleB); // Can target enemy hero
-        playerA.child.controller.set(roleB); // Target Player B's hero for damage
+        expect(playerA.child.controller.current?.options).toContain(heroA); // Can target friendly hero
+        expect(playerA.child.controller.current?.options).toContain(heroB); // Can target enemy hero
+        playerA.child.controller.set(heroB); // Target Player B's hero for damage
         await promise;
 
         // Ironforge Rifleman should be on board
@@ -89,6 +88,6 @@ describe('ironforge-rifleman', () => {
         expect(playerA.child.mana.state.current).toBe(7); // 10 - 3 = 7
 
         // Player B's hero should be damaged by 1
-        expect(roleB.child.health.state.current).toBe(29); // 30 - 1 = 29
+        expect(heroB.child.health.state.current).toBe(29); // 30 - 1 = 29
     });
 });
