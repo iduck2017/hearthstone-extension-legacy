@@ -35,18 +35,16 @@ export class SpellbenderFeatureModel extends SecretFeatureModel {
         let isValid = false;
         params.effects.forEach((value, key) => {
             value.forEach(item => {
-                if (item instanceof RoleModel) isValid = true;
+                if (item instanceof MinionCardModel) isValid = true;
             })
         })
         if (!isValid) return;
 
         // deploy
         const card = new SpellbenderMinionModel();
-        const role = card.child.role;
         card.deploy(board);
-
         // replace the minion card with the spellbender minion
-        event.redirect(role);
+        event.redirect(card);
         return true;
     }
 }

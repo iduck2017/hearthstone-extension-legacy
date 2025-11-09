@@ -1,9 +1,9 @@
-import { EffectModel, SpellEffectModel, Selector, RoleModel } from "hearthstone-core";
+import { EffectModel, SpellEffectModel, Selector, RoleModel, MinionCardModel } from "hearthstone-core";
 import { TemplUtil } from "set-piece";
 import { DivineSpiritBuffModel } from "./buff";
 
 @TemplUtil.is('divine-spirit-effect')
-export class DivineSpiritEffectModel extends SpellEffectModel<[RoleModel]> {
+export class DivineSpiritEffectModel extends SpellEffectModel<[MinionCardModel]> {
     constructor(props?: DivineSpiritEffectModel['props']) {
         props = props ?? {};
         super({
@@ -19,7 +19,7 @@ export class DivineSpiritEffectModel extends SpellEffectModel<[RoleModel]> {
         });
     }
 
-    toRun(): [Selector<RoleModel>] | undefined {
+    toRun(): [Selector<MinionCardModel>] | undefined {
         const games = this.route.game;
         if (!games) return;
         
@@ -30,10 +30,7 @@ export class DivineSpiritEffectModel extends SpellEffectModel<[RoleModel]> {
         return [new Selector(roles, { hint: "Choose a minion" })];
     }
 
-    protected async doRun(target: RoleModel) {
-        const minion = target.route.minion;
-        if (!minion) return;
-        
+    protected async doRun(target: MinionCardModel) {
         // Get current health and create a buff with equal value
         const currentHealth = target.child.health.state.current;
         const buff = new DivineSpiritBuffModel({ state: { offset: [0, currentHealth] }});

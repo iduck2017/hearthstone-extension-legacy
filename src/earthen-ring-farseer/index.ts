@@ -12,7 +12,7 @@
  * Collectible
  */
 
-import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, MinionFeaturesModel, RarityType, RoleAttackModel, RoleModel, RaceType } from "hearthstone-core";
+import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, MinionFeaturesModel, RarityType, RoleAttackModel, RaceType } from "hearthstone-core";
 import { EarthenRingFarseerBattlecryModel } from "./battlecry";
 
 @LibraryUtil.is('earthen-ring-farseer')
@@ -33,12 +33,8 @@ export class EarthenRingFarseerModel extends MinionCardModel {
             },
             child: {
                 cost: props.child?.cost ??  new CostModel({ state: { origin: 3 }}),
-                role: props.child?.role ?? new RoleModel({
-                    child: {
-                        attack: new RoleAttackModel({ state: { origin: 3 }}),
-                        health: new RoleHealthModel({ state: { origin: 3 }}),
-                    }
-                }),
+                attack: props.child?.attack ?? new RoleAttackModel({ state: { origin: 3 }}),
+                health: props.child?.health ?? new RoleHealthModel({ state: { origin: 3 }}),
                 feats: props.child?.feats ?? new MinionFeaturesModel({
                     child: { 
                         battlecry: [new EarthenRingFarseerBattlecryModel()]

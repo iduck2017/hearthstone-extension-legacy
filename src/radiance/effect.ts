@@ -35,7 +35,7 @@ export class RadianceEffectModel extends SpellEffectModel<[]> {
             new RestoreEvent({
                 source: card,
                 method: this,
-                target: hero.child.role,
+                target: hero,
                 origin: 5,
             })
         ]);

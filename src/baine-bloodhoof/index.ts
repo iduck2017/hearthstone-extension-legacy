@@ -1,4 +1,4 @@
-import { MinionCardModel, RarityType, ClassType, RoleAttackModel, RoleHealthModel, RoleModel, CostModel, LibraryUtil, TauntModel, RoleFeaturesModel } from "hearthstone-core";
+import { MinionCardModel, RarityType, ClassType, RoleAttackModel, RoleHealthModel, CostModel, LibraryUtil, MinionFeaturesModel } from "hearthstone-core";
 
 @LibraryUtil.is('baine-bloodhoof')
 export class BaineBloodhoofModel extends MinionCardModel {
@@ -18,11 +18,10 @@ export class BaineBloodhoofModel extends MinionCardModel {
             },
             child: {
                 cost: props.child?.cost ??  new CostModel({ state: { origin: 5 }}),
-                role: props.child?.role ?? new RoleModel({
-                    child: {
-                        attack: new RoleAttackModel({ state: { origin: 5 }}),
-                        health: new RoleHealthModel({ state: { origin: 5 }}),
-                    }
+                attack: props.child?.attack ?? new RoleAttackModel({ state: { origin: 5 }}),
+                health: props.child?.health ?? new RoleHealthModel({ state: { origin: 5 }}),
+                feats: props.child?.feats ?? new MinionFeaturesModel({
+                    child: { battlecry: [] }
                 }),
                 ...props.child
             },

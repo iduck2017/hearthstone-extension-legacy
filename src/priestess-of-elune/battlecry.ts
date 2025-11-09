@@ -35,7 +35,7 @@ export class PriestessOfEluneBattlecryModel extends MinionBattlecryModel<[]> {
             new RestoreEvent({
                 source: card,
                 method: this,
-                target: hero.child.role,
+                target: hero,
                 origin: 4,
             })
         ]);

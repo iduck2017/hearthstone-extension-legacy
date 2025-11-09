@@ -1,4 +1,4 @@
-import { RoleAttackModel, FeatureModel, RoleHealthModel, RoleAttackDecor, OperatorType, RoleModel, RoleFeatureModel } from "hearthstone-core";
+import { RoleAttackModel, FeatureModel, RoleHealthModel, RoleAttackDecor, OperatorType, RoleModel, MinionFeatureModel } from "hearthstone-core";
 import { Event, EventUtil, StateUtil, TemplUtil, TranxUtil, Decor, Frame } from "set-piece";
 import { DeepReadonly } from "utility-types";
 
@@ -10,7 +10,7 @@ export namespace AngryChickenFeatureModel {
 }
 
 @TemplUtil.is('angry-chicken-feature')
-export class AngryChickenFeatureModel extends RoleFeatureModel<
+export class AngryChickenFeatureModel extends MinionFeatureModel<
     AngryChickenFeatureModel.E,
     AngryChickenFeatureModel.S,
     AngryChickenFeatureModel.C,

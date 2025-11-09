@@ -1,4 +1,4 @@
-import { MinionCardModel, RoleHealthModel, RoleAttackModel, RoleModel, MinionFeaturesModel, LibraryUtil, CostModel } from "hearthstone-core";
+import { MinionCardModel, RoleHealthModel, RoleAttackModel, MinionFeaturesModel, LibraryUtil, CostModel } from "hearthstone-core";
 import { AbusiveSergeantBattlecryModel } from "./battlecry";
 import { ClassType, RarityType } from "hearthstone-core";
 
@@ -20,12 +20,8 @@ export class AbusiveSergeantModel extends MinionCardModel {
             },
             child: {
                 cost: props.child?.cost ??  new CostModel({ state: { origin: 1 }}),
-                role: props.child?.role ?? new RoleModel({
-                    child: {
-                        attack: new RoleAttackModel({ state: { origin: 2 }}),
-                        health: new RoleHealthModel({ state: { origin: 1 }}),   
-                    }
-                }),
+                attack: props.child?.attack ?? new RoleAttackModel({ state: { origin: 2 }}),
+                health: props.child?.health ?? new RoleHealthModel({ state: { origin: 1 }}),
                 feats: props.child?.feats ?? new MinionFeaturesModel({
                     child: { battlecry: [new AbusiveSergeantBattlecryModel()] }
                 }),

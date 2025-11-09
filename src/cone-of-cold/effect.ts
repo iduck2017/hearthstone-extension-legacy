@@ -3,7 +3,7 @@ import { TemplUtil } from "set-piece";
 
 
 @TemplUtil.is('cone-of-cold-effect')
-export class ConeOfColdEffectModel extends SpellEffectModel<[RoleModel]> {
+export class ConeOfColdEffectModel extends SpellEffectModel<[MinionCardModel]> {
     constructor(props?: ConeOfColdEffectModel['props']) {
         props = props ?? {};
         super({
@@ -19,18 +19,16 @@ export class ConeOfColdEffectModel extends SpellEffectModel<[RoleModel]> {
         });
     }
 
-    toRun(): [Selector<RoleModel>] | undefined {
+    toRun(): [Selector<MinionCardModel>] | undefined {
         const games = this.route.game;
         if (!games) return;
         const roles = games.query(true);
         return [new Selector(roles, { hint: "Choose a target" })]
     }
 
-    protected async doRun(target: RoleModel) {
+    protected async doRun(target: MinionCardModel) {
         const card = this.route.card;
         if (!card) return;
-
-        if (!target.route.card) return;
 
         const player = this.route.player;
         if (!player) return;
@@ -38,7 +36,7 @@ export class ConeOfColdEffectModel extends SpellEffectModel<[RoleModel]> {
         // Get the board that contains the target minion
         const board = target.route.board;
         if (!board) return;
-        const index = board.child.cards.indexOf(target.route.card);
+        const index = board.child.cards.indexOf(target);
         const cards = board.child.cards.slice(Math.max(0, index - 1), index + 2);
         const minions: MinionCardModel[] = [];
         cards.forEach((item) => {
@@ -50,12 +48,12 @@ export class ConeOfColdEffectModel extends SpellEffectModel<[RoleModel]> {
             type: DamageType.SPELL,
             source: card,
             method: this,
-            target: item.child.role,
+            target: item,
             origin: this.state.damage[0] ?? 0,
         })));
         // Freeze all affected minions
         minions.forEach((item) => { 
-            const feats = item.child.role.child.feats;
+            const feats = item.child.feats;
             const frozen = feats.child.frozen;
             frozen.active();
         });

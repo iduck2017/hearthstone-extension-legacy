@@ -12,7 +12,7 @@
  * Collectible
  */
 
-import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, MinionFeaturesModel, RarityType, RoleAttackModel, RoleModel, RaceType, RoleFeaturesModel, TauntModel } from "hearthstone-core";
+import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, MinionFeaturesModel, RarityType, RoleAttackModel, RaceType, TauntModel } from "hearthstone-core";
 
 @LibraryUtil.is('mogushan-warden')
 export class MogushanWardenModel extends MinionCardModel {
@@ -32,19 +32,11 @@ export class MogushanWardenModel extends MinionCardModel {
             },
             child: {
                 cost: props.child?.cost ??  new CostModel({ state: { origin: 4 }}),
-                role: props.child?.role ?? new RoleModel({
-                    child: {
-                        attack: new RoleAttackModel({ state: { origin: 1 }}),
-                        health: new RoleHealthModel({ state: { origin: 7 }}),
-                        feats: new RoleFeaturesModel({
-                            child: {
-                                taunt: new TauntModel()
-                            }
-                        })
-                    }
-                }),
+                attack: props.child?.attack ?? new RoleAttackModel({ state: { origin: 1 }}),
+                health: props.child?.health ?? new RoleHealthModel({ state: { origin: 7 }}),
                 feats: props.child?.feats ?? new MinionFeaturesModel({
-                    child: { 
+                    child: {
+                        taunt: new TauntModel(),
                         battlecry: []
                     }
                 }),

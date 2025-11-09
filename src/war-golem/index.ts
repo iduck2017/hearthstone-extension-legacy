@@ -9,7 +9,7 @@
  * Collectible
  */
 
-import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, MinionFeaturesModel, RarityType, RoleAttackModel, RoleModel, RaceType } from "hearthstone-core";
+import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, MinionFeaturesModel, RarityType, RoleAttackModel, RaceType } from "hearthstone-core";
 
 @LibraryUtil.is('war-golem')
 export class WarGolemModel extends MinionCardModel {
@@ -29,12 +29,8 @@ export class WarGolemModel extends MinionCardModel {
             },
             child: {
                 cost: props.child?.cost ??  new CostModel({ state: { origin: 7 }}),
-                role: props.child?.role ?? new RoleModel({
-                    child: {
-                        attack: new RoleAttackModel({ state: { origin: 7 }}),
-                        health: new RoleHealthModel({ state: { origin: 7 }}),
-                    }
-                }),
+                attack: props.child?.attack ?? new RoleAttackModel({ state: { origin: 7 }}),
+                health: props.child?.health ?? new RoleHealthModel({ state: { origin: 7 }}),
                 feats: props.child?.feats ?? new MinionFeaturesModel({
                     child: { 
                         battlecry: []

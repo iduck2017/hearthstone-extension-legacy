@@ -1,4 +1,4 @@
-import { FeatureModel, RoleAttackModel, RoleAttackDecor, OperatorType, RoleModel, RoleHealthModel, RoleFeatureModel } from "hearthstone-core";
+import { FeatureModel, RoleAttackModel, RoleAttackDecor, OperatorType, RoleModel, RoleHealthModel, CardFeatureModel, MinionFeatureModel } from "hearthstone-core";
 import { EventUtil, TemplUtil, StateUtil, TranxUtil, Frame, Event } from "set-piece";
 
 export namespace TaurenWarriorFeatureModel {
@@ -9,21 +9,12 @@ export namespace TaurenWarriorFeatureModel {
 }
 
 @TemplUtil.is('tauren-warrior-feature')
-export class TaurenWarriorFeatureModel extends RoleFeatureModel<
+export class TaurenWarriorFeatureModel extends MinionFeatureModel<
     TaurenWarriorFeatureModel.E,
     TaurenWarriorFeatureModel.S,
     TaurenWarriorFeatureModel.C,
     TaurenWarriorFeatureModel.R
 > {
-    public get route() {
-        const result = super.route;
-        const role: RoleModel | undefined = result.items.find(item => item instanceof RoleModel);
-        return {
-            ...result,
-            role
-        };
-    }
-
     constructor(props?: TaurenWarriorFeatureModel['props']) {
         props = props ?? {};
         super({

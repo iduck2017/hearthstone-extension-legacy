@@ -1,4 +1,4 @@
-import { MinionCardModel, RarityType, ClassType, RaceType, RoleAttackModel, RoleHealthModel, RoleModel, MinionFeaturesModel, CostModel, LibraryUtil } from "hearthstone-core";
+import { MinionCardModel, RarityType, ClassType, RaceType, RoleAttackModel, RoleHealthModel, MinionFeaturesModel, CostModel, LibraryUtil } from "hearthstone-core";
 
 @LibraryUtil.is('core-hound')
 export class CoreHoundModel extends MinionCardModel {
@@ -18,12 +18,8 @@ export class CoreHoundModel extends MinionCardModel {
             },
             child: {
                 cost: props.child?.cost ??  new CostModel({ state: { origin: 7 }}),
-                role: props.child?.role ?? new RoleModel({
-                    child: {
-                        attack: new RoleAttackModel({ state: { origin: 9 }}),
-                        health: new RoleHealthModel({ state: { origin: 5 }}),
-                    }
-                }),
+                attack: props.child?.attack ?? new RoleAttackModel({ state: { origin: 9 }}),
+                health: props.child?.health ?? new RoleHealthModel({ state: { origin: 5 }}),
                 feats: props.child?.feats ?? new MinionFeaturesModel({
                     child: {
                         battlecry: []

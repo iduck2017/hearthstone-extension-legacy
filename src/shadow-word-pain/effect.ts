@@ -30,10 +30,8 @@ export class ShadowWordPainEffectModel extends SpellEffectModel<[RoleModel]> {
     }
 
     protected async doRun(target: RoleModel) {
-        const minion = target.route.minion;
-        if (!minion) return;
         if (target.child.attack.state.current > 3) return;
         // Destroy the minion
-        minion.child.dispose.active(true, this.route.card, this);
+        target.child.dispose.active(true, this.route.card, this);
     }
 }

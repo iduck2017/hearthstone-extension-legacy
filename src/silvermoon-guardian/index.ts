@@ -12,7 +12,7 @@
  * Collectible
  */
 
-import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, MinionFeaturesModel, RarityType, RoleAttackModel, RoleModel, RaceType, RoleFeaturesModel, DivineShieldModel } from "hearthstone-core";
+import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, MinionFeaturesModel, RarityType, RoleAttackModel, RaceType, DivineShieldModel } from "hearthstone-core";
 
 @LibraryUtil.is('silvermoon-guardian')
 export class SilvermoonGuardianModel extends MinionCardModel {
@@ -32,19 +32,11 @@ export class SilvermoonGuardianModel extends MinionCardModel {
             },
             child: {
                 cost: props.child?.cost ??  new CostModel({ state: { origin: 4 }}),
-                role: props.child?.role ?? new RoleModel({
-                    child: {
-                        attack: new RoleAttackModel({ state: { origin: 3 }}),
-                        health: new RoleHealthModel({ state: { origin: 3 }}),
-                        feats: new RoleFeaturesModel({
-                            child: {
-                                divineShield: new DivineShieldModel()
-                            }
-                        })
-                    }
-                }),
+                attack: props.child?.attack ?? new RoleAttackModel({ state: { origin: 3 }}),
+                health: props.child?.health ?? new RoleHealthModel({ state: { origin: 3 }}),
                 feats: props.child?.feats ?? new MinionFeaturesModel({
-                    child: { 
+                    child: {
+                        divineShield: new DivineShieldModel(),
                         battlecry: []
                     }
                 }),

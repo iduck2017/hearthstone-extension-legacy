@@ -1,8 +1,8 @@
-import { EffectModel, Selector, RoleModel, SpellEffectModel } from "hearthstone-core";
+import { EffectModel, Selector, RoleModel, SpellEffectModel, MinionCardModel } from "hearthstone-core";
 import { TemplUtil } from "set-piece";
 
 @TemplUtil.is('silence-effect')
-export class SilenceEffectModel extends SpellEffectModel<[RoleModel]> {
+export class SilenceEffectModel extends SpellEffectModel<[MinionCardModel]> {
     constructor(props?: SilenceEffectModel['props']) {
         props = props ?? {};
         super({
@@ -18,16 +18,14 @@ export class SilenceEffectModel extends SpellEffectModel<[RoleModel]> {
         });
     }
 
-    toRun(): [Selector<RoleModel>] | undefined {
+    toRun(): [Selector<MinionCardModel>] | undefined {
         const games = this.route.game;
         if (!games) return;
         const roles = games.query(true); // Only minions can be targeted
         return [new Selector(roles, { hint: "Choose a minion" })];
     }
 
-    protected async doRun(target: RoleModel) {
-        const minion = target.route.minion;
-        if (!minion) return;
-        minion.silence();
+    protected async doRun(target: MinionCardModel) {
+        target.silence();
     }
 }

@@ -1,4 +1,4 @@
-import { DeathrattleModel, MinionCardModel, RoleFeaturesModel } from "hearthstone-core";
+import { DeathrattleModel } from "hearthstone-core";
 import { TemplUtil } from "set-piece";
 import { AegwynnTheGuardianContextModel } from "./context";
 

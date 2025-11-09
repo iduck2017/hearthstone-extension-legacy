@@ -38,8 +38,6 @@ export class TwilightDrakeBattlecryModel extends MinionBattlecryModel<[]> {
         const buff = new TwilightDrakeBuffModel({
             state: { offset: [0, count] }
         });
-        const role = card.child.role;
-        if (!role) return;
-        role.child.feats.add(buff);
+        card.child.feats.add(buff);
     }
 }

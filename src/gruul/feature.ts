@@ -31,8 +31,7 @@ export class GruulFeatureModel extends EndTurnHookModel {
     protected doRun() {
         const minion = this.route.minion;
         if (!minion) return;
-        const role = minion.child.role;
-        role.child.feats.add(new RoleBuffModel({
+        minion.child.feats.add(new RoleBuffModel({
             state: {
                 name: "Gruul's Growth",
                 desc: "+1/+1",

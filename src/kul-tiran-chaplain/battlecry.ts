@@ -34,9 +34,7 @@ export class KulTiranChaplainBattlecryModel extends MinionBattlecryModel<[RoleMo
         if (!player) return;
         
         // Check if the target is a friendly minion
-        const minion = target.route.minion;
-        if (!minion) return;
-        if (minion.route.player !== player) return;
+        if (target.route.player !== player) return;
         
         // Apply +2 Health buff
         const buff = new KulTiranChaplainBuffModel();

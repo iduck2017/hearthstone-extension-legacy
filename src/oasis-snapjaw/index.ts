@@ -10,7 +10,7 @@
  * Collectible
  */
 
-import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, MinionFeaturesModel, RarityType, RoleAttackModel, RoleModel, RaceType } from "hearthstone-core";
+import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, MinionFeaturesModel, RarityType, RoleAttackModel, RaceType } from "hearthstone-core";
 
 @LibraryUtil.is('oasis-snapjaw')
 export class OasisSnapjawModel extends MinionCardModel {
@@ -30,12 +30,8 @@ export class OasisSnapjawModel extends MinionCardModel {
             },
             child: {
                 cost: props.child?.cost ??  new CostModel({ state: { origin: 4 }}),
-                role: props.child?.role ?? new RoleModel({
-                    child: {
-                        attack: new RoleAttackModel({ state: { origin: 2 }}),
-                        health: new RoleHealthModel({ state: { origin: 7 }}),
-                    }
-                }),
+                attack: props.child?.attack ?? new RoleAttackModel({ state: { origin: 2 }}),
+                health: props.child?.health ?? new RoleHealthModel({ state: { origin: 7 }}),
                 feats: props.child?.feats ?? new MinionFeaturesModel({
                     child: { 
                         battlecry: []

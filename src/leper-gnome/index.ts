@@ -1,4 +1,4 @@
-import { RoleAttackModel, ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, RarityType, RoleModel, MinionFeaturesModel } from "hearthstone-core";
+import { RoleAttackModel, ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, RarityType, MinionFeaturesModel } from "hearthstone-core";
 import { LeperGnomeDeathrattleModel } from "./deathrattle";
 
 @LibraryUtil.is('leper-gnome')
@@ -19,12 +19,8 @@ export class LeperGnomeModel extends MinionCardModel {
             },
             child: {
                 cost: props.child?.cost ??  new CostModel({ state: { origin: 1 }}),
-                role: props.child?.role ?? new RoleModel({
-                    child: {
-                        health: new RoleHealthModel({ state: { origin: 1 }}),
-                        attack: new RoleAttackModel({ state: { origin: 2 }}),
-                    },
-                }),
+                attack: props.child?.attack ?? new RoleAttackModel({ state: { origin: 2 }}),
+                health: props.child?.health ?? new RoleHealthModel({ state: { origin: 1 }}),
                 feats: props.child?.feats ?? new MinionFeaturesModel({
                     child: { deathrattle: [new LeperGnomeDeathrattleModel()] }
                 }),

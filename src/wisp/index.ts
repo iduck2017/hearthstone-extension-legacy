@@ -1,4 +1,4 @@
-import { RoleAttackModel, CostModel, RoleHealthModel, MinionCardModel, RoleModel, LibraryUtil, ClassType, RaceType, RarityType } from "hearthstone-core";
+import { RoleAttackModel, CostModel, RoleHealthModel, MinionCardModel, LibraryUtil, ClassType, RaceType, RarityType } from "hearthstone-core";
 
 @LibraryUtil.is('wisp')
 export class WispModel extends MinionCardModel {
@@ -18,12 +18,8 @@ export class WispModel extends MinionCardModel {
             },
             child: {
                 cost: props.child?.cost ?? new CostModel({ state: { origin: 0 } }),
-                role: props.child?.role ?? new RoleModel({
-                    child: {
-                        health: new RoleHealthModel({ state: { origin: 1 } }),
-                        attack: new RoleAttackModel({ state: { origin: 1 } }),
-                    }
-                }),
+                attack: props.child?.attack ?? new RoleAttackModel({ state: { origin: 1 } }),
+                health: props.child?.health ?? new RoleHealthModel({ state: { origin: 1 } }),
                 ...props.child
             },
             refer: { ...props.refer },

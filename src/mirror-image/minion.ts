@@ -10,7 +10,7 @@
  * Collectible: No
  */
 
-import { ClassType, RoleHealthModel, MinionCardModel, MinionFeaturesModel, RarityType, RoleAttackModel, RoleModel, RoleFeaturesModel, TauntModel, CostModel, LibraryUtil } from "hearthstone-core";
+import { ClassType, RoleHealthModel, MinionCardModel, MinionFeaturesModel, RarityType, RoleAttackModel, TauntModel, CostModel, LibraryUtil } from "hearthstone-core";
 
 @LibraryUtil.is('mirror-image-minion')
 export class MirrorImageMinionModel extends MinionCardModel {
@@ -30,19 +30,13 @@ export class MirrorImageMinionModel extends MinionCardModel {
             },
             child: {
                 cost: props.child?.cost ??  new CostModel({ state: { origin: 0 }}),
-                role: props.child?.role ?? new RoleModel({
-                    child: {
-                        attack: new RoleAttackModel({ state: { origin: 0 }}),
-                        health: new RoleHealthModel({ state: { origin: 2 }}),
-                        feats: new RoleFeaturesModel({
-                            child: {
-                                taunt: new TauntModel()
-                            }
-                        })
-                    }
-                }),
+                attack: props.child?.attack ?? new RoleAttackModel({ state: { origin: 0 }}),
+                health: props.child?.health ?? new RoleHealthModel({ state: { origin: 2 }}),
                 feats: props.child?.feats ?? new MinionFeaturesModel({
-                    child: { battlecry: [] }
+                    child: {
+                        taunt: new TauntModel(),
+                        battlecry: []
+                    }
                 }),
                 ...props.child
             },

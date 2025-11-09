@@ -30,11 +30,9 @@ export class ShadowWordDeathEffectModel extends SpellEffectModel<[RoleModel]> {
     }
 
     protected async doRun(target: RoleModel) {
-        const minion = target.route.minion;
-        if (!minion) return;
         // Check if the minion has 5 or more Attack
-        if (minion.child.role.child.attack.state.current < 5) return;
+        if (target.child.attack.state.current < 5) return;
         // Destroy the minion
-        minion.child.dispose.active(true, this.route.card, this);
+        target.child.dispose.active(true, this.route.card, this);
     }
 }

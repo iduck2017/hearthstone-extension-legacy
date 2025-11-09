@@ -1,8 +1,8 @@
-import { MinionBattlecryModel, Selector, RoleModel } from "hearthstone-core";
+import { MinionBattlecryModel, Selector, RoleModel, MinionCardModel } from "hearthstone-core";
 import { TemplUtil } from "set-piece";
 
 @TemplUtil.is('spellbreaker-battlecry')
-export class SpellbreakerBattlecryModel extends MinionBattlecryModel<[RoleModel]> {
+export class SpellbreakerBattlecryModel extends MinionBattlecryModel<[MinionCardModel]> {
     constructor(props?: SpellbreakerBattlecryModel['props']) {
         props = props ?? {};
         super({
@@ -17,17 +17,15 @@ export class SpellbreakerBattlecryModel extends MinionBattlecryModel<[RoleModel]
         });
     }
 
-    public toRun(): [Selector<RoleModel>] | undefined {
+    public toRun(): [Selector<MinionCardModel>] | undefined {
         const games = this.route.game;
         if (!games) return;
         const roles = games.query(true); // Can only target minions
         return [new Selector(roles, { hint: "Choose a minion to silence" })];
     }
 
-    public async doRun(from: number, to: number, target: RoleModel) {
+    public async doRun(from: number, to: number, target: MinionCardModel) {
         // Silence the target minion
-        const minion = target.route.minion;
-        if (!minion) return;
-        minion.silence();
+        target.silence();
     }
 }

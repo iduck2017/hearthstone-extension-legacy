@@ -16,7 +16,7 @@
  * 1/1/3
  */
 
-import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, MinionFeaturesModel, RarityType, RoleAttackModel, RoleModel, RoleFeaturesModel } from "hearthstone-core";
+import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, MinionFeaturesModel, RarityType, RoleAttackModel } from "hearthstone-core";
 import { ManaWyrmFeatureModel } from "./feature";
 
 @LibraryUtil.is('mana-wyrm')
@@ -37,21 +37,12 @@ export class ManaWyrmModel extends MinionCardModel {
             },
             child: {
                 cost: props.child?.cost ??  new CostModel({ state: { origin: 1 }}),
-                role: props.child?.role ?? new RoleModel({
-                    child: {
-                        attack: new RoleAttackModel({ state: { origin: 1 }}),
-                        health: new RoleHealthModel({ state: { origin: 3 }}),
-                        feats: new RoleFeaturesModel({
-                            child: {
-                                feats: [new ManaWyrmFeatureModel()]
-                            }
-                        })
-                    }
-                }),
+                attack: props.child?.attack ?? new RoleAttackModel({ state: { origin: 1 }}),
+                health: props.child?.health ?? new RoleHealthModel({ state: { origin: 3 }}),
                 feats: props.child?.feats ?? new MinionFeaturesModel({
-                    child: { 
-                        battlecry: [], 
-                        feats: []
+                    child: {
+                        battlecry: [],
+                        feats: [new ManaWyrmFeatureModel()]
                     }
                 }),
                 ...props.child

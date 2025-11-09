@@ -22,7 +22,7 @@ export class HungryCrabBattlecryModel extends MinionBattlecryModel<[RoleModel]> 
         const game = this.route.game;
         if (!game) return;
         const options = game.query(true).filter(item => (
-            item.route.minion?.state.races.includes(RaceType.MURLOC)
+            item.state.races.includes(RaceType.MURLOC)
         ));
         return [new Selector(options, { hint: 'Select a Murloc' })];
     }
@@ -32,13 +32,12 @@ export class HungryCrabBattlecryModel extends MinionBattlecryModel<[RoleModel]> 
         if (!cardA) return;
         
         // Destroy the target murloc
-        const cardB = target.route.minion;
+        const cardB = target;
         if (!cardB) return;
         console.log('kill', cardB.name);
         cardB.child.dispose.active(true, this.route.card, this);
         
         // Add buff to the crab
-        const role = cardA.child.role;
-        role.child.feats.add(new HungryCrabBuffModel());
+        cardA.child.feats.add(new HungryCrabBuffModel());
     }
 }

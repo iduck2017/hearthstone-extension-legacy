@@ -20,7 +20,7 @@ export class IceBarrierFeatureModel extends SecretFeatureModel {
 
     @EventUtil.on(self => self.handleRecv)
     private listenRecv() {
-        return this.route.player?.proxy.child.hero.child.role.child.attack.event?.toRecv
+        return this.route.player?.proxy.child.hero.child.attack.event?.toRecv
     }
     @SecretFeatureModel.span()
     private handleRecv(that: RoleAttackModel, event: AbortEvent<{ source: RoleModel }>) {

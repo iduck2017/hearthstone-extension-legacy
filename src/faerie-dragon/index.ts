@@ -13,7 +13,7 @@
  * Collectible
  */
 
-import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, MinionFeaturesModel, RarityType, RoleAttackModel, RoleModel, RaceType, ElusiveModel, RoleFeaturesModel } from "hearthstone-core";
+import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, MinionFeaturesModel, RarityType, RoleAttackModel, RaceType, ElusiveModel } from "hearthstone-core";
 
 @LibraryUtil.is('faerie-dragon')
 export class FaerieDragonModel extends MinionCardModel {
@@ -33,17 +33,11 @@ export class FaerieDragonModel extends MinionCardModel {
             },
             child: {
                 cost: props.child?.cost ??  new CostModel({ state: { origin: 2 }}),
-                role: props.child?.role ?? new RoleModel({
-                    child: {
-                        attack: new RoleAttackModel({ state: { origin: 3 }}),
-                        health: new RoleHealthModel({ state: { origin: 2 }}),
-                        feats: new RoleFeaturesModel({
-                            child: { elusive: new ElusiveModel() }
-                        })
-                    }
-                }),
+                attack: props.child?.attack ?? new RoleAttackModel({ state: { origin: 3 }}),
+                health: props.child?.health ?? new RoleHealthModel({ state: { origin: 2 }}),
                 feats: props.child?.feats ?? new MinionFeaturesModel({
-                    child: { 
+                    child: {
+                        elusive: new ElusiveModel(),
                         battlecry: []
                     }
                 }),

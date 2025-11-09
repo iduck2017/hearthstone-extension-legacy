@@ -13,7 +13,7 @@
  * Artist: Alex Horley Orlandelli
  * Collectible
  */
-import { MinionCardModel, RoleHealthModel, RoleAttackModel, RoleModel, RoleFeaturesModel, TauntModel, LibraryUtil, CostModel } from "hearthstone-core";
+import { MinionCardModel, RoleHealthModel, RoleAttackModel, MinionFeaturesModel, TauntModel, LibraryUtil, CostModel } from "hearthstone-core";
 import { ClassType, RarityType } from "hearthstone-core";
 
 @LibraryUtil.is('goldshire-footman')
@@ -34,14 +34,10 @@ export class GoldshireFootmanModel extends MinionCardModel {
             },
             child: {
                 cost: props.child?.cost ??  new CostModel({ state: { origin: 1 }}),
-                role: props.child?.role ?? new RoleModel({
-                    child: {
-                        attack: new RoleAttackModel({ state: { origin: 1 }}),
-                        health: new RoleHealthModel({ state: { origin: 2 }}),   
-                        feats: new RoleFeaturesModel({
-                            child: { taunt: new TauntModel() }
-                        })  
-                    }
+                attack: props.child?.attack ?? new RoleAttackModel({ state: { origin: 1 }}),
+                health: props.child?.health ?? new RoleHealthModel({ state: { origin: 2 }}),
+                feats: props.child?.feats ?? new MinionFeaturesModel({
+                    child: { taunt: new TauntModel() }
                 }),
                 ...props.child,
             },

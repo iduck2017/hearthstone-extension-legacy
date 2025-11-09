@@ -39,7 +39,7 @@ export class MindBlastEffectModel extends SpellEffectModel<[]> {
             new DamageEvent({
                 source: card,
                 method: this,
-                target: hero.child.role,
+                target: hero,
                 origin: 5,
             })
         ]);

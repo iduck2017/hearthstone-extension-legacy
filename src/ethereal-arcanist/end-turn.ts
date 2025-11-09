@@ -41,7 +41,6 @@ export class EtherealArcanistFeatureModel extends EndTurnHookModel {
         const secrets = board.child.secrets;
         if (!secrets.length) return;
 
-        const role = minion.child.role;
-        role.child.feats.add(new EtherealArcanistBuffModel());
+        minion.child.feats.add(new EtherealArcanistBuffModel());
     }
 }

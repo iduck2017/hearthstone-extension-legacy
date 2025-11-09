@@ -13,7 +13,7 @@
  * Collectible
  */
 
-import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, MinionFeaturesModel, RarityType, RoleAttackModel, RoleModel, RaceType, SpellDamageModel } from "hearthstone-core";
+import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, MinionFeaturesModel, RarityType, RoleAttackModel, RaceType, SpellDamageModel } from "hearthstone-core";
 
 @LibraryUtil.is('malygos')
 export class MalygosModel extends MinionCardModel {
@@ -33,12 +33,8 @@ export class MalygosModel extends MinionCardModel {
             },
             child: {
                 cost: props.child?.cost ??  new CostModel({ state: { origin: 9 }}),
-                role: props.child?.role ?? new RoleModel({
-                    child: {
-                        attack: new RoleAttackModel({ state: { origin: 4 }}),
-                        health: new RoleHealthModel({ state: { origin: 12 }}),
-                    }
-                }),
+                attack: props.child?.attack ?? new RoleAttackModel({ state: { origin: 4 }}),
+                health: props.child?.health ?? new RoleHealthModel({ state: { origin: 12 }}),
                 feats: props.child?.feats ?? new MinionFeaturesModel({
                     child: { 
                         battlecry: [], 

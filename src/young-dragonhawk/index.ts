@@ -1,4 +1,4 @@
-import { LibraryUtil, WindfuryModel, RaceType, RoleModel, ClassType, RarityType, CostModel, MinionCardModel, RoleHealthModel, RoleAttackModel, RoleFeaturesModel } from "hearthstone-core";
+import { LibraryUtil, WindfuryModel, RaceType, RoleModel, ClassType, RarityType, CostModel, MinionCardModel, RoleHealthModel, RoleAttackModel, MinionFeaturesModel } from "hearthstone-core";
 
 @LibraryUtil.is('young-dragonhawk')
 export class YoungDragonhawkModel extends MinionCardModel {
@@ -18,14 +18,10 @@ export class YoungDragonhawkModel extends MinionCardModel {
             },
             child: {
                 cost: props.child?.cost ?? new CostModel({ state: { origin: 1 }}),
-                role: props.child?.role ?? new RoleModel({
-                    child: {
-                        attack: new RoleAttackModel({ state: { origin: 1 }}),
-                        health: new RoleHealthModel({ state: { origin: 1 }}),
-                        feats: new RoleFeaturesModel({
-                            child: { windfury: new WindfuryModel() }
-                        })
-                    }
+                attack: new RoleAttackModel({ state: { origin: 1 }}),
+                health: new RoleHealthModel({ state: { origin: 1 }}),
+                feats: new MinionFeaturesModel({
+                    child: { windfury: new WindfuryModel() }
                 }),
                 ...props.child,
             },

@@ -1,4 +1,4 @@
-import { MinionCardModel, RarityType, ClassType, RoleAttackModel, RoleHealthModel, RoleModel, RoleFeaturesModel, TauntModel, CostModel, LibraryUtil } from "hearthstone-core";
+import { MinionCardModel, RarityType, ClassType, RoleAttackModel, RoleHealthModel, MinionFeaturesModel, TauntModel, CostModel, LibraryUtil } from "hearthstone-core";
 
 @LibraryUtil.is('gnoll')
 export class GnollModel extends MinionCardModel {
@@ -18,15 +18,11 @@ export class GnollModel extends MinionCardModel {
             },
             child: {
                 cost: props.child?.cost ??  new CostModel({ state: { origin: 2 }}),
-                role: props.child?.role ?? new RoleModel({
+                attack: props.child?.attack ?? new RoleAttackModel({ state: { origin: 2 }}),
+                health: props.child?.health ?? new RoleHealthModel({ state: { origin: 2 }}),
+                feats: props.child?.feats ?? new MinionFeaturesModel({
                     child: {
-                        attack: new RoleAttackModel({ state: { origin: 2 }}),
-                        health: new RoleHealthModel({ state: { origin: 2 }}),
-                        feats: new RoleFeaturesModel({
-                            child: {
-                                taunt: new TauntModel()
-                            }
-                        })
+                        taunt: new TauntModel()
                     }
                 }),
                 ...props.child

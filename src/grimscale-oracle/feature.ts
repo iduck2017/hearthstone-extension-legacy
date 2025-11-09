@@ -1,4 +1,4 @@
-import { RoleAttackModel, FeatureModel, MinionCardModel, RaceType, RoleModel, OperatorType, RoleAttackDecor, CardFeatureModel, RoleFeatureModel } from "hearthstone-core";
+import { RoleAttackModel, FeatureModel, MinionCardModel, RaceType, RoleModel, OperatorType, RoleAttackDecor, CardFeatureModel, MinionFeatureModel } from "hearthstone-core";
 import { DebugUtil, StateUtil, TemplUtil, TranxUtil, Decor } from "set-piece";
 
 export namespace GrimscaleOracleFeatureModel {
@@ -9,7 +9,7 @@ export namespace GrimscaleOracleFeatureModel {
 }
 
 @TemplUtil.is('grimscale-oracle-feature')
-export class GrimscaleOracleFeatureModel extends RoleFeatureModel<
+export class GrimscaleOracleFeatureModel extends MinionFeatureModel<
     GrimscaleOracleFeatureModel.E,
     GrimscaleOracleFeatureModel.S,
     GrimscaleOracleFeatureModel.C,
@@ -33,15 +33,14 @@ export class GrimscaleOracleFeatureModel extends RoleFeatureModel<
 
     @StateUtil.on(self => self.modifyAttack)
     private listenAttack() {
-        return this.route.player?.proxy.child.board.any(MinionCardModel).child.role.child.attack.decor
+        return this.route.player?.proxy.child.board.any(MinionCardModel).child.attack.decor
     }
     private modifyAttack(that: RoleAttackModel, decor: RoleAttackDecor) {
         if (!this.state.isActive) return;
         
         const minion = that.route.minion;
         if (!minion) return;
-        const role = minion.child.role;
-        if (this.route.role === role) return;
+        if (this.route.minion === minion) return;
 
         if (!minion.state.races.includes(RaceType.MURLOC)) return;
         decor.add({

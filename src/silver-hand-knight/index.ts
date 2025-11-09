@@ -12,7 +12,7 @@
  * Collectible
  */
 
-import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, MinionFeaturesModel, RarityType, RoleAttackModel, RoleModel, RaceType } from "hearthstone-core";
+import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, MinionFeaturesModel, RarityType, RoleAttackModel, RaceType } from "hearthstone-core";
 import { SilverHandKnightBattlecryModel } from "./battlecry";
 
 @LibraryUtil.is('silver-hand-knight')
@@ -33,12 +33,8 @@ export class SilverHandKnightModel extends MinionCardModel {
             },
             child: {
                 cost: props.child?.cost ??  new CostModel({ state: { origin: 5 }}),
-                role: props.child?.role ?? new RoleModel({
-                    child: {
-                        attack: new RoleAttackModel({ state: { origin: 4 }}),
-                        health: new RoleHealthModel({ state: { origin: 4 }}),
-                    }
-                }),
+                attack: props.child?.attack ?? new RoleAttackModel({ state: { origin: 4 }}),
+                health: props.child?.health ?? new RoleHealthModel({ state: { origin: 4 }}),
                 feats: props.child?.feats ?? new MinionFeaturesModel({
                     child: { 
                         battlecry: [new SilverHandKnightBattlecryModel()]

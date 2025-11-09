@@ -13,7 +13,7 @@
  * Collectible
  */
 
-import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, MinionFeaturesModel, RarityType, RoleAttackModel, RoleModel, RaceType, RoleFeaturesModel } from "hearthstone-core";
+import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, MinionFeaturesModel, RarityType, RoleAttackModel, RaceType } from "hearthstone-core";
 import { RagnarosFeatureModel } from "./feature";
 import { RagnarosEndTurnModel } from "./end-turn";
 
@@ -35,22 +35,13 @@ export class RagnarosTheFirelordModel extends MinionCardModel {
             },
             child: {
                 cost: props.child?.cost ??  new CostModel({ state: { origin: 8 }}),
-                role: props.child?.role ?? new RoleModel({
-                    child: {
-                        attack: new RoleAttackModel({ state: { origin: 8 }}),
-                        health: new RoleHealthModel({ state: { origin: 8 }}),
-                        feats: new RoleFeaturesModel({
-                            child: {
-                                feats: [new RagnarosFeatureModel()]
-                            }
-                        })
-                    }
-                }),
+                attack: props.child?.attack ?? new RoleAttackModel({ state: { origin: 8 }}),
+                health: props.child?.health ?? new RoleHealthModel({ state: { origin: 8 }}),
                 feats: props.child?.feats ?? new MinionFeaturesModel({
                     child: { 
                         battlecry: [],
                         endTurn: [new RagnarosEndTurnModel()],
-                        // feats: [new RagnarosFeatureModel()]
+                        feats: [new RagnarosFeatureModel()]
                     }
                 }),
                 ...props.child

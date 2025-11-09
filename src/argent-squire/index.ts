@@ -1,4 +1,4 @@
-import { RoleAttackModel, ClassType, RoleHealthModel, MinionCardModel, RarityType, RoleFeaturesModel, RoleModel, DivineShieldModel } from "hearthstone-core";
+import { RoleAttackModel, ClassType, RoleHealthModel, MinionCardModel, RarityType, MinionFeaturesModel, DivineShieldModel } from "hearthstone-core";
 import { CostModel } from "hearthstone-core";
 import { LibraryUtil } from "hearthstone-core";
 
@@ -20,15 +20,11 @@ export class ArgentSquireModel extends MinionCardModel {
             },
             child: {
                 cost: props.child?.cost ??  new CostModel({ state: { origin: 1 }}),
-                role: props.child?.role ?? new RoleModel({
-                    child: {
-                        attack: new RoleAttackModel({ state: { origin: 1 }}),
-                        health: new RoleHealthModel({ state: { origin: 1 }}),   
-                        feats: new RoleFeaturesModel({
-                            child: { 
-                                divineShield: new DivineShieldModel({ state: { isActive: true } })
-                            }
-                        })
+                attack: props.child?.attack ?? new RoleAttackModel({ state: { origin: 1 }}),
+                health: props.child?.health ?? new RoleHealthModel({ state: { origin: 1 }}),
+                feats: props.child?.feats ?? new MinionFeaturesModel({
+                    child: { 
+                        divineShield: new DivineShieldModel({ state: { isActive: true } })
                     }
                 }),
                 ...props.child,

@@ -12,7 +12,7 @@
  * Collectible
  */
 
-import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, MinionFeaturesModel, RarityType, RoleAttackModel, RoleModel, RaceType, TauntModel, RoleFeaturesModel } from "hearthstone-core";
+import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, MinionFeaturesModel, RarityType, RoleAttackModel, RaceType, TauntModel } from "hearthstone-core";
 import { TaurenWarriorFeatureModel } from "./feature";
 
 @LibraryUtil.is('tauren-warrior')
@@ -33,20 +33,12 @@ export class TaurenWarriorModel extends MinionCardModel {
             },
             child: {
                 cost: props.child?.cost ??  new CostModel({ state: { origin: 3 }}),
-                role: props.child?.role ?? new RoleModel({
-                    child: {
-                        attack: new RoleAttackModel({ state: { origin: 2 }}),
-                        health: new RoleHealthModel({ state: { origin: 3 }}),
-                        feats: new RoleFeaturesModel({
-                            child: {
-                                taunt: new TauntModel(),
-                                feats: [new TaurenWarriorFeatureModel()]
-                            }
-                        })
-                    }
-                }),
+                attack: props.child?.attack ?? new RoleAttackModel({ state: { origin: 2 }}),
+                health: props.child?.health ?? new RoleHealthModel({ state: { origin: 3 }}),
                 feats: props.child?.feats ?? new MinionFeaturesModel({
-                    child: { 
+                    child: {
+                        taunt: new TauntModel(),
+                        feats: [new TaurenWarriorFeatureModel()],
                         battlecry: []
                     }
                 }),

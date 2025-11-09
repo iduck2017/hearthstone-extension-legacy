@@ -25,7 +25,7 @@ export class LeperGnomeDeathrattleModel extends DeathrattleModel {
         if (!player) return;
         const opponent = player.refer.opponent;
         if (!opponent) return;
-        const target = opponent.child.hero.child.role;
+        const target = opponent.child.hero;
         DamageModel.deal([
             new DamageEvent({
                 source: card,

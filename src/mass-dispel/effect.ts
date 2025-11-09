@@ -29,9 +29,8 @@ export class MassDispelEffectModel extends SpellEffectModel<[]> {
         const enemies = opponent.query(true);
         
         // Silence all enemy minions
-        for (const role of enemies) {
-            const minion = role.route.minion;
-            if (minion) minion.silence();
+        for (const item of enemies) {
+            item.silence();
         }
 
         // Draw a card

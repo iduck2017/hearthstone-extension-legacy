@@ -1,9 +1,9 @@
-import { CardFeatureModel, FeatureModel, RoleActionDecor, RoleActionModel, RoleFeatureModel, RoleModel } from "hearthstone-core";
+import { CardFeatureModel, FeatureModel, MinionFeatureModel, RoleActionDecor, RoleActionModel, RoleModel } from "hearthstone-core";
 import { StateUtil, TemplUtil } from "set-piece";
 
 
 @TemplUtil.is('ragnaros-feature')
-export class RagnarosFeatureModel extends RoleFeatureModel {
+export class RagnarosFeatureModel extends MinionFeatureModel {
     constructor(props?: RagnarosFeatureModel['props']) {
         props = props ?? {};
         super({
@@ -22,7 +22,7 @@ export class RagnarosFeatureModel extends RoleFeatureModel {
     // Disable attack action
     @StateUtil.on(self => self.modifyAction)
     private listenAction() {
-        return this.route.role?.proxy.child.action.decor
+        return this.route.minion?.proxy.child.action.decor
     }
     private modifyAction(that: RoleActionModel, decor: RoleActionDecor) {
         if (!this.state.isActive) return;

@@ -31,16 +31,13 @@ export class StampedingKodoBattlecryModel extends MinionBattlecryModel<[]> {
         if (!opponent) return;
 
         // Find enemy minions with 2 or less attack
-        const roles = opponent.query(true)
+        const cards = opponent.query(true)
             .filter(item => item.child.attack.state.current <= 2);
-        if (roles.length === 0) return;
+        if (cards.length === 0) return;
 
         // Randomly select one target
-        const index = Math.floor(Math.random() * roles.length);
-        const role = roles[index];
-        
-        // Destroy the target
-        const minion = role?.route.minion;
-        minion?.child.dispose.active(true, card, this);
+        const index = Math.floor(Math.random() * cards.length);
+        const target = cards[index];
+        target?.child.dispose.active(true, card, this);
     }
 }

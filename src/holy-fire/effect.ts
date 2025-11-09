@@ -47,7 +47,7 @@ export class HolyFireEffectModel extends SpellEffectModel<[RoleModel]> {
             new RestoreEvent({
                 source: card,
                 method: this,
-                target: hero.child.role,
+                target: hero,
                 origin: 5,
             })
         ]);

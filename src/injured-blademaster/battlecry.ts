@@ -29,13 +29,12 @@ export class InjuredBlademasterBattlecryModel extends MinionBattlecryModel<[]> {
         const card = this.route.card;
         if (!card) return;
 
-        const role = minion.child.role;
         // Deal 4 damage to himself
         DamageModel.deal([new DamageEvent({
             type: DamageType.SPELL,
             source: card,
             method: this,
-            target: role,
+            target: minion,
             origin: 4,
         })]);
     }

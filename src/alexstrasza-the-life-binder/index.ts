@@ -13,7 +13,7 @@
  * Collectible
  */
 
-import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, MinionFeaturesModel, RarityType, RoleAttackModel, RoleModel, RaceType } from "hearthstone-core";
+import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, MinionFeaturesModel, RarityType, RoleAttackModel, RaceType } from "hearthstone-core";
 import { AlexstraszaBattlecryModel } from "./battlecry";
 
 @LibraryUtil.is('alexstrasza-the-life-binder')
@@ -34,12 +34,8 @@ export class AlexstraszaTheLifeBinderModel extends MinionCardModel {
             },
             child: {
                 cost: props.child?.cost ??  new CostModel({ state: { origin: 9 }}),
-                role: props.child?.role ?? new RoleModel({
-                    child: {
-                        attack: new RoleAttackModel({ state: { origin: 8 }}),
-                        health: new RoleHealthModel({ state: { origin: 8 }}),
-                    }
-                }),
+                attack: props.child?.attack ?? new RoleAttackModel({ state: { origin: 8 }}),
+                health: props.child?.health ?? new RoleHealthModel({ state: { origin: 8 }}),
                 feats: props.child?.feats ?? new MinionFeaturesModel({
                     child: { 
                         battlecry: [new AlexstraszaBattlecryModel()]

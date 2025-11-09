@@ -10,7 +10,7 @@
  * Collectible
  */
 
-import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, MinionFeaturesModel, RarityType, RoleAttackModel, RoleModel, RaceType, ChargeModel, RoleFeaturesModel } from "hearthstone-core";
+import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, MinionFeaturesModel, RarityType, RoleAttackModel, RaceType, ChargeModel } from "hearthstone-core";
 
 @LibraryUtil.is('stormwind-knight')
 export class StormwindKnightModel extends MinionCardModel {
@@ -30,19 +30,11 @@ export class StormwindKnightModel extends MinionCardModel {
             },
             child: {
                 cost: props.child?.cost ??  new CostModel({ state: { origin: 4 }}),
-                role: props.child?.role ?? new RoleModel({
-                    child: {
-                        attack: new RoleAttackModel({ state: { origin: 2 }}),
-                        health: new RoleHealthModel({ state: { origin: 5 }}),
-                        feats: new RoleFeaturesModel({
-                            child: {
-                                charge: new ChargeModel({ state: { isActive: true } })
-                            }
-                        })
-                    }
-                }),
+                attack: props.child?.attack ?? new RoleAttackModel({ state: { origin: 2 }}),
+                health: props.child?.health ?? new RoleHealthModel({ state: { origin: 5 }}),
                 feats: props.child?.feats ?? new MinionFeaturesModel({
-                    child: { 
+                    child: {
+                        charge: new ChargeModel({ state: { isActive: true } }),
                         battlecry: []
                     }
                 }),

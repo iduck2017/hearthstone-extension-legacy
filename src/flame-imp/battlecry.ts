@@ -32,7 +32,7 @@ export class FlameImpBattlecryModel extends MinionBattlecryModel<[]> {
         DamageModel.deal([
             new DamageEvent({
                 source: card,
-                target: hero.child.role,
+                target: hero,
                 method: this,
                 origin: 3,
             })]

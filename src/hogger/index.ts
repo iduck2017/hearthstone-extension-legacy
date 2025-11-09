@@ -1,4 +1,4 @@
-import { MinionCardModel, RarityType, ClassType, RoleAttackModel, RoleHealthModel, RoleModel, MinionFeaturesModel, CostModel, LibraryUtil } from "hearthstone-core";
+import { MinionCardModel, RarityType, ClassType, RoleAttackModel, RoleHealthModel, MinionFeaturesModel, CostModel, LibraryUtil } from "hearthstone-core";
 import { HoggerEndTurnModel } from "./end-turn";
 
 @LibraryUtil.is('hogger')
@@ -19,12 +19,8 @@ export class HoggerModel extends MinionCardModel {
             },
             child: {
                 cost: props.child?.cost ??  new CostModel({ state: { origin: 6 }}),
-                role: props.child?.role ?? new RoleModel({
-                    child: {
-                        attack: new RoleAttackModel({ state: { origin: 4 }}),
-                        health: new RoleHealthModel({ state: { origin: 4 }}),
-                    }
-                }),
+                attack: props.child?.attack ?? new RoleAttackModel({ state: { origin: 4 }}),
+                health: props.child?.health ?? new RoleHealthModel({ state: { origin: 4 }}),
                 feats: props.child?.feats ?? new MinionFeaturesModel({
                     child: {
                         endTurn: [new HoggerEndTurnModel()]

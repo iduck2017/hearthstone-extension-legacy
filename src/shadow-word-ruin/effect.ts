@@ -29,10 +29,7 @@ export class ShadowWordRuinEffectModel extends SpellEffectModel<[]> {
         // Destroy all minions with 5 or more Attack
         for (const role of minions) {
             if (role.child.attack.state.current >= 5) {
-                const minion = role.route.minion;
-                if (minion) {
-                    minion.child.dispose.active(true, this.route.card, this);
-                }
+                role.child.dispose.active(true, this.route.card, this);
             }
         }
     }

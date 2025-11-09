@@ -6,7 +6,6 @@
  * 3. emerald-skytalon-attack: After 2 turns, the other emerald can attack the hero
  * 4. wisp-attack: Player B plays a wisp, it can attack immediately
  */
-
 import { GameModel, PlayerModel, MageModel, HandModel, BoardModel, AnimeUtil, ManaModel } from "hearthstone-core";
 import { EmeraldSkytalonModel } from "./index";
 import { WispModel } from "../wisp";

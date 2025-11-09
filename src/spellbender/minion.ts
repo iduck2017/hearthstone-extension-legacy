@@ -10,7 +10,7 @@
  * Collectible: No
  */
 
-import { ClassType, RoleHealthModel, MinionCardModel, MinionFeaturesModel, RarityType, RoleAttackModel, RoleModel } from "hearthstone-core";
+import { ClassType, RoleHealthModel, MinionCardModel, MinionFeaturesModel, RarityType, RoleAttackModel } from "hearthstone-core";
 import { CostModel } from "hearthstone-core";
 import { LibraryUtil } from "hearthstone-core";
 
@@ -32,12 +32,8 @@ export class SpellbenderMinionModel extends MinionCardModel {
             },
             child: {
                 cost: props.child?.cost ??  new CostModel({ state: { origin: 1 }}),
-                role: props.child?.role ?? new RoleModel({
-                    child: {
-                        attack: new RoleAttackModel({ state: { origin: 1 }}),
-                        health: new RoleHealthModel({ state: { origin: 3 }}),
-                    }
-                }),
+                attack: props.child?.attack ?? new RoleAttackModel({ state: { origin: 1 }}),
+                health: props.child?.health ?? new RoleHealthModel({ state: { origin: 3 }}),
                 feats: props.child?.feats ?? new MinionFeaturesModel({
                     child: { battlecry: [] }
                 }),

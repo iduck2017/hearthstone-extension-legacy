@@ -1,9 +1,9 @@
-import { CardFeatureModel, FeatureModel, MinionCardModel, RoleFeatureModel, SpellCardModel } from "hearthstone-core";
+import { MinionFeatureModel, SpellCardModel } from "hearthstone-core";
 import { Event, EventUtil, TemplUtil } from "set-piece";
 import { ManaWyrmBuffModel } from "./buff";
 
 @TemplUtil.is('mana-wyrm-feature')
-export class ManaWyrmFeatureModel extends RoleFeatureModel {
+export class ManaWyrmFeatureModel extends MinionFeatureModel {
 
     constructor(props?: ManaWyrmFeatureModel['props']) {
         props = props ?? {};

@@ -1,4 +1,4 @@
-import { RoleAttackModel, FeatureModel, RoleHealthModel, RoleAttackDecor, OperatorType, RoleModel, RoleFeatureModel } from "hearthstone-core";
+import { RoleAttackModel, RoleHealthModel, RoleAttackDecor, OperatorType, MinionFeatureModel } from "hearthstone-core";
 import { Event, EventUtil, StateUtil, TemplUtil, TranxUtil, Frame } from "set-piece";
 
 export namespace AmaniBerserkerFeatureModel {
@@ -9,7 +9,7 @@ export namespace AmaniBerserkerFeatureModel {
 }
 
 @TemplUtil.is('amani-berserker-feature')
-export class AmaniBerserkerFeatureModel extends RoleFeatureModel<
+export class AmaniBerserkerFeatureModel extends MinionFeatureModel<
     AmaniBerserkerFeatureModel.E,
     AmaniBerserkerFeatureModel.S,
     AmaniBerserkerFeatureModel.C,
