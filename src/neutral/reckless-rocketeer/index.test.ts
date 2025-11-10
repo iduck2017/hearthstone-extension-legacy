@@ -1,0 +1,109 @@
+/**
+ * Test cases for Reckless Rocketeer
+ * 
+ * Initial state: Player A has Reckless Rocketeer in hand.
+ * Player B has a Wisp on board.
+ * 
+ * 1. reckless-rocketeer-play: Player A plays Reckless Rocketeer.
+ * 2. reckless-rocketeer-charge: Player A's Reckless Rocketeer immediately attacks Player B's hero.
+ */
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, AnimeUtil } from "hearthstone-core";
+import { RecklessRocketeerModel } from "./index";
+import { WispModel } from '../../neutral/wisp';
+import { boot } from '../../boot';
+
+describe('reckless-rocketeer', () => {
+    const game = new GameModel({
+        state: { debug: { isDrawDisabled: true }},
+        child: {
+            playerA: new PlayerModel({
+                child: {
+                    mana: new ManaModel({ state: { origin: 10 }}),
+                    hero: new MageModel(),
+                    board: new BoardModel({
+                        child: { 
+                            cards: []
+                        }
+                    }),
+                    hand: new HandModel({
+                        child: { 
+                            cards: [new RecklessRocketeerModel()]
+                        }
+                    }),
+                    deck: new DeckModel({
+                        child: { cards: [] }
+                    })
+                }
+            }),
+            playerB: new PlayerModel({
+                child: {
+                    mana: new ManaModel({ state: { origin: 10 }}),
+                    hero: new MageModel(),
+                    board: new BoardModel({
+                        child: { cards: [new WispModel()]}
+                    }),
+                    hand: new HandModel({
+                        child: { cards: [] }
+                    })
+                }
+            })
+        }
+    });
+    boot(game);
+
+    const playerA = game.child.playerA;
+    const playerB = game.child.playerB;
+    const boardA = playerA.child.board;
+    const boardB = playerB.child.board;
+    const handA = playerA.child.hand;
+    const cardC = handA.child.cards.find(item => item instanceof RecklessRocketeerModel);
+    const cardD = boardB.child.cards.find(item => item instanceof WispModel);
+    if (!cardC || !cardD) throw new Error();
+    const heroB = playerB.child.hero;
+
+    test('reckless-rocketeer-play', async () => {
+        // Check initial state
+        expect(cardC.child.attack.state.current).toBe(5); // Reckless Rocketeer: 5/2
+        expect(cardC.child.health.state.current).toBe(2);
+        expect(handA.child.cards.length).toBe(1); // Reckless Rocketeer in hand
+        expect(boardA.child.cards.length).toBe(0); // No minions on board
+        expect(playerA.child.mana.state.current).toBe(10); // Full mana
+
+        // Play Reckless Rocketeer
+        let promise = cardC.play();
+        playerA.child.controller.set(0); // Select position 0
+        await promise;
+
+        // Reckless Rocketeer should be on board
+        expect(boardA.child.cards.length).toBe(1); // Reckless Rocketeer on board
+        expect(handA.child.cards.length).toBe(0); // Reckless Rocketeer moved to board
+        expect(playerA.child.mana.state.current).toBe(4); // 10 - 6 = 4
+
+        // Check that Reckless Rocketeer has Charge (can attack immediately)
+        expect(cardC.child.action.state.current).toBe(1); // Can attack
+        expect(cardC.child.action.status).toBe(true); // Action is available
+    });
+
+    test('reckless-rocketeer-charge', async () => {
+        // Check initial state
+        expect(heroB.child.health.state.current).toBe(30); // Player B hero: 30 health
+        expect(cardC.child.attack.state.current).toBe(5); // Reckless Rocketeer: 5/2
+        expect(cardC.child.health.state.current).toBe(2);
+        expect(cardC.child.action.state.current).toBe(1); // Can attack
+        expect(cardC.child.action.status).toBe(true); // Action is available
+
+        // Reckless Rocketeer attacks Player B's hero
+        const promise = cardC.child.action.run();
+        expect(playerA.child.controller.current?.options).toContain(heroB); // Can target enemy hero
+        expect(playerA.child.controller.current?.options).toContain(cardD); // Can target enemy minion
+        playerA.child.controller.set(heroB); // Target Player B's hero
+        await promise;
+
+        // Player B's hero should take 5 damage
+        expect(heroB.child.health.state.current).toBe(25); // 30 - 5 = 25
+        expect(heroB.child.health.state.damage).toBe(5);
+
+        // Reckless Rocketeer should have used its attack
+        expect(cardC.child.action.state.current).toBe(0); // Cannot attack again this turn
+    });
+});
