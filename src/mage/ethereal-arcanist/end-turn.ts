@@ -1,6 +1,5 @@
-import { EndTurnHookModel, MinionCardModel } from "hearthstone-core";
+import { EndTurnHookModel, MinionCardModel, RoleBuffModel } from "hearthstone-core";
 import { DebugUtil, TemplUtil } from "set-piece";
-import { EtherealArcanistBuffModel } from "./buff";
 
 
 @TemplUtil.is('ethereal-arcanist-end-turn')
@@ -41,6 +40,12 @@ export class EtherealArcanistFeatureModel extends EndTurnHookModel {
         const secrets = board.child.secrets;
         if (!secrets.length) return;
 
-        minion.child.feats.add(new EtherealArcanistBuffModel());
+        minion.child.feats.add(new RoleBuffModel({
+            state: {
+                name: "Ethereal Arcanist's Buff",
+                desc: "+2/+2.",
+                offset: [2, 2]
+            }
+        }));
     }
 }

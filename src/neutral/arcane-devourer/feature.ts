@@ -1,5 +1,4 @@
-import { CardFeatureModel, FeatureModel, MinionCardModel, MinionFeatureModel, SpellCardModel } from "hearthstone-core";
-import { ArcaneDevourerBuffModel } from "./buff";
+import { CardFeatureModel, FeatureModel, MinionCardModel, MinionFeatureModel, SpellCardModel, RoleBuffModel } from "hearthstone-core";
 import { Event, EventUtil, TemplUtil } from "set-piece";
 
 @TemplUtil.is('arcane-devourer-feature')
@@ -33,6 +32,12 @@ export class ArcaneDevourerFeatureModel extends MinionFeatureModel {
         // Only trigger when the minion's owner casts a spell
         if (that.route.player !== player) return;
         
-        minion.child.feats.add(new ArcaneDevourerBuffModel())
+        minion.child.feats.add(new RoleBuffModel({
+            state: {
+                name: "Arcane Devourer's Buff",
+                desc: "+2/+2.",
+                offset: [2, 2]
+            }
+        }))
     }
 }

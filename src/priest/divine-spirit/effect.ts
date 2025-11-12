@@ -1,6 +1,5 @@
-import { EffectModel, SpellEffectModel, Selector, RoleModel, MinionCardModel } from "hearthstone-core";
+import { EffectModel, SpellEffectModel, Selector, RoleModel, MinionCardModel, RoleBuffModel } from "hearthstone-core";
 import { TemplUtil } from "set-piece";
-import { DivineSpiritBuffModel } from "./buff";
 
 @TemplUtil.is('divine-spirit-effect')
 export class DivineSpiritEffectModel extends SpellEffectModel<[MinionCardModel]> {
@@ -33,7 +32,13 @@ export class DivineSpiritEffectModel extends SpellEffectModel<[MinionCardModel]>
     protected doRun(target: MinionCardModel) {
         // Get current health and create a buff with equal value
         const currentHealth = target.child.health.state.current;
-        const buff = new DivineSpiritBuffModel({ state: { offset: [0, currentHealth] }});
+        const buff = new RoleBuffModel({
+            state: {
+                name: "Divine Spirit's Buff",
+                desc: "Double a minion's Health.",
+                offset: [0, currentHealth]
+            }
+        });
         target.child.feats.add(buff);
     }
 }
