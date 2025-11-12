@@ -22,7 +22,7 @@ export class StampedingKodoBattlecryModel extends MinionBattlecryModel<[]> {
         return [];
     }
 
-    public async doRun(from: number, to: number) {
+    public doRun(from: number, to: number) {
         const card = this.route.card;
         if (!card) return;
 

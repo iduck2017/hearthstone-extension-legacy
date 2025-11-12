@@ -20,7 +20,7 @@ export class ArcaneIntellectEffectModel extends SpellEffectModel<[]> {
 
     toRun(): [] { return [] }
 
-    protected async doRun() {
+    protected doRun() {
         const player = this.route.player;
         if (!player) return;
         const deck = player.child.deck;

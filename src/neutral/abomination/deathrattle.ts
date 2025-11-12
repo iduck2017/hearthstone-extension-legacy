@@ -20,7 +20,7 @@ export class AbominationDeathrattleModel extends DeathrattleModel {
         });
     }
 
-    public async doRun() {
+    public doRun() {
         const card = this.route.card;
         if (!card) return;
 

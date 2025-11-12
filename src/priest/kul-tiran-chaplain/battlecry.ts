@@ -29,7 +29,7 @@ export class KulTiranChaplainBattlecryModel extends MinionBattlecryModel<[RoleMo
         return [new Selector(roles, { hint: "Choose a friendly minion" })];
     }
 
-    public async doRun(from: number, to: number, target: RoleModel) {
+    public doRun(from: number, to: number, target: RoleModel) {
         const player = this.route.player;
         if (!player) return;
         

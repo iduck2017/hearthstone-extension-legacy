@@ -25,7 +25,7 @@ export class HolyFireEffectModel extends SpellEffectModel<[RoleModel]> {
         return [new Selector(roles, { hint: "Choose a target" })];
     }
 
-    protected async doRun(target: RoleModel) {
+    protected doRun(target: RoleModel) {
         const card = this.route.card;
         const player = this.route.player;
         if (!card || !player) return;

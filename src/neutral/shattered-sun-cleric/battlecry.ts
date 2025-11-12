@@ -27,7 +27,7 @@ export class ShatteredSunClericBattlecryModel extends MinionBattlecryModel<[Role
         return [new Selector(minions, { hint: "Choose a friendly minion" })];
     }
 
-    public async doRun(from: number, to: number, target: RoleModel) {
+    public doRun(from: number, to: number, target: RoleModel) {
         // Give the target minion +1/+1
         const buff = new RoleBuffModel({
             state: { 

@@ -19,7 +19,7 @@ export class DemolisherFeatureModel extends StartTurnHookModel {
         });
     }
 
-    protected async doRun(isCurrent: boolean) {
+    protected doRun(isCurrent: boolean) {
         if (!isCurrent) return;
 
         const player = this.route.player;

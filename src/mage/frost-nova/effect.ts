@@ -21,7 +21,7 @@ export class FrostNovaEffectModel extends SpellEffectModel<[]>{
 
     toRun(): [] { return [] }
 
-    protected async doRun() {
+    protected doRun() {
         const player = this.route.player;
         const opponent = player?.refer.opponent;
         if (!opponent) return;

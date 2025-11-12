@@ -24,7 +24,7 @@ export class VoodooDoctorMinionBattlecryModel extends MinionBattlecryModel<[Role
         return [new Selector(roles, { hint: 'Choose a target' })];
     }
 
-    public async doRun(from: number, to: number, target: RoleModel) {
+    public doRun(from: number, to: number, target: RoleModel) {
         const card = this.route.card;
         if (!card) return;
         RestoreModel.deal([

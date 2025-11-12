@@ -23,7 +23,7 @@ export class FlamestrikeEffectModel extends SpellEffectModel<[]> {
         return [];
     }
 
-    protected async doRun() {
+    protected doRun() {
         const player = this.route.player;
         const opponent = player?.refer.opponent;
         if (!opponent) return;
@@ -34,7 +34,7 @@ export class FlamestrikeEffectModel extends SpellEffectModel<[]> {
         const roles = opponent.query(true); // Only minions
 
         // Deal 5 damage to all enemy minions
-        await DamageModel.deal(roles.map((item) => new DamageEvent({
+        DamageModel.deal(roles.map((item) => new DamageEvent({
             type: DamageType.SPELL,
             source: card,
             method: this,

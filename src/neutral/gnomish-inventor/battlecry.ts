@@ -22,7 +22,7 @@ export class GnomishInventorBattlecryModel extends MinionBattlecryModel<[]> {
         return [];
     }
 
-    public async doRun(from: number, to: number) {
+    public doRun(from: number, to: number) {
         const minion = this.route.minion;
         if (!minion) return;
         const player = minion.route.player;

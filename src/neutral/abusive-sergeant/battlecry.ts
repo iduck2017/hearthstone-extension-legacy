@@ -26,7 +26,7 @@ export class AbusiveSergeantBattlecryModel extends MinionBattlecryModel<[RoleMod
         return [new Selector(options, { hint: 'Choose a minion' })];
     }
 
-    public async doRun(from: number, to: number, target: RoleModel) {
+    public doRun(from: number, to: number, target: RoleModel) {
         target.child.feats.add(new AbusiveSergeantBuffModel())
     }
 }

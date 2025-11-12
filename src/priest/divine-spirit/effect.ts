@@ -30,7 +30,7 @@ export class DivineSpiritEffectModel extends SpellEffectModel<[MinionCardModel]>
         return [new Selector(roles, { hint: "Choose a minion" })];
     }
 
-    protected async doRun(target: MinionCardModel) {
+    protected doRun(target: MinionCardModel) {
         // Get current health and create a buff with equal value
         const currentHealth = target.child.health.state.current;
         const buff = new DivineSpiritBuffModel({ state: { offset: [0, currentHealth] }});

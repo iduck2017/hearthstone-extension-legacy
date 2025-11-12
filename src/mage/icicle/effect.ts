@@ -26,14 +26,14 @@ export class IcicleEffectModel extends SpellEffectModel<[RoleModel]> {
         return [new Selector(roles, { hint: "Choose a minion" })]
     }
 
-    protected async doRun(target: RoleModel) {
+    protected doRun(target: RoleModel) {
         const card = this.route.card;
         if (!card) return;
         const player = this.route.player;
         if (!player) return;
         
         // Deal 2 damage to the target
-        await DamageModel.deal([
+        DamageModel.deal([
             new DamageEvent({
                 type: DamageType.SPELL,
                 source: card,

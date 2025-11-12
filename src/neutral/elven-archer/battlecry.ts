@@ -1,5 +1,5 @@
 import { MinionBattlecryModel, DamageEvent, DamageModel, DamageType, RoleModel, Selector } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { DebugUtil, TemplUtil } from "set-piece";
 
 @TemplUtil.is('elven-archer-battlecry')
 export class ElvenArcherMinionBattlecryModel extends MinionBattlecryModel<[RoleModel]> {
@@ -26,7 +26,8 @@ export class ElvenArcherMinionBattlecryModel extends MinionBattlecryModel<[RoleM
         return [new Selector(roles, { hint: 'Choose a target' })]
     }
 
-    protected async doRun(from: number, to: number, target: RoleModel) {
+    protected doRun(from: number, to: number, target: RoleModel) {
+        DebugUtil.log(`${this.name} deals 1 damage to ${target.name}`);
         const card = this.route.card;
         if (!card) return;
         DamageModel.deal([

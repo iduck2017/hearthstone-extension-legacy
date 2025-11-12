@@ -20,7 +20,7 @@ export class KirinTorMageBattlecryModel extends MinionBattlecryModel<[]> {
 
     public toRun(): [] { return []; }
 
-    public async doRun(from: number, to: number) {
+    public doRun(from: number, to: number) {
         const player = this.route.player;
         if (!player) return;
         player.add(new KirinTorMageContextModel());

@@ -23,7 +23,7 @@ export class RazorfenHunterBattlecryModel extends MinionBattlecryModel<[]> {
         return [];
     }
 
-    public async doRun(from: number, to: number) {
+    public doRun(from: number, to: number) {
         const minion = this.route.minion;
         if (!minion) return;
 

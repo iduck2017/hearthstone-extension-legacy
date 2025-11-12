@@ -27,7 +27,7 @@ export class HungryCrabBattlecryModel extends MinionBattlecryModel<[RoleModel]> 
         return [new Selector(options, { hint: 'Select a Murloc' })];
     }
 
-    public async doRun(from: number, to: number, target: RoleModel) {
+    public doRun(from: number, to: number, target: RoleModel) {
         const cardA = this.route.minion;
         if (!cardA) return;
         

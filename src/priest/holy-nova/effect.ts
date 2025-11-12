@@ -20,7 +20,7 @@ export class HolyNovaEffectModel extends SpellEffectModel<[]> {
 
     toRun(): [] { return [] }
 
-    protected async doRun() {
+    protected doRun() {
         const game = this.route.game;
         const player = this.route.player;
         if (!game || !player) return;

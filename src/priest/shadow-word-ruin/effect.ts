@@ -20,7 +20,7 @@ export class ShadowWordRuinEffectModel extends SpellEffectModel<[]> {
 
     toRun(): [] { return [] }
 
-    protected async doRun() {
+    protected doRun() {
         const game = this.route.game;
         if (!game) return;
 

@@ -26,7 +26,7 @@ export class FireballEffectModel extends SpellEffectModel<[RoleModel]> {
         return [new Selector(roles, { hint: "Choose a target" })]
     }
 
-    protected async doRun(target: RoleModel) {
+    protected doRun(target: RoleModel) {
         const card = this.route.card;
         if (!card) return;
         DamageModel.deal([

@@ -14,6 +14,7 @@ export * from './mage/frostbolt';
 export * from './mage/ice-barrier';
 export * from './mage/ice-lance';
 export * from './mage/icicle';
+export * from './mage/jainas-gift';
 export * from './mage/kirin-tor-mage';
 export * from './mage/mana-wyrm';
 export * from './mage/mirror-entity';

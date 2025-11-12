@@ -22,7 +22,7 @@ export class PsychicConjurerBattlecryModel extends MinionBattlecryModel<[]> {
         return [];
     }
 
-    public async doRun(from: number, to: number) {
+    public doRun(from: number, to: number) {
         const player = this.route.player;
         if (!player) return;
         const opponent = player.refer.opponent;

@@ -24,7 +24,7 @@ export class EarthenRingFarseerBattlecryModel extends MinionBattlecryModel<[Role
         return [new Selector(roles, { hint: "Choose a target to restore 3 health" })];
     }
 
-    public async doRun(from: number, to: number, target: RoleModel) {
+    public doRun(from: number, to: number, target: RoleModel) {
         // Restore 3 health to the selected target
         const card = this.route.card;
         if (!card) return;

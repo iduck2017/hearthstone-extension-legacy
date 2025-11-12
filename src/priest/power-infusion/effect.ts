@@ -30,7 +30,7 @@ export class PowerInfusionEffectModel extends SpellEffectModel<[RoleModel]> {
         return [new Selector(roles, { hint: "Choose a minion" })];
     }
 
-    protected async doRun(target: RoleModel) {
+    protected doRun(target: RoleModel) {
         // Give the minion +2/+6 buff
         const buff = new PowerInfusionBuffModel();
         target.child.feats.add(buff);

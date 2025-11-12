@@ -21,7 +21,7 @@ export class BloodsailCorsairBattlecryModel extends MinionBattlecryModel<[]> {
     public toRun(): [] { return []; }
 
     // Remove 1 durability from opponent's weapon
-    public async doRun() {
+    public doRun() {
         const player = this.route.player;
         if (!player) return;
         const opponent = player.refer.opponent;

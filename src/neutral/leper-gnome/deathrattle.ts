@@ -18,7 +18,7 @@ export class LeperGnomeDeathrattleModel extends DeathrattleModel {
         });
     }
 
-    public async doRun() {
+    public doRun() {
         const player = this.route.player;
         const card = this.route.card;
         if (!card) return;

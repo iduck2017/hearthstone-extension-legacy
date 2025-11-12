@@ -37,7 +37,7 @@ export class MirrorImageEffectModel extends SpellEffectModel<[]> {
 
     toRun(): [] { return [] }
 
-    protected async doRun() {
+    protected doRun() {
         const player = this.route.player;
         if (!player) return;
         const board = player.child.board;

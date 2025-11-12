@@ -23,7 +23,7 @@ export class ThoughtstealEffectModel extends SpellEffectModel<[]> {
         return [];
     }
 
-    protected async doRun() {
+    protected doRun() {
         const player = this.route.player;
         if (!player) return;
         const opponent = player.refer.opponent;

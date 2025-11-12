@@ -21,7 +21,7 @@ export class ArcaneMissilesEffectModel extends SpellEffectModel<[]> {
 
     toRun(): [] { return [] }
 
-    protected async doRun() {
+    protected doRun() {
         const player = this.route.player;
         const opponent = player?.refer.opponent;
         if (!opponent) return;
@@ -35,7 +35,7 @@ export class ArcaneMissilesEffectModel extends SpellEffectModel<[]> {
             const index = Math.floor(Math.random() * roles.length);
             const target = roles[index];
             if (!target) break;
-            await DamageModel.deal([
+            DamageModel.deal([
                 new DamageEvent({
                     type: DamageType.SPELL,
                     source: card,

@@ -26,7 +26,7 @@ export class FocusedWillEffectModel extends SpellEffectModel<[MinionCardModel]> 
         return [new Selector(roles, { hint: "Choose a minion" })];
     }
 
-    protected async doRun(target: MinionCardModel) {
+    protected doRun(target: MinionCardModel) {
         // First, silence the minion
         target.silence();
 

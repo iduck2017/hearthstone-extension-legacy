@@ -17,7 +17,7 @@ export class RagnarosEndTurnModel extends EndTurnHookModel {
         });
     }
 
-    public async doRun(isCurrent: boolean) {
+    public doRun(isCurrent: boolean) {
         if (!isCurrent) return; // Only trigger at the end of the current player's turn
 
         const player = this.route.player;

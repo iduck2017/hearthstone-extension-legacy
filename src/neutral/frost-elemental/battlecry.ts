@@ -26,7 +26,7 @@ export class FrostElementalBattlecryModel extends MinionBattlecryModel<[RoleMode
         return [new Selector(roles, { hint: "Choose a character" })];
     }
 
-    public async doRun(from: number, to: number, target: RoleModel) {
+    public doRun(from: number, to: number, target: RoleModel) {
         // Freeze the target
         const feats = target.child.feats;
         const frozen = feats.child.frozen;

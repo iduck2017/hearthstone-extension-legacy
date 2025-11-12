@@ -24,7 +24,7 @@ export class AlexstraszaBattlecryModel extends MinionBattlecryModel<[RoleModel]>
         return [new Selector(roles, { hint: "Choose a character" })];
     }
 
-    public async doRun(from: number, to: number, target: RoleModel) {
+    public doRun(from: number, to: number, target: RoleModel) {
         const card = this.route.card;
         const player = this.route.player;
         if (!card || !player) return;

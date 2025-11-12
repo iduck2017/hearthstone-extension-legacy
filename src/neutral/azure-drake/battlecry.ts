@@ -21,7 +21,7 @@ export class AzureDrakeBattlecryModel extends MinionBattlecryModel<[]> {
     public toRun(): [] { return []; }
 
     // Draw a card when this minion is summoned
-    public async doRun() {
+    public doRun() {
         const player = this.route.player;
         if (!player) return;
         const deck = player.child.deck;

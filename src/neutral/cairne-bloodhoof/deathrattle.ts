@@ -18,7 +18,7 @@ export class CairneBloodhoofDeathrattleModel extends DeathrattleModel {
         });
     }
 
-    public async doRun() {
+    public doRun() {
         const player = this.route.player;
         if (!player) return;
         const board = player.child.board;

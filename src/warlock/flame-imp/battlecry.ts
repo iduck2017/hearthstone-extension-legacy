@@ -21,7 +21,7 @@ export class FlameImpBattlecryModel extends MinionBattlecryModel<[]> {
         return [];
     }
 
-    public async doRun(from: number, to: number) {
+    public doRun(from: number, to: number) {
         // Deal 3 damage to your hero
         const card = this.route.card;
         if (!card) return;

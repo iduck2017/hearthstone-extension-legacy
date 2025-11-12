@@ -25,12 +25,12 @@ export class HolySmiteEffectModel extends SpellEffectModel<[RoleModel]> {
         return [new Selector(roles, { hint: "Choose a minion" })];
     }
 
-    protected async doRun(target: RoleModel) {
+    protected doRun(target: RoleModel) {
         const card = this.route.card;
         if (!card) return;
 
         // Deal 3 damage to the target minion
-        await DamageModel.deal([
+        DamageModel.deal([
             new DamageEvent({
                 type: DamageType.SPELL,
                 source: card,

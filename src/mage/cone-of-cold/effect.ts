@@ -26,7 +26,7 @@ export class ConeOfColdEffectModel extends SpellEffectModel<[MinionCardModel]> {
         return [new Selector(roles, { hint: "Choose a target" })]
     }
 
-    protected async doRun(target: MinionCardModel) {
+    protected doRun(target: MinionCardModel) {
         const card = this.route.card;
         if (!card) return;
 
@@ -44,7 +44,7 @@ export class ConeOfColdEffectModel extends SpellEffectModel<[MinionCardModel]> {
         });
 
         // Deal 1 damage to all affected minions
-        await DamageModel.deal(minions.map((item) => new DamageEvent({
+        DamageModel.deal(minions.map((item) => new DamageEvent({
             type: DamageType.SPELL,
             source: card,
             method: this,

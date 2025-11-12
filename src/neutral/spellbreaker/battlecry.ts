@@ -24,7 +24,7 @@ export class SpellbreakerBattlecryModel extends MinionBattlecryModel<[MinionCard
         return [new Selector(roles, { hint: "Choose a minion to silence" })];
     }
 
-    public async doRun(from: number, to: number, target: MinionCardModel) {
+    public doRun(from: number, to: number, target: MinionCardModel) {
         // Silence the target minion
         target.silence();
     }

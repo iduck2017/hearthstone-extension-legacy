@@ -30,7 +30,7 @@ export class ScarletSubjugatorBattlecryModel extends MinionBattlecryModel<[RoleM
         return [new Selector(roles, { hint: "Choose an enemy minion" })];
     }
 
-    public async doRun(from: number, to: number, target: RoleModel) {
+    public doRun(from: number, to: number, target: RoleModel) {
         const player = this.route.player;
         if (!player) return;
         // Apply -2 Attack debuff until next turn

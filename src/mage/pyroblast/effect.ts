@@ -25,12 +25,12 @@ export class PyroblastEffectModel extends SpellEffectModel<[RoleModel]> {
         return [new Selector(roles, { hint: "Choose a target" })];
     }
 
-    protected async doRun(target: RoleModel) {
+    protected doRun(target: RoleModel) {
         const card = this.route.card;
         if (!card) return;
 
         // Deal 10 damage to the target
-        await DamageModel.deal([
+        DamageModel.deal([
             new DamageEvent({
                 type: DamageType.SPELL,
                 source: card,

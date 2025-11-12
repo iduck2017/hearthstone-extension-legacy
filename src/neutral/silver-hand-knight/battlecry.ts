@@ -22,7 +22,7 @@ export class SilverHandKnightBattlecryModel extends MinionBattlecryModel<[]> {
         return [];
     }
 
-    public async doRun(from: number, to: number) {
+    public doRun(from: number, to: number) {
         // Summon a 2/2 Squire
         const player = this.route.player;
         if (!player) return;

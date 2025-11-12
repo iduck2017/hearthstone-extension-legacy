@@ -52,10 +52,11 @@ describe('battlecry', () => {
         const promise = cardC.play();
         expect(playerA.child.controller.current?.options).toContain(0);
         playerA.child.controller.set(0);
-        await AnimeUtil.sleep()
-        expect(playerA.child.controller.current?.options).toContain(cardD);
-        expect(playerA.child.controller.current?.options).toContain(heroA);
-        expect(playerA.child.controller.current?.options).toContain(heroB);
+        await AnimeUtil.sleep();
+        const selector = playerA.child.controller.current;
+        expect(selector?.options).toContain(cardD);
+        expect(selector?.options).toContain(heroA);
+        expect(selector?.options).toContain(heroB);
         playerA.child.controller.set(cardD);
         await promise;
 

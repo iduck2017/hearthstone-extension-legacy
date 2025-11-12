@@ -21,7 +21,7 @@ export class BlizzardEffectModel extends SpellEffectModel<[]> {
 
     toRun(): [] { return [] }
 
-    protected async doRun() {
+    protected doRun() {
         const player = this.route.player;
         const opponent = player?.refer.opponent;
         if (!opponent) return;
@@ -32,13 +32,15 @@ export class BlizzardEffectModel extends SpellEffectModel<[]> {
         const roles = opponent.query(true);
         
         // Deal 2 damage to all enemy minions
-        await DamageModel.deal(roles.map((item) => new DamageEvent({
-            type: DamageType.SPELL,
-            source: card,
-            method: this,
-            target: item,
-            origin: this.state.damage[0] ?? 0,
-        })));
+        DamageModel.deal(
+            roles.map((item) => new DamageEvent({
+                type: DamageType.SPELL,
+                source: card,
+                method: this,
+                target: item,
+                origin: this.state.damage[0] ?? 0,
+            }))
+        );
         // Freeze all enemy minions
         for (const role of roles) {
             const feats = role.child.feats;

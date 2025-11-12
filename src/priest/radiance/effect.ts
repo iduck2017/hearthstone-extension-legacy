@@ -23,7 +23,7 @@ export class RadianceEffectModel extends SpellEffectModel<[]> {
         return [];
     }
 
-    protected async doRun() {
+    protected doRun() {
         const player = this.route.player;
         if (!player) return;
         const card = this.route.card;
@@ -31,7 +31,7 @@ export class RadianceEffectModel extends SpellEffectModel<[]> {
         const hero = player.child.hero;
         
         // Restore 5 Health to the hero
-        await RestoreModel.deal([
+        RestoreModel.deal([
             new RestoreEvent({
                 source: card,
                 method: this,

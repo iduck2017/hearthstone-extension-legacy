@@ -29,7 +29,7 @@ export class ShadowWordDeathEffectModel extends SpellEffectModel<[RoleModel]> {
         return [new Selector(roles, { hint: "Choose a minion with 5 or more Attack" })];
     }
 
-    protected async doRun(target: RoleModel) {
+    protected doRun(target: RoleModel) {
         // Check if the minion has 5 or more Attack
         if (target.child.attack.state.current < 5) return;
         // Destroy the minion

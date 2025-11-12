@@ -26,7 +26,7 @@ export class IceLanceEffectModel extends SpellEffectModel<[RoleModel]> {
         return [new Selector(roles, { hint: "Choose a target" })]
     }
 
-    protected async doRun(target: RoleModel) {
+    protected doRun(target: RoleModel) {
         const card = this.route.card;
         if (!card) return;
         
@@ -36,7 +36,7 @@ export class IceLanceEffectModel extends SpellEffectModel<[RoleModel]> {
         
         if (frozen.state.isActive) {
             // If already frozen, deal 4 damage instead
-            await DamageModel.deal([
+            DamageModel.deal([
                 new DamageEvent({
                     type: DamageType.SPELL,
                     source: card,

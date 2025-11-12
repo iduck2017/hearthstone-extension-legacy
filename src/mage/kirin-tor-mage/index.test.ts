@@ -91,7 +91,7 @@ describe('kirin-tor-mage', () => {
         expect(handA.child.cards.length).toBe(1); // Only Counterspell left
     })
 
-    test('second-secret-normal-cost', async () => {
+    test('secret-cast', async () => {
         // Check that the second secret now costs normal amount
         expect(cardE.child.cost.state.current).toBe(3); // Counterspell should cost normal 3
 

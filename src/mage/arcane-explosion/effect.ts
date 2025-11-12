@@ -22,7 +22,7 @@ export class ArcaneExplosionEffectModel extends SpellEffectModel<[]> {
 
     toRun(): [] { return [] }
 
-    protected async doRun() {
+    protected doRun() {
         const player = this.route.player;
         const opponent = player?.refer.opponent;
         if (!opponent) return;
@@ -33,7 +33,7 @@ export class ArcaneExplosionEffectModel extends SpellEffectModel<[]> {
         const roles = opponent.query(true);
         
         // Deal 1 damage to each enemy minion
-        await DamageModel.deal(roles.map((item) => new DamageEvent({
+        DamageModel.deal(roles.map((item) => new DamageEvent({
             type: DamageType.SPELL,
             source: card,
             method: this,

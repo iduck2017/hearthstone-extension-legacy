@@ -26,7 +26,7 @@ export class PolymorphEffectModel extends SpellEffectModel<[MinionCardModel]> {
         return [new Selector(roles, { hint: "Choose a minion" })]
     }
 
-    protected async doRun(target: MinionCardModel) {
+    protected doRun(target: MinionCardModel) {
         // Get the minion card from the target role
         // Transform the minion into a Sheep
         const sheep = new SheepModel();
