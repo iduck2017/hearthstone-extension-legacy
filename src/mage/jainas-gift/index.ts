@@ -13,7 +13,7 @@
  * Collectible
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, SpellCardModel, SpellFeaturesModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryUtil, RarityType, SpellCardModel } from "hearthstone-core";
 import { JainasGiftEffectModel } from "./effect";
 
 @LibraryUtil.is('jainas-gift')
@@ -26,7 +26,7 @@ export class JainasGiftModel extends SpellCardModel {
                 name: "Jaina's Gift",
                 desc: "Discover a Temporary Frostbolt, Arcane Intellect, or Fireball.",
                 flavorDesc: "\"On this day, my magic will bring us together.\" -Jaina",
-                isCollectible: true,
+                collectible: true,
                 rarity: RarityType.RARE,
                 class: ClassType.MAGE,
                 schools: [],
@@ -35,9 +35,7 @@ export class JainasGiftModel extends SpellCardModel {
             refer: { ...props.refer },
             child: { 
                 cost: props.child?.cost ?? new CostModel({ state: { origin: 1 }}),
-                feats: props.child?.feats ?? new SpellFeaturesModel({
-                    child: { effects: [new JainasGiftEffectModel()] }
-                }),
+                effects: props.child?.effects ?? [new JainasGiftEffectModel()],
                 ...props.child 
             }
         })

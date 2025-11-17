@@ -1,8 +1,8 @@
-import { CardFeatureModel, CostDecor, CostModel, CostType, FeatureModel, OperatorType, SpellCardModel } from "hearthstone-core";
+import { RoleFeatureModel, CostDecor, CostModel, CostType, OperatorType, SpellCardModel } from "hearthstone-core";
 import { StateUtil, TemplUtil } from "set-piece";
 
 @TemplUtil.is('sorcerers-apprentice-feature')
-export class SorcerersApprenticeFeatureModel extends CardFeatureModel {
+export class SorcerersApprenticeFeatureModel extends RoleFeatureModel {
     constructor(props?: SorcerersApprenticeFeatureModel['props']) {
         props = props ?? {};
         super({
@@ -10,7 +10,7 @@ export class SorcerersApprenticeFeatureModel extends CardFeatureModel {
             state: {
                 name: "Sorcerer's Apprentice's feature",
                 desc: "Your spells cost (1) less (but not less than 1).",
-                isActive: true,
+                actived: true,
                 ...props.state
             },
             child: { ...props.child },
@@ -31,7 +31,7 @@ export class SorcerersApprenticeFeatureModel extends CardFeatureModel {
             offset: -1,
             type: OperatorType.ADD,
             reason: this,
-            minumum: 1,
+            minimum: 1,
         });
     }
 }

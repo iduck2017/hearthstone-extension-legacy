@@ -1,9 +1,9 @@
-import { MinionBattlecryModel } from "hearthstone-core";
+import { BattlecryModel, Selector } from "hearthstone-core";
 import { TemplUtil } from "set-piece";
 import { KirinTorMageContextModel } from "./context";
 
 @TemplUtil.is('kirin-tor-mage-battlecry')
-export class KirinTorMageBattlecryModel extends MinionBattlecryModel<[]> {
+export class KirinTorMageBattlecryModel extends BattlecryModel<never> {
     constructor(props?: KirinTorMageBattlecryModel['props']) {
         props = props ?? {};
         super({
@@ -18,11 +18,13 @@ export class KirinTorMageBattlecryModel extends MinionBattlecryModel<[]> {
         });
     }
 
-    public toRun(): [] { return []; }
+    public prepare(...prev: never[]): Selector<never> | undefined {
+        return undefined
+    }
 
-    public doRun(from: number, to: number) {
+    public run() {
         const player = this.route.player;
         if (!player) return;
-        player.add(new KirinTorMageContextModel());
+        player.buff(new KirinTorMageContextModel());
     }
 }

@@ -15,7 +15,7 @@
  * Collectible
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SecretCardModel, SpellCardModel, SpellFeaturesModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SecretCardModel } from "hearthstone-core";
 import { VaporizeFeatureModel } from "./feature";
 
 @LibraryUtil.is('vaporize')
@@ -28,7 +28,7 @@ export class VaporizeModel extends SecretCardModel {
                 name: "Vaporize",
                 desc: "Secret: When a minion attacks your hero, destroy it.",
                 flavorDesc: "Rumor has it that Deathwing brought about the Cataclysm after losing a game to this card. We may never know the truth.",
-                isCollectible: true,
+                collectible: true,
                 rarity: RarityType.RARE,
                 class: ClassType.MAGE,
                 schools: [SchoolType.FIRE],
@@ -37,11 +37,7 @@ export class VaporizeModel extends SecretCardModel {
             refer: { ...props.refer },
             child: { 
                 cost: props.child?.cost ?? new CostModel({ state: { origin: 3 }}),
-                feats: new SpellFeaturesModel({
-                    child: {
-                        items: [new VaporizeFeatureModel()]
-                    }
-                }),
+                feats: [new VaporizeFeatureModel()],
                 ...props.child 
             }
         });

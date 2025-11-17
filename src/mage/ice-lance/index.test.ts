@@ -61,22 +61,23 @@ describe('ice-lance', () => {
         // Target is not frozen initially
         expect(playerA.child.mana.state.current).toBe(10);
         expect(handA.child.cards.length).toBe(1);
-        expect(cardC.child.feats.child.frozen.state.isActive).toBeFalsy();
+        expect(cardC.child.frozen.state.actived).toBeFalsy();
 
         // Play Ice Lance targeting enemy minion
         let promise = cardD.play();
-        expect(playerA.child.controller.current?.options).toContain(heroA);
-        expect(playerA.child.controller.current?.options).toContain(heroB);
-        expect(playerA.child.controller.current?.options).toContain(cardC);
+        const options1 = playerA.child.controller.current?.options;
+        expect(options1).toContain(heroA);
+        expect(options1).toContain(heroB);
+        expect(options1).toContain(cardC);
         playerA.child.controller.set(cardC);
         await promise;
         
         // Target should be frozen
         expect(playerA.child.mana.state.current).toBe(9);
-        expect(cardC.child.feats.child.frozen.state.isActive).toBe(true);
+        expect(cardC.child.frozen.state.actived).toBe(true);
         turn.next();
         expect(turn.refer.current).toBe(playerB);
-        expect(cardC.child.feats.child.frozen.state.isActive).toBe(true);
+        expect(cardC.child.frozen.state.actived).toBe(true);
         
         expect(handA.child.cards.length).toBe(0);
         expect(cardC.child.action.status).toBeFalsy();
@@ -85,12 +86,13 @@ describe('ice-lance', () => {
     test('ice-lance-cast', async () => {
         expect(playerB.child.mana.state.current).toBe(10);
         expect(handB.child.cards.length).toBe(1);
-        expect(cardC.child.feats.child.frozen.state.isActive).toBe(true);
+        expect(cardC.child.frozen.state.actived).toBe(true);
 
         let promise = cardE.play();
-        expect(playerB.child.controller.current?.options).toContain(heroA);
-        expect(playerB.child.controller.current?.options).toContain(heroB);
-        expect(playerB.child.controller.current?.options).toContain(cardC);
+        const options2 = playerB.child.controller.current?.options;
+        expect(options2).toContain(heroA);
+        expect(options2).toContain(heroB);
+        expect(options2).toContain(cardC);
         playerB.child.controller.set(cardC);
         await promise;
 

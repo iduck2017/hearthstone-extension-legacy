@@ -1,9 +1,9 @@
-import { EffectModel, SpellEffectModel } from "hearthstone-core";
+import { EffectModel, Selector, SpellEffectModel } from "hearthstone-core";
 import { TemplUtil } from "set-piece";
 
 
 @TemplUtil.is('frost-nova-effect')
-export class FrostNovaEffectModel extends SpellEffectModel<[]>{
+export class FrostNovaEffectModel extends SpellEffectModel<never>{
     constructor(props?: FrostNovaEffectModel['props']) {
         props = props ?? {};
         super({
@@ -19,20 +19,21 @@ export class FrostNovaEffectModel extends SpellEffectModel<[]>{
         });
     }
 
-    toRun(): [] { return [] }
+    public prepare(...prev: never[]): Selector<never> | undefined {
+        return undefined
+    }
 
-    protected doRun() {
+    protected run() {
         const player = this.route.player;
         const opponent = player?.refer.opponent;
         if (!opponent) return;
 
         // Get all enemy minions
-        const roles = opponent.query(true);
+        const roles = opponent.refer.minions;
         
         // Freeze all enemy minions
         for (const role of roles) {
-            const feats = role.child.feats;
-            const frozen = feats.child.frozen;
+            const frozen = role.child.frozen;
             frozen.active();
         }
     }

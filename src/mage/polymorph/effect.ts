@@ -3,7 +3,7 @@ import { TemplUtil } from "set-piece";
 import { SheepModel } from "./minion";
 
 @TemplUtil.is('polymorph-effect')
-export class PolymorphEffectModel extends SpellEffectModel<[MinionCardModel]> {
+export class PolymorphEffectModel extends SpellEffectModel<MinionCardModel> {
     constructor(props?: PolymorphEffectModel['props']) {
         props = props ?? {};
         super({
@@ -19,14 +19,14 @@ export class PolymorphEffectModel extends SpellEffectModel<[MinionCardModel]> {
         });
     }
 
-    toRun(): [Selector<MinionCardModel>] | undefined {
+    prepare(): Selector<MinionCardModel> | undefined {
         const games = this.route.game;
         if (!games) return;
-        const roles = games.query(true); // Only minions can be targeted
-        return [new Selector(roles, { hint: "Choose a minion" })]
+        const roles = games.refer.roles.filter(role => role instanceof MinionCardModel);
+        return new Selector(roles, { hint: "Choose a minion" })
     }
 
-    protected doRun(target: MinionCardModel) {
+    protected run(target: MinionCardModel) {
         // Get the minion card from the target role
         // Transform the minion into a Sheep
         const sheep = new SheepModel();

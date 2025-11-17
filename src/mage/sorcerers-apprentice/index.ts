@@ -14,7 +14,7 @@
  * Collectible
  */
 
-import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, MinionFeaturesModel, RarityType, RoleAttackModel } from "hearthstone-core";
+import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, RarityType, RoleAttackModel } from "hearthstone-core";
 import { SorcerersApprenticeFeatureModel } from "./feature";
 
 @LibraryUtil.is('sorcerers-apprentice')
@@ -27,7 +27,7 @@ export class SorcerersApprenticeModel extends MinionCardModel {
                 name: 'Sorcerer\'s Apprentice',
                 desc: 'Your spells cost (1) less (but not less than 1).',
                 flavorDesc: 'Apprentices are great for bossing around. "Conjure me some mana buns! And a coffee! Make that a mana coffee!"',
-                isCollectible: true,
+                collectible: true,
                 rarity: RarityType.COMMON,
                 class: ClassType.MAGE,
                 races: [],
@@ -37,11 +37,7 @@ export class SorcerersApprenticeModel extends MinionCardModel {
                 cost: props.child?.cost ??  new CostModel({ state: { origin: 2 }}),
                 attack: props.child?.attack ?? new RoleAttackModel({ state: { origin: 3 }}),
                 health: props.child?.health ?? new RoleHealthModel({ state: { origin: 2 }}),
-                feats: props.child?.feats ?? new MinionFeaturesModel({
-                    child: {
-                        items: [new SorcerersApprenticeFeatureModel()]
-                    }
-                }),
+                feats: props.child?.feats ?? [new SorcerersApprenticeFeatureModel()],
                 ...props.child
             },
             refer: { ...props.refer }

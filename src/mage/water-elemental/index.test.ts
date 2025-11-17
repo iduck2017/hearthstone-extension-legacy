@@ -10,8 +10,6 @@ import { WaterElementalModel } from "./index";
 import { WispModel } from "../../neutral/wisp";
 import { boot } from "../../boot";
 
-
-
 describe('water-elemental', () => {
     const game = new GameModel({
         state: { debug: { isDrawDisabled: true }},
@@ -56,36 +54,36 @@ describe('water-elemental', () => {
         // Check initial stats
         expect(cardC.child.attack.state.current).toBe(3);
         expect(cardC.child.health.state.current).toBe(6);
-        expect(cardD.child.feats.child.frozen.state.isActive).toBe(false);
+        expect(cardD.child.frozen.state.actived).toBe(false);
 
-        const promise = cardC.child.action.run();
-        await AnimeUtil.sleep();
-        expect(playerA.child.controller.current?.options).toContain(cardD);
+        const promise = cardC.child.action.start();
+        const options = playerA.child.controller.current?.options;
+        expect(options).toContain(cardD);
         playerA.child.controller.set(cardD);
         await promise;
 
         // Wisp should be damaged and frozen
         expect(cardD.child.health.state.current).toBe(3);
         expect(cardD.child.health.state.damage).toBe(3);
-        expect(cardD.child.feats.child.frozen.state.isActive).toBe(true);
+        expect(cardD.child.frozen.state.actived).toBe(true);
 
         expect(cardC.child.health.state.current).toBe(3);
         expect(cardC.child.health.state.damage).toBe(3);
-        expect(cardC.child.feats.child.frozen.state.isActive).toBe(true);
+        expect(cardC.child.frozen.state.actived).toBe(true);
     })
 
     test('water-elemental-attack', async () => {
         const turn = game.child.turn;
         turn.next();
 
-        expect(cardC.child.feats.child.frozen.state.isActive).toBe(true);
-        expect(cardD.child.feats.child.frozen.state.isActive).toBe(true);
+        expect(cardC.child.frozen.state.actived).toBe(true);
+        expect(cardD.child.frozen.state.actived).toBe(true);
         expect(cardC.child.action.status).toBe(false);
         expect(cardD.child.action.status).toBe(false);
 
         turn.next();
 
-        expect(cardC.child.feats.child.frozen.state.isActive).toBe(true);
-        expect(cardD.child.feats.child.frozen.state.isActive).toBe(false);
+        expect(cardC.child.frozen.state.actived).toBe(true);
+        expect(cardD.child.frozen.state.actived).toBe(false);
     })
 })

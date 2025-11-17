@@ -13,7 +13,7 @@
  * Collectible
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel, SpellFeaturesModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel } from "hearthstone-core";
 import { ArcaneIntellectEffectModel } from "./effect";
 
 @LibraryUtil.is('arcane-intellect')
@@ -26,7 +26,7 @@ export class ArcaneIntellectModel extends SpellCardModel {
                 name: "Arcane Intellect",
                 desc: "Draw 2 cards.",
                 flavorDesc: "Playing this card makes you SMARTER. And let's face it: we could all stand to be a little smarter.",
-                isCollectible: true,
+                collectible: true,
                 rarity: RarityType.COMMON,
                 class: ClassType.MAGE,
                 schools: [SchoolType.ARCANE],
@@ -35,9 +35,7 @@ export class ArcaneIntellectModel extends SpellCardModel {
             refer: { ...props.refer },
             child: { 
                 cost: props.child?.cost ?? new CostModel({ state: { origin: 3 }}),
-                feats: props.child?.feats ?? new SpellFeaturesModel({
-                    child: { effects: [new ArcaneIntellectEffectModel()] }
-                }),
+                effects: props.child?.effects ?? [new ArcaneIntellectEffectModel()],
                 ...props.child 
             }
         });

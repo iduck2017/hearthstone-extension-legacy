@@ -13,13 +13,13 @@
  * Collectible
  */
 
-import { EffectModel, SpellEffectModel } from "hearthstone-core";
+import { EffectModel, Selector, SpellEffectModel } from "hearthstone-core";
 import { TemplUtil } from "set-piece";
 import { MirrorImageMinionModel } from "./minion";
 
 
 @TemplUtil.is('mirror-image-effect')
-export class MirrorImageEffectModel extends SpellEffectModel<[]> {
+export class MirrorImageEffectModel extends SpellEffectModel<never> {
     constructor(props?: MirrorImageEffectModel['props']) {
         props = props ?? {};
         super({
@@ -35,9 +35,11 @@ export class MirrorImageEffectModel extends SpellEffectModel<[]> {
         });
     }
 
-    toRun(): [] { return [] }
+    public prepare(...prev: never[]): Selector<never> | undefined {
+        return undefined
+    }
 
-    protected doRun() {
+    protected run() {
         const player = this.route.player;
         if (!player) return;
         const board = player.child.board;
@@ -47,7 +49,7 @@ export class MirrorImageEffectModel extends SpellEffectModel<[]> {
         // Summon two 0/2 minions with Taunt
         for (let i = 0; i < 2; i++) {
             const minion = new MirrorImageMinionModel();
-            minion.deploy(board);
+            minion.summon(board);
         }
     }
 } 

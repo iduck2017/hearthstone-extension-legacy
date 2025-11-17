@@ -1,9 +1,9 @@
-import { Selector, RoleModel, DamageModel, DamageEvent, DamageType, SpellEffectModel } from "hearthstone-core";
+import { Selector, DamageModel, DamageEvent, DamageType, SpellEffectModel, RoleModel } from "hearthstone-core";
 import { TemplUtil } from "set-piece";
 
 
 @TemplUtil.is('fireball-effect')
-export class FireballEffectModel extends SpellEffectModel<[RoleModel]> {
+export class FireballEffectModel extends SpellEffectModel<RoleModel> {
     constructor(props?: FireballEffectModel['props']) {
         props = props ?? {};
         super({
@@ -19,14 +19,14 @@ export class FireballEffectModel extends SpellEffectModel<[RoleModel]> {
         })
     }
 
-    toRun(): [Selector<RoleModel>] | undefined {
+    prepare(): Selector<RoleModel> | undefined {
         const games = this.route.game;
         if (!games) return;
-        const roles = games.query();
-        return [new Selector(roles, { hint: "Choose a target" })]
+        const roles = games.refer.roles;
+        return new Selector(roles, { hint: "Choose a target" })
     }
 
-    protected doRun(target: RoleModel) {
+    protected run(target: RoleModel) {
         const card = this.route.card;
         if (!card) return;
         DamageModel.deal([

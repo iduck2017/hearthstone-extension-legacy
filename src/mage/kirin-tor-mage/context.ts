@@ -12,7 +12,7 @@ export class KirinTorMageContextModel extends FeatureModel {
             state: {
                 name: "Kirin Tor Mage's feature",
                 desc: "The next Secret you play this turn costs (0).",
-                isActive: true,
+                actived: true,
                 ...props.state
             },
             child: { ...props.child },
@@ -25,7 +25,7 @@ export class KirinTorMageContextModel extends FeatureModel {
         return this.route.player?.proxy.child.hand.any(SpellCardModel).child.cost.decor
     }
     private modifyCost(that: CostModel, decor: CostDecor) {
-        if (!this.state.isActive) return;
+        if (!this.state.actived) return;
         const player = this.route.player;
         if (!player) return;
         const card = that.route.card;
@@ -46,17 +46,17 @@ export class KirinTorMageContextModel extends FeatureModel {
         if (!player) return;
         const reason = event.detail.reason;
         if (!(reason instanceof SecretCardModel)) return;
-        player.del(this);
+        player.debuff(this);
     }
 
     @EventUtil.on(self => self.handleTurn)
     private listenTurn() {
-        return this.route.game?.proxy.child.turn.event?.doEnd
+        return this.route.game?.proxy.child.turn.event?.onEnd
     }
     private handleTurn(that: TurnModel, event: Event) {
         const player = this.route.player;
         if (!player) return;
-        player.del(this);
+        player.debuff(this);
     }
 
 }

@@ -15,7 +15,7 @@ export class AegwynnTheGuardianContextModel extends FeatureModel {
             state: {
                 name: 'Aegwynn The Guardian\'s feature',
                 desc: 'The next minion you draw inherits Spell Damage +2.',
-                isActive: true,
+                actived: true,
                 ...props.state,
             },
             child: { ...props.child },
@@ -30,9 +30,9 @@ export class AegwynnTheGuardianContextModel extends FeatureModel {
     private handleDraw(that: MinionCardModel, event: Event) {
         const player = this.route.player;
         if (!player) return;
-        if (!this.state.isActive) return;
-        that.child.feats.add(new SpellDamageModel({ state: { offset: 2 }}))
-        that.child.feats.add(new AegwynnTheGuardianDeathrattleModel());
-        player.del(this);
+        if (!this.state.actived) return;
+        that.buff(new SpellDamageModel({ state: { offset: 2 }}));
+        that.buff(new AegwynnTheGuardianDeathrattleModel());
+        player.debuff(this);
     }
 }

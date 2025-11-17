@@ -14,7 +14,7 @@
  * Collectible
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, SecretCardModel, SpellFeaturesModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryUtil, RarityType, SecretCardModel } from "hearthstone-core";
 import { SpellbenderFeatureModel } from "./feature";
 
 @LibraryUtil.is('spellbender')
@@ -27,7 +27,7 @@ export class SpellbenderModel extends SecretCardModel {
                 name: "Spellbender",
                 desc: "Secret: When an enemy casts a spell on a minion, summon a 1/3 as the new target.",
                 flavorDesc: "While it's fun to intercept enemy lightning bolts, a spellbender much prefers to intercept opposing Marks of the Wild. It just feels meaner. And blood elves... well, they're a little mean.",
-                isCollectible: true,
+                collectible: true,
                 rarity: RarityType.EPIC,
                 class: ClassType.MAGE,
                 schools: [],
@@ -36,11 +36,7 @@ export class SpellbenderModel extends SecretCardModel {
             refer: { ...props.refer },
             child: { 
                 cost: props.child?.cost ?? new CostModel({ state: { origin: 3 }}),
-                feats: new SpellFeaturesModel({
-                    child: {
-                        items: [new SpellbenderFeatureModel()]
-                    }
-                }),
+                feats: props.child?.feats ?? [new SpellbenderFeatureModel()],
                 ...props.child 
             }
         })

@@ -67,13 +67,13 @@ describe('spellbender', () => {
         expect(handA.child.cards.length).toBe(2);
         expect(boardB.child.cards.length).toBe(1); // Only Wisp
         expect(boardB.child.secrets.length).toBe(1);
-        expect(cardF.child.feats.child.frozen.state.isActive).toBe(false);
+        expect(cardF.child.frozen.state.actived).toBe(false);
 
         // Player A casts Frost Nova (should not trigger Spellbender on non-targeted spells)
         await cardC.play();
 
         // Check Frost Nova effect: all enemy minions should be frozen
-        expect(cardF.child.feats.child.frozen.state.isActive).toBe(true);
+        expect(cardF.child.frozen.state.actived).toBe(true);
         
         // Spellbender should still be active (not triggered)
         expect(boardB.child.secrets.length).toBe(1);
@@ -87,11 +87,12 @@ describe('spellbender', () => {
         expect(handA.child.cards.length).toBe(1);
         expect(boardB.child.secrets.length).toBe(1);
         expect(boardB.child.cards.length).toBe(1); // Only Wisp
-        expect(cardF.child.feats.child.frozen.state.isActive).toBe(true);
+        expect(cardF.child.frozen.state.actived).toBe(true);
 
         // Player A casts Ice Lance targeting Wisp (should trigger Spellbender)
         const promise = cardD.play();
-        expect(playerA.child.controller.current?.options).toContain(cardF);
+        const options = playerA.child.controller.current?.options;
+        expect(options).toContain(cardF);
         playerA.child.controller.set(cardF);
         await promise;
 
@@ -104,7 +105,7 @@ describe('spellbender', () => {
         expect(cardE).toBeDefined();
         if (!cardE) throw new Error();
 
-        expect(cardE.child.feats.child.frozen.state.isActive).toBe(true); // Spellbender gets frozen
+        expect(cardE.child.frozen.state.actived).toBe(true); // Spellbender gets frozen
         expect(cardF.child.dispose.status).toBe(false); // Wisp is alive
         expect(cardF.child.health.state.current).toBe(1); // Wisp is alive
         

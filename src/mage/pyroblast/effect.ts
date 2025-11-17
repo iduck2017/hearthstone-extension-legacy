@@ -2,7 +2,7 @@ import { EffectModel, Selector, RoleModel, DamageModel, DamageEvent, DamageType,
 import { TemplUtil } from "set-piece";
 
 @TemplUtil.is('pyroblast-effect')
-export class PyroblastEffectModel extends SpellEffectModel<[RoleModel]> {
+export class PyroblastEffectModel extends SpellEffectModel<RoleModel> {
     constructor(props?: PyroblastEffectModel['props']) {
         props = props ?? {};
         super({
@@ -18,14 +18,14 @@ export class PyroblastEffectModel extends SpellEffectModel<[RoleModel]> {
         });
     }
 
-    toRun(): [Selector<RoleModel>] | undefined {
+    prepare(): Selector<RoleModel> | undefined {
         const games = this.route.game;
         if (!games) return;
-        const roles = games.query(); // Can target any character
-        return [new Selector(roles, { hint: "Choose a target" })];
+        const roles = games.refer.roles;
+        return new Selector(roles, { hint: "Choose a target" });
     }
 
-    protected doRun(target: RoleModel) {
+    protected run(target: RoleModel) {
         const card = this.route.card;
         if (!card) return;
 

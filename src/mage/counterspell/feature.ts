@@ -1,4 +1,5 @@
 import { EffectModel, Selector, RoleModel, DamageModel, DamageEvent, DamageType, CardModel, SecretFeatureModel, AbortEvent, SpellCastEvent, SpellCardModel } from "hearthstone-core";
+import { SpellPerformModel } from "hearthstone-core/dist/type/models/features/perform/spell";
 import { DebugUtil, Event, EventUtil, Model, TemplUtil } from "set-piece";
 
 @TemplUtil.is('counterspell-effect')
@@ -10,7 +11,7 @@ export class CounterspellFeatureModel extends SecretFeatureModel {
             state: { 
                 name: "Counterspell's feature",
                 desc: "When your opponent casts a spell, Counter it.",
-                isActive: true,
+                actived: true,
                 ...props.state 
             },
             child: { ...props.child },
@@ -20,10 +21,10 @@ export class CounterspellFeatureModel extends SecretFeatureModel {
 
     @EventUtil.on(self => self.handleCast)
     private listenCast() {
-        return this.route.game?.proxy.any(SpellCardModel).event?.toCast
+        return this.route.game?.proxy.any(SpellCardModel).child.perform.event?.toRun
     }
     @SecretFeatureModel.span()
-    private handleCast(that: SpellCardModel, event: SpellCastEvent) {
+    private handleCast(that: SpellPerformModel, event: AbortEvent) {
         const player = this.route.player;
         if (!player) return;
         const opponent = player.refer.opponent;

@@ -13,7 +13,7 @@
  * Artist: Michael Komarck
  * Collectible
  */
-import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, MinionFeaturesModel, RarityType, RoleAttackModel } from "hearthstone-core";
+import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, RarityType, RoleAttackModel } from "hearthstone-core";
 import { EtherealArcanistFeatureModel } from "./end-turn";
 
 @LibraryUtil.is('ethereal-arcanist')
@@ -26,7 +26,7 @@ export class EtherealArcanistModel extends MinionCardModel {
                 name: 'Ethereal Arcanist',
                 desc: 'If you control a Secret at the end of your turn, gain +2/+2.',
                 flavorDesc: 'The ethereals are wrapped in cloth to give form to their non-corporeal bodies. Also because it\'s nice and soft.',
-                isCollectible: true,
+                collectible: true,
                 rarity: RarityType.RARE,
                 class: ClassType.MAGE,
                 races: [],
@@ -36,9 +36,7 @@ export class EtherealArcanistModel extends MinionCardModel {
                 cost: props.child?.cost ??  new CostModel({ state: { origin: 4 }}),
                 attack: props.child?.attack ?? new RoleAttackModel({ state: { origin: 3 }}),
                 health: props.child?.health ?? new RoleHealthModel({ state: { origin: 3 }}),
-                feats: props.child?.feats ?? new MinionFeaturesModel({
-                    child: { endTurn: [new EtherealArcanistFeatureModel()] }
-                }),
+                endTurn: props.child?.endTurn ?? [new EtherealArcanistFeatureModel()],
                 ...props.child,
             },
             refer: { ...props.refer },

@@ -15,7 +15,7 @@
  * Collectible
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel, SpellFeaturesModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel } from "hearthstone-core";
 import { PyroblastEffectModel } from "./effect";
 
 @LibraryUtil.is('pyroblast')
@@ -28,7 +28,7 @@ export class PyroblastModel extends SpellCardModel {
                 name: "Pyroblast",
                 desc: "Deal 10 damage.",
                 flavorDesc: "Take the time for an evil laugh after you draw this card.",
-                isCollectible: true,
+                collectible: true,
                 rarity: RarityType.EPIC,
                 class: ClassType.MAGE,
                 schools: [SchoolType.FIRE],
@@ -37,9 +37,7 @@ export class PyroblastModel extends SpellCardModel {
             refer: { ...props.refer },
             child: {
                 cost: props.child?.cost ?? new CostModel({ state: { origin: 10 }}),
-                feats: props.child?.feats ?? new SpellFeaturesModel({
-                    child: { effects: [new PyroblastEffectModel()] }
-                }),
+                effects: props.child?.effects ?? [new PyroblastEffectModel()],
                 ...props.child
             }
         });

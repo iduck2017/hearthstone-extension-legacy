@@ -14,7 +14,7 @@
  * Collectible
  */
 
-import { RoleAttackModel, ClassType, RoleHealthModel, MinionCardModel, RarityType, MinionFeaturesModel, LibraryUtil, CostModel } from "hearthstone-core";
+import { RoleAttackModel, ClassType, RoleHealthModel, MinionCardModel, RarityType, LibraryUtil, CostModel } from "hearthstone-core";
 import { ArchmageAntonidasFeatureModel } from "./feature";
 
 @LibraryUtil.is('archmage-antonidas')
@@ -26,7 +26,7 @@ export class ArchmageAntonidasModel extends MinionCardModel {
             state: {
                 name: 'Archmage Antonidas',
                 desc: 'Whenever you cast a spell, add a \'Fireball\' spell to your hand.',
-                isCollectible: true,
+                collectible: true,
                 flavorDesc: 'Antonidas was the Grand Magus of the Kirin Tor, and Jaina\'s mentor. This was a big step up from being Grand Magus of Jelly Donuts.',
                 rarity: RarityType.LEGENDARY,
                 class: ClassType.MAGE,
@@ -37,12 +37,7 @@ export class ArchmageAntonidasModel extends MinionCardModel {
                 cost: props.child?.cost ??  new CostModel({ state: { origin: 7 }}),
                 attack: props.child?.attack ?? new RoleAttackModel({ state: { origin: 5 }}),
                 health: props.child?.health ?? new RoleHealthModel({ state: { origin: 7 }}),
-                feats: props.child?.feats ?? new MinionFeaturesModel({
-                    child: {
-                        battlecry: [], 
-                        items: [new ArchmageAntonidasFeatureModel()]
-                    }
-                }),
+                feats: props.child?.feats ?? [new ArchmageAntonidasFeatureModel()],
                 ...props.child,
             },
             refer: { ...props.refer },

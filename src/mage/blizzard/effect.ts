@@ -1,9 +1,9 @@
-import { EffectModel, DamageModel, DamageEvent, DamageType, SpellEffectModel } from "hearthstone-core";
+import { EffectModel, DamageModel, DamageEvent, DamageType, SpellEffectModel, Selector } from "hearthstone-core";
 import { TemplUtil } from "set-piece";
 
 
 @TemplUtil.is('blizzard-effect')
-export class BlizzardEffectModel extends SpellEffectModel<[]> {
+export class BlizzardEffectModel extends SpellEffectModel<never> {
     constructor(props?: BlizzardEffectModel['props']) {
         props = props ?? {};
         super({
@@ -19,9 +19,11 @@ export class BlizzardEffectModel extends SpellEffectModel<[]> {
         });
     }
 
-    toRun(): [] { return [] }
+    public prepare(...prev: never[]): Selector<never> | undefined {
+        return undefined
+    }
 
-    protected doRun() {
+    protected run() {
         const player = this.route.player;
         const opponent = player?.refer.opponent;
         if (!opponent) return;
@@ -29,7 +31,7 @@ export class BlizzardEffectModel extends SpellEffectModel<[]> {
         if (!card) return;
 
         // Get all enemy minions
-        const roles = opponent.query(true);
+        const roles = opponent.refer.minions;
         
         // Deal 2 damage to all enemy minions
         DamageModel.deal(
@@ -43,8 +45,7 @@ export class BlizzardEffectModel extends SpellEffectModel<[]> {
         );
         // Freeze all enemy minions
         for (const role of roles) {
-            const feats = role.child.feats;
-            const frozen = feats.child.frozen;
+            const frozen = role.child.frozen;
             frozen.active();
         }
     }

@@ -15,7 +15,7 @@
  * Artist: Alex Horley Orlandelli
  * Collectible
  */
-import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel, SpellFeaturesModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel } from "hearthstone-core";
 import { IceLanceEffectModel } from "./effect";
 
 @LibraryUtil.is('ice-lance')
@@ -28,7 +28,7 @@ export class IceLanceModel extends SpellCardModel {
                 name: "Ice Lance",
                 desc: "Freeze a character. If it was already Frozen, deal 4 damage instead.",
                 flavorDesc: "The trick is not to break the lance. Otherwise, you have \"Ice Pieces.\" Ice Pieces aren't as effective.",
-                isCollectible: true,
+                collectible: true,
                 rarity: RarityType.COMMON,
                 class: ClassType.MAGE,
                 schools: [SchoolType.FROST],
@@ -37,9 +37,7 @@ export class IceLanceModel extends SpellCardModel {
             refer: { ...props.refer },
             child: { 
                 cost: props.child?.cost ?? new CostModel({ state: { origin: 1 }}),
-                feats: props.child?.feats ?? new SpellFeaturesModel({
-                    child: { effects: [new IceLanceEffectModel()] }
-                }),
+                effects: props.child?.effects ?? [new IceLanceEffectModel()],
                 ...props.child 
             }
         });

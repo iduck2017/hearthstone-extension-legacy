@@ -65,8 +65,9 @@ describe('pyroblast', () => {
 
         // Player A uses Pyroblast on Water Elemental
         const promise = cardC.play();
-        expect(playerA.child.controller.current?.options).toContain(cardD); // Water Elemental can be targeted
-        expect(playerA.child.controller.current?.options).toContain(heroB); // Hero can also be targeted
+        const options = playerA.child.controller.current?.options;
+        expect(options).toContain(cardD); // Water Elemental can be targeted
+        expect(options).toContain(heroB); // Hero can also be targeted
         playerA.child.controller.set(cardD); // Target Water Elemental
         await promise;
 

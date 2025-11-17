@@ -42,6 +42,7 @@ describe('stonetusk-boar', () => {
     });
     boot(game);
     
+    const playerA = game.child.playerA;
     const boardA = game.child.playerA.child.board;
     const boardB = game.child.playerB.child.board;
     const handA = game.child.playerA.child.hand;
@@ -57,8 +58,8 @@ describe('stonetusk-boar', () => {
         
         // Play Stonetusk Boar
         let promise = cardC.play();
-        await AnimeUtil.sleep();
-        expect(game.child.playerA.child.controller.current?.options).toContain(0);
+        const selector = playerA.child.controller.current;
+        expect(selector?.options).toContain(0);
         game.child.playerA.child.controller.set(0);
         await promise;
         expect(boardA.child.cards.length).toBe(1);
@@ -68,8 +69,7 @@ describe('stonetusk-boar', () => {
         expect(cardC.child.action.status).toBe(true);
         
         // Boar directly attacks enemy hero
-        promise = cardC.child.action.run();
-        await AnimeUtil.sleep();
+        promise = cardC.child.action.start();
         expect(game.child.playerA.child.controller.current?.options).toContain(heroB);
         expect(game.child.playerA.child.controller.current?.options.length).toBe(2);
         game.child.playerA.child.controller.set(heroB);

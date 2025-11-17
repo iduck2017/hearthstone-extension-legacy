@@ -1,4 +1,5 @@
 import { CardFeatureModel, FeatureModel, SpellCardModel } from "hearthstone-core";
+import { SpellPerformModel } from "hearthstone-core/dist/type/models/features/perform/spell";
 import { Event, EventUtil, TemplUtil } from "set-piece";
 import { FireballModel } from "../../mage/fireball";
 
@@ -12,7 +13,7 @@ export class ArchmageAntonidasFeatureModel extends CardFeatureModel {
             state: {
                 name: "Archmage Antonidas's feature",
                 desc: "Whenever you cast a spell, add a 'Fireball' spell to your hand.",
-                isActive: true,
+                actived: true,
                 ...props.state,
             },
             child: { ...props.child },
@@ -22,9 +23,9 @@ export class ArchmageAntonidasFeatureModel extends CardFeatureModel {
 
     @EventUtil.on(self => self.handleCast)
     private listenCast() {
-        return this.route.player?.proxy.any(SpellCardModel).event?.onPlay
+        return this.route.player?.proxy.any(SpellCardModel).child.perform.event?.onPlay
     }
-    private handleCast(that: SpellCardModel, event: Event) {
+    private handleCast(that: SpellPerformModel, event: Event) {
         const player = this.route.player;
         if (!player) return;
         // Add a Fireball spell to the player's hand

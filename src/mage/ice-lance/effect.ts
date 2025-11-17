@@ -3,7 +3,7 @@ import { TemplUtil } from "set-piece";
 
 
 @TemplUtil.is('ice-lance-effect')
-export class IceLanceEffectModel extends SpellEffectModel<[RoleModel]> {
+export class IceLanceEffectModel extends SpellEffectModel<RoleModel> {
     constructor(props?: IceLanceEffectModel['props']) {
         props = props ?? {};
         super({
@@ -19,22 +19,21 @@ export class IceLanceEffectModel extends SpellEffectModel<[RoleModel]> {
         });
     }
 
-    toRun(): [Selector<RoleModel>] | undefined {
+    prepare(): Selector<RoleModel> | undefined {
         const games = this.route.game;
         if (!games) return;
-        const roles = games.query();
-        return [new Selector(roles, { hint: "Choose a target" })]
+        const roles = games.refer.roles;
+        return new Selector(roles, { hint: "Choose a target" })
     }
 
-    protected doRun(target: RoleModel) {
+    protected run(target: RoleModel) {
         const card = this.route.card;
         if (!card) return;
         
         // Check if target is already frozen
-        const feats = target.child.feats;
-        const frozen = feats.child.frozen;
+        const frozen = target.child.frozen;
         
-        if (frozen.state.isActive) {
+        if (frozen.state.actived) {
             // If already frozen, deal 4 damage instead
             DamageModel.deal([
                 new DamageEvent({

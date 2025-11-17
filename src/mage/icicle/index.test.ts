@@ -62,7 +62,7 @@ describe('icicle', () => {
         // Check initial stats
         expect(cardE.child.health.state.current).toBe(6);
         expect(cardE.child.health.state.damage).toBe(0);
-        expect(cardE.child.feats.child.frozen.state.isActive).toBe(false);
+        expect(cardE.child.frozen.state.actived).toBe(false);
         expect(cardE.child.action.status).toBe(true); // Can attack initially
         expect(playerA.child.mana.state.current).toBe(10);
         expect(handA.child.cards.length).toBe(2);
@@ -70,12 +70,13 @@ describe('icicle', () => {
 
         // Step 1: Player A uses Ice Lance on own Water Elemental to freeze it
         let promise = cardC.play();
-        expect(playerA.child.controller.current?.options).toContain(cardE);
+        const options1 = playerA.child.controller.current?.options;
+        expect(options1).toContain(cardE);
         playerA.child.controller.set(cardE);
         await promise;
 
         // Water Elemental should be frozen and cannot attack
-        expect(cardE.child.feats.child.frozen.state.isActive).toBe(true);
+        expect(cardE.child.frozen.state.actived).toBe(true);
         expect(cardE.child.action.status).toBe(false); // Cannot attack when frozen
         expect(playerA.child.mana.state.current).toBe(9); // 10 - 1 cost
         expect(handA.child.cards.length).toBe(1); // Ice Lance consumed
@@ -86,7 +87,8 @@ describe('icicle', () => {
 
         // Step 2: Player A uses Icicle on frozen Water Elemental
         const promise = cardD.play();
-        expect(playerA.child.controller.current?.options).toContain(cardE);
+        const options2 = playerA.child.controller.current?.options;
+        expect(options2).toContain(cardE);
         playerA.child.controller.set(cardE);
         await promise;
 

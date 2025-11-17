@@ -13,7 +13,7 @@
  * Artist: Popo Wei
  * Collectible
  */
-import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, MinionFeaturesModel, RarityType, RoleAttackModel } from "hearthstone-core";
+import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, RarityType, RoleAttackModel } from "hearthstone-core";
 import { KirinTorMageBattlecryModel } from "./battlecry";
 
 @LibraryUtil.is('kirin-tor-mage')
@@ -26,7 +26,7 @@ export class KirinTorMageModel extends MinionCardModel {
                 name: 'Kirin Tor Mage',
                 desc: 'Battlecry: The next Secret you play this turn costs (0).',
                 flavorDesc: 'The Kirin Tor reside in the floating city of Dalaran. How do you make a Dalaran float? Two scoops of ice cream, one scoop of Dalaran.',
-                isCollectible: true,
+                collectible: true,
                 rarity: RarityType.RARE,
                 class: ClassType.MAGE,
                 races: [],
@@ -36,9 +36,7 @@ export class KirinTorMageModel extends MinionCardModel {
                 cost: props.child?.cost ??  new CostModel({ state: { origin: 3 }}),
                 attack: props.child?.attack ?? new RoleAttackModel({ state: { origin: 4 }}),
                 health: props.child?.health ?? new RoleHealthModel({ state: { origin: 3 }}),
-                feats: props.child?.feats ?? new MinionFeaturesModel({
-                    child: { battlecry: [new KirinTorMageBattlecryModel()] }
-                }),
+                battlecry: props.child?.battlecry ?? [new KirinTorMageBattlecryModel()],
                 ...props.child,
             },
             refer: { ...props.refer },

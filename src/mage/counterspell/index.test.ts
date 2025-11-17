@@ -65,8 +65,9 @@ describe('fireball', () => {
     test('counterspell-trigger', async () => {
         turn.next();
         let promise = spellD.play();
-        expect(playerB.child.controller.current?.options).toContain(heroA);
-        expect(playerB.child.controller.current?.options).toContain(heroB);
+        const options = playerB.child.controller.current?.options;
+        expect(options).toContain(heroA);
+        expect(options).toContain(heroB);
         playerB.child.controller.set(heroA);
         await promise;
         expect(handB.child.cards.length).toBe(0);

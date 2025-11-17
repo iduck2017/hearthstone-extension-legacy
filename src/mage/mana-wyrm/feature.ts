@@ -1,8 +1,9 @@
-import { MinionFeatureModel, SpellCardModel, RoleBuffModel } from "hearthstone-core";
+import { SpellCardModel, RoleBuffModel, RoleFeatureModel } from "hearthstone-core";
+import { SpellPerformModel } from "hearthstone-core/dist/type/models/features/perform/spell";
 import { Event, EventUtil, TemplUtil } from "set-piece";
 
 @TemplUtil.is('mana-wyrm-feature')
-export class ManaWyrmFeatureModel extends MinionFeatureModel {
+export class ManaWyrmFeatureModel extends RoleFeatureModel {
 
     constructor(props?: ManaWyrmFeatureModel['props']) {
         props = props ?? {};
@@ -11,7 +12,7 @@ export class ManaWyrmFeatureModel extends MinionFeatureModel {
             state: { 
                 name: "Mana Wyrm's feature",
                 desc: "Whenever you cast a spell, gain +1 Attack.",
-                isActive: true,
+                actived: true,
                 ...props.state 
             },
             child: { ...props.child },
@@ -21,9 +22,9 @@ export class ManaWyrmFeatureModel extends MinionFeatureModel {
 
     @EventUtil.on(self => self.handleCast)
     private listenCast() {
-        return this.route.player?.proxy.any(SpellCardModel).event?.onPlay
+        return this.route.player?.proxy.any(SpellCardModel).child.perform.event?.onPlay
     }
-    private handleCast(that: SpellCardModel, event: Event) {
+    private handleCast(that: SpellPerformModel, event: Event) {
         const role = this.route.role;
         if (!role) return;
         const player = this.route.player;
@@ -32,7 +33,7 @@ export class ManaWyrmFeatureModel extends MinionFeatureModel {
         // Only trigger when the minion's owner casts a spell
         if (that.route.player !== player) return;
         
-        role.child.feats.add(new RoleBuffModel({
+        role.buff(new RoleBuffModel({
             state: {
                 name: "Mana Wyrm's Buff",
                 desc: "+1 Attack.",

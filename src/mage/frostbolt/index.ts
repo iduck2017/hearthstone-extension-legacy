@@ -14,7 +14,7 @@
  * Collectible
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel, SpellFeaturesModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel } from "hearthstone-core";
 import { FrostboltEffectModel } from "./effect";
 
 @LibraryUtil.is('frostbolt')
@@ -27,7 +27,7 @@ export class FrostboltModel extends SpellCardModel {
                 name: "Frostbolt",
                 desc: "Deal 3 damage to a character and Freeze it.",
                 flavorDesc: "It is customary to yell \"Chill out!\" or \"Freeze!\" or \"Ice ice, baby!\" when you play this card.",
-                isCollectible: true,
+                collectible: true,
                 rarity: RarityType.COMMON,
                 class: ClassType.MAGE,
                 schools: [SchoolType.FROST],
@@ -36,9 +36,7 @@ export class FrostboltModel extends SpellCardModel {
             refer: { ...props.refer },
             child: { 
                 cost: props.child?.cost ?? new CostModel({ state: { origin: 2 }}),
-                feats: props.child?.feats ?? new SpellFeaturesModel({
-                    child: { effects: [new FrostboltEffectModel()] }
-                }),
+                effects: props.child?.effects ?? [new FrostboltEffectModel()],
                 ...props.child 
             }
         })

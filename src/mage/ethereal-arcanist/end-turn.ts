@@ -27,7 +27,7 @@ export class EtherealArcanistFeatureModel extends EndTurnHookModel {
         });
     }
 
-    protected doRun(isCurrent: boolean) {
+    protected run(isCurrent: boolean) {
         if (!isCurrent) return;
 
         const player = this.route.player;
@@ -40,7 +40,7 @@ export class EtherealArcanistFeatureModel extends EndTurnHookModel {
         const secrets = board.child.secrets;
         if (!secrets.length) return;
 
-        minion.child.feats.add(new RoleBuffModel({
+        minion.buff(new RoleBuffModel({
             state: {
                 name: "Ethereal Arcanist's Buff",
                 desc: "+2/+2.",

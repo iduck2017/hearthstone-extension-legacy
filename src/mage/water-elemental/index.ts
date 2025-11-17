@@ -15,7 +15,7 @@
  * 4/3/6
  */
 
-import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, MinionFeaturesModel, RarityType, RoleAttackModel, RaceType } from "hearthstone-core";
+import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, RarityType, RoleAttackModel, RaceType } from "hearthstone-core";
 import { WaterElementalFeatureModel } from "./feature";
 
 @LibraryUtil.is('water-elemental')
@@ -28,7 +28,7 @@ export class WaterElementalModel extends MinionCardModel {
                 name: 'Water Elemental',
                 desc: 'Freeze any character damaged by this minion.',
                 flavorDesc: 'Don\'t summon a water elemental at a party. It\'ll dampen the mood.',
-                isCollectible: true,
+                collectible: true,
                 rarity: RarityType.COMMON,
                 class: ClassType.MAGE,
                 races: [RaceType.ELEMENTAL],
@@ -38,12 +38,7 @@ export class WaterElementalModel extends MinionCardModel {
                 cost: props.child?.cost ??  new CostModel({ state: { origin: 4 }}),
                 attack: props.child?.attack ?? new RoleAttackModel({ state: { origin: 3 }}),
                 health: props.child?.health ?? new RoleHealthModel({ state: { origin: 6 }}),
-                feats: props.child?.feats ?? new MinionFeaturesModel({
-                    child: { 
-                        battlecry: [], 
-                        items: [new WaterElementalFeatureModel()]
-                    }
-                }),
+                feats: props.child?.feats ?? [new WaterElementalFeatureModel()],
                 ...props.child
             },
             refer: { ...props.refer }

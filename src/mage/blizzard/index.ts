@@ -15,7 +15,7 @@
  * Collectible
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel, SpellFeaturesModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel } from "hearthstone-core";
 import { BlizzardEffectModel } from "./effect";
 
 @LibraryUtil.is('blizzard')
@@ -28,7 +28,7 @@ export class BlizzardModel extends SpellCardModel {
                 name: "Blizzard",
                 desc: "Deal 2 damage to all enemy minions and Freeze them.",
                 flavorDesc: "This spell can be very Entertaining.",
-                isCollectible: true,
+                collectible: true,
                 rarity: RarityType.RARE,
                 class: ClassType.MAGE,
                 schools: [SchoolType.FROST],
@@ -37,11 +37,7 @@ export class BlizzardModel extends SpellCardModel {
             refer: { ...props.refer },
             child: { 
                 cost: props.child?.cost ?? new CostModel({ state: { origin: 6 }}),
-                feats: props.child?.feats ?? new SpellFeaturesModel({
-                    child: {
-                        effects: [new BlizzardEffectModel()]
-                    }
-                }),
+                effects: props.child?.effects ?? [new BlizzardEffectModel()],
                 ...props.child 
             }
         });

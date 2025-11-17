@@ -10,7 +10,7 @@ export class IceBarrierFeatureModel extends SecretFeatureModel {
             state: {
                 name: "Ice Barrier's feature",
                 desc: "When your hero is attacked, gain 8 Armor.",
-                isActive: true,
+                actived: true,
                 ...props.state
             },
             child: { ...props.child },
@@ -20,7 +20,7 @@ export class IceBarrierFeatureModel extends SecretFeatureModel {
 
     @EventUtil.on(self => self.handleRecv)
     private listenRecv() {
-        return this.route.player?.proxy.child.hero.child.attack.event?.toRecv
+        return this.route.player?.proxy.child.hero.child.attack.event?.toReceive
     }
     @SecretFeatureModel.span()
     private handleRecv(that: RoleAttackModel, event: AbortEvent<{ source: RoleModel }>) {
@@ -28,7 +28,7 @@ export class IceBarrierFeatureModel extends SecretFeatureModel {
         if (!player) return;
         // Check if the attack target is the player's hero
         const hero = player.child.hero;
-        hero.child.armor.restore(8);
+        hero.child.armor.gain(8);
         return true;
     }
 }

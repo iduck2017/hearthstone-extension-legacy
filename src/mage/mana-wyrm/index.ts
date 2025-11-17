@@ -16,7 +16,7 @@
  * 1/1/3
  */
 
-import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, MinionFeaturesModel, RarityType, RoleAttackModel } from "hearthstone-core";
+import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, RarityType, RoleAttackModel } from "hearthstone-core";
 import { ManaWyrmFeatureModel } from "./feature";
 
 @LibraryUtil.is('mana-wyrm')
@@ -29,7 +29,7 @@ export class ManaWyrmModel extends MinionCardModel {
                 name: 'Mana Wyrm',
                 desc: 'Whenever you cast a spell, gain +1 Attack.',
                 flavorDesc: 'These wyrms feed on arcane energies, and while they are generally considered a nuisance rather than a real threat, you really shouldn\'t leave them alone with a bucket of mana.',
-                isCollectible: true,
+                collectible: true,
                 rarity: RarityType.COMMON,
                 class: ClassType.MAGE,
                 races: [],
@@ -39,12 +39,7 @@ export class ManaWyrmModel extends MinionCardModel {
                 cost: props.child?.cost ??  new CostModel({ state: { origin: 1 }}),
                 attack: props.child?.attack ?? new RoleAttackModel({ state: { origin: 1 }}),
                 health: props.child?.health ?? new RoleHealthModel({ state: { origin: 3 }}),
-                feats: props.child?.feats ?? new MinionFeaturesModel({
-                    child: {
-                        battlecry: [],
-                        items: [new ManaWyrmFeatureModel()]
-                    }
-                }),
+                feats: props.child?.feats ?? [new ManaWyrmFeatureModel()],
                 ...props.child
             },
             refer: { ...props.refer }

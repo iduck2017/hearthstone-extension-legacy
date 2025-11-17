@@ -57,8 +57,9 @@ describe('ice-barrier', () => {
         expect(cardC.child.attack.state.current).toBe(1); // Wisp attack
 
         // Player A's Wisp attacks Player B's hero
-        const promise = cardC.child.action.run();
-        expect(playerA.child.controller.current?.options).toContain(heroB);
+        const promise = cardC.child.action.start();
+        const options1 = playerA.child.controller.current?.options;
+        expect(options1).toContain(heroB);
         playerA.child.controller.set(heroB);
         await promise;
 
@@ -83,8 +84,9 @@ describe('ice-barrier', () => {
         expect(game.child.turn.refer.current).toBe(playerA);
 
         // Player A's Wisp attacks Player B's hero again
-        const promise = cardC.child.action.run();
-        expect(playerA.child.controller.current?.options).toContain(heroB);
+        const promise = cardC.child.action.start();
+        const options2 = playerA.child.controller.current?.options;
+        expect(options2).toContain(heroB);
         playerA.child.controller.set(heroB);
         await promise;
 

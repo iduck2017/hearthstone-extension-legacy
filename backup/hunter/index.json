@@ -1,0 +1,747 @@
+{
+    "cards": [
+        {
+            "id": 877,
+            "collectible": 1,
+            "slug": "877-arcane-shot",
+            "classId": 3,
+            "multiClassIds": [],
+            "spellSchoolId": 1,
+            "cardTypeId": 5,
+            "cardSetId": 1635,
+            "rarityId": 2,
+            "artistName": "Luca Zontini",
+            "manaCost": 1,
+            "name": "Arcane Shot",
+            "text": "Deal 2 damage.",
+            "image": "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/01b0a4f8a9bfaf6dca14d293123b3faacbb88f5c3927df23fa92b374ac8899d3.png",
+            "imageGold": "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/d075d43b38cd2b7c5edc26ff0ee5017a9fbf2a31bf9e25c53fcdeb55d378b617.png",
+            "flavorText": "Magi conjured arcane arrows to sell to hunters, until hunters learned just enough magic to do it themselves. The resulting loss of jobs sent Stormwind into a minor recession.",
+            "cropImage": "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/62fcb73d4604263c722b2c3e23643d9a096e98fd29fb549d09d2ae793a6ae9b1.png",
+            "copyOfCardId": [
+                68193,
+                68434,
+                69546
+            ],
+            "isZilliaxFunctionalModule": false,
+            "isZilliaxCosmeticModule": false
+        },
+        {
+            "id": 903,
+            "collectible": 1,
+            "slug": "903-bestial-wrath",
+            "classId": 3,
+            "multiClassIds": [],
+            "cardTypeId": 5,
+            "cardSetId": 3,
+            "rarityId": 4,
+            "artistName": "Alex Horley Orlandelli",
+            "manaCost": 1,
+            "name": "Bestial Wrath",
+            "text": "Give a friendly Beast +2 Attack and <b>Immune</b> this turn.",
+            "image": "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/4bc3f18fa202a3083d5a9e6810f2a3e71083f238ff274c47ebe1e02e4ebfd0bc.png",
+            "imageGold": "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/b5203d0c9c287ae1f13993cb38cf9d86d7a3aa040703f82d3efb2de6fdec3708.png",
+            "flavorText": "The seething wrath is just beneath the surface. Beneath that is wild abandon, followed by slight annoyance.",
+            "cropImage": "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/1f00aa5b82c3bff3db26305e2015759c153fb837834795d850ebac85f151e654.png",
+            "keywordIds": [
+                17
+            ],
+            "copyOfCardId": [
+                69970
+            ],
+            "isZilliaxFunctionalModule": false,
+            "isZilliaxCosmeticModule": false
+        },
+        {
+            "id": 896,
+            "collectible": 1,
+            "slug": "896-flare",
+            "classId": 3,
+            "multiClassIds": [],
+            "cardTypeId": 5,
+            "cardSetId": 3,
+            "rarityId": 3,
+            "artistName": "Tyler Walpole",
+            "manaCost": 1,
+            "name": "Flare",
+            "text": "All minions lose <b>Stealth</b>. Destroy all enemy <b>Secrets</b>. Draw a card.",
+            "image": "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/0659d434768f49fc0c5d138723bc36d1b25e87935f6e2a3982259bdeef9e58ca.png",
+            "imageGold": "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/0d1678aa083d54b021988672a48439cc5c9ac4a8f1c1f25aa11b679cffbccc84.png",
+            "flavorText": "Not only does it reveal your enemies, but it's also great for parties!",
+            "cropImage": "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/3d30a10cceeebe543e5e549787293899002f29fa99e29456571f85137205955d.png",
+            "keywordIds": [
+                5,
+                6
+            ],
+            "copyOfCardId": [
+                69969
+            ],
+            "isZilliaxFunctionalModule": false,
+            "isZilliaxCosmeticModule": false
+        },
+        {
+            "id": 141,
+            "collectible": 1,
+            "slug": "141-hunters-mark",
+            "classId": 3,
+            "multiClassIds": [],
+            "cardTypeId": 5,
+            "cardSetId": 1635,
+            "rarityId": 2,
+            "artistName": "Jimmy Lo",
+            "manaCost": 1,
+            "name": "Hunter's Mark",
+            "text": "Change a minion's Health to 1.",
+            "image": "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/70c550d4a391c73f525d9e1a192d50ef5befe381ee77db4f476b4e961e95f406.png",
+            "imageGold": "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/90a3c0f97db2c079c9702ee64a2e6dc5995ecea159e9ba8a49b58d26cee4bd6a.png",
+            "flavorText": "Never play 'Hide and Go Seek' with a Hunter.",
+            "cropImage": "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/d0d3c64659e5a1022d946bd12da14e7dde5b1b42563ef548cdbdb6bfdae4d845.png",
+            "copyOfCardId": [
+                68357
+            ],
+            "isZilliaxFunctionalModule": false,
+            "isZilliaxCosmeticModule": false
+        },
+        {
+            "id": 103656,
+            "collectible": 1,
+            "slug": "103656-rexxars-gift",
+            "classId": 3,
+            "multiClassIds": [],
+            "cardTypeId": 5,
+            "cardSetId": 3,
+            "rarityId": 3,
+            "artistName": "Ivo Campelo da Silva",
+            "manaCost": 1,
+            "name": "Rexxar's Gift",
+            "text": "<b>Discover</b> a <b>Temporary</b> Quick Shot, Deadly Shot, or Explosive Shot.",
+            "image": "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/3f0ff9d33a97b263cf2ba6d5a19331c149fbcd0193343fe9ce88fa711975fd0d.png",
+            "imageGold": "",
+            "flavorText": "\"I shop alone.\" -Rexxar",
+            "cropImage": "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/6ec37a3a637a6b98bf60f8294fef1c7c43e9273ad09bc89285573130fb1ab3be.png",
+            "childIds": [
+                69691,
+                69605,
+                394
+            ],
+            "keywordIds": [
+                21,
+                320
+            ],
+            "copyOfCardId": [
+                110084
+            ],
+            "isZilliaxFunctionalModule": false,
+            "isZilliaxCosmeticModule": false
+        },
+        {
+            "id": 606,
+            "collectible": 1,
+            "slug": "606-timber-wolf",
+            "classId": 3,
+            "multiClassIds": [],
+            "minionTypeId": 20,
+            "cardTypeId": 4,
+            "cardSetId": 1635,
+            "rarityId": 2,
+            "artistName": "Malcolm Davis",
+            "health": 2,
+            "attack": 1,
+            "manaCost": 1,
+            "name": "Timber Wolf",
+            "text": "Your other Beasts have +1 Attack.",
+            "image": "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/1248348a7b7149a8a3e251ccffe48b80a016b3c1983e62c0abe9e1becb554689.png",
+            "imageGold": "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/12ab70f82e120bdc06412ce151b78d268306305080b7b87caa4284e617e7ec39.png",
+            "flavorText": "Other beasts totally dig hanging out with timber wolves.",
+            "cropImage": "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/16cb028f301afce64f6a96a310aa1aade09dd24c8c129d170c7fb1defe4bf6a6.png",
+            "copyOfCardId": [
+                68428
+            ],
+            "isZilliaxFunctionalModule": false,
+            "isZilliaxCosmeticModule": false
+        },
+        {
+            "id": 1047,
+            "collectible": 1,
+            "slug": "1047-tracking",
+            "classId": 3,
+            "multiClassIds": [],
+            "cardTypeId": 5,
+            "cardSetId": 1635,
+            "rarityId": 2,
+            "artistName": "Mauro Cascioli",
+            "manaCost": 1,
+            "name": "Tracking",
+            "text": "<b>Discover</b> a card from your deck.",
+            "image": "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/e442b84e869abf73eac8027f5b1d6d6c790c00f1755409621875b0d1db115d5a.png",
+            "imageGold": "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/678c4bbe3ab58dbb92dc767d22f2c062ea085fe33c9bdca97ebb7b4c07de9a2c.png",
+            "flavorText": "For the person who just cannot decide what card to put into a deck!",
+            "cropImage": "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/15c6e78b6d689d289cc03744fba6e4165de6aa2d43ca1f6af462351ce21fcdef.png",
+            "keywordIds": [
+                21
+            ],
+            "copyOfCardId": [
+                84935,
+                68433,
+                69545
+            ],
+            "isZilliaxFunctionalModule": false,
+            "isZilliaxCosmeticModule": false
+        },
+        {
+            "id": 585,
+            "collectible": 1,
+            "slug": "585-explosive-trap",
+            "classId": 3,
+            "multiClassIds": [],
+            "spellSchoolId": 2,
+            "cardTypeId": 5,
+            "cardSetId": 3,
+            "rarityId": 1,
+            "artistName": "Brandon Kitkouski",
+            "manaCost": 2,
+            "name": "Explosive Trap",
+            "text": "<b>Secret:</b> When your hero is attacked, deal 2 damage to all enemies.",
+            "image": "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/b8aefb636d81382c476d8bdd8631d9538ce7f3d19a5b25bf1bba43c017c0ba32.png",
+            "imageGold": "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/6c800fd7664f96a1baa85cdc94d6cb1bec71b3bc63c17d150e2d359cc83b2179.png",
+            "flavorText": "It traps your food AND cooks it for you!",
+            "cropImage": "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/5eeb12d8da464527f5c1590c7b0a332667c243507198ef67f55cd63600a4797f.png",
+            "keywordIds": [
+                5
+            ],
+            "copyOfCardId": [
+                69603,
+                70050
+            ],
+            "isZilliaxFunctionalModule": false,
+            "isZilliaxCosmeticModule": false
+        },
+        {
+            "id": 519,
+            "collectible": 1,
+            "slug": "519-freezing-trap",
+            "classId": 3,
+            "multiClassIds": [],
+            "spellSchoolId": 3,
+            "cardTypeId": 5,
+            "cardSetId": 3,
+            "rarityId": 1,
+            "artistName": "Matt Gaser",
+            "manaCost": 2,
+            "name": "Freezing Trap",
+            "text": "<b>Secret:</b> When an enemy minion attacks, return it to its owner's hand. It costs (2) more.",
+            "image": "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/31607aa1acd6acda0f7304e3d2fe4ea6a295e3c4545aa55cbc4f10a1e4136916.png",
+            "imageGold": "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/d745190eca413552855cf462a2d22d3dceaa11cab785d4f24427423f158f37a5.png",
+            "flavorText": "\"Dang, that's cold.\" - appropriate response to Freezing Trap, or a mean joke.",
+            "cropImage": "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/e589e1eb9c8955042fbc35d210e8c2eb0ecfc409b6718fb34a4dc9713fbd2cd9.png",
+            "keywordIds": [
+                5
+            ],
+            "copyOfCardId": [
+                69604,
+                70051
+            ],
+            "isZilliaxFunctionalModule": false,
+            "isZilliaxCosmeticModule": false
+        },
+        {
+            "id": 1091,
+            "collectible": 1,
+            "slug": "1091-misdirection",
+            "classId": 3,
+            "multiClassIds": [],
+            "cardTypeId": 5,
+            "cardSetId": 3,
+            "rarityId": 3,
+            "artistName": "Daren Bader",
+            "manaCost": 2,
+            "name": "Misdirection",
+            "text": "<b>Secret:</b> When an enemy attacks your hero, instead it attacks another random character.",
+            "image": "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/d08541357f1e885fecec62b2e78a7d03640830a6458f11b7e62a50bd364135e3.png",
+            "imageGold": "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/421c4ed04af63d9ddbdd51c3e82982792218c3b13e667e3af45c7b1f4de45b3c.png",
+            "flavorText": "Sometimes it's as simple as putting on a fake mustache and pointing at someone else.",
+            "cropImage": "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/ca816bf689351c43905801f3010203d86fbf7941a6637f8143d66b9bd4ce3e24.png",
+            "keywordIds": [
+                5
+            ],
+            "copyOfCardId": [
+                69963
+            ],
+            "isZilliaxFunctionalModule": false,
+            "isZilliaxCosmeticModule": false
+        },
+        {
+            "id": 1281,
+            "collectible": 1,
+            "slug": "1281-scavenging-hyena",
+            "classId": 3,
+            "multiClassIds": [],
+            "minionTypeId": 20,
+            "cardTypeId": 4,
+            "cardSetId": 3,
+            "rarityId": 1,
+            "artistName": "Jim Nelson",
+            "health": 2,
+            "attack": 2,
+            "manaCost": 2,
+            "name": "Scavenging Hyena",
+            "text": "Whenever a friendly Beast dies, gain +2/+1.",
+            "image": "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/b5b66095210b40269c08d5d461cb38e22a0cb4e93bf17cde5b2f5486a8801af4.png",
+            "imageGold": "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/2c1bae20ca51f1bcab9c873d461f40a5ec161d135448816de830750518f6e5d5.png",
+            "flavorText": "Hyenas prefer the bones of kodos or windserpents, but they'll eat pretty much anything. Even Brussels sprouts.",
+            "cropImage": "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/59ee2d883012468cdf958b2342828c287740514d64baddd12b471479769dc934.png",
+            "copyOfCardId": [
+                69599,
+                69962
+            ],
+            "isZilliaxFunctionalModule": false,
+            "isZilliaxCosmeticModule": false
+        },
+        {
+            "id": 113351,
+            "collectible": 1,
+            "slug": "113351-selective-breeder",
+            "classId": 3,
+            "multiClassIds": [],
+            "cardTypeId": 4,
+            "cardSetId": 1635,
+            "rarityId": 3,
+            "artistName": "Vladimir Kafanov",
+            "health": 3,
+            "attack": 1,
+            "manaCost": 2,
+            "name": "Selective Breeder",
+            "text": "<b>Battlecry:</b> <b>Discover</b> a copy of a Beast in your deck.",
+            "image": "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/de2925d1fe55cd461339c7383b67e7d23eb7da7273e5aed667bbe91b6edc6097.png",
+            "imageGold": "",
+            "flavorText": "His ethics are top notch. Just look at that smiling kitty!",
+            "cropImage": "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/00bfe59dec08c14aa28d38f5eff0f324cad26cbdda3c0a496509dbaa50866ddf.png",
+            "keywordIds": [
+                8,
+                21
+            ],
+            "copyOfCardId": [
+                62698
+            ],
+            "isZilliaxFunctionalModule": false,
+            "isZilliaxCosmeticModule": false
+        },
+        {
+            "id": 455,
+            "collectible": 1,
+            "slug": "455-snake-trap",
+            "classId": 3,
+            "multiClassIds": [],
+            "cardTypeId": 5,
+            "cardSetId": 3,
+            "rarityId": 4,
+            "artistName": "Bernie Kang",
+            "manaCost": 2,
+            "name": "Snake Trap",
+            "text": "<b>Secret:</b> When one of your minions is attacked, summon three 1/1 Snakes.",
+            "image": "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/9459a2680008f96c67e309f5a38326f6e3b38d00cb504b8938ab0f330a7cf756.png",
+            "imageGold": "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/0081cf2a1457baf7968c7474efc01310aa337f61edd116df782169fff0b0e63e.png",
+            "flavorText": "Why did it have to be snakes?",
+            "cropImage": "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/d5c3f04ab9ec69d60ee5e965f319def6568792e44c916ac6f691cba465d86d4a.png",
+            "childIds": [
+                204
+            ],
+            "keywordIds": [
+                5
+            ],
+            "copyOfCardId": [
+                69602,
+                69971
+            ],
+            "isZilliaxFunctionalModule": false,
+            "isZilliaxCosmeticModule": false
+        },
+        {
+            "id": 814,
+            "collectible": 1,
+            "slug": "814-snipe",
+            "classId": 3,
+            "multiClassIds": [],
+            "cardTypeId": 5,
+            "cardSetId": 3,
+            "rarityId": 1,
+            "artistName": "Lorenzo Minaca",
+            "manaCost": 2,
+            "name": "Snipe",
+            "text": "<b>Secret:</b> After your opponent plays a minion, deal 6 damage to it.",
+            "image": "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/fd021c13a89a5d91c123e287c2f16866468f9e41b746efe1b7a01904021f14d6.png",
+            "imageGold": "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/8fe2b07030c25b5d3f245eea2937eddaf6c315a0a35319d351876d2f27cd2644.png",
+            "flavorText": "A great sniper hits the spot. Just like a delicious flank of boar. Mmmmm.",
+            "cropImage": "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/24bfe29d16456624af13cd872759450b2ce78fd2e93df81384e520b616667ee4.png",
+            "keywordIds": [
+                5
+            ],
+            "copyOfCardId": [
+                102541,
+                70049
+            ],
+            "isZilliaxFunctionalModule": false,
+            "isZilliaxCosmeticModule": false
+        },
+        {
+            "id": 1241,
+            "collectible": 1,
+            "slug": "1241-starving-buzzard",
+            "classId": 3,
+            "multiClassIds": [],
+            "minionTypeId": 20,
+            "cardTypeId": 4,
+            "cardSetId": 1635,
+            "rarityId": 2,
+            "artistName": "Bernie Kang",
+            "health": 1,
+            "attack": 2,
+            "manaCost": 2,
+            "name": "Starving Buzzard",
+            "text": "Whenever you summon a Beast, draw a card.",
+            "image": "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/b44a22a45e8cecb89b5e70742037bd2514f7137e1cce1ec3e230f57820bcc8d2.png",
+            "imageGold": "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/24712e3e675625aaabc265e6cbf1eccc1651a75ffed6cb746a2dac624293a130.png",
+            "flavorText": "If you feed him, he loses his whole <i>identity</i>.",
+            "cropImage": "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/acb2945e688526bd2bbb0d7f3082328bc1df964e607264c0d3206408cdeabe4d.png",
+            "copyOfCardId": [
+                68416
+            ],
+            "isZilliaxFunctionalModule": false,
+            "isZilliaxCosmeticModule": false
+        },
+        {
+            "id": 437,
+            "collectible": 1,
+            "slug": "437-animal-companion",
+            "classId": 3,
+            "multiClassIds": [],
+            "cardTypeId": 5,
+            "cardSetId": 1635,
+            "rarityId": 2,
+            "artistName": "Wei Wang",
+            "manaCost": 3,
+            "name": "Animal Companion",
+            "text": "Summon a random Beast Companion.",
+            "image": "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/76f60a2c5341ffb27550c40abda044848f4e259410144db22659a1d0f35085a2.png",
+            "imageGold": "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/21b68f587dfe3bfa54d5aa5815665f6e543454147992eea94605e8e3c20f907d.png",
+            "flavorText": "You could summon Misha, Leokk, or Huffer! Huffer is more trouble than he's worth.",
+            "cropImage": "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/22fc73c7151722277cb0a691116bcec0f8010a40faab859c0d1bc1c4aa0d0053.png",
+            "childIds": [
+                100,
+                226,
+                959
+            ],
+            "copyOfCardId": [
+                76297,
+                68529
+            ],
+            "isZilliaxFunctionalModule": false,
+            "isZilliaxCosmeticModule": false
+        },
+        {
+            "id": 1093,
+            "collectible": 1,
+            "slug": "1093-deadly-shot",
+            "classId": 3,
+            "multiClassIds": [],
+            "cardTypeId": 5,
+            "cardSetId": 3,
+            "rarityId": 1,
+            "artistName": "Steven Prescott",
+            "manaCost": 3,
+            "name": "Deadly Shot",
+            "text": "Destroy a random enemy minion.",
+            "image": "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/f3fa488d795dc614a3035f6271096e930773db5f55cada587947ade3f2259fcc.png",
+            "imageGold": "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/df2483d02f2ce65e791ec140f783e30b8dc9dbf94d79d762acf9bb57c1480d32.png",
+            "flavorText": "Our ballista operator is effective, but not picky.",
+            "cropImage": "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/7f24f74d97b284f42bf6a838e72d53f88deb4c07c8c6740297bc34bcfd6d7b2f.png",
+            "copyOfCardId": [
+                69605,
+                70056
+            ],
+            "isZilliaxFunctionalModule": false,
+            "isZilliaxCosmeticModule": false
+        },
+        {
+            "id": 1662,
+            "collectible": 1,
+            "slug": "1662-eaglehorn-bow",
+            "classId": 3,
+            "multiClassIds": [],
+            "cardTypeId": 7,
+            "cardSetId": 3,
+            "rarityId": 3,
+            "artistName": "Cyril Van Der Haegen",
+            "health": 2,
+            "attack": 3,
+            "manaCost": 3,
+            "name": "Eaglehorn Bow",
+            "text": "Whenever a friendly <b>Secret</b> is revealed, gain +1 Durability.",
+            "image": "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/14a2ff80245fd82d7429c635fb75bb2020d086a96fd01e74db868f2690c7800c.png",
+            "imageGold": "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/6adf576557d03c85764179e4a36f2931f754ef5f890def124165fe4f74c447ff.png",
+            "flavorText": "First Lesson: Put the pointy end in the other guy.",
+            "cropImage": "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/63592dcff0379286d624c8cebb532a3d8bed8f637ee44fff40442557e6df6110.png",
+            "keywordIds": [
+                5
+            ],
+            "copyOfCardId": [
+                69965
+            ],
+            "isZilliaxFunctionalModule": false,
+            "isZilliaxCosmeticModule": false
+        },
+        {
+            "id": 296,
+            "collectible": 1,
+            "slug": "296-kill-command",
+            "classId": 3,
+            "multiClassIds": [],
+            "cardTypeId": 5,
+            "cardSetId": 1635,
+            "rarityId": 2,
+            "artistName": "Gabe from Penny Arcade",
+            "manaCost": 3,
+            "name": "Kill Command",
+            "text": "Deal 3 damage. If you control a Beast, deal 5 damage instead.",
+            "image": "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/48e59dbc2555358b3c8fc26db75ea1e63d43fbd517df26b7014e88fda45f8b72.png",
+            "imageGold": "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/4625e6769d8887c242334e6f0be15eddba464924213f976a62763391b15b185f.png",
+            "flavorText": "\"Kill!\", he commanded.",
+            "cropImage": "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/9a6bb17f879957aa0a46cb0ff4b377c701dba06de76459586884a27bd0106dfb.png",
+            "copyOfCardId": [
+                84939,
+                68472,
+                111361
+            ],
+            "isZilliaxFunctionalModule": false,
+            "isZilliaxCosmeticModule": false
+        },
+        {
+            "id": 1243,
+            "collectible": 1,
+            "slug": "1243-unleash-the-hounds",
+            "classId": 3,
+            "multiClassIds": [],
+            "cardTypeId": 5,
+            "cardSetId": 3,
+            "rarityId": 1,
+            "artistName": "Linggar Bramanty",
+            "manaCost": 3,
+            "name": "Unleash the Hounds",
+            "text": "For each enemy minion, summon a 1/1 Hound with <b>Charge</b>.",
+            "image": "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/87b07ca1afae0d7e3b623ee744c35302ac70f3e45cb3d7705659cf771217d4b7.png",
+            "imageGold": "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/89d5d2972166b9f9afd8733fda2f9697de6ba8036161275a85d9d4e10996845a.png",
+            "flavorText": "You must read the name of this card out loud each time you play it.",
+            "cropImage": "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/1e33ff64c85bf746e7fe96952f53e4329ee9c2db6cd50f846570660430f05e73.png",
+            "childIds": [
+                1715
+            ],
+            "keywordIds": [
+                4
+            ],
+            "copyOfCardId": [
+                69967
+            ],
+            "isZilliaxFunctionalModule": false,
+            "isZilliaxCosmeticModule": false
+        },
+        {
+            "id": 1003,
+            "collectible": 1,
+            "slug": "1003-houndmaster",
+            "classId": 3,
+            "multiClassIds": [],
+            "cardTypeId": 4,
+            "cardSetId": 1635,
+            "rarityId": 2,
+            "artistName": "Dan Brereton",
+            "health": 3,
+            "attack": 4,
+            "manaCost": 4,
+            "name": "Houndmaster",
+            "text": "<b>Battlecry:</b> Give a friendly Beast +2/+2 and <b>Taunt</b>.",
+            "image": "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/43f1c6491dc62cd97da5a05ed1af73cf9929aad75b1266b751a9c4ad315a65ab.png",
+            "imageGold": "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/3c1f9824210ada53d19345a4c444d2ab8606bd0f7d99499eff26c9da6de1e047.png",
+            "flavorText": "\"Who let the dogs out?\" he asks. It's rhetorical.",
+            "cropImage": "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/287061e213181ebcfa9c8bcf9f0fe0a73d7b95881ede9c5214ad6125c4a6d275.png",
+            "keywordIds": [
+                1,
+                8
+            ],
+            "copyOfCardId": [
+                68426
+            ],
+            "isZilliaxFunctionalModule": false,
+            "isZilliaxCosmeticModule": false
+        },
+        {
+            "id": 292,
+            "collectible": 1,
+            "slug": "292-multi-shot",
+            "classId": 3,
+            "multiClassIds": [],
+            "cardTypeId": 5,
+            "cardSetId": 1635,
+            "rarityId": 2,
+            "artistName": "Ben Zhang",
+            "manaCost": 4,
+            "name": "Multi-Shot",
+            "text": "Deal 3 damage to two random enemy minions.",
+            "image": "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/8045919a0e8b66399da70b6961fd432f384bc97b318335068bc639a2c529185d.png",
+            "imageGold": "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/3ec8f86b217c235f2c1bf473406a667dfb629ce601566080df3a5799fee6824c.png",
+            "flavorText": "You see, it's all about <i>throughput</i>.",
+            "cropImage": "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/76f1a9a8c7a53960b03a70464dc86623a65cecee836ce8dd8a19fab4e494edbb.png",
+            "copyOfCardId": [
+                68432
+            ],
+            "isZilliaxFunctionalModule": false,
+            "isZilliaxCosmeticModule": false
+        },
+        {
+            "id": 394,
+            "collectible": 1,
+            "slug": "394-explosive-shot",
+            "classId": 3,
+            "multiClassIds": [],
+            "spellSchoolId": 2,
+            "cardTypeId": 5,
+            "cardSetId": 3,
+            "rarityId": 3,
+            "artistName": "Tom Baxa",
+            "manaCost": 5,
+            "name": "Explosive Shot",
+            "text": "Deal 5 damage to a minion and 2 damage to adjacent ones.",
+            "image": "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/cef101a2ac81c782d3b1c7b67544e0842ec7224643edb1a97802057e3bf54423.png",
+            "imageGold": "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/b0934280b85e8b981b7bce543ea00641724911aa44c72bb621a98ad8fbe9b882.png",
+            "flavorText": "Pull the pin, count to 5, then shoot. Then duck.",
+            "cropImage": "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/71851aeba09c92525ebced6addfa1b4ea38d35ec0c06f5412aa83d9f83d3dbf5.png",
+            "copyOfCardId": [
+                69966
+            ],
+            "isZilliaxFunctionalModule": false,
+            "isZilliaxCosmeticModule": false
+        },
+        {
+            "id": 699,
+            "collectible": 1,
+            "slug": "699-tundra-rhino",
+            "classId": 3,
+            "multiClassIds": [],
+            "minionTypeId": 20,
+            "cardTypeId": 4,
+            "cardSetId": 1635,
+            "rarityId": 2,
+            "artistName": "Lars Grant-West",
+            "health": 5,
+            "attack": 2,
+            "manaCost": 5,
+            "name": "Tundra Rhino",
+            "text": "Your Beasts have <b>Charge</b>.",
+            "image": "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/ed689e8313a4c8a5dd3f3242703196c2587d786ee18135dae624fc3bc7780046.png",
+            "imageGold": "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/4e73dc9d788f906695d08b171a1c5f7512f8bfd4d660b53a115270226a77dd64.png",
+            "flavorText": "Tundra rhinos are often mistaken for kodos. Or am I mistaken?",
+            "cropImage": "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/1f66654fdbbd168135e9dd993177e9026f3a604eee85381e28e16088ff428fbb.png",
+            "keywordIds": [
+                4
+            ],
+            "copyOfCardId": [
+                68430
+            ],
+            "isZilliaxFunctionalModule": false,
+            "isZilliaxCosmeticModule": false
+        },
+        {
+            "id": 1261,
+            "collectible": 1,
+            "slug": "1261-savannah-highmane",
+            "classId": 3,
+            "multiClassIds": [],
+            "minionTypeId": 20,
+            "cardTypeId": 4,
+            "cardSetId": 3,
+            "rarityId": 3,
+            "artistName": "Milivoj Ceran",
+            "health": 5,
+            "attack": 7,
+            "manaCost": 6,
+            "name": "Savannah Highmane",
+            "text": "<b>Deathrattle:</b> Summon two 2/2 Hyenas.",
+            "image": "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/0dfd8af4c6e37860ce29891f1b1512444891104e22ee40d73ca80f81f33a4ccc.png",
+            "imageGold": "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/7116ee9fe8b21522fd7f2eb44bf02e036cdae9a99a4d2c916a9f23b107b08470.png",
+            "flavorText": "In the jungle, the mighty jungle, the lion gets slowly consumed by hyenas.",
+            "cropImage": "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/1c25b627bb205b0c159060e5cfa9515c66bf091c03c6b650ab66a1dff237e6eb.png",
+            "childIds": [
+                1624
+            ],
+            "keywordIds": [
+                12
+            ],
+            "copyOfCardId": [
+                69600,
+                69964
+            ],
+            "isZilliaxFunctionalModule": false,
+            "isZilliaxCosmeticModule": false
+        },
+        {
+            "id": 311,
+            "collectible": 1,
+            "slug": "311-gladiators-longbow",
+            "classId": 3,
+            "multiClassIds": [],
+            "cardTypeId": 7,
+            "cardSetId": 3,
+            "rarityId": 4,
+            "artistName": "Peter C. Lee",
+            "health": 2,
+            "attack": 5,
+            "manaCost": 7,
+            "name": "Gladiator's Longbow",
+            "text": "Your hero is <b>Immune</b> while attacking.",
+            "image": "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/099405235c2cbf035b9d2948b511bdd33c49f5a5ba45346c37b64564064fd9c0.png",
+            "imageGold": "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/763bf6c405de98f7d6881845bdb78d325961b4b9a39a2912168683c64c17819c.png",
+            "flavorText": "The longbow allows shots to be fired from farther away and is useful for firing on particularly odorous targets.",
+            "cropImage": "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/f3e37c72c8e42b18729ec8f3bae80abcf522ae7913d8f93b2bf19611c3374c8c.png",
+            "keywordIds": [
+                17
+            ],
+            "copyOfCardId": [
+                69803
+            ],
+            "isZilliaxFunctionalModule": false,
+            "isZilliaxCosmeticModule": false
+        },
+        {
+            "id": 1144,
+            "collectible": 1,
+            "slug": "1144-king-krush",
+            "classId": 3,
+            "multiClassIds": [],
+            "minionTypeId": 20,
+            "cardTypeId": 4,
+            "cardSetId": 3,
+            "rarityId": 5,
+            "artistName": "Alex Horley Orlandelli",
+            "health": 8,
+            "attack": 8,
+            "manaCost": 9,
+            "name": "King Krush",
+            "text": "<b>Charge</b>",
+            "image": "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/ce53cfeba71eae0c0638ab9a03799e9d9a40bffcdf76cfa4b5562533ea0d542c.png",
+            "imageGold": "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/73836752b55d662221cb30850b7f450cb297a56b35119fb40d35f89dec670ea6.png",
+            "flavorText": "The best defense against King Krush is to have someone you don’t like standing in front of you.",
+            "cropImage": "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/9e686d4761a1ea4224d647a2d6067ceb74f81455cfa7150ff789745653cfbab9.png",
+            "keywordIds": [
+                4
+            ],
+            "copyOfCardId": [
+                69601,
+                69968
+            ],
+            "isZilliaxFunctionalModule": false,
+            "isZilliaxCosmeticModule": false
+        }
+    ],
+    "cardCount": 27,
+    "pageCount": 1,
+    "page": 1
+}

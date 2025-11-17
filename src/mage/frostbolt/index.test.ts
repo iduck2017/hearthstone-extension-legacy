@@ -58,14 +58,15 @@ describe('frostbolt', () => {
         // Target is not frozen initially and has full health
         expect(playerA.child.mana.state.current).toBe(10);
         expect(handA.child.cards.length).toBe(1);
-        expect(cardC.child.feats.child.frozen.state.isActive).toBeFalsy();
+        expect(cardC.child.frozen.state.actived).toBeFalsy();
         expect(cardC.child.health.state.current).toBe(1);
 
         // Play Frostbolt targeting enemy minion
         let promise = cardD.play();
-        expect(playerA.child.controller.current?.options).toContain(heroA);
-        expect(playerA.child.controller.current?.options).toContain(heroB);
-        expect(playerA.child.controller.current?.options).toContain(cardC);
+        const options = playerA.child.controller.current?.options;
+        expect(options).toContain(heroA);
+        expect(options).toContain(heroB);
+        expect(options).toContain(cardC);
         playerA.child.controller.set(cardC);
         await promise;
         
@@ -73,13 +74,13 @@ describe('frostbolt', () => {
         expect(playerA.child.mana.state.current).toBe(8);
         expect(cardC.child.health.state.current).toBe(-2);
         expect(cardC.child.health.state.damage).toBe(3);
-        expect(cardC.child.feats.child.frozen.state.isActive).toBe(true);
+        expect(cardC.child.frozen.state.actived).toBe(true);
         expect(handA.child.cards.length).toBe(0);
         
         // Check turn progression and frozen state persists
         turn.next();
         expect(turn.refer.current).toBe(playerB);
-        expect(cardC.child.feats.child.frozen.state.isActive).toBe(true);
+        expect(cardC.child.frozen.state.actived).toBe(true);
         expect(cardC.child.action.status).toBe(false);
         
     })

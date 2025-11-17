@@ -75,8 +75,9 @@ describe('ethereal-arcanist', () => {
         expect(heroA.child.health.state.current).toBe(30); // Player A hero: 30 health
 
         // Player B's Wisp attacks Player A's hero
-        const promise = cardD.child.action.run();
-        expect(playerB.child.controller.current?.options).toContain(heroA);
+        const promise = cardD.child.action.start();
+        const options = playerB.child.controller.current?.options;
+        expect(options).toContain(heroA);
         playerB.child.controller.set(heroA);
         await promise;
 

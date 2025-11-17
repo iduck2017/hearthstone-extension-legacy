@@ -73,9 +73,10 @@ describe('polymorph', () => {
 
         // Player A uses Polymorph on Water Elemental
         const promise = cardC.play();
-        expect(playerA.child.controller.current?.options).toContain(cardD); // Water Elemental can be targeted
-        expect(playerA.child.controller.current?.options).toContain(cardE); // Wisp can be targeted
-        expect(playerA.child.controller.current?.options).not.toContain(heroB); // Hero cannot be targeted
+        const selelctor = playerA.child.controller.current;
+        expect(selelctor?.options).toContain(cardD); // Water Elemental can be targeted
+        expect(selelctor?.options).toContain(cardE); // Wisp can be targeted
+        expect(selelctor?.options).not.toContain(heroB); // Hero cannot be targeted
         playerA.child.controller.set(cardD); // Target Water Elemental
         await promise;
 

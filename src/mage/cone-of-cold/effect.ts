@@ -3,7 +3,7 @@ import { TemplUtil } from "set-piece";
 
 
 @TemplUtil.is('cone-of-cold-effect')
-export class ConeOfColdEffectModel extends SpellEffectModel<[MinionCardModel]> {
+export class ConeOfColdEffectModel extends SpellEffectModel<MinionCardModel> {
     constructor(props?: ConeOfColdEffectModel['props']) {
         props = props ?? {};
         super({
@@ -19,14 +19,14 @@ export class ConeOfColdEffectModel extends SpellEffectModel<[MinionCardModel]> {
         });
     }
 
-    toRun(): [Selector<MinionCardModel>] | undefined {
+    prepare(): Selector<MinionCardModel> | undefined {
         const games = this.route.game;
         if (!games) return;
-        const roles = games.query(true);
-        return [new Selector(roles, { hint: "Choose a target" })]
+        const roles = games.refer.roles.filter(role => role instanceof MinionCardModel);
+        return new Selector(roles, { hint: "Choose a target" })
     }
 
-    protected doRun(target: MinionCardModel) {
+    protected run(target: MinionCardModel) {
         const card = this.route.card;
         if (!card) return;
 
@@ -53,8 +53,7 @@ export class ConeOfColdEffectModel extends SpellEffectModel<[MinionCardModel]> {
         })));
         // Freeze all affected minions
         minions.forEach((item) => { 
-            const feats = item.child.feats;
-            const frozen = feats.child.frozen;
+            const frozen = item.child.frozen;
             frozen.active();
         });
     }

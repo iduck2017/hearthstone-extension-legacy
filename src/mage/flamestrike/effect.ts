@@ -1,8 +1,8 @@
-import { EffectModel, DamageModel, DamageEvent, DamageType, SpellEffectModel } from "hearthstone-core";
+import { EffectModel, DamageModel, DamageEvent, DamageType, SpellEffectModel, Selector } from "hearthstone-core";
 import { TemplUtil } from "set-piece";
 
 @TemplUtil.is('flamestrike-effect')
-export class FlamestrikeEffectModel extends SpellEffectModel<[]> {
+export class FlamestrikeEffectModel extends SpellEffectModel<never> {
     constructor(props?: FlamestrikeEffectModel['props']) {
         props = props ?? {};
         super({
@@ -18,12 +18,11 @@ export class FlamestrikeEffectModel extends SpellEffectModel<[]> {
         });
     }
 
-    toRun(): [] | undefined {
-        // No target selection needed - affects all enemy minions
-        return [];
+    public prepare(...prev: never[]): Selector<never> | undefined {
+        return undefined
     }
 
-    protected doRun() {
+    protected run() {
         const player = this.route.player;
         const opponent = player?.refer.opponent;
         if (!opponent) return;
@@ -31,7 +30,7 @@ export class FlamestrikeEffectModel extends SpellEffectModel<[]> {
         if (!card) return;
 
         // Get all enemy minions
-        const roles = opponent.query(true); // Only minions
+        const roles = opponent.refer.minions;
 
         // Deal 5 damage to all enemy minions
         DamageModel.deal(roles.map((item) => new DamageEvent({

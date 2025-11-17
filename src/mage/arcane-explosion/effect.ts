@@ -1,10 +1,10 @@
-import { DamageEvent, DamageModel, DamageType, SpellEffectModel } from "hearthstone-core";
+import { DamageEvent, DamageModel, DamageType, Selector, SpellEffectModel } from "hearthstone-core";
 import { TemplUtil } from "set-piece";
 
 
 
 @TemplUtil.is('arcane-explosion-effect')
-export class ArcaneExplosionEffectModel extends SpellEffectModel<[]> {
+export class ArcaneExplosionEffectModel extends SpellEffectModel<never> {
     constructor(props?: ArcaneExplosionEffectModel['props']) {
         props = props ?? {};
         super({
@@ -20,9 +20,11 @@ export class ArcaneExplosionEffectModel extends SpellEffectModel<[]> {
         });
     }
 
-    toRun(): [] { return [] }
+    public prepare(...prev: never[]): Selector<never> | undefined {
+        return undefined
+    }
 
-    protected doRun() {
+    protected run() {
         const player = this.route.player;
         const opponent = player?.refer.opponent;
         if (!opponent) return;
@@ -30,15 +32,17 @@ export class ArcaneExplosionEffectModel extends SpellEffectModel<[]> {
         if (!card) return;
         
         // Get all enemy minions
-        const roles = opponent.query(true);
+        const roles = opponent.refer.minions;
         
         // Deal 1 damage to each enemy minion
-        DamageModel.deal(roles.map((item) => new DamageEvent({
-            type: DamageType.SPELL,
-            source: card,
-            method: this,
-            target: item,
-            origin: this.state.damage[0] ?? 0,
-        })))
+        DamageModel.deal(
+            roles.map((item) => new DamageEvent({
+                type: DamageType.SPELL,
+                source: card,
+                method: this,
+                target: item,
+                origin: this.state.damage[0] ?? 0,
+            }))
+        )
     }
 }

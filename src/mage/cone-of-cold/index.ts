@@ -15,7 +15,7 @@
  * Collectible
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel, SpellFeaturesModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel } from "hearthstone-core";
 import { ConeOfColdEffectModel } from "./effect";
 
 @LibraryUtil.is('cone-of-cold')
@@ -28,7 +28,7 @@ export class ConeOfColdModel extends SpellCardModel {
                 name: "Cone of Cold",
                 desc: "Freeze a minion and the minions next to it, and deal 1 damage to them.",
                 flavorDesc: "Magi of the Kirin Tor were casting Cubes of Cold for many years before Cones came into fashion some 90 years ago.",
-                isCollectible: true,
+                collectible: true,
                 rarity: RarityType.COMMON,
                 class: ClassType.MAGE,
                 schools: [SchoolType.FROST],
@@ -37,9 +37,7 @@ export class ConeOfColdModel extends SpellCardModel {
             refer: { ...props.refer },
             child: { 
                 cost: props.child?.cost ?? new CostModel({ state: { origin: 3 }}),
-                feats: props.child?.feats ?? new SpellFeaturesModel({
-                    child: { effects: [new ConeOfColdEffectModel()] }
-                }),
+                effects: props.child?.effects ?? [new ConeOfColdEffectModel()],
                 ...props.child 
             }
         });

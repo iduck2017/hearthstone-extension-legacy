@@ -68,17 +68,18 @@ describe('cone-of-cold', () => {
         // Check initial stats
         expect(cardD.child.health.state.current).toBe(1); // Wisp: 1 health
         expect(cardE.child.health.state.current).toBe(2); // Goldshire Footman: 2 health
-        expect(cardD.child.feats.child.frozen.state.isActive).toBe(false);
-        expect(cardE.child.feats.child.frozen.state.isActive).toBe(false);
+        expect(cardD.child.frozen.state.actived).toBe(false);
+        expect(cardE.child.frozen.state.actived).toBe(false);
         expect(playerA.child.mana.state.current).toBe(10);
         expect(handA.child.cards.length).toBe(1);
         expect(boardB.child.cards.length).toBe(3);
 
         // Player A uses Cone of Cold on Player B's Wisp (leftmost minion)
         const promise = cardC.play();
-        expect(playerA.child.controller.current?.options).toContain(cardD);
-        expect(playerA.child.controller.current?.options).toContain(cardE);
-        expect(playerA.child.controller.current?.options).not.toContain(heroB);
+        const options = playerA.child.controller.current?.options;
+        expect(options).toContain(cardD);
+        expect(options).toContain(cardE);
+        expect(options).not.toContain(heroB);
         // choose Wisp
         playerA.child.controller.set(cardD);
         await promise;
@@ -86,13 +87,13 @@ describe('cone-of-cold', () => {
         // Wisp should die (1 - 1 = 0), Footman should take 1 damage (2 - 1 = 1)
         expect(cardD.child.health.state.current).toBe(0); // Wisp dies
         expect(cardD.child.dispose.status).toBe(true); // Wisp dies
-        expect(cardD.child.feats.child.frozen.state.isActive).toBe(true);
+        expect(cardD.child.frozen.state.actived).toBe(true);
 
         expect(cardE.child.health.state.current).toBe(1); // Footman: 2 - 1 = 1
-        expect(cardE.child.feats.child.frozen.state.isActive).toBe(true);
+        expect(cardE.child.frozen.state.actived).toBe(true);
 
         expect(cardF.child.health.state.current).toBe(3); // Mana Wyrm: 3
-        expect(cardF.child.feats.child.frozen.state.isActive).toBe(false);
+        expect(cardF.child.frozen.state.actived).toBe(false);
         
         expect(playerA.child.mana.state.current).toBe(7); // 10 - 3 cost
         expect(handA.child.cards.length).toBe(0);
@@ -110,9 +111,9 @@ describe('cone-of-cold', () => {
 
         // Check that frozen Footman cannot attack
         expect(cardE.child.action.status).toBe(false); // Goldshire Footman cannot attack
-        expect(cardE.child.feats.child.frozen.state.isActive).toBe(true);
+        expect(cardE.child.frozen.state.actived).toBe(true);
 
         expect(cardF.child.action.status).toBe(true); // Mana Wyrm can attack
-        expect(cardF.child.feats.child.frozen.state.isActive).toBe(false);
+        expect(cardF.child.frozen.state.actived).toBe(false);
     })
 })

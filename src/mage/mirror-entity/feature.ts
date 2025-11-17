@@ -1,5 +1,7 @@
 import { CardModel, MinionCardModel, SecretFeatureModel } from "hearthstone-core";
-import { Event, EventUtil, TemplUtil } from "set-piece";
+import { MinionPerformModel } from "hearthstone-core/dist/type/models/features/perform/minion";
+import { Event, EventUtil, TemplUtil, TranxUtil } from "set-piece";
+import { PolymorphModel } from "../polymorph";
 
 @TemplUtil.is('mirror-entity-feature')
 export class MirrorEntityFeatureModel extends SecretFeatureModel {
@@ -10,7 +12,7 @@ export class MirrorEntityFeatureModel extends SecretFeatureModel {
             state: {
                 name: "Mirror Entity's feature",
                 desc: "Secret: After your opponent plays a minion, summon a copy of it.",
-                isActive: true,
+                actived: true,
                 ...props.state
             },
             child: { ...props.child },
@@ -20,22 +22,27 @@ export class MirrorEntityFeatureModel extends SecretFeatureModel {
 
     @EventUtil.on(self => self.handlePlay)
     private listenPlay() {
-        return this.route.game?.proxy.any(MinionCardModel).event?.onPlay
+        return this.route.game?.proxy.any(MinionCardModel).child.perform.event?.onPlay
     }
     @SecretFeatureModel.span()
-    private handlePlay(that: MinionCardModel, event: Event) {
+    private handlePlay(that: MinionPerformModel, event: Event) {
         const playerA = this.route.player;
         if (!playerA) return;
         
+        // Get the minion card from the perform model
+        const minion = that.route.card;
+        if (!minion || !(minion instanceof MinionCardModel)) return;
+        
         // Only trigger when opponent plays a minion
-        const playerB = that.route.player;
+        const playerB = minion.route.player;
         if (playerB === playerA) return;
         
         // Create a copy of the minion
-        const copy = TemplUtil.copy(that);
+        const copy = minion.clone<MinionCardModel>();
         if (!copy) return;
-        const board = playerA.child.board;
-        copy.deploy(board);
+        copy.summon(playerA.child.board);
+
         return true;
     }
+
 }

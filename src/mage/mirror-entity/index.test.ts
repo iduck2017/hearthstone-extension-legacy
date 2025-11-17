@@ -111,6 +111,7 @@ describe('mirror-entity', () => {
         expect(boardA.child.secrets.length).toBe(0); // Secret consumed
         expect(boardA.child.cards.length).toBe(2); // Original Wisp + copied Water Elemental
         
+        console.log(game.route.app?.child.templates.map(item => item.name))
         // Verify the copied Water Elemental has correct stats
         const cardG = boardA.child.cards.find(minion => minion instanceof WaterElementalModel);
         expect(cardG).toBeDefined();

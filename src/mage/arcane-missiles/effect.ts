@@ -3,7 +3,7 @@ import { Model, TemplUtil } from "set-piece";
 
 
 @TemplUtil.is('arcane-missiles-effect')
-export class ArcaneMissilesEffectModel extends SpellEffectModel<[]> {
+export class ArcaneMissilesEffectModel extends SpellEffectModel<never> {
     constructor(props?: ArcaneMissilesEffectModel['props']) {
         props = props ?? {};
         super({
@@ -19,9 +19,11 @@ export class ArcaneMissilesEffectModel extends SpellEffectModel<[]> {
         });
     }
 
-    toRun(): [] { return [] }
+    public prepare(...prev: never[]): Selector<never> | undefined {
+        return undefined
+    }
 
-    protected doRun() {
+    protected run() {
         const player = this.route.player;
         const opponent = player?.refer.opponent;
         if (!opponent) return;
@@ -30,11 +32,13 @@ export class ArcaneMissilesEffectModel extends SpellEffectModel<[]> {
 
         const loop = this.state.damage[0] ?? 0;
         for (let index = 0; index < loop; index ++) {
-            const roles = opponent.query();
+            const roles = opponent.refer.roles;
+            console.log('🔍 roles', roles)
             if (!roles.length) break;
             const index = Math.floor(Math.random() * roles.length);
             const target = roles[index];
             if (!target) break;
+            console.log('🔍 target', target)
             DamageModel.deal([
                 new DamageEvent({
                     type: DamageType.SPELL,

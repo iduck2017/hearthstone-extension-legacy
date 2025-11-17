@@ -1,4 +1,4 @@
-import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SecretCardModel, SpellCardModel, SpellFeaturesModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SecretCardModel } from "hearthstone-core";
 import { CounterspellFeatureModel } from "./feature";
 
 @LibraryUtil.is('counterspell')
@@ -11,7 +11,7 @@ export class CounterspellModel extends SecretCardModel {
                 name: "Counterspell",
                 desc: "Secret: When your opponent casts a spell, Counter it.",
                 flavorDesc: "What's the difference between a mage playing with Counterspell and a mage who isn't? The mage who isn't is getting Pyroblasted in the face.",
-                isCollectible: true,
+                collectible: true,
                 rarity: RarityType.COMMON,
                 class: ClassType.MAGE,
                 schools: [SchoolType.ARCANE],
@@ -20,11 +20,7 @@ export class CounterspellModel extends SecretCardModel {
             refer: { ...props.refer },
             child: { 
                 cost: props.child?.cost ?? new CostModel({ state: { origin: 3 }}),
-                feats: new SpellFeaturesModel({
-                    child: {
-                        items: [new CounterspellFeatureModel()]
-                    }
-                }),
+                feats: props.child?.feats ?? [new CounterspellFeatureModel()],
                 ...props.child 
             }
         });

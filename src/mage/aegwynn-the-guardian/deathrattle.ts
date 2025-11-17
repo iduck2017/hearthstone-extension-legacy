@@ -19,9 +19,9 @@ export class AegwynnTheGuardianDeathrattleModel extends DeathrattleModel {
     }
 
     // When Aegwynn dies, the next minion drawn will inherit Spell Damage +2
-    public doRun() {
+    public run() {
         const player = this.route.player;
         if (!player) return;
-        player.add(new AegwynnTheGuardianContextModel())
+        player.buff(new AegwynnTheGuardianContextModel())
     }
 }

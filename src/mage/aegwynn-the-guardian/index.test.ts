@@ -89,7 +89,8 @@ describe('aegwynn-the-guardian', () => {
 
         // Player A uses Fireball on Aegwynn
         const promise = cardC.play();
-        expect(playerA.child.controller.current?.options).toContain(cardD);
+        const options1 = playerA.child.controller.current?.options;
+        expect(options1).toContain(cardD);
         playerA.child.controller.set(cardD);
         await promise;
 
@@ -131,7 +132,8 @@ describe('aegwynn-the-guardian', () => {
 
         // Player B uses Frostbolt on Wisp (with +2 spell damage from Aegwynn's deathrattle)
         const promise = cardE.play();
-        expect(playerB.child.controller.current?.options).toContain(wispOnBoard);
+        const options2 = playerB.child.controller.current?.options;
+        expect(options2).toContain(wispOnBoard);
         playerB.child.controller.set(wispOnBoard);
         await promise;
 

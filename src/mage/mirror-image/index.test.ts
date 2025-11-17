@@ -90,11 +90,12 @@ describe('mirror-image', () => {
         if (!cardD || !cardE) throw new Error();
 
         // Try to attack A's hero - should fail due to Taunt
-        const promise = wispB.child.action.run();
-        expect(playerB.child.controller.current?.options.length).toBe(2);
-        expect(playerB.child.controller.current?.options).not.toContain(heroA);
-        expect(playerB.child.controller.current?.options).toContain(cardD);
-        expect(playerB.child.controller.current?.options).toContain(cardE);
+        const promise = wispB.child.action.start();
+        const options = playerB.child.controller.current?.options;
+        expect(options?.length).toBe(2);
+        expect(options).not.toContain(heroA);
+        expect(options).toContain(cardD);
+        expect(options).toContain(cardE);
         playerB.child.controller.set(cardD);
         await promise;
         

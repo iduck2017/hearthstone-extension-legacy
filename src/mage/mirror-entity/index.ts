@@ -15,7 +15,7 @@
  * Collectible
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SecretCardModel, SpellFeaturesModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SecretCardModel } from "hearthstone-core";
 import { MirrorEntityFeatureModel } from "./feature";
 
 @LibraryUtil.is('mirror-entity')
@@ -28,7 +28,7 @@ export class MirrorEntityModel extends SecretCardModel {
                 name: "Mirror Entity",
                 desc: "Secret: After your opponent plays a minion, summon a copy of it.",
                 flavorDesc: "\"You go first.\" - Krush'gor the Behemoth, to his pet boar.",
-                isCollectible: true,
+                collectible: true,
                 rarity: RarityType.COMMON,
                 class: ClassType.MAGE,
                 schools: [SchoolType.ARCANE],
@@ -37,11 +37,7 @@ export class MirrorEntityModel extends SecretCardModel {
             refer: { ...props.refer },
             child: { 
                 cost: props.child?.cost ?? new CostModel({ state: { origin: 3 }}),
-                feats: new SpellFeaturesModel({
-                    child: {
-                        items: [new MirrorEntityFeatureModel()]
-                    }
-                }),
+                feats: props.child?.feats ?? [new MirrorEntityFeatureModel()],
                 ...props.child 
             }
         });

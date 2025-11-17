@@ -36,6 +36,7 @@ describe('goldshire-footman', () => {
         }
     });
     boot(game);
+    const playerA = game.child.playerA;
     const boardA = game.child.playerA.child.board;
     const boardB = game.child.playerB.child.board;
     const playerB = game.child.playerB;
@@ -47,12 +48,12 @@ describe('goldshire-footman', () => {
     test('wisp-attack-goldshire-footman', async () => {
         // Initial state verification
         expect(cardC.child.action.state.current).toBe(1); // Wisp has action point
-        expect(cardD.child.feats.child.taunt.state.isActive).toBe(true);
-        const promise = cardC.child.action.run();
-        await AnimeUtil.sleep();
-        expect(game.child.playerA.child.controller.current?.options).toContain(cardD);
-        expect(game.child.playerA.child.controller.current?.options).not.toContain(heroB);
-        game.child.playerA.child.controller.set(cardD);
+        expect(cardD.child.taunt.state.actived).toBe(true);
+        const promise = cardC.child.action.start();
+        const selector = playerA.child.controller.current;
+        expect(selector?.options).toContain(cardD);
+        expect(selector?.options).not.toContain(heroB);
+        playerA.child.controller.set(cardD);
         await promise;
         expect(cardD.child.health.state.current).toBe(1);
         expect(cardD.child.health.state.maximum).toBe(2);

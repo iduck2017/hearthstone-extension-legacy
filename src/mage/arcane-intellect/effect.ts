@@ -1,8 +1,8 @@
-import { EffectModel, SpellEffectModel } from "hearthstone-core";
+import { EffectModel, Selector, SpellEffectModel } from "hearthstone-core";
 import { TemplUtil } from "set-piece";
 
 @TemplUtil.is('arcane-intellect-effect')
-export class ArcaneIntellectEffectModel extends SpellEffectModel<[]> {
+export class ArcaneIntellectEffectModel extends SpellEffectModel<never> {
     constructor(props?: ArcaneIntellectEffectModel['props']) {
         props = props ?? {};
         super({
@@ -18,9 +18,11 @@ export class ArcaneIntellectEffectModel extends SpellEffectModel<[]> {
         });
     }
 
-    toRun(): [] { return [] }
+    public prepare(...prev: never[]): Selector<never> | undefined {
+        return undefined
+    }
 
-    protected doRun() {
+    protected run() {
         const player = this.route.player;
         if (!player) return;
         const deck = player.child.deck;

@@ -13,7 +13,7 @@
  * Collectible
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel, SpellFeaturesModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel } from "hearthstone-core";
 import { FlamestrikeEffectModel } from "./effect";
 
 @LibraryUtil.is('flamestrike')
@@ -26,7 +26,7 @@ export class FlamestrikeModel extends SpellCardModel {
                 name: "Flamestrike",
                 desc: "Deal 5 damage to all enemy minions.",
                 flavorDesc: "When the ground is on fire, you should not stop, drop, and roll.",
-                isCollectible: true,
+                collectible: true,
                 rarity: RarityType.COMMON,
                 class: ClassType.MAGE,
                 schools: [SchoolType.FIRE],
@@ -35,9 +35,7 @@ export class FlamestrikeModel extends SpellCardModel {
             refer: { ...props.refer },
             child: {
                 cost: props.child?.cost ?? new CostModel({ state: { origin: 7 }}),
-                feats: props.child?.feats ?? new SpellFeaturesModel({
-                    child: { effects: [new FlamestrikeEffectModel()] }
-                }),
+                effects: props.child?.effects ?? [new FlamestrikeEffectModel()],
                 ...props.child
             }
         });

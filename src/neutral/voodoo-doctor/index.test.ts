@@ -51,11 +51,10 @@ describe('voodoo-doctor', () => {
         expect(boardA.child.cards.length).toBe(1);
         
         // Wisp attacks Shieldbearer
-        let promise = cardC.child.action.run();
-        await AnimeUtil.sleep();
-        expect(playerA.child.controller.current).toBeDefined();
-        expect(playerA.child.controller.current?.options).toContain(heroB);
-        expect(playerA.child.controller.current?.options.length).toBe(1);
+        let promise = cardC.child.action.start();
+        const selector = playerA.child.controller.current;
+        expect(selector?.options).toContain(heroB);
+        expect(selector?.options.length).toBe(1);
         playerA.child.controller.set(heroB);
         await promise;
         
@@ -66,15 +65,15 @@ describe('voodoo-doctor', () => {
     test('voodoo-doctor-battlecry', async () => {
         // Play Voodoo Doctor
         let promise = cardD.play();
-        await AnimeUtil.sleep();
-        expect(playerA.child.controller.current?.options).toContain(0);
+        let selector = playerA.child.controller.current;
+        expect(selector?.options).toContain(0);
         playerA.child.controller.set(0);
-        await AnimeUtil.sleep();
-        
-        expect(playerA.child.controller.current?.options).toContain(heroA);
-        expect(playerA.child.controller.current?.options).toContain(heroB);
-        expect(playerA.child.controller.current?.options).toContain(cardC);
-        expect(playerA.child.controller.current?.options.length).toBe(3);
+        await AnimeUtil.pause();
+        selector = playerA.child.controller.current;
+        expect(selector?.options).toContain(heroA);
+        expect(selector?.options).toContain(heroB);
+        expect(selector?.options).toContain(cardC);
+        expect(selector?.options.length).toBe(3);
         playerA.child.controller.set(heroB);
         await promise;
         

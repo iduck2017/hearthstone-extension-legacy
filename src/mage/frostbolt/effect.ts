@@ -3,7 +3,7 @@ import { TemplUtil } from "set-piece";
 
 
 @TemplUtil.is('frostbolt-effect')
-export class FrostboltEffectModel extends SpellEffectModel<[RoleModel]> {
+export class FrostboltEffectModel extends SpellEffectModel<RoleModel> {
     constructor(props?: FrostboltEffectModel['props']) {
         props = props ?? {};
         super({
@@ -19,14 +19,14 @@ export class FrostboltEffectModel extends SpellEffectModel<[RoleModel]> {
         });
     }
 
-    toRun(): [Selector<RoleModel>] | undefined {
+    prepare(): Selector<RoleModel> | undefined {
         const games = this.route.game;
         if (!games) return;
-        const roles = games.query();
-        return [new Selector(roles, { hint: "Choose a target" })]
+        const roles = games.refer.roles;
+        return new Selector(roles, { hint: "Choose a target" })
     }
 
-    protected doRun(target: RoleModel) {
+    protected run(target: RoleModel) {
         const card = this.route.card;
         if (!card) return;
         
@@ -42,8 +42,7 @@ export class FrostboltEffectModel extends SpellEffectModel<[RoleModel]> {
         ])
         
         // Freeze the target
-        const feats = target.child.feats;
-        const frozen = feats.child.frozen;
+        const frozen = target.child.frozen;
         frozen.active();
     }
 } 

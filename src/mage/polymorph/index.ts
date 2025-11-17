@@ -12,7 +12,7 @@
  * Artist: Vance Kovacs
  * Collectible
  */
-import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel, SpellFeaturesModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel } from "hearthstone-core";
 import { PolymorphEffectModel } from "./effect";
 
 @LibraryUtil.is('polymorph')
@@ -25,7 +25,7 @@ export class PolymorphModel extends SpellCardModel {
                 name: "Polymorph",
                 desc: "Transform a minion into a 1/1 Sheep.",
                 flavorDesc: "There was going to be a pun in this flavor text, but it just came out baa-d.",
-                isCollectible: true,
+                collectible: true,
                 rarity: RarityType.COMMON,
                 class: ClassType.MAGE,
                 schools: [SchoolType.ARCANE],
@@ -34,9 +34,7 @@ export class PolymorphModel extends SpellCardModel {
             refer: { ...props.refer },
             child: { 
                 cost: props.child?.cost ?? new CostModel({ state: { origin: 4 }}),
-                feats: props.child?.feats ?? new SpellFeaturesModel({
-                    child: { effects: [new PolymorphEffectModel()] }
-                }),
+                effects: props.child?.effects ?? [new PolymorphEffectModel()],
                 ...props.child 
             }
         });

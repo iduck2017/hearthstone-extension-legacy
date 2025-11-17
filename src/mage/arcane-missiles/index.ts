@@ -14,7 +14,7 @@
  * Collectible
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel, SpellFeaturesModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel } from "hearthstone-core";
 import { ArcaneMissilesEffectModel } from "./effect";
 
 @LibraryUtil.is('arcane-missiles')
@@ -27,7 +27,7 @@ export class ArcaneMissilesModel extends SpellCardModel {
                 name: "Arcane Missiles",
                 desc: "Deal 3 damage randomly split among all enemies.",
                 flavorDesc: "You'd think you'd be able to control your missiles a little better since you're a powerful mage and all.",
-                isCollectible: true,
+                collectible: true,
                 rarity: RarityType.COMMON,
                 class: ClassType.MAGE,
                 schools: [SchoolType.ARCANE],
@@ -36,9 +36,7 @@ export class ArcaneMissilesModel extends SpellCardModel {
             refer: { ...props.refer },
             child: { 
                 cost: props.child?.cost ?? new CostModel({ state: { origin: 1 }}),
-                feats: props.child?.feats ?? new SpellFeaturesModel({
-                    child: { effects: [new ArcaneMissilesEffectModel()] }
-                }),
+                effects: props.child?.effects ?? [new ArcaneMissilesEffectModel()],
                 ...props.child 
             }
         });

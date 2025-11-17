@@ -61,8 +61,7 @@ describe('role', () => {
 
 
     test('wisp-attack', async () => {
-        const promise = cardC.child.action.run();
-        await AnimeUtil.sleep();
+        const promise = cardC.child.action.start();
         const selector = playerA.child.controller.current;
         expect(selector).toBeDefined();
         if (!selector) return;
@@ -84,8 +83,7 @@ describe('role', () => {
     test('wisp-attack', async () => {
         turn.next();
 
-        const promise = cardD.child.action.run();
-        await AnimeUtil.sleep();
+        const promise = cardD.child.action.start();
         const selector = playerB.child.controller.current;
         expect(selector).toBeDefined();
         if (!selector) return;

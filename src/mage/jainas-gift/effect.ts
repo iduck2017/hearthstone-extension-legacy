@@ -12,7 +12,7 @@ export namespace JainasGiftEffect {
 }
 
 @TemplUtil.is('jainas-gift-effect')
-export class JainasGiftEffectModel extends SpellEffectModel<[],
+export class JainasGiftEffectModel extends SpellEffectModel<never,
     JainasGiftEffect.E,
     JainasGiftEffect.S,
     JainasGiftEffect.C,
@@ -40,9 +40,11 @@ export class JainasGiftEffectModel extends SpellEffectModel<[],
         });
     }
 
-    toRun(): [] { return [] }
+    public prepare(...prev: never[]): Selector<never> | undefined {
+        return undefined
+    }
 
-    protected doRun() {
+    protected run() {
         const player = this.route.player;
         if (!player) return;
         player.child.controller.bind(this);

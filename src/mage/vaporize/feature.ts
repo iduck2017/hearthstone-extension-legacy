@@ -1,4 +1,5 @@
-import { SecretFeatureModel, RoleModel, RoleAttackModel, AbortEvent, MinionCardModel } from "hearthstone-core";
+import { SecretFeatureModel, RoleAttackModel, AbortEvent, HeroModel, RoleHealthModel } from "hearthstone-core";
+import { RoleModel } from "hearthstone-core/dist/type/models/entities/heroes";
 import { Event, EventUtil, TemplUtil } from "set-piece";
 
 @TemplUtil.is('vaporize-feature')
@@ -10,7 +11,7 @@ export class VaporizeFeatureModel extends SecretFeatureModel {
             state: {
                 name: "Vaporize's feature",
                 desc: "When a minion attacks your hero, destroy it.",
-                isActive: true,
+                actived: true,
                 ...props.state
             },
             child: { ...props.child },
@@ -20,7 +21,7 @@ export class VaporizeFeatureModel extends SecretFeatureModel {
 
     @EventUtil.on(self => self.handleAttack)
     private listenAttack() {
-        return this.route.player?.proxy.child.hero.child.attack.event?.toRecv
+        return this.route.player?.proxy.child.hero.child.attack.event?.toReceive
     }
     @SecretFeatureModel.span()
     private handleAttack(that: RoleAttackModel, event: AbortEvent<{ source: RoleModel }>) {
@@ -28,7 +29,7 @@ export class VaporizeFeatureModel extends SecretFeatureModel {
         if (!card) return;
         // Get the attack target from the event
         const role = event.detail.source;
-        role.child.dispose.active(true, card, this);
+        role.child.dispose.destroy(card, this);
         return true;
     }
 }

@@ -12,7 +12,7 @@ export class WispModel extends MinionCardModel {
                 flavorDesc: '',
                 rarity: RarityType.COMMON,
                 class: ClassType.NEUTRAL,
-                isCollectible: false,
+                collectible: false,
                 races: [RaceType.UNDEAD],
                 ...props.state,
             },

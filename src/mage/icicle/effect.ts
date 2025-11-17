@@ -1,9 +1,9 @@
-import { Selector, RoleModel, DamageModel, DamageEvent, DamageType, SpellEffectModel } from "hearthstone-core";
+import { Selector, RoleModel, DamageModel, DamageEvent, DamageType, SpellEffectModel, MinionCardModel } from "hearthstone-core";
 import { TemplUtil } from "set-piece";
 
 
 @TemplUtil.is('icicle-effect')
-export class IcicleEffectModel extends SpellEffectModel<[RoleModel]> {
+export class IcicleEffectModel extends SpellEffectModel<RoleModel> {
     constructor(props?: IcicleEffectModel['props']) {
         props = props ?? {};
         super({
@@ -19,14 +19,14 @@ export class IcicleEffectModel extends SpellEffectModel<[RoleModel]> {
         });
     }
 
-    toRun(): [Selector<RoleModel>] | undefined {
+    prepare(): Selector<RoleModel> | undefined {
         const games = this.route.game;
         if (!games) return;
-        const roles = games.query(true);
-        return [new Selector(roles, { hint: "Choose a minion" })]
+        const roles = games.refer.roles.filter(role => role instanceof MinionCardModel);
+        return new Selector(roles, { hint: "Choose a minion" })
     }
 
-    protected doRun(target: RoleModel) {
+    protected run(target: RoleModel) {
         const card = this.route.card;
         if (!card) return;
         const player = this.route.player;
@@ -44,10 +44,9 @@ export class IcicleEffectModel extends SpellEffectModel<[RoleModel]> {
         ])
         
         // Check if target is frozen
-        const feats = target.child.feats;
-        const frozen = feats.child.frozen;
+        const frozen = target.child.frozen;
         
-        if (frozen.state.isActive) {
+        if (frozen.state.actived) {
             // If frozen, draw a card
             const deck = player.child.deck;
             deck.draw();

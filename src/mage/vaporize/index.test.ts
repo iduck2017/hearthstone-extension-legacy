@@ -70,8 +70,9 @@ describe('vaporize', () => {
         expect(heroB.child.health.state.current).toBe(30); // Player B hero: 30 health
 
         // Player A's Wisp attacks Player B's Stonetusk Boar
-        const promise = cardC.child.action.run();
-        expect(playerA.child.controller.current?.options).toContain(cardE);
+        const promise = cardC.child.action.start();
+        const selector = playerA.child.controller.current;
+        expect(selector?.options).toContain(cardE);
         playerA.child.controller.set(cardE);
         await promise;
 
@@ -99,8 +100,9 @@ describe('vaporize', () => {
         expect(heroB.child.health.state.current).toBe(30); // Player B hero: 30 health
 
         // Player A's Voodoo Doctor attacks Player B's hero
-        const promise = cardD.child.action.run();
-        expect(playerA.child.controller.current?.options).toContain(heroB);
+        const promise = cardD.child.action.start();
+        const selector = playerA.child.controller.current;
+        expect(selector?.options).toContain(heroB);
         playerA.child.controller.set(heroB);
         await promise;
 

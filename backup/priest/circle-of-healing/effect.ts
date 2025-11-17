@@ -1,0 +1,40 @@
+import { EffectModel, RestoreEvent, RestoreModel, SpellEffectModel, Selector, MinionCardModel } from "hearthstone-core";
+import { TemplUtil } from "set-piece";
+
+@TemplUtil.is('circle-of-healing-effect')
+export class CircleOfHealingEffectModel extends SpellEffectModel<never> {
+    constructor(props?: CircleOfHealingEffectModel['props']) {
+        props = props ?? {};
+        super({
+            uuid: props.uuid,
+            state: {
+                name: "Circle of Healing's effect",
+                desc: "Restore 4 Health to ALL minions.",
+                damage: [],
+                ...props.state
+            },
+            child: { ...props.child },
+            refer: { ...props.refer },
+        });
+    }
+
+    public prepare(...prev: never[]): Selector<never> | undefined {
+        return undefined;
+    }
+
+    protected run() {
+        const game = this.route.game;
+        if (!game) return;
+        const card = this.route.card;
+        if (!card) return;
+
+        const minions = game.refer.roles.filter(role => role instanceof MinionCardModel);
+        // Restore 4 Health to all minions
+        RestoreModel.deal(minions.map((item) => new RestoreEvent({
+            source: card,
+            method: this,
+            target: item,
+            origin: 4,
+        })));
+    }
+}

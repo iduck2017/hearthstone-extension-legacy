@@ -15,7 +15,7 @@
  * Collectible
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SecretCardModel, SpellFeaturesModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SecretCardModel } from "hearthstone-core";
 import { IceBarrierFeatureModel } from "./feature";
 
 @LibraryUtil.is('ice-barrier')
@@ -28,7 +28,7 @@ export class IceBarrierModel extends SecretCardModel {
                 name: "Ice Barrier",
                 desc: "Secret: When your hero is attacked, gain 8 Armor.",
                 flavorDesc: "This is Rank 1. Rank 2 is Chocolate Milk Barrier.",
-                isCollectible: true,
+                collectible: true,
                 rarity: RarityType.COMMON,
                 class: ClassType.MAGE,
                 schools: [SchoolType.FROST],
@@ -37,11 +37,7 @@ export class IceBarrierModel extends SecretCardModel {
             refer: { ...props.refer },
             child: { 
                 cost: props.child?.cost ?? new CostModel({ state: { origin: 3 }}),
-                feats: new SpellFeaturesModel({
-                    child: {
-                        items: [new IceBarrierFeatureModel()]
-                    }
-                }),
+                feats: props.child?.feats ?? [new IceBarrierFeatureModel()],
                 ...props.child 
             }
         });

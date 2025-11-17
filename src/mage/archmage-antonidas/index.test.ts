@@ -75,7 +75,8 @@ describe('archmage-antonidas', () => {
 
         // Player A uses Frostbolt on Wisp
         const promise = cardD.play();
-        expect(playerA.child.controller.current?.options).toContain(cardF);
+        const options1 = playerA.child.controller.current?.options;
+        expect(options1).toContain(cardF);
         playerA.child.controller.set(cardF);
         await promise;
 
@@ -98,7 +99,8 @@ describe('archmage-antonidas', () => {
 
         // Player A uses the generated Fireball on Wisp (which should be dead, so target hero)
         const promise = cardG.play();
-        expect(playerA.child.controller.current?.options).toContain(heroB);
+        const options2 = playerA.child.controller.current?.options;
+        expect(options2).toContain(heroB);
         playerA.child.controller.set(heroB);
         await promise;
 

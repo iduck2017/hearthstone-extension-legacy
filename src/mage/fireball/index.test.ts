@@ -57,9 +57,10 @@ describe('fireball', () => {
         
         // Play Fireball targeting enemy hero
         let promise = cardD.play();
-        expect(game.child.playerA.child.controller.current?.options).toContain(heroA);
-        expect(game.child.playerA.child.controller.current?.options).toContain(heroB);
-        expect(game.child.playerA.child.controller.current?.options).toContain(cardC);
+        const options = game.child.playerA.child.controller.current?.options;
+        expect(options).toContain(heroA);
+        expect(options).toContain(heroB);
+        expect(options).toContain(cardC);
         game.child.playerA.child.controller.set(cardC);
         await promise;
         
