@@ -1,9 +1,9 @@
-import { StartTurnHookModel, DamageModel, DamageEvent } from "hearthstone-core";
+import { TurnStartModel, DamageModel, DamageEvent } from "hearthstone-core";
 import { TemplUtil } from "set-piece";
 
 
 @TemplUtil.is('demolisher-feature')
-export class DemolisherFeatureModel extends StartTurnHookModel {
+export class DemolisherFeatureModel extends TurnStartModel {
     constructor(props?: DemolisherFeatureModel['props']) {
         props = props ?? {};
         super({

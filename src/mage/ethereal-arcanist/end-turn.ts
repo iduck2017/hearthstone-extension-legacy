@@ -1,9 +1,9 @@
-import { EndTurnHookModel, MinionCardModel, RoleBuffModel } from "hearthstone-core";
+import { TurnEndModel, MinionCardModel, RoleBuffModel } from "hearthstone-core";
 import { DebugUtil, TemplUtil } from "set-piece";
 
 
 @TemplUtil.is('ethereal-arcanist-end-turn')
-export class EtherealArcanistFeatureModel extends EndTurnHookModel {
+export class EtherealArcanistFeatureModel extends TurnEndModel {
     public get route() {
         const result = super.route;
         const minion: MinionCardModel | undefined = result.items.find(item => item instanceof MinionCardModel);

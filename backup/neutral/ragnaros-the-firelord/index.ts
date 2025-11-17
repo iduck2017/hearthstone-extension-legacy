@@ -40,7 +40,7 @@ export class RagnarosTheFirelordModel extends MinionCardModel {
                 feats: props.child?.feats ?? new MinionFeaturesModel({
                     child: { 
                         battlecry: [],
-                        endTurn: [new RagnarosEndTurnModel()],
+                        turnEnd: [new RagnarosEndTurnModel()],
                         items: [new RagnarosFeatureModel()]
                     }
                 }),

@@ -23,7 +23,7 @@ export class HoggerModel extends MinionCardModel {
                 health: props.child?.health ?? new RoleHealthModel({ state: { origin: 4 }}),
                 feats: props.child?.feats ?? new MinionFeaturesModel({
                     child: {
-                        endTurn: [new HoggerEndTurnModel()]
+                        turnEnd: [new HoggerEndTurnModel()]
                     }
                 }),
                 ...props.child

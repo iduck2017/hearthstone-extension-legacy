@@ -36,7 +36,7 @@ export class EtherealArcanistModel extends MinionCardModel {
                 cost: props.child?.cost ??  new CostModel({ state: { origin: 4 }}),
                 attack: props.child?.attack ?? new RoleAttackModel({ state: { origin: 3 }}),
                 health: props.child?.health ?? new RoleHealthModel({ state: { origin: 3 }}),
-                endTurn: props.child?.endTurn ?? [new EtherealArcanistFeatureModel()],
+                turnEnd: props.child?.turnEnd ?? [new EtherealArcanistFeatureModel()],
                 ...props.child,
             },
             refer: { ...props.refer },

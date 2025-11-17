@@ -1,8 +1,8 @@
-import { EndTurnHookModel, DamageModel, DamageEvent, DamageType } from "hearthstone-core";
+import { TurnEndModel, DamageModel, DamageEvent, DamageType } from "hearthstone-core";
 import { TemplUtil } from "set-piece";
 
 @TemplUtil.is('ragnaros-end-turn')
-export class RagnarosEndTurnModel extends EndTurnHookModel {
+export class RagnarosEndTurnModel extends TurnEndModel {
     constructor(props?: RagnarosEndTurnModel['props']) {
         props = props ?? {};
         super({

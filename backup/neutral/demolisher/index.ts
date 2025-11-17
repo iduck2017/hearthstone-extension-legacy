@@ -39,7 +39,7 @@ export class DemolisherModel extends MinionCardModel {
                 feats: props.child?.feats ?? new MinionFeaturesModel({
                     child: { 
                         battlecry: [],
-                        startTurn: [new DemolisherFeatureModel()]
+                        turnStart: [new DemolisherFeatureModel()]
                     }
                 }),
                 ...props.child
