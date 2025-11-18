@@ -22,7 +22,7 @@ export class KirinTorMageBattlecryModel extends BattlecryModel<never> {
         return undefined
     }
 
-    public run() {
+    public run(params: never[]) {
         const player = this.route.player;
         if (!player) return;
         player.buff(new KirinTorMageContextModel());

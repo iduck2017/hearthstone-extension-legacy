@@ -4,7 +4,7 @@
  * 1. wisp-attack-goldshire-footman: Player A's Wisp can only attack Player B's Goldshire Footman due to taunt
  */
 
-import { GameModel, PlayerModel, MageModel, BoardModel, AnimeUtil, ManaModel } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, ManaModel } from "hearthstone-core";
 import { GoldshireFootmanModel } from ".";
 import { WispModel } from '../../neutral/wisp';
 import { boot } from '../../boot';

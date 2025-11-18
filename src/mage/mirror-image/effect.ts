@@ -39,7 +39,7 @@ export class MirrorImageEffectModel extends SpellEffectModel<never> {
         return undefined
     }
 
-    protected run() {
+    protected run(params: never[]) {
         const player = this.route.player;
         if (!player) return;
         const board = player.child.board;

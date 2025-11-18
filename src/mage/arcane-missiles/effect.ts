@@ -23,7 +23,7 @@ export class ArcaneMissilesEffectModel extends SpellEffectModel<never> {
         return undefined
     }
 
-    protected run() {
+    protected run(params: never[]) {
         const player = this.route.player;
         const opponent = player?.refer.opponent;
         if (!opponent) return;

@@ -26,7 +26,9 @@ export class ConeOfColdEffectModel extends SpellEffectModel<MinionCardModel> {
         return new Selector(roles, { hint: "Choose a target" })
     }
 
-    protected run(target: MinionCardModel) {
+    protected run(params: MinionCardModel[]) {
+        const target = params[0];
+        if (!target) return;
         const card = this.route.card;
         if (!card) return;
 

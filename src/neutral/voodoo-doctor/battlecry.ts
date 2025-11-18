@@ -18,19 +18,20 @@ export class VoodooDoctorMinionBattlecryModel extends BattlecryModel<RoleModel> 
     }
 
     public prepare(): Selector<RoleModel> | undefined {
-        console.log('🔍 prepare')
         const game = this.route.game;
         if (!game) return;
         const roles = game.refer.roles;
         return new Selector(roles, { hint: 'Choose a target' });
     }
 
-    public run(target: RoleModel) {
-        const card = this.route.card;
-        if (!card) return;
+    public run(params: RoleModel[]) {
+        const target = params[0];
+        if (!target) return;
+        const minion = this.route.minion;
+        if (!minion) return;
         RestoreModel.deal([
             new RestoreEvent({
-                source: card,
+                source: minion,
                 method: this,
                 target: target,
                 origin: 2,

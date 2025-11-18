@@ -26,7 +26,9 @@ export class IcicleEffectModel extends SpellEffectModel<RoleModel> {
         return new Selector(roles, { hint: "Choose a minion" })
     }
 
-    protected run(target: RoleModel) {
+    protected run(params: RoleModel[]) {
+        const target = params[0];
+        if (!target) return;
         const card = this.route.card;
         if (!card) return;
         const player = this.route.player;

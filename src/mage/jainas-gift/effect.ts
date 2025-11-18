@@ -44,7 +44,7 @@ export class JainasGiftEffectModel extends SpellEffectModel<never,
         return undefined
     }
 
-    protected run() {
+    protected run(params: never[]) {
         const player = this.route.player;
         if (!player) return;
         player.child.controller.bind(this);
