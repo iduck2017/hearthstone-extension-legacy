@@ -3,9 +3,9 @@
  * 1. Player A uses Bloodmage Thalnos to attack wisp, both die, Player A draws a card
  */
 
-import { GameModel, BoardModel, DeckModel, HandModel, MageModel, PlayerModel, AnimeUtil, ManaModel } from "hearthstone-core";
+import { GameModel, BoardModel, DeckModel, HandModel, MageModel, PlayerModel, AnimeUtil, ManaModel, CommonUtil } from "hearthstone-core";
 import { BloodmageThalnosModel } from ".";
-import { FireballModel } from "../../../backup/mage/fireball";
+import { FireballModel } from "../../mage/fireball";
 import { WispModel } from "../wisp";
 import { boot } from "../../boot";
 
@@ -76,14 +76,14 @@ describe('bloodmage-thalnos', () => {
         
         // Player A uses Bloodmage Thalnos to attack wisp
         let promise = cardC.child.action.run();
-        await AnimeUtil.sleep();
+        await CommonUtil.sleep();
         expect(playerA.controller.current?.options).toContain(cardD);
         playerA.controller.set(cardD);
         await promise;
         
         // Verify both minions die
-        expect(cardC.child.dispose.status).toBe(true);
-        expect(cardD.child.dispose.status).toBe(true);
+        expect(cardC.child.dispose.state.isActived).toBe(true);
+        expect(cardD.child.dispose.state.isActived).toBe(true);
         expect(boardA.child.cards.length).toBe(0);
         expect(boardB.child.cards.length).toBe(0);
         

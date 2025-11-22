@@ -26,7 +26,7 @@ export class LeperGnomeDeathrattleModel extends DeathrattleModel {
         });
     }
 
-    public run() {
+    public doRun() {
         const minion = this.route.minion;
         if (!minion) return;
         const player = this.route.player;

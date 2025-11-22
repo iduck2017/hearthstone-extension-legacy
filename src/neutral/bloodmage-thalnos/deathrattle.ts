@@ -20,7 +20,7 @@ export class BloodmageThalnosDeathrattleModel extends DeathrattleModel {
     }
 
     // Draw a card when this minion dies
-    public run() {
+    public doRun() {
         const player = this.route.player;
         if (!player) return;
         const deck = player.child.deck;

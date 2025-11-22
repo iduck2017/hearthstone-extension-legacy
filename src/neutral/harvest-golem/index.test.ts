@@ -105,7 +105,7 @@ describe('harvest-golem', () => {
 
         // Harvest Golem should die (2/3 vs 5/5)
         expect(boardA.child.cards.length).toBe(1); // Damaged Golem summoned
-        expect(cardC.child.dispose.status).toBe(true); // Harvest Golem dies
+        expect(cardC.child.dispose.state.isActived).toBe(true); // Harvest Golem dies
         
         // Check that Damaged Golem was summoned
         const cardE = boardA.child.cards.find(item => item instanceof DamagedGolemModel);

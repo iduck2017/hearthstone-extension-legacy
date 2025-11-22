@@ -118,7 +118,7 @@ describe('loot-hoarder', () => {
 
         // Loot Hoarder should die (2/1 vs 5/5)
         expect(boardA.child.cards.length).toBe(0); // Loot Hoarder dies
-        expect(lootHoarderOnBoard.child.dispose.status).toBe(true);
+        expect(lootHoarderOnBoard.child.dispose.state.isActived).toBe(true);
         
         // Deathrattle should draw a card
         expect(handA.child.cards.length).toBe(1); // Drew a card from deathrattle

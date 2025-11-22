@@ -26,7 +26,7 @@ export class HarvestGolemModel extends MinionCardModel {
                 name: 'Harvest Golem',
                 desc: 'Deathrattle: Summon a 2/1 Damaged Golem.',
                 flavorDesc: '"Overheat threshold exceeded. System failure. Wheat clog in port two. Shutting down."',
-                collectible: true,
+                isCollectible: true,
                 rarity: RarityType.COMMON,
                 class: ClassType.NEUTRAL,
                 races: [RaceType.MECH],

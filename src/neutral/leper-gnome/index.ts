@@ -10,7 +10,7 @@ export class LeperGnomeModel extends MinionCardModel {
             state: {
                 name: 'Leper Gnome',
                 desc: 'Deathrattle: Deal 2 damage to the enemy hero.',
-                collectible: true,
+                isCollectible: true,
                 flavorDesc: 'He really just wants to be your friend, but the constant rejection is starting to really get to him.',
                 rarity: RarityType.COMMON,
                 class: ClassType.NEUTRAL,

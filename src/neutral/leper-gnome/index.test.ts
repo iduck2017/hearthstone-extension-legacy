@@ -4,7 +4,7 @@
  * 1. leper-gnome-deathrattle: Player A's Leper Gnome attacks Player B's Wisp, both die, Player B loses 2 health
  */
 
-import { GameModel, BoardModel, MageModel, AnimeUtil, ManaModel, PlayerModel } from "hearthstone-core";
+import { GameModel, BoardModel, MageModel, AnimeUtil, ManaModel, PlayerModel, CommonUtil } from "hearthstone-core";
 import { LeperGnomeModel } from ".";
 import { WispModel } from '../wisp';
 import { boot } from '../../boot';
@@ -56,7 +56,7 @@ describe('leper-gnome', () => {
         
         // attack
         let promise = cardC.child.action.run();
-        await AnimeUtil.sleep();
+        await CommonUtil.sleep();
         expect(playerA.controller.current?.options).toContain(cardD);
         expect(playerA.controller.current?.options.length).toBe(2);
         playerA.controller.set(cardD);

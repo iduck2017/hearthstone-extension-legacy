@@ -10,7 +10,7 @@
 import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, AnimeUtil } from "hearthstone-core";
 import { CairneBloodhoofModel } from "./index";
 import { BaineBloodhoofModel } from "../baine-bloodhoof";
-import { FireballModel } from "../../../backup/mage/fireball";
+import { FireballModel } from "../../mage/fireball";
 import { WispModel } from "../wisp";
 import { boot } from "../../boot";
 
@@ -116,6 +116,6 @@ describe('cairne-bloodhoof', () => {
 
         // Baine Bloodhoof should take 1 damage
         expect(cardG2.child.health.state.current).toBe(4); // 5 - 1 = 4
-        expect(cardD.child.dispose.status).toBe(true);
+        expect(cardD.child.dispose.state.isActived).toBe(true);
     });
 });

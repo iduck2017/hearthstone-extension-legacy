@@ -17,7 +17,7 @@ export class LootHoarderDeathrattleModel extends DeathrattleModel {
         });
     }
 
-    public run() {
+    public doRun() {
         const player = this.route.player;
         if (!player) return;
         // Draw a card

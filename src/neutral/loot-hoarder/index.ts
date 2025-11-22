@@ -25,7 +25,7 @@ export class LootHoarderModel extends MinionCardModel {
                 name: 'Loot Hoarder',
                 desc: 'Deathrattle: Draw a card.',
                 flavorDesc: 'Always roll need.',
-                collectible: true,
+                isCollectible: true,
                 rarity: RarityType.COMMON,
                 class: ClassType.NEUTRAL,
                 races: [],

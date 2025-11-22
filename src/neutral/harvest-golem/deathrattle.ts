@@ -18,7 +18,7 @@ export class HarvestGolemDeathrattleModel extends DeathrattleModel {
         });
     }
 
-    public run() {
+    public doRun() {
         const player = this.route.player;
         if (!player) return;
         const board = player.child.board;
