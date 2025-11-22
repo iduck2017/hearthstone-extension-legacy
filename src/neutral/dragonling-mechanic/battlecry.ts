@@ -18,12 +18,12 @@ export class DragonlingMechanicBattlecryModel extends BattlecryModel<never> {
         });
     }
 
-    public prepare(): never | undefined {
+    public precheck(): never | undefined {
         // No target selection needed
         return undefined;
     }
 
-    public run(params: never[]) {
+    public async doRun(params: Array<never | undefined>) {
         const minion = this.route.minion;
         if (!minion) return;
 

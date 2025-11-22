@@ -14,7 +14,7 @@ export class FrostElementalModel extends MinionCardModel {
                 rarity: RarityType.COMMON,
                 class: ClassType.NEUTRAL,
                 races: [RaceType.ELEMENTAL],
-                collectible: true,
+                isCollectible: true,
                 ...props.state
             },
             child: {

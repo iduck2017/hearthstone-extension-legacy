@@ -8,7 +8,7 @@
  */
 import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, AnimeUtil } from "hearthstone-core";
 import { PriestessOfEluneModel } from "./index";
-import { FireballModel } from "../../../backup/mage/fireball";
+import { FireballModel } from "../../mage/fireball";
 import { boot } from "../../boot";
 
 describe('priestess-of-elune', () => {

@@ -22,7 +22,7 @@ export class IronforgeRiflemanModel extends MinionCardModel {
                 name: 'Ironforge Rifleman',
                 desc: 'Battlecry: Deal 1 damage.',
                 flavorDesc: '"Ready! Aim! Drink!"',
-                collectible: true,
+                isCollectible: true,
                 rarity: RarityType.COMMON,
                 class: ClassType.NEUTRAL,
                 races: [],

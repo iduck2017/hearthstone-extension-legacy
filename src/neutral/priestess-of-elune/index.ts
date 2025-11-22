@@ -14,7 +14,7 @@ export class PriestessOfEluneModel extends MinionCardModel {
                 rarity: RarityType.COMMON,
                 class: ClassType.NEUTRAL,
                 races: [],
-                collectible: true,
+                isCollectible: true,
                 ...props.state
             },
             child: {

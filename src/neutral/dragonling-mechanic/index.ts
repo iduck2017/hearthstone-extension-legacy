@@ -23,7 +23,7 @@ export class DragonlingMechanicModel extends MinionCardModel {
                 name: 'Dragonling Mechanic',
                 desc: 'Battlecry: Summon a 2/1 Mechanical Dragonling.',
                 flavorDesc: 'She is still working on installing the rocket launcher add-on for Mr. Bitey.',
-                collectible: true,
+                isCollectible: true,
                 rarity: RarityType.COMMON,
                 class: ClassType.NEUTRAL,
                 races: [],

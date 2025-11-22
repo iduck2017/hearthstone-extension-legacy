@@ -52,6 +52,7 @@ describe('battlecry', () => {
         const promise = cardC.play();
         expect(playerA.controller.current?.options).toContain(0);
         playerA.controller.set(0);
+        
         await CommonUtil.sleep();
         const selector = playerA.controller.current;
         expect(selector?.options).toContain(cardD);

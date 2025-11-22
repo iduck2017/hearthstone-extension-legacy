@@ -26,7 +26,7 @@ export class AzureDrakeModel extends MinionCardModel {
             state: {
                 name: 'Azure Drake',
                 desc: 'Spell Damage +1 Battlecry: Draw a card.',
-                collectible: true,
+                isCollectible: true,
                 flavorDesc: 'They initially planned to be the Beryl or Cerulean drakes, but those felt a tad too pretentious.',
                 rarity: RarityType.RARE,
                 class: ClassType.NEUTRAL,

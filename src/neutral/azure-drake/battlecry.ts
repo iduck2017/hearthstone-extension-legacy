@@ -18,12 +18,12 @@ export class AzureDrakeBattlecryModel extends BattlecryModel<never> {
     }
 
     // No target selection needed for this battlecry
-    public prepare(): never | undefined {
+    public precheck(): never | undefined {
         return undefined;
     }
 
     // Draw a card when this minion is summoned
-    public run(params: never[]) {
+    public async doRun(params: Array<never | undefined>) {
         const minion = this.route.minion;
         if (!minion) return;
         const player = this.route.player;
