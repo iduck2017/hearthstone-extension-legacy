@@ -40,7 +40,10 @@ export class MindVisionEffectModel extends SpellEffectModel<never> {
         
         // Create a copy of the random card
         const hand = player.child.hand;
-        hand.add(card, undefined, { isClone: true });
+        const copy = card.clone();
+        if (!copy) return;
+        
+        hand.gain(copy)
     }
 
 }

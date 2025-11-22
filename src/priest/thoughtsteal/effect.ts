@@ -42,8 +42,10 @@ export class ThoughtstealEffectModel extends SpellEffectModel<never> {
             if (!card) continue;
             // Create a copy of the random card
             const hand = player.child.hand;
-            
-            hand.add(card, undefined, { isClone: true });
+
+            const copy = card.clone();
+            if (!copy) continue;
+            hand.gain(copy);
             cards.splice(index, 1);
         }
     }

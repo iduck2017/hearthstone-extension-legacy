@@ -41,8 +41,8 @@ export class PowerWordShieldEffectModel extends SpellEffectModel<RoleModel> {
         // Draw a card
         const player = this.route.player;
         if (!player) return;
-        const deck = player.child.deck;
-        deck.draw();
+        const hand = player.child.hand;
+        hand.draw();
     }
 }
 

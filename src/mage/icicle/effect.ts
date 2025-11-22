@@ -50,8 +50,8 @@ export class IcicleEffectModel extends SpellEffectModel<RoleModel> {
         
         if (frozen.state.isEnabled) {
             // If frozen, draw a card
-            const deck = player.child.deck;
-            deck.draw();
+            const hand = player.child.hand;
+            hand.draw();
         }
     }
 }

@@ -28,7 +28,7 @@ export class AzureDrakeBattlecryModel extends BattlecryModel<never> {
         if (!minion) return;
         const player = this.route.player;
         if (!player) return;
-        const deck = player.child.deck;
-        deck.draw();
+        const hand = player.child.hand;
+        hand.draw();
     }
 } 

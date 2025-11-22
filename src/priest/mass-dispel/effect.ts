@@ -36,7 +36,7 @@ export class MassDispelEffectModel extends SpellEffectModel<never> {
         }
 
         // Draw a card
-        const deck = player.child.deck;
-        deck.draw();
+        const hand = player.child.hand;
+        hand.draw();
     }
 }

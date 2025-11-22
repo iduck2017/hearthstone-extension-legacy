@@ -30,6 +30,7 @@ export class NoviceEngineerBattlecryModel extends BattlecryModel<never> {
         if (!player) return;
 
         // Draw a card
-        player.child.deck.draw();
+        const hand = player.child.hand;
+        hand.draw();
     }
 }

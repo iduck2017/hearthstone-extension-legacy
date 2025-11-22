@@ -21,6 +21,7 @@ export class LootHoarderDeathrattleModel extends DeathrattleModel {
         const player = this.route.player;
         if (!player) return;
         // Draw a card
-        player.child.deck.draw();
+        const hand = player.child.hand;
+        hand.draw();
     }
 }
