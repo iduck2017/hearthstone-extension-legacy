@@ -22,7 +22,7 @@ export class SenjinShieldmastaModel extends MinionCardModel {
                 name: 'Sen\'jin Shieldmasta',
                 desc: 'Taunt',
                 flavorDesc: 'Sen\'jin Village is nice, if you like trolls and dust.',
-                collectible: true,
+                isCollectible: true,
                 rarity: RarityType.COMMON,
                 class: ClassType.NEUTRAL,
                 races: [],

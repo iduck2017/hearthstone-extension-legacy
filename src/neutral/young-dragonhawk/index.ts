@@ -9,7 +9,7 @@ export class YoungDragonhawkModel extends MinionCardModel {
             state: {
                 name: 'Young Dragonhawk',
                 desc: 'Windfury',
-                collectible: true,
+                isCollectible: true,
                 flavorDesc: 'They were the inspiration for the championship Taurenball team: The Dragonhawks.',
                 rarity: RarityType.COMMON,
                 class: ClassType.NEUTRAL,

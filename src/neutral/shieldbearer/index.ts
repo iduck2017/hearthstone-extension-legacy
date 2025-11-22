@@ -25,7 +25,7 @@ export class ShieldbearerModel extends MinionCardModel {
                 name: 'Shieldbearer',
                 desc: 'Taunt',
                 flavorDesc: 'Have you seen the size of the shields in this game?? This is no easy job.',
-                collectible: true,
+                isCollectible: true,
                 rarity: RarityType.COMMON,
                 class: ClassType.NEUTRAL,
                 races: [RaceType.DRAENEI],

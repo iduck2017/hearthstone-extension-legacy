@@ -25,7 +25,7 @@ export class StranglethornTigerModel extends MinionCardModel {
                 name: 'Stranglethorn Tiger',
                 desc: 'Stealth',
                 flavorDesc: 'The wonderful thing about tigers is tigers are wonderful things!',
-                collectible: true,
+                isCollectible: true,
                 rarity: RarityType.COMMON,
                 class: ClassType.NEUTRAL,
                 races: [RaceType.BEAST],

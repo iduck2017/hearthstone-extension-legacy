@@ -22,7 +22,7 @@ export class RiverCrocoliskModel extends MinionCardModel {
                 name: 'River Crocolisk',
                 desc: '',
                 flavorDesc: 'Edward "Lefty" Smith tried to make luggage out of a river crocolisk once.',
-                collectible: true,
+                isCollectible: true,
                 rarity: RarityType.COMMON,
                 class: ClassType.NEUTRAL,
                 races: [RaceType.BEAST],

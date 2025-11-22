@@ -1,18 +1,18 @@
 /**
- * Test cases for Stormwind Knight
+ * Test cases for Stranglethorn Tiger
  * 
- * Initial state: Player A has Stormwind Knight in hand.
+ * Initial state: Player A has Stranglethorn Tiger in hand.
  * Player B has a Wisp on board.
  * 
- * 1. stormwind-knight-play: Player A plays Stormwind Knight.
- * 2. stormwind-knight-attack: Player A's Stormwind Knight attacks Player B's Wisp immediately (Charge).
+ * 1. stranglethorn-tiger-play: Player A plays Stranglethorn Tiger.
+ * 2. wisp-attack: Player B's Wisp attacks, can only target Player A's hero (Stranglethorn Tiger has Stealth).
  */
 import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel } from "hearthstone-core";
-import { StormwindKnightModel } from "./index";
+import { StranglethornTigerModel } from "./index";
 import { WispModel } from '../wisp';
 import { boot } from '../../boot';
 
-describe('stormwind-knight', () => {
+describe('stranglethorn-tiger', () => {
     const game = new GameModel({
         state: { debug: { isDrawDisabled: true }},
         child: {
@@ -27,7 +27,7 @@ describe('stormwind-knight', () => {
                     }),
                     hand: new HandModel({
                         child: { 
-                            cards: [new StormwindKnightModel()]
+                            cards: [new StranglethornTigerModel()]
                         }
                     }),
                     deck: new DeckModel({
@@ -60,52 +60,53 @@ describe('stormwind-knight', () => {
     const boardA = playerA.child.board;
     const boardB = playerB.child.board;
     const handA = playerA.child.hand;
-    const cardC = handA.child.cards.find(item => item instanceof StormwindKnightModel);
+    const cardC = handA.child.cards.find(item => item instanceof StranglethornTigerModel);
     const cardD = boardB.child.cards.find(item => item instanceof WispModel);
     if (!cardC || !cardD) throw new Error();
-    const heroB = playerB.child.hero;
+    const heroA = playerA.child.hero;
 
-    test('stormwind-knight-play', async () => {
+    test('stranglethorn-tiger-play', async () => {
         // Check initial state
-        expect(cardC.child.attack.state.current).toBe(2); // Stormwind Knight: 2/5
+        expect(cardC.child.attack.state.current).toBe(5); // Stranglethorn Tiger: 5/5
         expect(cardC.child.health.state.current).toBe(5);
-        expect(handA.child.cards.length).toBe(1); // Stormwind Knight in hand
+        expect(handA.child.cards.length).toBe(1); // Stranglethorn Tiger in hand
         expect(boardA.child.cards.length).toBe(0); // No minions on board
         expect(playerA.child.mana.state.current).toBe(10); // Full mana
 
-        // Play Stormwind Knight
+        // Play Stranglethorn Tiger
         let promise = cardC.play();
         playerA.controller.set(0); // Select position 0
         await promise;
 
-        // Stormwind Knight should be on board
-        expect(boardA.child.cards.length).toBe(1); // Stormwind Knight on board
-        expect(handA.child.cards.length).toBe(0); // Stormwind Knight moved to board
-        expect(playerA.child.mana.state.current).toBe(6); // 10 - 4 = 6
+        // Stranglethorn Tiger should be on board
+        expect(boardA.child.cards.length).toBe(1); // Stranglethorn Tiger on board
+        expect(handA.child.cards.length).toBe(0); // Stranglethorn Tiger moved to board
+        expect(playerA.child.mana.state.current).toBe(5); // 10 - 5 = 5
 
-        // Check that Stormwind Knight has Charge
-        expect(cardC.child.charge.state.actived).toBe(true); // Has Charge
+        // Check that Stranglethorn Tiger has Stealth
+        expect(cardC.child.stealth.state.isEnabled).toBe(true); // Has Stealth
     });
 
-    test('stormwind-knight-attack', async () => {
+    test('wisp-attack', async () => {
+        // Turn to Player B
+        game.child.turn.next();
+        expect(game.child.turn.refer.current).toBe(playerB);
+
         // Check initial state
-        expect(cardC.child.health.state.current).toBe(5); // Stormwind Knight: 2/5
-        expect(cardD.child.health.state.current).toBe(1); // Wisp: 1/1
-        expect(boardA.child.cards.length).toBe(1); // Stormwind Knight on board
+        expect(cardC.child.health.state.current).toBe(5); // Stranglethorn Tiger: 5/5
+        expect(heroA.child.health.state.current).toBe(30); // Player A hero: 30 health
+        expect(boardA.child.cards.length).toBe(1); // Stranglethorn Tiger on board
         expect(boardB.child.cards.length).toBe(1); // Wisp on board
 
-        // Player A's Stormwind Knight attacks Player B's Wisp immediately (Charge allows immediate attack)
-        let promise = cardC.child.action.run();
-        expect(playerA.controller.current?.options).toContain(cardD); // Can target Wisp
-        expect(playerA.controller.current?.options).toContain(heroB); // Can target Player B's hero
-        playerA.controller.set(cardD); // Target Wisp
+        // Player B's Wisp attacks, can only target Player A's hero (Stranglethorn Tiger has Stealth)
+        let promise = cardD.child.action.run();
+        expect(playerB.controller.current?.options).toContain(heroA); // Can target Player A's hero
+        expect(playerB.controller.current?.options).not.toContain(cardC); // Cannot target Stranglethorn Tiger (Stealth)
+        playerB.controller.set(heroA); // Target Player A's hero
         await promise;
 
-        // Wisp should die (1/1 vs 2/5)
-        expect(boardB.child.cards.length).toBe(0); // Wisp dies
-        expect(cardD.child.dispose.refer.source).toBe(cardC);
-        expect(cardD.child.dispose.status).toBe(true);
-        
-        expect(cardC.child.health.state.current).toBe(4); // Stormwind Knight: 5 - 1 = 4
+        // Player A's hero should take 1 damage
+        expect(heroA.child.health.state.current).toBe(29); // Player A hero: 30 - 1 = 29
+        expect(cardD.child.health.state.current).toBe(1); // Wisp: 1/1 (no damage)
     });
 });

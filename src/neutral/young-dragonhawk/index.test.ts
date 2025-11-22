@@ -9,7 +9,7 @@
 import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel } from "hearthstone-core";
 import { YoungDragonhawkModel } from "./index";
 import { ShieldbearerModel } from "../shieldbearer";
-import { boot } from '../../../src/boot';
+import { boot } from '../../boot';
 
 describe('young-dragonhawk', () => {
     const game = new GameModel({
@@ -95,6 +95,6 @@ describe('young-dragonhawk', () => {
         expect(cardD.child.health.state.current).toBe(2); // Shieldbearer: 3 - 1 = 2
         
         // Cannot attack anymore
-        expect(cardC.child.action.status).toBe(false);
+        expect(cardC.child.action.state.isReady).toBe(false);
     });
 }) 

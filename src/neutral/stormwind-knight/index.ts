@@ -22,7 +22,7 @@ export class StormwindKnightModel extends MinionCardModel {
                 name: 'Stormwind Knight',
                 desc: 'Charge',
                 flavorDesc: 'They\'re still embarrassed about "The Deathwing Incident".',
-                collectible: true,
+                isCollectible: true,
                 rarity: RarityType.COMMON,
                 class: ClassType.NEUTRAL,
                 races: [],
@@ -32,7 +32,7 @@ export class StormwindKnightModel extends MinionCardModel {
                 cost: props.child?.cost ??  new CostModel({ state: { origin: 4 }}),
                 attack: props.child?.attack ?? new RoleAttackModel({ state: { origin: 2 }}),
                 health: props.child?.health ?? new RoleHealthModel({ state: { origin: 5 }}),
-                charge: props.child?.charge ?? new ChargeModel({ state: { actived: true } }),
+                charge: props.child?.charge ?? new ChargeModel({ state: { isEnabled: true } }),
                 ...props.child
             },
             refer: { ...props.refer }
