@@ -2,13 +2,13 @@
  * Test cases for Shadow Word: Pain
  * 
  * Initial state: Player A has Shadow Word: Pain in hand.
- * Player B has Aegwynn (5/5/5) and Stonetusk Boar (1/1) on board.
+ * Player B has Stranglethorn Tiger (5/5/5) and Stonetusk Boar (1/1) on board.
  * 
  * 1. shadow-word-pain-cast: Player A uses Shadow Word: Pain on Stonetusk Boar, destroys it.
  */
 import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel } from "hearthstone-core";
 import { ShadowWordPainModel } from "./index";
-import { AegwynnTheGuardianModel } from "../../mage/aegwynn-the-guardian";
+import { StranglethornTigerModel } from "../../neutral/stranglethorn-tiger";
 import { StonetuskBoarModel } from "../../neutral/stonetusk-boar";
 import { boot } from "../../boot";
 
@@ -39,7 +39,7 @@ describe('shadow-word-pain', () => {
                     hero: new MageModel(),
                     board: new BoardModel({
                         child: { 
-                            cards: [new AegwynnTheGuardianModel(), new StonetuskBoarModel()]
+                            cards: [new StranglethornTigerModel(), new StonetuskBoarModel()]
                         }
                     }),
                     hand: new HandModel({
@@ -58,7 +58,7 @@ describe('shadow-word-pain', () => {
     const heroB = playerB.child.hero;
     const handA = playerA.child.hand;
     const cardC = handA.child.cards.find(item => item instanceof ShadowWordPainModel);
-    const cardD = boardB.child.cards.find(item => item instanceof AegwynnTheGuardianModel);
+    const cardD = boardB.child.cards.find(item => item instanceof StranglethornTigerModel);
     const cardE = boardB.child.cards.find(item => item instanceof StonetuskBoarModel);
     if (!cardC || !cardD || !cardE) throw new Error();
 
@@ -71,14 +71,14 @@ describe('shadow-word-pain', () => {
         // Player A uses Shadow Word: Pain
         const promise = cardC.play();
         expect(playerA.controller.current?.options).toContain(cardE); // Stonetusk Boar (1/1) should be targetable
-        expect(playerA.controller.current?.options).not.toContain(cardD); // Aegwynn (5/5/5) should not be targetable
+        expect(playerA.controller.current?.options).not.toContain(cardD); // Stranglethorn Tiger (5/5/5) should not be targetable
         expect(playerA.controller.current?.options).not.toContain(heroA);
         expect(playerA.controller.current?.options).not.toContain(heroB);
         playerA.controller.set(cardE);
         await promise;
 
         // Stonetusk Boar should be destroyed
-        expect(boardB.child.cards.length).toBe(1); // Only Aegwynn remains
+        expect(boardB.child.cards.length).toBe(1); // Only Stranglethorn Tiger remains
         expect(cardE.child.dispose.state.isActived).toBe(true);
         expect(cardD.child.dispose.state.isActived).toBe(false);
         expect(boardB.child.cards[0]).toBe(cardD);

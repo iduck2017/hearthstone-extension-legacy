@@ -28,7 +28,7 @@ export class WaterElementalModel extends MinionCardModel {
                 name: 'Water Elemental',
                 desc: 'Freeze any character damaged by this minion.',
                 flavorDesc: 'Don\'t summon a water elemental at a party. It\'ll dampen the mood.',
-                collectible: true,
+                isCollectible: true,
                 rarity: RarityType.COMMON,
                 class: ClassType.MAGE,
                 races: [RaceType.ELEMENTAL],
