@@ -1,4 +1,4 @@
-import { GameModel, MageModel, PlayerModel, AnimeUtil, CommonUtil } from "hearthstone-core";
+import { GameModel, MageModel, PlayerModel, CommonUtil } from "hearthstone-core";
 import { boot } from "../../boot";
 import { HandModel } from "hearthstone-core";
 import { DeckModel } from "hearthstone-core";

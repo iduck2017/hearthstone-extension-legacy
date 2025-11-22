@@ -26,7 +26,7 @@ export class AlexstraszaTheLifeBinderModel extends MinionCardModel {
                 name: 'Alexstrasza the Life-Binder',
                 desc: 'Battlecry: Choose a character. If it\'s friendly, restore 8 Health. If it\'s an enemy, deal 8 damage.',
                 flavorDesc: 'Friendly Fire: Off',
-                collectible: true,
+                isCollectible: true,
                 rarity: RarityType.LEGENDARY,
                 class: ClassType.NEUTRAL,
                 races: [RaceType.DRAGON],

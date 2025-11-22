@@ -14,7 +14,7 @@ export class HoggerModel extends MinionCardModel {
                 rarity: RarityType.LEGENDARY,
                 class: ClassType.NEUTRAL,
                 races: [],
-                collectible: true,
+                isCollectible: true,
                 ...props.state
             },
             child: {

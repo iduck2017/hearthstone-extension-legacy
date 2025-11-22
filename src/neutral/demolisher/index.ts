@@ -26,7 +26,7 @@ export class DemolisherModel extends MinionCardModel {
                 name: 'Demolisher',
                 desc: 'At the start of your turn, deal 2 damage to a random enemy.',
                 flavorDesc: 'Laying siege isn\'t fun for anyone. It\'s not even all that effective, now that everyone has a flying mount.',
-                collectible: true,
+                isCollectible: true,
                 rarity: RarityType.RARE,
                 class: ClassType.NEUTRAL,
                 races: [RaceType.MECH],

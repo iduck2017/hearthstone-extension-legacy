@@ -7,7 +7,7 @@
  * 1. ragnaros-the-firelord-play: Player A plays Ragnaros the Firelord.
  * 2. turn-end: At the end of Player A's turn, Ragnaros deals 8 damage to Player B's hero.
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, AnimeUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel } from "hearthstone-core";
 import { RagnarosTheFirelordModel } from "./index";
 import { boot } from '../../boot';
 
@@ -89,7 +89,7 @@ describe('ragnaros-the-firelord', () => {
         if (!ragnarosOnBoard) throw new Error();
 
         // Check that Ragnaros cannot attack
-        expect(ragnarosOnBoard.child.action.status).toBe(false); // Action is disabled
+        expect(ragnarosOnBoard.child.action.state.isReady).toBe(false); // Action is disabled
     });
 
     test('turn-end', async () => {

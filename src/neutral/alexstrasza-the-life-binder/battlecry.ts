@@ -17,14 +17,14 @@ export class AlexstraszaBattlecryModel extends BattlecryModel<RoleModel> {
         });
     }
 
-    public prepare(): Selector<RoleModel> | undefined {
+    public precheck(): Selector<RoleModel> | undefined {
         const game = this.route.game;
         if (!game) return;
         const roles = game.refer.roles; // Can target any character
         return new Selector(roles, { hint: "Choose a character" });
     }
 
-    public run(params: RoleModel[]) {
+    public async doRun(params: Array<RoleModel | undefined>) {
         const target = params[0];
         if (!target) return;
         const minion = this.route.minion;

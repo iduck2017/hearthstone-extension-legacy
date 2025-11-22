@@ -19,7 +19,7 @@ export class DemolisherFeatureModel extends TurnStartModel {
             state: {
                 name: "Demolisher's Feature",
                 desc: "At the start of your turn, deal 2 damage to a random enemy.",
-                actived: true,
+                isEnabled: true,
                 ...props.state
             },
             child: { ...props.child },
@@ -27,9 +27,9 @@ export class DemolisherFeatureModel extends TurnStartModel {
         });
     }
 
-    protected run(isCurrent: boolean) {
+    protected doRun(isCurrent: boolean) {
         if (!isCurrent) return;
-
+        
         const player = this.route.player;
         if (!player) return;
         const opponent = player.refer.opponent;

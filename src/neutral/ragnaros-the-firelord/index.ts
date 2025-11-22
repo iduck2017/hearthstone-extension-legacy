@@ -27,7 +27,7 @@ export class RagnarosTheFirelordModel extends MinionCardModel {
                 name: 'Ragnaros the Firelord',
                 desc: 'Can\'t attack. At the end of your turn, deal 8 damage to a random enemy.',
                 flavorDesc: 'Ragnaros was summoned by the Dark Iron dwarves, who were eventually enslaved by the Firelord. Summoning Ragnaros often doesn\'t work out the way you want it to.',
-                collectible: true,
+                isCollectible: true,
                 rarity: RarityType.LEGENDARY,
                 class: ClassType.NEUTRAL,
                 races: [RaceType.ELEMENTAL],

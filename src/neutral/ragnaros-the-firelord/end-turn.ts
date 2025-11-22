@@ -26,9 +26,7 @@ export class RagnarosEndTurnModel extends TurnEndModel {
         });
     }
 
-    public run(isCurrent: boolean) {
-        if (!isCurrent) return; // Only trigger at the end of the current player's turn
-
+    protected doRun() {
         const player = this.route.player;
         if (!player) return;
         const opponent = player.refer.opponent;

@@ -18,9 +18,7 @@ export class HoggerEndTurnModel extends TurnEndModel {
         });
     }
 
-    public run(isCurrent: boolean) {
-        if (!isCurrent) return;
-
+    protected doRun() {
         const player = this.route.player;
         if (!player) return;
         const board = player.child.board;

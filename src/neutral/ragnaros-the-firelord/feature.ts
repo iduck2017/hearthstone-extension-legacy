@@ -10,7 +10,7 @@ export class RagnarosFeatureModel extends RoleFeatureModel {
             state: {
                 name: 'Ragnaros\'s Restriction',
                 desc: 'Can\'t attack.',
-                actived: true,
+                isEnabled: true,
                 ...props.state,
             },
             child: { ...props.child },
@@ -24,7 +24,7 @@ export class RagnarosFeatureModel extends RoleFeatureModel {
         return this.route.role?.proxy.child.action.decor
     }
     private modifyAction(that: RoleActionModel, decor: RoleActionDecor) {
-        if (!this.state.actived) return;
+        if (!this.state.isEnabled) return;
         decor.disable()
     }
 }
