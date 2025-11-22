@@ -5,7 +5,7 @@
  * 2. hungry-crab-battlecry: Player B plays Murloc Raider, then Hungry Crab, battlecry triggers and Hungry Crab becomes 3/4
  */
 
-import { GameModel, BoardModel, HandModel, MageModel, PlayerModel, AnimeUtil, ManaModel } from "hearthstone-core";
+import { GameModel, BoardModel, HandModel, MageModel, PlayerModel, CommonUtil, ManaModel } from "hearthstone-core";
 import { HungryCrabModel } from ".";
 import { WispModel } from '../wisp';
 import { MurlocRaiderModel } from "../murloc-raider";
@@ -59,11 +59,11 @@ describe('hungry-crab', () => {
         expect(boardA.child.cards.length).toBe(1);
 
         let promise = cardC.play();
-        await AnimeUtil.pause();
+        await CommonUtil.sleep();
         let selector = playerA.controller.current;
         expect(selector?.options).toContain(0);
         playerA.controller.set(0);
-        await AnimeUtil.pause();
+        await CommonUtil.sleep();
 
         // expect(playerA.controller.current).toBeUndefined();
         // await promise;

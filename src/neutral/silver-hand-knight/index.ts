@@ -25,7 +25,7 @@ export class SilverHandKnightModel extends MinionCardModel {
                 name: 'Silver Hand Knight',
                 desc: 'Battlecry: Summon a 2/2 Squire.',
                 flavorDesc: 'It\'s good to be a knight. Less so to be one\'s squire.',
-                collectible: true,
+                isCollectible: true,
                 rarity: RarityType.COMMON,
                 class: ClassType.NEUTRAL,
                 races: [],

@@ -18,18 +18,20 @@ export class MurlocTidehunterBattlecryModel extends BattlecryModel<never> {
         });
     }
 
-    public prepare(): never | undefined {
+    public precheck(): never | undefined {
         return undefined;
     }
 
-    public run(params: never[]) {
+    public async doRun(params: Array<never | undefined>) {
         const minion = this.route.minion;
         if (!minion) return;
         const player = this.route.player;
         if (!player) return;
         const board = player.child.board;
         const target = new MurlocScoutModel();
+        
         // summon
-        target.summon(board);
+        const index = board.child.cards.indexOf(minion)
+        target.summon(board, index + 1);
     }
 }

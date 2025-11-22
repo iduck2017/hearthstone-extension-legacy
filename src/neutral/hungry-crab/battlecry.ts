@@ -17,7 +17,7 @@ export class HungryCrabBattlecryModel extends BattlecryModel<RoleModel> {
         });
     }
 
-    public prepare(): Selector<RoleModel> | undefined {
+    public precheck(): Selector<RoleModel> | undefined {
         const game = this.route.game;
         if (!game) return;
         const options = game.refer.minions.filter(item => (
@@ -26,7 +26,7 @@ export class HungryCrabBattlecryModel extends BattlecryModel<RoleModel> {
         return new Selector(options, { hint: 'Select a Murloc' });
     }
 
-    public run(params: RoleModel[]) {
+    public async doRun(params: Array<RoleModel | undefined>) {
         console.log(params);
         const target = params[0];
         if (!target) return;

@@ -23,7 +23,7 @@ export class RazorfenHunterModel extends MinionCardModel {
                 name: 'Razorfen Hunter',
                 desc: 'Battlecry: Summon a 1/1 Boar.',
                 flavorDesc: 'Someone did mess with Tuskerr once. ONCE.',
-                collectible: true,
+                isCollectible: true,
                 rarity: RarityType.COMMON,
                 class: ClassType.NEUTRAL,
                 races: [],

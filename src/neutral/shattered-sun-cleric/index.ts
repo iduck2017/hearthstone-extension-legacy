@@ -25,7 +25,7 @@ export class ShatteredSunClericModel extends MinionCardModel {
                 name: 'Shattered Sun Cleric',
                 desc: 'Battlecry: Give a friendly minion +1/+1.',
                 flavorDesc: 'They always have a spare flask of Sunwell Energy Drink™!',
-                collectible: true,
+                isCollectible: true,
                 rarity: RarityType.COMMON,
                 class: ClassType.NEUTRAL,
                 races: [],

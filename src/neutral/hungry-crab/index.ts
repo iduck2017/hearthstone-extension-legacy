@@ -27,7 +27,7 @@ export class HungryCrabModel extends MinionCardModel {
             state: {
                 name: 'Hungry Crab',
                 desc: 'Battlecry: Destroy a Murloc and gain +2/+2.',
-                collectible: true,
+                isCollectible: true,
                 flavorDesc: 'Murloc. It\'s what\'s for dinner.',
                 rarity: RarityType.EPIC,
                 class: ClassType.NEUTRAL,

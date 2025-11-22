@@ -60,6 +60,7 @@ describe('murloc-tidehunter', () => {
         await promise;
 
         expect(boardA.child.cards.length).toBe(3);
+        console.log(boardA.child.cards.map(item => item.name))
         expect(boardA.child.cards[0] instanceof MurlocTidehunterModel).toBe(true);
         expect(boardA.child.cards[1] instanceof MurlocScoutModel).toBe(true);
         expect(boardA.child.cards[2] instanceof WispModel).toBe(true);

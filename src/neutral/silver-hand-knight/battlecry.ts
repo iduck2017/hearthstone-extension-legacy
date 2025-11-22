@@ -18,11 +18,11 @@ export class SilverHandKnightBattlecryModel extends BattlecryModel<never> {
         });
     }
 
-    public prepare(): never | undefined {
+    public precheck(): never | undefined {
         return undefined;
     }
 
-    public run(params: never[]) {
+    public async doRun(params: Array<never | undefined>) {
         // Summon a 2/2 Squire
         const minion = this.route.minion;
         if (!minion) return;

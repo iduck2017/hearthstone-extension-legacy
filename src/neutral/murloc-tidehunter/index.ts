@@ -27,7 +27,7 @@ export class MurlocTidehunterModel extends MinionCardModel {
             state: {
                 name: 'Murloc Tidehunter',
                 desc: 'Battlecry: Summon a 1/1 Murloc Scout.',
-                collectible: true,
+                isCollectible: true,
                 flavorDesc: '"Death will rise, from the tides!"',
                 rarity: RarityType.COMMON,
                 races: [RaceType.MURLOC],

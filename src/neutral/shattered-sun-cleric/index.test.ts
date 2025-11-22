@@ -8,7 +8,7 @@
  * 2. shattered-sun-cleric-play: Player B plays Shattered Sun Cleric (no targets).
  * 3. wisp-attack: Player A's buffed Wisp attacks Player B's Wisp.
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, AnimeUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, CommonUtil } from "hearthstone-core";
 import { ShatteredSunClericModel } from "./index";
 import { WispModel } from '../wisp';
 import { boot } from '../../boot';
@@ -81,10 +81,10 @@ describe('shattered-sun-cleric', () => {
 
         // Play Shattered Sun Cleric
         let promise = cardC.play();
-        await AnimeUtil.pause();
+        await CommonUtil.sleep();
         expect(playerA.controller.current?.options).toContain(0); // Select position 0
         playerA.controller.set(0);
-        await AnimeUtil.pause();
+        await CommonUtil.sleep();
         
         // Choose target for battlecry (Wisp)
         expect(playerA.controller.current?.options).toContain(cardD); // Can target Wisp
@@ -114,10 +114,10 @@ describe('shattered-sun-cleric', () => {
         
         // Play Shattered Sun Cleric (no targets available)
         let promise = cardE.play();
-        await AnimeUtil.pause();
+        await CommonUtil.sleep();
         expect(playerB.controller.current?.options).toContain(0); // Select position 0
         playerB.controller.set(0);
-        await AnimeUtil.pause();
+        await CommonUtil.sleep();
         expect(playerB.controller.current).toBeUndefined(); // No battlecry targets
         await promise;
         
@@ -127,7 +127,7 @@ describe('shattered-sun-cleric', () => {
         
         // Play Wisp
         promise = cardF.play();
-        await AnimeUtil.pause();
+        await CommonUtil.sleep();
         expect(playerB.controller.current?.options).toContain(0); // Select position 0
         playerB.controller.set(0);
         await promise;
@@ -154,7 +154,7 @@ describe('shattered-sun-cleric', () => {
 
         // Player A's buffed Wisp attacks Player B's Wisp
         let promise = cardD.child.action.run();
-        await AnimeUtil.pause();
+        await CommonUtil.sleep();
         expect(playerA.controller.current?.options).toContain(cardF); // Can target Player B's Wisp
         expect(playerA.controller.current?.options).toContain(heroB); // Can target Player B's hero
         expect(playerA.controller.current?.options).toContain(cardE); // Can target Player B's Shattered Sun Cleric
@@ -171,7 +171,7 @@ describe('shattered-sun-cleric', () => {
         expect(cardF.child.attack.state.current).toBe(1);
         expect(cardF.child.health.state.current).toBe(-1); // 1 - 2 = -1
         expect(cardF.child.health.state.damage).toBe(2);
-        expect(cardF.child.dispose.status).toBe(true);
+        expect(cardF.child.dispose.state.isActived).toBe(true);
         
         // Board state
         expect(boardA.child.cards.length).toBe(2); // Wisp + Shattered Sun Cleric on board
