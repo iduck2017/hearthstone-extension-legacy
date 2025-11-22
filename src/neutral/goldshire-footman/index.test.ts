@@ -48,7 +48,7 @@ describe('goldshire-footman', () => {
     test('wisp-attack-goldshire-footman', async () => {
         // Initial state verification
         expect(cardC.child.action.state.current).toBe(1); // Wisp has action point
-        expect(cardD.child.taunt.state.actived).toBe(true);
+        expect(cardD.child.taunt.state.isEnabled).toBe(true);
         const promise = cardC.child.action.run();
         const selector = playerA.controller.current;
         expect(selector?.options).toContain(cardD);

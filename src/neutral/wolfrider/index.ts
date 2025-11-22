@@ -22,7 +22,7 @@ export class WolfriderModel extends MinionCardModel {
                 name: 'Wolfrider',
                 desc: 'Charge',
                 flavorDesc: 'Orcish raiders ride wolves because they are well adapted to harsh environments, and because they are soft and cuddly.',
-                collectible: true,
+                isCollectible: true,
                 rarity: RarityType.COMMON,
                 class: ClassType.NEUTRAL,
                 races: [],
@@ -32,7 +32,7 @@ export class WolfriderModel extends MinionCardModel {
                 cost: props.child?.cost ??  new CostModel({ state: { origin: 3 }}),
                 attack: props.child?.attack ?? new RoleAttackModel({ state: { origin: 3 }}),
                 health: props.child?.health ?? new RoleHealthModel({ state: { origin: 1 }}),
-                charge: props.child?.charge ?? new ChargeModel({ state: { actived: true } }),
+                charge: props.child?.charge ?? new ChargeModel({ state: { isEnabled: true } }),
                 ...props.child
             },
             refer: { ...props.refer }

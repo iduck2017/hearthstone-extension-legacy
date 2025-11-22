@@ -22,7 +22,7 @@ export class KoboldGeomancerModel extends MinionCardModel {
                 name: 'Kobold Geomancer',
                 desc: 'Spell Damage +1',
                 flavorDesc: 'In the old days, Kobolds were the finest candle merchants in the land. Then they got pushed too far...',
-                collectible: true,
+                isCollectible: true,
                 rarity: RarityType.COMMON,
                 class: ClassType.NEUTRAL,
                 races: [],

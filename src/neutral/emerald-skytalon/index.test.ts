@@ -65,11 +65,13 @@ describe('emerald-skytalon', () => {
         expect(cardC.child.rush.state.isEnabled).toBe(true)
         promise = cardC.child.action.run()
 
+        // cancel
         const selector = playerA.controller.current;
         expect(selector?.options).toContain(cardE);
         expect(selector?.options).not.toContain(heroB);
         playerA.controller.set(undefined);
         await promise;
+
         expect(cardC.child.action.state.current).toBe(1);        
     })
 
@@ -83,7 +85,7 @@ describe('emerald-skytalon', () => {
         expect(boardA.child.cards.length).toBe(2);
         expect(cardD.child.action.state.current).toBe(1);
         expect(cardD.child.sleep.state.isActived).toBe(true);
-        expect(cardD.child.rush).toBeUndefined();
+        expect(cardD.child.rush.state.isEnabled).toBe(false);
 
         // Wisp can not attack immediately
         promise = cardD.child.action.run();
@@ -106,7 +108,7 @@ describe('emerald-skytalon', () => {
         expect(cardC.child.rush.state.isEnabled).toBe(true);
         expect(cardD.child.sleep.state.isActived).toBe(false);
         expect(cardD.child.action.state.current).toBe(1);
-        expect(cardD.child.rush).toBeUndefined();
+        expect(cardD.child.rush.state.isEnabled).toBe(false);
 
         let promise = cardC.child.action.run();
         const selector = playerA.controller.current;

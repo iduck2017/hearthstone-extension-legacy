@@ -7,8 +7,8 @@
 
 import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel } from "hearthstone-core";
 import { FireballModel } from "./index";
-import { WispModel } from "../../../src/neutral/wisp";
-import { boot } from "../../../src/boot";
+import { WispModel } from "../../neutral/wisp";
+import { boot } from "../../boot";
 
 
 
@@ -67,7 +67,7 @@ describe('fireball', () => {
         // Hero should take 6 damage
         expect(cardC.child.health.state.current).toBe(-5);
         expect(cardC.child.health.state.damage).toBe(6);
-        expect(cardC.child.dispose.status).toBe(true);
+        expect(cardC.child.dispose.state.isActived).toBe(true);
         expect(cardC.child.dispose.refer.source).toBe(cardD);
     })
 

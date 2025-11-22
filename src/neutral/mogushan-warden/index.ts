@@ -24,7 +24,7 @@ export class MogushanWardenModel extends MinionCardModel {
                 name: 'Mogu\'shan Warden',
                 desc: 'Taunt',
                 flavorDesc: 'All these guys ever do is talk about the Thunder King. BOOOORRRINNG!',
-                collectible: true,
+                isCollectible: true,
                 rarity: RarityType.COMMON,
                 class: ClassType.NEUTRAL,
                 races: [],

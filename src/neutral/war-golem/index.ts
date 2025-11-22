@@ -21,7 +21,7 @@ export class WarGolemModel extends MinionCardModel {
                 name: 'War Golem',
                 desc: '',
                 flavorDesc: 'Golems are not afraid, but for some reason they still run when you cast Fear on them. Instinct, maybe? A desire to blend in?',
-                collectible: true,
+                isCollectible: true,
                 rarity: RarityType.COMMON,
                 class: ClassType.NEUTRAL,
                 races: [],

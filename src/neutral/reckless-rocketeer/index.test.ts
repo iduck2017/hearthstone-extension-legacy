@@ -81,7 +81,7 @@ describe('reckless-rocketeer', () => {
 
         // Check that Reckless Rocketeer has Charge (can attack immediately)
         expect(cardC.child.action.state.current).toBe(1); // Can attack
-        expect(cardC.child.action.status).toBe(true); // Action is available
+        expect(cardC.child.action.state.isReady).toBe(true); // Action is available
     });
 
     test('reckless-rocketeer-charge', async () => {
@@ -90,7 +90,7 @@ describe('reckless-rocketeer', () => {
         expect(cardC.child.attack.state.current).toBe(5); // Reckless Rocketeer: 5/2
         expect(cardC.child.health.state.current).toBe(2);
         expect(cardC.child.action.state.current).toBe(1); // Can attack
-        expect(cardC.child.action.status).toBe(true); // Action is available
+        expect(cardC.child.action.state.isReady).toBe(true); // Action is available
 
         // Reckless Rocketeer attacks Player B's hero
         const promise = cardC.child.action.run();

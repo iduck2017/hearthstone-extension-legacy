@@ -27,7 +27,7 @@ export class FireballModel extends SpellCardModel {
                 name: "Fireball",
                 desc: "Deal 6 damage.",
                 flavorDesc: "This spell is useful for burning things. If you're looking for spells that toast things, or just warm them a little, you're in the wrong place.",
-                collectible: true,
+                isCollectible: true,
                 rarity: RarityType.COMMON,
                 class: ClassType.MAGE,
                 schools: [SchoolType.FIRE],

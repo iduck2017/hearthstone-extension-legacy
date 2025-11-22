@@ -103,12 +103,12 @@ describe('oasis-snapjaw', () => {
         // Check initial state
         expect(cardC.child.attack.state.current).toBe(2); // Oasis Snapjaw: 2/7
         expect(cardC.child.health.state.current).toBe(5);
-        expect(cardC.child.dispose.status).toBe(false);
+        expect(cardC.child.dispose.state.isActived).toBe(false);
 
         expect(cardD.child.attack.state.current).toBe(2);
         expect(cardD.child.health.state.current).toBe(5);
         expect(cardD.child.health.state.damage).toBe(2);
-        expect(cardD.child.dispose.status).toBe(false);
+        expect(cardD.child.dispose.state.isActived).toBe(false);
         
         expect(boardA.child.cards.length).toBe(1); // Oasis Snapjaw on board
         expect(boardB.child.cards.length).toBe(1); // Oasis Snapjaw on board

@@ -9,7 +9,7 @@ export class StonetuskBoarModel extends MinionCardModel {
             state: {
                 name: 'Stonetusk Boar',
                 desc: 'Charge',
-                collectible: true,
+                isCollectible: true,
                 flavorDesc: 'This card is boaring.',
                 rarity: RarityType.COMMON,
                 class: ClassType.NEUTRAL,
@@ -20,7 +20,7 @@ export class StonetuskBoarModel extends MinionCardModel {
                 cost: props.child?.cost ??  new CostModel({ state: { origin: 1 }}),
                 attack: props.child?.attack ?? new RoleAttackModel({ state: { origin: 1 }}),
                 health: props.child?.health ?? new RoleHealthModel({ state: { origin: 1 }}),
-                charge: props.child?.charge ?? new ChargeModel({ state: { actived: true } }),
+                charge: props.child?.charge ?? new ChargeModel({ state: { isEnabled: true } }),
                 ...props.child
             },
             refer: { ...props.refer }

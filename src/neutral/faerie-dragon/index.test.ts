@@ -84,7 +84,7 @@ describe('faerie-dragon', () => {
         expect(playerA.child.mana.state.current).toBe(8); // 10 - 2 = 8
 
         // Check that Faerie Dragon has Elusive
-        expect(cardC.child.elusive.state.actived).toBe(true); // Has Elusive
+        expect(cardC.child.elusive.state.isEnabled).toBe(true); // Has Elusive
     });
 
     test('fireball-cast', async () => {

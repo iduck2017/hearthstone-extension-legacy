@@ -85,7 +85,7 @@ describe('wolfrider', () => {
         expect(playerA.child.mana.state.current).toBe(7); // 10 - 3 = 7
 
         // Check that Wolfrider has Charge
-        expect(cardC.child.charge.state.actived).toBe(true); // Has Charge
+        expect(cardC.child.charge.state.isEnabled).toBe(true); // Has Charge
     });
 
     test('wolfrider-attack', async () => {
@@ -106,7 +106,7 @@ describe('wolfrider', () => {
         expect(boardB.child.cards.length).toBe(0); // Wisp dies
         expect(cardC.child.health.state.current).toBe(0); // Wolfrider: 1 - 1 = 0 (dies)
 
-        expect(cardD.child.dispose.status).toBe(true);
+        expect(cardD.child.dispose.state.isActived).toBe(true);
         expect(cardD.child.health.state.damage).toBe(3);
         expect(cardD.child.health.state.current).toBe(-2);
 

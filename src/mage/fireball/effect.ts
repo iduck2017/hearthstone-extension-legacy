@@ -19,14 +19,14 @@ export class FireballEffectModel extends SpellEffectModel<RoleModel> {
         })
     }
 
-    prepare(): Selector<RoleModel> | undefined {
+    precheck(): Selector<RoleModel> | undefined {
         const games = this.route.game;
         if (!games) return;
         const roles = games.refer.roles;
         return new Selector(roles, { hint: "Choose a target" })
     }
 
-    protected run(params: RoleModel[]) {
+    protected async doRun(params: Array<RoleModel | undefined>) {
         const target = params[0];
         if (!target) return;
         const card = this.route.card;

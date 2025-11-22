@@ -22,7 +22,7 @@ export class OasisSnapjawModel extends MinionCardModel {
                 name: 'Oasis Snapjaw',
                 desc: '',
                 flavorDesc: 'His dreams of flying and breathing fire like his idol will never be realized.',
-                collectible: true,
+                isCollectible: true,
                 rarity: RarityType.COMMON,
                 class: ClassType.NEUTRAL,
                 races: [RaceType.BEAST],

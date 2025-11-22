@@ -66,7 +66,7 @@ describe('stonetusk-boar', () => {
         expect(cardC.child.attack.state.current).toBe(1);
         expect(cardC.child.health.state.current).toBe(1);
         expect(cardC.child.action.state.current).toBe(1);
-        expect(cardC.child.action.status).toBe(true);
+        expect(cardC.child.action.state.isReady).toBe(true);
         
         // Boar directly attacks enemy hero
         promise = cardC.child.action.run();

@@ -22,7 +22,7 @@ export class MagmaRagerModel extends MinionCardModel {
                 name: 'Magma Rager',
                 desc: '',
                 flavorDesc: 'He likes to think he is powerful, but pretty much anyone can solo Molten Core now.',
-                collectible: true,
+                isCollectible: true,
                 rarity: RarityType.COMMON,
                 class: ClassType.NEUTRAL,
                 races: [RaceType.ELEMENTAL],

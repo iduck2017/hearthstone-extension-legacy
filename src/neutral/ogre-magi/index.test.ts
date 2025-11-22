@@ -1,18 +1,18 @@
 /**
- * Test cases for Kobold Geomancer
+ * Test cases for Ogre Magi
  * 
- * Initial state: Player A has Kobold Geomancer in hand.
+ * Initial state: Player A has Ogre Magi on board.
  * Player B has empty board.
  * 
- * 1. kobold-geomancer-play: Player A plays Kobold Geomancer.
- * 2. fireball-cast: Player A casts Fireball with Spell Damage +1.
+ * 1. ogre-magi-play: Player A plays Ogre Magi.
+ * 2. fireball-cast: Player A casts Fireball with Ogre Magi on board, dealing 6+1=7 damage to Player B's hero.
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel } from "hearthstone-core";
-import { KoboldGeomancerModel } from "./index";
-import { FireballModel } from "../../../backup/mage/fireball";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, AnimeUtil } from "hearthstone-core";
+import { OgreMagiModel } from "./index";
+import { FireballModel } from "../../mage/fireball";
 import { boot } from "../../boot";
 
-describe('kobold-geomancer', () => {
+describe('ogre-magi', () => {
     const game = new GameModel({
         state: { debug: { isDrawDisabled: true }},
         child: {
@@ -27,7 +27,7 @@ describe('kobold-geomancer', () => {
                     }),
                     hand: new HandModel({
                         child: { 
-                            cards: [new KoboldGeomancerModel(), new FireballModel()]
+                            cards: [new OgreMagiModel(), new FireballModel()]
                         }
                     }),
                     deck: new DeckModel({
@@ -59,46 +59,47 @@ describe('kobold-geomancer', () => {
     const playerB = game.child.playerB;
     const boardA = playerA.child.board;
     const handA = playerA.child.hand;
-    const cardC = handA.child.cards.find(item => item instanceof KoboldGeomancerModel);
+    const cardC = handA.child.cards.find(item => item instanceof OgreMagiModel);
     const cardD = handA.child.cards.find(item => item instanceof FireballModel);
     if (!cardC || !cardD) throw new Error();
     const heroA = playerA.child.hero;
     const heroB = playerB.child.hero;
 
-    test('kobold-geomancer-play', async () => {
+    test('ogre-magi-play', async () => {
         // Check initial state
-        expect(cardC.child.attack.state.current).toBe(2); // Kobold Geomancer: 2/2
-        expect(cardC.child.health.state.current).toBe(2);
-        expect(handA.child.cards.length).toBe(2); // Kobold Geomancer + Fireball in hand
+        expect(cardC.child.attack.state.current).toBe(4); // Ogre Magi: 4/4
+        expect(cardC.child.health.state.current).toBe(4);
+        expect(handA.child.cards.length).toBe(2); // Ogre Magi and Fireball in hand
         expect(boardA.child.cards.length).toBe(0); // No minions on board
         expect(playerA.child.mana.state.current).toBe(10); // Full mana
 
-        // Play Kobold Geomancer
+        // Play Ogre Magi
         let promise = cardC.play();
         playerA.controller.set(0); // Select position 0
         await promise;
 
-        // Kobold Geomancer should be on board
-        expect(boardA.child.cards.length).toBe(1); // Kobold Geomancer on board
-        expect(handA.child.cards.length).toBe(1); // Fireball remaining in hand
-        expect(playerA.child.mana.state.current).toBe(8); // 10 - 2 = 8
+        // Ogre Magi should be on board
+        expect(boardA.child.cards.length).toBe(1); // Ogre Magi on board
+        expect(handA.child.cards.length).toBe(1); // Fireball still in hand
+        expect(playerA.child.mana.state.current).toBe(6); // 10 - 4 = 6
     });
 
     test('fireball-cast', async () => {
         // Check initial state
         expect(heroB.child.health.state.current).toBe(30); // Player B hero: 30 health
-        expect(handA.child.cards.length).toBe(1); // Fireball in hand
-        expect(boardA.child.cards.length).toBe(1); // Kobold Geomancer on board
+        expect(handA.child.cards.filter(item => item instanceof FireballModel).length).toBe(1);
+        expect(playerA.child.mana.state.current).toBe(6);
 
-        // Player A casts Fireball
-        let promise = cardD.play();
-        // Choose target for Fireball (Player B's hero)
-        expect(playerA.controller.current?.options).toContain(heroB); // Can target Player B's hero
-        expect(playerA.controller.current?.options).toContain(heroA); // Can target Player A's hero
+        // Player A casts Fireball with Ogre Magi on board
+        const promise = cardD.play();
+        expect(playerA.controller.current?.options).toContain(heroA); // Can target friendly hero
+        expect(playerA.controller.current?.options).toContain(heroB); // Can target enemy hero
         playerA.controller.set(heroB); // Target Player B's hero
         await promise;
 
-        // Player B's hero should take 7 damage (6 + 1 from Spell Damage +1)
-        expect(heroB.child.health.state.current).toBe(23); // Player B hero: 30 - 7 = 23
+        // Fireball should deal 6+1=7 damage (6 base + 1 from Ogre Magi)
+        expect(heroB.child.health.state.current).toBe(23); // 30 - 7 = 23
+        expect(playerA.child.mana.state.current).toBe(2); // 6 - 4 cost (Fireball costs 4)
+        expect(handA.child.cards.filter(item => item instanceof FireballModel).length).toBe(0);
     });
 });

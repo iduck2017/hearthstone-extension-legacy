@@ -21,7 +21,7 @@ export class OgreMagiModel extends MinionCardModel {
                 name: 'Ogre Magi',
                 desc: 'Spell Damage +1',
                 flavorDesc: 'Training Ogres in the art of spellcasting is a questionable decision.',
-                collectible: true,
+                isCollectible: true,
                 rarity: RarityType.COMMON,
                 class: ClassType.NEUTRAL,
                 races: [],

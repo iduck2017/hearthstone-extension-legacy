@@ -108,10 +108,10 @@ describe('frostwolf-grunt', () => {
         expect(cardC.child.health.state.current).toBe(1);
         expect(cardC.child.health.state.damage).toBe(1);
         expect(cardC.child.health.state.maximum).toBe(2);
-        expect(cardC.child.dispose.status).toBe(false);
+        expect(cardC.child.dispose.state.isActived).toBe(false);
 
         expect(cardD.child.health.state.current).toBe(-1);
-        expect(cardD.child.dispose.status).toBe(true);
+        expect(cardD.child.dispose.state.isActived).toBe(true);
 
         // Both minions should die (1/1 vs 2/2)
         expect(boardA.child.cards.length).toBe(1); 
