@@ -7,7 +7,7 @@
  * 1. ironbeak-owl-play: Player A plays Ironbeak Owl, silencing Ancient Watcher.
  * 2. ancient-watcher-attack: Ancient Watcher can now attack (silence removed the restriction).
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, AnimeUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, CommonUtil } from "hearthstone-core";
 import { IronbeakOwlModel } from "./index";
 import { AncientWatcherModel } from "../ancient-watcher";
 import { boot } from '../../../src/boot';
@@ -73,12 +73,12 @@ describe('ironbeak-owl', () => {
         expect(playerA.child.mana.state.current).toBe(10); // Full mana
 
         // Check that Ancient Watcher has the restriction (cannot attack)
-        expect(cardD.child.action.status).toBe(false); // Ancient Watcher cannot attack
+        expect(cardD.child.action.state.isReady).toBe(false); // Ancient Watcher cannot attack
 
         // Play Ironbeak Owl
         let promise = cardC.play();
         playerA.controller.set(0); // Select position 0
-        await AnimeUtil.pause();
+        await CommonUtil.sleep();
         // Choose target for battlecry (silence Ancient Watcher)
         expect(playerA.controller.current?.options).toContain(cardD); // Can target Ancient Watcher
         playerA.controller.set(cardD); // Target Ancient Watcher for silence
@@ -90,7 +90,7 @@ describe('ironbeak-owl', () => {
         expect(playerA.child.mana.state.current).toBe(7); // 10 - 3 = 7
 
         // Ancient Watcher should be silenced (can now attack)
-        expect(cardD.child.action.status).toBe(true); // Ancient Watcher can now attack
+        expect(cardD.child.action.state.isReady).toBe(true); // Ancient Watcher can now attack
     });
 
     test('ancient-watcher-attack', async () => {

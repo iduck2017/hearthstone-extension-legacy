@@ -24,7 +24,7 @@ export class AncientWatcherModel extends MinionCardModel {
             state: {
                 name: 'Ancient Watcher',
                 desc: 'Can\'t attack.',
-                collectible: true,
+                isCollectible: true,
                 flavorDesc: 'Why do its eyes seem to follow you as you walk by?',
                 rarity: RarityType.RARE,
                 class: ClassType.NEUTRAL,

@@ -26,7 +26,7 @@ export class IronbeakOwlModel extends MinionCardModel {
                 name: 'Ironbeak Owl',
                 desc: 'Battlecry: Silence a minion.',
                 flavorDesc: 'Their wings are silent but their screech is... whatever the opposite of silent is.',
-                collectible: true,
+                isCollectible: true,
                 rarity: RarityType.COMMON,
                 class: ClassType.NEUTRAL,
                 races: [RaceType.BEAST],

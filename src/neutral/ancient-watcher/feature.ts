@@ -11,7 +11,7 @@ export class AncientWatcherFeatureModel extends RoleFeatureModel {
             state: {
                 name: 'Ancient Watcher\'s Restriction',
                 desc: 'Can\'t attack.',
-                actived: true,
+                isEnabled: true,
                 ...props.state,
             },
             child: { ...props.child },
@@ -25,7 +25,7 @@ export class AncientWatcherFeatureModel extends RoleFeatureModel {
         return this.route.role?.proxy.child.action.decor
     }
     private modifyAction(that: RoleActionModel, decor: RoleActionDecor) {
-        if (!this.state.actived) return;
+        if (!this.state.isActived) return;
         decor.disable()
     }
 } 

@@ -92,11 +92,11 @@ describe('stampeding-kodo', () => {
         expect(boardB.child.cards.length).toBe(1); // Only Chillwind Yeti remains
 
         // Check Wisp destruction
-        expect(cardD.child.dispose.status).toBe(true);
+        expect(cardD.child.dispose.state.isActived).toBe(true);
         expect(cardD.child.dispose.refer.source).toBe(cardC);
 
         // Check Chillwind Yeti destruction
-        expect(cardE.child.dispose.status).toBe(false);
+        expect(cardE.child.dispose.state.isActived).toBe(false);
         
     });
 });

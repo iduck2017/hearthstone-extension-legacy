@@ -26,7 +26,7 @@ export class StampedingKodoModel extends MinionCardModel {
                 name: 'Stampeding Kodo',
                 desc: 'Battlecry: Destroy a random enemy minion with 2 or less Attack.',
                 flavorDesc: 'This Kodo is so big that he can stampede by himself.',
-                collectible: true,
+                isCollectible: true,
                 rarity: RarityType.RARE,
                 class: ClassType.NEUTRAL,
                 races: [RaceType.BEAST],

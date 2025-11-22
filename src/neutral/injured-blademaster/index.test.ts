@@ -7,7 +7,7 @@
  * 1. injured-blademaster-play: Player A plays Injured Blademaster, dealing 4 damage to himself.
  * 2. earthen-ring-farseer-heal: Player A plays Earthen Ring Farseer to heal Injured Blademaster.
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, AnimeUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, CommonUtil } from "hearthstone-core";
 import { InjuredBlademasterModel } from "./index";
 import { EarthenRingFarseerModel } from "../earthen-ring-farseer";
 import { boot } from '../../boot';
@@ -96,7 +96,7 @@ describe('injured-blademaster', () => {
         // Play Earthen Ring Farseer
         let promise = cardD.play();
         playerA.controller.set(0); // Select position 0
-        await AnimeUtil.pause();
+        await CommonUtil.sleep();
         // Choose target for battlecry (heal Injured Blademaster)
         expect(playerA.controller.current?.options).toContain(cardC); // Can target Injured Blademaster
         expect(playerA.controller.current?.options).toContain(heroA); // Can target Player A's hero

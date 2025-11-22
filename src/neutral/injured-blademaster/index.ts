@@ -25,7 +25,7 @@ export class InjuredBlademasterModel extends MinionCardModel {
                 name: 'Injured Blademaster',
                 desc: 'Battlecry: Deal 4 damage to HIMSELF.',
                 flavorDesc: 'He claims it is an old war wound, but we think he just cut himself shaving.',
-                collectible: true,
+                isCollectible: true,
                 rarity: RarityType.RARE,
                 class: ClassType.NEUTRAL,
                 races: [],

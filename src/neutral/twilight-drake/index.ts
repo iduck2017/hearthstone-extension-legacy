@@ -26,7 +26,7 @@ export class TwilightDrakeModel extends MinionCardModel {
                 name: 'Twilight Drake',
                 desc: 'Battlecry: Gain +1 Health for each card in your hand.',
                 flavorDesc: 'Twilight drakes feed on Mystical Energy. And Tacos.',
-                collectible: true,
+                isCollectible: true,
                 rarity: RarityType.RARE,
                 class: ClassType.NEUTRAL,
                 races: [RaceType.DRAGON],

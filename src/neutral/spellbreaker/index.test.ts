@@ -7,7 +7,7 @@
  * 1. spellbreaker-play: Player A plays Spellbreaker, silencing Player B's Silvermoon Guardian.
  * 2. silvermoon-attack: Next turn, Player B's Silvermoon Guardian attacks Spellbreaker, both die.
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, AnimeUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, CommonUtil } from "hearthstone-core";
 import { SpellbreakerModel } from "./index";
 import { SilvermoonGuardianModel } from "../silvermoon-guardian";
 import { boot } from '../../boot';
@@ -76,9 +76,10 @@ describe('spellbreaker', () => {
 
         // Play Spellbreaker
         let promise = cardC.play();
-        await AnimeUtil.pause();
+        await CommonUtil.sleep();
         playerA.controller.set(0); // Select position 0
         
+        await CommonUtil.sleep();
         // Choose target for battlecry
         expect(playerA.controller.current?.options).toContain(cardD); // Can target Silvermoon Guardian
         playerA.controller.set(cardD); // Target Silvermoon Guardian for silence
@@ -90,7 +91,7 @@ describe('spellbreaker', () => {
         expect(playerA.child.mana.state.current).toBe(6); // 10 - 4 = 6
 
         // Silvermoon Guardian should be silenced (Divine Shield removed)
-        expect(cardD.child.divineShield).toBeUndefined(); // Divine Shield removed by silence
+        expect(cardD.child.divineShield.state.isEnabled).toBe(false); // Divine Shield removed by silence
     });
 
     test('silvermoon-attack', async () => {

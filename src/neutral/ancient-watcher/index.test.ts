@@ -4,7 +4,7 @@
  * 1. ancient-watcher-cannot-attack: Player A plays Ancient Watcher, it cannot attack
  * 2. ancient-watcher-cannot-attack-2: Ancient Watcher still cannot attack after turn changes
  */
-import { GameModel, BoardModel, HandModel, MageModel, PlayerModel, AnimeUtil, ManaModel } from "hearthstone-core";
+import { GameModel, BoardModel, HandModel, MageModel, PlayerModel, CommonUtil, ManaModel } from "hearthstone-core";
 import { AncientWatcherModel } from ".";
 import { WispModel } from '../wisp';
 import { boot } from '../../boot';
@@ -44,7 +44,7 @@ describe('ancient-watcher', () => {
         
         // Player A plays Watcher
         let promise = cardA.play();
-        await AnimeUtil.sleep();
+        await CommonUtil.sleep();
         expect(game.child.playerA.controller.current?.options).toContain(0);
         game.child.playerA.controller.set(0);
         await promise;
@@ -55,11 +55,11 @@ describe('ancient-watcher', () => {
         expect(cardA.child.action.state.current).toBe(1);
         
         // Verify Watcher cannot attack
-        expect(cardA.child.action.status).toBe(false);
+        expect(cardA.child.action.state.isReady).toBe(false);
         
         // Try to attack and verify no options are available
         promise = cardA.child.action.run();
-        await AnimeUtil.sleep();
+        await CommonUtil.sleep();
         expect(game.child.playerA.controller.current).toBeUndefined();
         await promise;
     });
@@ -70,12 +70,13 @@ describe('ancient-watcher', () => {
         turn.next();
         
         // Verify Watcher still cannot attack after turn change
-        expect(cardA.child.action.status).toBe(false);
+        expect(cardA.child.action.state.isReady).toBe(false);
         
         // End second turn
         turn.next();
         
         // Verify Watcher still cannot attack after second turn change
-        expect(cardA.child.action.status).toBe(false);
+        expect(cardA.child.action.state.isEnabled).toBe(false);
+        expect(cardA.child.action.state.isReady).toBe(false);
     });
 }); 

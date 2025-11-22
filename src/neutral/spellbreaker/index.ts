@@ -25,7 +25,7 @@ export class SpellbreakerModel extends MinionCardModel {
                 name: 'Spellbreaker',
                 desc: 'Battlecry: Silence a minion.',
                 flavorDesc: 'Spellbreakers can rip enchantments from magic-wielders. The process is painless and can be performed on an outpatient basis.',
-                collectible: true,
+                isCollectible: true,
                 rarity: RarityType.COMMON,
                 class: ClassType.NEUTRAL,
                 races: [],
