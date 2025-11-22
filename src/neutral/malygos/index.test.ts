@@ -8,8 +8,8 @@
  */
 import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, AnimeUtil } from "hearthstone-core";
 import { MalygosModel } from "./index";
-import { ArcaneMissilesModel } from "../../../backup/mage/arcane-missiles";
-import { FireballModel } from "../../../backup/mage/fireball";
+import { ArcaneMissilesModel } from "../../mage/arcane-missiles";
+import { FireballModel } from "../../mage/fireball";
 import { boot } from "../../boot";
 
 describe('malygos', () => {

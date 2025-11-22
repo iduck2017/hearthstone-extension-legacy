@@ -24,7 +24,7 @@ export class SilvermoonGuardianModel extends MinionCardModel {
                 name: 'Silvermoon Guardian',
                 desc: 'Divine Shield',
                 flavorDesc: 'The first time they tried to guard Silvermoon against the scourge, it didn\'t go so well…',
-                collectible: true,
+                isCollectible: true,
                 rarity: RarityType.COMMON,
                 class: ClassType.NEUTRAL,
                 races: [],

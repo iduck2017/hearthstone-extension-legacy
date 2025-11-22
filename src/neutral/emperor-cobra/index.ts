@@ -25,7 +25,7 @@ export class EmperorCobraModel extends MinionCardModel {
                 name: 'Emperor Cobra',
                 desc: 'Poisonous',
                 flavorDesc: 'The Sholazar Basin is home to a lot of really horrible things. If you\'re going to visit, wear bug spray. And plate armor.',
-                collectible: true,
+                isCollectible: true,
                 rarity: RarityType.RARE,
                 class: ClassType.NEUTRAL,
                 races: [RaceType.BEAST],

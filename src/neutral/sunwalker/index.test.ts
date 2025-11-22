@@ -83,8 +83,8 @@ describe('sunwalker', () => {
         expect(playerA.child.mana.state.current).toBe(4); // 10 - 6 = 4
 
         // Check that Sunwalker has Taunt and Divine Shield
-        expect(cardC.child.taunt.state.actived).toBe(true); // Has Taunt
-        expect(cardC.child.divineShield.state.actived).toBe(true); // Has Divine Shield
+        expect(cardC.child.taunt.state.isEnabled).toBe(true); // Has Taunt
+        expect(cardC.child.divineShield.state.isEnabled).toBe(true); // Has Divine Shield
     });
 
     test('wisp-attack', async () => {
@@ -107,6 +107,6 @@ describe('sunwalker', () => {
 
         // Sunwalker should take 1 damage but Divine Shield should block it
         expect(cardC.child.health.state.current).toBe(5); // Still 5 health (Divine Shield blocked damage)
-        expect(cardC.child.divineShield.state.actived).toBe(false); // Divine Shield consumed
+        expect(cardC.child.divineShield.state.isEnabled).toBe(false); // Divine Shield consumed
     });
 });

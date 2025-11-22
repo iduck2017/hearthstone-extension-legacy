@@ -25,7 +25,7 @@ export class MalygosModel extends MinionCardModel {
                 name: 'Malygos',
                 desc: 'Spell Damage +5',
                 flavorDesc: 'Malygos hates it when mortals use magic. He gets so mad!',
-                collectible: true,
+                isCollectible: true,
                 rarity: RarityType.LEGENDARY,
                 class: ClassType.NEUTRAL,
                 races: [RaceType.DRAGON],

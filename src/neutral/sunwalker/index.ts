@@ -23,7 +23,7 @@ export class SunwalkerModel extends MinionCardModel {
             state: {
                 name: 'Sunwalker',
                 desc: 'Taunt Divine Shield',
-                collectible: true,
+                isCollectible: true,
                 flavorDesc: 'She doesn\'t ACTUALLY walk on the Sun. It\'s just a name. Don\'t worry!',
                 rarity: RarityType.RARE,
                 class: ClassType.NEUTRAL,

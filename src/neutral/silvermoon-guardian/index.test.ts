@@ -110,6 +110,6 @@ describe('silvermoon-guardian', () => {
         expect(cardD.child.health.state.current).toBe(-2); // Wisp: 1 - 3 = -2 (dies)
         expect(boardB.child.cards.length).toBe(0); // Wisp dies
         // Divine Shield should be consumed
-        expect(cardC.child.divineShield.state.actived).toBe(false); // Divine Shield broken
+        expect(cardC.child.divineShield.state.isEnabled).toBe(false); // Divine Shield broken
     });
 });

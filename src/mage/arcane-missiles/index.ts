@@ -27,7 +27,7 @@ export class ArcaneMissilesModel extends SpellCardModel {
                 name: "Arcane Missiles",
                 desc: "Deal 3 damage randomly split among all enemies.",
                 flavorDesc: "You'd think you'd be able to control your missiles a little better since you're a powerful mage and all.",
-                collectible: true,
+                isCollectible: true,
                 rarity: RarityType.COMMON,
                 class: ClassType.MAGE,
                 schools: [SchoolType.ARCANE],
