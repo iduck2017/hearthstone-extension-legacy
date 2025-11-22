@@ -18,11 +18,11 @@ export class ThoughtstealEffectModel extends SpellEffectModel<never> {
         });
     }
 
-    public prepare(...prev: never[]): Selector<never> | undefined {
+    public precheck(): Selector<never> | undefined {
         return undefined;
     }
 
-    protected run() {
+    public async doRun() {
         const player = this.route.player;
         if (!player) return;
         const opponent = player.refer.opponent;
@@ -42,6 +42,7 @@ export class ThoughtstealEffectModel extends SpellEffectModel<never> {
             if (!card) continue;
             // Create a copy of the random card
             const hand = player.child.hand;
+            
             hand.add(card, undefined, { isClone: true });
             cards.splice(index, 1);
         }

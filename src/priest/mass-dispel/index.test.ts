@@ -6,7 +6,7 @@
  * 
  * 1. mass-dispel-cast: Player A casts Mass Dispel, silencing all enemy minions and drawing a card.
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, AnimeUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, CommonUtil } from "hearthstone-core";
 import { MassDispelModel } from "./index";
 import { WaterElementalModel } from "../../mage/water-elemental";
 import { WispModel } from "../../neutral/wisp";
@@ -84,14 +84,14 @@ describe('mass-dispel', () => {
         
         // Water Elemental attacks Player A hero again
         let promise = cardD.child.action.run();
-        await AnimeUtil.sleep();
+        await CommonUtil.sleep();
         expect(playerB.controller.current?.options).toContain(heroA);
         playerB.controller.set(heroA);
         await promise;
 
         // Player A should take 3 damage but NOT be frozen (silenced Water Elemental lost freeze ability)
         expect(heroA.child.health.state.current).toBe(27); 
-        expect(heroA.child.feats.child.frozen.state.isActive).toBe(false); // Should NOT be frozen
+        expect(heroA.child.frozen.state.isEnabled).toBe(false); // Should NOT be frozen
     });
     
 });

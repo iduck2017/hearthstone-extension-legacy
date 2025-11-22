@@ -67,7 +67,7 @@ describe('focused-will', () => {
 
         expect(cardC.child.attack.state.current).toBe(1); // Stonetusk Boar: 1/1
         expect(cardC.child.health.state.current).toBe(1);
-        expect(cardC.child.action.status).toBe(true); // Can attack (charge)
+        expect(cardC.child.action.state.isReady).toBe(true); // Can attack (charge)
         expect(playerA.child.mana.state.current).toBe(9); // 10 - 1 cost
         expect(handA.child.cards.length).toBe(1); // Boar consumed
     });
@@ -82,7 +82,7 @@ describe('focused-will', () => {
         // Boar should be silenced (cannot attack) and gain +3 Health
         expect(cardC.child.attack.state.current).toBe(1); // Attack unchanged
         expect(cardC.child.health.state.current).toBe(4); // 1 + 3 Health buff
-        expect(cardC.child.action.status).toBe(false); // Cannot attack (charge silenced)
+        expect(cardC.child.action.state.isReady).toBe(false); // Cannot attack (charge silenced)
         expect(playerA.child.mana.state.current).toBe(8); // 9 - 1 cost
         expect(handA.child.cards.length).toBe(0); // Focused Will consumed
         expect(boardA.child.cards.length).toBe(1); // Minion still on board
