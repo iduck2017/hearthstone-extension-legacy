@@ -18,11 +18,11 @@ export class CircleOfHealingEffectModel extends SpellEffectModel<never> {
         });
     }
 
-    public prepare(...prev: never[]): Selector<never> | undefined {
+    public precheck(): Selector<never> | undefined {
         return undefined;
     }
 
-    protected run() {
+    public async doRun() {
         const game = this.route.game;
         if (!game) return;
         const card = this.route.card;

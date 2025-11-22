@@ -18,20 +18,22 @@ export class ShadowWordRuinEffectModel extends SpellEffectModel<never> {
         });
     }
 
-    public prepare(...prev: never[]): Selector<never> | undefined {
+    public precheck(): Selector<never> | undefined {
         return undefined;
     }
 
-    protected run() {
+    public async doRun() {
         const game = this.route.game;
         if (!game) return;
 
         // Get all minions (both friendly and enemy)
         const minions = game.refer.roles.filter(role => role instanceof MinionCardModel);
+        const card = this.route.card;
+        if (!card) return;
         // Destroy all minions with 5 or more Attack
         for (const role of minions) {
             if (role.child.attack.state.current >= 5) {
-                role.child.dispose.active(true, this.route.card, this);
+                role.child.dispose.destroy(card, this);
             }
         }
     }

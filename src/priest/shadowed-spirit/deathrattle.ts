@@ -18,7 +18,7 @@ export class ShadowedSpiritDeathrattleModel extends DeathrattleModel {
         });
     }
 
-    public run() {
+    public doRun() {
         const player = this.route.player;
         const card = this.route.card;
         if (!card) return;

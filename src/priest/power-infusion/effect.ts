@@ -18,7 +18,7 @@ export class PowerInfusionEffectModel extends SpellEffectModel<RoleModel> {
         });
     }
 
-    public prepare(): Selector<RoleModel> | undefined {
+    public precheck(): Selector<RoleModel> | undefined {
         const games = this.route.game;
         if (!games) return;
         
@@ -29,7 +29,9 @@ export class PowerInfusionEffectModel extends SpellEffectModel<RoleModel> {
         return new Selector(roles, { hint: "Choose a minion" });
     }
 
-    protected run(target: RoleModel) {
+    public async doRun(params: Array<RoleModel | undefined>) {
+        const target = params[0];
+        if (!target) return;
         // Give the minion +2/+6 buff
         const buff = new RoleBuffModel({
             state: {

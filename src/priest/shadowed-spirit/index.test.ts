@@ -6,7 +6,7 @@
  * 
  * 1. shadowed-spirit-death: Player A's Shadowed Spirit dies, dealing 3 damage to Player B's hero.
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, AnimeUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, CommonUtil } from "hearthstone-core";
 import { ShadowedSpiritModel } from "./index";
 import { WaterElementalModel } from "../../mage/water-elemental";
 import { boot } from "../../boot";
@@ -71,14 +71,14 @@ describe('shadowed-spirit', () => {
 
         // Shadowed Spirit attacks Water Elemental, Shadowed Spirit dies
         let promise = cardC.child.action.run();
-        await AnimeUtil.sleep();
+        await CommonUtil.sleep();
         expect(playerA.controller.current?.options).toContain(cardD);
         playerA.controller.set(cardD);
         await promise;
 
         // Shadowed Spirit should die, Water Elemental should survive
-        expect(cardC.child.dispose.status).toBe(true);
-        expect(cardD.child.dispose.status).toBe(false);
+        expect(cardC.child.dispose.state.isActived).toBe(true);
+        expect(cardD.child.dispose.state.isActived).toBe(false);
         expect(boardA.child.cards.length).toBe(0);
         expect(boardB.child.cards.length).toBe(1);
 
