@@ -16,10 +16,10 @@
     "noUncheckedIndexedAccess": true
   },
   "include": [
-    "src/**/*", "backup/warrior/fiery-war-axe", "backup/mage", "backup/neutral2",
+    "src/**/*",
   ],
   "exclude": [
     "backup/**/*",
-    "scripts/**/*"
+    "scripts/**/*",
   ]
 }
