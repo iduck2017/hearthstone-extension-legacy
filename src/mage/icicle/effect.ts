@@ -19,14 +19,14 @@ export class IcicleEffectModel extends SpellEffectModel<RoleModel> {
         });
     }
 
-    prepare(): Selector<RoleModel> | undefined {
+    public precheck(): Selector<RoleModel> | undefined {
         const games = this.route.game;
         if (!games) return;
         const roles = games.refer.roles.filter(role => role instanceof MinionCardModel);
         return new Selector(roles, { hint: "Choose a minion" })
     }
 
-    protected run(params: RoleModel[]) {
+    public async doRun(params: Array<RoleModel | undefined>) {
         const target = params[0];
         if (!target) return;
         const card = this.route.card;
@@ -48,7 +48,7 @@ export class IcicleEffectModel extends SpellEffectModel<RoleModel> {
         // Check if target is frozen
         const frozen = target.child.frozen;
         
-        if (frozen.state.actived) {
+        if (frozen.state.isEnabled) {
             // If frozen, draw a card
             const deck = player.child.deck;
             deck.draw();

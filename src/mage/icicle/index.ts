@@ -28,7 +28,7 @@ export class IcicleModel extends SpellCardModel {
                 name: "Icicle",
                 desc: "Deal 2 damage to a minion. If it's Frozen, draw a card.",
                 flavorDesc: "This may appear weak at frost glance, but it's actually a very ice spell.",
-                collectible: true,
+                isCollectible: true,
                 rarity: RarityType.EPIC,
                 class: ClassType.MAGE,
                 schools: [SchoolType.FROST],

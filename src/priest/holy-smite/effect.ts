@@ -18,7 +18,7 @@ export class HolySmiteEffectModel extends SpellEffectModel<RoleModel> {
         });
     }
 
-    public prepare(): Selector<RoleModel> | undefined {
+    public precheck(): Selector<RoleModel> | undefined {
         const games = this.route.game;
         if (!games) return;
         const roles = games.refer.roles.filter(role => role instanceof MinionCardModel);
@@ -26,7 +26,9 @@ export class HolySmiteEffectModel extends SpellEffectModel<RoleModel> {
         return new Selector(roles, { hint: "Choose a minion" });
     }
 
-    protected run(target: RoleModel) {
+    public async doRun(params: Array<RoleModel | undefined>) {
+        const target = params[0];
+        if (!target) return;
         const card = this.route.card;
         if (!card) return;
 

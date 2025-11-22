@@ -18,7 +18,7 @@ export class ShadowWordPainEffectModel extends SpellEffectModel<RoleModel> {
         });
     }
 
-    public prepare(): Selector<RoleModel> | undefined {
+    public precheck(): Selector<RoleModel> | undefined {
         const games = this.route.game;
         if (!games) return;
         
@@ -29,7 +29,9 @@ export class ShadowWordPainEffectModel extends SpellEffectModel<RoleModel> {
         return new Selector(roles, { hint: "Choose a minion with 3 or less Attack" });
     }
 
-    protected run(target: RoleModel) {
+    public async doRun(params: Array<RoleModel | undefined>) {
+        const target = params[0];
+        if (!target) return;
         if (target.child.attack.state.current > 3) return;
         // Destroy the minion
         target.child.dispose.active(true, this.route.card, this);

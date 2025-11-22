@@ -28,7 +28,7 @@ export class IceLanceModel extends SpellCardModel {
                 name: "Ice Lance",
                 desc: "Freeze a character. If it was already Frozen, deal 4 damage instead.",
                 flavorDesc: "The trick is not to break the lance. Otherwise, you have \"Ice Pieces.\" Ice Pieces aren't as effective.",
-                collectible: true,
+                isCollectible: true,
                 rarity: RarityType.COMMON,
                 class: ClassType.MAGE,
                 schools: [SchoolType.FROST],

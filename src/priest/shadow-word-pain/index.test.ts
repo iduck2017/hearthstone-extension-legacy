@@ -79,8 +79,8 @@ describe('shadow-word-pain', () => {
 
         // Stonetusk Boar should be destroyed
         expect(boardB.child.cards.length).toBe(1); // Only Aegwynn remains
-        expect(cardE.child.dispose.status).toBe(true);
-        expect(cardD.child.dispose.status).toBe(false);
+        expect(cardE.child.dispose.state.isActived).toBe(true);
+        expect(cardD.child.dispose.state.isActived).toBe(false);
         expect(boardB.child.cards[0]).toBe(cardD);
 
         // Shadow Word: Pain should be consumed

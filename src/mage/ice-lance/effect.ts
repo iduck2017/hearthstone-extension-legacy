@@ -19,14 +19,14 @@ export class IceLanceEffectModel extends SpellEffectModel<RoleModel> {
         });
     }
 
-    prepare(): Selector<RoleModel> | undefined {
+    public precheck(): Selector<RoleModel> | undefined {
         const games = this.route.game;
         if (!games) return;
         const roles = games.refer.roles;
         return new Selector(roles, { hint: "Choose a target" })
     }
 
-    protected run(params: RoleModel[]) {
+    public async doRun(params: Array<RoleModel | undefined>) {
         const target = params[0];
         if (!target) return;
         const card = this.route.card;
@@ -35,7 +35,7 @@ export class IceLanceEffectModel extends SpellEffectModel<RoleModel> {
         // Check if target is already frozen
         const frozen = target.child.frozen;
         
-        if (frozen.state.actived) {
+        if (frozen.state.isEnabled) {
             // If already frozen, deal 4 damage instead
             DamageModel.deal([
                 new DamageEvent({
@@ -46,6 +46,8 @@ export class IceLanceEffectModel extends SpellEffectModel<RoleModel> {
                     origin: this.state.damage[0] ?? 0,
                 })
             ])
-        } else frozen.active();
+        } else {
+            frozen.enable();
+        }
     }
 } 

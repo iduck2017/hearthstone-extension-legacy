@@ -18,11 +18,11 @@ export class MindBlastEffectModel extends SpellEffectModel<never> {
         });
     }
 
-    public prepare(...prev: never[]): Selector<never> | undefined {
+    public precheck(): Selector<never> | undefined {
         return undefined;
     }
 
-    protected run() {
+    public async doRun() {
         const player = this.route.player;
         if (!player) return;
 
