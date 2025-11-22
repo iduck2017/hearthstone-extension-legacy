@@ -63,8 +63,8 @@ describe('holy-smite', () => {
 
         // Player A uses Holy Smite on Water Elemental
         const promise = cardC.play();
-        expect(playerA.child.controller.current?.options).toContain(cardD);
-        playerA.child.controller.set(cardD);
+        expect(playerA.controller.current?.options).toContain(cardD);
+        playerA.controller.set(cardD);
         await promise;
 
         // Water Elemental should take 3 damage

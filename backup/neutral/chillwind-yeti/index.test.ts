@@ -70,7 +70,7 @@ describe('chillwind-yeti', () => {
 
         // Play Chillwind Yeti
         let promise = cardC.play();
-        playerA.child.controller.set(0); // Select position 0
+        playerA.controller.set(0); // Select position 0
         await promise;
 
         // Chillwind Yeti should be on board

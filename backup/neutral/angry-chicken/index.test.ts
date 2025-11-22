@@ -54,8 +54,8 @@ describe('angry-chicken', () => {
     test('power-word-shield-cast', async () => {
         // Cast Power Word: Shield on Angry Chicken to give it +2 Health
         let promise = cardE.play();
-        expect(game.child.playerA.child.controller.current?.options).toContain(cardC);
-        game.child.playerA.child.controller.set(cardC);
+        expect(game.child.playerA.controller.current?.options).toContain(cardC);
+        game.child.playerA.controller.set(cardC);
         await promise;
 
         // Check that Power Word: Shield was applied
@@ -73,9 +73,9 @@ describe('angry-chicken', () => {
 
         const promise = cardC.child.action.run();
         await AnimeUtil.sleep();
-        expect(game.child.playerA.child.controller.current).toBeDefined();
-        expect(game.child.playerA.child.controller.current?.options).toContain(cardD);
-        game.child.playerA.child.controller.set(cardD);
+        expect(game.child.playerA.controller.current).toBeDefined();
+        expect(game.child.playerA.controller.current?.options).toContain(cardD);
+        game.child.playerA.controller.set(cardD);
         await promise;
         // After attack: A's chicken (3 health) vs B's chicken (1 health)
         // Both take 1 damage: A's chicken becomes 2 health, B's chicken becomes 0 health

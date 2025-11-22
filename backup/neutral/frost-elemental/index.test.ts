@@ -74,12 +74,12 @@ describe('frost-elemental', () => {
 
         // Play Frost Elemental
         let promise = cardC.play();
-        playerA.child.controller.set(0); // Select position 0
+        playerA.controller.set(0); // Select position 0
         await AnimeUtil.sleep();
-        expect(playerA.child.controller.current?.options).toContain(heroA); // Can target friendly hero
-        expect(playerA.child.controller.current?.options).toContain(heroB); // Can target enemy hero
-        expect(playerA.child.controller.current?.options).toContain(cardD); // Can target enemy minion
-        playerA.child.controller.set(cardD); // Target Wisp
+        expect(playerA.controller.current?.options).toContain(heroA); // Can target friendly hero
+        expect(playerA.controller.current?.options).toContain(heroB); // Can target enemy hero
+        expect(playerA.controller.current?.options).toContain(cardD); // Can target enemy minion
+        playerA.controller.set(cardD); // Target Wisp
         await promise;
 
         // Wisp should be frozen

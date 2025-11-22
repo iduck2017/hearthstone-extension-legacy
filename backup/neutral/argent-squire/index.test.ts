@@ -51,8 +51,8 @@ describe('argent-squire', () => {
         expect(cardC.child.feats.child.divineShield.state.isActive).toBe(true);
         expect(cardD.child.feats.child.divineShield.state.isActive).toBe(true);
         const promise = cardC.child.action.run();
-        expect(game.child.playerA.child.controller.current?.options).toContain(cardD);
-        game.child.playerA.child.controller.set(cardD);
+        expect(game.child.playerA.controller.current?.options).toContain(cardD);
+        game.child.playerA.controller.set(cardD);
         await promise;
         expect(cardC.child.health.state.current).toBe(1);
         expect(cardD.child.health.state.current).toBe(1);
@@ -66,8 +66,8 @@ describe('argent-squire', () => {
         turn.next();
         
         const promise = cardD.child.action.run();
-        expect(game.child.playerB.child.controller.current?.options).toContain(cardC);
-        game.child.playerB.child.controller.set(cardC);
+        expect(game.child.playerB.controller.current?.options).toContain(cardC);
+        game.child.playerB.controller.set(cardC);
         await promise;
 
         expect(cardC.child.health.state.current).toBe(0);

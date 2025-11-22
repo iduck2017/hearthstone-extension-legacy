@@ -71,7 +71,7 @@ describe('magma-rager', () => {
 
         // Play Magma Rager
         let promise = cardC.play();
-        playerA.child.controller.set(0); // Select position 0
+        playerA.controller.set(0); // Select position 0
         await promise;
 
         // Magma Rager should be on board

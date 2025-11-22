@@ -72,8 +72,8 @@ describe('shadowed-spirit', () => {
         // Shadowed Spirit attacks Water Elemental, Shadowed Spirit dies
         let promise = cardC.child.action.run();
         await AnimeUtil.sleep();
-        expect(playerA.child.controller.current?.options).toContain(cardD);
-        playerA.child.controller.set(cardD);
+        expect(playerA.controller.current?.options).toContain(cardD);
+        playerA.controller.set(cardD);
         await promise;
 
         // Shadowed Spirit should die, Water Elemental should survive

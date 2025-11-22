@@ -74,7 +74,7 @@ describe('sunwalker', () => {
 
         // Play Sunwalker
         let promise = cardC.play();
-        playerA.child.controller.set(0); // Select position 0
+        playerA.controller.set(0); // Select position 0
         await promise;
 
         // Sunwalker should be on board
@@ -100,9 +100,9 @@ describe('sunwalker', () => {
 
         // Try to attack with Wisp
         const promise = cardD.child.action.run();
-        expect(playerB.child.controller.current?.options).not.toContain(heroA); // Cannot target enemy hero
-        expect(playerB.child.controller.current?.options).toContain(cardC); // Must target Sunwalker due to Taunt
-        playerB.child.controller.set(cardC); // Target Sunwalker
+        expect(playerB.controller.current?.options).not.toContain(heroA); // Cannot target enemy hero
+        expect(playerB.controller.current?.options).toContain(cardC); // Must target Sunwalker due to Taunt
+        playerB.controller.set(cardC); // Target Sunwalker
         await promise;
 
         // Sunwalker should take 1 damage but Divine Shield should block it

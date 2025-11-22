@@ -72,7 +72,7 @@ describe('war-golem', () => {
 
         // Play War Golem
         let promise = cardC.play();
-        playerA.child.controller.set(0); // Select position 0
+        playerA.controller.set(0); // Select position 0
         await promise;
 
         // War Golem should be on board
@@ -93,8 +93,8 @@ describe('war-golem', () => {
 
         // Player A's War Golem attacks Player B's hero
         let promise = cardC.child.action.run();
-        expect(playerA.child.controller.current?.options).toContain(heroB); // Can target Player B's hero
-        playerA.child.controller.set(heroB); // Target Player B's hero
+        expect(playerA.controller.current?.options).toContain(heroB); // Can target Player B's hero
+        playerA.controller.set(heroB); // Target Player B's hero
         await promise;
 
         // Player B's hero should take 7 damage

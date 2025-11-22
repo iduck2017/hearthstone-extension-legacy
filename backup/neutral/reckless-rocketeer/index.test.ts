@@ -71,7 +71,7 @@ describe('reckless-rocketeer', () => {
 
         // Play Reckless Rocketeer
         let promise = cardC.play();
-        playerA.child.controller.set(0); // Select position 0
+        playerA.controller.set(0); // Select position 0
         await promise;
 
         // Reckless Rocketeer should be on board
@@ -94,9 +94,9 @@ describe('reckless-rocketeer', () => {
 
         // Reckless Rocketeer attacks Player B's hero
         const promise = cardC.child.action.run();
-        expect(playerA.child.controller.current?.options).toContain(heroB); // Can target enemy hero
-        expect(playerA.child.controller.current?.options).toContain(cardD); // Can target enemy minion
-        playerA.child.controller.set(heroB); // Target Player B's hero
+        expect(playerA.controller.current?.options).toContain(heroB); // Can target enemy hero
+        expect(playerA.controller.current?.options).toContain(cardD); // Can target enemy minion
+        playerA.controller.set(heroB); // Target Player B's hero
         await promise;
 
         // Player B's hero should take 5 damage

@@ -71,7 +71,7 @@ describe('injured-blademaster', () => {
 
         // Play Injured Blademaster
         let promise = cardC.play();
-        playerA.child.controller.set(0); // Select position 0
+        playerA.controller.set(0); // Select position 0
         await promise;
 
         // Injured Blademaster should be on board
@@ -95,13 +95,13 @@ describe('injured-blademaster', () => {
 
         // Play Earthen Ring Farseer
         let promise = cardD.play();
-        playerA.child.controller.set(0); // Select position 0
+        playerA.controller.set(0); // Select position 0
         await AnimeUtil.sleep();
         // Choose target for battlecry (heal Injured Blademaster)
-        expect(playerA.child.controller.current?.options).toContain(cardC); // Can target Injured Blademaster
-        expect(playerA.child.controller.current?.options).toContain(heroA); // Can target Player A's hero
-        expect(playerA.child.controller.current?.options).toContain(heroB); // Can target Player B's hero
-        playerA.child.controller.set(cardC); // Target Injured Blademaster
+        expect(playerA.controller.current?.options).toContain(cardC); // Can target Injured Blademaster
+        expect(playerA.controller.current?.options).toContain(heroA); // Can target Player A's hero
+        expect(playerA.controller.current?.options).toContain(heroB); // Can target Player B's hero
+        playerA.controller.set(cardC); // Target Injured Blademaster
         await promise;
 
         // Earthen Ring Farseer should be on board

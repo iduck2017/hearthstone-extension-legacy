@@ -74,8 +74,8 @@ describe('holy-nova', () => {
         // Player A's Water Elemental attacks Player B's Water Elemental
         let promise = cardD.child.action.run();
         await AnimeUtil.sleep();
-        expect(playerA.child.controller.current?.options).toContain(cardE);
-        playerA.child.controller.set(cardE);
+        expect(playerA.controller.current?.options).toContain(cardE);
+        playerA.controller.set(cardE);
         await promise;
 
         // Both Water Elementals should take 3 damage

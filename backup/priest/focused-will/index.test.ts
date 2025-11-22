@@ -62,7 +62,7 @@ describe('focused-will', () => {
 
         // Player A plays Stonetusk Boar
         const promise = cardC.play();
-        playerA.child.controller.set(0);
+        playerA.controller.set(0);
         await promise;
 
         expect(cardC.child.attack.state.current).toBe(1); // Stonetusk Boar: 1/1
@@ -75,8 +75,8 @@ describe('focused-will', () => {
     test('focused-will-cast', async () => {
         // Player A uses Focused Will on Boar
         const promise = cardD.play();
-        expect(playerA.child.controller.current?.options).toContain(cardC);
-        playerA.child.controller.set(cardC);
+        expect(playerA.controller.current?.options).toContain(cardC);
+        playerA.controller.set(cardC);
         await promise;
 
         // Boar should be silenced (cannot attack) and gain +3 Health

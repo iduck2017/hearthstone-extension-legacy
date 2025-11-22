@@ -45,7 +45,7 @@ describe('bloodfen-raptor', () => {
 
         const promise = card?.play();
         await AnimeUtil.sleep();
-        game.child.playerA.child.controller.set(0);
+        game.child.playerA.controller.set(0);
         await promise;
 
         expect(boardA.child.cards.length).toBe(1);

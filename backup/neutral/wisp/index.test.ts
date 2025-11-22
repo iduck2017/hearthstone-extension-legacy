@@ -63,13 +63,13 @@ describe('role', () => {
     test('wisp-attack', async () => {
         const promise = cardC.child.action.run();
         await AnimeUtil.sleep();
-        const selector = playerA.child.controller.current;
+        const selector = playerA.controller.current;
         expect(selector).toBeDefined();
         if (!selector) return;
         expect(selector.options).toContain(heroB);
         expect(selector?.options).toContain(cardD);
         expect(selector?.options.length).toBe(2);
-        playerA.child.controller.set(heroB);
+        playerA.controller.set(heroB);
         await promise;
 
         expect(heroB.child.health.state.current).toBe(29);
@@ -86,13 +86,13 @@ describe('role', () => {
 
         const promise = cardD.child.action.run();
         await AnimeUtil.sleep();
-        const selector = playerB.child.controller.current;
+        const selector = playerB.controller.current;
         expect(selector).toBeDefined();
         if (!selector) return;
         expect(selector.options).toContain(heroA);
         expect(selector?.options).toContain(cardC);
         expect(selector?.options.length).toBe(2);
-        playerB.child.controller.set(cardC);
+        playerB.controller.set(cardC);
         await promise;
         
         expect(cardC.child.health.state.current).toBe(0);

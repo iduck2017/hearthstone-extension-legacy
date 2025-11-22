@@ -70,9 +70,9 @@ describe('priestess-of-elune', () => {
 
         // Cast Fireball targeting Player A's hero
         const promise = cardD.play();
-        expect(playerA.child.controller.current?.options).toContain(heroA); // Can target friendly hero
-        expect(playerA.child.controller.current?.options).toContain(heroB); // Can target enemy hero
-        playerA.child.controller.set(heroA); // Target Player A's hero
+        expect(playerA.controller.current?.options).toContain(heroA); // Can target friendly hero
+        expect(playerA.controller.current?.options).toContain(heroB); // Can target enemy hero
+        playerA.controller.set(heroA); // Target Player A's hero
         await promise;
 
         // Hero should be damaged by 6
@@ -93,7 +93,7 @@ describe('priestess-of-elune', () => {
 
         // Play Priestess of Elune
         let promise = cardC.play();
-        playerA.child.controller.set(0); // Select position 0
+        playerA.controller.set(0); // Select position 0
         await promise;
 
         // Hero should be healed by 4 Health

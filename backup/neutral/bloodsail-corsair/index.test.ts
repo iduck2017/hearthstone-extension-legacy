@@ -50,8 +50,8 @@ describe('bloodsail-corsair', () => {
         // Player A plays Bloodsail Corsair
         let promise = cardC.play();
         await AnimeUtil.sleep();
-        expect(playerA.child.controller.current?.options).toContain(0);
-        playerA.child.controller.set(0);
+        expect(playerA.controller.current?.options).toContain(0);
+        playerA.controller.set(0);
         await promise;
         
         // Verify minion is played

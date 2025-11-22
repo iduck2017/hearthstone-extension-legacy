@@ -75,7 +75,7 @@ describe('senjin-shieldmasta', () => {
 
         // Play Sen'jin Shieldmasta
         let promise = cardC.play();
-        playerA.child.controller.set(0); // Select position 0
+        playerA.controller.set(0); // Select position 0
         await promise;
 
         // Sen'jin Shieldmasta should be on board
@@ -100,9 +100,9 @@ describe('senjin-shieldmasta', () => {
 
         // Player B's Wisp attacks - should be forced to target Sen'jin Shieldmasta due to Taunt
         let promise = cardD.child.action.run();
-        expect(playerB.child.controller.current?.options).toContain(cardC); // Can target Sen'jin Shieldmasta (Taunt)
-        expect(playerB.child.controller.current?.options).not.toContain(heroA); // Cannot target Player A's hero (Taunt blocks)
-        playerB.child.controller.set(cardC); // Target Sen'jin Shieldmasta
+        expect(playerB.controller.current?.options).toContain(cardC); // Can target Sen'jin Shieldmasta (Taunt)
+        expect(playerB.controller.current?.options).not.toContain(heroA); // Cannot target Player A's hero (Taunt blocks)
+        playerB.controller.set(cardC); // Target Sen'jin Shieldmasta
         await promise;
 
         // Both minions should take damage

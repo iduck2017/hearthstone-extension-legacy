@@ -77,9 +77,9 @@ describe('violet-teacher', () => {
 
         // Cast Frostbolt
         let promise = cardE.play();
-        expect(playerA.child.controller.current?.options).toContain(heroA); // Can target friendly hero
-        expect(playerA.child.controller.current?.options).toContain(heroB); // Can target enemy hero
-        playerA.child.controller.set(heroB); // Target Player B's hero
+        expect(playerA.controller.current?.options).toContain(heroA); // Can target friendly hero
+        expect(playerA.controller.current?.options).toContain(heroB); // Can target enemy hero
+        playerA.controller.set(heroB); // Target Player B's hero
         await promise;
 
         // No minions should be summoned (Violet Teacher not on board yet)
@@ -98,7 +98,7 @@ describe('violet-teacher', () => {
 
         // Play Violet Teacher
         let promise = cardC.play();
-        playerA.child.controller.set(0); // Select position 0
+        playerA.controller.set(0); // Select position 0
         await promise;
 
         // Violet Teacher should be on board
@@ -115,9 +115,9 @@ describe('violet-teacher', () => {
 
         // Cast Fireball
         let promise = cardD.play();
-        expect(playerA.child.controller.current?.options).toContain(heroA); // Can target friendly hero
-        expect(playerA.child.controller.current?.options).toContain(heroB); // Can target enemy hero
-        playerA.child.controller.set(heroB); // Target Player B's hero
+        expect(playerA.controller.current?.options).toContain(heroA); // Can target friendly hero
+        expect(playerA.controller.current?.options).toContain(heroB); // Can target enemy hero
+        playerA.controller.set(heroB); // Target Player B's hero
         await promise;
 
         // Violet Apprentice should be summoned

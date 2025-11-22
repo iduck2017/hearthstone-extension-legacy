@@ -70,10 +70,10 @@ describe('scarlet-subjugator', () => {
 
         // Player A plays Scarlet Subjugator
         const promise = cardC.play();
-        playerA.child.controller.set(0);
+        playerA.controller.set(0);
         await AnimeUtil.sleep();
-        expect(playerA.child.controller.current?.options).toContain(cardD); // Water Elemental should be targetable
-        playerA.child.controller.set(cardD);
+        expect(playerA.controller.current?.options).toContain(cardD); // Water Elemental should be targetable
+        playerA.controller.set(cardD);
         await promise;
 
         // Check that Scarlet Subjugator is on board
@@ -104,7 +104,7 @@ describe('scarlet-subjugator', () => {
         
         // Water Elemental attacks hero
         const promise = cardD.child.action.run();
-        playerB.child.controller.set(heroA);
+        playerB.controller.set(heroA);
         await promise;
         
         // Hero should take 1 damage (reduced attack)

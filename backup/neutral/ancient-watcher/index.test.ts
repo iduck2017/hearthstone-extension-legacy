@@ -45,8 +45,8 @@ describe('ancient-watcher', () => {
         // Player A plays Watcher
         let promise = cardA.play();
         await AnimeUtil.sleep();
-        expect(game.child.playerA.child.controller.current?.options).toContain(0);
-        game.child.playerA.child.controller.set(0);
+        expect(game.child.playerA.controller.current?.options).toContain(0);
+        game.child.playerA.controller.set(0);
         await promise;
         
         expect(boardA.child.cards.length).toBe(1);
@@ -61,7 +61,7 @@ describe('ancient-watcher', () => {
         // Try to attack and verify no options are available
         promise = cardA.child.action.run();
         await AnimeUtil.sleep();
-        expect(game.child.playerA.child.controller.current).toBeUndefined();
+        expect(game.child.playerA.controller.current).toBeUndefined();
         await promise;
     });
 

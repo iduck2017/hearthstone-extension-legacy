@@ -78,13 +78,13 @@ describe('alexstrasza-the-life-binder', () => {
 
         // Play Alexstrasza the Life-Binder
         let promise = cardC.play();
-        playerA.child.controller.set(0); // Select position 0
+        playerA.controller.set(0); // Select position 0
         await AnimeUtil.sleep();
         
         // Choose target for battlecry
-        expect(playerA.child.controller.current?.options).toContain(heroA); // Can target friendly hero
-        expect(playerA.child.controller.current?.options).toContain(heroB); // Can target enemy hero
-        playerA.child.controller.set(heroB); // Target Player B's hero for damage
+        expect(playerA.controller.current?.options).toContain(heroA); // Can target friendly hero
+        expect(playerA.controller.current?.options).toContain(heroB); // Can target enemy hero
+        playerA.controller.set(heroB); // Target Player B's hero for damage
         await promise;
 
         // Alexstrasza should be on board
@@ -108,13 +108,13 @@ describe('alexstrasza-the-life-binder', () => {
 
         // Play Alexstrasza the Life-Binder
         let promise = cardD.play();
-        playerB.child.controller.set(0); // Select position 0
+        playerB.controller.set(0); // Select position 0
         await AnimeUtil.sleep();
         
         // Choose target for battlecry
-        expect(playerB.child.controller.current?.options).toContain(heroA); // Can target enemy hero
-        expect(playerB.child.controller.current?.options).toContain(heroB); // Can target friendly hero
-        playerB.child.controller.set(heroB); // Target Player B's hero for healing
+        expect(playerB.controller.current?.options).toContain(heroA); // Can target enemy hero
+        expect(playerB.controller.current?.options).toContain(heroB); // Can target friendly hero
+        playerB.controller.set(heroB); // Target Player B's hero for healing
         await promise;
 
         // Alexstrasza should be on board

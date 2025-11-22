@@ -50,9 +50,9 @@ describe('goldshire-footman', () => {
         expect(cardD.child.feats.child.taunt.state.isActive).toBe(true);
         const promise = cardC.child.action.run();
         await AnimeUtil.sleep();
-        expect(game.child.playerA.child.controller.current?.options).toContain(cardD);
-        expect(game.child.playerA.child.controller.current?.options).not.toContain(heroB);
-        game.child.playerA.child.controller.set(cardD);
+        expect(game.child.playerA.controller.current?.options).toContain(cardD);
+        expect(game.child.playerA.controller.current?.options).not.toContain(heroB);
+        game.child.playerA.controller.set(cardD);
         await promise;
         expect(cardD.child.health.state.current).toBe(1);
         expect(cardD.child.health.state.maximum).toBe(2);

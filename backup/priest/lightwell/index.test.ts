@@ -73,7 +73,7 @@ describe('lightwell', () => {
         expect(cardE.child.health.state.current).toBe(1);
         // Water Elemental attacks Wisp
         const promise = cardD.child.action.run();
-        playerA.child.controller.set(cardE);
+        playerA.controller.set(cardE);
         await promise;
         // Both should take damage
         expect(cardD.child.health.state.current).toBe(5); // 6 - 1 = 5, but Wisp deals 1 damage

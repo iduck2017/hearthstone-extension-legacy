@@ -47,7 +47,7 @@ export class MalfurionsGiftEffectModel extends SpellEffectModel<[],
     protected doRun() {
         const player = this.route.player;
         if (!player) return;
-        player.child.controller.bind(this);
+        player.controller.bind(this);
 
         // Placeholder for discover implementation
         // When discover mechanics are implemented, this should:

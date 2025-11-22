@@ -67,10 +67,10 @@ describe('kul-tiran-chaplain', () => {
 
         // Player A plays Kul Tiran Chaplain
         const promise = cardC.play();
-        playerA.child.controller.set(0);
+        playerA.controller.set(0);
         await AnimeUtil.sleep();
-        expect(playerA.child.controller.current?.options).toContain(cardD); // Water Elemental should be targetable
-        playerA.child.controller.set(cardD);
+        expect(playerA.controller.current?.options).toContain(cardD); // Water Elemental should be targetable
+        playerA.controller.set(cardD);
         await promise;
 
         // Check that Kul Tiran Chaplain is on board

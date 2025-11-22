@@ -67,7 +67,7 @@ describe('crimson-clergy', () => {
 
         // Player A plays Crimson Clergy
         const promise = cardC.play();
-        playerA.child.controller.set(0);
+        playerA.controller.set(0);
         await promise;
 
         // Check that Crimson Clergy is on board

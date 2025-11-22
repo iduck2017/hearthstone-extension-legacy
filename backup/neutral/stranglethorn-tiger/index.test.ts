@@ -75,7 +75,7 @@ describe('stranglethorn-tiger', () => {
 
         // Play Stranglethorn Tiger
         let promise = cardC.play();
-        playerA.child.controller.set(0); // Select position 0
+        playerA.controller.set(0); // Select position 0
         await promise;
 
         // Stranglethorn Tiger should be on board
@@ -100,9 +100,9 @@ describe('stranglethorn-tiger', () => {
 
         // Player B's Wisp attacks, can only target Player A's hero (Stranglethorn Tiger has Stealth)
         let promise = cardD.child.action.run();
-        expect(playerB.child.controller.current?.options).toContain(heroA); // Can target Player A's hero
-        expect(playerB.child.controller.current?.options).not.toContain(cardC); // Cannot target Stranglethorn Tiger (Stealth)
-        playerB.child.controller.set(heroA); // Target Player A's hero
+        expect(playerB.controller.current?.options).toContain(heroA); // Can target Player A's hero
+        expect(playerB.controller.current?.options).not.toContain(cardC); // Cannot target Stranglethorn Tiger (Stealth)
+        playerB.controller.set(heroA); // Target Player A's hero
         await promise;
 
         // Player A's hero should take 1 damage

@@ -75,7 +75,7 @@ describe('ironfur-grizzly', () => {
 
         // Play Ironfur Grizzly
         let promise = cardC.play();
-        playerA.child.controller.set(0); // Select position 0
+        playerA.controller.set(0); // Select position 0
         await promise;
 
         // Ironfur Grizzly should be on board
@@ -100,9 +100,9 @@ describe('ironfur-grizzly', () => {
 
         // Player B's Wisp attacks - should be forced to target Ironfur Grizzly due to Taunt
         let promise = cardD.child.action.run();
-        expect(playerB.child.controller.current?.options).toContain(cardC); // Can target Ironfur Grizzly (Taunt)
-        expect(playerB.child.controller.current?.options).not.toContain(heroA); // Cannot target Player A's hero (Taunt blocks)
-        playerB.child.controller.set(cardC); // Target Ironfur Grizzly
+        expect(playerB.controller.current?.options).toContain(cardC); // Can target Ironfur Grizzly (Taunt)
+        expect(playerB.controller.current?.options).not.toContain(heroA); // Cannot target Player A's hero (Taunt blocks)
+        playerB.controller.set(cardC); // Target Ironfur Grizzly
         await promise;
 
         // Both minions should take damage

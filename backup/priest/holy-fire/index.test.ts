@@ -75,8 +75,8 @@ describe('holy-fire', () => {
 
         // Water Elemental attacks Player B's hero
         const promise = cardC.child.action.run();
-        expect(playerA.child.controller.current?.options).toContain(heroB);
-        playerA.child.controller.set(heroB);
+        expect(playerA.controller.current?.options).toContain(heroB);
+        playerA.controller.set(heroB);
         await promise;
 
         // Player B's hero should be damaged and frozen
@@ -98,10 +98,10 @@ describe('holy-fire', () => {
 
         // Cast Holy Fire targeting Water Elemental
         const promise = cardD.play();
-        expect(playerB.child.controller.current?.options).toContain(heroA); // Can target enemy hero
-        expect(playerB.child.controller.current?.options).toContain(heroB); // Can target friendly hero
-        expect(playerB.child.controller.current?.options).toContain(cardC); // Can target enemy minion
-        playerB.child.controller.set(cardC); // Target Water Elemental
+        expect(playerB.controller.current?.options).toContain(heroA); // Can target enemy hero
+        expect(playerB.controller.current?.options).toContain(heroB); // Can target friendly hero
+        expect(playerB.controller.current?.options).toContain(cardC); // Can target enemy minion
+        playerB.controller.set(cardC); // Target Water Elemental
         await promise;
 
         // Water Elemental should survive (6 health - 5 damage = 1 health)

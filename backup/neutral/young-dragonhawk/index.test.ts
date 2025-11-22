@@ -73,9 +73,9 @@ describe('young-dragonhawk', () => {
         // First attack
         let promise = cardC.child.action.run();
         await AnimeUtil.sleep();
-        expect(playerA.child.controller.current?.options).toContain(cardD); // Can target Shieldbearer
-        expect(playerA.child.controller.current?.options.length).toBe(1);
-        playerA.child.controller.set(cardD); // Target Shieldbearer
+        expect(playerA.controller.current?.options).toContain(cardD); // Can target Shieldbearer
+        expect(playerA.controller.current?.options.length).toBe(1);
+        playerA.controller.set(cardD); // Target Shieldbearer
         await promise;
         
         // After first attack
@@ -86,9 +86,9 @@ describe('young-dragonhawk', () => {
         // Second attack
         promise = cardC.child.action.run();
         await AnimeUtil.sleep();
-        expect(playerA.child.controller.current?.options).toContain(cardD); // Can target Shieldbearer
-        expect(playerA.child.controller.current?.options.length).toBe(1);
-        playerA.child.controller.set(cardD); // Target Shieldbearer
+        expect(playerA.controller.current?.options).toContain(cardD); // Can target Shieldbearer
+        expect(playerA.controller.current?.options.length).toBe(1);
+        playerA.controller.set(cardD); // Target Shieldbearer
         await promise;
         
         // After second attack

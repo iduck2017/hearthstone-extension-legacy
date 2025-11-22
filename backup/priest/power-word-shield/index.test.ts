@@ -72,8 +72,8 @@ describe('power-word-shield', () => {
 
         // Player A uses Power Word: Shield on Stonetusk Boar
         const promise = cardC.play();
-        expect(playerA.child.controller.current?.options).toContain(cardD);
-        playerA.child.controller.set(cardD);
+        expect(playerA.controller.current?.options).toContain(cardD);
+        playerA.controller.set(cardD);
         await promise;
 
         // Stonetusk Boar should gain +2 Health

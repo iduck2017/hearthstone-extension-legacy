@@ -73,8 +73,8 @@ describe('circle-of-healing', () => {
         // Player A's Water Elemental attacks Player B's Water Elemental
         const promise = cardC.child.action.run();
         await AnimeUtil.sleep();
-        expect(playerA.child.controller.current?.options).toContain(cardD);
-        playerA.child.controller.set(cardD);
+        expect(playerA.controller.current?.options).toContain(cardD);
+        playerA.controller.set(cardD);
         await promise;
 
         // Both Water Elementals should take 3 damage
@@ -91,8 +91,8 @@ describe('circle-of-healing', () => {
 
         // Player A uses Frostbolt on Player B's hero
         const promise = cardE.play();
-        expect(playerA.child.controller.current?.options).toContain(heroB);
-        playerA.child.controller.set(heroB);
+        expect(playerA.controller.current?.options).toContain(heroB);
+        playerA.controller.set(heroB);
         await promise;
 
         // Player B's hero should take 3 damage

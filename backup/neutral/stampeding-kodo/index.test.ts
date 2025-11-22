@@ -80,7 +80,7 @@ describe('stampeding-kodo', () => {
 
         // Play Stampeding Kodo
         let promise = cardC.play();
-        playerA.child.controller.set(0); // Select position 0
+        playerA.controller.set(0); // Select position 0
         await promise;
 
         // Stampeding Kodo should be on board

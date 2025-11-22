@@ -75,7 +75,7 @@ describe('faerie-dragon', () => {
         expect(playerA.child.mana.state.current).toBe(10); // Full mana
         // Play Faerie Dragon
         let promise = cardC.play();
-        playerA.child.controller.set(0); // Select position 0
+        playerA.controller.set(0); // Select position 0
         await promise;
 
         // Faerie Dragon should be on board
@@ -101,10 +101,10 @@ describe('faerie-dragon', () => {
         // Player B casts Fireball
         let promise = cardD.play();
         // Choose target for Fireball (cannot target Faerie Dragon due to Elusive)
-        expect(playerB.child.controller.current?.options).toContain(heroA); // Can target Player A's hero
-        expect(playerB.child.controller.current?.options).toContain(heroB); // Can target Player B's hero
-        expect(playerB.child.controller.current?.options).not.toContain(cardC); // Cannot target Faerie Dragon (Elusive)
-        playerB.child.controller.set(heroA); // Target Player A's hero
+        expect(playerB.controller.current?.options).toContain(heroA); // Can target Player A's hero
+        expect(playerB.controller.current?.options).toContain(heroB); // Can target Player B's hero
+        expect(playerB.controller.current?.options).not.toContain(cardC); // Cannot target Faerie Dragon (Elusive)
+        playerB.controller.set(heroA); // Target Player A's hero
         await promise;
 
         // Player A's hero should take 6 damage

@@ -50,14 +50,14 @@ describe('battlecry', () => {
 
         // play elven archer
         const promise = cardC.play();
-        expect(playerA.child.controller.current?.options).toContain(0);
-        playerA.child.controller.set(0);
+        expect(playerA.controller.current?.options).toContain(0);
+        playerA.controller.set(0);
         await AnimeUtil.sleep();
-        const selector = playerA.child.controller.current;
+        const selector = playerA.controller.current;
         expect(selector?.options).toContain(cardD);
         expect(selector?.options).toContain(heroA);
         expect(selector?.options).toContain(heroB);
-        playerA.child.controller.set(cardD);
+        playerA.controller.set(cardD);
         await promise;
 
         expect(cardD.child.health.state.current).toBe(0);

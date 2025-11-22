@@ -71,7 +71,7 @@ describe('psychic-conjurer', () => {
 
         // Player A plays Psychic Conjurer
         const promise = cardC.play();
-        playerA.child.controller.set(0);
+        playerA.controller.set(0);
         await promise;
 
         // Check that Psychic Conjurer is on board

@@ -75,7 +75,7 @@ describe('emperor-cobra', () => {
 
         // Play Emperor Cobra
         let promise = cardC.play();
-        playerA.child.controller.set(0); // Select position 0
+        playerA.controller.set(0); // Select position 0
         await promise;
 
         // Emperor Cobra should be on board
@@ -100,9 +100,9 @@ describe('emperor-cobra', () => {
 
         // Mogu'shan Warden attacks Emperor Cobra - should die from Poisonous despite high health
         let promise = cardD.child.action.run();
-        expect(playerB.child.controller.current?.options).toContain(cardC); // Can target Emperor Cobra
-        expect(playerB.child.controller.current?.options).toContain(heroA); // Can target Player A's hero
-        playerB.child.controller.set(cardC); // Target Emperor Cobra
+        expect(playerB.controller.current?.options).toContain(cardC); // Can target Emperor Cobra
+        expect(playerB.controller.current?.options).toContain(heroA); // Can target Player A's hero
+        playerB.controller.set(cardC); // Target Emperor Cobra
         await promise;
 
         // Mogu'shan Warden should die from Poisonous (despite having 7 health vs 2 attack)

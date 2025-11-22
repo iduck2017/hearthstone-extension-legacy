@@ -59,8 +59,8 @@ describe('amani-berserker', () => {
         // Player A uses Berserker to attack wisp
         let promise = cardC.child.action.run();
         await AnimeUtil.sleep();
-        expect(game.child.playerA.child.controller.current?.options).toContain(cardD);
-        game.child.playerA.child.controller.set(cardD);
+        expect(game.child.playerA.controller.current?.options).toContain(cardD);
+        game.child.playerA.controller.set(cardD);
         await promise;
         
         // Verify wisp dies with health -1
@@ -81,8 +81,8 @@ describe('amani-berserker', () => {
         // Player B uses second wisp to attack Berserker
         let promise = cardF.child.action.run();
         await AnimeUtil.sleep();
-        expect(game.child.playerB.child.controller.current?.options).toContain(cardC);
-        game.child.playerB.child.controller.set(cardC); 
+        expect(game.child.playerB.controller.current?.options).toContain(cardC);
+        game.child.playerB.controller.set(cardC); 
         await promise;
         
         // Verify wisp dies with health -4
@@ -102,11 +102,11 @@ describe('amani-berserker', () => {
         // Player A plays woodoo to heal Berserker
         let promise = cardE.play();
         await AnimeUtil.sleep();
-        expect(game.child.playerA.child.controller.current?.options).toContain(0);
-        game.child.playerA.child.controller.set(0);
+        expect(game.child.playerA.controller.current?.options).toContain(0);
+        game.child.playerA.controller.set(0);
         await AnimeUtil.sleep();
-        expect(game.child.playerA.child.controller.current?.options).toContain(cardC);
-        game.child.playerA.child.controller.set(cardC);
+        expect(game.child.playerA.controller.current?.options).toContain(cardC);
+        game.child.playerA.controller.set(cardC);
         await promise;
         
         // Verify Berserker is healed and loses attack power gain

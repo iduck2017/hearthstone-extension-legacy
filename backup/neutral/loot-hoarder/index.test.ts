@@ -78,7 +78,7 @@ describe('loot-hoarder', () => {
 
         // Play Loot Hoarder
         let promise = cardC.play();
-        playerA.child.controller.set(0); // Select position 0
+        playerA.controller.set(0); // Select position 0
         await promise;
 
         // Loot Hoarder should be on board
@@ -105,9 +105,9 @@ describe('loot-hoarder', () => {
 
         // Player B's Stranglethorn Tiger attacks Loot Hoarder
         let promise = cardD.child.action.run();
-        expect(playerB.child.controller.current?.options).toContain(lootHoarderOnBoard); // Can target Loot Hoarder
-        expect(playerB.child.controller.current?.options).toContain(heroA); // Can target Player A's hero
-        playerB.child.controller.set(lootHoarderOnBoard); // Target Loot Hoarder
+        expect(playerB.controller.current?.options).toContain(lootHoarderOnBoard); // Can target Loot Hoarder
+        expect(playerB.controller.current?.options).toContain(heroA); // Can target Player A's hero
+        playerB.controller.set(lootHoarderOnBoard); // Target Loot Hoarder
         await promise;
 
         expect(lootHoarderOnBoard.child.health.state.current).toBe(-4);

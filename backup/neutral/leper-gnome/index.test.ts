@@ -57,9 +57,9 @@ describe('leper-gnome', () => {
         // attack
         let promise = cardC.child.action.run();
         await AnimeUtil.sleep();
-        expect(playerA.child.controller.current?.options).toContain(cardD);
-        expect(playerA.child.controller.current?.options.length).toBe(2);
-        playerA.child.controller.set(cardD);
+        expect(playerA.controller.current?.options).toContain(cardD);
+        expect(playerA.controller.current?.options.length).toBe(2);
+        playerA.controller.set(cardD);
         await promise;
         
         expect(boardA.child.cards.length).toBe(0);

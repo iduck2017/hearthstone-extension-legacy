@@ -76,12 +76,12 @@ describe('spellbreaker', () => {
 
         // Play Spellbreaker
         let promise = cardC.play();
-        playerA.child.controller.set(0); // Select position 0
+        playerA.controller.set(0); // Select position 0
         await AnimeUtil.sleep();
         
         // Choose target for battlecry
-        expect(playerA.child.controller.current?.options).toContain(cardD); // Can target Silvermoon Guardian
-        playerA.child.controller.set(cardD); // Target Silvermoon Guardian for silence
+        expect(playerA.controller.current?.options).toContain(cardD); // Can target Silvermoon Guardian
+        playerA.controller.set(cardD); // Target Silvermoon Guardian for silence
         await promise;
 
         // Spellbreaker should be on board
@@ -106,9 +106,9 @@ describe('spellbreaker', () => {
 
         // Player B's Silvermoon Guardian attacks Spellbreaker
         let promise = cardD.child.action.run();
-        expect(playerB.child.controller.current?.options).toContain(cardC); // Can target Spellbreaker
-        expect(playerB.child.controller.current?.options).toContain(heroA); // Can target Player A's hero
-        playerB.child.controller.set(cardC); // Target Spellbreaker
+        expect(playerB.controller.current?.options).toContain(cardC); // Can target Spellbreaker
+        expect(playerB.controller.current?.options).toContain(heroA); // Can target Player A's hero
+        playerB.controller.set(cardC); // Target Spellbreaker
         await promise;
 
         // Both minions should die (3/3 vs 4/3)

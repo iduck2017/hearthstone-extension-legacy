@@ -70,8 +70,8 @@ describe('power-infusion', () => {
         // Cast Power Infusion on Wisp
         let promise = cardC.play();
         await AnimeUtil.sleep();
-        expect(playerA.child.controller.current?.options).toContain(cardD);
-        playerA.child.controller.set(cardD);
+        expect(playerA.controller.current?.options).toContain(cardD);
+        playerA.controller.set(cardD);
         await promise;
 
         // Wisp should have +2/+6 buff

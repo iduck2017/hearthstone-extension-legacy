@@ -75,7 +75,7 @@ describe('kobold-geomancer', () => {
 
         // Play Kobold Geomancer
         let promise = cardC.play();
-        playerA.child.controller.set(0); // Select position 0
+        playerA.controller.set(0); // Select position 0
         await promise;
 
         // Kobold Geomancer should be on board
@@ -93,9 +93,9 @@ describe('kobold-geomancer', () => {
         // Player A casts Fireball
         let promise = cardD.play();
         // Choose target for Fireball (Player B's hero)
-        expect(playerA.child.controller.current?.options).toContain(heroB); // Can target Player B's hero
-        expect(playerA.child.controller.current?.options).toContain(heroA); // Can target Player A's hero
-        playerA.child.controller.set(heroB); // Target Player B's hero
+        expect(playerA.controller.current?.options).toContain(heroB); // Can target Player B's hero
+        expect(playerA.controller.current?.options).toContain(heroA); // Can target Player A's hero
+        playerA.controller.set(heroB); // Target Player B's hero
         await promise;
 
         // Player B's hero should take 7 damage (6 + 1 from Spell Damage +1)

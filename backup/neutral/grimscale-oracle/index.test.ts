@@ -61,9 +61,9 @@ describe('grimscale-oracle', () => {
     test('grimscale-oracle-buff', async () => {
         const promise = cardC.play();
         await AnimeUtil.sleep();
-        expect(game.child.playerA.child.controller.current).toBeDefined();
-        expect(game.child.playerA.child.controller.current?.options.length).toBe(3);
-        game.child.playerA.child.controller.set(0);
+        expect(game.child.playerA.controller.current).toBeDefined();
+        expect(game.child.playerA.controller.current?.options.length).toBe(3);
+        game.child.playerA.controller.set(0);
         await promise;
 
         expect(boardA.child.cards.length).toBe(3);
@@ -85,13 +85,13 @@ describe('grimscale-oracle', () => {
         // Murloc Raider attacks Grimscale Oracle
         const promise = cardF.child.action.run();
         await AnimeUtil.sleep();
-        expect(game.child.playerB.child.controller.current).toBeDefined();
-        expect(game.child.playerB.child.controller.current?.options.length).toBe(4);
-        expect(game.child.playerB.child.controller.current?.options).toContain(cardE);
-        expect(game.child.playerB.child.controller.current?.options).toContain(cardC);
-        expect(game.child.playerB.child.controller.current?.options).toContain(cardD);
-        expect(game.child.playerB.child.controller.current?.options).toContain(heroA); 
-        game.child.playerB.child.controller.set(cardC);
+        expect(game.child.playerB.controller.current).toBeDefined();
+        expect(game.child.playerB.controller.current?.options.length).toBe(4);
+        expect(game.child.playerB.controller.current?.options).toContain(cardE);
+        expect(game.child.playerB.controller.current?.options).toContain(cardC);
+        expect(game.child.playerB.controller.current?.options).toContain(cardD);
+        expect(game.child.playerB.controller.current?.options).toContain(heroA); 
+        game.child.playerB.controller.set(cardC);
         await promise;
 
         expect(cardF.child.action.state.current).toBe(0); // Murloc Raider

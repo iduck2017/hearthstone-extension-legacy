@@ -77,9 +77,9 @@ describe('arcane-devourer', () => {
 
         // Player A casts Fireball
         const promise = cardC.play();
-        expect(playerA.child.controller.current?.options).toContain(heroA); // Can target friendly hero
-        expect(playerA.child.controller.current?.options).toContain(heroB); // Can target enemy hero
-        playerA.child.controller.set(heroB); // Target Player B's hero
+        expect(playerA.controller.current?.options).toContain(heroA); // Can target friendly hero
+        expect(playerA.controller.current?.options).toContain(heroB); // Can target enemy hero
+        playerA.controller.set(heroB); // Target Player B's hero
         await promise;
 
         // Arcane Devourer should gain +2/+2
@@ -102,9 +102,9 @@ describe('arcane-devourer', () => {
 
         // Player B casts Frostbolt
         const promise = cardD.play();
-        expect(playerB.child.controller.current?.options).toContain(heroA); // Can target friendly hero
-        expect(playerB.child.controller.current?.options).toContain(heroB); // Can target enemy hero
-        playerB.child.controller.set(heroA); // Target Player A's hero
+        expect(playerB.controller.current?.options).toContain(heroA); // Can target friendly hero
+        expect(playerB.controller.current?.options).toContain(heroB); // Can target enemy hero
+        playerB.controller.set(heroA); // Target Player A's hero
         await promise;
 
         // Arcane Devourer should NOT gain stats (enemy spell)

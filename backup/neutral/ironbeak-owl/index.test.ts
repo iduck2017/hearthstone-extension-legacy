@@ -78,11 +78,11 @@ describe('ironbeak-owl', () => {
 
         // Play Ironbeak Owl
         let promise = cardC.play();
-        playerA.child.controller.set(0); // Select position 0
+        playerA.controller.set(0); // Select position 0
         await AnimeUtil.sleep();
         // Choose target for battlecry (silence Ancient Watcher)
-        expect(playerA.child.controller.current?.options).toContain(cardD); // Can target Ancient Watcher
-        playerA.child.controller.set(cardD); // Target Ancient Watcher for silence
+        expect(playerA.controller.current?.options).toContain(cardD); // Can target Ancient Watcher
+        playerA.controller.set(cardD); // Target Ancient Watcher for silence
         await promise;
 
         // Ironbeak Owl should be on board
@@ -103,8 +103,8 @@ describe('ironbeak-owl', () => {
 
         // Ancient Watcher attacks Player B's hero
         let promise = cardD.child.action.run();
-        expect(playerA.child.controller.current?.options).toContain(heroB); // Can target Player B's hero
-        playerA.child.controller.set(heroB); // Target Player B's hero
+        expect(playerA.controller.current?.options).toContain(heroB); // Can target Player B's hero
+        playerA.controller.set(heroB); // Target Player B's hero
         await promise;
 
         // Player B's hero should take 4 damage

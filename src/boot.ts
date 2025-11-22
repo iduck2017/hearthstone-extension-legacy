@@ -3,7 +3,7 @@ import '.'
 
 export function boot(game: GameModel) {
     const root = new AppModel();
-    root.start(game);
+    root.set(game);
     game.child.turn.next();
     return game;
 }

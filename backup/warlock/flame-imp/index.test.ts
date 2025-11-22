@@ -73,7 +73,7 @@ describe('flame-imp', () => {
 
         // Play Flame Imp
         let promise = cardC.play();
-        playerA.child.controller.set(0); // Select position 0
+        playerA.controller.set(0); // Select position 0
         await promise;
 
         // Flame Imp should be on board

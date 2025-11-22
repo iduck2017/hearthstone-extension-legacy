@@ -58,8 +58,8 @@ describe('stonetusk-boar', () => {
         // Play Stonetusk Boar
         let promise = cardC.play();
         await AnimeUtil.sleep();
-        expect(game.child.playerA.child.controller.current?.options).toContain(0);
-        game.child.playerA.child.controller.set(0);
+        expect(game.child.playerA.controller.current?.options).toContain(0);
+        game.child.playerA.controller.set(0);
         await promise;
         expect(boardA.child.cards.length).toBe(1);
         expect(cardC.child.attack.state.current).toBe(1);
@@ -70,9 +70,9 @@ describe('stonetusk-boar', () => {
         // Boar directly attacks enemy hero
         promise = cardC.child.action.run();
         await AnimeUtil.sleep();
-        expect(game.child.playerA.child.controller.current?.options).toContain(heroB);
-        expect(game.child.playerA.child.controller.current?.options.length).toBe(2);
-        game.child.playerA.child.controller.set(heroB);
+        expect(game.child.playerA.controller.current?.options).toContain(heroB);
+        expect(game.child.playerA.controller.current?.options.length).toBe(2);
+        game.child.playerA.controller.set(heroB);
         await promise;
         
         expect(cardC.child.action.state.current).toBe(0);

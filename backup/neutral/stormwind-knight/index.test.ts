@@ -75,7 +75,7 @@ describe('stormwind-knight', () => {
 
         // Play Stormwind Knight
         let promise = cardC.play();
-        playerA.child.controller.set(0); // Select position 0
+        playerA.controller.set(0); // Select position 0
         await promise;
 
         // Stormwind Knight should be on board
@@ -96,9 +96,9 @@ describe('stormwind-knight', () => {
 
         // Player A's Stormwind Knight attacks Player B's Wisp immediately (Charge allows immediate attack)
         let promise = cardC.child.action.run();
-        expect(playerA.child.controller.current?.options).toContain(cardD); // Can target Wisp
-        expect(playerA.child.controller.current?.options).toContain(heroB); // Can target Player B's hero
-        playerA.child.controller.set(cardD); // Target Wisp
+        expect(playerA.controller.current?.options).toContain(cardD); // Can target Wisp
+        expect(playerA.controller.current?.options).toContain(heroB); // Can target Player B's hero
+        playerA.controller.set(cardD); // Target Wisp
         await promise;
 
         // Wisp should die (1/1 vs 2/5)

@@ -65,8 +65,8 @@ describe('silence', () => {
 
         // Player A uses Ice Lance on Mana Wyrm
         const promise = cardD.play();
-        expect(playerA.child.controller.current?.options).toContain(cardC);
-        playerA.child.controller.set(cardC);
+        expect(playerA.controller.current?.options).toContain(cardC);
+        playerA.controller.set(cardC);
         await promise;
 
         // Mana Wyrm should gain +1 attack and be frozen
@@ -86,8 +86,8 @@ describe('silence', () => {
 
         // Player A uses Silence on Mana Wyrm
         const promise = cardE.play();
-        expect(playerA.child.controller.current?.options).toContain(cardC);
-        playerA.child.controller.set(cardC);
+        expect(playerA.controller.current?.options).toContain(cardC);
+        playerA.controller.set(cardC);
         await promise;
 
         // Mana Wyrm should return to original stats and be unfrozen
@@ -106,8 +106,8 @@ describe('silence', () => {
 
         // Mana Wyrm attacks Player B hero
         const promise = cardC.child.action.run();
-        expect(playerA.child.controller.current?.options).toContain(heroB);
-        playerA.child.controller.set(heroB);
+        expect(playerA.controller.current?.options).toContain(heroB);
+        playerA.controller.set(heroB);
         await promise;
 
         // Player B should take 1 damage

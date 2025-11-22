@@ -75,7 +75,7 @@ describe('azure-drake', () => {
 
         // Play Azure Drake
         let promise = cardC.play();
-        playerA.child.controller.set(0); // Select position 0
+        playerA.controller.set(0); // Select position 0
         await promise;
 
         // Azure Drake should be on board and Fireball should be drawn
@@ -88,9 +88,9 @@ describe('azure-drake', () => {
     test('fireball-cast', async () => {
         // Cast Fireball targeting Player B's hero
         const promise = cardD.play();
-        expect(playerA.child.controller.current?.options).toContain(heroA); // Can target friendly hero
-        expect(playerA.child.controller.current?.options).toContain(heroB); // Can target enemy hero
-        playerA.child.controller.set(heroB); // Target Player B's hero
+        expect(playerA.controller.current?.options).toContain(heroA); // Can target friendly hero
+        expect(playerA.controller.current?.options).toContain(heroB); // Can target enemy hero
+        playerA.controller.set(heroB); // Target Player B's hero
         await promise;
 
         // Fireball should deal 7 damage (6 + 1 from Spell Damage +1)

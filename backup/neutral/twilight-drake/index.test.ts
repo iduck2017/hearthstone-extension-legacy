@@ -75,7 +75,7 @@ describe('twilight-drake', () => {
 
         // Play Twilight Drake
         let promise = cardC.play();
-        playerA.child.controller.set(0); // Select position 0
+        playerA.controller.set(0); // Select position 0
         await promise;
 
         // Twilight Drake should be on board

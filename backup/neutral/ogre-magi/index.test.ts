@@ -75,7 +75,7 @@ describe('ogre-magi', () => {
 
         // Play Ogre Magi
         let promise = cardC.play();
-        playerA.child.controller.set(0); // Select position 0
+        playerA.controller.set(0); // Select position 0
         await promise;
 
         // Ogre Magi should be on board
@@ -92,9 +92,9 @@ describe('ogre-magi', () => {
 
         // Player A casts Fireball with Ogre Magi on board
         const promise = cardD.play();
-        expect(playerA.child.controller.current?.options).toContain(heroA); // Can target friendly hero
-        expect(playerA.child.controller.current?.options).toContain(heroB); // Can target enemy hero
-        playerA.child.controller.set(heroB); // Target Player B's hero
+        expect(playerA.controller.current?.options).toContain(heroA); // Can target friendly hero
+        expect(playerA.controller.current?.options).toContain(heroB); // Can target enemy hero
+        playerA.controller.set(heroB); // Target Player B's hero
         await promise;
 
         // Fireball should deal 6+1=7 damage (6 base + 1 from Ogre Magi)

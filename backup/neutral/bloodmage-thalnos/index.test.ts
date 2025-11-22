@@ -54,10 +54,10 @@ describe('bloodmage-thalnos', () => {
 
     test('fireball-cast', async () => {
         const promise = cardE.play();
-        expect(playerA.child.controller.current?.options).toContain(heroB);
-        expect(playerA.child.controller.current?.options).toContain(cardD);
-        expect(playerA.child.controller.current?.options).toContain(cardC);
-        playerA.child.controller.set(heroB);
+        expect(playerA.controller.current?.options).toContain(heroB);
+        expect(playerA.controller.current?.options).toContain(cardD);
+        expect(playerA.controller.current?.options).toContain(cardC);
+        playerA.controller.set(heroB);
         await promise;
         expect(heroB.child.health.state.current).toBe(23)
         expect(heroB.child.health.state.damage).toBe(7)
@@ -77,8 +77,8 @@ describe('bloodmage-thalnos', () => {
         // Player A uses Bloodmage Thalnos to attack wisp
         let promise = cardC.child.action.run();
         await AnimeUtil.sleep();
-        expect(playerA.child.controller.current?.options).toContain(cardD);
-        playerA.child.controller.set(cardD);
+        expect(playerA.controller.current?.options).toContain(cardD);
+        playerA.controller.set(cardD);
         await promise;
         
         // Verify both minions die

@@ -72,7 +72,7 @@ describe('oasis-snapjaw', () => {
 
         // Play Oasis Snapjaw
         let promise = cardC.play();
-        playerA.child.controller.set(0); // Select position 0
+        playerA.controller.set(0); // Select position 0
         await promise;
 
         // Oasis Snapjaw should be on board
@@ -92,9 +92,9 @@ describe('oasis-snapjaw', () => {
         expect(cardD.child.health.state.current).toBe(7);
 
         let promise = cardD.child.action.run();
-        expect(playerB.child.controller.current?.options).toContain(cardC);
-        expect(playerB.child.controller.current?.options).toContain(heroA);
-        playerB.child.controller.set(cardC);
+        expect(playerB.controller.current?.options).toContain(cardC);
+        expect(playerB.controller.current?.options).toContain(heroA);
+        playerB.controller.set(cardC);
         await promise;
 
         expect(cardC.child.health.state.current).toBe(5); // Oasis Snapjaw: 2/7

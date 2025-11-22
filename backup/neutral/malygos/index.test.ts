@@ -94,9 +94,9 @@ describe('malygos', () => {
 
     //     // Player A casts Fireball with Malygos on board
     //     const promise = cardD.play();
-    //     expect(playerA.child.controller.current?.options).toContain(heroA); // Can target friendly hero
-    //     expect(playerA.child.controller.current?.options).toContain(heroB); // Can target enemy hero
-    //     playerA.child.controller.set(heroB); // Target Player B's hero
+    //     expect(playerA.controller.current?.options).toContain(heroA); // Can target friendly hero
+    //     expect(playerA.controller.current?.options).toContain(heroB); // Can target enemy hero
+    //     playerA.controller.set(heroB); // Target Player B's hero
     //     await promise;
 
     //     // Fireball should deal 6+5=11 damage (6 base + 5 from Malygos)

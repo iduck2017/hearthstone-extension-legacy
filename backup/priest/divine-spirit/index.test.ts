@@ -66,8 +66,8 @@ describe('divine-spirit', () => {
 
         // Player A uses Divine Spirit on Water Elemental
         const promise = cardC.play();
-        expect(playerA.child.controller.current?.options).toContain(cardD); // Water Elemental should be targetable
-        playerA.child.controller.set(cardD);
+        expect(playerA.controller.current?.options).toContain(cardD); // Water Elemental should be targetable
+        playerA.controller.set(cardD);
         await promise;
 
         // Water Elemental should have doubled Health

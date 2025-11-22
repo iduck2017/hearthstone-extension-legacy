@@ -73,7 +73,7 @@ describe('novice-engineer', () => {
 
         // Play Novice Engineer
         let promise = cardC.play();
-        playerA.child.controller.set(0); // Select position 0
+        playerA.controller.set(0); // Select position 0
         await promise;
 
         // Novice Engineer should be on board

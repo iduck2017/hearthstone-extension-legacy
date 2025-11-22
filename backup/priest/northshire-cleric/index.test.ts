@@ -81,8 +81,8 @@ describe('northshire-cleric', () => {
 
         // Northshire Cleric attacks first Mana Wyrm
         const promise = cardC.child.action.run();
-        expect(playerA.child.controller.current?.options).toContain(cardE);
-        playerA.child.controller.set(cardE);
+        expect(playerA.controller.current?.options).toContain(cardE);
+        playerA.controller.set(cardE);
         await promise;
 
         // Both should be damaged

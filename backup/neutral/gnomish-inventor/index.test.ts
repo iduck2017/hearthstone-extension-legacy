@@ -73,7 +73,7 @@ describe('gnomish-inventor', () => {
 
         // Play Gnomish Inventor
         let promise = cardC.play();
-        playerA.child.controller.set(0); // Select position 0
+        playerA.controller.set(0); // Select position 0
         await promise;
 
         // Gnomish Inventor should be on board

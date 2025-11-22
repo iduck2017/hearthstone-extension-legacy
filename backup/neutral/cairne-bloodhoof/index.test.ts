@@ -77,10 +77,10 @@ describe('cairne-bloodhoof', () => {
 
         // Cast Fireball targeting Cairne Bloodhoof
         const promise = cardC.play();
-        expect(playerA.child.controller.current?.options).toContain(heroA); // Can target friendly hero
-        expect(playerA.child.controller.current?.options).toContain(heroB); // Can target enemy hero
-        expect(playerA.child.controller.current?.options).toContain(cardE); // Can target enemy minion
-        playerA.child.controller.set(cardE); // Target Cairne Bloodhoof
+        expect(playerA.controller.current?.options).toContain(heroA); // Can target friendly hero
+        expect(playerA.controller.current?.options).toContain(heroB); // Can target enemy hero
+        expect(playerA.controller.current?.options).toContain(cardE); // Can target enemy minion
+        playerA.controller.set(cardE); // Target Cairne Bloodhoof
         await promise;
 
         // Cairne Bloodhoof should be destroyed and Baine Bloodhoof should be summoned
@@ -109,9 +109,9 @@ describe('cairne-bloodhoof', () => {
 
         // Try to attack with Wisp
         const promise = cardD.child.action.run();
-        expect(playerA.child.controller.current?.options).toContain(heroB); // Can target enemy hero
-        expect(playerA.child.controller.current?.options).toContain(cardG2);
-        playerA.child.controller.set(cardG2); // Target Baine Bloodhoof
+        expect(playerA.controller.current?.options).toContain(heroB); // Can target enemy hero
+        expect(playerA.controller.current?.options).toContain(cardG2);
+        playerA.controller.set(cardG2); // Target Baine Bloodhoof
         await promise;
 
         // Baine Bloodhoof should take 1 damage

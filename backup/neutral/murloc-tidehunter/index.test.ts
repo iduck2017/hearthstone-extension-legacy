@@ -55,8 +55,8 @@ describe('murloc-tidehunter', () => {
         
         // Play Murloc Tidehunter to the left of Wisp
         let promise = cardA.play();
-        expect(game.child.playerA.child.controller.current?.options).toContain(0);
-        game.child.playerA.child.controller.set(0);
+        expect(game.child.playerA.controller.current?.options).toContain(0);
+        game.child.playerA.controller.set(0);
         await promise;
 
         expect(boardA.child.cards.length).toBe(3);

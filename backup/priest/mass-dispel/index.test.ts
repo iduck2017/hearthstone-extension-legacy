@@ -85,8 +85,8 @@ describe('mass-dispel', () => {
         // Water Elemental attacks Player A hero again
         let promise = cardD.child.action.run();
         await AnimeUtil.sleep();
-        expect(playerB.child.controller.current?.options).toContain(heroA);
-        playerB.child.controller.set(heroA);
+        expect(playerB.controller.current?.options).toContain(heroA);
+        playerB.controller.set(heroA);
         await promise;
 
         // Player A should take 3 damage but NOT be frozen (silenced Water Elemental lost freeze ability)

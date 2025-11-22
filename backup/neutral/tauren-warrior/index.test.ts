@@ -76,7 +76,7 @@ describe('tauren-warrior', () => {
 
         // Play Tauren Warrior
         let promise = cardC.play();
-        playerA.child.controller.set(0); // Select position 0
+        playerA.controller.set(0); // Select position 0
         await promise;
 
         // Tauren Warrior should be on board
@@ -100,9 +100,9 @@ describe('tauren-warrior', () => {
 
         // Player B's Wisp attacks Player A's Tauren Warrior
         let promise = cardD.child.action.run();
-        expect(playerB.child.controller.current?.options).toContain(cardC); // Can target Tauren Warrior (Taunt)
-        expect(playerB.child.controller.current?.options).not.toContain(heroA); // Cannot target Player A's hero (Taunt blocks)
-        playerB.child.controller.set(cardC); // Target Tauren Warrior
+        expect(playerB.controller.current?.options).toContain(cardC); // Can target Tauren Warrior (Taunt)
+        expect(playerB.controller.current?.options).not.toContain(heroA); // Cannot target Player A's hero (Taunt blocks)
+        playerB.controller.set(cardC); // Target Tauren Warrior
         await promise;
 
         // Wisp should die (2/3 vs 1/1)

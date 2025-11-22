@@ -73,7 +73,7 @@ describe('lord-of-the-arena', () => {
 
         // Play Lord of the Arena
         let promise = cardC.play();
-        playerA.child.controller.set(0); // Select position 0
+        playerA.controller.set(0); // Select position 0
         await promise;
 
         // Lord of the Arena should be on board
@@ -95,9 +95,9 @@ describe('lord-of-the-arena', () => {
 
         // Try to attack with Wisp
         const promise = cardD.child.action.run();
-        expect(playerB.child.controller.current?.options).not.toContain(heroA); // Cannot target enemy hero (Taunt blocks)
-        expect(playerB.child.controller.current?.options).toContain(cardC); // Must target Lord of the Arena due to Taunt
-        playerB.child.controller.set(cardC); // Target Lord of the Arena
+        expect(playerB.controller.current?.options).not.toContain(heroA); // Cannot target enemy hero (Taunt blocks)
+        expect(playerB.controller.current?.options).toContain(cardC); // Must target Lord of the Arena due to Taunt
+        playerB.controller.set(cardC); // Target Lord of the Arena
         await promise;
 
         // Lord of the Arena should take 1 damage

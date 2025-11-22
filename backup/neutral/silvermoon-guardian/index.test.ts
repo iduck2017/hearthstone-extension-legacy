@@ -75,7 +75,7 @@ describe('silvermoon-guardian', () => {
 
         // Play Silvermoon Guardian
         let promise = cardC.play();
-        playerA.child.controller.set(0); // Select position 0
+        playerA.controller.set(0); // Select position 0
         await promise;
 
         // Silvermoon Guardian should be on board
@@ -100,9 +100,9 @@ describe('silvermoon-guardian', () => {
 
         // Player B's Wisp attacks Silvermoon Guardian - should break Divine Shield
         let promise = cardD.child.action.run();
-        expect(playerB.child.controller.current?.options).toContain(cardC); // Can target Silvermoon Guardian
-        expect(playerB.child.controller.current?.options).toContain(heroA); // Can target Player A's hero
-        playerB.child.controller.set(cardC); // Target Silvermoon Guardian
+        expect(playerB.controller.current?.options).toContain(cardC); // Can target Silvermoon Guardian
+        expect(playerB.controller.current?.options).toContain(heroA); // Can target Player A's hero
+        playerB.controller.set(cardC); // Target Silvermoon Guardian
         await promise;
 
         // Divine Shield should be broken, but Silvermoon Guardian takes no damage

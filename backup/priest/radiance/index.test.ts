@@ -73,8 +73,8 @@ describe('radiance', () => {
 
         // Player A uses Fireball on Player B's hero
         const promise = cardC.play();
-        expect(playerA.child.controller.current?.options).toContain(heroB);
-        playerA.child.controller.set(heroB);
+        expect(playerA.controller.current?.options).toContain(heroB);
+        playerA.controller.set(heroB);
         await promise;
 
         // Player B's hero should take 6 damage

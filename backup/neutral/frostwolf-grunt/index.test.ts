@@ -75,7 +75,7 @@ describe('frostwolf-grunt', () => {
 
         // Play Frostwolf Grunt
         let promise = cardC.play();
-        playerA.child.controller.set(0); // Select position 0
+        playerA.controller.set(0); // Select position 0
         await promise;
 
         // Frostwolf Grunt should be on board
@@ -100,9 +100,9 @@ describe('frostwolf-grunt', () => {
 
         // Player B's Wisp attacks, can only target Frostwolf Grunt (Taunt forces this)
         let promise = cardD.child.action.run();
-        expect(playerB.child.controller.current?.options).toContain(cardC); // Can target Frostwolf Grunt (Taunt forces this)
-        expect(playerB.child.controller.current?.options).not.toContain(heroA); // Cannot target Player A's hero (Taunt blocks)
-        playerB.child.controller.set(cardC); // Target Frostwolf Grunt
+        expect(playerB.controller.current?.options).toContain(cardC); // Can target Frostwolf Grunt (Taunt forces this)
+        expect(playerB.controller.current?.options).not.toContain(heroA); // Cannot target Player A's hero (Taunt blocks)
+        playerB.controller.set(cardC); // Target Frostwolf Grunt
         await promise;
 
         expect(cardC.child.health.state.current).toBe(1);

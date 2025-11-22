@@ -58,10 +58,10 @@ describe('hungry-crab', () => {
 
         let promise = cardC.play();
         await AnimeUtil.sleep();
-        expect(game.child.playerA.child.controller.current?.options).toContain(0);
-        game.child.playerA.child.controller.set(0);
+        expect(game.child.playerA.controller.current?.options).toContain(0);
+        game.child.playerA.controller.set(0);
         await AnimeUtil.sleep();
-        expect(game.child.playerA.child.controller.current).toBeUndefined();
+        expect(game.child.playerA.controller.current).toBeUndefined();
         await promise;
 
         const crabOnBoard = boardA.child.cards.find((item: any) => item instanceof HungryCrabModel);
@@ -86,24 +86,24 @@ describe('hungry-crab', () => {
         // Play Murloc Raider first
         let promise = cardF.play();
         await AnimeUtil.sleep();
-        expect(game.child.playerB.child.controller.current?.options).toContain(0);
-        game.child.playerB.child.controller.set(0);
+        expect(game.child.playerB.controller.current?.options).toContain(0);
+        game.child.playerB.controller.set(0);
         await promise;
         expect(boardB.child.cards.length).toBe(1);
 
         // Play Hungry Crab and trigger battlecry
         promise = cardE.play();
         await AnimeUtil.sleep();
-        expect(game.child.playerB.child.controller.current?.options).toContain(0);
-        game.child.playerB.child.controller.set(0);
+        expect(game.child.playerB.controller.current?.options).toContain(0);
+        game.child.playerB.controller.set(0);
         await AnimeUtil.sleep();
         
         const murlocOnBoard = boardB.child.cards.find((item: any) => item instanceof MurlocRaiderModel);
         if (!murlocOnBoard) throw new Error();
         
-        expect(game.child.playerB.child.controller.current?.options).toContain(murlocOnBoard);
-        expect(game.child.playerB.child.controller.current?.options.length).toBe(1);
-        game.child.playerB.child.controller.set(murlocOnBoard);
+        expect(game.child.playerB.controller.current?.options).toContain(murlocOnBoard);
+        expect(game.child.playerB.controller.current?.options.length).toBe(1);
+        game.child.playerB.controller.set(murlocOnBoard);
         await promise;
 
         expect(murlocOnBoard.child.dispose.status).toBe(true); // Murloc Raider destroyed
