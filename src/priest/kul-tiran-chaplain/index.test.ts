@@ -6,7 +6,7 @@
  * 
  * 1. kul-tiran-chaplain-play: Player A plays Kul Tiran Chaplain, gives Water Elemental +2 Health.
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, AnimeUtil } from "hearthstone-core";
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, CommonUtil } from "hearthstone-core";
 import { KulTiranChaplainModel } from "./index";
 import { WaterElementalModel } from "../../mage/water-elemental";
 import { boot } from "../../boot";
@@ -68,7 +68,7 @@ describe('kul-tiran-chaplain', () => {
         // Player A plays Kul Tiran Chaplain
         const promise = cardC.play();
         playerA.controller.set(0);
-        await AnimeUtil.sleep();
+        await CommonUtil.sleep();
         expect(playerA.controller.current?.options).toContain(cardD); // Water Elemental should be targetable
         playerA.controller.set(cardD);
         await promise;

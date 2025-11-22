@@ -40,6 +40,6 @@ export class ScarletSubjugatorDebuffModel extends IRoleBuffModel<
         const count = this.state.count;
         const current = that.state.current;
         if (current !== count) return;
-        this.deactive();
+        this.disable();
     }
 }

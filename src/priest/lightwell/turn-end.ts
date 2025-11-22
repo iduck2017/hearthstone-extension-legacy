@@ -1,15 +1,16 @@
-import { TurnEndModel, RestoreModel, RestoreEvent } from "hearthstone-core";
+import { TurnStartModel, RestoreModel, RestoreEvent, MinionCardModel, TurnEndModel } from "hearthstone-core";
 import { TemplUtil } from "set-piece";
 
 @TemplUtil.is('lightwell-end-turn')
-export class LightwellEndTurnModel extends TurnEndModel {
-    constructor(props?: LightwellEndTurnModel['props']) {
+export class LightwellTurnEndModel extends TurnEndModel {
+    constructor(props?: LightwellTurnEndModel['props']) {
         props = props ?? {};
         super({
             uuid: props.uuid,
             state: {
                 name: 'Lightwell\'s End Turn',
                 desc: 'At the start of your turn, restore 3 Health to a damaged friendly character.',
+                isEnabled: true,
                 ...props.state,
             },
             child: { ...props.child },
@@ -17,9 +18,8 @@ export class LightwellEndTurnModel extends TurnEndModel {
         });
     }
 
-    protected run(isCurrent: boolean) {
+    protected doRun(isCurrent: boolean) {
         if (!isCurrent) return;
-
         const player = this.route.player;
         if (!player) return;
         
@@ -39,12 +39,12 @@ export class LightwellEndTurnModel extends TurnEndModel {
         if (!target) return;
         
         // Restore 3 Health
-        const source = this.route.card;
-        if (!source) return;
+        const card = this.route.card;
+        if (!card) return;
         
         RestoreModel.deal([
             new RestoreEvent({
-                source: source,
+                source: card,
                 method: this,
                 target: target,
                 origin: 3,

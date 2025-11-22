@@ -17,8 +17,8 @@
  * 2/0/5
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, MinionCardModel, MinionFeaturesModel, RoleAttackModel, RoleHealthModel } from "hearthstone-core";
-import { LightwellEndTurnModel } from "./end-turn";
+import { ClassType, CostModel, LibraryUtil, RarityType, MinionCardModel, RoleAttackModel, RoleHealthModel } from "hearthstone-core";
+import { LightwellTurnEndModel } from "./turn-end";
 
 @LibraryUtil.is('lightwell')
 export class LightwellModel extends MinionCardModel {
@@ -40,7 +40,7 @@ export class LightwellModel extends MinionCardModel {
                 cost: props.child?.cost ??  new CostModel({ state: { origin: 2 }}),
                 attack: props.child?.attack ?? new RoleAttackModel({ state: { origin: 0 }}),
                 health: props.child?.health ?? new RoleHealthModel({ state: { origin: 5 }}),
-                feats: props.child?.feats ?? [new LightwellEndTurnModel()],
+                turnEnd: props.child?.turnEnd ?? [new LightwellTurnEndModel()],
                 ...props.child
             },
             refer: { ...props.refer }

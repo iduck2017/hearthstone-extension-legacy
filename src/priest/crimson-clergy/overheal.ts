@@ -10,7 +10,7 @@ export class CrimsonClergyOverhealModel extends OverhealModel {
             state: {
                 name: 'Crimson Clergy\'s feature',
                 desc: 'Overheal: Draw a card.',
-                isActive: true,
+                isEnabled: true,
                 ...props.state,
             },
             child: { ...props.child },
@@ -18,11 +18,11 @@ export class CrimsonClergyOverhealModel extends OverhealModel {
         });
     }
 
-    protected run() {
+    protected doRun() {
         const player = this.route.player;
         if (!player) return;
         // Draw a card for overheal
-        const deck = player.child.deck;
-        deck.draw();
+        const hand = player.child.hand;
+        hand.draw();
     }
 }

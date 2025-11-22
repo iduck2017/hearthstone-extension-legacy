@@ -17,11 +17,11 @@ export class PsychicConjurerBattlecryModel extends BattlecryModel<never> {
         });
     }
 
-    public prepare(...prev: never[]): Selector<never> | undefined {
+    public precheck(): Selector<never> | undefined {
         return undefined;
     }
 
-    public run() {
+    public async doRun() {
         const player = this.route.player;
         if (!player) return;
         const opponent = player.refer.opponent;
@@ -40,7 +40,9 @@ export class PsychicConjurerBattlecryModel extends BattlecryModel<never> {
         
         // Create a copy of the random card
         const hand = player.child.hand;
-        hand.add(card, undefined, { isClone: true });
+        const copy = card.clone();
+        if (!copy) return;
+        hand.gain(copy);
     }
 
 }

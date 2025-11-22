@@ -18,7 +18,7 @@ export class ScarletSubjugatorBattlecryModel extends BattlecryModel<RoleModel> {
         });
     }
 
-    public prepare(): Selector<RoleModel> | undefined {
+    public precheck(): Selector<RoleModel> | undefined {
         const player = this.route.player;
         const opponent = player?.refer.opponent;
         if (!opponent) return;
@@ -30,7 +30,9 @@ export class ScarletSubjugatorBattlecryModel extends BattlecryModel<RoleModel> {
         return new Selector(roles, { hint: "Choose an enemy minion" });
     }
 
-    public run(target: RoleModel) {
+    public async doRun(params: Array<RoleModel | undefined>) {
+        const target = params[0];
+        if (!target) return;
         const player = this.route.player;
         if (!player) return;
         // Apply -2 Attack debuff until next turn
