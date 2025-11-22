@@ -1,8 +1,8 @@
-import { Selector, SpellEffectModel, RoleModel, DamageModel, DamageEvent, DamageType } from "hearthstone-core";
+import { Selector, SpellEffectModel, MinionCardModel, DamageModel, DamageEvent, DamageType } from "hearthstone-core";
 import { TemplUtil } from "set-piece";
 
 @TemplUtil.is('slam-effect')
-export class SlamEffectModel extends SpellEffectModel<RoleModel> {
+export class SlamEffectModel extends SpellEffectModel<MinionCardModel> {
     constructor(props?: SlamEffectModel['props']) {
         props = props ?? {};
         super({
@@ -18,14 +18,14 @@ export class SlamEffectModel extends SpellEffectModel<RoleModel> {
         });
     }
 
-    public precheck(): Selector<RoleModel> | undefined {
+    public precheck(): Selector<MinionCardModel> | undefined {
         const game = this.route.game;
         if (!game) return;
         const roles = game.refer.minions;
         return new Selector(roles, { hint: "Choose a minion" });
     }
 
-    public async doRun(params: Array<RoleModel | undefined>) {
+    public async doRun(params: Array<MinionCardModel | undefined>) {
         const target = params[0];
         if (!target) return;
         const card = this.route.card;

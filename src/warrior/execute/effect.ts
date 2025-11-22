@@ -1,8 +1,8 @@
-import { Selector, SpellEffectModel, RoleModel, MinionCardModel } from "hearthstone-core";
+import { Selector, SpellEffectModel, MinionCardModel } from "hearthstone-core";
 import { TemplUtil } from "set-piece";
 
 @TemplUtil.is('execute-effect')
-export class ExecuteEffectModel extends SpellEffectModel<RoleModel> {
+export class ExecuteEffectModel extends SpellEffectModel<MinionCardModel> {
     constructor(props?: ExecuteEffectModel['props']) {
         props = props ?? {};
         super({
@@ -18,7 +18,7 @@ export class ExecuteEffectModel extends SpellEffectModel<RoleModel> {
         });
     }
 
-    public precheck(): Selector<RoleModel> | undefined {
+    public precheck(): Selector<MinionCardModel> | undefined {
         const player = this.route.player;
         if (!player) return;
         const opponent = player.refer.opponent;
@@ -34,7 +34,7 @@ export class ExecuteEffectModel extends SpellEffectModel<RoleModel> {
         });
     }
 
-    public async doRun(params: Array<RoleModel | undefined>) {
+    public async doRun(params: Array<MinionCardModel | undefined>) {
         const target = params[0];
         if (!target) return;
         

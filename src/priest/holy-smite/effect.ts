@@ -1,8 +1,8 @@
-import { EffectModel, Selector, RoleModel, SpellEffectModel, DamageModel, DamageEvent, DamageType, MinionCardModel } from "hearthstone-core";
+import { EffectModel, Selector, SpellEffectModel, DamageModel, DamageEvent, DamageType, MinionCardModel } from "hearthstone-core";
 import { TemplUtil } from "set-piece";
 
 @TemplUtil.is('holy-smite-effect')
-export class HolySmiteEffectModel extends SpellEffectModel<RoleModel> {
+export class HolySmiteEffectModel extends SpellEffectModel<MinionCardModel> {
     constructor(props?: HolySmiteEffectModel['props']) {
         props = props ?? {};
         super({
@@ -18,14 +18,14 @@ export class HolySmiteEffectModel extends SpellEffectModel<RoleModel> {
         });
     }
 
-    public precheck(): Selector<RoleModel> | undefined {
+    public precheck(): Selector<MinionCardModel> | undefined {
         const games = this.route.game;
         if (!games) return;
         const roles = games.refer.minions;
         return new Selector(roles, { hint: "Choose a minion" });
     }
 
-    public async doRun(params: Array<RoleModel | undefined>) {
+    public async doRun(params: Array<MinionCardModel | undefined>) {
         const target = params[0];
         if (!target) return;
         const card = this.route.card;

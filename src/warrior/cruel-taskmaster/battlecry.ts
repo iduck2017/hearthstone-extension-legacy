@@ -1,17 +1,16 @@
-import { Selector, SpellEffectModel, MinionCardModel, DamageModel, DamageEvent, DamageType, RoleBuffModel } from "hearthstone-core";
+import { BattlecryModel, MinionCardModel, DamageModel, DamageEvent, DamageType, RoleBuffModel, Selector } from "hearthstone-core";
 import { TemplUtil } from "set-piece";
 
-@TemplUtil.is('inner-rage-effect')
-export class InnerRageEffectModel extends SpellEffectModel<MinionCardModel> {
-    constructor(props?: InnerRageEffectModel['props']) {
+@TemplUtil.is('cruel-taskmaster-battlecry')
+export class CruelTaskmasterBattlecryModel extends BattlecryModel<MinionCardModel> {
+    constructor(props?: CruelTaskmasterBattlecryModel['props']) {
         props = props ?? {};
         super({
             uuid: props.uuid,
             state: {
-                name: "Inner Rage's effect",
+                name: "Cruel Taskmaster's Battlecry",
                 desc: "Deal 1 damage to a minion and give it +2 Attack.",
-                damage: [1],
-                ...props.state
+                ...props.state,
             },
             child: { ...props.child },
             refer: { ...props.refer },
@@ -28,24 +27,24 @@ export class InnerRageEffectModel extends SpellEffectModel<MinionCardModel> {
     public async doRun(params: Array<MinionCardModel | undefined>) {
         const target = params[0];
         if (!target) return;
-        const card = this.route.card;
-        if (!card) return;
+        const minion = this.route.minion;
+        if (!minion) return;
 
         // Deal 1 damage to the target minion
         DamageModel.deal([
             new DamageEvent({
-                type: DamageType.SPELL,
-                source: card,
+                type: DamageType.DEFEND,
+                source: minion,
                 method: this,
                 target,
-                origin: this.state.damage[0] ?? 1,
+                origin: 1,
             })
         ]);
 
         // Give the minion +2 Attack buff
         const buff = new RoleBuffModel({
             state: {
-                name: "Inner Rage's Buff",
+                name: "Cruel Taskmaster's Buff",
                 desc: "+2 Attack.",
                 offset: [2, 0] // +2 Attack, +0 Health
             }
