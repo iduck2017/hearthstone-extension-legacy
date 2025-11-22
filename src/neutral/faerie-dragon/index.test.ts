@@ -10,7 +10,7 @@
 import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel } from "hearthstone-core";
 import { FaerieDragonModel } from "./index";
 import { FireballModel } from "../../mage/fireball";
-import { boot } from "../../../src/boot";
+import { boot } from '../../boot';
 
 describe('faerie-dragon', () => {
     const game = new GameModel({

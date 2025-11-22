@@ -23,7 +23,7 @@ export class IronfurGrizzlyModel extends MinionCardModel {
                 name: 'Ironfur Grizzly',
                 desc: 'Taunt',
                 flavorDesc: '"Bear Carcass 1/10"',
-                collectible: true,
+                isCollectible: true,
                 rarity: RarityType.COMMON,
                 class: ClassType.NEUTRAL,
                 races: [RaceType.BEAST],

@@ -25,7 +25,7 @@ export class FaerieDragonModel extends MinionCardModel {
                 name: 'Faerie Dragon',
                 desc: 'Elusive',
                 flavorDesc: 'Adorable. Immune to Magic. Doesn\'t pee on the rug. The perfect pet!',
-                collectible: true,
+                isCollectible: true,
                 rarity: RarityType.COMMON,
                 class: ClassType.NEUTRAL,
                 races: [RaceType.DRAGON],

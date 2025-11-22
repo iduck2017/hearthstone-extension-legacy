@@ -22,7 +22,7 @@ export class FrostwolfGruntModel extends MinionCardModel {
                 name: 'Frostwolf Grunt',
                 desc: 'Taunt',
                 flavorDesc: 'Grunting is what his father did and his father before that. It\'s more than just a job.',
-                collectible: true,
+                isCollectible: true,
                 rarity: RarityType.COMMON,
                 class: ClassType.NEUTRAL,
                 races: [],

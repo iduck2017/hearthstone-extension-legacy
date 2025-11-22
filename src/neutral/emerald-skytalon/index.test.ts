@@ -61,12 +61,13 @@ describe('emerald-skytalon', () => {
         expect(cardC.child.attack.state.current).toBe(2);
         expect(cardC.child.health.state.current).toBe(1);
         expect(cardC.child.action.state.current).toBe(1);
-        expect(cardC.child.sleep.state.actived).toBe(true);
-        expect(cardC.child.rush.state.actived).toBe(true)
+        expect(cardC.child.sleep.state.isActived).toBe(true);
+        expect(cardC.child.rush.state.isEnabled).toBe(true)
         promise = cardC.child.action.run()
 
-        expect(playerA.controller.current?.options).toContain(cardE);
-        expect(playerA.controller.current?.options).not.toContain(heroB);
+        const selector = playerA.controller.current;
+        expect(selector?.options).toContain(cardE);
+        expect(selector?.options).not.toContain(heroB);
         playerA.controller.set(undefined);
         await promise;
         expect(cardC.child.action.state.current).toBe(1);        
@@ -81,7 +82,7 @@ describe('emerald-skytalon', () => {
 
         expect(boardA.child.cards.length).toBe(2);
         expect(cardD.child.action.state.current).toBe(1);
-        expect(cardD.child.sleep.state.actived).toBe(true);
+        expect(cardD.child.sleep.state.isActived).toBe(true);
         expect(cardD.child.rush).toBeUndefined();
 
         // Wisp can not attack immediately
@@ -100,16 +101,17 @@ describe('emerald-skytalon', () => {
         await turn.next();
         expect(turn.refer.current).toBe(playerA);
 
-        expect(cardC.child.sleep.state.actived).toBe(false);
+        expect(cardC.child.sleep.state.isActived).toBe(false);
         expect(cardC.child.action.state.current).toBe(1);
-        expect(cardC.child.rush.state.actived).toBe(true);
-        expect(cardD.child.sleep.state.actived).toBe(false);
+        expect(cardC.child.rush.state.isEnabled).toBe(true);
+        expect(cardD.child.sleep.state.isActived).toBe(false);
         expect(cardD.child.action.state.current).toBe(1);
         expect(cardD.child.rush).toBeUndefined();
 
         let promise = cardC.child.action.run();
-        expect(playerA.controller.current?.options).toContain(cardE);
-        expect(playerA.controller.current?.options).toContain(heroB);
+        const selector = playerA.controller.current;
+        expect(selector?.options).toContain(cardE);
+        expect(selector?.options).toContain(heroB);
         playerA.controller.set(heroB);
         await promise;
 
@@ -120,8 +122,9 @@ describe('emerald-skytalon', () => {
     test('wisp-attack', async () => {
         // Wisp attack
         const promise = cardD.child.action.run();
-        expect(playerA.controller.current?.options).toContain(cardE);
-        expect(playerA.controller.current?.options).toContain(heroB);
+        const selector = playerA.controller.current;
+        expect(selector?.options).toContain(cardE);
+        expect(selector?.options).toContain(heroB);
         playerA.controller.set(heroB);
         await promise;
 
