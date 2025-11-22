@@ -1,14 +1,14 @@
 import { BattlecryModel } from "hearthstone-core";
 import { TemplUtil } from "set-piece";
 
-@TemplUtil.is('gnomish-inventor-battlecry')
-export class GnomishInventorBattlecryModel extends BattlecryModel<never> {
-    constructor(props?: GnomishInventorBattlecryModel['props']) {
+@TemplUtil.is('novice-engineer-battlecry')
+export class NoviceEngineerBattlecryModel extends BattlecryModel<never> {
+    constructor(props?: NoviceEngineerBattlecryModel['props']) {
         props = props ?? {};
         super({
             uuid: props.uuid,
             state: {
-                name: "Gnomish Inventor's Battlecry",
+                name: "Novice Engineer's Battlecry",
                 desc: "Draw a card.",
                 ...props.state
             },
@@ -17,14 +17,15 @@ export class GnomishInventorBattlecryModel extends BattlecryModel<never> {
         });
     }
 
-    public prepare(): never | undefined {
+    public precheck(): never | undefined {
         // No target selection needed
         return undefined;
     }
 
-    public run(params: never[]) {
+    public async doRun(params: Array<never | undefined>) {
         const minion = this.route.minion;
         if (!minion) return;
+
         const player = this.route.player;
         if (!player) return;
 

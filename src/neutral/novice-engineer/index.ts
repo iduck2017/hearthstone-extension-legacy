@@ -23,7 +23,7 @@ export class NoviceEngineerModel extends MinionCardModel {
                 name: 'Novice Engineer',
                 desc: 'Battlecry: Draw a card.',
                 flavorDesc: '"Half of this class will not graduate… since they\'ll have been turned to chickens." - Tinkmaster Overspark, teaching Gizmos 101.',
-                collectible: true,
+                isCollectible: true,
                 rarity: RarityType.COMMON,
                 class: ClassType.NEUTRAL,
                 races: [],

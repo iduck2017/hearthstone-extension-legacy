@@ -23,7 +23,7 @@ export class GnomishInventorModel extends MinionCardModel {
                 name: 'Gnomish Inventor',
                 desc: 'Battlecry: Draw a card.',
                 flavorDesc: 'She\'s never quite sure what she\'s making, she just knows it\'s AWESOME!',
-                collectible: true,
+                isCollectible: true,
                 rarity: RarityType.COMMON,
                 class: ClassType.NEUTRAL,
                 races: [],

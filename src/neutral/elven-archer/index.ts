@@ -10,7 +10,7 @@ export class ElvenArcherModel extends MinionCardModel {
             state: {
                 name: 'Elven Archer',
                 desc: 'Battlecry: Deal 1 damage.',
-                collectible: true,
+                isCollectible: true,
                 flavorDesc: 'Don\'t bother asking her out on a date. She\'ll shoot you down.',
                 rarity: RarityType.COMMON,
                 class: ClassType.NEUTRAL,

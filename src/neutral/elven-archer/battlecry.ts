@@ -17,15 +17,15 @@ export class ElvenArcherMinionBattlecryModel extends BattlecryModel<RoleModel> {
         });
     }
 
-    public prepare(): Selector<RoleModel> | undefined {
+    public precheck(): Selector<RoleModel> | undefined {
         const game = this.route.game;
         if (!game) return;
         const roles = game.refer.roles;
         return new Selector(roles, { hint: 'Choose a target' });
     }
 
-    public run(params: RoleModel[]): void {
-        const target = params[0]
+    public async doRun(params: Array<RoleModel | undefined>) {
+        const target = params[0];
         if (!target) return;
         DebugUtil.log(`${this.name} deals 1 damage to ${target.name}`);
         const minion = this.route.minion;
@@ -33,8 +33,8 @@ export class ElvenArcherMinionBattlecryModel extends BattlecryModel<RoleModel> {
         DamageModel.deal([
             new DamageEvent({
                 source: minion,
-                target,
                 method: this,
+                target,
                 origin: 1,
                 type: DamageType.DEFAULT,
             })

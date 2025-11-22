@@ -17,14 +17,14 @@ export class EarthenRingFarseerBattlecryModel extends BattlecryModel<RoleModel> 
         });
     }
 
-    public prepare(): Selector<RoleModel> | undefined {
+    public precheck(): Selector<RoleModel> | undefined {
         const game = this.route.game;
         if (!game) return;
         const roles = game.refer.roles; // All characters
         return new Selector(roles, { hint: "Choose a target to restore 3 health" });
     }
 
-    public run(params: RoleModel[]) {
+    public async doRun(params: Array<RoleModel | undefined>) {
         const target = params[0];
         if (!target) return;
         // Restore 3 health to the selected target
@@ -33,8 +33,8 @@ export class EarthenRingFarseerBattlecryModel extends BattlecryModel<RoleModel> 
         RestoreModel.deal([
             new RestoreEvent({
                 source: minion,
-                target: target,
                 method: this,
+                target: target,
                 origin: 3,
             })
         ]);

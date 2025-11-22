@@ -25,7 +25,7 @@ export class EarthenRingFarseerModel extends MinionCardModel {
                 name: 'Earthen Ring Farseer',
                 desc: 'Battlecry: Restore 3 Health.',
                 flavorDesc: 'He can see really far, and he doesn\'t use a telescope like those filthy pirates.',
-                collectible: true,
+                isCollectible: true,
                 rarity: RarityType.COMMON,
                 class: ClassType.NEUTRAL,
                 races: [],

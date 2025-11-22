@@ -20,7 +20,7 @@ export class VioletApprenticeModel extends MinionCardModel {
                 name: 'Violet Apprentice',
                 desc: '',
                 flavorDesc: '',
-                collectible: false,
+                isCollectible: false,
                 rarity: RarityType.COMMON,
                 class: ClassType.NEUTRAL,
                 races: [],

@@ -108,9 +108,10 @@ describe('emperor-cobra', () => {
         // Mogu'shan Warden should die from Poisonous (despite having 7 health vs 2 attack)
         expect(cardD.child.health.state.current).toBe(5); // Mogu'shan Warden dies from Poisonous
         expect(cardD.child.health.state.damage).toBe(2);
+        expect(cardD.child.dispose.state.isDestroyed).toBe(true);
+        console.log(cardD.child.dispose.state)
         expect(cardD.child.dispose.state.isActived).toBe(true);
         expect(cardD.child.dispose.refer.source).toBe(cardC);
-        expect(cardD.child.dispose.state.isActived).toBe(true);
         
         expect(boardB.child.cards.length).toBe(0); // Mogu'shan Warden dies
         // Emperor Cobra should also take damage from the attack
