@@ -13,7 +13,7 @@
  * Collectible
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, SpellCardModel, SpellFeaturesModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryUtil, RarityType, SpellCardModel,  } from "hearthstone-core";
 import { PowerOfTheWildEffectModel } from "./effect";
 
 @LibraryUtil.is('power-of-the-wild')
@@ -35,7 +35,7 @@ export class PowerOfTheWildModel extends SpellCardModel {
             refer: { ...props.refer },
             child: { 
                 cost: props.child?.cost ?? new CostModel({ state: { origin: 2 }}),
-                feats: props.child?.feats ?? new SpellFeaturesModel({
+                feats: props.child?.feats ?? new ({
                     child: { effects: [new PowerOfTheWildEffectModel()] }
                 }),
                 ...props.child 

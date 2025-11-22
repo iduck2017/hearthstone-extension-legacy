@@ -13,7 +13,7 @@
  * Artist: Raymond Swanland
  * Collectible
  */
-import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel, SpellFeaturesModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel,  } from "hearthstone-core";
 import { WrathEffectModel } from "./effect";
 
 @LibraryUtil.is('wrath')
@@ -35,7 +35,7 @@ export class WrathModel extends SpellCardModel {
             refer: { ...props.refer },
             child: { 
                 cost: props.child?.cost ?? new CostModel({ state: { origin: 2 }}),
-                feats: props.child?.feats ?? new SpellFeaturesModel({
+                feats: props.child?.feats ?? new ({
                     child: { effects: [new WrathEffectModel()] }
                 }),
                 ...props.child 

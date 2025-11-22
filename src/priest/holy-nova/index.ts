@@ -1,4 +1,4 @@
-import { ClassType, CostModel, LibraryUtil, SpellCardModel, RarityType, SchoolType, SpellFeaturesModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryUtil, SpellCardModel, RarityType, SchoolType } from "hearthstone-core";
 import { HolyNovaEffectModel } from "./effect";
 
 @LibraryUtil.is('holy-nova')

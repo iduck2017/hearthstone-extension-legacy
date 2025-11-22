@@ -18,7 +18,7 @@ export class DivineSpiritEffectModel extends SpellEffectModel<MinionCardModel> {
         });
     }
 
-    public prepare(): Selector<MinionCardModel> | undefined {
+    public precheck(): Selector<MinionCardModel> | undefined {
         const games = this.route.game;
         if (!games) return;
         
@@ -29,7 +29,9 @@ export class DivineSpiritEffectModel extends SpellEffectModel<MinionCardModel> {
         return new Selector(roles, { hint: "Choose a minion" });
     }
 
-    protected run(target: MinionCardModel) {
+    public async doRun(params: Array<MinionCardModel | undefined>) {
+        const target = params[0];
+        if (!target) return;
         // Get current health and create a buff with equal value
         const currentHealth = target.child.health.state.current;
         const buff = new RoleBuffModel({

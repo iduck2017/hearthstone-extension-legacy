@@ -81,7 +81,7 @@ describe('holy-fire', () => {
 
         // Player B's hero should be damaged and frozen
         expect(heroB.child.health.state.current).toBe(27); // 30 - 3 = 27
-        expect(heroB.child.feats.child.frozen.state.isActive).toBe(true); // Frozen by Water Elemental
+        expect(heroB.child.frozen.state.isEnabled).toBe(true); // Frozen by Water Elemental
     });
 
     test('holy-fire-cast', async () => {

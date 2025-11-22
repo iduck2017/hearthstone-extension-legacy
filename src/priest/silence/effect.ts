@@ -18,14 +18,16 @@ export class SilenceEffectModel extends SpellEffectModel<MinionCardModel> {
         });
     }
 
-    public prepare(): Selector<MinionCardModel> | undefined {
+    public precheck(): Selector<MinionCardModel> | undefined {
         const games = this.route.game;
         if (!games) return;
         const roles = games.refer.roles.filter(role => role instanceof MinionCardModel);
         return new Selector(roles, { hint: "Choose a minion" });
     }
 
-    protected run(target: MinionCardModel) {
+    public async doRun(params: Array<MinionCardModel | undefined>) {
+        const target = params[0];
+        if (!target) return;
         target.silence();
     }
 }

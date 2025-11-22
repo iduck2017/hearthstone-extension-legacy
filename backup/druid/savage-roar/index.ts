@@ -13,7 +13,7 @@
  * Collectible
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, SpellCardModel, SpellFeaturesModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryUtil, RarityType, SpellCardModel,  } from "hearthstone-core";
 import { SavageRoarEffectModel } from "./effect";
 
 @LibraryUtil.is('savage-roar')
@@ -35,7 +35,7 @@ export class SavageRoarModel extends SpellCardModel {
             refer: { ...props.refer },
             child: { 
                 cost: props.child?.cost ?? new CostModel({ state: { origin: 3 }}),
-                feats: props.child?.feats ?? new SpellFeaturesModel({
+                feats: props.child?.feats ?? new ({
                     child: { effects: [new SavageRoarEffectModel()] }
                 }),
                 ...props.child 

@@ -29,7 +29,7 @@ export class ManaWyrmModel extends MinionCardModel {
                 name: 'Mana Wyrm',
                 desc: 'Whenever you cast a spell, gain +1 Attack.',
                 flavorDesc: 'These wyrms feed on arcane energies, and while they are generally considered a nuisance rather than a real threat, you really shouldn\'t leave them alone with a bucket of mana.',
-                collectible: true,
+                isCollectible: true,
                 rarity: RarityType.COMMON,
                 class: ClassType.MAGE,
                 races: [],

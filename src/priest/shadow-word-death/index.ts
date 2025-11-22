@@ -15,7 +15,7 @@
  * 
  * 2 cost
  */
-import { ClassType, CostModel, LibraryUtil, RarityType, SpellCardModel, SchoolType, SpellFeaturesModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryUtil, RarityType, SpellCardModel, SchoolType } from "hearthstone-core";
 import { ShadowWordDeathEffectModel } from "./effect";
 
 @LibraryUtil.is('shadow-word-death')

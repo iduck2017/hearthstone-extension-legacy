@@ -1,8 +1,8 @@
-import { MinionBattlecryModel, DamageModel, DamageEvent } from "hearthstone-core";
+import { BattlecryModel, DamageModel, DamageEvent, DamageType } from "hearthstone-core";
 import { TemplUtil } from "set-piece";
 
 @TemplUtil.is('flame-imp-battlecry')
-export class FlameImpBattlecryModel extends MinionBattlecryModel<[]> {
+export class FlameImpBattlecryModel extends BattlecryModel<never> {
     constructor(props?: FlameImpBattlecryModel['props']) {
         props = props ?? {};
         super({
@@ -17,25 +17,27 @@ export class FlameImpBattlecryModel extends MinionBattlecryModel<[]> {
         });
     }
 
-    public toRun(): [] | undefined {
-        return [];
+    public precheck(): never | undefined {
+        // No target selection needed
+        return undefined;
     }
 
-    public doRun(from: number, to: number) {
+    public async doRun(params: Array<never | undefined>) {
         // Deal 3 damage to your hero
-        const card = this.route.card;
-        if (!card) return;
+        const minion = this.route.minion;
+        if (!minion) return;
         const player = this.route.player;
         if (!player) return;
         const hero = player.child.hero;
         
         DamageModel.deal([
             new DamageEvent({
-                source: card,
+                type: DamageType.SPELL,
+                source: minion,
                 target: hero,
                 method: this,
                 origin: 3,
-            })]
-        );
+            })
+        ]);
     }
 }

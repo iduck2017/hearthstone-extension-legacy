@@ -13,7 +13,7 @@
  * Collectible
  */
 
-import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, MinionFeaturesModel, RarityType, RoleAttackModel, RaceType } from "hearthstone-core";
+import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, RarityType, RoleAttackModel, RaceType } from "hearthstone-core";
 import { FlameImpBattlecryModel } from "./battlecry";
 
 @LibraryUtil.is('flame-imp')
@@ -36,11 +36,7 @@ export class FlameImpModel extends MinionCardModel {
                 cost: props.child?.cost ??  new CostModel({ state: { origin: 1 }}),
                 attack: props.child?.attack ?? new RoleAttackModel({ state: { origin: 3 }}),
                 health: props.child?.health ?? new RoleHealthModel({ state: { origin: 2 }}),
-                feats: props.child?.feats ?? new MinionFeaturesModel({
-                    child: { 
-                        battlecry: [new FlameImpBattlecryModel()]
-                    }
-                }),
+                battlecry: props.child?.battlecry ?? [new FlameImpBattlecryModel()],
                 ...props.child
             },
             refer: { ...props.refer }

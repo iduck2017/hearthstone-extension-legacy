@@ -18,7 +18,7 @@ export class ShadowWordDeathEffectModel extends SpellEffectModel<RoleModel> {
         });
     }
 
-    public prepare(): Selector<RoleModel> | undefined {
+    public precheck(): Selector<RoleModel> | undefined {
         const games = this.route.game;
         if (!games) return;
         
@@ -29,10 +29,12 @@ export class ShadowWordDeathEffectModel extends SpellEffectModel<RoleModel> {
         return new Selector(roles, { hint: "Choose a minion with 5 or more Attack" });
     }
 
-    protected run(target: RoleModel) {
+    public async doRun(params: Array<RoleModel | undefined>) {
+        const target = params[0];
+        if (!target) return;
         // Check if the minion has 5 or more Attack
         if (target.child.attack.state.current < 5) return;
         // Destroy the minion
-        target.child.dispose.active(true, this.route.card, this);
+        target.child.dispose.destroy(this.route.card, this);
     }
 }

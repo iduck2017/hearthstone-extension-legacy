@@ -1,4 +1,4 @@
-import { SpellCardModel, RarityType, ClassType, SchoolType, CostModel, SpellFeaturesModel } from "hearthstone-core";
+import { SpellCardModel, RarityType, ClassType, SchoolType, CostModel } from "hearthstone-core";
 import { TemplUtil } from "set-piece";
 import { HolyFireEffectModel } from "./effect";
 

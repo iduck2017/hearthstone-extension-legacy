@@ -18,7 +18,7 @@
  * 2 cost
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, SpellCardModel, SchoolType, SpellFeaturesModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryUtil, RarityType, SpellCardModel, SchoolType,  } from "hearthstone-core";
 import { ThoughtstealEffectModel } from "./effect";
 
 @LibraryUtil.is('thoughtsteal')

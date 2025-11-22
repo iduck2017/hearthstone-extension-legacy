@@ -2,15 +2,15 @@
  * Test cases for Shadow Word: Death
  * 
  * Initial state: Player A has Shadow Word: Death in hand.
- * Player B has Aegwynn (5/5/5) and Stonetusk Boar (1/1) on board.
+ * Player B has Stranglethorn Tiger (5/5/5) and Stonetusk Boar (1/1) on board.
  * 
- * 1. shadow-word-death-cast: Player A uses Shadow Word: Death on Aegwynn, destroys it.
+ * 1. shadow-word-death-cast: Player A uses Shadow Word: Death on Stranglethorn Tiger, destroys it.
  */
 import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel } from "hearthstone-core";
 import { ShadowWordDeathModel } from "./index";
 import { StonetuskBoarModel } from "../../neutral/stonetusk-boar";
 import { boot } from "../../boot";
-import { AegwynnTheGuardianModel } from "../../mage/aegwynn-the-guardian";
+import { StranglethornTigerModel } from "../../neutral/stranglethorn-tiger";
 
 describe('shadow-word-death', () => {
     const game = new GameModel({
@@ -39,7 +39,7 @@ describe('shadow-word-death', () => {
                     hero: new MageModel(),
                     board: new BoardModel({
                         child: { 
-                            cards: [new AegwynnTheGuardianModel(), new StonetuskBoarModel()]
+                            cards: [new StranglethornTigerModel(), new StonetuskBoarModel()]
                         }
                     }),
                     hand: new HandModel({
@@ -58,7 +58,7 @@ describe('shadow-word-death', () => {
     const heroB = playerB.child.hero;
     const handA = playerA.child.hand;
     const cardC = handA.child.cards.find(item => item instanceof ShadowWordDeathModel);
-    const cardD = boardB.child.cards.find(item => item instanceof AegwynnTheGuardianModel);
+    const cardD = boardB.child.cards.find(item => item instanceof StranglethornTigerModel);
     const cardE = boardB.child.cards.find(item => item instanceof StonetuskBoarModel);
     if (!cardC || !cardD || !cardE) throw new Error();
 
@@ -70,17 +70,17 @@ describe('shadow-word-death', () => {
 
         // Player A uses Shadow Word: Death
         const promise = cardC.play();
-        expect(playerA.controller.current?.options).toContain(cardD); // Aegwynn (5/5/5) should be targetable
+        expect(playerA.controller.current?.options).toContain(cardD); // Stranglethorn Tiger (5/5/5) should be targetable
         expect(playerA.controller.current?.options).not.toContain(cardE); // Stonetusk Boar (1/1) should not be targetable
         expect(playerA.controller.current?.options).not.toContain(heroA);
         expect(playerA.controller.current?.options).not.toContain(heroB); 
         playerA.controller.set(cardD);
         await promise;
 
-        // Aegwynn should be destroyed
+        // Stranglethorn Tiger should be destroyed
         expect(boardB.child.cards.length).toBe(1); // Only Stonetusk Boar remains
-        expect(cardD.child.dispose.status).toBe(true);
-        expect(cardE.child.dispose.status).toBe(false);
+        expect(cardD.child.dispose.state.isActived).toBe(true);
+        expect(cardE.child.dispose.state.isActived).toBe(false);
         expect(boardB.child.cards[0]).toBe(cardE);
 
         // Shadow Word: Death should be consumed

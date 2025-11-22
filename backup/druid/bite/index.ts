@@ -13,7 +13,7 @@
  * Collectible
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, SpellCardModel, SpellFeaturesModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryUtil, RarityType, SpellCardModel,  } from "hearthstone-core";
 import { BiteEffectModel } from "./effect";
 
 @LibraryUtil.is('bite')
@@ -35,7 +35,7 @@ export class BiteModel extends SpellCardModel {
             refer: { ...props.refer },
             child: { 
                 cost: props.child?.cost ?? new CostModel({ state: { origin: 4 }}),
-                feats: props.child?.feats ?? new SpellFeaturesModel({
+                feats: props.child?.feats ?? new ({
                     child: { effects: [new BiteEffectModel()] }
                 }),
                 ...props.child 

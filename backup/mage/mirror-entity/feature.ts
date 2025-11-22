@@ -1,5 +1,4 @@
-import { CardModel, MinionCardModel, SecretFeatureModel } from "hearthstone-core";
-import { MinionPerformModel } from "hearthstone-core/dist/type/models/features/perform/minion";
+import { CardModel, MinionCardModel, MinionPerformModel, SecretFeatureModel } from "hearthstone-core";
 import { Event, EventUtil, TemplUtil, TranxUtil } from "set-piece";
 import { PolymorphModel } from "../polymorph";
 

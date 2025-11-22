@@ -1,4 +1,4 @@
-import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel, SpellFeaturesModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel,  } from "hearthstone-core";
 import { PursuitOfJusticeEffectModel } from "./effect";
 
 @LibraryUtil.is('pursuit-of-justice')
@@ -20,7 +20,7 @@ export class PursuitOfJusticeModel extends SpellCardModel {
             refer: { ...props.refer },
             child: {
                 cost: props.child?.cost ?? new CostModel({ state: { origin: 2 }}),
-                feats: props.child?.feats ?? new SpellFeaturesModel({
+                feats: props.child?.feats ?? new ({
                     child: { effects: [new PursuitOfJusticeEffectModel()] }
                 }),
                 ...props.child

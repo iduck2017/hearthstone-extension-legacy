@@ -1,4 +1,4 @@
-import { ClassType, CostModel, LibraryUtil, SpellCardModel, RarityType, SchoolType, SpellFeaturesModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryUtil, SpellCardModel, RarityType, SchoolType,  } from "hearthstone-core";
 import { MassDispelEffectModel } from "./effect";
 
 @LibraryUtil.is('mass-dispel')

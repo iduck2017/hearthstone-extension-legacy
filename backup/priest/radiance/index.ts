@@ -15,7 +15,7 @@
  * 
  * 1 cost
  */
-import { ClassType, CostModel, LibraryUtil, RarityType, SpellCardModel, SchoolType, SpellFeaturesModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryUtil, RarityType, SpellCardModel, SchoolType,  } from "hearthstone-core";
 import { RadianceEffectModel } from "./effect";
 
 @LibraryUtil.is('radiance')

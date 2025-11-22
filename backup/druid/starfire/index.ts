@@ -14,7 +14,7 @@
  * Collectible
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel, SpellFeaturesModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel,  } from "hearthstone-core";
 import { StarfireEffectModel } from "./effect";
 
 @LibraryUtil.is('starfire')
@@ -36,7 +36,7 @@ export class StarfireModel extends SpellCardModel {
             refer: { ...props.refer },
             child: { 
                 cost: props.child?.cost ?? new CostModel({ state: { origin: 6 }}),
-                feats: props.child?.feats ?? new SpellFeaturesModel({
+                feats: props.child?.feats ?? new ({
                     child: { effects: [new StarfireEffectModel()] }
                 }),
                 ...props.child 

@@ -1,4 +1,4 @@
-import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel, SpellFeaturesModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel,  } from "hearthstone-core";
 import { BlessingOfWisdomEffectModel } from "./effect";
 
 @LibraryUtil.is('blessing-of-wisdom')
@@ -20,7 +20,7 @@ export class BlessingOfWisdomModel extends SpellCardModel {
             refer: { ...props.refer },
             child: {
                 cost: props.child?.cost ?? new CostModel({ state: { origin: 1 }}),
-                feats: props.child?.feats ?? new SpellFeaturesModel({
+                feats: props.child?.feats ?? new ({
                     child: { effects: [new BlessingOfWisdomEffectModel()] }
                 }),
                 ...props.child

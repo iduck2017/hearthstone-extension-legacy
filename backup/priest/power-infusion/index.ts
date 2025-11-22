@@ -1,4 +1,4 @@
-import { ClassType, CostModel, LibraryUtil, SpellCardModel, RarityType, SchoolType, SpellFeaturesModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryUtil, SpellCardModel, RarityType, SchoolType,  } from "hearthstone-core";
 import { PowerInfusionEffectModel } from "./effect";
 
 @LibraryUtil.is('power-infusion')

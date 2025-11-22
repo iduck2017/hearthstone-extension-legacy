@@ -18,14 +18,16 @@ export class HolyFireEffectModel extends SpellEffectModel<RoleModel> {
         });
     }
 
-    public prepare(): Selector<RoleModel> | undefined {
+    public precheck(): Selector<RoleModel> | undefined {
         const games = this.route.game;
         if (!games) return;
         const roles = games.refer.roles;
         return new Selector(roles, { hint: "Choose a target" });
     }
 
-    protected run(target: RoleModel) {
+    public async doRun(params: Array<RoleModel | undefined>) {
+        const target = params[0];
+        if (!target) return;
         const card = this.route.card;
         const player = this.route.player;
         if (!card || !player) return;

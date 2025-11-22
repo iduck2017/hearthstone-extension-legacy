@@ -20,11 +20,11 @@ export class ArcaneExplosionEffectModel extends SpellEffectModel<never> {
         });
     }
 
-    public prepare(...prev: never[]): Selector<never> | undefined {
+    public precheck(): Selector<never> | undefined {
         return undefined
     }
 
-    protected run(params: never[]) {
+    public async doRun() {
         const player = this.route.player;
         const opponent = player?.refer.opponent;
         if (!opponent) return;

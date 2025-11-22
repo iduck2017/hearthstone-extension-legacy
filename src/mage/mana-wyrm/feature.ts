@@ -1,5 +1,4 @@
-import { SpellCardModel, RoleBuffModel, RoleFeatureModel } from "hearthstone-core";
-import { SpellPerformModel } from "hearthstone-core/dist/type/models/features/perform/spell";
+import { SpellCardModel, RoleBuffModel, RoleFeatureModel, SpellPerformModel } from "hearthstone-core";
 import { Event, EventUtil, TemplUtil } from "set-piece";
 
 @TemplUtil.is('mana-wyrm-feature')
@@ -12,7 +11,7 @@ export class ManaWyrmFeatureModel extends RoleFeatureModel {
             state: { 
                 name: "Mana Wyrm's feature",
                 desc: "Whenever you cast a spell, gain +1 Attack.",
-                actived: true,
+                isEnabled: true,
                 ...props.state 
             },
             child: { ...props.child },
@@ -22,9 +21,10 @@ export class ManaWyrmFeatureModel extends RoleFeatureModel {
 
     @EventUtil.on(self => self.handleCast)
     private listenCast() {
-        return this.route.player?.proxy.any(SpellCardModel).child.perform.event?.onPlay
+        const spell = this.route.player?.proxy.any(SpellCardModel);
+        return spell?.child.perform.event?.onPlay
     }
-    private handleCast(that: SpellPerformModel, event: Event) {
+    protected handleCast(that: SpellPerformModel, event: Event) {
         const role = this.route.role;
         if (!role) return;
         const player = this.route.player;

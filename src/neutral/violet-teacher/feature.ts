@@ -21,7 +21,9 @@ export class VioletTeacherFeatureModel extends RoleFeatureModel {
 
     @EventUtil.on(self => self.handleCast)
     private listenCast() {
-        return this.route.game?.proxy.any(SpellCardModel).child.perform.event?.onPlay
+        const spell = this.route.game?.proxy.any(SpellCardModel);
+        if (!spell) return;
+        return spell.child.perform.event?.onPlay
     }
     private handleCast(that: SpellPerformModel, event: Event) {
         const minion = this.route.minion;

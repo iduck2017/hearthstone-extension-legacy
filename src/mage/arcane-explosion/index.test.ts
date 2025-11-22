@@ -6,9 +6,9 @@
 
 import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel } from "hearthstone-core";
 import { ArcaneExplosionModel } from "./index";
-import { WispModel } from "../../../src/neutral/wisp";
-import { GoldshireFootmanModel } from "../../../src/neutral/goldshire-footman";
-import { boot } from "../../../src/boot";
+import { WispModel } from "../../neutral/wisp";
+import { GoldshireFootmanModel } from "../../neutral/goldshire-footman";
+import { boot } from "../../boot";
 
 describe('arcane-explosion', () => {
     const game = new GameModel({

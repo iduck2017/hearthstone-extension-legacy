@@ -8,7 +8,7 @@
 import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel } from "hearthstone-core";
 import { ManaWyrmModel } from "./index";
 import { ArcaneExplosionModel } from "../arcane-explosion";
-import { boot } from "../../../src/boot";
+import { boot } from "../../boot";
 
 
 
