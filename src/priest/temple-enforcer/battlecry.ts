@@ -23,8 +23,6 @@ export class TempleEnforcerBattlecryModel extends BattlecryModel<RoleModel> {
         
         // Only target friendly minions
         const roles = player.refer.minions;
-        if (roles.length === 0) return; // No valid targets
-        
         return new Selector(roles, { hint: "Choose a friendly minion" });
     }
 

@@ -27,7 +27,7 @@ export class ShadowWordRuinEffectModel extends SpellEffectModel<never> {
         if (!game) return;
 
         // Get all minions (both friendly and enemy)
-        const minions = game.refer.roles.filter(role => role instanceof MinionCardModel);
+        const minions = game.refer.minions;
         const card = this.route.card;
         if (!card) return;
         // Destroy all minions with 5 or more Attack

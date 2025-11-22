@@ -21,7 +21,7 @@ export class PowerWordShieldEffectModel extends SpellEffectModel<RoleModel> {
     public precheck(): Selector<RoleModel> | undefined {
         const game = this.route.game;
         if (!game) return;
-        const roles = game.refer.roles.filter(role => role instanceof MinionCardModel);
+        const roles = game.refer.minions;
         return new Selector(roles, { hint: "Choose a minion" });
     }
 

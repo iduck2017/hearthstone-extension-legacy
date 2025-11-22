@@ -23,9 +23,7 @@ export class ShadowWordPainEffectModel extends SpellEffectModel<RoleModel> {
         if (!games) return;
         
         // Only target minions with 3 or less Attack
-        const roles = games.refer.roles.filter(role => role instanceof MinionCardModel && role.child.attack.state.current <= 3);
-        if (roles.length === 0) return; // No valid targets
-        
+        const roles = games.refer.minions.filter(role => role.child.attack.state.current <= 3);
         return new Selector(roles, { hint: "Choose a minion with 3 or less Attack" });
     }
 

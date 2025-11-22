@@ -27,8 +27,7 @@ export class LightwellTurnEndModel extends TurnEndModel {
         const roles = player.refer.roles
             .filter(role => {
                 const health = role.child.health;
-                if (health.state.maximum > health.state.current) return true;
-                return false;
+                return health.state.isInjured;
             })
         
         if (!roles.length) return;

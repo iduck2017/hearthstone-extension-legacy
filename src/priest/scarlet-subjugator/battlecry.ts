@@ -25,8 +25,6 @@ export class ScarletSubjugatorBattlecryModel extends BattlecryModel<RoleModel> {
         
         // Only target enemy minions
         const roles = opponent.refer.minions;
-        if (roles.length === 0) return; // No valid targets
-        
         return new Selector(roles, { hint: "Choose an enemy minion" });
     }
 

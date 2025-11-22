@@ -55,7 +55,7 @@ export class AmaniBerserkerFeatureModel extends RoleFeatureModel<
         if (!role) return;
 
         const health = role.child.health;
-        const isEnrage = health.state.current < health.state.maximum;
+        const isEnrage = health.state.isInjured;
         if (!isEnrage) return;
         
         decor.add({

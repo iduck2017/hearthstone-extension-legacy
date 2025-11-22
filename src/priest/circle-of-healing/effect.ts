@@ -28,7 +28,7 @@ export class CircleOfHealingEffectModel extends SpellEffectModel<never> {
         const card = this.route.card;
         if (!card) return;
 
-        const minions = game.refer.roles.filter(role => role instanceof MinionCardModel);
+        const minions = game.refer.minions;
         // Restore 4 Health to all minions
         RestoreModel.deal(minions.map((item) => new RestoreEvent({
             source: card,

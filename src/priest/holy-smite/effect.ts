@@ -21,8 +21,7 @@ export class HolySmiteEffectModel extends SpellEffectModel<RoleModel> {
     public precheck(): Selector<RoleModel> | undefined {
         const games = this.route.game;
         if (!games) return;
-        const roles = games.refer.roles.filter(role => role instanceof MinionCardModel);
-        if (roles.length === 0) return;
+        const roles = games.refer.minions;
         return new Selector(roles, { hint: "Choose a minion" });
     }
 
