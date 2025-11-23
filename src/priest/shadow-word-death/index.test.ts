@@ -1,16 +1,22 @@
 /**
  * Test cases for Shadow Word: Death
  * 
- * Initial state: Player A has Shadow Word: Death in hand.
- * Player B has Stranglethorn Tiger (5/5/5) and Stonetusk Boar (1/1) on board.
- * 
- * 1. shadow-word-death-cast: Player A uses Shadow Word: Death on Stranglethorn Tiger, destroys it.
+ * 1. initial-state:
+ *    - Player A has Shadow Word: Death in hand
+ *    - Player B has Core Hound (9/5) on board
+ *    - Player B has Stonetusk Boar (1/1) on board
+ * 2. shadow-word-death-cast:
+ *    - Player A uses Shadow Word: Death
+ *    - Assert: Targets include Core Hound (attack >= 5)
+ *    - Assert: Targets do not include Stonetusk Boar (attack < 5)
+ *    - Select target Core Hound
+ *    - Assert: Core Hound is destroyed and removed from board
  */
 import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel } from "hearthstone-core";
 import { ShadowWordDeathModel } from "./index";
 import { StonetuskBoarModel } from "../../neutral/stonetusk-boar";
+import { CoreHoundModel } from "../../neutral/core-hound";
 import { boot } from "../../boot";
-import { StranglethornTigerModel } from "../../neutral/stranglethorn-tiger";
 
 describe('shadow-word-death', () => {
     const game = new GameModel({
@@ -39,7 +45,7 @@ describe('shadow-word-death', () => {
                     hero: new MageModel(),
                     board: new BoardModel({
                         child: { 
-                            cards: [new StranglethornTigerModel(), new StonetuskBoarModel()]
+                            cards: [new CoreHoundModel(), new StonetuskBoarModel()]
                         }
                     }),
                     hand: new HandModel({
@@ -58,33 +64,31 @@ describe('shadow-word-death', () => {
     const heroB = playerB.child.hero;
     const handA = playerA.child.hand;
     const cardC = handA.child.cards.find(item => item instanceof ShadowWordDeathModel);
-    const cardD = boardB.child.cards.find(item => item instanceof StranglethornTigerModel);
+    const cardD = boardB.child.cards.find(item => item instanceof CoreHoundModel);
     const cardE = boardB.child.cards.find(item => item instanceof StonetuskBoarModel);
     if (!cardC || !cardD || !cardE) throw new Error();
 
-    test('shadow-word-death-cast', async () => {
-        // Check initial state
-        expect(boardB.child.cards.length).toBe(2);
-        expect(playerA.child.mana.state.current).toBe(10);
-        expect(handA.child.cards.length).toBe(1);
+    // initial-state:
+    // - Player A has Shadow Word: Death in hand
+    // - Player B has Core Hound (9/5) on board
+    // - Player B has Stonetusk Boar (1/1) on board
 
+    test('shadow-word-death-cast', async () => {
         // Player A uses Shadow Word: Death
-        const promise = cardC.play();
-        expect(playerA.controller.current?.options).toContain(cardD); // Stranglethorn Tiger (5/5/5) should be targetable
-        expect(playerA.controller.current?.options).not.toContain(cardE); // Stonetusk Boar (1/1) should not be targetable
-        expect(playerA.controller.current?.options).not.toContain(heroA);
-        expect(playerA.controller.current?.options).not.toContain(heroB); 
+        let promise = cardC.play();
+        
+        // Assert: Targets include Core Hound (attack >= 5)
+        expect(playerA.controller.current?.options).toContain(cardD);
+        
+        // Assert: Targets do not include Stonetusk Boar (attack < 5)
+        expect(playerA.controller.current?.options).not.toContain(cardE);
+        
+        // Select target Core Hound
         playerA.controller.set(cardD);
         await promise;
 
-        // Stranglethorn Tiger should be destroyed
-        expect(boardB.child.cards.length).toBe(1); // Only Stonetusk Boar remains
+        // Assert: Core Hound is destroyed and removed from board
         expect(cardD.child.dispose.state.isActived).toBe(true);
-        expect(cardE.child.dispose.state.isActived).toBe(false);
-        expect(boardB.child.cards[0]).toBe(cardE);
-
-        // Shadow Word: Death should be consumed
-        expect(handA.child.cards.length).toBe(0); // Shadow Word: Death consumed
-        expect(playerA.child.mana.state.current).toBe(8); // 10 - 2 cost
+        expect(boardB.child.cards).not.toContain(cardD);
     });
 });

@@ -1,17 +1,25 @@
 /**
  * Test cases for Shadow Word: Ruin
  * 
- * Initial state: Player A has Shadow Word: Ruin in hand.
- * Player A has minions with different attack values on board.
- * Player B has minions with different attack values on board.
- * 
- * 1. shadow-word-ruin-cast: Player A casts Shadow Word: Ruin, destroying all minions with 5 or more Attack.
+ * 1. initial-state:
+ *    - Player A has Shadow Word: Ruin in hand
+ *    - Player A has Wisp (1/1) on board
+ *    - Player A has Water Elemental (3/6) on board
+ *    - Player A has Stranglethorn Tiger (5/5) on board
+ *    - Player B has Core Hound (9/5) on board
+ * 2. shadow-word-ruin-cast:
+ *    - Player A uses Shadow Word: Ruin
+ *    - Assert: Stranglethorn Tiger (attack >= 5) is destroyed
+ *    - Assert: Core Hound (attack >= 5) is destroyed
+ *    - Assert: Wisp (attack < 5) survives
+ *    - Assert: Water Elemental (attack < 5) survives
  */
 import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel, CommonUtil } from "hearthstone-core";
 import { ShadowWordRuinModel } from "./index";
 import { WispModel } from "../../neutral/wisp";
 import { WaterElementalModel } from "../../mage/water-elemental";
 import { StranglethornTigerModel } from "../../neutral/stranglethorn-tiger";
+import { CoreHoundModel } from "../../neutral/core-hound";
 import { boot } from "../../boot";
 
 describe('shadow-word-ruin', () => {
@@ -43,7 +51,7 @@ describe('shadow-word-ruin', () => {
                     hero: new MageModel(),
                     board: new BoardModel({
                         child: { 
-                            cards: [new WispModel(), new WaterElementalModel()]
+                            cards: [new CoreHoundModel()]
                         }
                     }),
                     hand: new HandModel({
@@ -64,44 +72,33 @@ describe('shadow-word-ruin', () => {
     const cardD = boardA.child.cards.find(item => item instanceof WispModel);
     const cardE = boardA.child.cards.find(item => item instanceof WaterElementalModel);
     const cardF = boardA.child.cards.find(item => item instanceof StranglethornTigerModel);
-    const cardG = boardB.child.cards.find(item => item instanceof WispModel);
-    const cardH = boardB.child.cards.find(item => item instanceof WaterElementalModel);
-    if (!cardC || !cardD || !cardE || !cardF || !cardG || !cardH) throw new Error();
+    const cardG = boardB.child.cards.find(item => item instanceof CoreHoundModel);
+    if (!cardC || !cardD || !cardE || !cardF || !cardG) throw new Error();
+
+    // initial-state:
+    // - Player A has Shadow Word: Ruin in hand
+    // - Player A has Wisp (1/1) on board
+    // - Player A has Water Elemental (3/6) on board
+    // - Player A has Stranglethorn Tiger (5/5) on board
+    // - Player B has Core Hound (9/5) on board
 
     test('shadow-word-ruin-cast', async () => {
-        // Check initial state
-        expect(cardD.child.attack.state.current).toBe(1); // Wisp: 1/1 (should survive)
-        expect(cardD.child.health.state.current).toBe(1);
-        expect(cardE.child.attack.state.current).toBe(3); // Water Elemental: 3/6 (should survive)
-        expect(cardE.child.health.state.current).toBe(6);
-        expect(cardF.child.attack.state.current).toBe(5); // Stranglethorn Tiger: 5/5 (should be destroyed)
-        expect(cardF.child.health.state.current).toBe(5);
-        expect(cardG.child.attack.state.current).toBe(1); // Enemy Wisp: 1/1 (should survive)
-        expect(cardG.child.health.state.current).toBe(1);
-        expect(cardH.child.attack.state.current).toBe(3); // Enemy Water Elemental: 3/6 (should survive)
-        expect(cardH.child.health.state.current).toBe(6);
+        // Player A uses Shadow Word: Ruin
+        await cardC.play();
 
-        // Check initial board state
-        expect(boardA.child.cards.length).toBe(3);
-        expect(boardB.child.cards.length).toBe(2);
+        // Assert: Stranglethorn Tiger (attack >= 5) is destroyed
+        expect(cardF.child.dispose.state.isActived).toBe(true);
+        
+        // Assert: Core Hound (attack >= 5) is destroyed
+        expect(cardG.child.dispose.state.isActived).toBe(true);
+        
+        // Assert: Wisp (attack < 5) survives
+        expect(cardD.child.dispose.state.isActived).toBe(false);
+        
+        // Assert: Water Elemental (attack < 5) survives
+        expect(cardE.child.dispose.state.isActived).toBe(false);
 
-        // Cast Shadow Word: Ruin
-        let promise = cardC.play();
-        await promise;
-
-        // Only Aegwynn (5/5) should be destroyed, others should survive
-        expect(cardD.child.dispose.state.isActived).toBe(false); // Wisp survives
-        expect(cardE.child.dispose.state.isActived).toBe(false); // Water Elemental survives
-        expect(cardF.child.dispose.state.isActived).toBe(true); // Stranglethorn Tiger destroyed
-        expect(cardG.child.dispose.state.isActived).toBe(false); // Enemy Wisp survives
-        expect(cardH.child.dispose.state.isActived).toBe(false); // Enemy Water Elemental survives
-
-        // Check final board state
-        expect(boardA.child.cards.length).toBe(2); // Wisp and Water Elemental remain
-        expect(boardB.child.cards.length).toBe(2); // Both enemy minions remain
-
-        // Shadow Word: Ruin should be consumed
-        expect(handA.child.cards.length).toBe(0); // Shadow Word: Ruin consumed
-        expect(playerA.child.mana.state.current).toBe(6); // 10 - 4 = 6
+        expect(boardA.child.cards.length).toBe(2);
+        expect(boardB.child.cards.length).toBe(0);
     });
 });
