@@ -1,5 +1,5 @@
-import { Selector, SpellEffectModel, BaseFeatureModel, RoleAttackBuffModel, RoleHealthBuffModel } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { Selector, SpellEffectModel, BaseFeatureModel, RoleAttackBuffModel, RoleHealthBuffModel, WeaponAttackBuffModel, WeaponActionkBuffModel } from "hearthstone-core";
+import { DebugUtil, TemplUtil } from "set-piece";
 import { HeavyAxeModel } from "../heavy-axe";
 
 @TemplUtil.is('upgrade-effect')
@@ -38,8 +38,8 @@ export class UpgradeEffectModel extends SpellEffectModel<never> {
                 },
                 child: {
                     buffs: [
-                        new RoleAttackBuffModel({ state: { offset: 1 } }),
-                        new RoleHealthBuffModel({ state: { offset: 1 } })
+                        new WeaponAttackBuffModel({ state: { offset: 1 } }),
+                        new WeaponActionkBuffModel({ state: { offset: 1 } })
                     ]
                 },
             }));

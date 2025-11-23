@@ -119,23 +119,23 @@ describe('bloodsail-deckhand', () => {
 
     });
 
-    // test('arcanite-reaper-play', async () => {
-    //     // Player A plays Arcanite Reaper
-    //     // Assert: Arcanite Reaper cost is 5 (not reduced, feature was disabled after first weapon)
-    //     expect(cardE.child.cost.state.current).toBe(5);
+    test('arcanite-reaper-play', async () => {
+        // Player A plays Arcanite Reaper
+        // Assert: Arcanite Reaper cost is 5 (not reduced, feature was disabled after first weapon)
+        expect(cardE.child.cost.state.current).toBe(5);
         
-    //     let promise = cardE.play();
-    //     await promise;
+        let promise = cardE.play();
+        await promise;
 
-    //     // Assert: Arcanite Reaper is equipped (replaces Fiery War Axe)
-    //     expect(heroA.child.weapon).toBeDefined();
-    //     expect(heroA.child.weapon).toBe(cardE);
-    //     // Assert: Hero attack is 5 (Arcanite Reaper attack)
-    //     expect(heroA.child.attack.state.current).toBe(5);
-    //     // Assert: Player A's mana is 3 (8 - 5 = 3)
-    //     expect(playerA.child.mana.state.current).toBe(3);
-    //     // Assert: Hand is empty
-    //     expect(handA.child.cards.length).toBe(0);
-    // });
+        // Assert: Arcanite Reaper is equipped (replaces Fiery War Axe)
+        expect(heroA.child.weapon).toBeDefined();
+        expect(heroA.child.weapon).toBe(cardE);
+        // Assert: Hero attack is 5 (Arcanite Reaper attack)
+        expect(heroA.child.attack.state.current).toBe(5);
+        // Assert: Player A's mana is 3 (8 - 5 = 3)
+        expect(playerA.child.mana.state.current).toBe(3);
+        // Assert: Hand is empty
+        expect(handA.child.cards.length).toBe(0);
+    });
 });
 
