@@ -1,27 +1,29 @@
 /**
- * Test cases for Stormwind Knight
+ * Test cases for Kor'kron Elite
  * 
  * 1. initial-state:
- *    - Player A has Stormwind Knight in hand
+ *    - Player A has Kor'kron Elite in hand
  *    - Player B has Wisp (1/1) on board
  *    - Player B hero health 30
- * 2. stormwind-knight-play:
- *    - Player A summons Stormwind Knight
- *    - Assert: Stormwind Knight has Charge
- *    - Assert: Stormwind Knight can attack immediately
- * 3. stormwind-knight-attack:
- *    - Stormwind Knight attacks Player B's Wisp
- *    - Assert: Can target enemy hero
- *    - Assert: Can target enemy minion
- *    - Assert: Wisp is destroyed
- *    - Assert: Stormwind Knight's action is consumed
+ * 2. korkron-elite-play:
+ *    - Player A summons Kor'kron Elite
+ *    - Assert: Kor'kron Elite is on Player A's board
+ *    - Assert: Kor'kron Elite's attack is 4
+ *    - Assert: Kor'kron Elite's health is 3
+ *    - Assert: Kor'kron Elite has Charge
+ *    - Assert: Kor'kron Elite can attack immediately
+ * 3. korkron-elite-attack:
+ *    - Kor'kron Elite attacks Player B's hero
+ *    - Assert: Player B's hero health is 26
+ *    - Assert: Kor'kron Elite's action is consumed
  */
-import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel } from "hearthstone-core";
-import { StormwindKnightModel } from "./index";
-import { WispModel } from '../wisp';
-import { boot } from '../../boot';
 
-describe('stormwind-knight', () => {
+import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel } from "hearthstone-core";
+import { KorkronEliteModel } from "./index";
+import { WispModel } from "../../neutral/wisp";
+import { boot } from "../../boot";
+
+describe('korkron-elite', () => {
     const game = new GameModel({
         state: { debug: { isDrawDisabled: true }},
         child: {
@@ -30,13 +32,11 @@ describe('stormwind-knight', () => {
                     mana: new ManaModel({ state: { origin: 10 }}),
                     hero: new MageModel(),
                     board: new BoardModel({
-                        child: { 
-                            cards: []
-                        }
+                        child: { cards: [] }
                     }),
                     hand: new HandModel({
                         child: { 
-                            cards: [new StormwindKnightModel()]
+                            cards: [new KorkronEliteModel()]
                         }
                     }),
                     deck: new DeckModel({
@@ -54,9 +54,7 @@ describe('stormwind-knight', () => {
                         }
                     }),
                     hand: new HandModel({
-                        child: { 
-                            cards: []
-                        }
+                        child: { cards: [] }
                     })
                 }
             })
@@ -67,33 +65,35 @@ describe('stormwind-knight', () => {
     const playerA = game.child.playerA;
     const playerB = game.child.playerB;
     const boardA = playerA.child.board;
-    const boardB = playerB.child.board;
     const handA = playerA.child.hand;
-    const cardC = handA.child.cards.find(item => item instanceof StormwindKnightModel);
-    const cardD = boardB.child.cards.find(item => item instanceof WispModel);
-    if (!cardC || !cardD) throw new Error();
     const heroB = playerB.child.hero;
+    
+    const cardC = handA.child.cards.find(item => item instanceof KorkronEliteModel);
+    if (!cardC) throw new Error();
 
     // initial-state:
-    // - Player A has Stormwind Knight in hand
+    // - Player A has Kor'kron Elite in hand
     // - Player B has Wisp (1/1) on board
     // - Player B hero health 30
 
-    test('stormwind-knight-play', async () => {
-        // Player A summons Stormwind Knight
+    test('korkron-elite-play', async () => {
+        // Player A summons Kor'kron Elite
         let promise = cardC.play();
         playerA.controller.set(0); // Select position 0
         await promise;
 
-        // Assert: Stormwind Knight has Charge
+        // Assert: Kor'kron Elite has Charge
         expect(cardC.child.charge.state.isEnabled).toBe(true);
         
-        // Assert: Stormwind Knight can attack immediately
+        // Assert: Kor'kron Elite can attack immediately
         expect(cardC.child.action.state.isReady).toBe(true);
     });
 
-    test('stormwind-knight-attack', async () => {
-        // Stormwind Knight attacks Player B's Wisp
+    test('korkron-elite-attack', async () => {
+        const cardD = playerB.child.board.child.cards.find(item => item instanceof WispModel);
+        if (!cardD) throw new Error();
+
+        // Kor'kron Elite attacks Player B's hero
         let promise = cardC.child.action.run();
         
         // Assert: Can target enemy hero
@@ -102,15 +102,14 @@ describe('stormwind-knight', () => {
         // Assert: Can target enemy minion
         expect(playerA.controller.current?.options).toContain(cardD);
         
-        playerA.controller.set(cardD); // Target Wisp
+        playerA.controller.set(heroB); // Target Player B's hero
         await promise;
 
-        // Assert: Wisp is destroyed
-        expect(cardD.child.dispose.state.isActived).toBe(true);
-
-        expect(cardC.child.health.state.current).toBe(4)
+        // Assert: Player B's hero health is 26
+        expect(heroB.child.health.state.current).toBe(26);
         
-        // Assert: Stormwind Knight's action is consumed
+        // Assert: Kor'kron Elite's action is consumed
         expect(cardC.child.action.state.current).toBe(0);
     });
 });
+

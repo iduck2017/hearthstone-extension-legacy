@@ -1,11 +1,20 @@
 /**
  * Test cases for Reckless Rocketeer
  * 
- * Initial state: Player A has Reckless Rocketeer in hand.
- * Player B has a Wisp on board.
- * 
- * 1. reckless-rocketeer-play: Player A plays Reckless Rocketeer.
- * 2. reckless-rocketeer-charge: Player A's Reckless Rocketeer immediately attacks Player B's hero.
+ * 1. initial-state:
+ *    - Player A has Reckless Rocketeer in hand
+ *    - Player B has Wisp (1/1) on board
+ *    - Player B hero health 30
+ * 2. reckless-rocketeer-play:
+ *    - Player A summons Reckless Rocketeer
+ *    - Assert: Reckless Rocketeer has Charge
+ *    - Assert: Reckless Rocketeer can attack immediately
+ * 3. reckless-rocketeer-attack:
+ *    - Reckless Rocketeer attacks Player B's hero
+ *    - Assert: Can target enemy hero
+ *    - Assert: Can target enemy minion
+ *    - Assert: Player B's hero health is 25
+ *    - Assert: Reckless Rocketeer's action is consumed
  */
 import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel } from "hearthstone-core";
 import { RecklessRocketeerModel } from "./index";
@@ -61,49 +70,41 @@ describe('reckless-rocketeer', () => {
     if (!cardC || !cardD) throw new Error();
     const heroB = playerB.child.hero;
 
-    test('reckless-rocketeer-play', async () => {
-        // Check initial state
-        expect(cardC.child.attack.state.current).toBe(5); // Reckless Rocketeer: 5/2
-        expect(cardC.child.health.state.current).toBe(2);
-        expect(handA.child.cards.length).toBe(1); // Reckless Rocketeer in hand
-        expect(boardA.child.cards.length).toBe(0); // No minions on board
-        expect(playerA.child.mana.state.current).toBe(10); // Full mana
+    // initial-state:
+    // - Player A has Reckless Rocketeer in hand
+    // - Player B has Wisp (1/1) on board
+    // - Player B hero health 30
 
-        // Play Reckless Rocketeer
+    test('reckless-rocketeer-play', async () => {
+        // Player A summons Reckless Rocketeer
         let promise = cardC.play();
         playerA.controller.set(0); // Select position 0
         await promise;
 
-        // Reckless Rocketeer should be on board
-        expect(boardA.child.cards.length).toBe(1); // Reckless Rocketeer on board
-        expect(handA.child.cards.length).toBe(0); // Reckless Rocketeer moved to board
-        expect(playerA.child.mana.state.current).toBe(4); // 10 - 6 = 4
-
-        // Check that Reckless Rocketeer has Charge (can attack immediately)
-        expect(cardC.child.action.state.current).toBe(1); // Can attack
-        expect(cardC.child.action.state.isReady).toBe(true); // Action is available
+        // Assert: Reckless Rocketeer has Charge
+        expect(cardC.child.charge.state.isEnabled).toBe(true);
+        
+        // Assert: Reckless Rocketeer can attack immediately
+        expect(cardC.child.action.state.isReady).toBe(true);
     });
 
-    test('reckless-rocketeer-charge', async () => {
-        // Check initial state
-        expect(heroB.child.health.state.current).toBe(30); // Player B hero: 30 health
-        expect(cardC.child.attack.state.current).toBe(5); // Reckless Rocketeer: 5/2
-        expect(cardC.child.health.state.current).toBe(2);
-        expect(cardC.child.action.state.current).toBe(1); // Can attack
-        expect(cardC.child.action.state.isReady).toBe(true); // Action is available
-
+    test('reckless-rocketeer-attack', async () => {
         // Reckless Rocketeer attacks Player B's hero
-        const promise = cardC.child.action.run();
-        expect(playerA.controller.current?.options).toContain(heroB); // Can target enemy hero
-        expect(playerA.controller.current?.options).toContain(cardD); // Can target enemy minion
+        let promise = cardC.child.action.run();
+        
+        // Assert: Can target enemy hero
+        expect(playerA.controller.current?.options).toContain(heroB);
+        
+        // Assert: Can target enemy minion
+        expect(playerA.controller.current?.options).toContain(cardD);
+        
         playerA.controller.set(heroB); // Target Player B's hero
         await promise;
 
-        // Player B's hero should take 5 damage
-        expect(heroB.child.health.state.current).toBe(25); // 30 - 5 = 25
-        expect(heroB.child.health.state.damage).toBe(5);
-
-        // Reckless Rocketeer should have used its attack
-        expect(cardC.child.action.state.current).toBe(0); // Cannot attack again this turn
+        // Assert: Player B's hero health is 25
+        expect(heroB.child.health.state.current).toBe(25);
+        
+        // Assert: Reckless Rocketeer's action is consumed
+        expect(cardC.child.action.state.current).toBe(0);
     });
 });

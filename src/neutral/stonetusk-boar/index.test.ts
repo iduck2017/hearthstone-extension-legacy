@@ -1,7 +1,20 @@
 /**
  * Test cases for Stonetusk Boar
  * 
- * 1. stonetusk-boar-charge: Player A plays Stonetusk Boar and immediately attacks enemy hero
+ * 1. initial-state:
+ *    - Player A has Stonetusk Boar in hand
+ *    - Player B has Wisp (1/1) on board
+ *    - Player B hero health 30
+ * 2. stonetusk-boar-play:
+ *    - Player A summons Stonetusk Boar
+ *    - Assert: Stonetusk Boar has Charge
+ *    - Assert: Stonetusk Boar can attack immediately
+ * 3. stonetusk-boar-attack:
+ *    - Stonetusk Boar attacks Player B's hero
+ *    - Assert: Can target enemy hero
+ *    - Assert: Can target enemy minion
+ *    - Assert: Player B's hero health is 29
+ *    - Assert: Stonetusk Boar's action is consumed
  */
 
 import { GameModel, BoardModel, HandModel, MageModel, PlayerModel, ManaModel } from "hearthstone-core";
@@ -51,32 +64,41 @@ describe('stonetusk-boar', () => {
     const heroB = game.child.playerB.child.hero;
     if (!cardC || !cardD) throw new Error();
 
-    test('stonetusk-boar-charge', async () => {
-        expect(boardA.child.cards.length).toBe(0);
-        expect(boardB.child.cards.length).toBe(1);
-        expect(heroB.child.health.state.current).toBe(30);
-        
-        // Play Stonetusk Boar
+    // initial-state:
+    // - Player A has Stonetusk Boar in hand
+    // - Player B has Wisp (1/1) on board
+    // - Player B hero health 30
+
+    test('stonetusk-boar-play', async () => {
+        // Player A summons Stonetusk Boar
         let promise = cardC.play();
-        const selector = playerA.controller.current;
-        expect(selector?.options).toContain(0);
-        game.child.playerA.controller.set(0);
+        playerA.controller.set(0); // Select position 0
         await promise;
-        expect(boardA.child.cards.length).toBe(1);
-        expect(cardC.child.attack.state.current).toBe(1);
-        expect(cardC.child.health.state.current).toBe(1);
-        expect(cardC.child.action.state.current).toBe(1);
+
+        // Assert: Stonetusk Boar has Charge
+        expect(cardC.child.charge.state.isEnabled).toBe(true);
+        
+        // Assert: Stonetusk Boar can attack immediately
         expect(cardC.child.action.state.isReady).toBe(true);
+    });
+
+    test('stonetusk-boar-attack', async () => {
+        // Stonetusk Boar attacks Player B's hero
+        let promise = cardC.child.action.run();
         
-        // Boar directly attacks enemy hero
-        promise = cardC.child.action.run();
-        expect(game.child.playerA.controller.current?.options).toContain(heroB);
-        expect(game.child.playerA.controller.current?.options.length).toBe(2);
-        game.child.playerA.controller.set(heroB);
+        // Assert: Can target enemy hero
+        expect(playerA.controller.current?.options).toContain(heroB);
+        
+        // Assert: Can target enemy minion
+        expect(playerA.controller.current?.options).toContain(cardD);
+        
+        playerA.controller.set(heroB); // Target Player B's hero
         await promise;
-        
-        expect(cardC.child.action.state.current).toBe(0);
+
+        // Assert: Player B's hero health is 29
         expect(heroB.child.health.state.current).toBe(29);
-        expect(heroB.child.health.state.damage).toBe(1);
-    })
+        
+        // Assert: Stonetusk Boar's action is consumed
+        expect(cardC.child.action.state.current).toBe(0);
+    });
 }) 

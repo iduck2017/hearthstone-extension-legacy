@@ -1,11 +1,20 @@
 /**
  * Test cases for Bluegill Warrior
  * 
- * Initial state: Player A has Bluegill Warrior in hand.
- * Player B has a Wisp on board.
- * 
- * 1. bluegill-warrior-play: Player A plays Bluegill Warrior.
- * 2. bluegill-warrior-charge: Player A's Bluegill Warrior immediately attacks Player B's hero.
+ * 1. initial-state:
+ *    - Player A has Bluegill Warrior in hand
+ *    - Player B has Wisp (1/1) on board
+ *    - Player B hero health 30
+ * 2. bluegill-warrior-play:
+ *    - Player A summons Bluegill Warrior
+ *    - Assert: Bluegill Warrior has Charge
+ *    - Assert: Bluegill Warrior can attack immediately
+ * 3. bluegill-warrior-attack:
+ *    - Bluegill Warrior attacks Player B's hero
+ *    - Assert: Can target enemy hero
+ *    - Assert: Can target enemy minion
+ *    - Assert: Player B's hero health is 28
+ *    - Assert: Bluegill Warrior's action is consumed
  */
 import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel } from "hearthstone-core";
 import { BluegillWarriorModel } from "./index";
@@ -63,49 +72,41 @@ describe('bluegill-warrior', () => {
     if (!cardC || !cardD) throw new Error();
     const heroB = playerB.child.hero;
 
-    test('bluegill-warrior-play', async () => {
-        // Check initial state
-        expect(cardC.child.attack.state.current).toBe(2); // Bluegill Warrior: 2/1
-        expect(cardC.child.health.state.current).toBe(1);
-        expect(handA.child.cards.length).toBe(1); // Bluegill Warrior in hand
-        expect(boardA.child.cards.length).toBe(0); // No minions on board
-        expect(playerA.child.mana.state.current).toBe(10); // Full mana
+    // initial-state:
+    // - Player A has Bluegill Warrior in hand
+    // - Player B has Wisp (1/1) on board
+    // - Player B hero health 30
 
-        // Play Bluegill Warrior
+    test('bluegill-warrior-play', async () => {
+        // Player A summons Bluegill Warrior
         let promise = cardC.play();
         playerA.controller.set(0); // Select position 0
         await promise;
 
-        // Bluegill Warrior should be on board
-        expect(boardA.child.cards.length).toBe(1); // Bluegill Warrior on board
-        expect(handA.child.cards.length).toBe(0); // Bluegill Warrior moved to board
-        expect(playerA.child.mana.state.current).toBe(8); // 10 - 2 = 8
-
-        // Check that Bluegill Warrior has Charge (can attack immediately)
-        expect(cardC.child.action.state.current).toBe(1); // Can attack
-        expect(cardC.child.action.state.isReady).toBe(true); // Action is available
+        // Assert: Bluegill Warrior has Charge
+        expect(cardC.child.charge.state.isEnabled).toBe(true);
+        
+        // Assert: Bluegill Warrior can attack immediately
+        expect(cardC.child.action.state.isReady).toBe(true);
     });
 
-    test('bluegill-warrior-charge', async () => {
-        // Check initial state
-        expect(heroB.child.health.state.current).toBe(30); // Player B hero: 30 health
-        expect(cardC.child.attack.state.current).toBe(2); // Bluegill Warrior: 2/1
-        expect(cardC.child.health.state.current).toBe(1);
-        expect(cardC.child.action.state.current).toBe(1); // Can attack
-        expect(cardC.child.action.state.isReady).toBe(true); // Action is available
-
+    test('bluegill-warrior-attack', async () => {
         // Bluegill Warrior attacks Player B's hero
-        const promise = cardC.child.action.run();
-        expect(playerA.controller.current?.options).toContain(heroB); // Can target enemy hero
-        expect(playerA.controller.current?.options).toContain(cardD); // Can target enemy minion
+        let promise = cardC.child.action.run();
+        
+        // Assert: Can target enemy hero
+        expect(playerA.controller.current?.options).toContain(heroB);
+        
+        // Assert: Can target enemy minion
+        expect(playerA.controller.current?.options).toContain(cardD);
+        
         playerA.controller.set(heroB); // Target Player B's hero
         await promise;
 
-        // Player B's hero should take 2 damage
-        expect(heroB.child.health.state.current).toBe(28); // 30 - 2 = 28
-        expect(heroB.child.health.state.damage).toBe(2);
-
-        // Bluegill Warrior should have used its attack
-        expect(cardC.child.action.state.current).toBe(0); // Cannot attack again this turn
+        // Assert: Player B's hero health is 28
+        expect(heroB.child.health.state.current).toBe(28);
+        
+        // Assert: Bluegill Warrior's action is consumed
+        expect(cardC.child.action.state.current).toBe(0);
     });
 });

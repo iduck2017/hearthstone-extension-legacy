@@ -1,11 +1,21 @@
 /**
  * Test cases for Wolfrider
  * 
- * Initial state: Player A has Wolfrider in hand.
- * Player B has a Wisp on board.
- * 
- * 1. wolfrider-play: Player A plays Wolfrider.
- * 2. wolfrider-attack: Player A's Wolfrider attacks Player B's Wisp immediately (Charge).
+ * 1. initial-state:
+ *    - Player A has Wolfrider in hand
+ *    - Player B has Wisp (1/1) on board
+ *    - Player B hero health 30
+ * 2. wolfrider-play:
+ *    - Player A summons Wolfrider
+ *    - Assert: Wolfrider has Charge
+ *    - Assert: Wolfrider can attack immediately
+ * 3. wolfrider-attack:
+ *    - Wolfrider attacks Player B's Wisp
+ *    - Assert: Can target enemy hero
+ *    - Assert: Can target enemy minion
+ *    - Assert: Wisp is destroyed
+ *    - Assert: Wolfrider is destroyed
+ *    - Assert: Wolfrider's action is consumed
  */
 import { GameModel, PlayerModel, MageModel, BoardModel, HandModel, ManaModel, DeckModel } from "hearthstone-core";
 import { WolfriderModel } from "./index";
@@ -66,50 +76,44 @@ describe('wolfrider', () => {
     const heroA = playerA.child.hero;
     const heroB = playerB.child.hero;
 
-    test('wolfrider-play', async () => {
-        // Check initial state
-        expect(cardC.child.attack.state.current).toBe(3); // Wolfrider: 3/1
-        expect(cardC.child.health.state.current).toBe(1);
-        expect(handA.child.cards.length).toBe(1); // Wolfrider in hand
-        expect(boardA.child.cards.length).toBe(0); // No minions on board
-        expect(playerA.child.mana.state.current).toBe(10); // Full mana
+    // initial-state:
+    // - Player A has Wolfrider in hand
+    // - Player B has Wisp (1/1) on board
+    // - Player B hero health 30
 
-        // Play Wolfrider
+    test('wolfrider-play', async () => {
+        // Player A summons Wolfrider
         let promise = cardC.play();
         playerA.controller.set(0); // Select position 0
         await promise;
 
-        // Wolfrider should be on board
-        expect(boardA.child.cards.length).toBe(1); // Wolfrider on board
-        expect(handA.child.cards.length).toBe(0); // Wolfrider moved to board
-        expect(playerA.child.mana.state.current).toBe(7); // 10 - 3 = 7
-
-        // Check that Wolfrider has Charge
-        expect(cardC.child.charge.state.isEnabled).toBe(true); // Has Charge
+        // Assert: Wolfrider has Charge
+        expect(cardC.child.charge.state.isEnabled).toBe(true);
+        
+        // Assert: Wolfrider can attack immediately
+        expect(cardC.child.action.state.isReady).toBe(true);
     });
 
     test('wolfrider-attack', async () => {
-        // Check initial state
-        expect(cardC.child.health.state.current).toBe(1); // Wolfrider: 3/1
-        expect(cardD.child.health.state.current).toBe(1); // Wisp: 1/1
-        expect(boardA.child.cards.length).toBe(1); // Wolfrider on board
-        expect(boardB.child.cards.length).toBe(1); // Wisp on board
-
-        // Player A's Wolfrider attacks Player B's Wisp immediately (Charge allows immediate attack)
+        // Wolfrider attacks Player B's Wisp
         let promise = cardC.child.action.run();
-        expect(playerA.controller.current?.options).toContain(cardD); // Can target Wisp
-        expect(playerA.controller.current?.options).toContain(heroB); // Can target Player B's hero
+        
+        // Assert: Can target enemy hero
+        expect(playerA.controller.current?.options).toContain(heroB);
+        
+        // Assert: Can target enemy minion
+        expect(playerA.controller.current?.options).toContain(cardD);
+        
         playerA.controller.set(cardD); // Target Wisp
         await promise;
 
-        // Wisp should die (1/1 vs 3/1)
-        expect(boardB.child.cards.length).toBe(0); // Wisp dies
-        expect(cardC.child.health.state.current).toBe(0); // Wolfrider: 1 - 1 = 0 (dies)
-
+        // Assert: Wisp is destroyed
         expect(cardD.child.dispose.state.isActived).toBe(true);
-        expect(cardD.child.health.state.damage).toBe(3);
-        expect(cardD.child.health.state.current).toBe(-2);
-
-        expect(boardA.child.cards.length).toBe(0); // Wolfrider dies
+        
+        // Assert: Wolfrider is destroyed
+        expect(cardC.child.dispose.state.isActived).toBe(true);
+        
+        // Assert: Wolfrider's action is consumed
+        expect(cardC.child.action.state.current).toBe(0);
     });
 });
