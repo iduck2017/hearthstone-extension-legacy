@@ -25,8 +25,8 @@
   },
   "scripts": {
     "test": "jest",
-    "build:cjs": "node scripts/index.js && tsc -p tsconfig.cjs.json",
-    "build:esm": "node scripts/index.js && tsc -p tsconfig.esm.json",
+    "build:cjs": "node scripts/route.js && tsc -p tsconfig.cjs.json",
+    "build:esm": "node scripts/route.js && tsc -p tsconfig.esm.json",
     "watch:cjs": "tsc -p tsconfig.cjs.json --watch",
     "watch:esm": "tsc -p tsconfig.esm.json --watch",
     "route": "node scripts/route.js"
