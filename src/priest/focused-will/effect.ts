@@ -1,4 +1,4 @@
-import { EffectModel, Selector, RoleModel, SpellEffectModel, MinionCardModel, RoleBuffModel } from "hearthstone-core";
+import { EffectModel, Selector, RoleModel, SpellEffectModel, MinionCardModel, BaseFeatureModel, RoleHealthBuffModel } from "hearthstone-core";
 import { TemplUtil } from "set-piece";
 
 @TemplUtil.is('focused-will-effect')
@@ -32,13 +32,14 @@ export class FocusedWillEffectModel extends SpellEffectModel<MinionCardModel> {
         target.silence();
 
         // Then, give it +3 Health buff
-        const buff = new RoleBuffModel({
+        target.buff(new BaseFeatureModel({
             state: {
                 name: "Focused Will's Buff",
                 desc: "+3 Health.",
-                offset: [0, 3] // +0 Attack, +3 Health
-            }
-        });
-        target.buff(buff);
+            },
+            child: {
+                buffs: [new RoleHealthBuffModel({ state: { offset: 3 } })]
+            },
+        }));
     }
 }

@@ -1,8 +1,8 @@
-import { GameModel, IRoleBuffModel, TurnModel } from "hearthstone-core";
+import { RoleAttackBuffModel, FeatureModel, TurnModel } from "hearthstone-core";
 import { Event, EventUtil, TemplUtil } from "set-piece";
 
 @TemplUtil.is('heroic-strike-buff')
-export class HeroicStrikeBuffModel extends IRoleBuffModel {
+export class HeroicStrikeBuffModel extends FeatureModel {
     constructor(props?: HeroicStrikeBuffModel['props']) {
         props = props ?? {};
         super({
@@ -10,10 +10,13 @@ export class HeroicStrikeBuffModel extends IRoleBuffModel {
             state: {
                 name: "Heroic Strike's Buff",
                 desc: "+4 Attack this turn.",
-                offset: [4, 0], // +4 Attack, +0 Health
+                isEnabled: true,
                 ...props.state,
             },
-            child: { ...props.child },
+            child: {
+                buffs: [new RoleAttackBuffModel({ state: { offset: 4 } })],
+                ...props.child,
+            },
             refer: { ...props.refer },
         });
     }

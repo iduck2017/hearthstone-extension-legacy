@@ -1,4 +1,4 @@
-import { Selector, SpellEffectModel, RoleBuffModel, MinionCardModel } from "hearthstone-core";
+import { Selector, SpellEffectModel, BaseFeatureModel, RoleAttackBuffModel, RoleHealthBuffModel, MinionCardModel } from "hearthstone-core";
 import { TemplUtil } from "set-piece";
 
 @TemplUtil.is('power-infusion-effect')
@@ -31,13 +31,17 @@ export class PowerInfusionEffectModel extends SpellEffectModel<MinionCardModel> 
         const target = params[0];
         if (!target) return;
         // Give the minion +2/+6 buff
-        const buff = new RoleBuffModel({
+        target.buff(new BaseFeatureModel({
             state: {
                 name: "Power Infusion's Buff",
                 desc: "+2/+6.",
-                offset: [2, 6] // +2 Attack, +6 Health
-            }
-        });
-        target.buff(buff);
+            },
+            child: {
+                buffs: [
+                    new RoleAttackBuffModel({ state: { offset: 2 } }),
+                    new RoleHealthBuffModel({ state: { offset: 6 } })
+                ]
+            },
+        }));
     }
 }

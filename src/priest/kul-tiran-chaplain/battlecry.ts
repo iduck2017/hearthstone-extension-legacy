@@ -1,4 +1,4 @@
-import { BattlecryModel, Selector, RoleModel, RoleBuffModel } from "hearthstone-core";
+import { BattlecryModel, Selector, RoleModel, BaseFeatureModel, RoleHealthBuffModel } from "hearthstone-core";
 import { TemplUtil } from "set-piece";
 
 @TemplUtil.is('kul-tiran-chaplain-battlecry')
@@ -36,13 +36,14 @@ export class KulTiranChaplainBattlecryModel extends BattlecryModel<RoleModel> {
         if (target.route.player !== player) return;
         
         // Apply +2 Health buff
-        const buff = new RoleBuffModel({
+        target.buff(new BaseFeatureModel({
             state: {
                 name: "Kul Tiran Chaplain's Buff",
                 desc: "+2 Health.",
-                offset: [0, 2] // +0 Attack, +2 Health
-            }
-        });
-        target.buff(buff);
+            },
+            child: {
+                buffs: [new RoleHealthBuffModel({ state: { offset: 2 } })]
+            },
+        }));
     }
 }

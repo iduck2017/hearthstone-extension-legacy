@@ -1,4 +1,4 @@
-import { BattlecryModel, MinionCardModel, DamageModel, DamageEvent, DamageType, RoleBuffModel, Selector } from "hearthstone-core";
+import { BattlecryModel, MinionCardModel, DamageModel, DamageEvent, DamageType, BaseFeatureModel, RoleAttackBuffModel, Selector } from "hearthstone-core";
 import { TemplUtil } from "set-piece";
 
 @TemplUtil.is('cruel-taskmaster-battlecry')
@@ -42,14 +42,15 @@ export class CruelTaskmasterBattlecryModel extends BattlecryModel<MinionCardMode
         ]);
 
         // Give the minion +2 Attack buff
-        const buff = new RoleBuffModel({
+        target.buff(new BaseFeatureModel({
             state: {
                 name: "Cruel Taskmaster's Buff",
                 desc: "+2 Attack.",
-                offset: [2, 0] // +2 Attack, +0 Health
-            }
-        });
-        target.buff(buff);
+            },
+            child: {
+                buffs: [new RoleAttackBuffModel({ state: { offset: 2 } })]
+            },
+        }));
     }
 }
 

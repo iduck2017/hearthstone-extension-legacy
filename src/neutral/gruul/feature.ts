@@ -1,4 +1,4 @@
-import { TurnEndModel, MinionCardModel, RoleBuffModel } from "hearthstone-core";
+import { TurnEndModel, MinionCardModel, BaseFeatureModel, RoleAttackBuffModel, RoleHealthBuffModel } from "hearthstone-core";
 import { TemplUtil } from "set-piece";
 
 @TemplUtil.is('gruul-feature')
@@ -30,12 +30,17 @@ export class GruulFeatureModel extends TurnEndModel {
     protected doRun() {
         const minion = this.route.minion;
         if (!minion) return;
-        minion.buff(new RoleBuffModel({
+        minion.buff(new BaseFeatureModel({
             state: {
                 name: "Gruul's Growth",
                 desc: "+1/+1",
-                offset: [1, 1]
-            }
+            },
+            child: {
+                buffs: [
+                    new RoleAttackBuffModel({ state: { offset: 1 } }),
+                    new RoleHealthBuffModel({ state: { offset: 1 } })
+                ]
+            },
         }));
     }
 }

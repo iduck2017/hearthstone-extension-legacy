@@ -1,4 +1,4 @@
-import { Selector, SpellEffectModel, RoleBuffModel, MinionCardModel } from "hearthstone-core";
+import { Selector, SpellEffectModel, BaseFeatureModel, RoleAttackBuffModel, MinionCardModel } from "hearthstone-core";
 import { TemplUtil } from "set-piece";
 
 @TemplUtil.is('charge-effect')
@@ -32,14 +32,15 @@ export class ChargeEffectModel extends SpellEffectModel<MinionCardModel> {
         if (!target) return;
 
         // Give the minion +2 Attack buff
-        const buff = new RoleBuffModel({
+        target.buff(new BaseFeatureModel({
             state: {
                 name: "Charge's Buff",
                 desc: "+2 Attack.",
-                offset: [2, 0] // +2 Attack, +0 Health
-            }
-        });
-        target.buff(buff);
+            },
+            child: {
+                buffs: [new RoleAttackBuffModel({ state: { offset: 2 } })]
+            },
+        }));
         // Give the minion Charge ability
         const charge = target.child.charge;
         charge.enable();

@@ -1,4 +1,4 @@
-import { BattlecryModel, RoleBuffModel } from "hearthstone-core";
+import { BattlecryModel, BaseFeatureModel, RoleHealthBuffModel } from "hearthstone-core";
 import { TemplUtil } from "set-piece";
 
 @TemplUtil.is('twilight-drake-battlecry')
@@ -34,13 +34,14 @@ export class TwilightDrakeBattlecryModel extends BattlecryModel<never> {
         if (!count) return;
 
         // Apply health buff based on hand size
-        const buff = new RoleBuffModel({
+        card.buff(new BaseFeatureModel({
             state: {
                 name: "Twilight Drake's Health Buff",
                 desc: "Gain +1 Health for each card in your hand.",
-                offset: [0, count]
-            }
-        });
-        card.buff(buff);
+            },
+            child: {
+                buffs: [new RoleHealthBuffModel({ state: { offset: count } })]
+            },
+        }));
     }
 }

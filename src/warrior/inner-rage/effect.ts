@@ -1,4 +1,4 @@
-import { Selector, SpellEffectModel, MinionCardModel, DamageModel, DamageEvent, DamageType, RoleBuffModel } from "hearthstone-core";
+import { Selector, SpellEffectModel, MinionCardModel, DamageModel, DamageEvent, DamageType, BaseFeatureModel, RoleAttackBuffModel } from "hearthstone-core";
 import { TemplUtil } from "set-piece";
 
 @TemplUtil.is('inner-rage-effect')
@@ -43,14 +43,15 @@ export class InnerRageEffectModel extends SpellEffectModel<MinionCardModel> {
         ]);
 
         // Give the minion +2 Attack buff
-        const buff = new RoleBuffModel({
+        target.buff(new BaseFeatureModel({
             state: {
                 name: "Inner Rage's Buff",
                 desc: "+2 Attack.",
-                offset: [2, 0] // +2 Attack, +0 Health
-            }
-        });
-        target.buff(buff);
+            },
+            child: {
+                buffs: [new RoleAttackBuffModel({ state: { offset: 2 } })]
+            },
+        }));
     }
 }
 

@@ -1,4 +1,4 @@
-import { SpellCardModel, RoleBuffModel, RoleFeatureModel, SpellPerformModel } from "hearthstone-core";
+import { SpellCardModel, RoleFeatureModel, SpellPerformModel, BuffModel, RoleAttackBuffModel, FeatureModel, BaseFeatureModel } from "hearthstone-core";
 import { Event, EventUtil, TemplUtil } from "set-piece";
 
 @TemplUtil.is('mana-wyrm-feature')
@@ -33,12 +33,14 @@ export class ManaWyrmFeatureModel extends RoleFeatureModel {
         // Only trigger when the minion's owner casts a spell
         if (that.route.player !== player) return;
         
-        role.buff(new RoleBuffModel({
+        role.buff(new BaseFeatureModel({
             state: {
-                name: "Mana Wyrm's Buff",
-                desc: "+1 Attack.",
-                offset: [1, 0]
-            }
-        }))
+                name: 'Mana Wyrm\'s Buff',
+                desc: '+1 Attack.',
+            },
+            child: {
+                buffs: [new RoleAttackBuffModel({ state: { offset: 1 } })]
+            },
+        }));
     }
 }

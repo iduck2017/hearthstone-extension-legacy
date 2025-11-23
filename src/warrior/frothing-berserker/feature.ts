@@ -1,4 +1,4 @@
-import { RoleFeatureModel, RoleBuffModel, DamageEvent, RoleHealthModel } from "hearthstone-core";
+import { RoleFeatureModel, BaseFeatureModel, RoleAttackBuffModel, DamageEvent, RoleHealthModel } from "hearthstone-core";
 import { Event, EventUtil, TemplUtil } from "set-piece";
 
 @TemplUtil.is('frothing-berserker-feature')
@@ -35,12 +35,14 @@ export class FrothingBerserkerFeatureModel extends RoleFeatureModel {
         if (!minion) return;
         
         // Gain +1 Attack buff
-        role.buff(new RoleBuffModel({
+        role.buff(new BaseFeatureModel({
             state: {
                 name: "Frothing Berserker's Buff",
                 desc: "+1 Attack.",
-                offset: [1, 0] // +1 Attack, +0 Health
-            }
+            },
+            child: {
+                buffs: [new RoleAttackBuffModel({ state: { offset: 1 } })]
+            },
         }));
     }
 }

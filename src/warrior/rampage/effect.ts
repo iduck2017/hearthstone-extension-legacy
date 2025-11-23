@@ -1,5 +1,5 @@
 
-import { Selector, SpellEffectModel, MinionCardModel, RoleBuffModel } from "hearthstone-core";
+import { Selector, SpellEffectModel, MinionCardModel, BaseFeatureModel, RoleAttackBuffModel, RoleHealthBuffModel } from "hearthstone-core";
 import { TemplUtil } from "set-piece";
 
 @TemplUtil.is('rampage-effect')
@@ -34,14 +34,18 @@ export class RampageEffectModel extends SpellEffectModel<MinionCardModel> {
         if (!target) return;
 
         // Give the damaged minion +3/+3 buff
-        const buff = new RoleBuffModel({
+        target.buff(new BaseFeatureModel({
             state: {
                 name: "Rampage's Buff",
                 desc: "+3/+3",
-                offset: [3, 3] // +3 Attack, +3 Health
-            }
-        });
-        target.buff(buff);
+            },
+            child: {
+                buffs: [
+                    new RoleAttackBuffModel({ state: { offset: 3 } }),
+                    new RoleHealthBuffModel({ state: { offset: 3 } })
+                ]
+            },
+        }));
     }
 }
 

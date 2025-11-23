@@ -1,4 +1,4 @@
-import { Selector, SpellEffectModel, RoleBuffModel } from "hearthstone-core";
+import { Selector, SpellEffectModel, BaseFeatureModel, RoleAttackBuffModel, RoleHealthBuffModel } from "hearthstone-core";
 import { TemplUtil } from "set-piece";
 import { HeavyAxeModel } from "../heavy-axe";
 
@@ -31,14 +31,18 @@ export class UpgradeEffectModel extends SpellEffectModel<never> {
         
         if (weapon) {
             // If you have a weapon, give it +1/+1
-            const buff = new RoleBuffModel({
+            weapon.buff(new BaseFeatureModel({
                 state: {
                     name: "Upgrade!'s Buff",
                     desc: "+1/+1.",
-                    offset: [1, 1] // +1 Attack, +1 Durability
-                }
-            });
-            weapon.buff(buff);
+                },
+                child: {
+                    buffs: [
+                        new RoleAttackBuffModel({ state: { offset: 1 } }),
+                        new RoleHealthBuffModel({ state: { offset: 1 } })
+                    ]
+                },
+            }));
         } else {
             // Otherwise equip a 1/3 weapon
             const weapon = new HeavyAxeModel();

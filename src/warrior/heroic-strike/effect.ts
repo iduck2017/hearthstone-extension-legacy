@@ -1,4 +1,4 @@
-import { Selector, SpellEffectModel, RoleBuffModel } from "hearthstone-core";
+import { Selector, SpellEffectModel } from "hearthstone-core";
 import { TemplUtil } from "set-piece";
 import { HeroicStrikeBuffModel } from "./buff";
 

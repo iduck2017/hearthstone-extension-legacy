@@ -1,4 +1,4 @@
-import { EffectModel, Selector, SpellEffectModel, RoleBuffModel, MinionCardModel } from "hearthstone-core";
+import { EffectModel, Selector, SpellEffectModel, BaseFeatureModel, RoleHealthBuffModel, MinionCardModel } from "hearthstone-core";
 import { TemplUtil } from "set-piece";
 
 @TemplUtil.is('power-word-shield-effect')
@@ -29,14 +29,15 @@ export class PowerWordShieldEffectModel extends SpellEffectModel<MinionCardModel
         const target = params[0];
         if (!target) return;
         // Give the minion +2 Health buff
-        const buff = new RoleBuffModel({
+        target.buff(new BaseFeatureModel({
             state: {
                 name: "Power Word: Shield's Buff",
                 desc: "+2 Health.",
-                offset: [0, 2] // +0 Attack, +2 Health
-            }
-        });
-        target.buff(buff);
+            },
+            child: {
+                buffs: [new RoleHealthBuffModel({ state: { offset: 2 } })]
+            },
+        }));
 
         // Draw a card
         const player = this.route.player;

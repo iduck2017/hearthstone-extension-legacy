@@ -1,4 +1,4 @@
-import { PlayerModel, IRoleBuffModel, TurnModel } from "hearthstone-core";
+import { RoleAttackBuffModel, FeatureModel, TurnModel } from "hearthstone-core";
 import { Event, EventUtil, TemplUtil } from "set-piece";
 
 export namespace ScarletSubjugatorDebuffModel {
@@ -9,7 +9,7 @@ export namespace ScarletSubjugatorDebuffModel {
 }
 
 @TemplUtil.is('scarlet-subjugator-debuff')
-export class ScarletSubjugatorDebuffModel extends IRoleBuffModel<
+export class ScarletSubjugatorDebuffModel extends FeatureModel<
     ScarletSubjugatorDebuffModel.E,
     ScarletSubjugatorDebuffModel.S,
     ScarletSubjugatorDebuffModel.C,
@@ -22,15 +22,17 @@ export class ScarletSubjugatorDebuffModel extends IRoleBuffModel<
             state: {
                 name: 'Scarlet Subjugator\'s Debuff',
                 desc: '-2 Attack until your next turn.',
-                offset: [-2, 0], // -2 Attack, 0 Health
+                isEnabled: true,
                 count: 0,
                 ...props.state,
             },
-            child: { ...props.child },
+            child: {
+                buffs: [new RoleAttackBuffModel({ state: { offset: -2 } })],
+                ...props.child,
+            },
             refer: { ...props.refer },
         });
     }
-
 
     @EventUtil.on(self => self.handleTurn)
     private listenTurn() {

@@ -1,4 +1,4 @@
-import { BattlecryModel, Selector, RoleModel, RoleBuffModel } from "hearthstone-core";
+import { BattlecryModel, Selector, RoleModel, BaseFeatureModel, RoleAttackBuffModel, RoleHealthBuffModel } from "hearthstone-core";
 import { TemplUtil } from "set-piece";
 
 @TemplUtil.is('shattered-sun-cleric-battlecry')
@@ -31,13 +31,17 @@ export class ShatteredSunClericBattlecryModel extends BattlecryModel<RoleModel> 
         const target = params[0];
         if (!target) return;
         // Give the target minion +1/+1
-        const buff = new RoleBuffModel({
+        target.buff(new BaseFeatureModel({
             state: { 
                 name: "Shattered Sun Cleric's Buff",
                 desc: "+1/+1",
-                offset: [1, 1] // +1 Attack, +1 Health
-            }
-        });
-        target.buff(buff);
+            },
+            child: {
+                buffs: [
+                    new RoleAttackBuffModel({ state: { offset: 1 } }),
+                    new RoleHealthBuffModel({ state: { offset: 1 } })
+                ]
+            },
+        }));
     }
 }

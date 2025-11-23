@@ -1,4 +1,4 @@
-import { BattlecryModel, Selector, RoleModel, RoleBuffModel, MinionCardModel } from "hearthstone-core";
+import { BattlecryModel, Selector, RoleModel, BaseFeatureModel, RoleHealthBuffModel, MinionCardModel } from "hearthstone-core";
 import { TemplUtil } from "set-piece";
 
 @TemplUtil.is('temple-enforcer-battlecry')
@@ -36,13 +36,14 @@ export class TempleEnforcerBattlecryModel extends BattlecryModel<RoleModel> {
         if (target.route.player !== player) return;
         
         // Apply +3 Health buff
-        const buff = new RoleBuffModel({
+        target.buff(new BaseFeatureModel({
             state: {
                 name: "Temple Enforcer's Buff",
                 desc: "+3 Health.",
-                offset: [0, 3] // +0 Attack, +3 Health
-            }
-        });
-        target.buff(buff);
+            },
+            child: {
+                buffs: [new RoleHealthBuffModel({ state: { offset: 3 } })]
+            },
+        }));
     }
 }

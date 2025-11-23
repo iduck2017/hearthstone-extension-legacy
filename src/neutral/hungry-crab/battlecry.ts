@@ -1,4 +1,4 @@
-import { RaceType, BattlecryModel, RoleModel, Selector, RoleBuffModel, MinionCardModel } from "hearthstone-core";
+import { RaceType, BattlecryModel, RoleModel, Selector, BaseFeatureModel, RoleAttackBuffModel, RoleHealthBuffModel, MinionCardModel } from "hearthstone-core";
 import { TemplUtil, DebugUtil } from "set-piece";
 
 @TemplUtil.is('hungry-crab-battlecry')
@@ -37,12 +37,17 @@ export class HungryCrabBattlecryModel extends BattlecryModel<RoleModel> {
         target.child.dispose.destroy(minion, this);
         
         // Add buff to the crab
-        minion.buff(new RoleBuffModel({
+        minion.buff(new BaseFeatureModel({
             state: {
                 name: "Hungry Crab's Buff",
                 desc: "+2/+2",
-                offset: [2, 2]
-            }
+            },
+            child: {
+                buffs: [
+                    new RoleAttackBuffModel({ state: { offset: 2 } }),
+                    new RoleHealthBuffModel({ state: { offset: 2 } })
+                ]
+            },
         }));
     }
 }
