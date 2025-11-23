@@ -80,6 +80,8 @@
     - 除了initial-state外，一个列表项对应一个测试函数
     
     - 用例名应当是严格的`名词-动词` 组合，例如 `fireball-cast`,`wisp-attack`
+
+    - 卡牌从`cardC`开始命名，玩家用`playerA`和`playerB`表示
     
 - 为测试用例添加注释，每个断言语句前都应当注释，保留顶部注释
 
