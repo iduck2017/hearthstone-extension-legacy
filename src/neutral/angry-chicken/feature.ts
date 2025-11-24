@@ -63,7 +63,7 @@ export class AngryChickenFeatureModel extends RoleFeatureModel<
         decor.add({
             offset: this.state.offset,
             type: OperatorType.ADD,
-            reason: this,
+            method: this,
         })
     }
 }

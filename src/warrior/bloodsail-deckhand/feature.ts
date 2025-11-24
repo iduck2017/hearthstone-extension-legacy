@@ -55,7 +55,7 @@ export class BloodsailDeckhandFeatureModel extends FeatureModel {
         decor.add({
             offset: -1,
             type: OperatorType.ADD,
-            reason: this,
+            method: this,
         });
     }
 }

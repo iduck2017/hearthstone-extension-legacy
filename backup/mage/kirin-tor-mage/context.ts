@@ -33,7 +33,7 @@ export class KirinTorMageContextModel extends FeatureModel {
         decor.add({
             offset: 0,
             type: OperatorType.SET,
-            reason: this,
+            method: this,
         });
     }
 

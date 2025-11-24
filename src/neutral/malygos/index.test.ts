@@ -86,22 +86,22 @@ describe('malygos', () => {
         expect(handA.child.cards.length).toBe(1);
     });
 
-    // test('fireball-cast', async () => {
-    //     // Check initial state
-    //     expect(heroB.child.health.state.current).toBe(22); // Player B hero: 22 health (from previous test)
-    //     expect(handA.child.cards.filter(item => item instanceof FireballModel).length).toBe(1);
-    //     expect(playerA.child.mana.state.current).toBe(9);
+    test('fireball-cast', async () => {
+        // Check initial state
+        expect(heroB.child.health.state.current).toBe(22); // Player B hero: 22 health (from previous test)
+        expect(handA.child.cards.filter(item => item instanceof FireballModel).length).toBe(1);
+        expect(playerA.child.mana.state.current).toBe(9);
 
-    //     // Player A casts Fireball with Malygos on board
-    //     const promise = cardD.play();
-    //     expect(playerA.controller.current?.options).toContain(heroA); // Can target friendly hero
-    //     expect(playerA.controller.current?.options).toContain(heroB); // Can target enemy hero
-    //     playerA.controller.set(heroB); // Target Player B's hero
-    //     await promise;
+        // Player A casts Fireball with Malygos on board
+        const promise = cardD.play();
+        expect(playerA.controller.current?.options).toContain(heroA); // Can target friendly hero
+        expect(playerA.controller.current?.options).toContain(heroB); // Can target enemy hero
+        playerA.controller.set(heroB); // Target Player B's hero
+        await promise;
 
-    //     // Fireball should deal 6+5=11 damage (6 base + 5 from Malygos)
-    //     expect(heroB.child.health.state.current).toBe(11); // 22 - 11 = 11
-    //     expect(playerA.child.mana.state.current).toBe(5); // 9 - 4 cost (Fireball costs 4)
-    //     expect(handA.child.cards.filter(item => item instanceof FireballModel).length).toBe(0);
-    // });
+        // Fireball should deal 6+5=11 damage (6 base + 5 from Malygos)
+        expect(heroB.child.health.state.current).toBe(11); // 22 - 11 = 11
+        expect(playerA.child.mana.state.current).toBe(5); // 9 - 4 cost (Fireball costs 4)
+        expect(handA.child.cards.filter(item => item instanceof FireballModel).length).toBe(0);
+    });
 });

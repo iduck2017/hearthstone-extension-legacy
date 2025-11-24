@@ -30,7 +30,7 @@ export class SorcerersApprenticeFeatureModel extends RoleFeatureModel {
         decor.add({
             offset: -1,
             type: OperatorType.ADD,
-            reason: this,
+            method: this,
             minimum: 1,
         });
     }

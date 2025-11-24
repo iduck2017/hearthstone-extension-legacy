@@ -62,7 +62,7 @@ export class TaurenWarriorFeatureModel extends RoleFeatureModel<
         decor.add({
             type: OperatorType.ADD,
             offset: this.state.offset,
-            reason: this,
+            method: this,
         })
     }
 }

@@ -33,7 +33,7 @@ export class NordrassilDruidContextModel extends FeatureModel {
         decor.add({
             offset: -3,
             type: OperatorType.ADD,
-            reason: this,
+            method: this,
         });
     }
 
