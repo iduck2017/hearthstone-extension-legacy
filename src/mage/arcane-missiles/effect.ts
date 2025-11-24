@@ -1,20 +1,37 @@
 import { DamageEvent, DamageModel, DamageType, EffectModel, Selector, SpellEffectModel } from "hearthstone-core";
 import { Model, TemplUtil } from "set-piece";
+import { ArcaneMissilesSliceEffectModel } from "./slice";
 
+
+export namespace ArcaneMissilesEffectModel {
+    export type E = {}
+    export type S = {}
+    export type C = {
+        slice: ArcaneMissilesSliceEffectModel
+    }
+    export type R = {}
+}
 
 @TemplUtil.is('arcane-missiles-effect')
-export class ArcaneMissilesEffectModel extends SpellEffectModel<never> {
+export class ArcaneMissilesEffectModel extends SpellEffectModel<never,
+    ArcaneMissilesEffectModel.E,
+    ArcaneMissilesEffectModel.S,
+    ArcaneMissilesEffectModel.C,
+    ArcaneMissilesEffectModel.R
+> {
     constructor(props?: ArcaneMissilesEffectModel['props']) {
         props = props ?? {};
         super({
             uuid: props.uuid,
             state: { 
                 name: "Arcane Missiles's effect",
-                desc: "Deal {{spellDamage[0]}} damage randomly split among all enemies.",
-                damage: [3],
+                desc: "Deal *3* damage randomly split among all enemies.",
                 ...props.state 
             },
-            child: { ...props.child },
+            child: { 
+                slice: props.child?.slice ?? new ArcaneMissilesSliceEffectModel(),
+                ...props.child 
+            },
             refer: { ...props.refer },
         });
     }
@@ -30,24 +47,10 @@ export class ArcaneMissilesEffectModel extends SpellEffectModel<never> {
         const card = this.route.card;
         if (!card) return;
 
-        const loop = this.state.damage[0] ?? 0;
+        const loop = 3 + this.state.offset;
+        console.log('loops', loop)
         for (let index = 0; index < loop; index ++) {
-            const roles = opponent.refer.roles;
-            console.log('🔍 roles', roles)
-            if (!roles.length) break;
-            const index = Math.floor(Math.random() * roles.length);
-            const target = roles[index];
-            if (!target) break;
-            console.log('🔍 target', target)
-            DamageModel.deal([
-                new DamageEvent({
-                    type: DamageType.SPELL,
-                    source: card,
-                    method: this,
-                    target,
-                    origin: 1,
-                })
-            ])
+            this.child.slice.run([])
         }
     }
 } 

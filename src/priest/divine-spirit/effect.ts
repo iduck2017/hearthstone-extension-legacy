@@ -10,7 +10,6 @@ export class DivineSpiritEffectModel extends SpellEffectModel<MinionCardModel> {
             state: {
                 name: "Divine Spirit's effect",
                 desc: "Double a minion's Health.",
-                damage: [],
                 ...props.state
             },
             child: { ...props.child },

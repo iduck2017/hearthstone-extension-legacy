@@ -10,8 +10,7 @@ export class IceLanceEffectModel extends SpellEffectModel<RoleModel> {
             uuid: props.uuid,
             state: { 
                 name: "Ice Lance's effect",
-                desc: "Freeze a character. If it was already Frozen, deal {{spellDamage[0]}} damage instead.",
-                damage: [4],
+                desc: "Freeze a character. If it was already Frozen, deal *4* damage instead.",
                 ...props.state 
             },
             child: { ...props.child },
@@ -43,7 +42,7 @@ export class IceLanceEffectModel extends SpellEffectModel<RoleModel> {
                     source: card,
                     method: this,
                     target,
-                    origin: this.state.damage[0] ?? 0,
+                    origin: 4,
                 })
             ])
         } else {

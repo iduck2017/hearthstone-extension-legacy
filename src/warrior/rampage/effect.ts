@@ -11,7 +11,6 @@ export class RampageEffectModel extends SpellEffectModel<MinionCardModel> {
             state: {
                 name: "Rampage's effect",
                 desc: "Give a damaged minion +3/+3.",
-                damage: [],
                 ...props.state
             },
             child: { ...props.child },

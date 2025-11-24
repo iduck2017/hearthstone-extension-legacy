@@ -10,7 +10,6 @@ export class ShieldSlamEffectModel extends SpellEffectModel<MinionCardModel> {
             state: {
                 name: "Shield Slam's effect",
                 desc: "Deal 1 damage to a minion for each Armor you have.",
-                damage: [],
                 ...props.state
             },
             child: { ...props.child },

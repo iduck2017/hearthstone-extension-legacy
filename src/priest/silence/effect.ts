@@ -10,7 +10,6 @@ export class SilenceEffectModel extends SpellEffectModel<MinionCardModel> {
             state: {
                 name: "Silence's effect",
                 desc: "Silence a minion.",
-                damage: [],
                 ...props.state
             },
             child: { ...props.child },

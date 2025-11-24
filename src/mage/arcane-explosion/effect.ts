@@ -11,8 +11,7 @@ export class ArcaneExplosionEffectModel extends SpellEffectModel<never> {
             uuid: props.uuid,
             state: { 
                 name: "Arcane Explosion's effect",
-                desc: "Deal {{spellDamage[0]}} damage to all enemy minions.",
-                damage: [1],
+                desc: "Deal *1* damage to all enemy minions.",
                 ...props.state 
             },
             child: { ...props.child },
@@ -41,7 +40,7 @@ export class ArcaneExplosionEffectModel extends SpellEffectModel<never> {
                 source: card,
                 method: this,
                 target: item,
-                origin: this.state.damage[0] ?? 0,
+                origin: 1,
             }))
         )
     }

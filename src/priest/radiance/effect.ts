@@ -10,7 +10,6 @@ export class RadianceEffectModel extends SpellEffectModel<never> {
             state: {
                 name: "Radiance's effect",
                 desc: "Restore 5 Health to your hero.",
-                damage: [],
                 ...props.state
             },
             child: { ...props.child },

@@ -9,8 +9,7 @@ export class MortalStrikeEffectModel extends SpellEffectModel<RoleModel> {
             uuid: props.uuid,
             state: {
                 name: "Mortal Strike's effect",
-                desc: "Deal 4 damage. If you have 12 or less Health, deal 6 instead.",
-                damage: [4],
+                desc: "Deal *4* damage. If you have 12 or less Health, deal *6* instead.",
                 ...props.state
             },
             child: { ...props.child },

@@ -9,8 +9,7 @@ export class HolyNovaEffectModel extends SpellEffectModel<never> {
             uuid: props.uuid,
             state: {
                 name: "Holy Nova's effect",
-                desc: "Deal {{spellDamage[0]}} damage to all enemy minions. Restore 2 Health to all friendly characters.",
-                damage: [2],
+                desc: "Deal *2* damage to all enemy minions. Restore 2 Health to all friendly characters.",
                 ...props.state
             },
             child: { ...props.child },
@@ -39,8 +38,8 @@ export class HolyNovaEffectModel extends SpellEffectModel<never> {
             source: card,
             method: this,
             target: item,
-            origin: this.state.damage[0] ?? 0,
-            type: DamageType.DEFAULT,
+                origin: 2,
+                type: DamageType.SPELL,
         })));
 
         // Restore 2 Health to all friendly characters (hero and minions)

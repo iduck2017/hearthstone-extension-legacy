@@ -9,8 +9,7 @@ export class SlamEffectModel extends SpellEffectModel<MinionCardModel> {
             uuid: props.uuid,
             state: {
                 name: "Slam's effect",
-                desc: "Deal 2 damage to a minion. If it survives, draw a card.",
-                damage: [2],
+                desc: "Deal *2* damage to a minion. If it survives, draw a card.",
                 ...props.state
             },
             child: { ...props.child },
@@ -40,7 +39,7 @@ export class SlamEffectModel extends SpellEffectModel<MinionCardModel> {
                 source: card,
                 method: this,
                 target,
-                origin: this.state.damage[0] ?? 2,
+                origin: 2,
             })
         ]);
 

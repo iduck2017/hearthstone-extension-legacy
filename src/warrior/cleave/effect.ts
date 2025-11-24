@@ -9,8 +9,7 @@ export class CleaveEffectModel extends SpellEffectModel<never> {
             uuid: props.uuid,
             state: {
                 name: "Cleave's effect",
-                desc: "Deal 2 damage to two random enemy minions.",
-                damage: [2],
+                desc: "Deal *2* damage to two random enemy minions.",
                 ...props.state
             },
             child: { ...props.child },
@@ -54,7 +53,7 @@ export class CleaveEffectModel extends SpellEffectModel<never> {
                 source: card,
                 method: this,
                 target,
-                origin: this.state.damage[0] ?? 2,
+                origin: 2,
             })
         );
         DamageModel.deal(damageEvents);

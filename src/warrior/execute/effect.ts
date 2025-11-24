@@ -10,7 +10,6 @@ export class ExecuteEffectModel extends SpellEffectModel<MinionCardModel> {
             state: {
                 name: "Execute's effect",
                 desc: "Destroy a damaged enemy minion.",
-                damage: [],
                 ...props.state
             },
             child: { ...props.child },

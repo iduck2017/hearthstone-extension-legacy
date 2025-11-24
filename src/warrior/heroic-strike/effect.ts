@@ -11,7 +11,6 @@ export class HeroicStrikeEffectModel extends SpellEffectModel<never> {
             state: {
                 name: "Heroic Strike's effect",
                 desc: "Give your hero +4 Attack this turn.",
-                damage: [],
                 ...props.state
             },
             child: { ...props.child },

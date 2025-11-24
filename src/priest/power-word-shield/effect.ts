@@ -10,7 +10,6 @@ export class PowerWordShieldEffectModel extends SpellEffectModel<MinionCardModel
             state: {
                 name: "Power Word: Shield's effect",
                 desc: "Give a minion +2 Health. Draw a card.",
-                damage: [],
                 ...props.state
             },
             child: { ...props.child },

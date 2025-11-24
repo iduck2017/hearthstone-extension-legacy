@@ -10,7 +10,6 @@ export class FocusedWillEffectModel extends SpellEffectModel<MinionCardModel> {
             state: {
                 name: "Focused Will's effect",
                 desc: "Silence a minion, then give it +3 Health.",
-                damage: [],
                 ...props.state
             },
             child: { ...props.child },

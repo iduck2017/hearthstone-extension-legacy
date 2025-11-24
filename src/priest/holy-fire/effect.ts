@@ -9,8 +9,7 @@ export class HolyFireEffectModel extends SpellEffectModel<RoleModel> {
             uuid: props.uuid,
             state: {
                 name: "Holy Fire's effect",
-                desc: "Deal {{spellDamage[0]}} damage. Restore 5 Health to your hero.",
-                damage: [5],
+                desc: "Deal *5* damage. Restore 5 Health to your hero.",
                 ...props.state
             },
             child: { ...props.child },
@@ -39,7 +38,7 @@ export class HolyFireEffectModel extends SpellEffectModel<RoleModel> {
                 source: card,
                 method: this,
                 target,
-                origin: this.state.damage[0] ?? 0,
+                origin: 5,
             })
         ]);
 

@@ -10,7 +10,6 @@ export class ShieldBlockEffectModel extends SpellEffectModel<never> {
             state: {
                 name: "Shield Block's effect",
                 desc: "Gain 5 Armor. Draw a card.",
-                damage: [],
                 ...props.state
             },
             child: { ...props.child },

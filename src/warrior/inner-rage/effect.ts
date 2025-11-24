@@ -9,8 +9,7 @@ export class InnerRageEffectModel extends SpellEffectModel<MinionCardModel> {
             uuid: props.uuid,
             state: {
                 name: "Inner Rage's effect",
-                desc: "Deal 1 damage to a minion and give it +2 Attack.",
-                damage: [1],
+                desc: "Deal *1* damage to a minion and give it +2 Attack.",
                 ...props.state
             },
             child: { ...props.child },
@@ -38,7 +37,7 @@ export class InnerRageEffectModel extends SpellEffectModel<MinionCardModel> {
                 source: card,
                 method: this,
                 target,
-                origin: this.state.damage[0] ?? 1,
+                origin: 1,
             })
         ]);
 

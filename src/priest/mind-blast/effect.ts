@@ -9,8 +9,7 @@ export class MindBlastEffectModel extends SpellEffectModel<never> {
             uuid: props.uuid,
             state: {
                 name: "Mind Blast's effect",
-                desc: "Deal {{spellDamage[0]}} damage to the enemy hero.",
-                damage: [5],
+                desc: "Deal *5* damage to the enemy hero.",
                 ...props.state
             },
             child: { ...props.child },
@@ -40,7 +39,7 @@ export class MindBlastEffectModel extends SpellEffectModel<never> {
                 source: card,
                 method: this,
                 target: hero,
-                origin: this.state.damage[0] ?? 0,
+                origin: 5,
             })
         ]);
     }

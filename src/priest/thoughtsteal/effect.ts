@@ -10,7 +10,6 @@ export class ThoughtstealEffectModel extends SpellEffectModel<never> {
             state: {
                 name: "Thoughtsteal's effect",
                 desc: "Copy 2 cards in your opponent's deck and add them to your hand.",
-                damage: [],
                 ...props.state
             },
             child: { ...props.child },

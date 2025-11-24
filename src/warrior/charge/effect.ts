@@ -10,7 +10,6 @@ export class ChargeEffectModel extends SpellEffectModel<MinionCardModel> {
             state: {
                 name: "Charge's effect",
                 desc: "Give a friendly minion +2 Attack and Charge.",
-                damage: [],
                 ...props.state
             },
             child: { ...props.child },

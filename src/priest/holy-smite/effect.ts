@@ -9,8 +9,7 @@ export class HolySmiteEffectModel extends SpellEffectModel<MinionCardModel> {
             uuid: props.uuid,
             state: {
                 name: "Holy Smite's effect",
-                desc: "Deal {{spellDamage[0]}} damage to a minion.",
-                damage: [3],
+                desc: "Deal *3* damage to a minion.",
                 ...props.state
             },
             child: { ...props.child },
@@ -38,7 +37,7 @@ export class HolySmiteEffectModel extends SpellEffectModel<MinionCardModel> {
                 source: card,
                 method: this,
                 target,
-                origin: this.state.damage[0] ?? 0
+                origin: 3
             })
         ]);
     }

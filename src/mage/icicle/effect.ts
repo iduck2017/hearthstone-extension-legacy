@@ -10,8 +10,7 @@ export class IcicleEffectModel extends SpellEffectModel<RoleModel> {
             uuid: props.uuid,
             state: { 
                 name: "Icicle's effect",
-                desc: "Deal {{spellDamage[0]}} damage to a minion. If it's Frozen, draw a card.",
-                damage: [2],
+                desc: "Deal *2* damage to a minion. If it's Frozen, draw a card.",
                 ...props.state 
             },
             child: { ...props.child },
@@ -41,7 +40,7 @@ export class IcicleEffectModel extends SpellEffectModel<RoleModel> {
                 source: card,
                 method: this,
                 target,
-                origin: this.state.damage[0] ?? 0
+                origin: 2
             })
         ])
         

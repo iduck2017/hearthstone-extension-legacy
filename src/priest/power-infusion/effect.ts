@@ -10,7 +10,6 @@ export class PowerInfusionEffectModel extends SpellEffectModel<MinionCardModel> 
             state: {
                 name: "Power Infusion's effect",
                 desc: "Give a minion +2/+6.",
-                damage: [],
                 ...props.state
             },
             child: { ...props.child },

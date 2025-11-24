@@ -10,7 +10,6 @@ export class BattleRageEffectModel extends SpellEffectModel<never> {
             state: {
                 name: "Battle Rage's effect",
                 desc: "Draw a card for each damaged friendly character.",
-                damage: [],
                 ...props.state
             },
             child: { ...props.child },

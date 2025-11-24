@@ -10,7 +10,6 @@ export class ShadowWordPainEffectModel extends SpellEffectModel<MinionCardModel>
             state: {
                 name: "Shadow Word: Pain's effect",
                 desc: "Destroy a minion with 3 or less Attack.",
-                damage: [],
                 ...props.state
             },
             child: { ...props.child },

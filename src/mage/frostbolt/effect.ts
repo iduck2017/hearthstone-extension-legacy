@@ -10,8 +10,7 @@ export class FrostboltEffectModel extends SpellEffectModel<RoleModel> {
             uuid: props.uuid,
             state: { 
                 name: "Frostbolt's effect",
-                desc: "Deal {{spellDamage[0]}} damage to a character and Freeze it.",
-                damage: [3],
+                desc: "Deal *3* damage to a character and Freeze it.",
                 ...props.state 
             },
             child: { ...props.child },
@@ -39,7 +38,7 @@ export class FrostboltEffectModel extends SpellEffectModel<RoleModel> {
                 source: card,
                 method: this,
                 target,
-                origin: this.state.damage[0] ?? 0
+                origin: 3
             })
         ])
         

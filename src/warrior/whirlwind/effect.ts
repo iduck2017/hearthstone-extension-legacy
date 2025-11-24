@@ -9,8 +9,7 @@ export class WhirlwindEffectModel extends SpellEffectModel<never> {
             uuid: props.uuid,
             state: {
                 name: "Whirlwind's effect",
-                desc: "Deal 1 damage to ALL minions.",
-                damage: [1],
+                desc: "Deal *1* damage to ALL minions.",
                 ...props.state
             },
             child: { ...props.child },
@@ -38,7 +37,7 @@ export class WhirlwindEffectModel extends SpellEffectModel<never> {
                 source: card,
                 method: this,
                 target: item,
-                origin: this.state.damage[0] ?? 1,
+                origin: 1,
             }))
         );
     }

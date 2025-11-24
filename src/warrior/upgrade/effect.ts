@@ -11,7 +11,6 @@ export class UpgradeEffectModel extends SpellEffectModel<never> {
             state: {
                 name: "Upgrade!'s effect",
                 desc: "If you have a weapon, give it +1/+1. Otherwise equip a 1/3 weapon.",
-                damage: [],
                 ...props.state
             },
             child: { ...props.child },

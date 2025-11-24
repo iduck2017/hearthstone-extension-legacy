@@ -10,7 +10,6 @@ export class ShadowWordRuinEffectModel extends SpellEffectModel<never> {
             state: {
                 name: "Shadow Word: Ruin's effect",
                 desc: "Destroy all minions with 5 or more Attack.",
-                damage: [],
                 ...props.state
             },
             child: { ...props.child },

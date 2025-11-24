@@ -10,7 +10,6 @@ export class MassDispelEffectModel extends SpellEffectModel<never> {
             state: {
                 name: "Mass Dispel's effect",
                 desc: "Silence all enemy minions. Draw a card.",
-                damage: [],
                 ...props.state
             },
             child: { ...props.child },

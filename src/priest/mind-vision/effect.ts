@@ -10,7 +10,6 @@ export class MindVisionEffectModel extends SpellEffectModel<never> {
             state: {
                 name: "Mind Vision's effect",
                 desc: "Put a copy of a random card in your opponent's hand into your hand.",
-                damage: [],
                 ...props.state
             },
             child: { ...props.child },

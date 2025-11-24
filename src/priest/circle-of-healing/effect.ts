@@ -10,7 +10,6 @@ export class CircleOfHealingEffectModel extends SpellEffectModel<never> {
             state: {
                 name: "Circle of Healing's effect",
                 desc: "Restore 4 Health to ALL minions.",
-                damage: [],
                 ...props.state
             },
             child: { ...props.child },
