@@ -1,4 +1,4 @@
-import { BattlecryModel, Selector, RoleModel } from "hearthstone-core";
+import { BattlecryModel, Selector, RoleModel, FrozenModel } from "hearthstone-core";
 import { TemplUtil } from "set-piece";
 
 @TemplUtil.is('frost-elemental-battlecry')
@@ -29,7 +29,6 @@ export class FrostElementalBattlecryModel extends BattlecryModel<RoleModel> {
     public async doRun(params: Array<RoleModel | undefined>) {
         const target = params[0];
         if (!target) return;
-        // Freeze the target
-        target.child.frozen.enable();
+        FrozenModel.enable([target])
     }
 }

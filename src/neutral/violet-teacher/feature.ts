@@ -19,6 +19,14 @@ export class VioletTeacherFeatureModel extends RoleFeatureModel {
         });
     }
 
+    protected get isActived() {
+        const result = super.isActived;
+        if (result) {
+            console.log('pass');
+        } 
+        return result;
+    }
+
     @EventUtil.on(self => self.handleCast)
     private listenCast() {
         const spell = this.route.game?.proxy.any(SpellCardModel);

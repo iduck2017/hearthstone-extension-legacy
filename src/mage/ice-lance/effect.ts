@@ -1,4 +1,4 @@
-import { Selector, RoleModel, DamageModel, DamageEvent, DamageType, SpellEffectModel } from "hearthstone-core";
+import { Selector, RoleModel, DamageModel, DamageEvent, DamageType, SpellEffectModel, FrozenModel } from "hearthstone-core";
 import { TemplUtil } from "set-piece";
 
 
@@ -45,8 +45,6 @@ export class IceLanceEffectModel extends SpellEffectModel<RoleModel> {
                     origin: 4,
                 })
             ])
-        } else {
-            frozen.enable();
-        }
+        } else FrozenModel.enable([target]);
     }
 } 

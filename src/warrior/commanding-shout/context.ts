@@ -1,8 +1,8 @@
-import { RoleFeatureModel, RoleHealthModel, DamageEvent, TurnModel } from "hearthstone-core";
-import { Event, EventUtil, TemplUtil } from "set-piece";
+import { RoleFeatureModel, RoleHealthModel, DamageEvent, TurnModel, MinionCardModel, RoleHealthDecor, OperatorType, FeatureModel } from "hearthstone-core";
+import { Event, EventUtil, StateUtil, TemplUtil } from "set-piece";
 
 @TemplUtil.is('commanding-shout-feature')
-export class CommandingShoutContextModel extends RoleFeatureModel {
+export class CommandingShoutContextModel extends FeatureModel {
     constructor(props?: CommandingShoutContextModel['props']) {
         props = props ?? {};
         super({
@@ -18,14 +18,23 @@ export class CommandingShoutContextModel extends RoleFeatureModel {
         });
     }
 
-    @EventUtil.on(self => self.handleDamage)
-    private listenDamage() {
-        const health = this.route.role?.proxy.child.health;
-        if (!health) return;
-        return health.event?.toConsume;
+    @StateUtil.on(self => self.modifyHealth)
+    protected listenHealth() {
+        const player = this.route.player;
+        const board = player?.proxy.child.board;
+        const minions = board?.any(MinionCardModel);
+        const health = minions?.child.health;
+        console.warn('listenHealth', health?.decor);
+        return health?.decor
     }
-    private handleDamage(that: RoleHealthModel, event: DamageEvent) {
-        
+    private modifyHealth(that: RoleHealthModel, decor: RoleHealthDecor) {
+        console.warn('modifyHealth', that, decor);
+        decor.add({
+            key: RoleHealthDecor.MINIMUM,
+            type: OperatorType.SET,
+            offset: 1,
+            method: this,
+        })
     }
 
     @EventUtil.on(self => self.handleTurn)

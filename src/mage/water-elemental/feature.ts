@@ -1,4 +1,4 @@
-import { DamageEvent, DamageModel, RoleFeatureModel } from "hearthstone-core";
+import { DamageEvent, DamageModel, FrozenModel, RoleFeatureModel } from "hearthstone-core";
 import { Event, EventUtil, TemplUtil } from "set-piece";
 
 @TemplUtil.is('water-elemental-feature')
@@ -25,7 +25,6 @@ export class WaterElementalFeatureModel extends RoleFeatureModel {
     }
     private handleDamage(that: DamageModel, event: DamageEvent) {
         const target = event.detail.target;
-        const frozen = target.child.frozen;
-        frozen.enable();
+        FrozenModel.enable([target]);
     }
 }
