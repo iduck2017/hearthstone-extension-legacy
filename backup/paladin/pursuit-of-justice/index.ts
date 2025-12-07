@@ -1,7 +1,7 @@
-import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel,  } from "hearthstone-core";
+import { ClassType, CostModel, LibraryService, RarityType, SchoolType, SpellCardModel,  } from "hearthstone-core";
 import { PursuitOfJusticeEffectModel } from "./effect";
 
-@LibraryUtil.is('pursuit-of-justice')
+@LibraryService.is('pursuit-of-justice')
 export class PursuitOfJusticeModel extends SpellCardModel {
     constructor(props?: PursuitOfJusticeModel['props']) {
         props = props ?? {};

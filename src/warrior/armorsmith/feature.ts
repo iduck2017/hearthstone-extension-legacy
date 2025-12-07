@@ -1,7 +1,7 @@
 import { RoleFeatureModel, DamageEvent, RoleHealthModel, MinionCardModel } from "hearthstone-core";
-import { Event, EventUtil, TemplUtil } from "set-piece";
+import { Event, EventPlugin, ChunkService } from "set-piece";
 
-@TemplUtil.is('armorsmith-feature')
+@ChunkService.is('armorsmith-feature')
 export class ArmorsmithFeatureModel extends RoleFeatureModel {
     constructor(props?: ArmorsmithFeatureModel['props']) {
         props = props ?? {};
@@ -18,7 +18,7 @@ export class ArmorsmithFeatureModel extends RoleFeatureModel {
         });
     }
 
-    @EventUtil.on(self => self.handleDamage)
+    @EventPlugin.on(self => self.handleDamage)
     private listenDamage() {
         const game = this.route.game;
         if (!game) return;

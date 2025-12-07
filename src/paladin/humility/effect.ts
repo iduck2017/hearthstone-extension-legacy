@@ -1,7 +1,7 @@
 import { Selector, SpellEffectModel, MinionCardModel, BaseFeatureModel, RoleAttackBuffModel, OperatorType } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 
-@TemplUtil.is('humility-effect')
+@ChunkService.is('humility-effect')
 export class HumilityEffectModel extends SpellEffectModel<MinionCardModel> {
     constructor(props?: HumilityEffectModel['props']) {
         props = props ?? {};

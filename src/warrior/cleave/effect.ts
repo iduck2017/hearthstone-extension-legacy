@@ -1,7 +1,7 @@
 import { Selector, SpellEffectModel, DamageModel, DamageEvent, DamageType, RoleModel, MinionCardModel } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 
-@TemplUtil.is('cleave-effect')
+@ChunkService.is('cleave-effect')
 export class CleaveEffectModel extends SpellEffectModel<never> {
     constructor(props?: CleaveEffectModel['props']) {
         props = props ?? {};

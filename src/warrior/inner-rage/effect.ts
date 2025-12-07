@@ -1,7 +1,7 @@
 import { Selector, SpellEffectModel, MinionCardModel, DamageModel, DamageEvent, DamageType, BaseFeatureModel, RoleAttackBuffModel } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 
-@TemplUtil.is('inner-rage-effect')
+@ChunkService.is('inner-rage-effect')
 export class InnerRageEffectModel extends SpellEffectModel<MinionCardModel> {
     constructor(props?: InnerRageEffectModel['props']) {
         props = props ?? {};

@@ -1,7 +1,7 @@
 import { BattlecryModel, DamageModel, DamageEvent, DamageType } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 
-@TemplUtil.is('flame-imp-battlecry')
+@ChunkService.is('flame-imp-battlecry')
 export class FlameImpBattlecryModel extends BattlecryModel<never> {
     constructor(props?: FlameImpBattlecryModel['props']) {
         props = props ?? {};

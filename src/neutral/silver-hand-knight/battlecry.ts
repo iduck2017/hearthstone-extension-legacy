@@ -1,8 +1,8 @@
 import { BattlecryModel } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 import { SquireModel } from "../squire";
 
-@TemplUtil.is('silver-hand-knight-battlecry')
+@ChunkService.is('silver-hand-knight-battlecry')
 export class SilverHandKnightBattlecryModel extends BattlecryModel<never> {
     constructor(props?: SilverHandKnightBattlecryModel['props']) {
         props = props ?? {};

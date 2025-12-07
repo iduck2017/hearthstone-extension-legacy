@@ -9,9 +9,9 @@
  * Collectible
  */
 
-import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, RarityType, RoleAttackModel, RaceType } from "hearthstone-core";
+import { ClassType, CostModel, RoleHealthModel, LibraryService, MinionCardModel, RarityType, RoleAttackModel, RaceType } from "hearthstone-core";
 
-@LibraryUtil.is('chillwind-yeti')
+@LibraryService.is('chillwind-yeti')
 export class ChillwindYetiModel extends MinionCardModel {
     constructor(props?: ChillwindYetiModel['props']) {
         props = props ?? {};

@@ -1,7 +1,7 @@
 import { CardModel, EffectModel, SpellEffectModel, Selector } from "hearthstone-core";
-import { TemplUtil, TranxUtil } from "set-piece";
+import { ChunkService, TranxService } from "set-piece";
 
-@TemplUtil.is('mind-vision-effect')
+@ChunkService.is('mind-vision-effect')
 export class MindVisionEffectModel extends SpellEffectModel<never> {
     constructor(props?: MindVisionEffectModel['props']) {
         props = props ?? {};

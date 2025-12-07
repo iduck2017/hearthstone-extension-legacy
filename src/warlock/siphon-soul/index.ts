@@ -17,10 +17,10 @@
  * 4 mana
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryService, RarityType, SchoolType, SpellCardModel } from "hearthstone-core";
 import { SiphonSoulEffectModel } from "./effect";
 
-@LibraryUtil.is('siphon-soul')
+@LibraryService.is('siphon-soul')
 export class SiphonSoulModel extends SpellCardModel {
     constructor(props?: SiphonSoulModel['props']) {
         props = props ?? {};

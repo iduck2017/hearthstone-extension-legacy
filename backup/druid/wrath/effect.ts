@@ -1,11 +1,11 @@
 import { EffectModel, SpellEffectModel } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 // TODO: Implement Choose One mechanic
 // This card has two options:
 // 1. Deal 3 damage to a minion
 // 2. Deal 1 damage to a minion and draw a card
 
-@TemplUtil.is('wrath-effect')
+@ChunkService.is('wrath-effect')
 export class WrathEffectModel extends SpellEffectModel<[]> {
     constructor(props?: WrathEffectModel['props']) {
         props = props ?? {};

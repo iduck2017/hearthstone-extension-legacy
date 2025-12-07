@@ -1,6 +1,6 @@
-import { MinionCardModel, RarityType, ClassType, RoleAttackModel, RoleHealthModel, TauntModel, CostModel, LibraryUtil } from "hearthstone-core";
+import { MinionCardModel, RarityType, ClassType, RoleAttackModel, RoleHealthModel, TauntModel, CostModel, LibraryService } from "hearthstone-core";
 
-@LibraryUtil.is('lord-of-the-arena')
+@LibraryService.is('lord-of-the-arena')
 export class LordOfTheArenaModel extends MinionCardModel {
     constructor(props?: LordOfTheArenaModel['props']) {
         props = props ?? {};

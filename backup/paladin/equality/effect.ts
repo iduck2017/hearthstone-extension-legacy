@@ -1,7 +1,7 @@
 import { SpellEffectModel } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 
-@TemplUtil.is('equality-effect')
+@ChunkService.is('equality-effect')
 export class EqualityEffectModel extends SpellEffectModel<[]> {
     constructor(props?: EqualityEffectModel['props']) {
         props = props ?? {};

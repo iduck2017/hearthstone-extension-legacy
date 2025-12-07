@@ -10,9 +10,9 @@
  * Collectible
  */
 
-import { ChargeModel, RoleHealthModel, RoleAttackModel, MinionCardModel, ClassType, RarityType, CostModel, LibraryUtil } from "hearthstone-core";
+import { ChargeModel, RoleHealthModel, RoleAttackModel, MinionCardModel, ClassType, RarityType, CostModel, LibraryService } from "hearthstone-core";
 
-@LibraryUtil.is('reckless-rocketeer')
+@LibraryService.is('reckless-rocketeer')
 export class RecklessRocketeerModel extends MinionCardModel {
     constructor(props?: RecklessRocketeerModel['props']) {
         props = props ?? {};

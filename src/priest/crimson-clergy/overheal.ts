@@ -1,7 +1,7 @@
 import { FeatureModel, OverhealModel, RoleHealthModel, RoleModel } from "hearthstone-core";
-import { Event, EventUtil, TemplUtil } from "set-piece";
+import { Event, EventPlugin, ChunkService } from "set-piece";
 
-@TemplUtil.is('crimson-clergy-overheal')
+@ChunkService.is('crimson-clergy-overheal')
 export class CrimsonClergyOverhealModel extends OverhealModel {
     constructor(props?: CrimsonClergyOverhealModel['props']) {
         props = props ?? {};

@@ -17,10 +17,10 @@
  * 2 mana
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, SpellCardModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryService, RarityType, SpellCardModel } from "hearthstone-core";
 import { HeroicStrikeEffectModel } from "./effect";
 
-@LibraryUtil.is('heroic-strike')
+@LibraryService.is('heroic-strike')
 export class HeroicStrikeModel extends SpellCardModel {
     constructor(props?: HeroicStrikeModel['props']) {
         props = props ?? {};

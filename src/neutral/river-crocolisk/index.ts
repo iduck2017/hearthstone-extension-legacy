@@ -10,9 +10,9 @@
  * Collectible
  */
 
-import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, RarityType, RoleAttackModel, RaceType } from "hearthstone-core";
+import { ClassType, CostModel, RoleHealthModel, LibraryService, MinionCardModel, RarityType, RoleAttackModel, RaceType } from "hearthstone-core";
 
-@LibraryUtil.is('river-crocolisk')
+@LibraryService.is('river-crocolisk')
 export class RiverCrocoliskModel extends MinionCardModel {
     constructor(props?: RiverCrocoliskModel['props']) {
         props = props ?? {};

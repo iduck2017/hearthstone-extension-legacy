@@ -17,10 +17,10 @@
  * 2 mana 2/3
  */
 
-import { ClassType, CostModel, LibraryUtil, MinionCardModel, RarityType, RoleAttackModel, RoleHealthModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryService, MinionCardModel, RarityType, RoleAttackModel, RoleHealthModel } from "hearthstone-core";
 import { CruelTaskmasterBattlecryModel } from "./battlecry";
 
-@LibraryUtil.is('cruel-taskmaster')
+@LibraryService.is('cruel-taskmaster')
 export class CruelTaskmasterModel extends MinionCardModel {
     constructor(props?: CruelTaskmasterModel['props']) {
         props = props ?? {};

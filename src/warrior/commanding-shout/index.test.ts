@@ -22,7 +22,7 @@ import { CommandingShoutModel } from "./index";
 import { ChillwindYetiModel } from "../../neutral/chillwind-yeti";
 import { FireballModel } from "../../mage/fireball";
 import { boot } from "../../boot";
-import { DebugUtil } from "set-piece";
+import { DebugService } from "set-piece";
 
 describe('commanding-shout', () => {
     const game = new GameModel({

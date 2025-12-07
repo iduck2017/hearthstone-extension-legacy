@@ -1,7 +1,7 @@
 import { EffectModel, SpellEffectModel, TauntModel, RoleBuffModel } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 
-@TemplUtil.is('gift-of-the-wild-effect')
+@ChunkService.is('gift-of-the-wild-effect')
 export class GiftOfTheWildEffectModel extends SpellEffectModel<[]> {
     constructor(props?: GiftOfTheWildEffectModel['props']) {
         props = props ?? {};

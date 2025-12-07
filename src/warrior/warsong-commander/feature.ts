@@ -1,7 +1,7 @@
 import { RoleFeatureModel, BoardModel, MinionCardModel } from "hearthstone-core";
-import { Event, EventUtil, TemplUtil } from "set-piece";
+import { Event, EventPlugin, ChunkService } from "set-piece";
 
-@TemplUtil.is('warsong-commander-feature')
+@ChunkService.is('warsong-commander-feature')
 export class WarsongCommanderFeatureModel extends RoleFeatureModel {
     constructor(props?: WarsongCommanderFeatureModel['props']) {
         props = props ?? {};
@@ -18,7 +18,7 @@ export class WarsongCommanderFeatureModel extends RoleFeatureModel {
         });
     }
 
-    @EventUtil.on(self => self.handleSummon)
+    @EventPlugin.on(self => self.handleSummon)
     private listenSummon() {
         const player = this.route.player;
         if (!player) return;

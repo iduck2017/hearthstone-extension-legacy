@@ -9,9 +9,9 @@
  * Collectible
  */
 
-import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, RarityType, RoleAttackModel, RaceType } from "hearthstone-core";
+import { ClassType, CostModel, RoleHealthModel, LibraryService, MinionCardModel, RarityType, RoleAttackModel, RaceType } from "hearthstone-core";
 
-@LibraryUtil.is('mechanical-dragonling')
+@LibraryService.is('mechanical-dragonling')
 export class MechanicalDragonlingModel extends MinionCardModel {
     constructor(props?: MechanicalDragonlingModel['props']) {
         props = props ?? {};

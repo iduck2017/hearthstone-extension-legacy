@@ -1,7 +1,7 @@
 import { Selector, SpellEffectModel, MinionCardModel, DamageModel, DamageEvent, DamageType } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 
-@TemplUtil.is('shadow-bolt-effect')
+@ChunkService.is('shadow-bolt-effect')
 export class ShadowBoltEffectModel extends SpellEffectModel<MinionCardModel> {
     constructor(props?: ShadowBoltEffectModel['props']) {
         props = props ?? {};

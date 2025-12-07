@@ -15,10 +15,10 @@
  * Collectible
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryService, RarityType, SchoolType, SpellCardModel } from "hearthstone-core";
 import { BlizzardEffectModel } from "./effect";
 
-@LibraryUtil.is('blizzard')
+@LibraryService.is('blizzard')
 export class BlizzardModel extends SpellCardModel {
     constructor(props?: BlizzardModel['props']) {
         props = props ?? {};

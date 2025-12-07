@@ -1,8 +1,8 @@
 import { EffectModel, Selector, SpellEffectModel } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 
 
-@TemplUtil.is('frost-nova-effect')
+@ChunkService.is('frost-nova-effect')
 export class FrostNovaEffectModel extends SpellEffectModel<never>{
     constructor(props?: FrostNovaEffectModel['props']) {
         props = props ?? {};

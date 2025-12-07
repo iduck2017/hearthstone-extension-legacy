@@ -1,8 +1,8 @@
 import { MinionBattlecryModel } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 import { NordrassilDruidContextModel } from "./context";
 
-@TemplUtil.is('nordrassil-druid-battlecry')
+@ChunkService.is('nordrassil-druid-battlecry')
 export class NordrassilDruidBattlecryModel extends MinionBattlecryModel<[]> {
     constructor(props?: NordrassilDruidBattlecryModel['props']) {
         props = props ?? {};

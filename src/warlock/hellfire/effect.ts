@@ -1,7 +1,7 @@
 import { Selector, SpellEffectModel, DamageModel, DamageEvent, DamageType, RoleModel } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 
-@TemplUtil.is('hellfire-effect')
+@ChunkService.is('hellfire-effect')
 export class HellfireEffectModel extends SpellEffectModel<never> {
     constructor(props?: HellfireEffectModel['props']) {
         props = props ?? {};

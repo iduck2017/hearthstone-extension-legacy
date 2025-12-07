@@ -1,7 +1,7 @@
 import { EffectModel, SpellEffectModel, DamageModel, DamageEvent, DamageType, Selector } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 
-@TemplUtil.is('mind-blast-effect')
+@ChunkService.is('mind-blast-effect')
 export class MindBlastEffectModel extends SpellEffectModel<never> {
     constructor(props?: MindBlastEffectModel['props']) {
         props = props ?? {};

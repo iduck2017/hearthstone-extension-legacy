@@ -1,7 +1,7 @@
 import { AbortEvent, RoleAttackModel, RoleModel, SecretFeatureModel } from "hearthstone-core";
-import { Event, EventUtil, TemplUtil } from "set-piece";
+import { Event, EventPlugin, ChunkService } from "set-piece";
 
-@TemplUtil.is('ice-barrier-feature')
+@ChunkService.is('ice-barrier-feature')
 export class IceBarrierFeatureModel extends SecretFeatureModel {
     constructor(props?: IceBarrierFeatureModel['props']) {
         props = props ?? {};
@@ -18,7 +18,7 @@ export class IceBarrierFeatureModel extends SecretFeatureModel {
         });
     }
 
-    @EventUtil.on(self => self.handleRecv)
+    @EventPlugin.on(self => self.handleRecv)
     private listenRecv() {
         return this.route.player?.proxy.child.hero.child.attack.event?.toReceive
     }

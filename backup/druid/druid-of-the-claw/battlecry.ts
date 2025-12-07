@@ -1,12 +1,12 @@
 import { MinionBattlecryModel } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 // TODO: Implement Choose One mechanic and Transform
 // This card has two options:
 // 1. Transform into a 7/6 with Rush
 // 2. Transform into a 4/9 with Taunt
 // Need to create the transformed minion models
 
-@TemplUtil.is('druid-of-the-claw-battlecry')
+@ChunkService.is('druid-of-the-claw-battlecry')
 export class DruidOfTheClawBattlecryModel extends MinionBattlecryModel<[]> {
     constructor(props?: DruidOfTheClawBattlecryModel['props']) {
         props = props ?? {};

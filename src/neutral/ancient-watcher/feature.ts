@@ -1,7 +1,7 @@
 import { FeatureModel, RoleActionDecor, RoleActionModel, RoleFeatureModel, RoleModel } from "hearthstone-core";
-import { StateUtil, TemplUtil, Decor } from "set-piece";
+import { StatePlugin, ChunkService, Decor } from "set-piece";
 
-@TemplUtil.is('ancient-watcher-feature')
+@ChunkService.is('ancient-watcher-feature')
 export class AncientWatcherFeatureModel extends RoleFeatureModel {
 
     constructor(props?: AncientWatcherFeatureModel['props']) {
@@ -20,7 +20,7 @@ export class AncientWatcherFeatureModel extends RoleFeatureModel {
     }
 
     // Disable attack action
-    @StateUtil.on(self => self.modifyAction)
+    @StatePlugin.on(self => self.modifyAction)
     private listenAction() {
         return this.route.role?.proxy.child.action.decor
     }

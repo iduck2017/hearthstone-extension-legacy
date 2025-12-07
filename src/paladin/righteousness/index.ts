@@ -17,10 +17,10 @@
  * 5 mana
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryService, RarityType, SchoolType, SpellCardModel } from "hearthstone-core";
 import { RighteousnessEffectModel } from "./effect";
 
-@LibraryUtil.is('righteousness')
+@LibraryService.is('righteousness')
 export class RighteousnessModel extends SpellCardModel {
     constructor(props?: RighteousnessModel['props']) {
         props = props ?? {};

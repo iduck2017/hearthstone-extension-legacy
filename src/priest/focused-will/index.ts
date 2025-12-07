@@ -15,10 +15,10 @@
  * Collectible
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel,  } from "hearthstone-core";
+import { ClassType, CostModel, LibraryService, RarityType, SchoolType, SpellCardModel,  } from "hearthstone-core";
 import { FocusedWillEffectModel } from "./effect";
 
-@LibraryUtil.is('focused-will')
+@LibraryService.is('focused-will')
 export class FocusedWillModel extends SpellCardModel {
     constructor(props?: FocusedWillModel['props']) {
         props = props ?? {};

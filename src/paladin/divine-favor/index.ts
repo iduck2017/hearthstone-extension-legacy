@@ -17,10 +17,10 @@
  * 3 mana
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryService, RarityType, SchoolType, SpellCardModel } from "hearthstone-core";
 import { DivineFavorEffectModel } from "./effect";
 
-@LibraryUtil.is('divine-favor')
+@LibraryService.is('divine-favor')
 export class DivineFavorModel extends SpellCardModel {
     constructor(props?: DivineFavorModel['props']) {
         props = props ?? {};

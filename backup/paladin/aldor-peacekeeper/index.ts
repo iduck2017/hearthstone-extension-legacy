@@ -1,7 +1,7 @@
-import { ClassType, CostModel, LibraryUtil, RarityType, MinionCardModel, MinionFeaturesModel, RoleAttackModel, RoleHealthModel, MinionBattlecryModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryService, RarityType, MinionCardModel, MinionFeaturesModel, RoleAttackModel, RoleHealthModel, MinionBattlecryModel } from "hearthstone-core";
 import { AldorPeacekeeperBattlecryModel } from "./battlecry";
 
-@LibraryUtil.is('aldor-peacekeeper')
+@LibraryService.is('aldor-peacekeeper')
 export class AldorPeacekeeperModel extends MinionCardModel {
     constructor(props?: AldorPeacekeeperModel['props']) {
         props = props ?? {};

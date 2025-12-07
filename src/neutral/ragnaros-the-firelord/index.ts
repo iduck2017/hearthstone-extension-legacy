@@ -13,11 +13,11 @@
  * Collectible
  */
 
-import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, RarityType, RoleAttackModel, RaceType } from "hearthstone-core";
+import { ClassType, CostModel, RoleHealthModel, LibraryService, MinionCardModel, RarityType, RoleAttackModel, RaceType } from "hearthstone-core";
 import { RagnarosFeatureModel } from "./feature";
 import { RagnarosEndTurnModel } from "./end-turn";
 
-@LibraryUtil.is('ragnaros-the-firelord')
+@LibraryService.is('ragnaros-the-firelord')
 export class RagnarosTheFirelordModel extends MinionCardModel {
     constructor(props?: RagnarosTheFirelordModel['props']) {
         props = props ?? {};

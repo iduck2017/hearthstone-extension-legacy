@@ -13,9 +13,9 @@
  * Collectible
  */
 
-import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, RarityType, RoleAttackModel, RaceType, ElusiveModel } from "hearthstone-core";
+import { ClassType, CostModel, RoleHealthModel, LibraryService, MinionCardModel, RarityType, RoleAttackModel, RaceType, ElusiveModel } from "hearthstone-core";
 
-@LibraryUtil.is('faerie-dragon')
+@LibraryService.is('faerie-dragon')
 export class FaerieDragonModel extends MinionCardModel {
     constructor(props?: FaerieDragonModel['props']) {
         props = props ?? {};

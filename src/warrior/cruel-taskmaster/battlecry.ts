@@ -1,7 +1,7 @@
 import { BattlecryModel, MinionCardModel, DamageModel, DamageEvent, DamageType, BaseFeatureModel, RoleAttackBuffModel, Selector } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 
-@TemplUtil.is('cruel-taskmaster-battlecry')
+@ChunkService.is('cruel-taskmaster-battlecry')
 export class CruelTaskmasterBattlecryModel extends BattlecryModel<MinionCardModel> {
     constructor(props?: CruelTaskmasterBattlecryModel['props']) {
         props = props ?? {};

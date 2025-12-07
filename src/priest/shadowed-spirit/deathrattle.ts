@@ -1,8 +1,8 @@
 import { DamageEvent, DamageModel, DamageType, DeathrattleModel } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 
 
-@TemplUtil.is('shadowed-spirit-deathrattle')
+@ChunkService.is('shadowed-spirit-deathrattle')
 export class ShadowedSpiritDeathrattleModel extends DeathrattleModel {
     constructor(props?: ShadowedSpiritDeathrattleModel['props']) {
         props = props ?? {};

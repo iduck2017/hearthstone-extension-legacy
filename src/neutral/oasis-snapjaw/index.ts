@@ -10,9 +10,9 @@
  * Collectible
  */
 
-import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, RarityType, RoleAttackModel, RaceType } from "hearthstone-core";
+import { ClassType, CostModel, RoleHealthModel, LibraryService, MinionCardModel, RarityType, RoleAttackModel, RaceType } from "hearthstone-core";
 
-@LibraryUtil.is('oasis-snapjaw')
+@LibraryService.is('oasis-snapjaw')
 export class OasisSnapjawModel extends MinionCardModel {
     constructor(props?: OasisSnapjawModel['props']) {
         props = props ?? {};

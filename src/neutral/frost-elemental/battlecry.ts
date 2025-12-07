@@ -1,7 +1,7 @@
 import { BattlecryModel, Selector, RoleModel, FrozenModel } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 
-@TemplUtil.is('frost-elemental-battlecry')
+@ChunkService.is('frost-elemental-battlecry')
 export class FrostElementalBattlecryModel extends BattlecryModel<RoleModel> {
     constructor(props?: FrostElementalBattlecryModel['props']) {
         props = props ?? {};

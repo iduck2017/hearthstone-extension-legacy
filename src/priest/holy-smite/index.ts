@@ -14,10 +14,10 @@
  * Collectible
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryService, RarityType, SchoolType, SpellCardModel } from "hearthstone-core";
 import { HolySmiteEffectModel } from "./effect";
 
-@LibraryUtil.is('holy-smite')
+@LibraryService.is('holy-smite')
 export class HolySmiteModel extends SpellCardModel {
     constructor(props?: HolySmiteModel['props']) {
         props = props ?? {};

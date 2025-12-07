@@ -1,7 +1,7 @@
 import { Selector, SpellEffectModel, MinionCardModel, RaceType } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 
-@TemplUtil.is('sense-demons-effect')
+@ChunkService.is('sense-demons-effect')
 export class SenseDemonsEffectModel extends SpellEffectModel<never> {
     constructor(props?: SenseDemonsEffectModel['props']) {
         props = props ?? {};

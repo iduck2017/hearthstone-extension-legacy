@@ -1,7 +1,7 @@
 import { EffectModel, Selector, SpellEffectModel } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 
-@TemplUtil.is('arcane-intellect-effect')
+@ChunkService.is('arcane-intellect-effect')
 export class ArcaneIntellectEffectModel extends SpellEffectModel<never> {
     constructor(props?: ArcaneIntellectEffectModel['props']) {
         props = props ?? {};

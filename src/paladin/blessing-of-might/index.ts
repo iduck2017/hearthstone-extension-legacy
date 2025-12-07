@@ -17,10 +17,10 @@
  * 1 mana
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryService, RarityType, SchoolType, SpellCardModel } from "hearthstone-core";
 import { BlessingOfMightEffectModel } from "./effect";
 
-@LibraryUtil.is('blessing-of-might')
+@LibraryService.is('blessing-of-might')
 export class BlessingOfMightModel extends SpellCardModel {
     constructor(props?: BlessingOfMightModel['props']) {
         props = props ?? {};

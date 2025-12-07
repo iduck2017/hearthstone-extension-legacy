@@ -1,7 +1,7 @@
 import { BattlecryModel } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 
-@TemplUtil.is('novice-engineer-battlecry')
+@ChunkService.is('novice-engineer-battlecry')
 export class NoviceEngineerBattlecryModel extends BattlecryModel<never> {
     constructor(props?: NoviceEngineerBattlecryModel['props']) {
         props = props ?? {};

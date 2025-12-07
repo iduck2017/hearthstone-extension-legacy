@@ -1,7 +1,7 @@
-import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel,  } from "hearthstone-core";
+import { ClassType, CostModel, LibraryService, RarityType, SchoolType, SpellCardModel,  } from "hearthstone-core";
 import { EyeForAnEyeEffectModel } from "./effect";
 
-@LibraryUtil.is('eye-for-an-eye')
+@LibraryService.is('eye-for-an-eye')
 export class EyeForAnEyeModel extends SpellCardModel {
     constructor(props?: EyeForAnEyeModel['props']) {
         props = props ?? {};

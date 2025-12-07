@@ -1,8 +1,8 @@
 import { Selector, DamageModel, DamageEvent, DamageType, SpellEffectModel, RoleModel } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 
 
-@TemplUtil.is('fireball-effect')
+@ChunkService.is('fireball-effect')
 export class FireballEffectModel extends SpellEffectModel<RoleModel> {
     constructor(props?: FireballEffectModel['props']) {
         props = props ?? {};

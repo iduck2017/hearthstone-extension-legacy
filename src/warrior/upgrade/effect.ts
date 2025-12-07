@@ -1,8 +1,8 @@
 import { Selector, SpellEffectModel, BaseFeatureModel, RoleAttackBuffModel, RoleHealthBuffModel, WeaponAttackBuffModel, WeaponActionkBuffModel } from "hearthstone-core";
-import { DebugUtil, TemplUtil } from "set-piece";
+import { DebugService, ChunkService } from "set-piece";
 import { HeavyAxeModel } from "../heavy-axe";
 
-@TemplUtil.is('upgrade-effect')
+@ChunkService.is('upgrade-effect')
 export class UpgradeEffectModel extends SpellEffectModel<never> {
     constructor(props?: UpgradeEffectModel['props']) {
         props = props ?? {};

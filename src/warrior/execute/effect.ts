@@ -1,7 +1,7 @@
 import { Selector, SpellEffectModel, MinionCardModel } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 
-@TemplUtil.is('execute-effect')
+@ChunkService.is('execute-effect')
 export class ExecuteEffectModel extends SpellEffectModel<MinionCardModel> {
     constructor(props?: ExecuteEffectModel['props']) {
         props = props ?? {};

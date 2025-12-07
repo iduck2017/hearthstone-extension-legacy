@@ -14,10 +14,10 @@
  * Collectible
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel,  } from "hearthstone-core";
+import { ClassType, CostModel, LibraryService, RarityType, SchoolType, SpellCardModel,  } from "hearthstone-core";
 import { MarkOfNatureEffectModel } from "./effect";
 
-@LibraryUtil.is('mark-of-nature')
+@LibraryService.is('mark-of-nature')
 export class MarkOfNatureModel extends SpellCardModel {
     constructor(props?: MarkOfNatureModel['props']) {
         props = props ?? {};

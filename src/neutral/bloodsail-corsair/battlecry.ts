@@ -1,7 +1,7 @@
 import { BattlecryModel } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 
-@TemplUtil.is('bloodsail-corsair-battlecry')
+@ChunkService.is('bloodsail-corsair-battlecry')
 export class BloodsailCorsairBattlecryModel extends BattlecryModel<never> {
     constructor(props?: BloodsailCorsairBattlecryModel['props']) {
         props = props ?? {};

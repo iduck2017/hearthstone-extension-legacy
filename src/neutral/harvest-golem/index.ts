@@ -13,10 +13,10 @@
  * Collectible
  */
 
-import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, RarityType, RoleAttackModel, RaceType } from "hearthstone-core";
+import { ClassType, CostModel, RoleHealthModel, LibraryService, MinionCardModel, RarityType, RoleAttackModel, RaceType } from "hearthstone-core";
 import { HarvestGolemDeathrattleModel } from "./deathrattle";
 
-@LibraryUtil.is('harvest-golem')
+@LibraryService.is('harvest-golem')
 export class HarvestGolemModel extends MinionCardModel {
     constructor(props?: HarvestGolemModel['props']) {
         props = props ?? {};

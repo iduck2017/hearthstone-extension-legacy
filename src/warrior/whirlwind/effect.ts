@@ -1,7 +1,7 @@
 import { DamageEvent, DamageModel, DamageType, MinionCardModel, Selector, SpellEffectModel } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 
-@TemplUtil.is('whirlwind-effect')
+@ChunkService.is('whirlwind-effect')
 export class WhirlwindEffectModel extends SpellEffectModel<never> {
     constructor(props?: WhirlwindEffectModel['props']) {
         props = props ?? {};

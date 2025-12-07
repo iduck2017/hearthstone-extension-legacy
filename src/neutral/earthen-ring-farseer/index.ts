@@ -12,10 +12,10 @@
  * Collectible
  */
 
-import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, RarityType, RoleAttackModel, RaceType } from "hearthstone-core";
+import { ClassType, CostModel, RoleHealthModel, LibraryService, MinionCardModel, RarityType, RoleAttackModel, RaceType } from "hearthstone-core";
 import { EarthenRingFarseerBattlecryModel } from "./battlecry";
 
-@LibraryUtil.is('earthen-ring-farseer')
+@LibraryService.is('earthen-ring-farseer')
 export class EarthenRingFarseerModel extends MinionCardModel {
     constructor(props?: EarthenRingFarseerModel['props']) {
         props = props ?? {};

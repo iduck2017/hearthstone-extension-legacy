@@ -1,7 +1,7 @@
 import { BattlecryModel, Selector, MinionCardModel } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 
-@TemplUtil.is('ironbeak-owl-battlecry')
+@ChunkService.is('ironbeak-owl-battlecry')
 export class IronbeakOwlBattlecryModel extends BattlecryModel<MinionCardModel> {
     constructor(props?: IronbeakOwlBattlecryModel['props']) {
         props = props ?? {};

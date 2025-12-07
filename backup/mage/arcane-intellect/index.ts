@@ -13,10 +13,10 @@
  * Collectible
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryService, RarityType, SchoolType, SpellCardModel } from "hearthstone-core";
 import { ArcaneIntellectEffectModel } from "./effect";
 
-@LibraryUtil.is('arcane-intellect')
+@LibraryService.is('arcane-intellect')
 export class ArcaneIntellectModel extends SpellCardModel {
     constructor(props?: ArcaneIntellectModel['props']) {
         props = props ?? {};

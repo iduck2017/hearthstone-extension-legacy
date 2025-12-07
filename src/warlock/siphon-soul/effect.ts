@@ -1,7 +1,7 @@
 import { Selector, SpellEffectModel, MinionCardModel, RestoreModel, RestoreEvent } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 
-@TemplUtil.is('siphon-soul-effect')
+@ChunkService.is('siphon-soul-effect')
 export class SiphonSoulEffectModel extends SpellEffectModel<MinionCardModel> {
     constructor(props?: SiphonSoulEffectModel['props']) {
         props = props ?? {};

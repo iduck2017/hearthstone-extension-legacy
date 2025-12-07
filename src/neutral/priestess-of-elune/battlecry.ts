@@ -1,7 +1,7 @@
 import { BattlecryModel, RestoreModel, RestoreEvent } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 
-@TemplUtil.is('priestess-of-elune-battlecry')
+@ChunkService.is('priestess-of-elune-battlecry')
 export class PriestessOfEluneBattlecryModel extends BattlecryModel<never> {
     constructor(props?: PriestessOfEluneBattlecryModel['props']) {
         props = props ?? {};

@@ -17,10 +17,10 @@
  * 7 mana 5/7
  */
 
-import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, RarityType, RoleAttackModel, TauntModel } from "hearthstone-core";
+import { ClassType, CostModel, RoleHealthModel, LibraryService, MinionCardModel, RarityType, RoleAttackModel, TauntModel } from "hearthstone-core";
 import { GuardianOfKingsBattlecryModel } from "./battlecry";
 
-@LibraryUtil.is('guardian-of-kings')
+@LibraryService.is('guardian-of-kings')
 export class GuardianOfKingsModel extends MinionCardModel {
     constructor(props?: GuardianOfKingsModel['props']) {
         props = props ?? {};

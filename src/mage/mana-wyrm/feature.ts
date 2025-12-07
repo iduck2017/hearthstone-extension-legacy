@@ -1,7 +1,7 @@
 import { SpellCardModel, RoleFeatureModel, SpellPerformModel, BuffModel, RoleAttackBuffModel, FeatureModel, BaseFeatureModel } from "hearthstone-core";
-import { Event, EventUtil, TemplUtil } from "set-piece";
+import { Event, EventPlugin, ChunkService } from "set-piece";
 
-@TemplUtil.is('mana-wyrm-feature')
+@ChunkService.is('mana-wyrm-feature')
 export class ManaWyrmFeatureModel extends RoleFeatureModel {
 
     constructor(props?: ManaWyrmFeatureModel['props']) {
@@ -19,7 +19,7 @@ export class ManaWyrmFeatureModel extends RoleFeatureModel {
         });
     }
 
-    @EventUtil.on(self => self.handleCast)
+    @EventPlugin.on(self => self.handleCast)
     private listenCast() {
         const spell = this.route.player?.proxy.any(SpellCardModel);
         return spell?.child.perform.event?.onPlay

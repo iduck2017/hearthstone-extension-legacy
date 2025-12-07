@@ -1,7 +1,7 @@
 import { SpellEffectModel, RestoreModel, RestoreEvent } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 
-@TemplUtil.is('lay-on-hands-effect')
+@ChunkService.is('lay-on-hands-effect')
 export class LayOnHandsEffectModel extends SpellEffectModel<[]> {
     constructor(props?: LayOnHandsEffectModel['props']) {
         props = props ?? {};

@@ -15,9 +15,9 @@
  * 5 mana 5/2
  */
 
-import { ClassType, CostModel, WeaponActionModel, RarityType, WeaponAttackModel, WeaponCardModel, LibraryUtil } from "hearthstone-core";
+import { ClassType, CostModel, WeaponActionModel, RarityType, WeaponAttackModel, WeaponCardModel, LibraryService } from "hearthstone-core";
 
-@LibraryUtil.is('arcanite-reaper')
+@LibraryService.is('arcanite-reaper')
 export class ArcaniteReaperModel extends WeaponCardModel {
     constructor(props?: ArcaniteReaperModel['props']) {
         props = props ?? {};

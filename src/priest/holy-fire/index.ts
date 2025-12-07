@@ -1,8 +1,8 @@
 import { SpellCardModel, RarityType, ClassType, SchoolType, CostModel } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 import { HolyFireEffectModel } from "./effect";
 
-@TemplUtil.is('holy-fire')
+@ChunkService.is('holy-fire')
 export class HolyFireModel extends SpellCardModel {
     constructor(props?: HolyFireModel['props']) {
         props = props ?? {};

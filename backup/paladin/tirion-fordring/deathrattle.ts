@@ -1,7 +1,7 @@
 import { DeathrattleModel } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 
-@TemplUtil.is('tirion-fordring-deathrattle')
+@ChunkService.is('tirion-fordring-deathrattle')
 export class TirionFordringDeathrattleModel extends DeathrattleModel {
     constructor(props?: TirionFordringDeathrattleModel['props']) {
         props = props ?? {};

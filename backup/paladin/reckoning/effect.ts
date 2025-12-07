@@ -1,7 +1,7 @@
 import { SpellEffectModel } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 
-@TemplUtil.is('reckoning-effect')
+@ChunkService.is('reckoning-effect')
 export class ReckoningEffectModel extends SpellEffectModel<[]> {
     constructor(props?: ReckoningEffectModel['props']) {
         props = props ?? {};

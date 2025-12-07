@@ -1,8 +1,8 @@
 import { DeathrattleModel } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 import { AegwynnTheGuardianContextModel } from "./context";
 
-@TemplUtil.is('aegwynn-the-guardian-deathrattle')
+@ChunkService.is('aegwynn-the-guardian-deathrattle')
 export class AegwynnTheGuardianDeathrattleModel extends DeathrattleModel {
     constructor(props?: AegwynnTheGuardianDeathrattleModel['props']) {
         props = props ?? {};

@@ -1,9 +1,9 @@
 import { DeathrattleModel, DamageModel, DamageType, DamageEvent } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 
 
 
-@TemplUtil.is('abomination-deathrattle')
+@ChunkService.is('abomination-deathrattle')
 export class AbominationDeathrattleModel extends DeathrattleModel {
 
     constructor(props?: AbominationDeathrattleModel['props']) {

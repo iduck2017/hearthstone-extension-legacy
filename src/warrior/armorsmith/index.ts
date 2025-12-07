@@ -18,10 +18,10 @@
  * 1/4
  */
 
-import { ClassType, CostModel, LibraryUtil, MinionCardModel, RarityType, RoleAttackModel, RoleHealthModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryService, MinionCardModel, RarityType, RoleAttackModel, RoleHealthModel } from "hearthstone-core";
 import { ArmorsmithFeatureModel } from "./feature";
 
-@LibraryUtil.is('armorsmith')
+@LibraryService.is('armorsmith')
 export class ArmorsmithModel extends MinionCardModel {
     constructor(props?: ArmorsmithModel['props']) {
         props = props ?? {};

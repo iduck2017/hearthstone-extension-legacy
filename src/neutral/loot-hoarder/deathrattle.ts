@@ -1,7 +1,7 @@
 import { DeathrattleModel } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 
-@TemplUtil.is('loot-hoarder-deathrattle')
+@ChunkService.is('loot-hoarder-deathrattle')
 export class LootHoarderDeathrattleModel extends DeathrattleModel {
     constructor(props?: LootHoarderDeathrattleModel['props']) {
         props = props ?? {};

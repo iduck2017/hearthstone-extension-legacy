@@ -1,7 +1,7 @@
 import { EffectModel, SpellEffectModel, Selector } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 
-@TemplUtil.is('mass-dispel-effect')
+@ChunkService.is('mass-dispel-effect')
 export class MassDispelEffectModel extends SpellEffectModel<never> {
     constructor(props?: MassDispelEffectModel['props']) {
         props = props ?? {};

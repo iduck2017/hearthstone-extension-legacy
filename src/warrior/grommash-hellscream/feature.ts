@@ -1,5 +1,5 @@
 import { RoleAttackModel, RoleHealthModel, RoleAttackDecor, OperatorType, RoleFeatureModel } from "hearthstone-core";
-import { Event, EventUtil, StateUtil, TemplUtil, TranxUtil, Frame } from "set-piece";
+import { Event, EventPlugin, StatePlugin, ChunkService, TranxService, Frame } from "set-piece";
 
 export namespace GrommashHellscreamFeatureModel {
     export type E = {};
@@ -8,7 +8,7 @@ export namespace GrommashHellscreamFeatureModel {
     export type R = {}
 }
 
-@TemplUtil.is('grommash-hellscream-feature')
+@ChunkService.is('grommash-hellscream-feature')
 export class GrommashHellscreamFeatureModel extends RoleFeatureModel<
     GrommashHellscreamFeatureModel.E,
     GrommashHellscreamFeatureModel.S,
@@ -32,18 +32,18 @@ export class GrommashHellscreamFeatureModel extends RoleFeatureModel<
     }
 
     // Listen to health state changes to trigger enrage effect
-    @EventUtil.on(self => self.handleChange)
+    @EventPlugin.on(self => self.handleChange)
     private listenChange() {
         return this.route.role?.proxy.child.health.event?.onChange
     }
-    @TranxUtil.span()
+    @TranxService.span()
     private handleChange(that: RoleHealthModel, event: Event<Frame<RoleHealthModel>>) {
         if (that.state.current !== event.detail.state.current) this.reload()
         if (that.state.maximum !== event.detail.state.maximum) this.reload()
     }
 
     // Apply attack buff when damaged
-    @StateUtil.on(self => self.modifyAttack)
+    @StatePlugin.on(self => self.modifyAttack)
     private listenAttack() {
         return this.route.role?.proxy.child.attack.decor
     }

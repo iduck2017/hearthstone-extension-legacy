@@ -1,7 +1,7 @@
 import { RoleFeatureModel, WeaponCardModel, CostModel, CostDecor, CostType, OperatorType, WeaponPerformModel, FeatureModel } from "hearthstone-core";
-import { StateUtil, Event, EventUtil, TemplUtil } from "set-piece";
+import { StatePlugin, Event, EventPlugin, ChunkService } from "set-piece";
 
-@TemplUtil.is('bloodsail-deckhand-feature')
+@ChunkService.is('bloodsail-deckhand-feature')
 export class BloodsailDeckhandFeatureModel extends FeatureModel {
     constructor(props?: BloodsailDeckhandFeatureModel['props']) {
         props = props ?? {};
@@ -18,7 +18,7 @@ export class BloodsailDeckhandFeatureModel extends FeatureModel {
         });
     }
 
-    @EventUtil.on(self => self.handlePlay)
+    @EventPlugin.on(self => self.handlePlay)
     protected listenPlay() {
         const player = this.route.player;
         if (!player) return;
@@ -30,7 +30,7 @@ export class BloodsailDeckhandFeatureModel extends FeatureModel {
         this.disable();
     }
 
-    @StateUtil.on(self => self.modifyCost)
+    @StatePlugin.on(self => self.modifyCost)
     protected listenCost() {
         const player = this.route.player;
         if (!player) return;

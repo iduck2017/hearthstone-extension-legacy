@@ -13,9 +13,9 @@
  * Collectible
  */
 
-import { MinionCardModel, RoleHealthModel, RoleAttackModel, RaceType, RarityType, ClassType, LibraryUtil, CostModel } from "hearthstone-core";
+import { MinionCardModel, RoleHealthModel, RoleAttackModel, RaceType, RarityType, ClassType, LibraryService, CostModel } from "hearthstone-core";
 
-@LibraryUtil.is('murloc-raider')
+@LibraryService.is('murloc-raider')
 export class MurlocRaiderModel extends MinionCardModel {
     constructor(props?: MurlocRaiderModel['props']) {
         props = props ?? {};

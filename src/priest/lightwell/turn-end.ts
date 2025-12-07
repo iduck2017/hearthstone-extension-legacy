@@ -1,7 +1,7 @@
 import { TurnStartModel, RestoreModel, RestoreEvent, MinionCardModel, TurnEndModel } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 
-@TemplUtil.is('lightwell-end-turn')
+@ChunkService.is('lightwell-end-turn')
 export class LightwellTurnEndModel extends TurnEndModel {
     constructor(props?: LightwellTurnEndModel['props']) {
         props = props ?? {};

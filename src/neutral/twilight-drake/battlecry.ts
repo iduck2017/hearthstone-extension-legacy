@@ -1,7 +1,7 @@
 import { BattlecryModel, BaseFeatureModel, RoleHealthBuffModel } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 
-@TemplUtil.is('twilight-drake-battlecry')
+@ChunkService.is('twilight-drake-battlecry')
 export class TwilightDrakeBattlecryModel extends BattlecryModel<never> {
     constructor(props?: TwilightDrakeBattlecryModel['props']) {
         props = props ?? {};

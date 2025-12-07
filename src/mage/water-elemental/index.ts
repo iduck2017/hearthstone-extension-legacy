@@ -15,10 +15,10 @@
  * 4/3/6
  */
 
-import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, RarityType, RoleAttackModel, RaceType } from "hearthstone-core";
+import { ClassType, CostModel, RoleHealthModel, LibraryService, MinionCardModel, RarityType, RoleAttackModel, RaceType } from "hearthstone-core";
 import { WaterElementalFeatureModel } from "./feature";
 
-@LibraryUtil.is('water-elemental')
+@LibraryService.is('water-elemental')
 export class WaterElementalModel extends MinionCardModel {
     constructor(props?: WaterElementalModel['props']) {
         props = props ?? {};

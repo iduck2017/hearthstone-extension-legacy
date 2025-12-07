@@ -1,7 +1,7 @@
 import { Selector, DamageModel, DamageEvent, DamageType, SpellEffectModel, RoleModel } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 
-@TemplUtil.is('mortal-strike-effect')
+@ChunkService.is('mortal-strike-effect')
 export class MortalStrikeEffectModel extends SpellEffectModel<RoleModel> {
     constructor(props?: MortalStrikeEffectModel['props']) {
         props = props ?? {};

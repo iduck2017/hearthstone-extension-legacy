@@ -10,10 +10,10 @@
  * Collectible
  */
 
-import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, RarityType, RoleAttackModel, RaceType } from "hearthstone-core";
+import { ClassType, CostModel, RoleHealthModel, LibraryService, MinionCardModel, RarityType, RoleAttackModel, RaceType } from "hearthstone-core";
 import { GnomishInventorBattlecryModel } from "./battlecry";
 
-@LibraryUtil.is('gnomish-inventor')
+@LibraryService.is('gnomish-inventor')
 export class GnomishInventorModel extends MinionCardModel {
     constructor(props?: GnomishInventorModel['props']) {
         props = props ?? {};

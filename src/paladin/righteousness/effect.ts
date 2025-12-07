@@ -1,7 +1,7 @@
 import { Selector, SpellEffectModel, MinionCardModel } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 
-@TemplUtil.is('righteousness-effect')
+@ChunkService.is('righteousness-effect')
 export class RighteousnessEffectModel extends SpellEffectModel<never> {
     constructor(props?: RighteousnessEffectModel['props']) {
         props = props ?? {};

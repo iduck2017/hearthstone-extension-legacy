@@ -1,7 +1,7 @@
 import { Selector, SpellEffectModel, MinionCardModel, DisposeModel } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 
-@TemplUtil.is('brawl-effect')
+@ChunkService.is('brawl-effect')
 export class BrawlEffectModel extends SpellEffectModel<never> {
     constructor(props?: BrawlEffectModel['props']) {
         props = props ?? {};

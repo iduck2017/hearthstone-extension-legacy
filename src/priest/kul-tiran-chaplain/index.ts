@@ -17,10 +17,10 @@
  * 2/3/2
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, MinionCardModel, RoleAttackModel, RoleHealthModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryService, RarityType, MinionCardModel, RoleAttackModel, RoleHealthModel } from "hearthstone-core";
 import { KulTiranChaplainBattlecryModel } from "./battlecry";
 
-@LibraryUtil.is('kul-tiran-chaplain')
+@LibraryService.is('kul-tiran-chaplain')
 export class KulTiranChaplainModel extends MinionCardModel {
     constructor(props?: KulTiranChaplainModel['props']) {
         props = props ?? {};

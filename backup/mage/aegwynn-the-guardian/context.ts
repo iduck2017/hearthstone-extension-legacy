@@ -1,8 +1,8 @@
 import { FeatureModel, MinionCardModel, SpellDamageModel } from "hearthstone-core";
-import { Event, EventUtil, TemplUtil } from "set-piece";
+import { Event, EventPlugin, ChunkService } from "set-piece";
 import { AegwynnTheGuardianDeathrattleModel } from "./deathrattle";
 
-@TemplUtil.is('aegwynn-the-guardian-context')
+@ChunkService.is('aegwynn-the-guardian-context')
 export class AegwynnTheGuardianContextModel extends FeatureModel {
     public get status() {
         return true;
@@ -23,7 +23,7 @@ export class AegwynnTheGuardianContextModel extends FeatureModel {
         });
     }
 
-    @EventUtil.on(self => self.handleDraw)
+    @EventPlugin.on(self => self.handleDraw)
     private listenDraw() {
         return this.route.player?.proxy.child.hand.any(MinionCardModel).event?.onDraw
     }

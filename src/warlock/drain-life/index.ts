@@ -17,10 +17,10 @@
  * 3 mana
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryService, RarityType, SchoolType, SpellCardModel } from "hearthstone-core";
 import { DrainLifeEffectModel } from "./effect";
 
-@LibraryUtil.is('drain-life')
+@LibraryService.is('drain-life')
 export class DrainLifeModel extends SpellCardModel {
     constructor(props?: DrainLifeModel['props']) {
         props = props ?? {};

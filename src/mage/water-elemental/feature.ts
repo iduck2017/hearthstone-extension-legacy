@@ -1,7 +1,7 @@
 import { DamageEvent, DamageModel, FrozenModel, RoleFeatureModel } from "hearthstone-core";
-import { Event, EventUtil, TemplUtil } from "set-piece";
+import { Event, EventPlugin, ChunkService } from "set-piece";
 
-@TemplUtil.is('water-elemental-feature')
+@ChunkService.is('water-elemental-feature')
 export class WaterElementalFeatureModel extends RoleFeatureModel {
     constructor(props?: WaterElementalFeatureModel['props']) {
         props = props ?? {};
@@ -19,7 +19,7 @@ export class WaterElementalFeatureModel extends RoleFeatureModel {
     }
 
 
-    @EventUtil.on(self => self.handleDamage)
+    @EventPlugin.on(self => self.handleDamage)
     private listenDamage() {
         return this.route.card?.proxy.child.damage.event?.onDeal
     }

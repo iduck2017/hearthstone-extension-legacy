@@ -15,10 +15,10 @@
  * Artist: Alex Horley Orlandelli
  * Collectible
  */
-import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryService, RarityType, SchoolType, SpellCardModel } from "hearthstone-core";
 import { IceLanceEffectModel } from "./effect";
 
-@LibraryUtil.is('ice-lance')
+@LibraryService.is('ice-lance')
 export class IceLanceModel extends SpellCardModel {
     constructor(props?: IceLanceModel['props']) {
         props = props ?? {};

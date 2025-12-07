@@ -1,7 +1,7 @@
 import { EffectModel, Selector, RoleModel, SpellEffectModel, MinionCardModel, BaseFeatureModel, RoleHealthBuffModel } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 
-@TemplUtil.is('focused-will-effect')
+@ChunkService.is('focused-will-effect')
 export class FocusedWillEffectModel extends SpellEffectModel<MinionCardModel> {
     constructor(props?: FocusedWillEffectModel['props']) {
         props = props ?? {};

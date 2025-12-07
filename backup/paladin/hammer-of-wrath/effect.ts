@@ -1,7 +1,7 @@
 import { Selector, RoleModel, SpellEffectModel, DamageModel, DamageEvent, DamageType } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 
-@TemplUtil.is('hammer-of-wrath-effect')
+@ChunkService.is('hammer-of-wrath-effect')
 export class HammerOfWrathEffectModel extends SpellEffectModel<[RoleModel]> {
     constructor(props?: HammerOfWrathEffectModel['props']) {
         props = props ?? {};

@@ -1,5 +1,5 @@
 import { DiscoverModel, Selector, SelectorModel, SpellCardModel, SpellEffectModel } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 // TODO: Import FeralRageModel, WildGrowthModel, SwipeModel when they are implemented
 // import { FeralRageModel } from "../feral-rage";
 import { WildGrowthModel } from "../wild-growth";
@@ -12,7 +12,7 @@ export namespace MalfurionsGiftEffect {
     export type R = {}
 }
 
-@TemplUtil.is('malfurions-gift-effect')
+@ChunkService.is('malfurions-gift-effect')
 export class MalfurionsGiftEffectModel extends SpellEffectModel<[],
     MalfurionsGiftEffect.E,
     MalfurionsGiftEffect.S,

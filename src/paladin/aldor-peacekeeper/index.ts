@@ -17,10 +17,10 @@
  * 3 mana 3/3
  */
 
-import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, RarityType, RoleAttackModel, RaceType } from "hearthstone-core";
+import { ClassType, CostModel, RoleHealthModel, LibraryService, MinionCardModel, RarityType, RoleAttackModel, RaceType } from "hearthstone-core";
 import { AldorPeacekeeperBattlecryModel } from "./battlecry";
 
-@LibraryUtil.is('aldor-peacekeeper')
+@LibraryService.is('aldor-peacekeeper')
 export class AldorPeacekeeperModel extends MinionCardModel {
     constructor(props?: AldorPeacekeeperModel['props']) {
         props = props ?? {};

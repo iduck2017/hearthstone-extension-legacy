@@ -17,10 +17,10 @@
  * 6 mana
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryService, RarityType, SchoolType, SpellCardModel } from "hearthstone-core";
 import { AvengingWrathEffectModel } from "./effect";
 
-@LibraryUtil.is('avenging-wrath')
+@LibraryService.is('avenging-wrath')
 export class AvengingWrathModel extends SpellCardModel {
     constructor(props?: AvengingWrathModel['props']) {
         props = props ?? {};

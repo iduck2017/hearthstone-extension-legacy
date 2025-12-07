@@ -13,10 +13,10 @@
  * Collectible
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, SpellCardModel,  } from "hearthstone-core";
+import { ClassType, CostModel, LibraryService, RarityType, SpellCardModel,  } from "hearthstone-core";
 import { MalfurionsGiftEffectModel } from "./effect";
 
-@LibraryUtil.is('malfurions-gift')
+@LibraryService.is('malfurions-gift')
 export class MalfurionsGiftModel extends SpellCardModel {
     constructor(props?: MalfurionsGiftModel['props']) {
         props = props ?? {};

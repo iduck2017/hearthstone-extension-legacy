@@ -14,10 +14,10 @@
  * Collectible
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, SecretCardModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryService, RarityType, SecretCardModel } from "hearthstone-core";
 import { SpellbenderFeatureModel } from "./feature";
 
-@LibraryUtil.is('spellbender')
+@LibraryService.is('spellbender')
 export class SpellbenderModel extends SecretCardModel {
     constructor(props?: SpellbenderModel['props']) {
         props = props ?? {}

@@ -10,9 +10,9 @@
  * Collectible
  */
 
-import { RoleAttackModel, ClassType, RoleHealthModel, LibraryUtil, MinionCardModel, RaceType, RarityType, CostModel } from "hearthstone-core";
+import { RoleAttackModel, ClassType, RoleHealthModel, LibraryService, MinionCardModel, RaceType, RarityType, CostModel } from "hearthstone-core";
 
-@LibraryUtil.is('bloodfen-raptor')
+@LibraryService.is('bloodfen-raptor')
 export class BloodfenRaptorModel extends MinionCardModel {
     constructor(props?: BloodfenRaptorModel['props']) {
         props = props ?? {};

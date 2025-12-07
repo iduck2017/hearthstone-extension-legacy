@@ -1,6 +1,6 @@
-import { MinionCardModel, RarityType, ClassType, RoleAttackModel, RoleHealthModel, CostModel, LibraryUtil } from "hearthstone-core";
+import { MinionCardModel, RarityType, ClassType, RoleAttackModel, RoleHealthModel, CostModel, LibraryService } from "hearthstone-core";
 
-@LibraryUtil.is('baine-bloodhoof')
+@LibraryService.is('baine-bloodhoof')
 export class BaineBloodhoofModel extends MinionCardModel {
     constructor(props?: BaineBloodhoofModel['props']) {
         props = props ?? {};

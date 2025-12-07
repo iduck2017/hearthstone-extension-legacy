@@ -12,10 +12,10 @@
  * Collectible
  */
 
-import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, RarityType, RoleAttackModel, RaceType } from "hearthstone-core";
+import { ClassType, CostModel, RoleHealthModel, LibraryService, MinionCardModel, RarityType, RoleAttackModel, RaceType } from "hearthstone-core";
 import { SilverHandKnightBattlecryModel } from "./battlecry";
 
-@LibraryUtil.is('silver-hand-knight')
+@LibraryService.is('silver-hand-knight')
 export class SilverHandKnightModel extends MinionCardModel {
     constructor(props?: SilverHandKnightModel['props']) {
         props = props ?? {};

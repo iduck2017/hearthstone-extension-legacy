@@ -17,10 +17,10 @@
  * 2 mana
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, SpellCardModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryService, RarityType, SpellCardModel } from "hearthstone-core";
 import { RampageEffectModel } from "./effect";
 
-@LibraryUtil.is('rampage')
+@LibraryService.is('rampage')
 export class RampageModel extends SpellCardModel {
     constructor(props?: RampageModel['props']) {
         props = props ?? {};

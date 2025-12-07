@@ -15,10 +15,10 @@
  * Collectible
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryService, RarityType, SchoolType, SpellCardModel } from "hearthstone-core";
 import { IcicleEffectModel } from "./effect";
 
-@LibraryUtil.is('icicle')
+@LibraryService.is('icicle')
 export class IcicleModel extends SpellCardModel {
     constructor(props?: IcicleModel['props']) {
         props = props ?? {};

@@ -1,7 +1,7 @@
 import { RoleFeatureModel, BaseFeatureModel, RoleAttackBuffModel, DamageEvent, RoleHealthModel } from "hearthstone-core";
-import { Event, EventUtil, TemplUtil } from "set-piece";
+import { Event, EventPlugin, ChunkService } from "set-piece";
 
-@TemplUtil.is('frothing-berserker-feature')
+@ChunkService.is('frothing-berserker-feature')
 export class FrothingBerserkerFeatureModel extends RoleFeatureModel {
     constructor(props?: FrothingBerserkerFeatureModel['props']) {
         props = props ?? {};
@@ -18,7 +18,7 @@ export class FrothingBerserkerFeatureModel extends RoleFeatureModel {
         });
     }
 
-    @EventUtil.on(self => self.handleDamage)
+    @EventPlugin.on(self => self.handleDamage)
     private listenDamage() {
         const game = this.route.game;
         if (!game) return;

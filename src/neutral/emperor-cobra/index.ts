@@ -13,9 +13,9 @@
  * Collectible
  */
 
-import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, RarityType, RoleAttackModel, RaceType, PoisonousModel } from "hearthstone-core";
+import { ClassType, CostModel, RoleHealthModel, LibraryService, MinionCardModel, RarityType, RoleAttackModel, RaceType, PoisonousModel } from "hearthstone-core";
 
-@LibraryUtil.is('emperor-cobra')
+@LibraryService.is('emperor-cobra')
 export class EmperorCobraModel extends MinionCardModel {
     constructor(props?: EmperorCobraModel['props']) {
         props = props ?? {};

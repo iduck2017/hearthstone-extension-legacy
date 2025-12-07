@@ -17,10 +17,10 @@
  * 1 mana 0/1
  */
 
-import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, RarityType, RoleAttackModel, RaceType, StealthModel } from "hearthstone-core";
+import { ClassType, CostModel, RoleHealthModel, LibraryService, MinionCardModel, RarityType, RoleAttackModel, RaceType, StealthModel } from "hearthstone-core";
 import { BloodImpFeatureModel } from "./feature";
 
-@LibraryUtil.is('blood-imp')
+@LibraryService.is('blood-imp')
 export class BloodImpModel extends MinionCardModel {
     constructor(props?: BloodImpModel['props']) {
         props = props ?? {};

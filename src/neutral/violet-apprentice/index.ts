@@ -8,9 +8,9 @@
  * Collectible
  */
 
-import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, RarityType, RoleAttackModel, RaceType } from "hearthstone-core";
+import { ClassType, CostModel, RoleHealthModel, LibraryService, MinionCardModel, RarityType, RoleAttackModel, RaceType } from "hearthstone-core";
 
-@LibraryUtil.is('violet-apprentice')
+@LibraryService.is('violet-apprentice')
 export class VioletApprenticeModel extends MinionCardModel {
     constructor(props?: VioletApprenticeModel['props']) {
         props = props ?? {};

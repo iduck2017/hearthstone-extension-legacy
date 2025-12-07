@@ -1,7 +1,7 @@
 import { SpellEffectModel, RestoreModel, RestoreEvent } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 
-@TemplUtil.is('holy-light-effect')
+@ChunkService.is('holy-light-effect')
 export class HolyLightEffectModel extends SpellEffectModel<[]> {
     constructor(props?: HolyLightEffectModel['props']) {
         props = props ?? {};

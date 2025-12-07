@@ -13,9 +13,9 @@
  * Collectible
  */
 
-import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, RarityType, RoleAttackModel, RaceType, TauntModel } from "hearthstone-core";
+import { ClassType, CostModel, RoleHealthModel, LibraryService, MinionCardModel, RarityType, RoleAttackModel, RaceType, TauntModel } from "hearthstone-core";
 
-@LibraryUtil.is('shieldbearer')
+@LibraryService.is('shieldbearer')
 export class ShieldbearerModel extends MinionCardModel {
     constructor(props?: ShieldbearerModel['props']) {
         props = props ?? {};

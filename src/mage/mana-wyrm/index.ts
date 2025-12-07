@@ -16,10 +16,10 @@
  * 1/1/3
  */
 
-import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, RarityType, RoleAttackModel } from "hearthstone-core";
+import { ClassType, CostModel, RoleHealthModel, LibraryService, MinionCardModel, RarityType, RoleAttackModel } from "hearthstone-core";
 import { ManaWyrmFeatureModel } from "./feature";
 
-@LibraryUtil.is('mana-wyrm')
+@LibraryService.is('mana-wyrm')
 export class ManaWyrmModel extends MinionCardModel {
     constructor(props?: ManaWyrmModel['props']) {
         props = props ?? {};

@@ -1,7 +1,7 @@
 import { FeatureModel, WeaponCardModel, WeaponPerformModel, RestoreModel, RestoreEvent } from "hearthstone-core";
-import { Event, EventUtil, TemplUtil } from "set-piece";
+import { Event, EventPlugin, ChunkService } from "set-piece";
 
-@TemplUtil.is('truesilver-champion-feature')
+@ChunkService.is('truesilver-champion-feature')
 export class TruesilverChampionFeatureModel extends FeatureModel {
     constructor(props?: TruesilverChampionFeatureModel['props']) {
         props = props ?? {};
@@ -18,7 +18,7 @@ export class TruesilverChampionFeatureModel extends FeatureModel {
         });
     }
 
-    @EventUtil.on(self => self.handleAttack)
+    @EventPlugin.on(self => self.handleAttack)
     protected listenAttack() {
         const player = this.route.player;
         if (!player) return;

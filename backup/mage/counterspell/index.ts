@@ -1,7 +1,7 @@
-import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SecretCardModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryService, RarityType, SchoolType, SecretCardModel } from "hearthstone-core";
 import { CounterspellFeatureModel } from "./feature";
 
-@LibraryUtil.is('counterspell')
+@LibraryService.is('counterspell')
 export class CounterspellModel extends SecretCardModel {
     constructor(props?: CounterspellModel['props']) {
         props = props ?? {};

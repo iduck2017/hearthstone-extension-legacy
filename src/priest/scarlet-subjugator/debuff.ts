@@ -1,5 +1,5 @@
 import { RoleAttackBuffModel, FeatureModel, TurnModel } from "hearthstone-core";
-import { Event, EventUtil, TemplUtil } from "set-piece";
+import { Event, EventPlugin, ChunkService } from "set-piece";
 
 export namespace ScarletSubjugatorDebuffModel {
     export type E = {};
@@ -8,7 +8,7 @@ export namespace ScarletSubjugatorDebuffModel {
     export type R = {};
 }
 
-@TemplUtil.is('scarlet-subjugator-debuff')
+@ChunkService.is('scarlet-subjugator-debuff')
 export class ScarletSubjugatorDebuffModel extends FeatureModel<
     ScarletSubjugatorDebuffModel.E,
     ScarletSubjugatorDebuffModel.S,
@@ -34,7 +34,7 @@ export class ScarletSubjugatorDebuffModel extends FeatureModel<
         });
     }
 
-    @EventUtil.on(self => self.handleTurn)
+    @EventPlugin.on(self => self.handleTurn)
     private listenTurn() {
         return this.route.game?.proxy.child.turn.event?.onStart
     }

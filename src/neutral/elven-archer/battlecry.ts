@@ -1,7 +1,7 @@
 import { BattlecryModel, DamageEvent, DamageModel, DamageType, RoleModel, Selector } from "hearthstone-core";
-import { DebugUtil, TemplUtil } from "set-piece";
+import { DebugService, ChunkService } from "set-piece";
 
-@TemplUtil.is('elven-archer-battlecry')
+@ChunkService.is('elven-archer-battlecry')
 export class ElvenArcherMinionBattlecryModel extends BattlecryModel<RoleModel> {
     constructor(props?: ElvenArcherMinionBattlecryModel['props']) {
         props = props ?? {};
@@ -27,7 +27,7 @@ export class ElvenArcherMinionBattlecryModel extends BattlecryModel<RoleModel> {
     public async doRun(params: Array<RoleModel | undefined>) {
         const target = params[0];
         if (!target) return;
-        DebugUtil.log(`${this.name} deals 1 damage to ${target.name}`);
+        DebugService.log(`${this.name} deals 1 damage to ${target.name}`);
         const minion = this.route.minion;
         if (!minion) return;
         DamageModel.deal([

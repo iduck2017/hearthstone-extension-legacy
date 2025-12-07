@@ -1,8 +1,8 @@
 import { RoleFeatureModel, SpellCardModel, SpellPerformModel } from "hearthstone-core";
-import { Event, EventUtil, TemplUtil } from "set-piece";
+import { Event, EventPlugin, ChunkService } from "set-piece";
 import { VioletApprenticeModel } from "../violet-apprentice";
 
-@TemplUtil.is('violet-teacher-feature')
+@ChunkService.is('violet-teacher-feature')
 export class VioletTeacherFeatureModel extends RoleFeatureModel {
     constructor(props?: VioletTeacherFeatureModel['props']) {
         props = props ?? {};
@@ -27,7 +27,7 @@ export class VioletTeacherFeatureModel extends RoleFeatureModel {
         return result;
     }
 
-    @EventUtil.on(self => self.handleCast)
+    @EventPlugin.on(self => self.handleCast)
     private listenCast() {
         const spell = this.route.game?.proxy.any(SpellCardModel);
         if (!spell) return;

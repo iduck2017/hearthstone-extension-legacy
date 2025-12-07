@@ -1,8 +1,8 @@
 import { BattlecryModel } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 import { BloodsailDeckhandFeatureModel } from "./feature";
 
-@TemplUtil.is('bloodsail-deckhand-battlecry')
+@ChunkService.is('bloodsail-deckhand-battlecry')
 export class BloodsailDeckhandBattlecryModel extends BattlecryModel<never> {
     constructor(props?: BloodsailDeckhandBattlecryModel['props']) {
         props = props ?? {};

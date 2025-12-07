@@ -14,10 +14,10 @@
  * Artist: Ben Zhang
  * Collectible
  */
-import { MinionCardModel, RoleHealthModel, RoleAttackModel, ClassType, RarityType, RaceType, LibraryUtil, CostModel, SpellDamageModel } from "hearthstone-core";
+import { MinionCardModel, RoleHealthModel, RoleAttackModel, ClassType, RarityType, RaceType, LibraryService, CostModel, SpellDamageModel } from "hearthstone-core";
 import { AzureDrakeBattlecryModel } from "./battlecry";
 
-@LibraryUtil.is('azure-drake')
+@LibraryService.is('azure-drake')
 export class AzureDrakeModel extends MinionCardModel {
     constructor(props?: AzureDrakeModel['props']) {
         props = props ?? {};

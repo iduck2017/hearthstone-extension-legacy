@@ -1,8 +1,8 @@
 import { EffectModel, DamageModel, DamageEvent, DamageType, SpellEffectModel, Selector } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 
 
-@TemplUtil.is('blizzard-effect')
+@ChunkService.is('blizzard-effect')
 export class BlizzardEffectModel extends SpellEffectModel<never> {
     constructor(props?: BlizzardEffectModel['props']) {
         props = props ?? {};

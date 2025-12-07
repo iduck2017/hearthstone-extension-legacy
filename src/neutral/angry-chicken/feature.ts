@@ -1,5 +1,5 @@
 import { RoleAttackModel, FeatureModel, RoleHealthModel, RoleAttackDecor, OperatorType, RoleModel, RoleFeatureModel } from "hearthstone-core";
-import { Event, EventUtil, StateUtil, TemplUtil, TranxUtil, Decor, Frame } from "set-piece";
+import { Event, EventPlugin, StatePlugin, ChunkService, TranxService, Decor, Frame } from "set-piece";
 import { DeepReadonly } from "utility-types";
 
 export namespace AngryChickenFeatureModel {
@@ -9,7 +9,7 @@ export namespace AngryChickenFeatureModel {
     export type R = {}
 }
 
-@TemplUtil.is('angry-chicken-feature')
+@ChunkService.is('angry-chicken-feature')
 export class AngryChickenFeatureModel extends RoleFeatureModel<
     AngryChickenFeatureModel.E,
     AngryChickenFeatureModel.S,
@@ -34,18 +34,18 @@ export class AngryChickenFeatureModel extends RoleFeatureModel<
 
 
     // Listen to health state changes to trigger enrage effect
-    @EventUtil.on(self => self.handleChange)
+    @EventPlugin.on(self => self.handleChange)
     private listenChange() {
         return this.route.role?.proxy.child.health.event?.onChange
     }
-    @TranxUtil.span()
+    @TranxService.span()
     private handleChange(that: RoleHealthModel, event: Event<Frame<RoleHealthModel>>) {
         if (that.state.current !== event.detail.state.current) this.reload()
         if (that.state.maximum !== event.detail.state.maximum) this.reload()
     }
 
     // Apply attack buff when damaged
-    @StateUtil.on(self => self.modifyAttack)
+    @StatePlugin.on(self => self.modifyAttack)
     private listenAttack() {
         return this.route.role?.proxy.child.attack.decor
     }

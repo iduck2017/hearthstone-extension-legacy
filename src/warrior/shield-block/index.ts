@@ -17,10 +17,10 @@
  * 2 mana
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, SpellCardModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryService, RarityType, SpellCardModel } from "hearthstone-core";
 import { ShieldBlockEffectModel } from "./effect";
 
-@LibraryUtil.is('shield-block')
+@LibraryService.is('shield-block')
 export class ShieldBlockModel extends SpellCardModel {
     constructor(props?: ShieldBlockModel['props']) {
         props = props ?? {};

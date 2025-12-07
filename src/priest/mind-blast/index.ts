@@ -17,10 +17,10 @@
  * 
  * 2 cost
  */
-import { ClassType, CostModel, LibraryUtil, RarityType, SpellCardModel, SchoolType } from "hearthstone-core";
+import { ClassType, CostModel, LibraryService, RarityType, SpellCardModel, SchoolType } from "hearthstone-core";
 import { MindBlastEffectModel } from "./effect";
 
-@LibraryUtil.is('mind-blast')
+@LibraryService.is('mind-blast')
 export class MindBlastModel extends SpellCardModel {
     constructor(props?: MindBlastModel['props']) {
         props = props ?? {};

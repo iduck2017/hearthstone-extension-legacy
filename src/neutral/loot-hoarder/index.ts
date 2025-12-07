@@ -12,10 +12,10 @@
  * Collectible
  */
 
-import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, RarityType, RoleAttackModel, RaceType } from "hearthstone-core";
+import { ClassType, CostModel, RoleHealthModel, LibraryService, MinionCardModel, RarityType, RoleAttackModel, RaceType } from "hearthstone-core";
 import { LootHoarderDeathrattleModel } from "./deathrattle";
 
-@LibraryUtil.is('loot-hoarder')
+@LibraryService.is('loot-hoarder')
 export class LootHoarderModel extends MinionCardModel {
     constructor(props?: LootHoarderModel['props']) {
         props = props ?? {};

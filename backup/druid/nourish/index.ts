@@ -14,10 +14,10 @@
  * Collectible
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel,  } from "hearthstone-core";
+import { ClassType, CostModel, LibraryService, RarityType, SchoolType, SpellCardModel,  } from "hearthstone-core";
 import { NourishEffectModel } from "./effect";
 
-@LibraryUtil.is('nourish')
+@LibraryService.is('nourish')
 export class NourishModel extends SpellCardModel {
     constructor(props?: NourishModel['props']) {
         props = props ?? {};

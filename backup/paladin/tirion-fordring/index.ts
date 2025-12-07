@@ -1,7 +1,7 @@
-import { ClassType, CostModel, LibraryUtil, RarityType, MinionCardModel, MinionFeaturesModel, RoleAttackModel, RoleHealthModel, TauntModel, DivineShieldModel, DeathrattleModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryService, RarityType, MinionCardModel, MinionFeaturesModel, RoleAttackModel, RoleHealthModel, TauntModel, DivineShieldModel, DeathrattleModel } from "hearthstone-core";
 import { TirionFordringDeathrattleModel } from "./deathrattle";
 
-@LibraryUtil.is('tirion-fordring')
+@LibraryService.is('tirion-fordring')
 export class TirionFordringModel extends MinionCardModel {
     constructor(props?: TirionFordringModel['props']) {
         props = props ?? {};

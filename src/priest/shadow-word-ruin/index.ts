@@ -1,7 +1,7 @@
-import { ClassType, CostModel, LibraryUtil, SpellCardModel, RarityType, SchoolType,  } from "hearthstone-core";
+import { ClassType, CostModel, LibraryService, SpellCardModel, RarityType, SchoolType,  } from "hearthstone-core";
 import { ShadowWordRuinEffectModel } from "./effect";
 
-@LibraryUtil.is('shadow-word-ruin')
+@LibraryService.is('shadow-word-ruin')
 export class ShadowWordRuinModel extends SpellCardModel {
     constructor(props?: ShadowWordRuinModel['props']) {
         props = props ?? {};

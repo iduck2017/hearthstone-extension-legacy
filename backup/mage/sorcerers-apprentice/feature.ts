@@ -1,7 +1,7 @@
 import { RoleFeatureModel, CostDecor, CostModel, CostType, OperatorType, SpellCardModel } from "hearthstone-core";
-import { StateUtil, TemplUtil } from "set-piece";
+import { StatePlugin, ChunkService } from "set-piece";
 
-@TemplUtil.is('sorcerers-apprentice-feature')
+@ChunkService.is('sorcerers-apprentice-feature')
 export class SorcerersApprenticeFeatureModel extends RoleFeatureModel {
     constructor(props?: SorcerersApprenticeFeatureModel['props']) {
         props = props ?? {};
@@ -18,7 +18,7 @@ export class SorcerersApprenticeFeatureModel extends RoleFeatureModel {
         })
     }
 
-    @StateUtil.on(self => self.modifyCost)
+    @StatePlugin.on(self => self.modifyCost)
     private listenCost() {
         return this.route.player?.proxy.child.hand.any(SpellCardModel).child.cost.decor
     }

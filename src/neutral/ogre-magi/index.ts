@@ -9,9 +9,9 @@
  * Artist: James Ryman
  * Collectible
  */
-import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, RarityType, RoleAttackModel, RaceType, SpellDamageModel } from "hearthstone-core";
+import { ClassType, CostModel, RoleHealthModel, LibraryService, MinionCardModel, RarityType, RoleAttackModel, RaceType, SpellDamageModel } from "hearthstone-core";
 
-@LibraryUtil.is('ogre-magi')
+@LibraryService.is('ogre-magi')
 export class OgreMagiModel extends MinionCardModel {
     constructor(props?: OgreMagiModel['props']) {
         props = props ?? {};

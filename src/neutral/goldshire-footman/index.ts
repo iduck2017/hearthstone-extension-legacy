@@ -13,10 +13,10 @@
  * Artist: Alex Horley Orlandelli
  * Collectible
  */
-import { MinionCardModel, RoleHealthModel, RoleAttackModel, TauntModel, LibraryUtil, CostModel } from "hearthstone-core";
+import { MinionCardModel, RoleHealthModel, RoleAttackModel, TauntModel, LibraryService, CostModel } from "hearthstone-core";
 import { ClassType, RarityType } from "hearthstone-core";
 
-@LibraryUtil.is('goldshire-footman')
+@LibraryService.is('goldshire-footman')
 export class GoldshireFootmanModel extends MinionCardModel {
     constructor(props?: GoldshireFootmanModel['props']) {
         props = props ?? {};

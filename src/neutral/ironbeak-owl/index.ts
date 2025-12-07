@@ -13,10 +13,10 @@
  * Collectible
  */
 
-import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, RarityType, RoleAttackModel, RaceType } from "hearthstone-core";
+import { ClassType, CostModel, RoleHealthModel, LibraryService, MinionCardModel, RarityType, RoleAttackModel, RaceType } from "hearthstone-core";
 import { IronbeakOwlBattlecryModel } from "./battlecry";
 
-@LibraryUtil.is('ironbeak-owl')
+@LibraryService.is('ironbeak-owl')
 export class IronbeakOwlModel extends MinionCardModel {
     constructor(props?: IronbeakOwlModel['props']) {
         props = props ?? {};

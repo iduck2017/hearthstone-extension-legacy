@@ -1,8 +1,8 @@
 import { BattlecryModel, Selector } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 import { KirinTorMageContextModel } from "./context";
 
-@TemplUtil.is('kirin-tor-mage-battlecry')
+@ChunkService.is('kirin-tor-mage-battlecry')
 export class KirinTorMageBattlecryModel extends BattlecryModel<never> {
     constructor(props?: KirinTorMageBattlecryModel['props']) {
         props = props ?? {};

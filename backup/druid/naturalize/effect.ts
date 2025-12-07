@@ -1,7 +1,7 @@
 import { Selector, RoleModel, MinionCardModel, SpellEffectModel } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 
-@TemplUtil.is('naturalize-effect')
+@ChunkService.is('naturalize-effect')
 export class NaturalizeEffectModel extends SpellEffectModel<[MinionCardModel]> {
     constructor(props?: NaturalizeEffectModel['props']) {
         props = props ?? {};

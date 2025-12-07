@@ -1,8 +1,8 @@
 import { TurnEndModel } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 import { GnollModel } from "../gnoll";
 
-@TemplUtil.is('hogger-end-turn')
+@ChunkService.is('hogger-end-turn')
 export class HoggerEndTurnModel extends TurnEndModel {
     constructor(props?: HoggerEndTurnModel['props']) {
         props = props ?? {};

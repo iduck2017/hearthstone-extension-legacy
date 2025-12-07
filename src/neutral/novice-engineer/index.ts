@@ -10,10 +10,10 @@
  * Collectible
  */
 
-import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, RarityType, RoleAttackModel, RaceType } from "hearthstone-core";
+import { ClassType, CostModel, RoleHealthModel, LibraryService, MinionCardModel, RarityType, RoleAttackModel, RaceType } from "hearthstone-core";
 import { NoviceEngineerBattlecryModel } from "./battlecry";
 
-@LibraryUtil.is('novice-engineer')
+@LibraryService.is('novice-engineer')
 export class NoviceEngineerModel extends MinionCardModel {
     constructor(props?: NoviceEngineerModel['props']) {
         props = props ?? {};

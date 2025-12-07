@@ -1,7 +1,7 @@
 import { RoleFeatureModel, RoleHealthModel, DamageEvent, TurnModel, MinionCardModel, RoleHealthDecor, OperatorType, FeatureModel } from "hearthstone-core";
-import { Event, EventUtil, StateUtil, TemplUtil } from "set-piece";
+import { Event, EventPlugin, StatePlugin, ChunkService } from "set-piece";
 
-@TemplUtil.is('commanding-shout-feature')
+@ChunkService.is('commanding-shout-feature')
 export class CommandingShoutContextModel extends FeatureModel {
     constructor(props?: CommandingShoutContextModel['props']) {
         props = props ?? {};
@@ -18,7 +18,7 @@ export class CommandingShoutContextModel extends FeatureModel {
         });
     }
 
-    @StateUtil.on(self => self.modifyHealth)
+    @StatePlugin.on(self => self.modifyHealth)
     protected listenHealth() {
         const player = this.route.player;
         const board = player?.proxy.child.board;
@@ -37,7 +37,7 @@ export class CommandingShoutContextModel extends FeatureModel {
         })
     }
 
-    @EventUtil.on(self => self.handleTurn)
+    @EventPlugin.on(self => self.handleTurn)
     private listenTurn() {
         const game = this.route.game;
         if (!game) return;

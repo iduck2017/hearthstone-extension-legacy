@@ -15,10 +15,10 @@
  * 
  * 1 cost
  */
-import { ClassType, CostModel, LibraryUtil, RarityType, SpellCardModel, SchoolType,  } from "hearthstone-core";
+import { ClassType, CostModel, LibraryService, RarityType, SpellCardModel, SchoolType,  } from "hearthstone-core";
 import { RadianceEffectModel } from "./effect";
 
-@LibraryUtil.is('radiance')
+@LibraryService.is('radiance')
 export class RadianceModel extends SpellCardModel {
     constructor(props?: RadianceModel['props']) {
         props = props ?? {};

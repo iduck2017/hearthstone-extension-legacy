@@ -14,10 +14,10 @@
  * Collectible
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel,  } from "hearthstone-core";
+import { ClassType, CostModel, LibraryService, RarityType, SchoolType, SpellCardModel,  } from "hearthstone-core";
 import { WildGrowthEffectModel } from "./effect";
 
-@LibraryUtil.is('wild-growth')
+@LibraryService.is('wild-growth')
 export class WildGrowthModel extends SpellCardModel {
     constructor(props?: WildGrowthModel['props']) {
         props = props ?? {};

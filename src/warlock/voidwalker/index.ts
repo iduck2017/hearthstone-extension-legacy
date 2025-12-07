@@ -17,9 +17,9 @@
  * 1 mana 1/3
  */
 
-import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, RarityType, RoleAttackModel, RaceType, TauntModel } from "hearthstone-core";
+import { ClassType, CostModel, RoleHealthModel, LibraryService, MinionCardModel, RarityType, RoleAttackModel, RaceType, TauntModel } from "hearthstone-core";
 
-@LibraryUtil.is('voidwalker')
+@LibraryService.is('voidwalker')
 export class VoidwalkerModel extends MinionCardModel {
     constructor(props?: VoidwalkerModel['props']) {
         props = props ?? {};

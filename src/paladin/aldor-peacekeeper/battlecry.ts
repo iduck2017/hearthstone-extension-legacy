@@ -1,7 +1,7 @@
 import { BattlecryModel, Selector, MinionCardModel, BaseFeatureModel, RoleAttackBuffModel, OperatorType } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 
-@TemplUtil.is('aldor-peacekeeper-battlecry')
+@ChunkService.is('aldor-peacekeeper-battlecry')
 export class AldorPeacekeeperBattlecryModel extends BattlecryModel<MinionCardModel> {
     constructor(props?: AldorPeacekeeperBattlecryModel['props']) {
         props = props ?? {};

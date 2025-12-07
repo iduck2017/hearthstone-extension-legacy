@@ -10,9 +10,9 @@
  * Collectible
  */
 
-import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, RarityType, RoleAttackModel, RaceType, ChargeModel } from "hearthstone-core";
+import { ClassType, CostModel, RoleHealthModel, LibraryService, MinionCardModel, RarityType, RoleAttackModel, RaceType, ChargeModel } from "hearthstone-core";
 
-@LibraryUtil.is('stormwind-knight')
+@LibraryService.is('stormwind-knight')
 export class StormwindKnightModel extends MinionCardModel {
     constructor(props?: StormwindKnightModel['props']) {
         props = props ?? {};

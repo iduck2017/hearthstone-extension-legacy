@@ -18,10 +18,10 @@
  * 2 cost
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, SpellCardModel, SchoolType } from "hearthstone-core";
+import { ClassType, CostModel, LibraryService, RarityType, SpellCardModel, SchoolType } from "hearthstone-core";
 import { DivineSpiritEffectModel } from "./effect";
 
-@LibraryUtil.is('divine-spirit')
+@LibraryService.is('divine-spirit')
 export class DivineSpiritModel extends SpellCardModel {
     constructor(props?: DivineSpiritModel['props']) {
         props = props ?? {};

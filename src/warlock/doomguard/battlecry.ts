@@ -1,7 +1,7 @@
 import { BattlecryModel, CardModel } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 
-@TemplUtil.is('doomguard-battlecry')
+@ChunkService.is('doomguard-battlecry')
 export class DoomguardBattlecryModel extends BattlecryModel<never> {
     constructor(props?: DoomguardBattlecryModel['props']) {
         props = props ?? {};

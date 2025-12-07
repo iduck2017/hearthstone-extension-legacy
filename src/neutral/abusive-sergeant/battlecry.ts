@@ -1,8 +1,8 @@
 import { MinionCardModel, BattlecryModel, RoleModel, Selector } from "hearthstone-core";
 import { AbusiveSergeantBuffModel } from "./buff";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 
-@TemplUtil.is('abusive-sergeant-battlecry')
+@ChunkService.is('abusive-sergeant-battlecry')
 export class AbusiveSergeantBattlecryModel extends BattlecryModel<RoleModel> {
     constructor(props?: AbusiveSergeantBattlecryModel['props']) {
         props = props ?? {};

@@ -10,9 +10,9 @@
  * Collectible
  */
 
-import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, RarityType, RoleAttackModel, RaceType } from "hearthstone-core";
+import { ClassType, CostModel, RoleHealthModel, LibraryService, MinionCardModel, RarityType, RoleAttackModel, RaceType } from "hearthstone-core";
 
-@LibraryUtil.is('magma-rager')
+@LibraryService.is('magma-rager')
 export class MagmaRagerModel extends MinionCardModel {
     constructor(props?: MagmaRagerModel['props']) {
         props = props ?? {};

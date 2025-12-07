@@ -1,7 +1,7 @@
 import { Selector, RoleModel, MinionCardModel, SpellEffectModel, TauntModel, RoleBuffModel } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 
-@TemplUtil.is('mark-of-the-wild-effect')
+@ChunkService.is('mark-of-the-wild-effect')
 export class MarkOfTheWildEffectModel extends SpellEffectModel<[MinionCardModel]> {
     constructor(props?: MarkOfTheWildEffectModel['props']) {
         props = props ?? {};

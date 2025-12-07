@@ -18,10 +18,10 @@
  * 4/9
  */
 
-import { ChargeModel, RoleHealthModel, RoleAttackModel, MinionCardModel, ClassType, RarityType, CostModel, LibraryUtil } from "hearthstone-core";
+import { ChargeModel, RoleHealthModel, RoleAttackModel, MinionCardModel, ClassType, RarityType, CostModel, LibraryService } from "hearthstone-core";
 import { GrommashHellscreamFeatureModel } from "./feature";
 
-@LibraryUtil.is('grommash-hellscream')
+@LibraryService.is('grommash-hellscream')
 export class GrommashHellscreamModel extends MinionCardModel {
     constructor(props?: GrommashHellscreamModel['props']) {
         props = props ?? {};

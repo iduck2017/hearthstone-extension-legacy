@@ -12,10 +12,10 @@
  * Collectible
  */
 
-import { RoleAttackModel, ClassType, RoleHealthModel, LibraryUtil, MinionCardModel, RarityType, CostModel } from "hearthstone-core";
+import { RoleAttackModel, ClassType, RoleHealthModel, LibraryService, MinionCardModel, RarityType, CostModel } from "hearthstone-core";
 import { AmaniBerserkerFeatureModel } from "./feature";
 
-@LibraryUtil.is('amani-berserker')
+@LibraryService.is('amani-berserker')
 export class AmaniBerserkerModel extends MinionCardModel {
     constructor(props?: AmaniBerserkerModel['props']) {
         props = props ?? {};

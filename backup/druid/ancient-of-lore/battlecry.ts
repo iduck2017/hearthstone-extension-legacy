@@ -1,11 +1,11 @@
 import { MinionBattlecryModel } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 // TODO: Implement Choose One mechanic
 // This card has two options:
 // 1. Draw 2 cards
 // 2. Restore 7 Health to a target
 
-@TemplUtil.is('ancient-of-lore-battlecry')
+@ChunkService.is('ancient-of-lore-battlecry')
 export class AncientOfLoreBattlecryModel extends MinionBattlecryModel<[]> {
     constructor(props?: AncientOfLoreBattlecryModel['props']) {
         props = props ?? {};

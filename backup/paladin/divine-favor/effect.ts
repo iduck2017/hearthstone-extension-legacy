@@ -1,7 +1,7 @@
 import { SpellEffectModel } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 
-@TemplUtil.is('divine-favor-effect')
+@ChunkService.is('divine-favor-effect')
 export class DivineFavorEffectModel extends SpellEffectModel<[]> {
     constructor(props?: DivineFavorEffectModel['props']) {
         props = props ?? {};

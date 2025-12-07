@@ -10,10 +10,10 @@
  * Collectible
  */
 
-import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, RarityType, RoleAttackModel, RaceType } from "hearthstone-core";
+import { ClassType, CostModel, RoleHealthModel, LibraryService, MinionCardModel, RarityType, RoleAttackModel, RaceType } from "hearthstone-core";
 import { RazorfenHunterBattlecryModel } from "./battlecry";
 
-@LibraryUtil.is('razorfen-hunter')
+@LibraryService.is('razorfen-hunter')
 export class RazorfenHunterModel extends MinionCardModel {
     constructor(props?: RazorfenHunterModel['props']) {
         props = props ?? {};

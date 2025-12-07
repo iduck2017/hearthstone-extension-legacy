@@ -1,6 +1,6 @@
-import { MinionCardModel, RarityType, ClassType, RoleAttackModel, RoleHealthModel, TauntModel, CostModel, LibraryUtil } from "hearthstone-core";
+import { MinionCardModel, RarityType, ClassType, RoleAttackModel, RoleHealthModel, TauntModel, CostModel, LibraryService } from "hearthstone-core";
 
-@LibraryUtil.is('gnoll')
+@LibraryService.is('gnoll')
 export class GnollModel extends MinionCardModel {
     constructor(props?: GnollModel['props']) {
         props = props ?? {};

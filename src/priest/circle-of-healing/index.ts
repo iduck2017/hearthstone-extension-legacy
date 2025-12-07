@@ -15,10 +15,10 @@
  * Collectible
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryService, RarityType, SchoolType, SpellCardModel } from "hearthstone-core";
 import { CircleOfHealingEffectModel } from "./effect";
 
-@LibraryUtil.is('circle-of-healing')
+@LibraryService.is('circle-of-healing')
 export class CircleOfHealingModel extends SpellCardModel {
     constructor(props?: CircleOfHealingModel['props']) {
         props = props ?? {};

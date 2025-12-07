@@ -17,10 +17,10 @@
  * 4 mana
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, SpellCardModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryService, RarityType, SpellCardModel } from "hearthstone-core";
 import { MortalStrikeEffectModel } from "./effect";
 
-@LibraryUtil.is('mortal-strike')
+@LibraryService.is('mortal-strike')
 export class MortalStrikeModel extends SpellCardModel {
     constructor(props?: MortalStrikeModel['props']) {
         props = props ?? {};

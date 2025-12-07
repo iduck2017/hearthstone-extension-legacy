@@ -13,9 +13,9 @@
  * 5/3
  */
 
-import { ClassType, CostModel, WeaponActionModel, WeaponAttackModel, WeaponCardModel, LibraryUtil, RarityType } from "hearthstone-core";
+import { ClassType, CostModel, WeaponActionModel, WeaponAttackModel, WeaponCardModel, LibraryService, RarityType } from "hearthstone-core";
 
-@LibraryUtil.is('ashbringer')
+@LibraryService.is('ashbringer')
 export class AshbringerModel extends WeaponCardModel {
     constructor(props?: AshbringerModel['props']) {
         props = props ?? {};

@@ -17,10 +17,10 @@
  * 8 mana
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryService, RarityType, SchoolType, SpellCardModel } from "hearthstone-core";
 import { TwistingNetherEffectModel } from "./effect";
 
-@LibraryUtil.is('twisting-nether')
+@LibraryService.is('twisting-nether')
 export class TwistingNetherModel extends SpellCardModel {
     constructor(props?: TwistingNetherModel['props']) {
         props = props ?? {};

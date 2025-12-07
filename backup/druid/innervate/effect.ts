@@ -1,7 +1,7 @@
 import { SpellEffectModel } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 
-@TemplUtil.is('innervate-effect')
+@ChunkService.is('innervate-effect')
 export class InnervateEffectModel extends SpellEffectModel<[]> {
     constructor(props?: InnervateEffectModel['props']) {
         props = props ?? {};

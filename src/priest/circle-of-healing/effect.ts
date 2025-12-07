@@ -1,7 +1,7 @@
 import { EffectModel, RestoreEvent, RestoreModel, SpellEffectModel, Selector, MinionCardModel } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 
-@TemplUtil.is('circle-of-healing-effect')
+@ChunkService.is('circle-of-healing-effect')
 export class CircleOfHealingEffectModel extends SpellEffectModel<never> {
     constructor(props?: CircleOfHealingEffectModel['props']) {
         props = props ?? {};

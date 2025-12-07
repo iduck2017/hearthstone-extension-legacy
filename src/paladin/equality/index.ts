@@ -17,10 +17,10 @@
  * 2 mana
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryService, RarityType, SchoolType, SpellCardModel } from "hearthstone-core";
 import { EqualityEffectModel } from "./effect";
 
-@LibraryUtil.is('equality')
+@LibraryService.is('equality')
 export class EqualityModel extends SpellCardModel {
     constructor(props?: EqualityModel['props']) {
         props = props ?? {};

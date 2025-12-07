@@ -17,10 +17,10 @@
  * 1 mana
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, SpellCardModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryService, RarityType, SpellCardModel } from "hearthstone-core";
 import { UpgradeEffectModel } from "./effect";
 
-@LibraryUtil.is('upgrade')
+@LibraryService.is('upgrade')
 export class UpgradeModel extends SpellCardModel {
     constructor(props?: UpgradeModel['props']) {
         props = props ?? {};

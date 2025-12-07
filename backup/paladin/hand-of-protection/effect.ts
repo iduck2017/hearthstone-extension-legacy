@@ -1,7 +1,7 @@
 import { Selector, MinionCardModel, SpellEffectModel, DivineShieldModel } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 
-@TemplUtil.is('hand-of-protection-effect')
+@ChunkService.is('hand-of-protection-effect')
 export class HandOfProtectionEffectModel extends SpellEffectModel<[MinionCardModel]> {
     constructor(props?: HandOfProtectionEffectModel['props']) {
         props = props ?? {};

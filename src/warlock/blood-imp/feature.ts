@@ -1,7 +1,7 @@
 import { TurnEndModel, MinionCardModel, BaseFeatureModel, RoleHealthBuffModel } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 
-@TemplUtil.is('blood-imp-feature')
+@ChunkService.is('blood-imp-feature')
 export class BloodImpFeatureModel extends TurnEndModel {
     public get route() {
         const result = super.route;

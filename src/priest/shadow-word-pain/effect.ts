@@ -1,7 +1,7 @@
 import { EffectModel, SpellEffectModel, Selector, MinionCardModel } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 
-@TemplUtil.is('shadow-word-pain-effect')
+@ChunkService.is('shadow-word-pain-effect')
 export class ShadowWordPainEffectModel extends SpellEffectModel<MinionCardModel> {
     constructor(props?: ShadowWordPainEffectModel['props']) {
         props = props ?? {};

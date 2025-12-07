@@ -1,9 +1,9 @@
 import { DamageEvent, DamageModel, DamageType, Selector, SpellEffectModel } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 
 
 
-@TemplUtil.is('arcane-explosion-effect')
+@ChunkService.is('arcane-explosion-effect')
 export class ArcaneExplosionEffectModel extends SpellEffectModel<never> {
     constructor(props?: ArcaneExplosionEffectModel['props']) {
         props = props ?? {};

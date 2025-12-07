@@ -10,9 +10,9 @@
  * Collectible: No
  */
 
-import { ClassType, RoleHealthModel, MinionCardModel, RarityType, RoleAttackModel, TauntModel, CostModel, LibraryUtil } from "hearthstone-core";
+import { ClassType, RoleHealthModel, MinionCardModel, RarityType, RoleAttackModel, TauntModel, CostModel, LibraryService } from "hearthstone-core";
 
-@LibraryUtil.is('mirror-image-minion')
+@LibraryService.is('mirror-image-minion')
 export class MirrorImageMinionModel extends MinionCardModel {
     constructor(props?: MirrorImageMinionModel['props']) {
         props = props ?? {};

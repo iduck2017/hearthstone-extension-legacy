@@ -1,7 +1,7 @@
 import { Selector, SpellEffectModel, MinionCardModel, RestoreModel, RestoreEvent, RaceType } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 
-@TemplUtil.is('sacrificial-pact-effect')
+@ChunkService.is('sacrificial-pact-effect')
 export class SacrificialPactEffectModel extends SpellEffectModel<MinionCardModel> {
     constructor(props?: SacrificialPactEffectModel['props']) {
         props = props ?? {};

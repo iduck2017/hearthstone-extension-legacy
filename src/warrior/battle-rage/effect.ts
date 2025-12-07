@@ -1,7 +1,7 @@
 import { Selector, SpellEffectModel } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 
-@TemplUtil.is('battle-rage-effect')
+@ChunkService.is('battle-rage-effect')
 export class BattleRageEffectModel extends SpellEffectModel<never> {
     constructor(props?: BattleRageEffectModel['props']) {
         props = props ?? {};

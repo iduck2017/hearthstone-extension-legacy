@@ -1,8 +1,8 @@
 import { DeathrattleModel } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 import { BaineBloodhoofModel } from "../baine-bloodhoof";
 
-@TemplUtil.is('cairne-bloodhoof-deathrattle')
+@ChunkService.is('cairne-bloodhoof-deathrattle')
 export class CairneBloodhoofDeathrattleModel extends DeathrattleModel {
     constructor(props?: CairneBloodhoofDeathrattleModel['props']) {
         props = props ?? {};

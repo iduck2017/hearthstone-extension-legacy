@@ -1,8 +1,8 @@
 import { Selector, RoleModel, DamageModel, DamageEvent, DamageType, SpellEffectModel, FrozenModel } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 
 
-@TemplUtil.is('ice-lance-effect')
+@ChunkService.is('ice-lance-effect')
 export class IceLanceEffectModel extends SpellEffectModel<RoleModel> {
     constructor(props?: IceLanceEffectModel['props']) {
         props = props ?? {};

@@ -17,10 +17,10 @@
  * 3 mana
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, SpellCardModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryService, RarityType, SpellCardModel } from "hearthstone-core";
 import { ChargeEffectModel } from "./effect";
 
-@LibraryUtil.is('charge')
+@LibraryService.is('charge')
 export class ChargeModel extends SpellCardModel {
     constructor(props?: ChargeModel['props']) {
         props = props ?? {};

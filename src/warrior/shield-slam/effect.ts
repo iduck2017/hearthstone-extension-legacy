@@ -1,7 +1,7 @@
 import { Selector, DamageModel, DamageEvent, DamageType, SpellEffectModel, MinionCardModel } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 
-@TemplUtil.is('shield-slam-effect')
+@ChunkService.is('shield-slam-effect')
 export class ShieldSlamEffectModel extends SpellEffectModel<MinionCardModel> {
     constructor(props?: ShieldSlamEffectModel['props']) {
         props = props ?? {};

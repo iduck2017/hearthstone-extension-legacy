@@ -1,7 +1,7 @@
-import { ClassType, CostModel, LibraryUtil, SpellCardModel, RarityType, SchoolType,  } from "hearthstone-core";
+import { ClassType, CostModel, LibraryService, SpellCardModel, RarityType, SchoolType,  } from "hearthstone-core";
 import { MassDispelEffectModel } from "./effect";
 
-@LibraryUtil.is('mass-dispel')
+@LibraryService.is('mass-dispel')
 export class MassDispelModel extends SpellCardModel {
     constructor(props?: MassDispelModel['props']) {
         props = props ?? {};

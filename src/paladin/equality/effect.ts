@@ -1,7 +1,7 @@
 import { Selector, SpellEffectModel, RoleFeatureModel, RoleHealthModel, RoleHealthDecor, OperatorType } from "hearthstone-core";
-import { TemplUtil, StateUtil } from "set-piece";
+import { ChunkService, StatePlugin } from "set-piece";
 
-@TemplUtil.is('equality-effect')
+@ChunkService.is('equality-effect')
 export class EqualityEffectModel extends SpellEffectModel<never> {
     constructor(props?: EqualityEffectModel['props']) {
         props = props ?? {};
@@ -35,7 +35,7 @@ export class EqualityEffectModel extends SpellEffectModel<never> {
     }
 }
 
-@TemplUtil.is('equality-feature')
+@ChunkService.is('equality-feature')
 class EqualityFeatureModel extends RoleFeatureModel {
     constructor(props?: EqualityFeatureModel['props']) {
         props = props ?? {};
@@ -52,7 +52,7 @@ class EqualityFeatureModel extends RoleFeatureModel {
         });
     }
 
-    @StateUtil.on(self => self.modifyHealth)
+    @StatePlugin.on(self => self.modifyHealth)
     private listenHealth() {
         return this.route.role?.proxy.child.health.decor;
     }

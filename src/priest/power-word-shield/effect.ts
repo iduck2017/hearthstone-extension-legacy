@@ -1,7 +1,7 @@
 import { EffectModel, Selector, SpellEffectModel, BaseFeatureModel, RoleHealthBuffModel, MinionCardModel } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 
-@TemplUtil.is('power-word-shield-effect')
+@ChunkService.is('power-word-shield-effect')
 export class PowerWordShieldEffectModel extends SpellEffectModel<MinionCardModel> {
     constructor(props?: PowerWordShieldEffectModel['props']) {
         props = props ?? {};

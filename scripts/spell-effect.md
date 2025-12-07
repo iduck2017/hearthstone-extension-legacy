@@ -21,7 +21,7 @@ SpellEffectModel的api发生了变更,请检查项目下所有涉及SpellEffectM
 修改前:
 
 ```
-@TemplUtil.is('fireball-effect')
+@ChunkService.is('fireball-effect')
 export class FireballEffectModel extends SpellEffectModel<RoleModel> {
     constructor(props?: FireballEffectModel['props']) {
         props = props ?? {};
@@ -67,7 +67,7 @@ export class FireballEffectModel extends SpellEffectModel<RoleModel> {
 修改后:
 
 ```
-@TemplUtil.is('fireball-effect')
+@ChunkService.is('fireball-effect')
 export class FireballEffectModel extends SpellEffectModel<RoleModel> {
     constructor(props?: FireballEffectModel['props']) {
         props = props ?? {};

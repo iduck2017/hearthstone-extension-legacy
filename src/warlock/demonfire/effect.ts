@@ -1,7 +1,7 @@
 import { Selector, SpellEffectModel, MinionCardModel, DamageModel, DamageEvent, DamageType, BaseFeatureModel, RoleAttackBuffModel, RoleHealthBuffModel, RaceType } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 
-@TemplUtil.is('demonfire-effect')
+@ChunkService.is('demonfire-effect')
 export class DemonfireEffectModel extends SpellEffectModel<MinionCardModel> {
     constructor(props?: DemonfireEffectModel['props']) {
         props = props ?? {};

@@ -17,10 +17,10 @@
  * 4 mana 4/2
  */
 
-import { ClassType, CostModel, WeaponActionModel, RarityType, WeaponAttackModel, WeaponCardModel, LibraryUtil } from "hearthstone-core";
+import { ClassType, CostModel, WeaponActionModel, RarityType, WeaponAttackModel, WeaponCardModel, LibraryService } from "hearthstone-core";
 import { TruesilverChampionFeatureModel } from "./feature";
 
-@LibraryUtil.is('truesilver-champion')
+@LibraryService.is('truesilver-champion')
 export class TruesilverChampionModel extends WeaponCardModel {
     constructor(props?: TruesilverChampionModel['props']) {
         props = props ?? {};

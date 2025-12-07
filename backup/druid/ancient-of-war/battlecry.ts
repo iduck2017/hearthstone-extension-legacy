@@ -1,11 +1,11 @@
 import { MinionBattlecryModel, RoleBuffModel, TauntModel } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 // TODO: Implement Choose One mechanic
 // This card has two options:
 // 1. +5 Attack
 // 2. +5 Health and Taunt
 
-@TemplUtil.is('ancient-of-war-battlecry')
+@ChunkService.is('ancient-of-war-battlecry')
 export class AncientOfWarBattlecryModel extends MinionBattlecryModel<[]> {
     constructor(props?: AncientOfWarBattlecryModel['props']) {
         props = props ?? {};

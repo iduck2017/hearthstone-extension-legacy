@@ -1,7 +1,7 @@
 import { MinionBattlecryModel, Selector, MinionCardModel, DivineShieldModel } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 
-@TemplUtil.is('argent-protector-battlecry')
+@ChunkService.is('argent-protector-battlecry')
 export class ArgentProtectorBattlecryModel extends MinionBattlecryModel<[MinionCardModel]> {
     constructor(props?: ArgentProtectorBattlecryModel['props']) {
         props = props ?? {};

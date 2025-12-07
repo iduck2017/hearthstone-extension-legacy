@@ -1,7 +1,7 @@
 import { Selector, RoleModel, DamageModel, DamageEvent, DamageType, SpellEffectModel } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 
-@TemplUtil.is('savagery-effect')
+@ChunkService.is('savagery-effect')
 export class SavageryEffectModel extends SpellEffectModel<[RoleModel]> {
     constructor(props?: SavageryEffectModel['props']) {
         props = props ?? {};

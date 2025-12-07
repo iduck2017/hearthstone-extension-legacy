@@ -17,10 +17,10 @@
  * 5 mana 5/7
  */
 
-import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, RarityType, RoleAttackModel, RaceType, ChargeModel } from "hearthstone-core";
+import { ClassType, CostModel, RoleHealthModel, LibraryService, MinionCardModel, RarityType, RoleAttackModel, RaceType, ChargeModel } from "hearthstone-core";
 import { DoomguardBattlecryModel } from "./battlecry";
 
-@LibraryUtil.is('doomguard')
+@LibraryService.is('doomguard')
 export class DoomguardModel extends MinionCardModel {
     constructor(props?: DoomguardModel['props']) {
         props = props ?? {};

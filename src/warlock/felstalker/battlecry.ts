@@ -1,7 +1,7 @@
 import { BattlecryModel, CardModel } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 
-@TemplUtil.is('felstalker-battlecry')
+@ChunkService.is('felstalker-battlecry')
 export class FelstalkerBattlecryModel extends BattlecryModel<never> {
     constructor(props?: FelstalkerBattlecryModel['props']) {
         props = props ?? {};

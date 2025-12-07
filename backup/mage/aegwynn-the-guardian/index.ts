@@ -13,10 +13,10 @@
  * Artist: Luke Mancini
  * Collectible
  */
-import { RoleAttackModel, ClassType, RoleHealthModel, MinionCardModel, RarityType, SpellDamageModel, LibraryUtil, CostModel } from "hearthstone-core";
+import { RoleAttackModel, ClassType, RoleHealthModel, MinionCardModel, RarityType, SpellDamageModel, LibraryService, CostModel } from "hearthstone-core";
 import { AegwynnTheGuardianDeathrattleModel } from "./deathrattle";
 
-@LibraryUtil.is('aegwynn-the-guardian')
+@LibraryService.is('aegwynn-the-guardian')
 export class AegwynnTheGuardianModel extends MinionCardModel {
     constructor(props?: AegwynnTheGuardianModel['props']) {
         props = props ?? {};

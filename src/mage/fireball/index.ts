@@ -14,10 +14,10 @@
  * Collectible
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryService, RarityType, SchoolType, SpellCardModel } from "hearthstone-core";
 import { FireballEffectModel } from "./effect";
 
-@LibraryUtil.is('fireball')
+@LibraryService.is('fireball')
 export class FireballModel extends SpellCardModel {
     constructor(props?: FireballModel['props']) {
         props = props ?? {};

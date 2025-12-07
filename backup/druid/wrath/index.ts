@@ -13,10 +13,10 @@
  * Artist: Raymond Swanland
  * Collectible
  */
-import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel,  } from "hearthstone-core";
+import { ClassType, CostModel, LibraryService, RarityType, SchoolType, SpellCardModel,  } from "hearthstone-core";
 import { WrathEffectModel } from "./effect";
 
-@LibraryUtil.is('wrath')
+@LibraryService.is('wrath')
 export class WrathModel extends SpellCardModel {
     constructor(props?: WrathModel['props']) {
         props = props ?? {};

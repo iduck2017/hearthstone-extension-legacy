@@ -17,10 +17,10 @@
  * 3 mana 2/4
  */
 
-import { ClassType, CostModel, LibraryUtil, MinionCardModel, RarityType, RoleAttackModel, RoleHealthModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryService, MinionCardModel, RarityType, RoleAttackModel, RoleHealthModel } from "hearthstone-core";
 import { FrothingBerserkerFeatureModel } from "./feature";
 
-@LibraryUtil.is('frothing-berserker')
+@LibraryService.is('frothing-berserker')
 export class FrothingBerserkerModel extends MinionCardModel {
     constructor(props?: FrothingBerserkerModel['props']) {
         props = props ?? {};

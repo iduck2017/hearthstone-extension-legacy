@@ -17,10 +17,10 @@
  * 1 mana
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryService, RarityType, SchoolType, SpellCardModel } from "hearthstone-core";
 import { HandOfProtectionEffectModel } from "./effect";
 
-@LibraryUtil.is('hand-of-protection')
+@LibraryService.is('hand-of-protection')
 export class HandOfProtectionModel extends SpellCardModel {
     constructor(props?: HandOfProtectionModel['props']) {
         props = props ?? {};

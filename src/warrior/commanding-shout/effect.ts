@@ -1,8 +1,8 @@
 import { Selector, SpellEffectModel, MinionCardModel, PlayerModel } from "hearthstone-core";
-import { DebugUtil, TemplUtil } from "set-piece";
+import { DebugService, ChunkService } from "set-piece";
 import { CommandingShoutContextModel } from "./context";
 
-@TemplUtil.is('commanding-shout-effect')
+@ChunkService.is('commanding-shout-effect')
 export class CommandingShoutEffectModel extends SpellEffectModel<never> {
     constructor(props?: CommandingShoutEffectModel['props']) {
         props = props ?? {};

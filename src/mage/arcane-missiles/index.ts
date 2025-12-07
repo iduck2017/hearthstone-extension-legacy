@@ -14,10 +14,10 @@
  * Collectible
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryService, RarityType, SchoolType, SpellCardModel } from "hearthstone-core";
 import { ArcaneMissilesEffectModel } from "./effect";
 
-@LibraryUtil.is('arcane-missiles')
+@LibraryService.is('arcane-missiles')
 export class ArcaneMissilesModel extends SpellCardModel {
     constructor(props?: ArcaneMissilesModel['props']) {
         props = props ?? {};

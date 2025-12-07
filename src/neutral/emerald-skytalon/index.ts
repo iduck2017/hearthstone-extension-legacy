@@ -1,6 +1,6 @@
-import { RoleAttackModel, ClassType, RoleHealthModel, MinionCardModel, RarityType, RaceType, RushModel, CostModel, LibraryUtil } from "hearthstone-core";
+import { RoleAttackModel, ClassType, RoleHealthModel, MinionCardModel, RarityType, RaceType, RushModel, CostModel, LibraryService } from "hearthstone-core";
 
-@LibraryUtil.is('emerald-skytalon')
+@LibraryService.is('emerald-skytalon')
 export class EmeraldSkytalonModel extends MinionCardModel {
     constructor(props?: EmeraldSkytalonModel['props']) {
         props = props ?? {};

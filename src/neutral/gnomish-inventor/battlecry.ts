@@ -1,7 +1,7 @@
 import { BattlecryModel } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 
-@TemplUtil.is('gnomish-inventor-battlecry')
+@ChunkService.is('gnomish-inventor-battlecry')
 export class GnomishInventorBattlecryModel extends BattlecryModel<never> {
     constructor(props?: GnomishInventorBattlecryModel['props']) {
         props = props ?? {};

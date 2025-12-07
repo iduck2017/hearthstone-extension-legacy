@@ -1,7 +1,7 @@
 import { BattlecryModel, Selector, RoleModel, DamageModel, RestoreModel, DamageType, RestoreEvent, DamageEvent } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 
-@TemplUtil.is('alexstrasza-battlecry')
+@ChunkService.is('alexstrasza-battlecry')
 export class AlexstraszaBattlecryModel extends BattlecryModel<RoleModel> {
     constructor(props?: AlexstraszaBattlecryModel['props']) {
         props = props ?? {};

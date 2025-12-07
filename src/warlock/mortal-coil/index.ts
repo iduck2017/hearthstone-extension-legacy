@@ -17,10 +17,10 @@
  * 1 mana
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryService, RarityType, SchoolType, SpellCardModel } from "hearthstone-core";
 import { MortalCoilEffectModel } from "./effect";
 
-@LibraryUtil.is('mortal-coil')
+@LibraryService.is('mortal-coil')
 export class MortalCoilModel extends SpellCardModel {
     constructor(props?: MortalCoilModel['props']) {
         props = props ?? {};

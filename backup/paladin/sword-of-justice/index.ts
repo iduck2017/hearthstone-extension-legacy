@@ -1,6 +1,6 @@
-import { ClassType, CostModel, LibraryUtil, RarityType, WeaponCardModel, WeaponAttackModel, WeaponActionModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryService, RarityType, WeaponCardModel, WeaponAttackModel, WeaponActionModel } from "hearthstone-core";
 
-@LibraryUtil.is('sword-of-justice')
+@LibraryService.is('sword-of-justice')
 export class SwordOfJusticeModel extends WeaponCardModel {
     constructor(props?: SwordOfJusticeModel['props']) {
         props = props ?? {};

@@ -17,10 +17,10 @@
  * 2/0/5
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, MinionCardModel, RoleAttackModel, RoleHealthModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryService, RarityType, MinionCardModel, RoleAttackModel, RoleHealthModel } from "hearthstone-core";
 import { LightwellTurnEndModel } from "./turn-end";
 
-@LibraryUtil.is('lightwell')
+@LibraryService.is('lightwell')
 export class LightwellModel extends MinionCardModel {
     constructor(props?: LightwellModel['props']) {
         props = props ?? {};

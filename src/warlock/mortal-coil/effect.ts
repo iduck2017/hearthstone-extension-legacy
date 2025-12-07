@@ -1,7 +1,7 @@
 import { Selector, SpellEffectModel, MinionCardModel, DamageModel, DamageEvent, DamageType } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 
-@TemplUtil.is('mortal-coil-effect')
+@ChunkService.is('mortal-coil-effect')
 export class MortalCoilEffectModel extends SpellEffectModel<MinionCardModel> {
     constructor(props?: MortalCoilEffectModel['props']) {
         props = props ?? {};

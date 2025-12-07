@@ -17,10 +17,10 @@
  * 7 mana 7/1
  */
 
-import { ClassType, CostModel, WeaponActionModel, RarityType, WeaponAttackModel, WeaponCardModel, LibraryUtil } from "hearthstone-core";
+import { ClassType, CostModel, WeaponActionModel, RarityType, WeaponAttackModel, WeaponCardModel, LibraryService } from "hearthstone-core";
 import { GorehowlFeatureModel } from "./feature";
 
-@LibraryUtil.is('gorehowl')
+@LibraryService.is('gorehowl')
 export class GorehowlModel extends WeaponCardModel {
     constructor(props?: GorehowlModel['props']) {
         props = props ?? {};

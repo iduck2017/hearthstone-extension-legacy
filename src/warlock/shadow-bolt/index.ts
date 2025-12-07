@@ -17,10 +17,10 @@
  * 3 mana
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryService, RarityType, SchoolType, SpellCardModel } from "hearthstone-core";
 import { ShadowBoltEffectModel } from "./effect";
 
-@LibraryUtil.is('shadow-bolt')
+@LibraryService.is('shadow-bolt')
 export class ShadowBoltModel extends SpellCardModel {
     constructor(props?: ShadowBoltModel['props']) {
         props = props ?? {};

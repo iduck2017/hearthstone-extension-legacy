@@ -7,9 +7,9 @@
  * Class: Neutral
  * Collectible: false
  */
-import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, RarityType, RoleAttackModel, RaceType } from "hearthstone-core";
+import { ClassType, CostModel, RoleHealthModel, LibraryService, MinionCardModel, RarityType, RoleAttackModel, RaceType } from "hearthstone-core";
 
-@LibraryUtil.is('boar')
+@LibraryService.is('boar')
 export class BoarModel extends MinionCardModel {
     constructor(props?: BoarModel['props']) {
         props = props ?? {};

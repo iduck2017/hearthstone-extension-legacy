@@ -1,11 +1,11 @@
 import { MinionBattlecryModel } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 // TODO: Implement Choose One mechanic
 // This card has two options:
 // 1. Deal 2 damage to a target
 // 2. Silence a minion
 
-@TemplUtil.is('keeper-of-the-grove-battlecry')
+@ChunkService.is('keeper-of-the-grove-battlecry')
 export class KeeperOfTheGroveBattlecryModel extends MinionBattlecryModel<[]> {
     constructor(props?: KeeperOfTheGroveBattlecryModel['props']) {
         props = props ?? {};

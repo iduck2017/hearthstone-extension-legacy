@@ -13,9 +13,9 @@
  * Charge
  */
 
-import { ChargeModel, RoleHealthModel, RoleAttackModel, MinionCardModel, RaceType, ClassType, RarityType, CostModel, LibraryUtil } from "hearthstone-core";
+import { ChargeModel, RoleHealthModel, RoleAttackModel, MinionCardModel, RaceType, ClassType, RarityType, CostModel, LibraryService } from "hearthstone-core";
 
-@LibraryUtil.is('bluegill-warrior')
+@LibraryService.is('bluegill-warrior')
 export class BluegillWarriorModel extends MinionCardModel {
     constructor(props?: BluegillWarriorModel['props']) {
         props = props ?? {};

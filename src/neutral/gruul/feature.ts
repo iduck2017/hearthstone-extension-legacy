@@ -1,7 +1,7 @@
 import { TurnEndModel, MinionCardModel, BaseFeatureModel, RoleAttackBuffModel, RoleHealthBuffModel } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 
-@TemplUtil.is('gruul-feature')
+@ChunkService.is('gruul-feature')
 export class GruulFeatureModel extends TurnEndModel {
     public get route() {
         const result = super.route;

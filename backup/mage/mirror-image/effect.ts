@@ -14,11 +14,11 @@
  */
 
 import { EffectModel, Selector, SpellEffectModel } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 import { MirrorImageMinionModel } from "./minion";
 
 
-@TemplUtil.is('mirror-image-effect')
+@ChunkService.is('mirror-image-effect')
 export class MirrorImageEffectModel extends SpellEffectModel<never> {
     constructor(props?: MirrorImageEffectModel['props']) {
         props = props ?? {};

@@ -1,7 +1,7 @@
 import { TurnStartModel, DamageModel, DamageType, DamageEvent, MinionCardModel } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 
-@TemplUtil.is('demolisher-feature')
+@ChunkService.is('demolisher-feature')
 export class DemolisherFeatureModel extends TurnStartModel {
     public get route() {
         const result = super.route;

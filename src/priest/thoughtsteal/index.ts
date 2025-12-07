@@ -18,10 +18,10 @@
  * 2 cost
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, SpellCardModel, SchoolType,  } from "hearthstone-core";
+import { ClassType, CostModel, LibraryService, RarityType, SpellCardModel, SchoolType,  } from "hearthstone-core";
 import { ThoughtstealEffectModel } from "./effect";
 
-@LibraryUtil.is('thoughtsteal')
+@LibraryService.is('thoughtsteal')
 export class ThoughtstealModel extends SpellCardModel {
     constructor(props?: ThoughtstealModel['props']) {
         props = props ?? {};

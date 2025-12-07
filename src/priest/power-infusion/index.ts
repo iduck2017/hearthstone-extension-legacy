@@ -1,7 +1,7 @@
-import { ClassType, CostModel, LibraryUtil, SpellCardModel, RarityType, SchoolType,  } from "hearthstone-core";
+import { ClassType, CostModel, LibraryService, SpellCardModel, RarityType, SchoolType,  } from "hearthstone-core";
 import { PowerInfusionEffectModel } from "./effect";
 
-@LibraryUtil.is('power-infusion')
+@LibraryService.is('power-infusion')
 export class PowerInfusionModel extends SpellCardModel {
     constructor(props?: PowerInfusionModel['props']) {
         props = props ?? {};

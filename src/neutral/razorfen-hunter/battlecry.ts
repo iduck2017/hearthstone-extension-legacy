@@ -1,8 +1,8 @@
 import { BattlecryModel } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 import { BoarModel } from "../boar";
 
-@TemplUtil.is('razorfen-hunter-battlecry')
+@ChunkService.is('razorfen-hunter-battlecry')
 export class RazorfenHunterBattlecryModel extends BattlecryModel<never> {
     constructor(props?: RazorfenHunterBattlecryModel['props']) {
         props = props ?? {};

@@ -17,10 +17,10 @@
  * 1 mana
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, SpellCardModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryService, RarityType, SpellCardModel } from "hearthstone-core";
 import { WhirlwindEffectModel } from "./effect";
 
-@LibraryUtil.is('whirlwind')
+@LibraryService.is('whirlwind')
 export class WhirlwindModel extends SpellCardModel {
     constructor(props?: WhirlwindModel['props']) {
         props = props ?? {};

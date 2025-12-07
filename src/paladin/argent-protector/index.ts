@@ -17,10 +17,10 @@
  * 2 mana 3/2
  */
 
-import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, RarityType, RoleAttackModel, RaceType } from "hearthstone-core";
+import { ClassType, CostModel, RoleHealthModel, LibraryService, MinionCardModel, RarityType, RoleAttackModel, RaceType } from "hearthstone-core";
 import { ArgentProtectorBattlecryModel } from "./battlecry";
 
-@LibraryUtil.is('argent-protector')
+@LibraryService.is('argent-protector')
 export class ArgentProtectorModel extends MinionCardModel {
     constructor(props?: ArgentProtectorModel['props']) {
         props = props ?? {};

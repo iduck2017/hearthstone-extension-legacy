@@ -9,10 +9,10 @@
  * Artist: Tooth
  * Collectible
  */
-import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, RarityType, RoleAttackModel, RaceType } from "hearthstone-core";
+import { ClassType, CostModel, RoleHealthModel, LibraryService, MinionCardModel, RarityType, RoleAttackModel, RaceType } from "hearthstone-core";
 import { IronforgeRiflemanBattlecryModel } from "./battlecry";
 
-@LibraryUtil.is('ironforge-rifleman')
+@LibraryService.is('ironforge-rifleman')
 export class IronforgeRiflemanModel extends MinionCardModel {
     constructor(props?: IronforgeRiflemanModel['props']) {
         props = props ?? {};

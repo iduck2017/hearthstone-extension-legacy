@@ -1,7 +1,7 @@
 import { DamageModel, DamageType, DeathrattleModel, DamageEvent, MinionCardModel } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 
-@TemplUtil.is('leper-gnome-deathrattle')
+@ChunkService.is('leper-gnome-deathrattle')
 export class LeperGnomeDeathrattleModel extends DeathrattleModel {
     public get route() {
         const result = super.route;

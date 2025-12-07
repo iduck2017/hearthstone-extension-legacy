@@ -1,7 +1,7 @@
 import { BattlecryModel, Selector, RoleModel, BaseFeatureModel, RoleHealthBuffModel, MinionCardModel } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 
-@TemplUtil.is('temple-enforcer-battlecry')
+@ChunkService.is('temple-enforcer-battlecry')
 export class TempleEnforcerBattlecryModel extends BattlecryModel<RoleModel> {
     constructor(props?: TempleEnforcerBattlecryModel['props']) {
         props = props ?? {};

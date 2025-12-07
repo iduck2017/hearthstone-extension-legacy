@@ -17,10 +17,10 @@
  * 1 mana
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, SpellCardModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryService, RarityType, SpellCardModel } from "hearthstone-core";
 import { GuldansGiftEffectModel } from "./effect";
 
-@LibraryUtil.is('guldans-gift')
+@LibraryService.is('guldans-gift')
 export class GuldansGiftModel extends SpellCardModel {
     constructor(props?: GuldansGiftModel['props']) {
         props = props ?? {};

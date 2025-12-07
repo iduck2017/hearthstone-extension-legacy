@@ -1,11 +1,11 @@
 import { EffectModel, SpellEffectModel } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 // TODO: Implement Choose One mechanic
 // This card has two options:
 // 1. Gain 2 Mana Crystals
 // 2. Draw 3 cards
 
-@TemplUtil.is('nourish-effect')
+@ChunkService.is('nourish-effect')
 export class NourishEffectModel extends SpellEffectModel<[]> {
     constructor(props?: NourishEffectModel['props']) {
         props = props ?? {};

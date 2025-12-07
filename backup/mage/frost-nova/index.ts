@@ -12,10 +12,10 @@
  * Artist: Josh Tallman
  * Collectible
  */
-import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryService, RarityType, SchoolType, SpellCardModel } from "hearthstone-core";
 import { FrostNovaEffectModel } from "./effect";
 
-@LibraryUtil.is('frost-nova')
+@LibraryService.is('frost-nova')
 export class FrostNovaModel extends SpellCardModel {
     constructor(props?: FrostNovaModel['props']) {
         props = props ?? {};

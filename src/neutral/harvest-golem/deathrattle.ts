@@ -1,8 +1,8 @@
 import { DeathrattleModel } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 import { DamagedGolemModel } from "../damaged-golem";
 
-@TemplUtil.is('harvest-golem-deathrattle')
+@ChunkService.is('harvest-golem-deathrattle')
 export class HarvestGolemDeathrattleModel extends DeathrattleModel {
     constructor(props?: HarvestGolemDeathrattleModel['props']) {
         props = props ?? {};

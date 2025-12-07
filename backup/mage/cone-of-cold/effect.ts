@@ -1,8 +1,8 @@
 import { Selector, RoleModel, DamageModel, DamageEvent, DamageType, MinionCardModel, SpellEffectModel } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 
 
-@TemplUtil.is('cone-of-cold-effect')
+@ChunkService.is('cone-of-cold-effect')
 export class ConeOfColdEffectModel extends SpellEffectModel<MinionCardModel> {
     constructor(props?: ConeOfColdEffectModel['props']) {
         props = props ?? {};

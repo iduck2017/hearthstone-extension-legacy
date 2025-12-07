@@ -17,10 +17,10 @@
  * 2 mana 4/3
  */
 
-import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, RarityType, RoleAttackModel, RaceType } from "hearthstone-core";
+import { ClassType, CostModel, RoleHealthModel, LibraryService, MinionCardModel, RarityType, RoleAttackModel, RaceType } from "hearthstone-core";
 import { FelstalkerBattlecryModel } from "./battlecry";
 
-@LibraryUtil.is('felstalker')
+@LibraryService.is('felstalker')
 export class FelstalkerModel extends MinionCardModel {
     constructor(props?: FelstalkerModel['props']) {
         props = props ?? {};

@@ -1,5 +1,5 @@
 import { RoleAttackModel, FeatureModel, MinionCardModel, RaceType, RoleModel, OperatorType, RoleAttackDecor, RoleFeatureModel } from "hearthstone-core";
-import { DebugUtil, StateUtil, TemplUtil, TranxUtil, Decor } from "set-piece";
+import { DebugService, StatePlugin, ChunkService, TranxService, Decor } from "set-piece";
 
 export namespace GrimscaleOracleFeatureModel {
     export type E = {}
@@ -8,7 +8,7 @@ export namespace GrimscaleOracleFeatureModel {
     export type R = {}
 }
 
-@TemplUtil.is('grimscale-oracle-feature')
+@ChunkService.is('grimscale-oracle-feature')
 export class GrimscaleOracleFeatureModel extends RoleFeatureModel<
     GrimscaleOracleFeatureModel.E,
     GrimscaleOracleFeatureModel.S,
@@ -31,7 +31,7 @@ export class GrimscaleOracleFeatureModel extends RoleFeatureModel<
         });
     }
 
-    @StateUtil.on(self => self.modifyAttack)
+    @StatePlugin.on(self => self.modifyAttack)
     private listenAttack() {
         return this.route.player?.proxy.child.board.any(MinionCardModel).child.attack.decor
     }

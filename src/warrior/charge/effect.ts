@@ -1,7 +1,7 @@
 import { Selector, SpellEffectModel, BaseFeatureModel, RoleAttackBuffModel, MinionCardModel } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 
-@TemplUtil.is('charge-effect')
+@ChunkService.is('charge-effect')
 export class ChargeEffectModel extends SpellEffectModel<MinionCardModel> {
     constructor(props?: ChargeEffectModel['props']) {
         props = props ?? {};

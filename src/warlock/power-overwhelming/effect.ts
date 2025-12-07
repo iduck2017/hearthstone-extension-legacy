@@ -1,7 +1,7 @@
 import { Selector, SpellEffectModel, MinionCardModel, BaseFeatureModel, RoleAttackBuffModel, RoleHealthBuffModel, TurnEndModel, IRoleBuffModel } from "hearthstone-core";
-import { TemplUtil, TranxUtil } from "set-piece";
+import { ChunkService, TranxService } from "set-piece";
 
-@TemplUtil.is('power-overwhelming-effect')
+@ChunkService.is('power-overwhelming-effect')
 export class PowerOverwhelmingEffectModel extends SpellEffectModel<MinionCardModel> {
     constructor(props?: PowerOverwhelmingEffectModel['props']) {
         props = props ?? {};
@@ -45,7 +45,7 @@ export class PowerOverwhelmingEffectModel extends SpellEffectModel<MinionCardMod
     }
 }
 
-@TemplUtil.is('power-overwhelming-buff')
+@ChunkService.is('power-overwhelming-buff')
 class PowerOverwhelmingBuffModel extends BaseFeatureModel implements IRoleBuffModel {
     constructor(props?: PowerOverwhelmingBuffModel['props']) {
         props = props ?? {};
@@ -67,7 +67,7 @@ class PowerOverwhelmingBuffModel extends BaseFeatureModel implements IRoleBuffMo
         });
     }
 
-    @TranxUtil.span()
+    @TranxService.span()
     onEnd() {
         const role = this.route.role;
         if (!role) return;

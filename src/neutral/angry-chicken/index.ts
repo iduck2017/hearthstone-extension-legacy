@@ -11,10 +11,10 @@
  * Collectible
  */
 
-import { RoleAttackModel, ClassType, MinionCardModel, RaceType, RarityType, LibraryUtil, CostModel, RoleHealthModel } from "hearthstone-core";
+import { RoleAttackModel, ClassType, MinionCardModel, RaceType, RarityType, LibraryService, CostModel, RoleHealthModel } from "hearthstone-core";
 import { AngryChickenFeatureModel } from "./feature";
 
-@LibraryUtil.is('angry-chicken')
+@LibraryService.is('angry-chicken')
 export class AngryChickenModel extends MinionCardModel {
     constructor(props?: AngryChickenModel['props']) {
         props = props ?? {};

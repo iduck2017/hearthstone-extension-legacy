@@ -1,8 +1,8 @@
 import { CardModel, MinionCardModel, MinionPerformModel, SecretFeatureModel } from "hearthstone-core";
-import { Event, EventUtil, TemplUtil, TranxUtil } from "set-piece";
+import { Event, EventPlugin, ChunkService, TranxService } from "set-piece";
 import { PolymorphModel } from "../polymorph";
 
-@TemplUtil.is('mirror-entity-feature')
+@ChunkService.is('mirror-entity-feature')
 export class MirrorEntityFeatureModel extends SecretFeatureModel {
     constructor(props?: MirrorEntityFeatureModel['props']) {
         props = props ?? {};
@@ -19,7 +19,7 @@ export class MirrorEntityFeatureModel extends SecretFeatureModel {
         });
     }
 
-    @EventUtil.on(self => self.handlePlay)
+    @EventPlugin.on(self => self.handlePlay)
     private listenPlay() {
         return this.route.game?.proxy.any(MinionCardModel).child.perform.event?.onPlay
     }

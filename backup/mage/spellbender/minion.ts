@@ -12,9 +12,9 @@
 
 import { ClassType, RoleHealthModel, MinionCardModel, RarityType, RoleAttackModel } from "hearthstone-core";
 import { CostModel } from "hearthstone-core";
-import { LibraryUtil } from "hearthstone-core";
+import { LibraryService } from "hearthstone-core";
 
-@LibraryUtil.is('spellbender-minion')
+@LibraryService.is('spellbender-minion')
 export class SpellbenderMinionModel extends MinionCardModel {
     constructor(props?: SpellbenderMinionModel['props']) {
         props = props ?? {};

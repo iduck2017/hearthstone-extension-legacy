@@ -13,10 +13,10 @@
  * Collectible
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, MinionCardModel, MinionFeaturesModel, RoleAttackModel, RoleHealthModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryService, RarityType, MinionCardModel, MinionFeaturesModel, RoleAttackModel, RoleHealthModel } from "hearthstone-core";
 import { CenariusBattlecryModel } from "./battlecry";
 
-@LibraryUtil.is('cenarius')
+@LibraryService.is('cenarius')
 export class CenariusModel extends MinionCardModel {
     constructor(props?: CenariusModel['props']) {
         props = props ?? {};

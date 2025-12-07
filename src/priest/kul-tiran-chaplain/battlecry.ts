@@ -1,7 +1,7 @@
 import { BattlecryModel, Selector, RoleModel, BaseFeatureModel, RoleHealthBuffModel } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 
-@TemplUtil.is('kul-tiran-chaplain-battlecry')
+@ChunkService.is('kul-tiran-chaplain-battlecry')
 export class KulTiranChaplainBattlecryModel extends BattlecryModel<RoleModel> {
     constructor(props?: KulTiranChaplainBattlecryModel['props']) {
         props = props ?? {};

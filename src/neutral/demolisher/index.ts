@@ -13,10 +13,10 @@
  * Collectible
  */
 
-import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, RarityType, RoleAttackModel, RaceType } from "hearthstone-core";
+import { ClassType, CostModel, RoleHealthModel, LibraryService, MinionCardModel, RarityType, RoleAttackModel, RaceType } from "hearthstone-core";
 import { DemolisherFeatureModel } from "./start-turn";
 
-@LibraryUtil.is('demolisher')
+@LibraryService.is('demolisher')
 export class DemolisherModel extends MinionCardModel {
     constructor(props?: DemolisherModel['props']) {
         props = props ?? {};

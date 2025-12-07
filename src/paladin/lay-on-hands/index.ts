@@ -17,10 +17,10 @@
  * 6 mana
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryService, RarityType, SchoolType, SpellCardModel } from "hearthstone-core";
 import { LayOnHandsEffectModel } from "./effect";
 
-@LibraryUtil.is('lay-on-hands')
+@LibraryService.is('lay-on-hands')
 export class LayOnHandsModel extends SpellCardModel {
     constructor(props?: LayOnHandsModel['props']) {
         props = props ?? {};

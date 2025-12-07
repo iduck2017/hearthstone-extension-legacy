@@ -15,10 +15,10 @@
  * Collectible
  */
 
-import { RoleAttackModel, ClassType, RoleHealthModel, LibraryUtil, RaceType, RarityType, CostModel, MinionCardModel } from "hearthstone-core";
+import { RoleAttackModel, ClassType, RoleHealthModel, LibraryService, RaceType, RarityType, CostModel, MinionCardModel } from "hearthstone-core";
 import { BloodsailCorsairBattlecryModel } from "./battlecry";
 
-@LibraryUtil.is('bloodsail-corsair')
+@LibraryService.is('bloodsail-corsair')
 export class BloodsailCorsairModel extends MinionCardModel {
     constructor(props?: BloodsailCorsairModel['props']) {
         props = props ?? {};

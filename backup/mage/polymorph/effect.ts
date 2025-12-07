@@ -1,8 +1,8 @@
 import { EffectModel, Selector, RoleModel, MinionCardModel, SpellEffectModel } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 import { SheepModel } from "./minion";
 
-@TemplUtil.is('polymorph-effect')
+@ChunkService.is('polymorph-effect')
 export class PolymorphEffectModel extends SpellEffectModel<MinionCardModel> {
     constructor(props?: PolymorphEffectModel['props']) {
         props = props ?? {};

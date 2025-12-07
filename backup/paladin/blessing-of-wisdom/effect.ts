@@ -1,7 +1,7 @@
 import { Selector, MinionCardModel, SpellEffectModel } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 
-@TemplUtil.is('blessing-of-wisdom-effect')
+@ChunkService.is('blessing-of-wisdom-effect')
 export class BlessingOfWisdomEffectModel extends SpellEffectModel<[MinionCardModel]> {
     constructor(props?: BlessingOfWisdomEffectModel['props']) {
         props = props ?? {};

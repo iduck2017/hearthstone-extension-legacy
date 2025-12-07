@@ -17,10 +17,10 @@
  * 1 mana
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryService, RarityType, SchoolType, SpellCardModel } from "hearthstone-core";
 import { PowerOverwhelmingEffectModel } from "./effect";
 
-@LibraryUtil.is('power-overwhelming')
+@LibraryService.is('power-overwhelming')
 export class PowerOverwhelmingModel extends SpellCardModel {
     constructor(props?: PowerOverwhelmingModel['props']) {
         props = props ?? {};

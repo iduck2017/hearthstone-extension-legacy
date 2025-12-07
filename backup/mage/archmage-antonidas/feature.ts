@@ -1,10 +1,10 @@
 import { CardFeatureModel, FeatureModel, SpellCardModel } from "hearthstone-core";
 import { SpellPerformModel } from "hearthstone-core/dist/type/models/features/perform/spell";
-import { Event, EventUtil, TemplUtil } from "set-piece";
+import { Event, EventPlugin, ChunkService } from "set-piece";
 import { FireballModel } from "../fireball";
 
 
-@TemplUtil.is('archmage-antonidas-feature')
+@ChunkService.is('archmage-antonidas-feature')
 export class ArchmageAntonidasFeatureModel extends CardFeatureModel {
     constructor(props?: ArchmageAntonidasFeatureModel['props']) {
         props = props ?? {};
@@ -21,7 +21,7 @@ export class ArchmageAntonidasFeatureModel extends CardFeatureModel {
         });
     }
 
-    @EventUtil.on(self => self.handleCast)
+    @EventPlugin.on(self => self.handleCast)
     private listenCast() {
         return this.route.player?.proxy.any(SpellCardModel).child.perform.event?.onPlay
     }

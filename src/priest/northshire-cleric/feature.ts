@@ -1,7 +1,7 @@
 import { RoleFeatureModel, RestoreEvent, RoleHealthModel } from "hearthstone-core";
-import { DebugUtil, Event, EventUtil, TemplUtil } from "set-piece";
+import { DebugService, Event, EventPlugin, ChunkService } from "set-piece";
 
-@TemplUtil.is('northshire-cleric-feature')
+@ChunkService.is('northshire-cleric-feature')
 export class NorthshireClericFeatureModel extends RoleFeatureModel {
     constructor(props?: NorthshireClericFeatureModel['props']) {
         props = props ?? {};
@@ -18,7 +18,7 @@ export class NorthshireClericFeatureModel extends RoleFeatureModel {
         });
     }
 
-    @EventUtil.on(self => self.handleHeal)
+    @EventPlugin.on(self => self.handleHeal)
     private listenHeal() {
         const game = this.route.game;
         if (!game) return;
@@ -39,6 +39,6 @@ export class NorthshireClericFeatureModel extends RoleFeatureModel {
 
         const minionA = this.route.card;
         if (!minionA) return;
-        DebugUtil.log(`${minionA.name} Draw a card because of ${minionB?.name}`);
+        DebugService.log(`${minionA.name} Draw a card because of ${minionB?.name}`);
     }
 }

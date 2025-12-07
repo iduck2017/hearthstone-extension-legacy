@@ -1,7 +1,7 @@
 import { EffectModel, SpellEffectModel, DamageModel, DamageEvent, RestoreModel, RestoreEvent, DamageType, Selector } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 
-@TemplUtil.is('holy-nova-effect')
+@ChunkService.is('holy-nova-effect')
 export class HolyNovaEffectModel extends SpellEffectModel<never> {
     constructor(props?: HolyNovaEffectModel['props']) {
         props = props ?? {};

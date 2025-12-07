@@ -1,9 +1,9 @@
 import { EffectModel, SpellEffectModel } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 // TODO: Implement Treant minion
 // Need to create a 2/2 Treant minion and summon three of them
 
-@TemplUtil.is('force-of-nature-effect')
+@ChunkService.is('force-of-nature-effect')
 export class ForceOfNatureEffectModel extends SpellEffectModel<[]> {
     constructor(props?: ForceOfNatureEffectModel['props']) {
         props = props ?? {};

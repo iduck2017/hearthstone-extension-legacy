@@ -1,7 +1,7 @@
-import { ClassType, CostModel, LibraryUtil, RarityType, SpellCardModel,  } from "hearthstone-core";
+import { ClassType, CostModel, LibraryService, RarityType, SpellCardModel,  } from "hearthstone-core";
 import { NobleSacrificeEffectModel } from "./effect";
 
-@LibraryUtil.is('noble-sacrifice')
+@LibraryService.is('noble-sacrifice')
 export class NobleSacrificeModel extends SpellCardModel {
     constructor(props?: NobleSacrificeModel['props']) {
         props = props ?? {};

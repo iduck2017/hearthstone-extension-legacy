@@ -17,10 +17,10 @@
  * 6 mana 6/6
  */
 
-import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, RarityType, RoleAttackModel, RaceType } from "hearthstone-core";
+import { ClassType, CostModel, RoleHealthModel, LibraryService, MinionCardModel, RarityType, RoleAttackModel, RaceType } from "hearthstone-core";
 import { DreadInfernalBattlecryModel } from "./battlecry";
 
-@LibraryUtil.is('dread-infernal')
+@LibraryService.is('dread-infernal')
 export class DreadInfernalModel extends MinionCardModel {
     constructor(props?: DreadInfernalModel['props']) {
         props = props ?? {};

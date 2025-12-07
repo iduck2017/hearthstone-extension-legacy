@@ -1,7 +1,7 @@
 import { BaseFeatureModel, RoleAttackBuffModel, RoleFeatureModel, RoleHealthBuffModel, SpellCardModel, SpellPerformModel } from "hearthstone-core";
-import { Event, EventUtil, TemplUtil } from "set-piece";
+import { Event, EventPlugin, ChunkService } from "set-piece";
 
-@TemplUtil.is('arcane-devourer-feature')
+@ChunkService.is('arcane-devourer-feature')
 export class ArcaneDevourerFeatureModel extends RoleFeatureModel {
 
     constructor(props?: ArcaneDevourerFeatureModel['props']) {
@@ -19,7 +19,7 @@ export class ArcaneDevourerFeatureModel extends RoleFeatureModel {
         });
     }
 
-    @EventUtil.on(self => self.handleCast)
+    @EventPlugin.on(self => self.handleCast)
     protected listenCast() {
         const spell = this.route.game?.proxy.any(SpellCardModel);
         return spell?.child.perform.event?.onPlay

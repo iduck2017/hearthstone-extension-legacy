@@ -13,10 +13,10 @@
  * Collectible
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, MinionCardModel, MinionFeaturesModel, RoleAttackModel, RoleHealthModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryService, RarityType, MinionCardModel, MinionFeaturesModel, RoleAttackModel, RoleHealthModel } from "hearthstone-core";
 import { KeeperOfTheGroveBattlecryModel } from "./battlecry";
 
-@LibraryUtil.is('keeper-of-the-grove')
+@LibraryService.is('keeper-of-the-grove')
 export class KeeperOfTheGroveModel extends MinionCardModel {
     constructor(props?: KeeperOfTheGroveModel['props']) {
         props = props ?? {};

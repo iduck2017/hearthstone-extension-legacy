@@ -1,7 +1,7 @@
 import { Selector, SpellEffectModel } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 
-@TemplUtil.is('call-of-the-void-effect')
+@ChunkService.is('call-of-the-void-effect')
 export class CallOfTheVoidEffectModel extends SpellEffectModel<never> {
     constructor(props?: CallOfTheVoidEffectModel['props']) {
         props = props ?? {};

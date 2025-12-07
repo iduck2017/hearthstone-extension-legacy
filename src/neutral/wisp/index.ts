@@ -1,6 +1,6 @@
-import { RoleAttackModel, CostModel, RoleHealthModel, MinionCardModel, LibraryUtil, ClassType, RaceType, RarityType } from "hearthstone-core";
+import { RoleAttackModel, CostModel, RoleHealthModel, MinionCardModel, LibraryService, ClassType, RaceType, RarityType } from "hearthstone-core";
 
-@LibraryUtil.is('wisp')
+@LibraryService.is('wisp')
 export class WispModel extends MinionCardModel {
     constructor(props?: WispModel['props']) {
         props = props ?? {};

@@ -1,7 +1,7 @@
 import { BattlecryModel, RestoreEvent, RestoreModel, RoleModel, Selector } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 
-@TemplUtil.is('voodoo-doctor-battlecry')
+@ChunkService.is('voodoo-doctor-battlecry')
 export class VoodooDoctorMinionBattlecryModel extends BattlecryModel<RoleModel> {
     constructor(props?: VoodooDoctorMinionBattlecryModel['props']) {
         props = props ?? {};

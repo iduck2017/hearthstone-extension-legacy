@@ -1,8 +1,8 @@
 
 import { Selector, SpellEffectModel, MinionCardModel, BaseFeatureModel, RoleAttackBuffModel, RoleHealthBuffModel } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 
-@TemplUtil.is('rampage-effect')
+@ChunkService.is('rampage-effect')
 export class RampageEffectModel extends SpellEffectModel<MinionCardModel> {
     constructor(props?: RampageEffectModel['props']) {
         props = props ?? {};

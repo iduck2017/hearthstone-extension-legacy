@@ -12,10 +12,10 @@
  * Collectible
  */
 
-import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, RarityType, RoleAttackModel, RaceType, TauntModel } from "hearthstone-core";
+import { ClassType, CostModel, RoleHealthModel, LibraryService, MinionCardModel, RarityType, RoleAttackModel, RaceType, TauntModel } from "hearthstone-core";
 import { TaurenWarriorFeatureModel } from "./feature";
 
-@LibraryUtil.is('tauren-warrior')
+@LibraryService.is('tauren-warrior')
 export class TaurenWarriorModel extends MinionCardModel {
     constructor(props?: TaurenWarriorModel['props']) {
         props = props ?? {};

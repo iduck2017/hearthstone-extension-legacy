@@ -13,10 +13,10 @@
  * Collectible
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryService, RarityType, SchoolType, SpellCardModel } from "hearthstone-core";
 import { FlamestrikeEffectModel } from "./effect";
 
-@LibraryUtil.is('flamestrike')
+@LibraryService.is('flamestrike')
 export class FlamestrikeModel extends SpellCardModel {
     constructor(props?: FlamestrikeModel['props']) {
         props = props ?? {};

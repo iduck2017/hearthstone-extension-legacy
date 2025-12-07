@@ -1,7 +1,7 @@
 import { EffectModel, DamageModel, DamageEvent, DamageType, SpellEffectModel, Selector } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 
-@TemplUtil.is('flamestrike-effect')
+@ChunkService.is('flamestrike-effect')
 export class FlamestrikeEffectModel extends SpellEffectModel<never> {
     constructor(props?: FlamestrikeEffectModel['props']) {
         props = props ?? {};

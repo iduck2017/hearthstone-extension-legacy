@@ -1,7 +1,7 @@
 import { EffectModel, SpellEffectModel } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 
-@TemplUtil.is('wild-growth-effect')
+@ChunkService.is('wild-growth-effect')
 export class WildGrowthEffectModel extends SpellEffectModel<[]> {
     constructor(props?: WildGrowthEffectModel['props']) {
         props = props ?? {};

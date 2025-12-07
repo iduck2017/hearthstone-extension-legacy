@@ -1,9 +1,9 @@
 import { EffectModel, SpellEffectModel } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 // TODO: Implement Deathrattle addition
 // Need to add a Deathrattle to all friendly minions that summons a 2/2 Treant
 
-@TemplUtil.is('soul-of-the-forest-effect')
+@ChunkService.is('soul-of-the-forest-effect')
 export class SoulOfTheForestEffectModel extends SpellEffectModel<[]> {
     constructor(props?: SoulOfTheForestEffectModel['props']) {
         props = props ?? {};

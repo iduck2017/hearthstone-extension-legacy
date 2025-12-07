@@ -1,11 +1,11 @@
 import { MinionBattlecryModel, RoleBuffModel, TauntModel } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 // TODO: Implement Choose One mechanic
 // This card has two options:
 // 1. Give your other minions +2/+2
 // 2. Summon two 2/2 Treants with Taunt
 
-@TemplUtil.is('cenarius-battlecry')
+@ChunkService.is('cenarius-battlecry')
 export class CenariusBattlecryModel extends MinionBattlecryModel<[]> {
     constructor(props?: CenariusBattlecryModel['props']) {
         props = props ?? {};

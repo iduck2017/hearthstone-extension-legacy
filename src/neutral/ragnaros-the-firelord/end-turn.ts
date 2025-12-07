@@ -1,7 +1,7 @@
 import { TurnEndModel, DamageModel, DamageType, DamageEvent, MinionCardModel } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 
-@TemplUtil.is('ragnaros-end-turn')
+@ChunkService.is('ragnaros-end-turn')
 export class RagnarosEndTurnModel extends TurnEndModel {
     public get route() {
         const result = super.route;

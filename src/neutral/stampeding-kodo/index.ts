@@ -13,10 +13,10 @@
  * Collectible
  */
 
-import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, RarityType, RoleAttackModel, RaceType } from "hearthstone-core";
+import { ClassType, CostModel, RoleHealthModel, LibraryService, MinionCardModel, RarityType, RoleAttackModel, RaceType } from "hearthstone-core";
 import { StampedingKodoBattlecryModel } from "./battlecry";
 
-@LibraryUtil.is('stampeding-kodo')
+@LibraryService.is('stampeding-kodo')
 export class StampedingKodoModel extends MinionCardModel {
     constructor(props?: StampedingKodoModel['props']) {
         props = props ?? {};

@@ -1,7 +1,7 @@
 import { EffectModel, SpellEffectModel, Selector, RoleModel, MinionCardModel, BaseFeatureModel, RoleHealthBuffModel } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 
-@TemplUtil.is('divine-spirit-effect')
+@ChunkService.is('divine-spirit-effect')
 export class DivineSpiritEffectModel extends SpellEffectModel<MinionCardModel> {
     constructor(props?: DivineSpiritEffectModel['props']) {
         props = props ?? {};

@@ -17,10 +17,10 @@
  * 1 mana
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryService, RarityType, SchoolType, SpellCardModel } from "hearthstone-core";
 import { CallOfTheVoidEffectModel } from "./effect";
 
-@LibraryUtil.is('call-of-the-void')
+@LibraryService.is('call-of-the-void')
 export class CallOfTheVoidModel extends SpellCardModel {
     constructor(props?: CallOfTheVoidModel['props']) {
         props = props ?? {};

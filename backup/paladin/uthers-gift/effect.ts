@@ -1,7 +1,7 @@
 import { SpellEffectModel } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 
-@TemplUtil.is('uthers-gift-effect')
+@ChunkService.is('uthers-gift-effect')
 export class UthersGiftEffectModel extends SpellEffectModel<[]> {
     constructor(props?: UthersGiftEffectModel['props']) {
         props = props ?? {};

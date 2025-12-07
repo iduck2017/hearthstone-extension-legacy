@@ -1,8 +1,8 @@
 import { BattlecryModel } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 import { MurlocScoutModel } from "../murloc-scout";
 
-@TemplUtil.is('murloc-tidehunter-battlecry')
+@ChunkService.is('murloc-tidehunter-battlecry')
 export class MurlocTidehunterBattlecryModel extends BattlecryModel<never> {
     constructor(props?: MurlocTidehunterBattlecryModel['props']) {
         props = props ?? {};

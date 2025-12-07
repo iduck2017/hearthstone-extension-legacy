@@ -14,10 +14,10 @@
  * Collectible
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel,  } from "hearthstone-core";
+import { ClassType, CostModel, LibraryService, RarityType, SchoolType, SpellCardModel,  } from "hearthstone-core";
 import { StarfallEffectModel } from "./effect";
 
-@LibraryUtil.is('starfall')
+@LibraryService.is('starfall')
 export class StarfallModel extends SpellCardModel {
     constructor(props?: StarfallModel['props']) {
         props = props ?? {};

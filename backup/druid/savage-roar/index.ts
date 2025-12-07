@@ -13,10 +13,10 @@
  * Collectible
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, SpellCardModel,  } from "hearthstone-core";
+import { ClassType, CostModel, LibraryService, RarityType, SpellCardModel,  } from "hearthstone-core";
 import { SavageRoarEffectModel } from "./effect";
 
-@LibraryUtil.is('savage-roar')
+@LibraryService.is('savage-roar')
 export class SavageRoarModel extends SpellCardModel {
     constructor(props?: SavageRoarModel['props']) {
         props = props ?? {};

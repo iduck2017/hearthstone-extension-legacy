@@ -17,10 +17,10 @@
  * 4 mana 5/6
  */
 
-import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, RarityType, RoleAttackModel, RaceType } from "hearthstone-core";
+import { ClassType, CostModel, RoleHealthModel, LibraryService, MinionCardModel, RarityType, RoleAttackModel, RaceType } from "hearthstone-core";
 import { PitLordBattlecryModel } from "./battlecry";
 
-@LibraryUtil.is('pit-lord')
+@LibraryService.is('pit-lord')
 export class PitLordModel extends MinionCardModel {
     constructor(props?: PitLordModel['props']) {
         props = props ?? {};

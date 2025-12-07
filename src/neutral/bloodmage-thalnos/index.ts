@@ -13,10 +13,10 @@
  * Collectible
  */
 
-import { RoleAttackModel, ClassType, RoleHealthModel, MinionCardModel, RaceType, RarityType, SpellDamageModel, LibraryUtil, CostModel } from "hearthstone-core";
+import { RoleAttackModel, ClassType, RoleHealthModel, MinionCardModel, RaceType, RarityType, SpellDamageModel, LibraryService, CostModel } from "hearthstone-core";
 import { BloodmageThalnosDeathrattleModel } from "./deathrattle";
 
-@LibraryUtil.is('bloodmage-thalnos')
+@LibraryService.is('bloodmage-thalnos')
 export class BloodmageThalnosModel extends MinionCardModel {
     constructor(props?: BloodmageThalnosModel['props']) {
         props = props ?? {};

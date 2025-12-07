@@ -11,9 +11,9 @@
  * Collectible: No
  */
 
-import { ClassType, RoleHealthModel, MinionCardModel, RaceType, RarityType, RoleAttackModel, CostModel, LibraryUtil } from "hearthstone-core";
+import { ClassType, RoleHealthModel, MinionCardModel, RaceType, RarityType, RoleAttackModel, CostModel, LibraryService } from "hearthstone-core";
 
-@LibraryUtil.is('murloc-scout')
+@LibraryService.is('murloc-scout')
 export class MurlocScoutModel extends MinionCardModel {
     constructor(props?: MurlocScoutModel['props']) {
         props = props ?? {};

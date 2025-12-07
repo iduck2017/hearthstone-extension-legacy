@@ -17,9 +17,9 @@
  * 4 mana 5/4
  */
 
-import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, RarityType, RoleAttackModel, RushModel } from "hearthstone-core";
+import { ClassType, CostModel, RoleHealthModel, LibraryService, MinionCardModel, RarityType, RoleAttackModel, RushModel } from "hearthstone-core";
 
-@LibraryUtil.is('warsong-outrider')
+@LibraryService.is('warsong-outrider')
 export class WarsongOutriderModel extends MinionCardModel {
     constructor(props?: WarsongOutriderModel['props']) {
         props = props ?? {};

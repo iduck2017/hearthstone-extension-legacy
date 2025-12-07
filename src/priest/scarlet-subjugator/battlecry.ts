@@ -1,8 +1,8 @@
 import { BattlecryModel, Selector, RoleModel } from "hearthstone-core";
-import { TemplUtil, TranxUtil } from "set-piece";
+import { ChunkService, TranxService } from "set-piece";
 import { ScarletSubjugatorDebuffModel } from "./debuff";
 
-@TemplUtil.is('scarlet-subjugator-battlecry')
+@ChunkService.is('scarlet-subjugator-battlecry')
 export class ScarletSubjugatorBattlecryModel extends BattlecryModel<RoleModel> {
     constructor(props?: ScarletSubjugatorBattlecryModel['props']) {
         props = props ?? {};
@@ -37,7 +37,7 @@ export class ScarletSubjugatorBattlecryModel extends BattlecryModel<RoleModel> {
         this.debuff(target);
     }
 
-    @TranxUtil.span()
+    @TranxService.span()
     private debuff(target: RoleModel) {
         const game = this.route.game;
         if (!game) return;

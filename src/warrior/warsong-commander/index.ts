@@ -17,10 +17,10 @@
  * 3 mana 2/3
  */
 
-import { ClassType, CostModel, LibraryUtil, MinionCardModel, RarityType, RoleAttackModel, RoleHealthModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryService, MinionCardModel, RarityType, RoleAttackModel, RoleHealthModel } from "hearthstone-core";
 import { WarsongCommanderFeatureModel } from "./feature";
 
-@LibraryUtil.is('warsong-commander')
+@LibraryService.is('warsong-commander')
 export class WarsongCommanderModel extends MinionCardModel {
     constructor(props?: WarsongCommanderModel['props']) {
         props = props ?? {};

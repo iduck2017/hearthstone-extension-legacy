@@ -1,7 +1,7 @@
-import { ClassType, CostModel, LibraryUtil, SpellCardModel, RarityType, SchoolType } from "hearthstone-core";
+import { ClassType, CostModel, LibraryService, SpellCardModel, RarityType, SchoolType } from "hearthstone-core";
 import { HolyNovaEffectModel } from "./effect";
 
-@LibraryUtil.is('holy-nova')
+@LibraryService.is('holy-nova')
 export class HolyNovaModel extends SpellCardModel {
     constructor(props?: HolyNovaModel['props']) {
         props = props ?? {};

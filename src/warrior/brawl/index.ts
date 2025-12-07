@@ -17,10 +17,10 @@
  * 5 mana
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, SpellCardModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryService, RarityType, SpellCardModel } from "hearthstone-core";
 import { BrawlEffectModel } from "./effect";
 
-@LibraryUtil.is('brawl')
+@LibraryService.is('brawl')
 export class BrawlModel extends SpellCardModel {
     constructor(props?: BrawlModel['props']) {
         props = props ?? {};

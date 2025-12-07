@@ -1,7 +1,7 @@
 import { SpellEffectModel } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 
-@TemplUtil.is('pursuit-of-justice-effect')
+@ChunkService.is('pursuit-of-justice-effect')
 export class PursuitOfJusticeEffectModel extends SpellEffectModel<[]> {
     constructor(props?: PursuitOfJusticeEffectModel['props']) {
         props = props ?? {};

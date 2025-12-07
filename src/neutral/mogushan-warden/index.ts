@@ -12,9 +12,9 @@
  * Collectible
  */
 
-import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, RarityType, RoleAttackModel, RaceType, TauntModel } from "hearthstone-core";
+import { ClassType, CostModel, RoleHealthModel, LibraryService, MinionCardModel, RarityType, RoleAttackModel, RaceType, TauntModel } from "hearthstone-core";
 
-@LibraryUtil.is('mogushan-warden')
+@LibraryService.is('mogushan-warden')
 export class MogushanWardenModel extends MinionCardModel {
     constructor(props?: MogushanWardenModel['props']) {
         props = props ?? {};

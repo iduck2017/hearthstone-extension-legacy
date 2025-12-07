@@ -1,7 +1,7 @@
 import { BattlecryModel, Selector, RoleModel, DamageModel, DamageType, DamageEvent } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 
-@TemplUtil.is('ironforge-rifleman-battlecry')
+@ChunkService.is('ironforge-rifleman-battlecry')
 export class IronforgeRiflemanBattlecryModel extends BattlecryModel<RoleModel> {
     constructor(props?: IronforgeRiflemanBattlecryModel['props']) {
         props = props ?? {};

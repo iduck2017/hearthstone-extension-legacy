@@ -14,10 +14,10 @@
  * Collectible
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel,  } from "hearthstone-core";
+import { ClassType, CostModel, LibraryService, RarityType, SchoolType, SpellCardModel,  } from "hearthstone-core";
 import { MindVisionEffectModel } from "./effect";
 
-@LibraryUtil.is('mind-vision')
+@LibraryService.is('mind-vision')
 export class MindVisionModel extends SpellCardModel {
     constructor(props?: MindVisionModel['props']) {
         props = props ?? {};

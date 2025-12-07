@@ -1,7 +1,7 @@
-import { RoleAttackModel, ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, RarityType } from "hearthstone-core";
+import { RoleAttackModel, ClassType, CostModel, RoleHealthModel, LibraryService, MinionCardModel, RarityType } from "hearthstone-core";
 import { LeperGnomeDeathrattleModel } from "./deathrattle";
 
-@LibraryUtil.is('leper-gnome')
+@LibraryService.is('leper-gnome')
 export class LeperGnomeModel extends MinionCardModel {
     constructor(props?: LeperGnomeModel['props']) {
         props = props ?? {};

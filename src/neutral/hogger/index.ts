@@ -1,7 +1,7 @@
-import { MinionCardModel, RarityType, ClassType, RoleAttackModel, RoleHealthModel, CostModel, LibraryUtil } from "hearthstone-core";
+import { MinionCardModel, RarityType, ClassType, RoleAttackModel, RoleHealthModel, CostModel, LibraryService } from "hearthstone-core";
 import { HoggerEndTurnModel } from "./end-turn";
 
-@LibraryUtil.is('hogger')
+@LibraryService.is('hogger')
 export class HoggerModel extends MinionCardModel {
     constructor(props?: HoggerModel['props']) {
         props = props ?? {};

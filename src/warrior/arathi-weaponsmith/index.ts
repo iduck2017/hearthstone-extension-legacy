@@ -17,10 +17,10 @@
  * 4 mana 3/3
  */
 
-import { ClassType, CostModel, LibraryUtil, MinionCardModel, RarityType, RoleAttackModel, RoleHealthModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryService, MinionCardModel, RarityType, RoleAttackModel, RoleHealthModel } from "hearthstone-core";
 import { ArathiWeaponsmithBattlecryModel } from "./battlecry";
 
-@LibraryUtil.is('arathi-weaponsmith')
+@LibraryService.is('arathi-weaponsmith')
 export class ArathiWeaponsmithModel extends MinionCardModel {
     constructor(props?: ArathiWeaponsmithModel['props']) {
         props = props ?? {};

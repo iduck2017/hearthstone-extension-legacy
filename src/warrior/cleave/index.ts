@@ -17,10 +17,10 @@
  * 2 mana
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, SpellCardModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryService, RarityType, SpellCardModel } from "hearthstone-core";
 import { CleaveEffectModel } from "./effect";
 
-@LibraryUtil.is('cleave')
+@LibraryService.is('cleave')
 export class CleaveModel extends SpellCardModel {
     constructor(props?: CleaveModel['props']) {
         props = props ?? {};

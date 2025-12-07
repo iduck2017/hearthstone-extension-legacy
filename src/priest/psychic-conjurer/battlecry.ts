@@ -1,7 +1,7 @@
 import { CardModel, BattlecryModel, Selector } from "hearthstone-core";
-import { TemplUtil, TranxUtil } from "set-piece";
+import { ChunkService, TranxService } from "set-piece";
 
-@TemplUtil.is('psychic-conjurer-battlecry')
+@ChunkService.is('psychic-conjurer-battlecry')
 export class PsychicConjurerBattlecryModel extends BattlecryModel<never> {
     constructor(props?: PsychicConjurerBattlecryModel['props']) {
         props = props ?? {};

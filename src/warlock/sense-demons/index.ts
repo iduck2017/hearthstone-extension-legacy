@@ -17,10 +17,10 @@
  * 3 mana
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryService, RarityType, SchoolType, SpellCardModel } from "hearthstone-core";
 import { SenseDemonsEffectModel } from "./effect";
 
-@LibraryUtil.is('sense-demons')
+@LibraryService.is('sense-demons')
 export class SenseDemonsModel extends SpellCardModel {
     constructor(props?: SenseDemonsModel['props']) {
         props = props ?? {};

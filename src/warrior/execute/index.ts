@@ -17,10 +17,10 @@
  * 1 mana
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, SpellCardModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryService, RarityType, SpellCardModel } from "hearthstone-core";
 import { ExecuteEffectModel } from "./effect";
 
-@LibraryUtil.is('execute')
+@LibraryService.is('execute')
 export class ExecuteModel extends SpellCardModel {
     constructor(props?: ExecuteModel['props']) {
         props = props ?? {};

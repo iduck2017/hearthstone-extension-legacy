@@ -9,9 +9,9 @@
  * Class: Mage
  * Collectible: No
  */
-import { ClassType, RoleHealthModel, MinionCardModel, RarityType, RoleAttackModel, RaceType, CostModel, LibraryUtil } from "hearthstone-core";
+import { ClassType, RoleHealthModel, MinionCardModel, RarityType, RoleAttackModel, RaceType, CostModel, LibraryService } from "hearthstone-core";
 
-@LibraryUtil.is('sheep')
+@LibraryService.is('sheep')
 export class SheepModel extends MinionCardModel {
     constructor(props?: SheepModel['props']) {
         props = props ?? {};

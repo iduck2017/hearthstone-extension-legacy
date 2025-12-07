@@ -14,10 +14,10 @@
  * Artist: Zoltan & Gabor
  * Collectible
  */
-import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryService, RarityType, SchoolType, SpellCardModel } from "hearthstone-core";
 import { SilenceEffectModel } from "./effect";
 
-@LibraryUtil.is('silence')
+@LibraryService.is('silence')
 export class SilenceModel extends SpellCardModel {
     constructor(props?: SilenceModel['props']) {
         props = props ?? {};

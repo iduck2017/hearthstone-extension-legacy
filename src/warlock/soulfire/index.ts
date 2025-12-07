@@ -17,10 +17,10 @@
  * 1 mana
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryService, RarityType, SchoolType, SpellCardModel } from "hearthstone-core";
 import { SoulfireEffectModel } from "./effect";
 
-@LibraryUtil.is('soulfire')
+@LibraryService.is('soulfire')
 export class SoulfireModel extends SpellCardModel {
     constructor(props?: SoulfireModel['props']) {
         props = props ?? {};

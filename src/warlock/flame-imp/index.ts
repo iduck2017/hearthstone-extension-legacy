@@ -13,10 +13,10 @@
  * Collectible
  */
 
-import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, RarityType, RoleAttackModel, RaceType } from "hearthstone-core";
+import { ClassType, CostModel, RoleHealthModel, LibraryService, MinionCardModel, RarityType, RoleAttackModel, RaceType } from "hearthstone-core";
 import { FlameImpBattlecryModel } from "./battlecry";
 
-@LibraryUtil.is('flame-imp')
+@LibraryService.is('flame-imp')
 export class FlameImpModel extends MinionCardModel {
     constructor(props?: FlameImpModel['props']) {
         props = props ?? {};

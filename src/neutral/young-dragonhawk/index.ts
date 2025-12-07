@@ -1,6 +1,6 @@
-import { LibraryUtil, WindfuryModel, RaceType, ClassType, RarityType, CostModel, MinionCardModel, RoleHealthModel, RoleAttackModel } from "hearthstone-core";
+import { LibraryService, WindfuryModel, RaceType, ClassType, RarityType, CostModel, MinionCardModel, RoleHealthModel, RoleAttackModel } from "hearthstone-core";
 
-@LibraryUtil.is('young-dragonhawk')
+@LibraryService.is('young-dragonhawk')
 export class YoungDragonhawkModel extends MinionCardModel {
     constructor(props?: YoungDragonhawkModel['props']) {
         props = props ?? {};

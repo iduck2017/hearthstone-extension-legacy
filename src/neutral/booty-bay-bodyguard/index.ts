@@ -12,9 +12,9 @@ Artist: Matt Cavotta
 Collectible
 */
 
-import { MinionCardModel, RoleHealthModel, RoleAttackModel, ClassType, RarityType, TauntModel, CostModel, LibraryUtil } from "hearthstone-core";
+import { MinionCardModel, RoleHealthModel, RoleAttackModel, ClassType, RarityType, TauntModel, CostModel, LibraryService } from "hearthstone-core";
 
-@LibraryUtil.is('booty-bay-bodyguard')
+@LibraryService.is('booty-bay-bodyguard')
 export class BootyBayBodyguardModel extends MinionCardModel {
     constructor(props?: BootyBayBodyguardModel['props']) {
         props = props ?? {};

@@ -1,7 +1,7 @@
-import { ClassType, CostModel, LibraryUtil, RarityType, SpellCardModel,  } from "hearthstone-core";
+import { ClassType, CostModel, LibraryService, RarityType, SpellCardModel,  } from "hearthstone-core";
 import { UthersGiftEffectModel } from "./effect";
 
-@LibraryUtil.is('uthers-gift')
+@LibraryService.is('uthers-gift')
 export class UthersGiftModel extends SpellCardModel {
     constructor(props?: UthersGiftModel['props']) {
         props = props ?? {};

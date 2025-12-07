@@ -15,10 +15,10 @@
  * Collectible
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryService, RarityType, SchoolType, SpellCardModel } from "hearthstone-core";
 import { ConeOfColdEffectModel } from "./effect";
 
-@LibraryUtil.is('cone-of-cold')
+@LibraryService.is('cone-of-cold')
 export class ConeOfColdModel extends SpellCardModel {
     constructor(props?: ConeOfColdModel['props']) {
         props = props ?? {};

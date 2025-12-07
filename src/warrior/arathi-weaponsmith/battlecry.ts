@@ -1,8 +1,8 @@
 import { BattlecryModel } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 import { ArathiWeaponModel } from "./weapon";
 
-@TemplUtil.is('arathi-weaponsmith-battlecry')
+@ChunkService.is('arathi-weaponsmith-battlecry')
 export class ArathiWeaponsmithBattlecryModel extends BattlecryModel<never> {
     constructor(props?: ArathiWeaponsmithBattlecryModel['props']) {
         props = props ?? {};

@@ -1,6 +1,6 @@
-import { ClassType, CostModel, WeaponActionModel, RarityType, WeaponAttackModel, WeaponCardModel, LibraryUtil } from "hearthstone-core";
+import { ClassType, CostModel, WeaponActionModel, RarityType, WeaponAttackModel, WeaponCardModel, LibraryService } from "hearthstone-core";
 
-@LibraryUtil.is('heavy-axe')
+@LibraryService.is('heavy-axe')
 export class HeavyAxeModel extends WeaponCardModel {
     constructor(props?: HeavyAxeModel['props']) {
         props = props ?? {};

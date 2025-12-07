@@ -17,10 +17,10 @@
  * 1 mana
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryService, RarityType, SchoolType, SpellCardModel } from "hearthstone-core";
 import { CorruptionEffectModel } from "./effect";
 
-@LibraryUtil.is('corruption')
+@LibraryService.is('corruption')
 export class CorruptionModel extends SpellCardModel {
     constructor(props?: CorruptionModel['props']) {
         props = props ?? {};

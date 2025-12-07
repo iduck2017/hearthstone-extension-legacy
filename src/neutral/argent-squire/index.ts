@@ -1,6 +1,6 @@
-import { RoleAttackModel, ClassType, RoleHealthModel, MinionCardModel, RarityType, DivineShieldModel, CostModel, LibraryUtil } from "hearthstone-core";
+import { RoleAttackModel, ClassType, RoleHealthModel, MinionCardModel, RarityType, DivineShieldModel, CostModel, LibraryService } from "hearthstone-core";
 
-@LibraryUtil.is('argent-squire')
+@LibraryService.is('argent-squire')
 export class ArgentSquireModel extends MinionCardModel {
     constructor(props?: ArgentSquireModel['props']) {
         props = props ?? {};

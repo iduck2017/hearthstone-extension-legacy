@@ -1,8 +1,8 @@
 import { Selector, SpellEffectModel } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 import { HeroicStrikeBuffModel } from "./buff";
 
-@TemplUtil.is('heroic-strike-effect')
+@ChunkService.is('heroic-strike-effect')
 export class HeroicStrikeEffectModel extends SpellEffectModel<never> {
     constructor(props?: HeroicStrikeEffectModel['props']) {
         props = props ?? {};

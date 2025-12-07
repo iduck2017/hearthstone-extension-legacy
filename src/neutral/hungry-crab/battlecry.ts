@@ -1,7 +1,7 @@
 import { RaceType, BattlecryModel, RoleModel, Selector, BaseFeatureModel, RoleAttackBuffModel, RoleHealthBuffModel, MinionCardModel } from "hearthstone-core";
-import { TemplUtil, DebugUtil } from "set-piece";
+import { ChunkService, DebugService } from "set-piece";
 
-@TemplUtil.is('hungry-crab-battlecry')
+@ChunkService.is('hungry-crab-battlecry')
 export class HungryCrabBattlecryModel extends BattlecryModel<RoleModel> {
     constructor(props?: HungryCrabBattlecryModel['props']) {
         props = props ?? {};

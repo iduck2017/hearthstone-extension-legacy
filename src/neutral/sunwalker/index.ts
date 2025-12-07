@@ -12,9 +12,9 @@
  * Collectible
  */
 
-import { TauntModel, RoleHealthModel, RoleAttackModel, MinionCardModel, ClassType, RarityType, DivineShieldModel, CostModel, LibraryUtil } from "hearthstone-core";
+import { TauntModel, RoleHealthModel, RoleAttackModel, MinionCardModel, ClassType, RarityType, DivineShieldModel, CostModel, LibraryService } from "hearthstone-core";
 
-@LibraryUtil.is('sunwalker')
+@LibraryService.is('sunwalker')
 export class SunwalkerModel extends MinionCardModel {
     constructor(props?: SunwalkerModel['props']) {
         props = props ?? {};

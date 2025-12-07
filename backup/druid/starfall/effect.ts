@@ -1,11 +1,11 @@
 import { EffectModel, SpellEffectModel } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 // TODO: Implement Choose One mechanic
 // This card has two options:
 // 1. Deal 5 damage to a minion (requires target selection)
 // 2. Deal 2 damage to all enemy minions
 
-@TemplUtil.is('starfall-effect')
+@ChunkService.is('starfall-effect')
 export class StarfallEffectModel extends SpellEffectModel<[]> {
     constructor(props?: StarfallEffectModel['props']) {
         props = props ?? {};

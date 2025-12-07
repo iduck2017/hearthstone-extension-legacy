@@ -1,8 +1,8 @@
 import { SecretFeatureModel, RoleAttackModel, AbortEvent, HeroModel, RoleHealthModel } from "hearthstone-core";
 import { RoleModel } from "hearthstone-core/dist/type/models/entities/heroes";
-import { Event, EventUtil, TemplUtil } from "set-piece";
+import { Event, EventPlugin, ChunkService } from "set-piece";
 
-@TemplUtil.is('vaporize-feature')
+@ChunkService.is('vaporize-feature')
 export class VaporizeFeatureModel extends SecretFeatureModel {
     constructor(props?: VaporizeFeatureModel['props']) {
         props = props ?? {};
@@ -19,7 +19,7 @@ export class VaporizeFeatureModel extends SecretFeatureModel {
         });
     }
 
-    @EventUtil.on(self => self.handleAttack)
+    @EventPlugin.on(self => self.handleAttack)
     private listenAttack() {
         return this.route.player?.proxy.child.hero.child.attack.event?.toReceive
     }

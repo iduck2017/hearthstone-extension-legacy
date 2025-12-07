@@ -1,5 +1,5 @@
 import { DamageEvent, DamageModel, DamageType, EffectModel, Selector, SpellEffectModel } from "hearthstone-core";
-import { Model, TemplUtil } from "set-piece";
+import { Model, ChunkService } from "set-piece";
 import { ArcaneMissilesSliceEffectModel } from "./slice";
 
 
@@ -12,7 +12,7 @@ export namespace ArcaneMissilesEffectModel {
     export type R = {}
 }
 
-@TemplUtil.is('arcane-missiles-effect')
+@ChunkService.is('arcane-missiles-effect')
 export class ArcaneMissilesEffectModel extends SpellEffectModel<never,
     ArcaneMissilesEffectModel.E,
     ArcaneMissilesEffectModel.S,

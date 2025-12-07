@@ -1,7 +1,7 @@
 import { EffectModel, SpellEffectModel, RoleBuffModel } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 
-@TemplUtil.is('savage-roar-effect')
+@ChunkService.is('savage-roar-effect')
 export class SavageRoarEffectModel extends SpellEffectModel<[]> {
     constructor(props?: SavageRoarEffectModel['props']) {
         props = props ?? {};

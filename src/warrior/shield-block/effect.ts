@@ -1,7 +1,7 @@
 import { Selector, SpellEffectModel } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 
-@TemplUtil.is('shield-block-effect')
+@ChunkService.is('shield-block-effect')
 export class ShieldBlockEffectModel extends SpellEffectModel<never> {
     constructor(props?: ShieldBlockEffectModel['props']) {
         props = props ?? {};

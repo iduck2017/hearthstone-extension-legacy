@@ -9,9 +9,9 @@
  * Collectible
  */
 
-import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, RarityType, RoleAttackModel, RaceType } from "hearthstone-core";
+import { ClassType, CostModel, RoleHealthModel, LibraryService, MinionCardModel, RarityType, RoleAttackModel, RaceType } from "hearthstone-core";
 
-@LibraryUtil.is('damaged-golem')
+@LibraryService.is('damaged-golem')
 export class DamagedGolemModel extends MinionCardModel {
     constructor(props?: DamagedGolemModel['props']) {
         props = props ?? {};

@@ -1,7 +1,7 @@
 import { SpellEffectModel } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 
-@TemplUtil.is('noble-sacrifice-effect')
+@ChunkService.is('noble-sacrifice-effect')
 export class NobleSacrificeEffectModel extends SpellEffectModel<[]> {
     constructor(props?: NobleSacrificeEffectModel['props']) {
         props = props ?? {};

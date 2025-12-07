@@ -1,11 +1,11 @@
 import { EffectModel, SpellEffectModel } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 // TODO: Implement Choose One mechanic
 // This card has two options:
 // 1. Give a minion +4 Attack
 // 2. Give a minion +4 Health and Taunt
 
-@TemplUtil.is('mark-of-nature-effect')
+@ChunkService.is('mark-of-nature-effect')
 export class MarkOfNatureEffectModel extends SpellEffectModel<[]> {
     constructor(props?: MarkOfNatureEffectModel['props']) {
         props = props ?? {};

@@ -1,7 +1,7 @@
-import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel,  } from "hearthstone-core";
+import { ClassType, CostModel, LibraryService, RarityType, SchoolType, SpellCardModel,  } from "hearthstone-core";
 import { HolyWrathEffectModel } from "./effect";
 
-@LibraryUtil.is('holy-wrath')
+@LibraryService.is('holy-wrath')
 export class HolyWrathModel extends SpellCardModel {
     constructor(props?: HolyWrathModel['props']) {
         props = props ?? {};

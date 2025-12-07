@@ -14,10 +14,10 @@
  * Collectible
  */
 
-import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, RarityType, RoleAttackModel } from "hearthstone-core";
+import { ClassType, CostModel, RoleHealthModel, LibraryService, MinionCardModel, RarityType, RoleAttackModel } from "hearthstone-core";
 import { SorcerersApprenticeFeatureModel } from "./feature";
 
-@LibraryUtil.is('sorcerers-apprentice')
+@LibraryService.is('sorcerers-apprentice')
 export class SorcerersApprenticeModel extends MinionCardModel {
     constructor(props?: SorcerersApprenticeModel['props']) {
         props = props ?? {};

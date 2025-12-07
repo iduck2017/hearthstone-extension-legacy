@@ -1,7 +1,7 @@
 import { Selector, SpellEffectModel, MinionCardModel } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 
-@TemplUtil.is('twisting-nether-effect')
+@ChunkService.is('twisting-nether-effect')
 export class TwistingNetherEffectModel extends SpellEffectModel<never> {
     constructor(props?: TwistingNetherEffectModel['props']) {
         props = props ?? {};

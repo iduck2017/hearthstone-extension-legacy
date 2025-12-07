@@ -1,7 +1,7 @@
 import { RoleFeatureModel, RoleActionDecor, RoleActionModel } from "hearthstone-core";
-import { StateUtil, TemplUtil } from "set-piece";
+import { StatePlugin, ChunkService } from "set-piece";
 
-@TemplUtil.is('ragnaros-feature')
+@ChunkService.is('ragnaros-feature')
 export class RagnarosFeatureModel extends RoleFeatureModel {
     constructor(props?: RagnarosFeatureModel['props']) {
         props = props ?? {};
@@ -19,7 +19,7 @@ export class RagnarosFeatureModel extends RoleFeatureModel {
     }
 
     // Disable attack action
-    @StateUtil.on(self => self.modifyAction)
+    @StatePlugin.on(self => self.modifyAction)
     private listenAction() {
         return this.route.role?.proxy.child.action.decor
     }

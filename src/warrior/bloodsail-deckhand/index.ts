@@ -18,10 +18,10 @@
  * 2/1
  */
 
-import { ClassType, CostModel, LibraryUtil, MinionCardModel, RaceType, RarityType, RoleAttackModel, RoleHealthModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryService, MinionCardModel, RaceType, RarityType, RoleAttackModel, RoleHealthModel } from "hearthstone-core";
 import { BloodsailDeckhandBattlecryModel } from "./battlecry";
 
-@LibraryUtil.is('bloodsail-deckhand')
+@LibraryService.is('bloodsail-deckhand')
 export class BloodsailDeckhandModel extends MinionCardModel {
     constructor(props?: BloodsailDeckhandModel['props']) {
         props = props ?? {};

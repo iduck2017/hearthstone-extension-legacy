@@ -1,7 +1,7 @@
 import { SpellEffectModel, DamageModel, DamageEvent, DamageType } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 
-@TemplUtil.is('avenging-wrath-effect')
+@ChunkService.is('avenging-wrath-effect')
 export class AvengingWrathEffectModel extends SpellEffectModel<[]> {
     constructor(props?: AvengingWrathEffectModel['props']) {
         props = props ?? {};

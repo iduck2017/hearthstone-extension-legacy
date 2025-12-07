@@ -14,10 +14,10 @@
  * Collectible
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel,  } from "hearthstone-core";
+import { ClassType, CostModel, LibraryService, RarityType, SchoolType, SpellCardModel,  } from "hearthstone-core";
 import { SoulOfTheForestEffectModel } from "./effect";
 
-@LibraryUtil.is('soul-of-the-forest')
+@LibraryService.is('soul-of-the-forest')
 export class SoulOfTheForestModel extends SpellCardModel {
     constructor(props?: SoulOfTheForestModel['props']) {
         props = props ?? {};

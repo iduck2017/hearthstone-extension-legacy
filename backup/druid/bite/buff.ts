@@ -1,7 +1,7 @@
 import { GameModel, IRoleBuffModel, RoleModel, TurnModel } from "hearthstone-core";
-import { Event, EventUtil, TemplUtil } from "set-piece";
+import { Event, EventPlugin, ChunkService } from "set-piece";
 
-@TemplUtil.is('bite-buff')
+@ChunkService.is('bite-buff')
 export class BiteBuffModel extends IRoleBuffModel {
     constructor(props?: BiteBuffModel['props']) {
         props = props ?? {};
@@ -18,7 +18,7 @@ export class BiteBuffModel extends IRoleBuffModel {
         });
     }
 
-    @EventUtil.on(self => self.handleTurn)
+    @EventPlugin.on(self => self.handleTurn)
     private listenTurn() {
         return this.route.game?.proxy.child.turn.event?.onEnd
     }

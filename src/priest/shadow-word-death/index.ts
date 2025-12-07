@@ -15,10 +15,10 @@
  * 
  * 2 cost
  */
-import { ClassType, CostModel, LibraryUtil, RarityType, SpellCardModel, SchoolType } from "hearthstone-core";
+import { ClassType, CostModel, LibraryService, RarityType, SpellCardModel, SchoolType } from "hearthstone-core";
 import { ShadowWordDeathEffectModel } from "./effect";
 
-@LibraryUtil.is('shadow-word-death')
+@LibraryService.is('shadow-word-death')
 export class ShadowWordDeathModel extends SpellCardModel {
     constructor(props?: ShadowWordDeathModel['props']) {
         props = props ?? {};

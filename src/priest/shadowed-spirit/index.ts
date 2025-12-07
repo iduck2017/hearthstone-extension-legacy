@@ -1,7 +1,7 @@
-import { RoleAttackModel, ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, RarityType, RaceType } from "hearthstone-core";
+import { RoleAttackModel, ClassType, CostModel, RoleHealthModel, LibraryService, MinionCardModel, RarityType, RaceType } from "hearthstone-core";
 import { ShadowedSpiritDeathrattleModel } from "./deathrattle";
 
-@LibraryUtil.is('shadowed-spirit')
+@LibraryService.is('shadowed-spirit')
 export class ShadowedSpiritModel extends MinionCardModel {
     constructor(props?: ShadowedSpiritModel['props']) {
         props = props ?? {};

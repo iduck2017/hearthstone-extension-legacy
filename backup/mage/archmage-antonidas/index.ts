@@ -14,10 +14,10 @@
  * Collectible
  */
 
-import { RoleAttackModel, ClassType, RoleHealthModel, MinionCardModel, RarityType, LibraryUtil, CostModel } from "hearthstone-core";
+import { RoleAttackModel, ClassType, RoleHealthModel, MinionCardModel, RarityType, LibraryService, CostModel } from "hearthstone-core";
 import { ArchmageAntonidasFeatureModel } from "./feature";
 
-@LibraryUtil.is('archmage-antonidas')
+@LibraryService.is('archmage-antonidas')
 export class ArchmageAntonidasModel extends MinionCardModel {
     constructor(props?: ArchmageAntonidasModel['props']) {
         props = props ?? {};

@@ -1,7 +1,7 @@
 import { Selector, SpellEffectModel, DamageModel, DamageEvent, DamageType, RoleModel } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 
-@TemplUtil.is('consecration-effect')
+@ChunkService.is('consecration-effect')
 export class ConsecrationEffectModel extends SpellEffectModel<never> {
     constructor(props?: ConsecrationEffectModel['props']) {
         props = props ?? {};

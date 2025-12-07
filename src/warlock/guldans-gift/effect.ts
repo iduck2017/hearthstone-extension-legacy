@@ -1,7 +1,7 @@
 import { Selector, SpellEffectModel } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 
-@TemplUtil.is('guldans-gift-effect')
+@ChunkService.is('guldans-gift-effect')
 export class GuldansGiftEffectModel extends SpellEffectModel<never> {
     constructor(props?: GuldansGiftEffectModel['props']) {
         props = props ?? {};

@@ -12,10 +12,10 @@
  * Collectible
  */
 
-import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, RarityType, RoleAttackModel, RaceType } from "hearthstone-core";
+import { ClassType, CostModel, RoleHealthModel, LibraryService, MinionCardModel, RarityType, RoleAttackModel, RaceType } from "hearthstone-core";
 import { GruulFeatureModel } from "./feature";
 
-@LibraryUtil.is('gruul')
+@LibraryService.is('gruul')
 export class GruulModel extends MinionCardModel {
     constructor(props?: GruulModel['props']) {
         props = props ?? {};

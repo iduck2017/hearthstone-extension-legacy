@@ -1,5 +1,5 @@
 import { Selector, SpellEffectModel } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 import { AvengingWrathSliceEffectModel } from "./slice";
 
 export namespace AvengingWrathEffectModel {
@@ -11,7 +11,7 @@ export namespace AvengingWrathEffectModel {
     export type R = {}
 }
 
-@TemplUtil.is('avenging-wrath-effect')
+@ChunkService.is('avenging-wrath-effect')
 export class AvengingWrathEffectModel extends SpellEffectModel<never,
     AvengingWrathEffectModel.E,
     AvengingWrathEffectModel.S,

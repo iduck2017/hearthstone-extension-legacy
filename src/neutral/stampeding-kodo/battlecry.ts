@@ -1,7 +1,7 @@
 import { BattlecryModel } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 
-@TemplUtil.is('stampeding-kodo-battlecry')
+@ChunkService.is('stampeding-kodo-battlecry')
 export class StampedingKodoBattlecryModel extends BattlecryModel<never> {
     constructor(props?: StampedingKodoBattlecryModel['props']) {
         props = props ?? {};

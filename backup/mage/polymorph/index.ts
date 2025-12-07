@@ -12,10 +12,10 @@
  * Artist: Vance Kovacs
  * Collectible
  */
-import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryService, RarityType, SchoolType, SpellCardModel } from "hearthstone-core";
 import { PolymorphEffectModel } from "./effect";
 
-@LibraryUtil.is('polymorph')
+@LibraryService.is('polymorph')
 export class PolymorphModel extends SpellCardModel {
     constructor(props?: PolymorphModel['props']) {
         props = props ?? {};

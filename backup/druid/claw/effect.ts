@@ -1,8 +1,8 @@
 import { EffectModel, SpellEffectModel } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 import { ClawBuffModel } from "./buff";
 
-@TemplUtil.is('claw-effect')
+@ChunkService.is('claw-effect')
 export class ClawEffectModel extends SpellEffectModel<[]> {
     constructor(props?: ClawEffectModel['props']) {
         props = props ?? {};

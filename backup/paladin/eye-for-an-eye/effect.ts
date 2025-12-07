@@ -1,7 +1,7 @@
 import { SpellEffectModel } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 
-@TemplUtil.is('eye-for-an-eye-effect')
+@ChunkService.is('eye-for-an-eye-effect')
 export class EyeForAnEyeEffectModel extends SpellEffectModel<[]> {
     constructor(props?: EyeForAnEyeEffectModel['props']) {
         props = props ?? {};

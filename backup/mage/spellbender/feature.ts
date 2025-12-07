@@ -1,5 +1,5 @@
 import { MinionCardModel, SecretFeatureModel, SpellCardModel, SpellCastEvent } from "hearthstone-core";
-import { Event, EventUtil } from "set-piece";
+import { Event, EventPlugin } from "set-piece";
 import { SpellbenderMinionModel } from "./minion";
 import { SpellPerformModel } from "hearthstone-core/dist/type/models/features/perform/spell";
 
@@ -19,7 +19,7 @@ export class SpellbenderFeatureModel extends SecretFeatureModel {
         })
     }
 
-    @EventUtil.on(self => self.handleCast)
+    @EventPlugin.on(self => self.handleCast)
     private listenCast() {
         return this.route.game?.proxy.any(SpellCardModel).child.perform.event?.toCast
     }

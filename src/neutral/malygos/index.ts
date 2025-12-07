@@ -13,9 +13,9 @@
  * Collectible
  */
 
-import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, RarityType, RoleAttackModel, RaceType, SpellDamageModel } from "hearthstone-core";
+import { ClassType, CostModel, RoleHealthModel, LibraryService, MinionCardModel, RarityType, RoleAttackModel, RaceType, SpellDamageModel } from "hearthstone-core";
 
-@LibraryUtil.is('malygos')
+@LibraryService.is('malygos')
 export class MalygosModel extends MinionCardModel {
     constructor(props?: MalygosModel['props']) {
         props = props ?? {};

@@ -1,7 +1,7 @@
-import { MinionCardModel, RarityType, ClassType, RaceType, RoleAttackModel, RoleHealthModel, TauntModel, CostModel, LibraryUtil } from "hearthstone-core";
+import { MinionCardModel, RarityType, ClassType, RaceType, RoleAttackModel, RoleHealthModel, TauntModel, CostModel, LibraryService } from "hearthstone-core";
 import { CairneBloodhoofDeathrattleModel } from "./deathrattle";
 
-@LibraryUtil.is('cairne-bloodhoof')
+@LibraryService.is('cairne-bloodhoof')
 export class CairneBloodhoofModel extends MinionCardModel {
     constructor(props?: CairneBloodhoofModel['props']) {
         props = props ?? {};

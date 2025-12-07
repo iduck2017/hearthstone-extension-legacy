@@ -12,9 +12,9 @@
  * Collectible
  */
 
-import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, RarityType, RoleAttackModel, RaceType, DivineShieldModel } from "hearthstone-core";
+import { ClassType, CostModel, RoleHealthModel, LibraryService, MinionCardModel, RarityType, RoleAttackModel, RaceType, DivineShieldModel } from "hearthstone-core";
 
-@LibraryUtil.is('silvermoon-guardian')
+@LibraryService.is('silvermoon-guardian')
 export class SilvermoonGuardianModel extends MinionCardModel {
     constructor(props?: SilvermoonGuardianModel['props']) {
         props = props ?? {};

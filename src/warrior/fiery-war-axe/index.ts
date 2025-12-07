@@ -12,9 +12,9 @@
  * 2/3/2
  */
 
-import { ClassType, CostModel, WeaponActionModel, RarityType, WeaponAttackModel, WeaponCardModel, LibraryUtil } from "hearthstone-core";
+import { ClassType, CostModel, WeaponActionModel, RarityType, WeaponAttackModel, WeaponCardModel, LibraryService } from "hearthstone-core";
 
-@LibraryUtil.is('fiery-war-axe')
+@LibraryService.is('fiery-war-axe')
 export class FieryWarAxeModel extends WeaponCardModel {
     constructor(props?: FieryWarAxeModel['props']) {
         props = props ?? {};

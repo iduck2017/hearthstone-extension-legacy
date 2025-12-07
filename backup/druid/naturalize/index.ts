@@ -14,10 +14,10 @@
  * Collectible
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel,  } from "hearthstone-core";
+import { ClassType, CostModel, LibraryService, RarityType, SchoolType, SpellCardModel,  } from "hearthstone-core";
 import { NaturalizeEffectModel } from "./effect";
 
-@LibraryUtil.is('naturalize')
+@LibraryService.is('naturalize')
 export class NaturalizeModel extends SpellCardModel {
     constructor(props?: NaturalizeModel['props']) {
         props = props ?? {};

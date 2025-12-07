@@ -1,7 +1,7 @@
 import { FeatureModel, WeaponCardModel, WeaponActionModel, WeaponActionDecor, MinionCardModel, RoleActionModel, HeroModel } from "hearthstone-core";
-import { StateUtil, Event, EventUtil, TemplUtil } from "set-piece";
+import { StatePlugin, Event, EventPlugin, ChunkService } from "set-piece";
 
-@TemplUtil.is('gorehowl-feature')
+@ChunkService.is('gorehowl-feature')
 export class GorehowlFeatureModel extends FeatureModel {
     constructor(props?: GorehowlFeatureModel['props']) {
         props = props ?? {};

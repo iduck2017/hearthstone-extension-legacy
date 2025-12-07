@@ -14,10 +14,10 @@
  * Collectible
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryService, RarityType, SchoolType, SpellCardModel } from "hearthstone-core";
 import { FrostboltEffectModel } from "./effect";
 
-@LibraryUtil.is('frostbolt')
+@LibraryService.is('frostbolt')
 export class FrostboltModel extends SpellCardModel {
     constructor(props?: FrostboltModel['props']) {
         props = props ?? {};

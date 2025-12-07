@@ -1,7 +1,7 @@
 import { Selector, RoleModel, SpellEffectModel, DamageModel, DamageEvent, DamageType } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 
-@TemplUtil.is('holy-wrath-effect')
+@ChunkService.is('holy-wrath-effect')
 export class HolyWrathEffectModel extends SpellEffectModel<[RoleModel]> {
     constructor(props?: HolyWrathEffectModel['props']) {
         props = props ?? {};

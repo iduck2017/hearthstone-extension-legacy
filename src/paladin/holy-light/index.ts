@@ -17,10 +17,10 @@
  * 2 mana
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryService, RarityType, SchoolType, SpellCardModel } from "hearthstone-core";
 import { HolyLightEffectModel } from "./effect";
 
-@LibraryUtil.is('holy-light')
+@LibraryService.is('holy-light')
 export class HolyLightModel extends SpellCardModel {
     constructor(props?: HolyLightModel['props']) {
         props = props ?? {};

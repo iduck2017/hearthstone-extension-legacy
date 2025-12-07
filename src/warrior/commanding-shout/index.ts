@@ -17,10 +17,10 @@
  * 2 mana
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, SpellCardModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryService, RarityType, SpellCardModel } from "hearthstone-core";
 import { CommandingShoutEffectModel } from "./effect";
 
-@LibraryUtil.is('commanding-shout')
+@LibraryService.is('commanding-shout')
 export class CommandingShoutModel extends SpellCardModel {
     constructor(props?: CommandingShoutModel['props']) {
         props = props ?? {};

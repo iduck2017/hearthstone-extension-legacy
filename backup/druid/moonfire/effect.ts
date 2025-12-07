@@ -1,7 +1,7 @@
 import { Selector, RoleModel, DamageModel, DamageEvent, DamageType, SpellEffectModel } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 
-@TemplUtil.is('moonfire-effect')
+@ChunkService.is('moonfire-effect')
 export class MoonfireEffectModel extends SpellEffectModel<[RoleModel]> {
     constructor(props?: MoonfireEffectModel['props']) {
         props = props ?? {};

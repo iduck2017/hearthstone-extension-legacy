@@ -13,10 +13,10 @@
  * Collectible
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, SpellCardModel,  } from "hearthstone-core";
+import { ClassType, CostModel, LibraryService, RarityType, SpellCardModel,  } from "hearthstone-core";
 import { BiteEffectModel } from "./effect";
 
-@LibraryUtil.is('bite')
+@LibraryService.is('bite')
 export class BiteModel extends SpellCardModel {
     constructor(props?: BiteModel['props']) {
         props = props ?? {};

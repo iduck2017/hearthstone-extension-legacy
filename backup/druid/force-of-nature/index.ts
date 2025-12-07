@@ -14,10 +14,10 @@
  * Collectible
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel,  } from "hearthstone-core";
+import { ClassType, CostModel, LibraryService, RarityType, SchoolType, SpellCardModel,  } from "hearthstone-core";
 import { ForceOfNatureEffectModel } from "./effect";
 
-@LibraryUtil.is('force-of-nature')
+@LibraryService.is('force-of-nature')
 export class ForceOfNatureModel extends SpellCardModel {
     constructor(props?: ForceOfNatureModel['props']) {
         props = props ?? {};

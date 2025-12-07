@@ -1,7 +1,7 @@
 import { CostDecor, CostModel, FeatureModel, ManaModel, OperatorType, SecretCardModel, SpellCardModel, TurnModel } from "hearthstone-core";
-import { Event, EventUtil, Model, StateUtil, TemplUtil } from "set-piece";
+import { Event, EventPlugin, Model, StatePlugin, ChunkService } from "set-piece";
 
-@TemplUtil.is('kirin-tor-mage-feature')
+@ChunkService.is('kirin-tor-mage-feature')
 export class KirinTorMageContextModel extends FeatureModel {
     public get status() { return true; }
 
@@ -20,7 +20,7 @@ export class KirinTorMageContextModel extends FeatureModel {
         });
     }
 
-    @StateUtil.on(self => self.modifyCost)
+    @StatePlugin.on(self => self.modifyCost)
     private listenCost() {
         return this.route.player?.proxy.child.hand.any(SpellCardModel).child.cost.decor
     }
@@ -37,7 +37,7 @@ export class KirinTorMageContextModel extends FeatureModel {
         });
     }
 
-    @EventUtil.on(self => self.handleCast)
+    @EventPlugin.on(self => self.handleCast)
     private listenCast() {
         return this.route.player?.proxy.child.mana.event?.onConsume
     }
@@ -49,7 +49,7 @@ export class KirinTorMageContextModel extends FeatureModel {
         player.debuff(this);
     }
 
-    @EventUtil.on(self => self.handleTurn)
+    @EventPlugin.on(self => self.handleTurn)
     private listenTurn() {
         return this.route.game?.proxy.child.turn.event?.onEnd
     }

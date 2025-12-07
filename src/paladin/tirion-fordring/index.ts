@@ -17,10 +17,10 @@
  * 8 mana 6/6
  */
 
-import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, RarityType, RoleAttackModel, TauntModel, DivineShieldModel } from "hearthstone-core";
+import { ClassType, CostModel, RoleHealthModel, LibraryService, MinionCardModel, RarityType, RoleAttackModel, TauntModel, DivineShieldModel } from "hearthstone-core";
 import { TirionFordringDeathrattleModel } from "./deathrattle";
 
-@LibraryUtil.is('tirion-fordring')
+@LibraryService.is('tirion-fordring')
 export class TirionFordringModel extends MinionCardModel {
     constructor(props?: TirionFordringModel['props']) {
         props = props ?? {};

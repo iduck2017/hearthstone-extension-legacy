@@ -1,6 +1,6 @@
-import { ClassType, CostModel, WeaponActionModel, RarityType, WeaponAttackModel, WeaponCardModel, LibraryUtil } from "hearthstone-core";
+import { ClassType, CostModel, WeaponActionModel, RarityType, WeaponAttackModel, WeaponCardModel, LibraryService } from "hearthstone-core";
 
-@LibraryUtil.is('arathi-weapon')
+@LibraryService.is('arathi-weapon')
 export class ArathiWeaponModel extends WeaponCardModel {
     constructor(props?: ArathiWeaponModel['props']) {
         props = props ?? {};

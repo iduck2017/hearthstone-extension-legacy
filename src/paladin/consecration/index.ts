@@ -17,10 +17,10 @@
  * 3 mana
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryService, RarityType, SchoolType, SpellCardModel } from "hearthstone-core";
 import { ConsecrationEffectModel } from "./effect";
 
-@LibraryUtil.is('consecration')
+@LibraryService.is('consecration')
 export class ConsecrationModel extends SpellCardModel {
     constructor(props?: ConsecrationModel['props']) {
         props = props ?? {};

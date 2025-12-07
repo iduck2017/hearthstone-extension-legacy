@@ -17,10 +17,10 @@
  * 5 mana
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryService, RarityType, SchoolType, SpellCardModel } from "hearthstone-core";
 import { BlessedChampionEffectModel } from "./effect";
 
-@LibraryUtil.is('blessed-champion')
+@LibraryService.is('blessed-champion')
 export class BlessedChampionModel extends SpellCardModel {
     constructor(props?: BlessedChampionModel['props']) {
         props = props ?? {};

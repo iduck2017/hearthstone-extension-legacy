@@ -1,7 +1,7 @@
 import { FeatureModel, RoleAttackBuffModel, TurnModel } from "hearthstone-core";
-import { Event, EventUtil, TemplUtil } from "set-piece";
+import { Event, EventPlugin, ChunkService } from "set-piece";
 
-@TemplUtil.is('abusive-sergeant-buff')
+@ChunkService.is('abusive-sergeant-buff')
 export class AbusiveSergeantBuffModel extends FeatureModel {
     constructor(props?: AbusiveSergeantBuffModel['props']) {
         props = props ?? {};
@@ -21,7 +21,7 @@ export class AbusiveSergeantBuffModel extends FeatureModel {
         });
     }
 
-    @EventUtil.on(self => self.handleTurn)
+    @EventPlugin.on(self => self.handleTurn)
     private listenTurn() {
         return this.route.game?.proxy.child.turn.event?.onEnd
     }

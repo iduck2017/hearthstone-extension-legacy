@@ -12,10 +12,10 @@
  * Collectible
  */
 
-import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, RarityType, RoleAttackModel, RaceType } from "hearthstone-core";
+import { ClassType, CostModel, RoleHealthModel, LibraryService, MinionCardModel, RarityType, RoleAttackModel, RaceType } from "hearthstone-core";
 import { ShatteredSunClericBattlecryModel } from "./battlecry";
 
-@LibraryUtil.is('shattered-sun-cleric')
+@LibraryService.is('shattered-sun-cleric')
 export class ShatteredSunClericModel extends MinionCardModel {
     constructor(props?: ShatteredSunClericModel['props']) {
         props = props ?? {};

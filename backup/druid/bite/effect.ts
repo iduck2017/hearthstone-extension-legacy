@@ -1,8 +1,8 @@
 import { EffectModel, SpellEffectModel } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 import { BiteBuffModel } from "./buff";
 
-@TemplUtil.is('bite-effect')
+@ChunkService.is('bite-effect')
 export class BiteEffectModel extends SpellEffectModel<[]> {
     constructor(props?: BiteEffectModel['props']) {
         props = props ?? {};

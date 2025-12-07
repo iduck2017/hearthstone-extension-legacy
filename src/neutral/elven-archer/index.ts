@@ -1,7 +1,7 @@
-import { MinionCardModel, RoleHealthModel, RoleAttackModel, LibraryUtil, CostModel, ClassType, RarityType } from "hearthstone-core";
+import { MinionCardModel, RoleHealthModel, RoleAttackModel, LibraryService, CostModel, ClassType, RarityType } from "hearthstone-core";
 import { ElvenArcherMinionBattlecryModel } from "./battlecry";
 
-@LibraryUtil.is('elven-archer')
+@LibraryService.is('elven-archer')
 export class ElvenArcherModel extends MinionCardModel {
     constructor(props?: ElvenArcherModel['props']) {
         props = props ?? {};

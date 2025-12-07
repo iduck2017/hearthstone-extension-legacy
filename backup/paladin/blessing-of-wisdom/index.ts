@@ -1,7 +1,7 @@
-import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel,  } from "hearthstone-core";
+import { ClassType, CostModel, LibraryService, RarityType, SchoolType, SpellCardModel,  } from "hearthstone-core";
 import { BlessingOfWisdomEffectModel } from "./effect";
 
-@LibraryUtil.is('blessing-of-wisdom')
+@LibraryService.is('blessing-of-wisdom')
 export class BlessingOfWisdomModel extends SpellCardModel {
     constructor(props?: BlessingOfWisdomModel['props']) {
         props = props ?? {};

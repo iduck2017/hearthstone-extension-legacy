@@ -17,10 +17,10 @@
  * 1 mana
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, SpellCardModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryService, RarityType, SpellCardModel } from "hearthstone-core";
 import { SlamEffectModel } from "./effect";
 
-@LibraryUtil.is('slam')
+@LibraryService.is('slam')
 export class SlamModel extends SpellCardModel {
     constructor(props?: SlamModel['props']) {
         props = props ?? {};

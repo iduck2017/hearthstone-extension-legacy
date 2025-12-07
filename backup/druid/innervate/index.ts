@@ -14,10 +14,10 @@
  * Collectible
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel,  } from "hearthstone-core";
+import { ClassType, CostModel, LibraryService, RarityType, SchoolType, SpellCardModel,  } from "hearthstone-core";
 import { InnervateEffectModel } from "./effect";
 
-@LibraryUtil.is('innervate')
+@LibraryService.is('innervate')
 export class InnervateModel extends SpellCardModel {
     constructor(props?: InnervateModel['props']) {
         props = props ?? {};

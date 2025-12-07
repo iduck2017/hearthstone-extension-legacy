@@ -1,7 +1,7 @@
 import { BattlecryModel } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 
-@TemplUtil.is('azure-drake-battlecry')
+@ChunkService.is('azure-drake-battlecry')
 export class AzureDrakeBattlecryModel extends BattlecryModel<never> {
     constructor(props?: AzureDrakeBattlecryModel['props']) {
         props = props ?? {};

@@ -1,8 +1,8 @@
 import { Selector, RoleModel, DamageModel, DamageEvent, DamageType, SpellEffectModel, MinionCardModel } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 
 
-@TemplUtil.is('icicle-effect')
+@ChunkService.is('icicle-effect')
 export class IcicleEffectModel extends SpellEffectModel<RoleModel> {
     constructor(props?: IcicleEffectModel['props']) {
         props = props ?? {};

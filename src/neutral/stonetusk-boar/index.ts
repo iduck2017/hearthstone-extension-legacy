@@ -1,6 +1,6 @@
-import { ChargeModel, RoleHealthModel, RoleAttackModel, MinionCardModel, RaceType, ClassType, RarityType, CostModel, LibraryUtil } from "hearthstone-core";
+import { ChargeModel, RoleHealthModel, RoleAttackModel, MinionCardModel, RaceType, ClassType, RarityType, CostModel, LibraryService } from "hearthstone-core";
 
-@LibraryUtil.is('stonetusk-boar')   
+@LibraryService.is('stonetusk-boar')   
 export class StonetuskBoarModel extends MinionCardModel {
     constructor(props?: StonetuskBoarModel['props']) {
         props = props ?? {};

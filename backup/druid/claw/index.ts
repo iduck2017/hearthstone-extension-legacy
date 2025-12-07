@@ -13,10 +13,10 @@
  * Collectible
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, SpellCardModel,  } from "hearthstone-core";
+import { ClassType, CostModel, LibraryService, RarityType, SpellCardModel,  } from "hearthstone-core";
 import { ClawEffectModel } from "./effect";
 
-@LibraryUtil.is('claw')
+@LibraryService.is('claw')
 export class ClawModel extends SpellCardModel {
     constructor(props?: ClawModel['props']) {
         props = props ?? {};

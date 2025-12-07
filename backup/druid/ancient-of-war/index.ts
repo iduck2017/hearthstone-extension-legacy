@@ -13,10 +13,10 @@
  * Collectible
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, MinionCardModel, MinionFeaturesModel, RoleAttackModel, RoleHealthModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryService, RarityType, MinionCardModel, MinionFeaturesModel, RoleAttackModel, RoleHealthModel } from "hearthstone-core";
 import { AncientOfWarBattlecryModel } from "./battlecry";
 
-@LibraryUtil.is('ancient-of-war')
+@LibraryService.is('ancient-of-war')
 export class AncientOfWarModel extends MinionCardModel {
     constructor(props?: AncientOfWarModel['props']) {
         props = props ?? {};

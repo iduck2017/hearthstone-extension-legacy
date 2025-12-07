@@ -18,9 +18,9 @@
  * 4/3
  */
 
-import { ChargeModel, RoleHealthModel, RoleAttackModel, MinionCardModel, ClassType, RarityType, CostModel, LibraryUtil } from "hearthstone-core";
+import { ChargeModel, RoleHealthModel, RoleAttackModel, MinionCardModel, ClassType, RarityType, CostModel, LibraryService } from "hearthstone-core";
 
-@LibraryUtil.is('korkron-elite')
+@LibraryService.is('korkron-elite')
 export class KorkronEliteModel extends MinionCardModel {
     constructor(props?: KorkronEliteModel['props']) {
         props = props ?? {};

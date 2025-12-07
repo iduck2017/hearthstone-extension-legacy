@@ -11,7 +11,7 @@ import { EtherealArcanistModel } from "./index";
 import { IceBarrierModel } from "../ice-barrier";
 import { WispModel } from "../../../src/neutral/wisp";
 import { boot } from "../../../src/boot";
-import { DebugUtil } from "set-piece";
+import { DebugService } from "set-piece";
 
 describe('ethereal-arcanist', () => {
     const game = new GameModel({

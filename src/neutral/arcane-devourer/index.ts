@@ -13,10 +13,10 @@
  * Collectible
  */
 
-import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, RarityType, RoleAttackModel, RaceType } from "hearthstone-core";
+import { ClassType, CostModel, RoleHealthModel, LibraryService, MinionCardModel, RarityType, RoleAttackModel, RaceType } from "hearthstone-core";
 import { ArcaneDevourerFeatureModel } from "./feature";
 
-@LibraryUtil.is('arcane-devourer')
+@LibraryService.is('arcane-devourer')
 export class ArcaneDevourerModel extends MinionCardModel {
     constructor(props?: ArcaneDevourerModel['props']) {
         props = props ?? {};

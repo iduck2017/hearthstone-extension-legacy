@@ -10,9 +10,9 @@
  * Collectible
  */
 
-import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, RarityType, RoleAttackModel, RaceType, TauntModel } from "hearthstone-core";
+import { ClassType, CostModel, RoleHealthModel, LibraryService, MinionCardModel, RarityType, RoleAttackModel, RaceType, TauntModel } from "hearthstone-core";
 
-@LibraryUtil.is('senjin-shieldmasta')
+@LibraryService.is('senjin-shieldmasta')
 export class SenjinShieldmastaModel extends MinionCardModel {
     constructor(props?: SenjinShieldmastaModel['props']) {
         props = props ?? {};

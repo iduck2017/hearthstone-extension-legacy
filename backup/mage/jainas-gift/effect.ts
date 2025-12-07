@@ -1,5 +1,5 @@
 import { DiscoverModel, Selector, SelectorModel, SpellCardModel, SpellEffectModel } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 import { FrostboltModel } from "../frostbolt";
 import { ArcaneIntellectModel } from "../arcane-intellect";
 import { FireballModel } from "../fireball";
@@ -11,7 +11,7 @@ export namespace JainasGiftEffect {
     export type R = {}
 }
 
-@TemplUtil.is('jainas-gift-effect')
+@ChunkService.is('jainas-gift-effect')
 export class JainasGiftEffectModel extends SpellEffectModel<never,
     JainasGiftEffect.E,
     JainasGiftEffect.S,

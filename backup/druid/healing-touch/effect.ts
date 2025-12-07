@@ -1,7 +1,7 @@
 import { Selector, RoleModel, RestoreModel, RestoreEvent, SpellEffectModel } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 
-@TemplUtil.is('healing-touch-effect')
+@ChunkService.is('healing-touch-effect')
 export class HealingTouchEffectModel extends SpellEffectModel<[RoleModel]> {
     constructor(props?: HealingTouchEffectModel['props']) {
         props = props ?? {};

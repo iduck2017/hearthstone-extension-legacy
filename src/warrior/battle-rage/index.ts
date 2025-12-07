@@ -17,10 +17,10 @@
  * 2 mana
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, SpellCardModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryService, RarityType, SpellCardModel } from "hearthstone-core";
 import { BattleRageEffectModel } from "./effect";
 
-@LibraryUtil.is('battle-rage')
+@LibraryService.is('battle-rage')
 export class BattleRageModel extends SpellCardModel {
     constructor(props?: BattleRageModel['props']) {
         props = props ?? {};

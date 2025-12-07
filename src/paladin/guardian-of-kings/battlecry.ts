@@ -1,7 +1,7 @@
 import { BattlecryModel, RestoreModel, RestoreEvent } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 
-@TemplUtil.is('guardian-of-kings-battlecry')
+@ChunkService.is('guardian-of-kings-battlecry')
 export class GuardianOfKingsBattlecryModel extends BattlecryModel<never> {
     constructor(props?: GuardianOfKingsBattlecryModel['props']) {
         props = props ?? {};

@@ -15,10 +15,10 @@
  * 
  * 2 cost
  */
-import { ClassType, CostModel, LibraryUtil, RarityType, SpellCardModel, SchoolType } from "hearthstone-core";
+import { ClassType, CostModel, LibraryService, RarityType, SpellCardModel, SchoolType } from "hearthstone-core";
 import { ShadowWordPainEffectModel } from "./effect";
 
-@LibraryUtil.is('shadow-word-pain')
+@LibraryService.is('shadow-word-pain')
 export class ShadowWordPainModel extends SpellCardModel {
     constructor(props?: ShadowWordPainModel['props']) {
         props = props ?? {};

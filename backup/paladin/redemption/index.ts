@@ -1,7 +1,7 @@
-import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel,  } from "hearthstone-core";
+import { ClassType, CostModel, LibraryService, RarityType, SchoolType, SpellCardModel,  } from "hearthstone-core";
 import { RedemptionEffectModel } from "./effect";
 
-@LibraryUtil.is('redemption')
+@LibraryService.is('redemption')
 export class RedemptionModel extends SpellCardModel {
     constructor(props?: RedemptionModel['props']) {
         props = props ?? {};

@@ -1,7 +1,7 @@
 import { EffectModel, Selector, RoleModel, SpellEffectModel, MinionCardModel } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 
-@TemplUtil.is('silence-effect')
+@ChunkService.is('silence-effect')
 export class SilenceEffectModel extends SpellEffectModel<MinionCardModel> {
     constructor(props?: SilenceEffectModel['props']) {
         props = props ?? {};

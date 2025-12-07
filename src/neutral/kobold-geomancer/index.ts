@@ -10,9 +10,9 @@
  * Collectible
  */
 
-import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, RarityType, RoleAttackModel, RaceType, SpellDamageModel } from "hearthstone-core";
+import { ClassType, CostModel, RoleHealthModel, LibraryService, MinionCardModel, RarityType, RoleAttackModel, RaceType, SpellDamageModel } from "hearthstone-core";
 
-@LibraryUtil.is('kobold-geomancer')
+@LibraryService.is('kobold-geomancer')
 export class KoboldGeomancerModel extends MinionCardModel {
     constructor(props?: KoboldGeomancerModel['props']) {
         props = props ?? {};

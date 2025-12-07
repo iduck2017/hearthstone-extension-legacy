@@ -16,10 +16,10 @@
  * 1/1/2
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, MinionCardModel, RoleAttackModel, RoleHealthModel, RaceType } from "hearthstone-core";
+import { ClassType, CostModel, LibraryService, RarityType, MinionCardModel, RoleAttackModel, RoleHealthModel, RaceType } from "hearthstone-core";
 import { PsychicConjurerBattlecryModel } from "./battlecry";
 
-@LibraryUtil.is('psychic-conjurer')
+@LibraryService.is('psychic-conjurer')
 export class PsychicConjurerModel extends MinionCardModel {
     constructor(props?: PsychicConjurerModel['props']) {
         props = props ?? {};

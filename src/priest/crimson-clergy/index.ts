@@ -16,10 +16,10 @@
  * 
  * 1/1/3
  */
-import { ClassType, CostModel, LibraryUtil, RarityType, MinionCardModel, RoleAttackModel, RoleHealthModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryService, RarityType, MinionCardModel, RoleAttackModel, RoleHealthModel } from "hearthstone-core";
 import { CrimsonClergyOverhealModel } from "./overheal";
 
-@LibraryUtil.is('crimson-clergy')
+@LibraryService.is('crimson-clergy')
 export class CrimsonClergyModel extends MinionCardModel {
     constructor(props?: CrimsonClergyModel['props']) {
         props = props ?? {};

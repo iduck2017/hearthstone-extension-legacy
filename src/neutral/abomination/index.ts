@@ -13,10 +13,10 @@
  * Collectible
  */
 
-import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, RarityType, RoleAttackModel, RaceType, TauntModel } from "hearthstone-core";
+import { ClassType, CostModel, RoleHealthModel, LibraryService, MinionCardModel, RarityType, RoleAttackModel, RaceType, TauntModel } from "hearthstone-core";
 import { AbominationDeathrattleModel } from "./deathrattle";
 
-@LibraryUtil.is('abomination')
+@LibraryService.is('abomination')
 export class AbominationModel extends MinionCardModel {
     constructor(props?: AbominationModel['props']) {
         props = props ?? {};

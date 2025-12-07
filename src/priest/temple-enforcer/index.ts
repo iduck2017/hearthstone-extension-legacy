@@ -1,7 +1,7 @@
-import { RoleAttackModel, ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, RarityType, RaceType } from "hearthstone-core";
+import { RoleAttackModel, ClassType, CostModel, RoleHealthModel, LibraryService, MinionCardModel, RarityType, RaceType } from "hearthstone-core";
 import { TempleEnforcerBattlecryModel } from "./battlecry";
 
-@LibraryUtil.is('temple-enforcer')
+@LibraryService.is('temple-enforcer')
 export class TempleEnforcerModel extends MinionCardModel {
     constructor(props?: TempleEnforcerModel['props']) {
         props = props ?? {};

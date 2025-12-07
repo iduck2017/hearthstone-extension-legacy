@@ -13,10 +13,10 @@
  * Collectible
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, SpellCardModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryService, RarityType, SpellCardModel } from "hearthstone-core";
 import { JainasGiftEffectModel } from "./effect";
 
-@LibraryUtil.is('jainas-gift')
+@LibraryService.is('jainas-gift')
 export class JainasGiftModel extends SpellCardModel {
     constructor(props?: JainasGiftModel['props']) {
         props = props ?? {};

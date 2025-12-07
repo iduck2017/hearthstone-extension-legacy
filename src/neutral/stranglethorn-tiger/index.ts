@@ -13,9 +13,9 @@
  * Collectible
  */
 
-import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, RarityType, RoleAttackModel, RaceType, StealthModel } from "hearthstone-core";
+import { ClassType, CostModel, RoleHealthModel, LibraryService, MinionCardModel, RarityType, RoleAttackModel, RaceType, StealthModel } from "hearthstone-core";
 
-@LibraryUtil.is('stranglethorn-tiger')
+@LibraryService.is('stranglethorn-tiger')
 export class StranglethornTigerModel extends MinionCardModel {
     constructor(props?: StranglethornTigerModel['props']) {
         props = props ?? {};

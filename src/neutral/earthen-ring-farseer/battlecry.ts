@@ -1,7 +1,7 @@
 import { BattlecryModel, Selector, RoleModel, RestoreModel, RestoreEvent } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 
-@TemplUtil.is('earthen-ring-farseer-battlecry')
+@ChunkService.is('earthen-ring-farseer-battlecry')
 export class EarthenRingFarseerBattlecryModel extends BattlecryModel<RoleModel> {
     constructor(props?: EarthenRingFarseerBattlecryModel['props']) {
         props = props ?? {};

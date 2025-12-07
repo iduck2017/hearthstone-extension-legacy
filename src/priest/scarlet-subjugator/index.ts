@@ -17,10 +17,10 @@
  * 1/2/1
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, MinionCardModel, RoleAttackModel, RoleHealthModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryService, RarityType, MinionCardModel, RoleAttackModel, RoleHealthModel } from "hearthstone-core";
 import { ScarletSubjugatorBattlecryModel } from "./battlecry";
 
-@LibraryUtil.is('scarlet-subjugator')
+@LibraryService.is('scarlet-subjugator')
 export class ScarletSubjugatorModel extends MinionCardModel {
     constructor(props?: ScarletSubjugatorModel['props']) {
         props = props ?? {};

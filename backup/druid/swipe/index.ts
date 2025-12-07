@@ -13,10 +13,10 @@
  * Collectible
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, SpellCardModel,  } from "hearthstone-core";
+import { ClassType, CostModel, LibraryService, RarityType, SpellCardModel,  } from "hearthstone-core";
 import { SwipeEffectModel } from "./effect";
 
-@LibraryUtil.is('swipe')
+@LibraryService.is('swipe')
 export class SwipeModel extends SpellCardModel {
     constructor(props?: SwipeModel['props']) {
         props = props ?? {};

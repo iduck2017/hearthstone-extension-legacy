@@ -1,7 +1,7 @@
 import { RoleAttackBuffModel, FeatureModel, TurnModel } from "hearthstone-core";
-import { Event, EventUtil, TemplUtil } from "set-piece";
+import { Event, EventPlugin, ChunkService } from "set-piece";
 
-@TemplUtil.is('heroic-strike-buff')
+@ChunkService.is('heroic-strike-buff')
 export class HeroicStrikeBuffModel extends FeatureModel {
     constructor(props?: HeroicStrikeBuffModel['props']) {
         props = props ?? {};
@@ -21,7 +21,7 @@ export class HeroicStrikeBuffModel extends FeatureModel {
         });
     }
 
-    @EventUtil.on(self => self.handleTurn)
+    @EventPlugin.on(self => self.handleTurn)
     private listenTurn() {
         const game = this.route.game;
         if (!game) return;

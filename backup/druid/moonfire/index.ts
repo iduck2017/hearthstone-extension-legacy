@@ -14,10 +14,10 @@
  * Collectible
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel,  } from "hearthstone-core";
+import { ClassType, CostModel, LibraryService, RarityType, SchoolType, SpellCardModel,  } from "hearthstone-core";
 import { MoonfireEffectModel } from "./effect";
 
-@LibraryUtil.is('moonfire')
+@LibraryService.is('moonfire')
 export class MoonfireModel extends SpellCardModel {
     constructor(props?: MoonfireModel['props']) {
         props = props ?? {};

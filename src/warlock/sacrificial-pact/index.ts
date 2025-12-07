@@ -17,10 +17,10 @@
  * 0 mana
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SpellCardModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryService, RarityType, SchoolType, SpellCardModel } from "hearthstone-core";
 import { SacrificialPactEffectModel } from "./effect";
 
-@LibraryUtil.is('sacrificial-pact')
+@LibraryService.is('sacrificial-pact')
 export class SacrificialPactModel extends SpellCardModel {
     constructor(props?: SacrificialPactModel['props']) {
         props = props ?? {};

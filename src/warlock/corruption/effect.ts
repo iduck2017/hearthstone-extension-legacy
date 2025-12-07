@@ -1,7 +1,7 @@
 import { Selector, SpellEffectModel, MinionCardModel, TurnStartModel } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 
-@TemplUtil.is('corruption-effect')
+@ChunkService.is('corruption-effect')
 export class CorruptionEffectModel extends SpellEffectModel<MinionCardModel> {
     constructor(props?: CorruptionEffectModel['props']) {
         props = props ?? {};
@@ -46,7 +46,7 @@ export class CorruptionEffectModel extends SpellEffectModel<MinionCardModel> {
     }
 }
 
-@TemplUtil.is('corruption-feature')
+@ChunkService.is('corruption-feature')
 class CorruptionFeatureModel extends TurnStartModel {
     constructor(props?: CorruptionFeatureModel['props']) {
         props = props ?? {};

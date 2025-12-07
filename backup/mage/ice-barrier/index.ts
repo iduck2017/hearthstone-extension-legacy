@@ -15,10 +15,10 @@
  * Collectible
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SecretCardModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryService, RarityType, SchoolType, SecretCardModel } from "hearthstone-core";
 import { IceBarrierFeatureModel } from "./feature";
 
-@LibraryUtil.is('ice-barrier')
+@LibraryService.is('ice-barrier')
 export class IceBarrierModel extends SecretCardModel {
     constructor(props?: IceBarrierModel['props']) {
         props = props ?? {};

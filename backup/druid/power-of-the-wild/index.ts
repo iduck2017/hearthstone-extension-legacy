@@ -13,10 +13,10 @@
  * Collectible
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, SpellCardModel,  } from "hearthstone-core";
+import { ClassType, CostModel, LibraryService, RarityType, SpellCardModel,  } from "hearthstone-core";
 import { PowerOfTheWildEffectModel } from "./effect";
 
-@LibraryUtil.is('power-of-the-wild')
+@LibraryService.is('power-of-the-wild')
 export class PowerOfTheWildModel extends SpellCardModel {
     constructor(props?: PowerOfTheWildModel['props']) {
         props = props ?? {};

@@ -13,10 +13,10 @@
  * Artist: Michael Komarck
  * Collectible
  */
-import { ClassType, CostModel, RoleHealthModel, LibraryUtil, MinionCardModel, RarityType, RoleAttackModel } from "hearthstone-core";
+import { ClassType, CostModel, RoleHealthModel, LibraryService, MinionCardModel, RarityType, RoleAttackModel } from "hearthstone-core";
 import { EtherealArcanistFeatureModel } from "./end-turn";
 
-@LibraryUtil.is('ethereal-arcanist')
+@LibraryService.is('ethereal-arcanist')
 export class EtherealArcanistModel extends MinionCardModel {
     constructor(props?: EtherealArcanistModel['props']) {
         props = props ?? {};

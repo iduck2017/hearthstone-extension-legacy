@@ -30,7 +30,7 @@
 import { BoardModel, GameModel, HandModel, MageModel, ManaModel, PlayerModel, WarriorModel } from "hearthstone-core";
 import { WispModel } from "../../neutral/wisp";
 import { FieryWarAxeModel } from ".";
-import { DebugUtil } from "set-piece";
+import { DebugService } from "set-piece";
 import { boot } from "../../boot";
 
 describe('firey-war-axe', () => {

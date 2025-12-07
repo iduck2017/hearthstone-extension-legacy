@@ -15,10 +15,10 @@
  * Collectible
  */
 
-import { ClassType, RoleHealthModel, MinionCardModel, RaceType, RarityType, RoleAttackModel, CostModel, LibraryUtil } from "hearthstone-core";
+import { ClassType, RoleHealthModel, MinionCardModel, RaceType, RarityType, RoleAttackModel, CostModel, LibraryService } from "hearthstone-core";
 import { MurlocTidehunterBattlecryModel } from "./battlecry";
 
-@LibraryUtil.is('murloc-tidehunter')
+@LibraryService.is('murloc-tidehunter')
 export class MurlocTidehunterModel extends MinionCardModel {
     constructor(props?: MurlocTidehunterModel['props']) {
         props = props ?? {};

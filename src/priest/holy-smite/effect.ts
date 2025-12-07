@@ -1,7 +1,7 @@
 import { EffectModel, Selector, SpellEffectModel, DamageModel, DamageEvent, DamageType, MinionCardModel } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 
-@TemplUtil.is('holy-smite-effect')
+@ChunkService.is('holy-smite-effect')
 export class HolySmiteEffectModel extends SpellEffectModel<MinionCardModel> {
     constructor(props?: HolySmiteEffectModel['props']) {
         props = props ?? {};

@@ -13,10 +13,10 @@
  * Collectible
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, MinionCardModel, MinionFeaturesModel, RoleAttackModel, RoleHealthModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryService, RarityType, MinionCardModel, MinionFeaturesModel, RoleAttackModel, RoleHealthModel } from "hearthstone-core";
 import { DruidOfTheClawBattlecryModel } from "./battlecry";
 
-@LibraryUtil.is('druid-of-the-claw')
+@LibraryService.is('druid-of-the-claw')
 export class DruidOfTheClawModel extends MinionCardModel {
     constructor(props?: DruidOfTheClawModel['props']) {
         props = props ?? {};

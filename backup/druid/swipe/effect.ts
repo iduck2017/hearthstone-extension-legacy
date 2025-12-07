@@ -1,7 +1,7 @@
 import { Selector, RoleModel, DamageModel, DamageEvent, DamageType, SpellEffectModel } from "hearthstone-core";
-import { TemplUtil } from "set-piece";
+import { ChunkService } from "set-piece";
 
-@TemplUtil.is('swipe-effect')
+@ChunkService.is('swipe-effect')
 export class SwipeEffectModel extends SpellEffectModel<[RoleModel]> {
     constructor(props?: SwipeEffectModel['props']) {
         props = props ?? {};

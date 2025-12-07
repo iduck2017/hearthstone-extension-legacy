@@ -1,7 +1,7 @@
-import { MinionCardModel, RarityType, ClassType, RaceType, RoleAttackModel, RoleHealthModel, CostModel, LibraryUtil } from "hearthstone-core";
+import { MinionCardModel, RarityType, ClassType, RaceType, RoleAttackModel, RoleHealthModel, CostModel, LibraryService } from "hearthstone-core";
 import { FrostElementalBattlecryModel } from "./battlecry";
 
-@LibraryUtil.is('frost-elemental')
+@LibraryService.is('frost-elemental')
 export class FrostElementalModel extends MinionCardModel {
     constructor(props?: FrostElementalModel['props']) {
         props = props ?? {};

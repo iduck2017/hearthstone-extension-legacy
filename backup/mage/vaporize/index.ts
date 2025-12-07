@@ -15,10 +15,10 @@
  * Collectible
  */
 
-import { ClassType, CostModel, LibraryUtil, RarityType, SchoolType, SecretCardModel } from "hearthstone-core";
+import { ClassType, CostModel, LibraryService, RarityType, SchoolType, SecretCardModel } from "hearthstone-core";
 import { VaporizeFeatureModel } from "./feature";
 
-@LibraryUtil.is('vaporize')
+@LibraryService.is('vaporize')
 export class VaporizeModel extends SecretCardModel {
     constructor(props?: VaporizeModel['props']) {
         props = props ?? {};
