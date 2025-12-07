@@ -27,7 +27,7 @@ export class BloodImpFeatureModel extends TurnEndModel {
         });
     }
 
-    protected doRun() {
+    protected doRun(isCurrent: boolean) {
         const player = this.route.player;
         if (!player) return;
         const minion = this.route.minion;
@@ -39,7 +39,7 @@ export class BloodImpFeatureModel extends TurnEndModel {
         if (game.child.turn.refer.current !== player) return;
 
         // Get all friendly minions except this one
-        const minions = player.refer.minions.filter(m => m !== minion);
+        const minions = player.refer.minions.filter(item => item !== minion);
         if (minions.length === 0) return;
 
         // Select a random friendly minion

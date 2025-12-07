@@ -26,7 +26,6 @@ import { DebugUtil } from "set-piece";
 
 describe('commanding-shout', () => {
     const game = new GameModel({
-        state: { debug: { isDrawDisabled: true }},
         child: {
             playerA: new PlayerModel({
                 child: {
@@ -76,16 +75,16 @@ describe('commanding-shout', () => {
 
     // Player A uses Commanding Shout and draws 1 card
     test('commanding-shout-cast', async () => {
-        // Assert: Player A has 1 card in hand (Commanding Shout)
+        // Assert: Player A has 2 cards in hand (Commanding Shout + Fireball drawn at turn start)
         console.log(handA.child.cards.map(item => item.name));
-        expect(handA.child.cards.length).toBe(1);
+        expect(handA.child.cards.length).toBe(2);
         
         // Player A uses Commanding Shout
         let promise = cardD.play();
         await promise;
         
-        // Assert: Player A's hand size remains 1 (consumed 1, drew 1)
-        expect(handA.child.cards.length).toBe(1);
+        // Assert: Player A's hand size remains 2 (consumed 1, drew 1)
+        expect(handA.child.cards.length).toBe(2);
         expect(cardC.child.health.state.minimum).toBe(1)
     });
 
